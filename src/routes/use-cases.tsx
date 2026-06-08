@@ -1,7 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import { Check, Slack, Github, AlertTriangle, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
+import { Check, Slack, Github, AlertTriangle, Calendar } from "lucide-react";
+
+const avatar = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
+
+const testimonials = [
+  { name: "Maya Chen", role: "CFO, Northwind", saved: "3-5 hrs/week", quote: "Viktor handles the weekly cash recap I used to dread. Now it's just there in Slack on Monday morning.", image: avatar("photo-1573496359142-b8d87734a5a2") },
+  { name: "Jacob Aldridge", role: "Founder, Como Coaching", saved: "10+ hrs/week", quote: "Viktor may feel expensive for a monthly subscription, but he's the cheapest hire I've ever made — and the only one who acts on my midnight asks.", image: avatar("photo-1507003211169-0a1dd7228f2d") },
+  { name: "Richard Comer", role: "VP Eng, Flagship", saved: "10+ hrs/week", quote: "Viktor takes the morning alerts off my plate. I haven't read a Datadog email in two months and I sleep through the night.", image: avatar("photo-1580489944761-15a19d654956") },
+];
 
 export const Route = createFileRoute("/use-cases")({
   head: () => ({
@@ -226,20 +236,7 @@ function UseCasesPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-4 py-16">
-        <div className="mx-auto max-w-6xl rounded-[36px] relative overflow-hidden p-10 md:p-14 bg-gradient-to-br from-[oklch(0.78_0.12_310)] via-[oklch(0.58_0.18_285)] to-[oklch(0.42_0.20_278)]">
-          <h2 className="font-display text-center text-4xl md:text-5xl text-white">What our customers say.</h2>
-          <div className="mt-12 grid md:grid-cols-3 gap-5">
-            <TestimonialCard saved="3-5 hrs/week" quote="Viktor handles the weekly cash recap I used to dread. Now it's just there in Slack on Monday morning." name="Maya Chen" role="CFO, Northwind" featured={false} />
-            <TestimonialCard saved="10+ hrs/week" quote="Viktor may feel expensive for a monthly subscription, but he's the cheapest hire I've ever made — and the only one who acts on my midnight asks." name="Jacob Aldridge" role="Founder, Como Coaching" featured />
-            <TestimonialCard saved="10+ hrs/week" quote="Viktor takes the morning alerts off my plate. I haven't read a Datadog email in two months and I sleep through the night." name="Richard Comer" role="VP Eng, Flagship" featured={false} />
-          </div>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition"><ChevronLeft className="w-4 h-4" /></button>
-            <button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition"><ChevronRight className="w-4 h-4" /></button>
-          </div>
-        </div>
-      </section>
+      <TestimonialsCarousel items={testimonials} />
 
       {/* START FREE CTA */}
       <section className="px-4 py-16">
@@ -359,21 +356,3 @@ function IconChip({ children }: { children: React.ReactNode }) {
   );
 }
 
-function TestimonialCard({ saved, quote, name, role, featured }: { saved: string; quote: string; name: string; role: string; featured: boolean }) {
-  return (
-    <div className={"rounded-2xl p-6 " + (featured ? "bg-white shadow-2xl" : "bg-white/10 backdrop-blur border border-white/15")}>
-      <div className={"flex items-center gap-2 text-[11px] font-semibold " + (featured ? "text-violet-600" : "text-white/80")}>
-        <span className={"w-5 h-5 rounded-full flex items-center justify-center text-[10px] " + (featured ? "bg-violet-100" : "bg-white/20")}>★</span>
-        Saved: {saved}
-      </div>
-      <p className={"mt-4 text-[13.5px] leading-relaxed " + (featured ? "text-foreground" : "text-white/90")}>"{quote}"</p>
-      <div className="mt-5 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-300 to-violet-500" />
-        <div>
-          <div className={"text-[13px] font-semibold " + (featured ? "text-foreground" : "text-white")}>{name}</div>
-          <div className={"text-[11px] " + (featured ? "text-muted-foreground" : "text-white/70")}>{role}</div>
-        </div>
-      </div>
-    </div>
-  );
-}

@@ -10,9 +10,10 @@ import zapierLogo from "@/assets/images/zapier.svg";
 import microsoftLogo from "@/assets/images/microsoft-teams.svg";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import {
-  WorkflowAutomation, ReportsAnalytics, AppBuilder, FAQ,
-  AskAI, StartFree,
+  WorkflowAutomation, ReportsAnalytics, AppBuilder, AskAI,
 } from "@/components/site/HomeSections";
+import { FAQSection } from "@/components/site/FAQSection";
+import { StartFreeSection } from "@/components/site/StartFreeSection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -68,38 +69,13 @@ function Index() {
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3">
-            <button className="px-8 py-4 rounded-full bg-white text-foreground font-medium text-base hover:bg-white/95 transition">
+            <button className="cursor-pointer px-20 sm:px-8 py-4 rounded-full bg-white text-foreground font-medium text-base hover:bg-white/95 transition">
               Get Started for Free
             </button>
             <a className="text-white/80 text-sm underline underline-offset-4">or talk to sales →</a>
           </div>
 
-          <div className="mt-16 pb-3 flex flex-wrap justify-center items-center gap-8 text-white/85 text-sm">
-
-            <BadgeItem>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true">
-                <g opacity="0.5" fill="currentColor">
-                  <path d="M15.403 1.53687L15.3809 1.51479C13.9792 0.113128 12.1922 -0.299302 10.2382 0.20911C8.33003 0.70559 6.27473 2.07099 4.17286 4.17284C2.07099 6.27471 0.705597 8.33001 0.209119 10.2382C0.0725881 10.7629 0.00246034 11.2756 6.30673e-05 11.772C-0.00643744 13.1241 0.489523 14.3554 1.51474 15.3807C2.91641 16.7823 4.70337 17.1947 6.65737 16.6863C8.56553 16.1899 10.6208 14.8244 12.7227 12.7226C14.8246 10.6207 16.19 8.5654 16.6864 6.65726C17.1921 4.71356 16.7869 2.93517 15.403 1.53687Z" />
-                  <path d="M18.2587 4.39263L18.4853 4.6192C19.8869 6.02086 20.2993 7.80781 19.7909 9.76183C19.6916 10.1433 19.5576 10.5308 19.39 10.9232L17.3421 8.87539C17.6446 8.2537 17.8803 7.6312 18.042 7.00996C18.2737 6.11926 18.3486 5.23901 18.2587 4.39263Z" />
-                  <path d="M18.718 12.2321C18.1153 13.242 17.308 14.2783 16.313 15.3283L14.1992 13.2146C15.1596 12.2041 15.9816 11.1781 16.6319 10.146L18.718 12.2321Z" />
-                  <path d="M15.3224 16.3186C14.2717 17.3137 13.2347 18.1206 12.2242 18.7226L10.1383 16.6367C11.171 15.9869 12.1976 15.1651 13.2087 14.2048L15.3224 16.3186Z" />
-                  <path d="M10.9144 19.3937L8.86687 17.3461C8.24806 17.6467 7.62846 17.881 7.01007 18.0419C6.1193 18.2736 5.23897 18.3486 4.3925 18.2586L4.6192 18.4853C6.02086 19.8869 7.80781 20.2993 9.76183 19.7909C10.1405 19.6923 10.525 19.5596 10.9144 19.3937Z" />
-                </g>
-              </svg>
-              <span>$100 in free credits</span>
-            </BadgeItem>
-
-            <BadgeItem>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true"><g opacity="0.5" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M14.6866 0.313814C14.2681 -0.104605 13.5897 -0.104605 13.1713 0.313814C12.7529 0.732233 12.7529 1.41062 13.1713 1.82904L14.9137 3.57144L13.1713 5.31381C12.7529 5.73223 12.7529 6.41063 13.1713 6.82904C13.5897 7.24746 14.2681 7.24746 14.6866 6.82904L16.429 5.08667L18.1711 6.82884C18.5896 7.24727 19.2679 7.24727 19.6863 6.82884C20.1047 6.41043 20.1047 5.73203 19.6863 5.31361L17.9441 3.57144L19.6863 1.82924C20.1047 1.41082 20.1047 0.73243 19.6863 0.314011C19.268 -0.104407 18.5896 -0.104407 18.1711 0.314011L16.429 2.05621L14.6866 0.313814ZM11.9086 8.09173C10.8863 7.06936 10.8007 5.46493 11.6519 4.3451C10.9136 4.30794 10.1228 4.28589 9.28571 4.28589C5.95984 4.28589 4.44051 4.56681 3.09029 4.8182C2.89307 4.85493 2.70333 4.89024 2.51217 4.92386C1.12592 5.16767 0 6.36439 0 7.86087V9.17637H18.5714V8.90609C17.9634 8.82989 17.3753 8.55837 16.9084 8.09153L16.429 7.61204L15.9493 8.09173C14.8334 9.20751 13.0244 9.20751 11.9086 8.09173ZM0 16.4103V10.9621H18.5714V16.4103C18.5714 17.9321 17.3953 19.1237 15.9863 19.375C15.821 19.4044 15.6561 19.4351 15.4859 19.4669L15.4811 19.4679C14.1309 19.7193 12.6116 20 9.28571 20C5.95986 20 4.44053 19.7191 3.09031 19.4677C2.91831 19.4357 2.75197 19.4047 2.58513 19.375C1.17609 19.1237 0 17.9321 0 16.4103ZM12.2217 14.1288C11.7286 14.1288 11.3288 14.5286 11.3288 15.0216C11.3288 15.5147 11.7286 15.9144 12.2217 15.9144H15.1253C15.6183 15.9144 16.0181 15.5147 16.0181 15.0216C16.0181 14.5286 15.6183 14.1288 15.1253 14.1288H12.2217Z"></path></g></svg>
-              <span>No credit card required</span>
-            </BadgeItem>
-
-            <BadgeItem>
-             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true"><g opacity="0.5" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M9.10746 0.108826C7.81167 0.28318 6.2465 0.7724 4.9648 1.22955C4.14854 1.52069 3.41396 1.81138 2.88367 2.02915C2.61828 2.13814 2.40347 2.22911 2.25447 2.29307C2.17997 2.32504 2.12187 2.35028 2.08211 2.36767L2.03644 2.38771L2.02436 2.39305L2.02107 2.39449L2.02013 2.39492C2.02003 2.39497 2.01967 2.39512 2.30968 3.04788L2.02013 2.39492C1.9989 2.40435 1.97768 2.41502 1.95747 2.42647L2.30968 3.04788C1.95747 2.42647 1.95666 2.42694 1.95583 2.42741L1.95413 2.42838L1.95064 2.43039L1.94326 2.43474L1.92686 2.44474C1.91521 2.45201 1.90217 2.46049 1.88786 2.47031C1.8592 2.48995 1.82553 2.51485 1.78767 2.54594C1.71181 2.60824 1.62006 2.69464 1.51876 2.81219C1.3158 3.04771 1.07862 3.40347 0.853064 3.93304C0.429008 4.92864 0.0422208 6.54699 0.000244141 9.17189H9.10746V0.108826ZM0.0791055 10.9576C0.44511 13.7848 1.98286 15.803 3.80381 17.212C5.54868 18.5622 7.56634 19.3669 9.10746 19.8359V10.9576H0.0791055ZM10.8932 19.8912C12.4486 19.4302 14.5205 18.6144 16.2962 17.2069C18.0775 15.7949 19.5679 13.7775 19.9231 10.9576H10.8932V19.8912ZM19.9998 9.17189H10.8932V0.108909C12.1888 0.283336 13.7537 0.772473 15.0352 1.22955C15.8515 1.52069 16.5861 1.81138 17.1164 2.02915C17.3818 2.13814 17.5965 2.22911 17.7455 2.29307C17.8201 2.32504 17.8781 2.35028 17.9179 2.36767L17.9635 2.38771L17.9756 2.39305L17.9789 2.39449L17.9799 2.39492C17.9799 2.39497 17.9804 2.39512 17.6904 3.04788C18.0425 2.42647 18.0434 2.42694 18.0442 2.42741L18.0459 2.42838L18.0494 2.43039L18.0568 2.43474L18.0732 2.44474C18.0848 2.45201 18.0978 2.46049 18.1122 2.47031C18.1408 2.48995 18.1745 2.51485 18.2124 2.54594C18.2882 2.60824 18.3799 2.69464 18.4812 2.81219C18.6842 3.04771 18.9214 3.40347 19.1469 3.93304C19.5711 4.92864 19.9578 6.54699 19.9998 9.17189ZM17.6904 3.04788L18.0425 2.42647C18.0224 2.41502 18.0012 2.40435 17.9799 2.39492L17.6904 3.04788Z"></path></g></svg>
-              <span>SOC 2 compliant</span>
-            </BadgeItem>
-
-          </div>
+          <HeroBadges />
 
           <div className="mt-20 mb-6">
             <LogoMarquee logos={trustedLogos} />
@@ -108,8 +84,8 @@ function Index() {
       </section>
 
       {/* OUTPUT / FEATURES — visuals overlap hero bottom */}
-      <section className="px-20 -mt-1 relative z-10 pt-2 pb-24 bg-section-cream">
-        <div className="mx-auto max-w-7xl grid md:grid-cols-3 gap-5 items-start">
+      <section className="md:px-4 lg:px-20 relative z-10 pb-24 bg-section-cream">
+        <div className="mx-auto max-w-7xl grid lg:grid-cols-3 gap-5 items-start">
           <FeatureCard
             title="Real output, not just text."
             body="Viktor doesn't brainstorm. It ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
@@ -145,19 +121,94 @@ function Index() {
       <AskAI />
 
       {/* FAQ */}
-      <FAQ />
+      <FAQSection />
 
       {/* START FREE */}
-      <StartFree />
+      <StartFreeSection />
 
       <Footer />
     </div>
   );
 }
 
-function BadgeItem({ children }: { children: React.ReactNode }) {
+const HERO_BADGE_INTERVAL_MS = 3000;
+
+const heroBadges = [
+  {
+    label: "$100 in free credits",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true">
+        <g opacity="0.5" fill="currentColor">
+          <path d="M15.403 1.53687L15.3809 1.51479C13.9792 0.113128 12.1922 -0.299302 10.2382 0.20911C8.33003 0.70559 6.27473 2.07099 4.17286 4.17284C2.07099 6.27471 0.705597 8.33001 0.209119 10.2382C0.0725881 10.7629 0.00246034 11.2756 6.30673e-05 11.772C-0.00643744 13.1241 0.489523 14.3554 1.51474 15.3807C2.91641 16.7823 4.70337 17.1947 6.65737 16.6863C8.56553 16.1899 10.6208 14.8244 12.7227 12.7226C14.8246 10.6207 16.19 8.5654 16.6864 6.65726C17.1921 4.71356 16.7869 2.93517 15.403 1.53687Z" />
+          <path d="M18.2587 4.39263L18.4853 4.6192C19.8869 6.02086 20.2993 7.80781 19.7909 9.76183C19.6916 10.1433 19.5576 10.5308 19.39 10.9232L17.3421 8.87539C17.6446 8.2537 17.8803 7.6312 18.042 7.00996C18.2737 6.11926 18.3486 5.23901 18.2587 4.39263Z" />
+          <path d="M18.718 12.2321C18.1153 13.242 17.308 14.2783 16.313 15.3283L14.1992 13.2146C15.1596 12.2041 15.9816 11.1781 16.6319 10.146L18.718 12.2321Z" />
+          <path d="M15.3224 16.3186C14.2717 17.3137 13.2347 18.1206 12.2242 18.7226L10.1383 16.6367C11.171 15.9869 12.1976 15.1651 13.2087 14.2048L15.3224 16.3186Z" />
+          <path d="M10.9144 19.3937L8.86687 17.3461C8.24806 17.6467 7.62846 17.881 7.01007 18.0419C6.1193 18.2736 5.23897 18.3486 4.3925 18.2586L4.6192 18.4853C6.02086 19.8869 7.80781 20.2993 9.76183 19.7909C10.1405 19.6923 10.525 19.5596 10.9144 19.3937Z" />
+        </g>
+      </svg>
+    ),
+  },
+  {
+    label: "No credit card required",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true">
+        <g opacity="0.5" fill="currentColor">
+          <path fillRule="evenodd" clipRule="evenodd" d="M14.6866 0.313814C14.2681 -0.104605 13.5897 -0.104605 13.1713 0.313814C12.7529 0.732233 12.7529 1.41062 13.1713 1.82904L14.9137 3.57144L13.1713 5.31381C12.7529 5.73223 12.7529 6.41063 13.1713 6.82904C13.5897 7.24746 14.2681 7.24746 14.6866 6.82904L16.429 5.08667L18.1711 6.82884C18.5896 7.24727 19.2679 7.24727 19.6863 6.82884C20.1047 6.41043 20.1047 5.73203 19.6863 5.31361L17.9441 3.57144L19.6863 1.82924C20.1047 1.41082 20.1047 0.73243 19.6863 0.314011C19.268 -0.104407 18.5896 -0.104407 18.1711 0.314011L16.429 2.05621L14.6866 0.313814ZM11.9086 8.09173C10.8863 7.06936 10.8007 5.46493 11.6519 4.3451C10.9136 4.30794 10.1228 4.28589 9.28571 4.28589C5.95984 4.28589 4.44051 4.56681 3.09029 4.8182C2.89307 4.85493 2.70333 4.89024 2.51217 4.92386C1.12592 5.16767 0 6.36439 0 7.86087V9.17637H18.5714V8.90609C17.9634 8.82989 17.3753 8.55837 16.9084 8.09153L16.429 7.61204L15.9493 8.09173C14.8334 9.20751 13.0244 9.20751 11.9086 8.09173ZM0 16.4103V10.9621H18.5714V16.4103C18.5714 17.9321 17.3953 19.1237 15.9863 19.375C15.821 19.4044 15.6561 19.4351 15.4859 19.4669L15.4811 19.4679C14.1309 19.7193 12.6116 20 9.28571 20C5.95986 20 4.44053 19.7191 3.09031 19.4677C2.91831 19.4357 2.75197 19.4047 2.58513 19.375C1.17609 19.1237 0 17.9321 0 16.4103ZM12.2217 14.1288C11.7286 14.1288 11.3288 14.5286 11.3288 15.0216C11.3288 15.5147 11.7286 15.9144 12.2217 15.9144H15.1253C15.6183 15.9144 16.0181 15.5147 16.0181 15.0216C16.0181 14.5286 15.6183 14.1288 15.1253 14.1288H12.2217Z" />
+        </g>
+      </svg>
+    ),
+  },
+  {
+    label: "SOC 2 compliant",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="size-5 shrink-0" aria-hidden="true">
+        <g opacity="0.5" fill="currentColor">
+          <path fillRule="evenodd" clipRule="evenodd" d="M9.10746 0.108826C7.81167 0.28318 6.2465 0.7724 4.9648 1.22955C4.14854 1.52069 3.41396 1.81138 2.88367 2.02915C2.61828 2.13814 2.40347 2.22911 2.25447 2.29307C2.17997 2.32504 2.12187 2.35028 2.08211 2.36767L2.03644 2.38771L2.02436 2.39305L2.02107 2.39449L2.02013 2.39492C2.02003 2.39497 2.01967 2.39512 2.30968 3.04788L2.02013 2.39492C1.9989 2.40435 1.97768 2.41502 1.95747 2.42647L2.30968 3.04788C1.95747 2.42647 1.95666 2.42694 1.95583 2.42741L1.95413 2.42838L1.95064 2.43039L1.94326 2.43474L1.92686 2.44474C1.91521 2.45201 1.90217 2.46049 1.88786 2.47031C1.8592 2.48995 1.82553 2.51485 1.78767 2.54594C1.71181 2.60824 1.62006 2.69464 1.51876 2.81219C1.3158 3.04771 1.07862 3.40347 0.853064 3.93304C0.429008 4.92864 0.0422208 6.54699 0.000244141 9.17189H9.10746V0.108826ZM0.0791055 10.9576C0.44511 13.7848 1.98286 15.803 3.80381 17.212C5.54868 18.5622 7.56634 19.3669 9.10746 19.8359V10.9576H0.0791055ZM10.8932 19.8912C12.4486 19.4302 14.5205 18.6144 16.2962 17.2069C18.0775 15.7949 19.5679 13.7775 19.9231 10.9576H10.8932V19.8912ZM19.9998 9.17189H10.8932V0.108909C12.1888 0.283336 13.7537 0.772473 15.0352 1.22955C15.8515 1.52069 16.5861 1.81138 17.1164 2.02915C17.3818 2.13814 17.5965 2.22911 17.7455 2.29307C17.8201 2.32504 17.8781 2.35028 17.9179 2.36767L17.9635 2.38771L17.9756 2.39305L17.9789 2.39449L17.9799 2.39492C17.9799 2.39497 17.9804 2.39512 17.6904 3.04788C18.0425 2.42647 18.0434 2.42694 18.0442 2.42741L18.0459 2.42838L18.0494 2.43039L18.0568 2.43474L18.0732 2.44474C18.0848 2.45201 18.0978 2.46049 18.1122 2.47031C18.1408 2.48995 18.1745 2.51485 18.2124 2.54594C18.2882 2.60824 18.3799 2.69464 18.4812 2.81219C18.6842 3.04771 18.9214 3.40347 19.1469 3.93304C19.5711 4.92864 19.9578 6.54699 19.9998 9.17189ZM17.6904 3.04788L18.0425 2.42647C18.0224 2.41502 18.0012 2.40435 17.9799 2.39492L17.6904 3.04788Z" />
+        </g>
+      </svg>
+    ),
+  },
+];
+
+function HeroBadges() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setActiveIndex((i) => (i + 1) % heroBadges.length),
+      HERO_BADGE_INTERVAL_MS,
+    );
+    return () => clearInterval(t);
+  }, []);
+
+  const activeBadge = heroBadges[activeIndex];
+
   return (
-    <div className="flex items-center gap-2">
+    <>
+      <div className="md:hidden mt-16 pb-3 flex justify-center text-white/85 text-sm">
+        <div className="h-5 overflow-hidden">
+          <BadgeItem key={activeIndex} className="animate-logo-slide-up">
+            {activeBadge.icon}
+            <span>{activeBadge.label}</span>
+          </BadgeItem>
+        </div>
+      </div>
+
+      <div className="hidden md:flex mt-16 pb-3 flex-wrap justify-center items-center gap-8 text-white/85 text-sm">
+        {heroBadges.map((badge) => (
+          <BadgeItem key={badge.label}>
+            {badge.icon}
+            <span>{badge.label}</span>
+          </BadgeItem>
+        ))}
+      </div>
+    </>
+  );
+}
+
+function BadgeItem({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`flex items-center gap-2${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );
@@ -220,41 +271,24 @@ function LogoMarquee({ logos }: { logos: string[] }) {
 
 function FeatureCard({ title, body, visual, tinted }: { title: string; body: string; visual: React.ReactNode; tinted?: boolean }) {
   return (
-    <div className="flex flex-col bg-white/60 rounded-4xl">
+    <div className="flex flex-col bg-white/50 rounded-[40px]">
       <div
-        className="relative -mt-10 rounded-[32px] overflow-hidden min-h-[340px] flex items-center justify-center px-4 py-8 shadow-[0_20px_50px_-20px_rgba(40,20,80,0.12)] backdrop-blur-xl"
-        style={{
-          background: tinted
-            ? "linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(220,210,245,0.3) 100%)"
-            : "linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%)",
-        }}
+        className="relative  rounded-[32px] overflow-hidden min-h-[340px] flex items-center justify-center px-4 py-8 "
+        
       >
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
+         
+        />
+        <div
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
-            background: "#ffffff",
-            filter: "blur(20px)",
-            WebkitFilter: "blur(20px)",
-            opacity: 0.15,
           }}
         />
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
-            background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            background:
-              "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
-            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            WebkitMaskComposite: "xor",
-            maskComposite: "exclude",
-            padding: "1px",
-            filter: "blur(0.5px)",
-            WebkitFilter: "blur(0.5px)",
+            
           }}
         />
         <div className="relative z-10 w-full flex items-center justify-center">{visual}</div>
@@ -315,7 +349,7 @@ function ToolIconsVisual() {
   const count = INTEGRATION_WHEEL_LOGOS.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
-  const rotation = -(activeIndex * (360 / count));
+  const rotation = activeIndex * (360 / count);
   const stepEase = `transform ${INTEGRATION_STEP_MS}ms cubic-bezier(0.45, 0, 0.2, 1)`;
 
   useEffect(() => {
@@ -334,14 +368,15 @@ function ToolIconsVisual() {
     <div className="relative h-[220px] w-full" aria-hidden="true">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 z-10 mx-auto max-w-xl"
-        style={{
-          height: "92px",
-          background: "radial-gradient(60% 100% at 50% -10%, rgb(237 229 251 / 0.95), transparent 62%)",
-        }}
+        
       />
       <div
         className="relative z-0 mx-auto h-full overflow-hidden"
-        style={{ width: INTEGRATION_ARC_VIEWPORT_W }}
+        style={{
+          width: INTEGRATION_ARC_VIEWPORT_W,
+          maskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
+        }}
       >
         <div
           className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 translate-y-[3.75rem]"
@@ -354,7 +389,6 @@ function ToolIconsVisual() {
             {INTEGRATION_WHEEL_LOGOS.map((logo, i) => {
               const angle = (i / count) * 360;
               const slot = integrationRelativeSlot(i, displayIndex, count);
-              const visible = Math.abs(slot) <= 1;
               const featured = slot === 0;
 
               return (
@@ -370,10 +404,8 @@ function ToolIconsVisual() {
                     marginTop: -LOGO_CARD_SIZE / 2,
                     transform: `rotate(${angle}deg) translateY(-${WHEEL_RADIUS}px) scale(${featured ? 1 : 0.94})`,
                     transformOrigin: "50% 50%",
-                    opacity: visible ? 1 : 0,
                     zIndex: featured ? 3 : 1,
-                    transition: `${stepEase}, opacity 200ms ease-out`,
-                    pointerEvents: visible ? "auto" : "none",
+                    transition: stepEase,
                   }}
                 >
                   <IntegrationLogoCard featured={featured}>{logo.icon}</IntegrationLogoCard>
@@ -459,7 +491,7 @@ function ChatBubble({ name, time, body, badge }: { name: string; time: string; b
 
 function Mention({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center px-1.5 py-0.5 rounded-[5px] bg-[#ECE9FE] text-[#6236FF] font-medium text-md leading-none select-none">
+    <span className="inline-flex items-center px-1.5 py-0.5 rounded-[5px] bg-[#ECE9FE] text-[#6236FF]  text-md leading-none select-none">
       {children}
     </span>
   );

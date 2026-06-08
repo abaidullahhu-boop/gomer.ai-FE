@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ChevronDown, Workflow, BarChart3, GitBranch, Globe, Users, ShieldCheck, Check } from "lucide-react";
+import { Workflow, BarChart3, GitBranch, Globe, Users, ShieldCheck, Check } from "lucide-react";
 import claudeAppIcon from "@/assets/images/claude-app-icon.png";
 import viktorMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
@@ -243,8 +243,13 @@ export function AppBuilder() {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const lgQuery = window.matchMedia("(min-width: 1024px)");
+
     function updateScrollProgress() {
-      if (window.innerWidth < 1024) return;
+      if (!lgQuery.matches) {
+        setScrollProgress(0);
+        return;
+      }
 
       const container = scrollRef.current;
       if (!container) return;
@@ -266,9 +271,11 @@ export function AppBuilder() {
     }
 
     updateScrollProgress();
+    lgQuery.addEventListener("change", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     return () => {
+      lgQuery.removeEventListener("change", onScroll);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
@@ -278,11 +285,11 @@ export function AppBuilder() {
   const needle = scrollProgress * (HOW_IT_WORKS_STEPS.length - 1);
 
   return (
-    <section className="px-6 py-24">
-      <div ref={scrollRef} className="mx-auto max-w-6xl lg:min-h-[300vh]">
+    <section className="px-2 md:px-6 py-24 bg-section-cream">
+      <div ref={scrollRef} className="mx-auto max-w-6xl max-lg:min-h-0 lg:min-h-[300vh]">
         <div className="lg:sticky lg:top-28">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="pl-[108px] max-lg:pl-0">
+            <div className="pl-[108px] max-lg:pl-0 max-lg:px-4">
               <div className="inline-flex items-center gap-2 text-violet-700 text-xs">
                 How it works
               </div>
@@ -300,13 +307,18 @@ export function AppBuilder() {
               </h3>
             </div>
 
-            <div className="lg:hidden flex flex-col gap-6 items-center">
+            <div className="max-lg:flex lg:hidden flex-col gap-6 w-full px-2 sm:px-0">
               {HOW_IT_WORKS_STEPS.map((step) => (
-                <HowItWorksCard key={step.number} {...step} />
+                <div
+                  key={step.number}
+                  className="rounded-3xl bg-hero p-6 sm:p-8 shadow-xl flex justify-center"
+                >
+                  <HowItWorksCard {...step} />
+                </div>
               ))}
             </div>
 
-            <div className="hidden lg:flex relative overflow-hidden rounded-3xl bg-hero p-8 min-h-[560px] h-[640px] shadow-xl">
+            <div className="max-lg:hidden lg:flex relative overflow-hidden rounded-3xl bg-hero p-8 min-h-[560px] h-[640px] shadow-xl">
               {HOW_IT_WORKS_STEPS.map((step, i) => {
                 const motion = getHowItWorksCardMotion(needle, i);
 
@@ -489,12 +501,12 @@ export function SecurityCompliance() {
 
 export function AskAI() {
   const options = [
-    { name: "Ask ChatGPT", icon: "💬" },
-    { name: "Ask Perplexity", icon: "🔎" },
-    { name: "Ask Claude", icon: "✳️" },
+    { name: "Ask ChatGPT", icon: "💬", link: "https://chatgpt.com" },
+    { name: "Ask Perplexity", icon: "🔎", link: "https://perplexity.com" },
+    { name: "Ask Claude", icon: "✳️", link: "https://claude.com" },
   ];
   return (
-    <section className="px-6 pt-32 pb-10">
+    <section className="smpx-6 pt-2 sm:pt-32 sm:pb-10 bg-section-cream">
       <div className="mx-auto max-w-6xl">
         <div className="relative overflow-hidden rounded-[40px] bg-ask-card px-6 py-16 text-center">
         <span className="pointer-events-none absolute inset-x-0 top-[90%] -translate-y-1/2 text-center font-display text-[26vw] leading-none text-white/5 select-none">            VIKTOR
@@ -505,180 +517,17 @@ export function AskAI() {
             <p className="mt-8 mx-auto max-w-md text-white/80 leading-relaxed">
               Pick your favorite AI and ask what it thinks about Viktor. No filter, no spin.
             </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="cursor-pointer mt-10 flex flex-wrap justify-center gap-4">
               {options.map((o) => (
                 <button
                   key={o.name}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-md font-medium text-foreground shadow-lg hover:bg-white/95 transition"
+                  className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-md font-medium text-foreground shadow-lg hover:bg-white/95 transition"
+                  onClick={() => window.open(o.link, "_blank")}
                 >
                   <span>{o.icon}</span> {o.name}
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const faqs = [
-  { q: "What is Viktor, exactly?", a: "Viktor is an AI employee that lives in Slack. It has its own computer in the cloud where it writes and runs code to complete tasks. It's not a chatbot — it's a colleague that does real work." },
-  { q: "How is Viktor different from ChatGPT or other AI assistants?", a: "ChatGPT tells you how to do work. Viktor does it. It connects to your tools, takes action, and ships finished artifacts: PDFs, dashboards, code, campaigns." },
-  { q: "What can Viktor actually do?", a: "Pull reports, build dashboards, write code, run ad audits, draft outreach, triage bugs, build internal tools, automate recurring work, and more — anything you'd ask a smart generalist hire." },
-  { q: "What tools does Viktor connect to?", a: "3,000+ integrations including Slack, Teams, Notion, Linear, GitHub, Stripe, HubSpot, Salesforce, Meta Ads, Google Ads, Apollo, Airtable, and almost any tool with an API." },
-  { q: "How does pricing work?", a: "Flat monthly subscription per workspace. No per-seat fees, no per-task billing. Start free with $100 in credits." },
-  { q: "Is my data secure?", a: "Yes. Viktor is SOC 2 Type II compliant. Your data is encrypted in transit and at rest, and never used to train shared models." },
-  { q: "Where does Viktor run?", a: "Viktor runs in an isolated cloud sandbox per workspace. It has its own computer, file system, and browser environment." },
-  { q: "Can Viktor write and deploy code?", a: "Yes. Viktor can write code in any major language, open pull requests, review code, and deploy to your existing CI/CD pipeline." },
-  { q: "Does Viktor work in Microsoft Teams?", a: "Yes. Viktor works natively in both Slack and Microsoft Teams with full feature parity." },
-  { q: "How long does setup take?", a: "Less than 5 minutes. Install Viktor in Slack or Teams, connect a few tools, and start delegating." },
-  { q: "Can I control what Viktor has access to?", a: "Yes. Admins can scope Viktor's access per tool, per channel, and per user with granular permissions." },
-  { q: "Does Viktor learn from my company?", a: "Yes. Viktor builds a private knowledge base of your processes, preferences, and past work — scoped to your workspace only." },
-  { q: "What happens if Viktor makes a mistake?", a: "You can roll back any action, review Viktor's full execution log, and refine instructions. Viktor learns from corrections." },
-  { q: "Can I try Viktor for free?", a: "Yes. Every workspace starts with $100 in free credits — no credit card required." },
-  { q: "Do you offer enterprise plans?", a: "Yes. Enterprise plans include SSO, audit logs, custom data residency, and a dedicated success manager." },
-  { q: "How does Viktor handle confidential data?", a: "All data is encrypted, isolated per workspace, and never shared with third parties or used for model training." },
-  { q: "Can Viktor handle scheduled or recurring tasks?", a: "Yes. Schedule any task on a cron — daily reports, weekly audits, monthly invoices — Viktor runs them in the background." },
-  { q: "What languages does Viktor speak?", a: "Viktor is fluent in 50+ languages and adapts to your team's tone and vocabulary." },
-  { q: "Can multiple teammates use Viktor at once?", a: "Yes. Viktor handles parallel conversations and tasks across your entire workspace simultaneously." },
-  { q: "How does Viktor compare to hiring a contractor?", a: "Viktor is available 24/7, doesn't require onboarding for each task, and costs a fraction of a contractor — while shipping comparable quality work." },
-  { q: "Can I cancel anytime?", a: "Yes. No long-term contracts. Cancel anytime from your workspace settings." },
-  { q: "Do you offer a refund policy?", a: "Yes. 30-day money-back guarantee on all plans, no questions asked." },
-  { q: "How do I get support?", a: "Email, in-app chat, and a dedicated Slack channel for Pro and Enterprise customers." },
-];
-
-export function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
-  const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? faqs : faqs.slice(0, 4);
-  return (
-    <section className="px-20 py-32 ">
-      <div className="mx-auto w-full max-w-7xl grid gap-8 lg:grid-cols-[minmax(0,519fr)_minmax(0,630fr)] lg:items-start">
-        <h2 className="font-display text-5xl md:text-5xl">FAQ</h2>
-        <div>
-          <div className="space-y-3">
-            {visible.map((f, i) => {
-              const isOpen = open === i;
-              return (
-                <div
-                  key={f.q}
-                  className={`overflow-hidden transition-[border-radius] duration-300 ease-out ${
-                    isOpen
-                      ? "rounded-3xl bg-white"
-                      : "rounded-full bg-white"
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 px-7 py-5 text-left"
-                  >
-                    <span
-                      className={`font-medium text-lg transition-colors duration-300 ease-out ${
-                        isOpen ? "text-[#6e47ff]" : "text-foreground"
-                      }`}
-                    >
-                      {f.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-violet-600 transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  <div
-                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <div
-                        className={`px-7 pb-6 text-md text-[#9693a3] leading-relaxed transition-[opacity,transform] duration-300 ease-out ${
-                          isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
-                        }`}
-                      >
-                        {f.a}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="mt-8 flex justify-start">
-            <button
-              onClick={() => setShowAll((v) => !v)}
-              className="rounded-full border border-border px-7 py-3.5 text-md font-medium hover:bg-secondary transition"
-            >
-              {showAll ? "Show Less" : `Show All ${faqs.length} Questions`}
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function StartFree() {
-  const points = [
-    "3,000+ integrations",
-    "Slack and Teams",
-    "Reports, dashboards, apps",
-    "Code and PR reviews",
-    "SOC 2 compliant",
-  ];
-  return (
-    <section className="px-6 pb-20 pt-16 ">
-      <div className="mx-auto max-w-6xl">
-        <div className="rounded-[40px] bg-hero px-8 py-16 md:px-16 md:py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-stretch">
-            <div className="flex flex-col justify-between">
-              <div>
-                <h2 className="font-display text-white text-3xl leading-[1.05]">
-                  Start free.<br />Pay only whenyou're ready.
-                </h2>
-                <p className="mt-6 text-white max-w-md leading-relaxed">
-                  Every feature. Every integration. $100 in credits on the house.
-                  No credit card, no sales call, no catch. When you need more,
-                  it starts $20/month.
-                </p>
-              </div>
-              <div className="mt-10 md:mt-0 flex flex-wrap gap-4">
-                <button className="rounded-full bg-white px-7 py-3.5 text-md font-medium text-foreground hover:bg-white/95 transition">
-                  Get Started for Free
-                </button>
-                <button className="rounded-full border border-white/50 px-7 py-3.5 text-md font-medium text-white hover:bg-white/10 transition">
-                  See all plans
-                </button>
-              </div>
-            </div>
-            <ul className="divide-y divide-white/15 md:pl-10">
-              {points.map((p) => (
-                <li key={p} className="flex items-center gap-3.5 py-8 text-lg text-white first:pt-0 last:pb-0">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full ">
-                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="size-6 shrink-0 opacity-50">
-                    <g opacity="0.3">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M9.28571 1.42859C6.41139 1.42859 4.06494 2.2392 2.43779 3.86637C0.810617 5.49353 0 7.83997 0 10.7143C0 13.5886 0.810617 15.935 2.43779 17.5623C4.06494 19.1894 6.41139 20 9.28571 20C12.16 20 14.5064 19.1894 16.1337 17.5623C17.7609 15.935 18.5714 13.5886 18.5714 10.7143C18.5714 7.83997 17.7609 5.49353 16.1337 3.86637C14.5064 2.2392 12.16 1.42859 9.28571 1.42859Z"
-                        fill="white"
-                        style={{ mixBlendMode: 'plus-lighter' }}
-                      />
-                    </g>
-                    <g opacity="0.5">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M19.7411 0.373119C20.1268 0.821897 20.0756 1.49836 19.6268 1.88403C17.4778 3.73086 15.9752 5.29501 14.7262 7.1419C13.4735 8.99426 12.4446 11.1774 11.2978 14.2981C11.1725 14.6391 10.8829 14.8934 10.5285 14.9736C10.1741 15.0537 9.80329 14.9489 9.5434 14.695L4.60833 9.87354C4.18507 9.46003 4.17717 8.78169 4.59069 8.35843C5.0042 7.93516 5.68254 7.92726 6.10581 8.34077L9.87209 12.0203C10.8381 9.57747 11.7939 7.65267 12.9511 5.94149C14.3446 3.88079 15.9991 2.17626 18.2302 0.258861C18.6789 -0.126815 19.3554 -0.0756606 19.7411 0.373119Z"
-                        fill="white"
-                        style={{ mixBlendMode: 'plus-lighter' }}
-                      />
-                    </g>
-                  </svg>
-                  </span>
-                  {p}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
