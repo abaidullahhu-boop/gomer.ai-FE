@@ -227,10 +227,12 @@ export function Nav() {
     setMobileAccordion(null);
   }
 
-  const desktopBarClass =
+  const navBarClass =
     scrolled || mobileOpen
       ? "bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
       : "bg-white/10 backdrop-blur-[22px]";
+
+  const showGlassOverlay = !scrolled && !mobileOpen;
 
   return (
     <header className="fixed top-0 z-50 w-full">
@@ -239,9 +241,9 @@ export function Nav() {
           {/* Desktop navbar */}
           <div className="relative isolate hidden w-full overflow-visible rounded-full lg:block">
             <div
-              className={`relative z-10 h-full w-full rounded-full py-4 pr-4 pl-8 transition-all duration-300 ${desktopBarClass}`}
+              className={`relative z-10 h-full w-full rounded-full py-4 pr-4 pl-8 transition-all duration-300 ${navBarClass}`}
             >
-              {!scrolled && (
+              {showGlassOverlay && (
                 <>
                   <div
                     className="pointer-events-none absolute inset-0 rounded-full"
@@ -324,14 +326,41 @@ export function Nav() {
 
           {/* Mobile navbar */}
           <div className="lg:hidden">
-            <div className="flex items-center justify-between rounded-full bg-white px-6 py-4 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-              <Link to="/" className="block" onClick={closeMobileMenu}>
-                <img src={logo} alt="Viktor" width={80} height={24} />
-              </Link>
-              <MenuToggleButton
-                open={mobileOpen}
-                onClick={() => (mobileOpen ? closeMobileMenu() : setMobileOpen(true))}
-              />
+            <div className="relative isolate">
+              <div
+                className={`relative z-10 flex items-center justify-between rounded-full px-6 py-4 transition-all duration-300 ${navBarClass}`}
+              >
+                {showGlassOverlay && (
+                  <>
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-full"
+                      style={{
+                        background:
+                          "radial-gradient(100% 100%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 100%)",
+                      }}
+                    />
+
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-full"
+                      style={{
+                        background:
+                          "linear-gradient(-15deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
+                        WebkitMask:
+                          "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
+                        padding: "1px",
+                      }}
+                    />
+                  </>
+                )}
+
+                <Link to="/" className="relative block" onClick={closeMobileMenu}>
+                  <img src={logo} alt="Viktor" width={80} height={24} />
+                </Link>
+                <MenuToggleButton
+                  open={mobileOpen}
+                  onClick={() => (mobileOpen ? closeMobileMenu() : setMobileOpen(true))}
+                />
+              </div>
             </div>
 
             {mobileOpen && (

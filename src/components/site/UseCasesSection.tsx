@@ -169,8 +169,8 @@ export function UseCasesSection() {
   }, [activeIndex, cycleKey, goNext]);
 
   return (
-    <section className="px-20 py-1">
-      <div className="mx-auto rounded-[36px] overflow-hidden relative bg-hero xl:pr-10 xl:pl-20 2xl:gap-[6.75rem] 2xl:pr-16 2xl:pl-40 md:px-32 py-14 md:py-32">
+    <section className="lg:px-20 py-1 bg-section-cream">
+      <div className="mx-auto rounded-[36px] overflow-hidden relative bg-hero px-3 xl:pr-10 xl:pl-20 2xl:gap-[6.75rem] 2xl:pr-16 2xl:pl-40 lg:px-32 py-20">
         {/* Peach glow */}
         <div
           aria-hidden
@@ -181,7 +181,7 @@ export function UseCasesSection() {
           }}
         />
 
-        <div className="relative grid md:grid-cols-[1fr_1.3fr] gap-10 md:gap-32 items-start">
+        <div className="relative grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-32 items-start">
           {/* LEFT */}
           <div>
             <p className="text-xs text-white/70">Use cases</p>

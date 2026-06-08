@@ -1,24 +1,43 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Clock, Linkedin } from "lucide-react";
 
-type Testimonial = {
+export type Testimonial = {
   name: string;
   role: string;
-  saved: string;
   quote: string;
-  image: string;
+  saved?: string;
+  image?: string;
+};
+
+export type TestimonialsCarouselProps = {
+  items: Testimonial[];
+  title?: string;
+  className?: string;
 };
 
 const PAUSE_MS = 4000;
 const SCROLL_MS = 700;
 
-export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+export function TestimonialsCarousel({
+  items,
+  title = "What our customers say.",
+  className,
+}: TestimonialsCarouselProps) {
+  const extendedItems = useMemo(
+    () => [...items, ...items, ...items],
+    [items],
+  );
+  const [activeIndex, setActiveIndex] = useState(items.length);
   const [offset, setOffset] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const pausedRef = useRef(false);
+
+  useEffect(() => {
+    setActiveIndex(items.length);
+  }, [items.length]);
 
   const updateOffset = useCallback(() => {
     const container = containerRef.current;
@@ -35,13 +54,58 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
+  const snapTo = useCallback((index: number) => {
+    setTransitionEnabled(false);
+    setActiveIndex(index);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTransitionEnabled(true);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (items.length === 0) return;
+    if (activeIndex >= 2 * items.length) {
+      const timer = setTimeout(() => snapTo(items.length), SCROLL_MS);
+      return () => clearTimeout(timer);
+    }
+    if (activeIndex < items.length) {
+      const timer = setTimeout(
+        () => snapTo(activeIndex + items.length),
+        SCROLL_MS,
+      );
+      return () => clearTimeout(timer);
+    }
+  }, [activeIndex, items.length, snapTo]);
+
   const goNext = useCallback(() => {
-    setActiveIndex((i) => (i + 1) % items.length);
-  }, [items.length]);
+    setActiveIndex((i) => i + 1);
+  }, []);
 
   const goPrev = useCallback(() => {
-    setActiveIndex((i) => (i - 1 + items.length) % items.length);
-  }, [items.length]);
+    setActiveIndex((i) => i - 1);
+  }, []);
+
+  const goToCard = useCallback(
+    (clickedIndex: number) => {
+      setActiveIndex((current) => {
+        if (clickedIndex === current) return current;
+        const itemIndex = clickedIndex % items.length;
+        const candidates = [
+          itemIndex,
+          itemIndex + items.length,
+          itemIndex + 2 * items.length,
+        ];
+        return candidates.reduce((closest, candidate) =>
+          Math.abs(candidate - current) < Math.abs(closest - current)
+            ? candidate
+            : closest,
+        );
+      });
+    },
+    [items.length],
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -51,8 +115,8 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
   }, [goNext]);
 
   return (
-    <section className="px-4 py-16">
-      <div className="mx-auto max-w-6xl rounded-[36px] overflow-hidden relative bg-hero px-6 md:px-12 py-16 md:py-20">
+    <section className={"sm:px-4 py-18 bg-section-cream " + (className ?? "")}>
+      <div className="mx-auto max-w-6xl rounded-[36px] overflow-hidden relative bg-hero py-16 md:py-20">
         <div
           aria-hidden
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[40%] rounded-full blur-3xl opacity-70"
@@ -84,7 +148,7 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
         />
 
         <h2 className="relative font-display text-4xl md:text-5xl text-white text-center">
-          What our customers say.
+          {title}
         </h2>
 
         <div
@@ -102,12 +166,14 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
             className="flex items-start gap-5 w-max will-change-transform"
             style={{
               transform: `translateX(${offset}px)`,
-              transition: `transform ${SCROLL_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
+              transition: transitionEnabled
+                ? `transform ${SCROLL_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
+                : "none",
             }}
           >
-            {items.map((t, i) => {
+            {extendedItems.map((t, i) => {
               const isActive = i === activeIndex;
-              const isTall = i % 2 === 0;
+              const isTall = (i % items.length) % 2 === 0;
               const heightClass = isActive
                 ? "h-[340px]"
                 : isTall
@@ -116,7 +182,7 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
 
               return (
                 <div
-                  key={t.name}
+                  key={`${t.name}-${i}`}
                   ref={(el) => {
                     cardRefs.current[i] = el;
                   }}
@@ -124,12 +190,13 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
                   className="w-[min(85vw,320px)] md:w-[340px] shrink-0 h-[340px] flex items-start"
                 >
                 <article
+                  onClick={() => !isActive && goToCard(i)}
                   className={
                     "relative overflow-hidden w-full rounded-3xl p-6 flex flex-col justify-between backdrop-blur-sm transition-[height,opacity,background,box-shadow] duration-500 " +
                     heightClass +
                     (isActive
                       ? " bg-gradient-to-b from-[oklch(0.96_0.03_60)] to-[oklch(0.92_0.05_330)] text-foreground shadow-[0_20px_50px_-20px_oklch(0.3_0.15_290/0.6)]"
-                      : " bg-white/15 text-white opacity-80")
+                      : " bg-white/15 text-white opacity-80 cursor-pointer hover:opacity-95")
                   }
                 >
                   <div
@@ -155,49 +222,49 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
                   />
                   <div className="relative z-10 flex flex-col justify-between h-full">
                   <div>
-                    <div
-                      className={
-                        "inline-flex items-center gap-2 text-xs " +
-                        (isActive ? "text-indigo-deep" : "text-white/85")
-                      }
-                    >
-                      <span className="relative shrink-0 w-5 h-5">
-                        <span
-                          className={
-                            "flex items-center justify-center w-5 h-5 rounded-full " +
-                            (isActive
-                              ? "bg-violet-soft"
-                              : "")
-                          }
-                        >
-                          <Clock
-                            className="w-3 h-3 text-white"
-                            strokeWidth={2.5}
-                          />
-                        </span>
-                        {isActive && (
-                          <span className="absolute -bottom-px -right-px flex items-center justify-center w-2.5 h-2.5 rounded-full bg-violet-soft ring-1 ring-white">
-                            <Check
-                              className="w-1.5 h-1.5 text-white"
-                              strokeWidth={3.5}
-                            />
-                          </span>
-                        )}
-                      </span>
-                      <span className={isActive ? "font-medium" : undefined}>
-                        Saved:
-                      </span>
-                      <span
+                    {t.saved && (
+                      <div
                         className={
-                          "px-2 py-0.5 rounded-full " +
-                          (isActive
-                            ? "bg-[oklch(0.93_0.05_290)] font-medium"
-                            : "border border-white/40")
+                          "inline-flex items-center gap-2 text-xs " +
+                          (isActive ? "text-indigo-deep" : "text-white/85")
                         }
                       >
-                        {t.saved}
-                      </span>
-                    </div>
+                        <span className="relative shrink-0 w-5 h-5">
+                          <span
+                            className={
+                              "flex items-center justify-center w-5 h-5 rounded-full " +
+                              (isActive ? "bg-violet-soft" : "")
+                            }
+                          >
+                            <Clock
+                              className="w-3 h-3 text-white"
+                              strokeWidth={2.5}
+                            />
+                          </span>
+                          {isActive && (
+                            <span className="absolute -bottom-px -right-px flex items-center justify-center w-2.5 h-2.5 rounded-full bg-violet-soft ring-1 ring-white">
+                              <Check
+                                className="w-1.5 h-1.5 text-white"
+                                strokeWidth={3.5}
+                              />
+                            </span>
+                          )}
+                        </span>
+                        <span className={isActive ? "font-medium" : undefined}>
+                          Saved:
+                        </span>
+                        <span
+                          className={
+                            "px-2 py-0.5 rounded-full " +
+                            (isActive
+                              ? "bg-[oklch(0.93_0.05_290)] font-medium"
+                              : "border border-white/40")
+                          }
+                        >
+                          {t.saved}
+                        </span>
+                      </div>
+                    )}
                     <p
                       className={
                         "mt-6 text-lg font-medium leading-relaxed " +
@@ -209,11 +276,15 @@ export function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
                   </div>
                   <div className="mt-6 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={t.image}
-                        alt={t.name}
-                        className="w-9 h-9 rounded-full object-cover shrink-0"
-                      />
+                      {t.image ? (
+                        <img
+                          src={t.image}
+                          alt={t.name}
+                          className="w-9 h-9 rounded-full object-cover shrink-0"
+                        />
+                      ) : (
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-300 to-violet-500 shrink-0" />
+                      )}
                       <div className="leading-tight">
                         <div
                           className={

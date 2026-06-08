@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import { Check, ChevronDown, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
+import { Check, ChevronDown, Play } from "lucide-react";
 import { SlackPurpleCard } from "@/components/site/SlackChangelogCards";
 
 export const Route = createFileRoute("/compare/viktor-vs-chatgpt")({
@@ -40,7 +41,7 @@ function ComparePage() {
       <TeammateInSlack />
       <IntegrationsVsZero />
       <WhenToChoose />
-      <Testimonials />
+      <TestimonialsCarousel items={testimonials} />
       <FAQ />
       <StartFree />
       <Footer />
@@ -348,46 +349,6 @@ const testimonials = [
   { name: "Sam Kopelman", role: "CEO, Givr", quote: "ChatGPT was helpful. Viktor is operational. It runs the work, not just the answers." },
   { name: "Antonín Štětina", role: "CEO, KULINA Group", quote: "Mindblowing all-in-one AI which does everything in a single solution — no more tab-switching between ten different products." },
 ];
-
-function Testimonials() {
-  const [i, setI] = useState(0);
-  const item = testimonials[i];
-  return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-to-br from-[oklch(0.88_0.06_310)] via-[oklch(0.70_0.15_290)] to-[oklch(0.45_0.20_280)] p-10 md:p-14 shadow-xl">
-        <h2 className="font-display text-3xl md:text-4xl tracking-tight text-white text-center">
-          What our customers say.
-        </h2>
-        <div className="mt-10 mx-auto max-w-2xl rounded-2xl bg-white/95 backdrop-blur p-8 shadow-2xl">
-          <p className="text-foreground text-base md:text-lg leading-relaxed">"{item.quote}"</p>
-          <div className="mt-6 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-300 to-violet-500" />
-            <div>
-              <div className="text-sm font-semibold text-foreground">{item.name}</div>
-              <div className="text-xs text-muted-foreground">{item.role}</div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <button
-            onClick={() => setI((i - 1 + testimonials.length) % testimonials.length)}
-            className="w-10 h-10 rounded-full bg-white/90 text-foreground flex items-center justify-center hover:bg-white transition"
-            aria-label="Previous"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setI((i + 1) % testimonials.length)}
-            className="w-10 h-10 rounded-full bg-white/90 text-foreground flex items-center justify-center hover:bg-white transition"
-            aria-label="Next"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 const faqs = [
   { q: "Is Viktor a replacement for ChatGPT?", a: "For team workflows — yes. For personal Q&A in a browser tab, ChatGPT still wins. Many of our customers run both." },

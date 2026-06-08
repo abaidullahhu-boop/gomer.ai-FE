@@ -2,11 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ShieldCheck, KeyRound, Eye, CheckCircle2, Shield, UserCheck, Database,
-  Play, ChevronLeft, ChevronRight, Linkedin, Plug, Settings2, Boxes,
+  Play, Plug, Settings2, Boxes,
   ChevronDown, Zap,
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
+
+const avatar = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
+
+const customerTestimonials = [
+  { name: "Boris Wexler", role: "CEO, Space Dinosaurs", saved: "10+ hrs/week", quote: "Viktor is an incredible tool — it was almost instantly adopted by the bulk of my team.", image: avatar("photo-1500648767791-00dcc994a43e") },
+  { name: "Robert Tyrrell", role: "Owner, TalentBright", saved: "10+ hrs/week", quote: "It's blown my mind seeing what Viktor can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring actual people.", image: avatar("photo-1519345182560-3f2917c472ef") },
+  { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Viktor is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
+];
 
 export const Route = createFileRoute("/enterprise")({
   head: () => ({
@@ -29,7 +39,7 @@ function EnterprisePage() {
       <ComplianceGrid />
       <DeliverablesTabs />
       <SecurityAlly />
-      <CustomersSay />
+      <TestimonialsCarousel items={customerTestimonials} title="What our customers say" />
       <AddInTwoMinutes />
       <EnterpriseFAQ />
       <StartFreeCTA />
@@ -357,83 +367,6 @@ function SecurityAlly() {
           <button className="px-6 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-foreground/90 transition">
             Read full Security model
           </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- CUSTOMERS SAY ---------------- */
-
-const customerQuotes = [
-  {
-    name: "Boris Wexler",
-    role: "CEO, Space Dinosaurs",
-    quote: "Viktor is an incredible tool — it was almost instantly adopted by the bulk of my team.",
-    badge: "Founder · 10+ hrs/week",
-  },
-  {
-    name: "Robert Tyrrell",
-    role: "Owner, TalentBright",
-    quote: "It's blown my mind seeing what Viktor can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring actual people.",
-    badge: "Owner · 10+ hrs/week",
-    featured: true,
-  },
-  {
-    name: "Jordan Dikoum",
-    role: "Co-Founder, UniTru Inc.",
-    quote: "Viktor is our eyes, ears, and hands. We might really never have to hire someone again.",
-    badge: "Co-Founder · 10+ hrs/week",
-  },
-];
-
-function CustomersSay() {
-  return (
-    <section className="px-6 py-16">
-      <div className="mx-auto max-w-6xl">
-        <div className="rounded-[40px] bg-gradient-to-br from-violet-400 via-violet-500 to-indigo-600 p-10 md:p-14 text-center relative overflow-hidden">
-          <h2 className="font-display text-white text-3xl md:text-4xl">What our customers say</h2>
-
-          <div className="mt-10 grid md:grid-cols-3 gap-5 text-left">
-            {customerQuotes.map((q) => (
-              <div
-                key={q.name}
-                className={`rounded-3xl p-6 ${
-                  q.featured
-                    ? "bg-white text-foreground md:scale-[1.04] shadow-xl"
-                    : "bg-white/15 text-white border border-white/20"
-                }`}
-              >
-                <div className={`text-[11px] font-semibold ${q.featured ? "text-violet-700" : "text-white/80"}`}>
-                  {q.badge}
-                </div>
-                <p className={`mt-4 text-[13.5px] leading-relaxed ${q.featured ? "text-foreground" : "text-white/95"}`}>
-                  "{q.quote}"
-                </p>
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-300 to-violet-500" />
-                  <div>
-                    <div className={`text-[13px] font-semibold ${q.featured ? "text-foreground" : "text-white"}`}>
-                      {q.name}
-                    </div>
-                    <div className={`text-[11px] ${q.featured ? "text-muted-foreground" : "text-white/75"}`}>
-                      {q.role}
-                    </div>
-                  </div>
-                  <Linkedin className={`ml-auto w-4 h-4 ${q.featured ? "text-violet-600" : "text-white/80"}`} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <button className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition">
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition">
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
         </div>
       </div>
     </section>

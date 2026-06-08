@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useCallback, useId, useLayoutEffect, useRef, useState } from "react";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
@@ -9,7 +9,7 @@ type TabIconProps = { className?: string };
 
 function AdSpendIcon({ className }: TabIconProps) {
   return (
-    <svg width="20" height="20" viewBox="0 0 19.2857 19.2858" fill="none" className={`text-secondary ${className ?? ""}`} aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 19.2857 19.2858" fill="none" className={className ?? "text-secondary"} aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -22,7 +22,7 @@ function AdSpendIcon({ className }: TabIconProps) {
 
 function MeetingsIcon({ className }: TabIconProps) {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={`text-secondary ${className ?? ""}`} aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={className ?? "text-secondary"} aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -35,7 +35,7 @@ function MeetingsIcon({ className }: TabIconProps) {
 
 function WorkflowIcon({ className }: TabIconProps) {
   return (
-    <svg viewBox="0 0 19.9999 20.0005" fill="none" className={`text-secondary ${className ?? ""}`} aria-hidden="true">
+    <svg viewBox="0 0 19.9999 20.0005" fill="none" className={className ?? "text-secondary"} aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -48,7 +48,7 @@ function WorkflowIcon({ className }: TabIconProps) {
 
 function ToolsIcon({ className }: TabIconProps) {
   return (
-    <svg viewBox="0 0 19.9999 20.0001" fill="none" className={`text-secondary ${className ?? ""}`} aria-hidden="true">
+    <svg viewBox="0 0 19.9999 20.0001" fill="none" className={className ?? "text-secondary"} aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -90,9 +90,51 @@ const TABS = [
   },
 ];
 
+type TabIndicator = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+};
+
 export function CompareSection() {
   const [active, setActive] = useState(TABS[0].id);
   const current = TABS.find((t) => t.id === active)!;
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef(new Map<string, HTMLButtonElement>());
+  const [indicator, setIndicator] = useState<TabIndicator | null>(null);
+
+  const updateIndicator = useCallback(() => {
+    const container = tabsRef.current;
+    const button = tabRefs.current.get(active);
+    if (!container || !button) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+
+    setIndicator({
+      left: buttonRect.left - containerRect.left,
+      top: buttonRect.top - containerRect.top,
+      width: buttonRect.width,
+      height: buttonRect.height,
+    });
+  }, [active]);
+
+  useLayoutEffect(() => {
+    updateIndicator();
+
+    const container = tabsRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(updateIndicator);
+    observer.observe(container);
+    window.addEventListener("resize", updateIndicator);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [updateIndicator]);
 
   return (
     <section className="px-6 py-24 bg-section-cream">
@@ -105,26 +147,49 @@ export function CompareSection() {
           <br />
           The work is still there.
         </h2>
-        <p className="mt-6 text-secondary max-w-xl mx-auto text-base">
+        <p className="mt-6 text-foreground/50 max-w-xl mx-auto text-base">
           ChatGPT. Claude. Zapier. Notion AI. You're already using AI. You're also still
           doing the work.
         </p>
 
         {/* Tabs */}
-        <div className="mt-12 mx-12 py-1 flex flex-wrap justify-center gap-2 max-w-6xl rounded-full  bg-white">
+        <div
+          ref={tabsRef}
+          className="relative mt-20 px-3 py-1 flex flex-nowrap justify-evenly gap-2 w-full overflow-x-auto rounded-full bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {indicator && (
+            <div
+              aria-hidden="true"
+              className="absolute rounded-full bg-hero shadow-[0_4px_14px_-2px_rgba(60,40,180,0.45)] pointer-events-none transition-[left,top,width,height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              style={{
+                left: indicator.left,
+                top: indicator.top,
+                width: indicator.width,
+                height: indicator.height,
+              }}
+            />
+          )}
           {TABS.map((t) => {
             const Icon = t.icon;
             const isActive = t.id === active;
             return (
               <button
                 key={t.id}
+                ref={(node) => {
+                  if (node) tabRefs.current.set(t.id, node);
+                  else tabRefs.current.delete(t.id);
+                }}
                 onClick={() => setActive(t.id)}
                 className={
-                  "inline-flex items-center gap-2 px-8 py-3 rounded-full text-md font-medium text-primary transition-all " +
-                  (isActive ? "bg-hero text-white shadow-sm" : "bg-white text-foreground/70 hover:text-foreground")
+                  "relative z-10 inline-flex shrink-0 items-center gap-2 whitespace-nowrap px-6 sm:px-8 py-3 rounded-full text-md font-medium transition-colors duration-300 ease-out " +
+                  (isActive ? "text-white" : "text-foreground/70 hover:text-foreground")
                 }
               >
-                <Icon className="w-4 h-4" />
+                <Icon
+                  className={`w-4 h-4 shrink-0 transition-colors duration-300 ease-out ${
+                    isActive ? "text-white" : "text-secondary/70"
+                  }`}
+                />
                 {t.label}
               </button>
             );
@@ -132,7 +197,7 @@ export function CompareSection() {
         </div>
 
         {/* Comparison cards with connector */}
-        <div className="mt-14 max-w-5xl mx-auto">
+        <div className="mt-14 sm:px-8 lg:px-0 max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-0">
             <div
               className="text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1"
@@ -152,9 +217,15 @@ export function CompareSection() {
 
             <ComparisonConnector />
 
-            <div className="relative bg-hero text-left pl-5 pb-8 rounded-xl text-white min-h-[135px] flex flex-col justify-end shadow-[0_20px_60px_-20px_rgba(60,40,180,0.5)] md:flex-1">
-              <div className="absolute -top-5 -left-4 inline-flex items-center gap-2 px-8 py-8 rounded-[40px] bg-white/20 backdrop-blur-md shadow-lg">
-                <img src={viktorBrandDark} alt="Viktor" width={108} height={32} />
+            <div className="relative bg-hero text-left px-5 pb-8 pt-4 rounded-xl text-white min-h-[135px] flex flex-col justify-between gap-4 md:justify-end md:gap-0 md:pt-0 md:pl-5 md:pr-0 shadow-[0_20px_60px_-20px_rgba(60,40,180,0.5)] md:flex-1">
+              <div className="relative z-10 inline-flex w-fit shrink-0 items-center gap-2 rounded-[40px] bg-white/20 px-4 py-3 shadow-lg backdrop-blur-md md:absolute md:-left-4 md:-top-5 md:px-8 md:py-8">
+                <img
+                  src={viktorBrandDark}
+                  alt="Viktor"
+                  width={108}
+                  height={32}
+                  className="h-6 w-auto md:h-8"
+                />
               </div>
               <p className="text-lg font-medium">
                 <span className="text-[#4e32b5] inline-block px-2 py-0.5 rounded-[5px] bg-[#f1edff] mr-1.5 text-lg font-medium">
@@ -191,7 +262,7 @@ function ComparisonConnector() {
 
   return (
     <div
-      className="relative hidden w-26 shrink-0 overflow-visible md:block"
+      className="relative hidden w-28 shrink-0 overflow-visible md:block"
       style={{ minHeight: 160 }}
       aria-hidden="true"
     >

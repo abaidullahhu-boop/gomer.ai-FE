@@ -6,7 +6,8 @@ import {
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import { FAQ, StartFree } from "@/components/site/HomeSections";
+import { FAQSection } from "@/components/site/FAQSection";
+import { StartFreeSection } from "@/components/site/StartFreeSection";
 
 export const Route = createFileRoute("/security")({
   head: () => ({
@@ -41,8 +42,8 @@ function SecurityPage() {
       <Pillars />
       <ZeroSecrets />
       <FoundSomething />
-      <FAQ />
-      <StartFree />
+      <FAQSection />
+      <StartFreeSection />
       <Footer />
     </div>
   );
