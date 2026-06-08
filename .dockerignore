@@ -1,0 +1,14 @@
+node_modules
+.output
+.git
+.gitignore
+.tanstack
+.nitro
+.vscode
+.idea
+*.log
+*.local
+.wrangler
+.dev.vars
+dist
+dist-ssr

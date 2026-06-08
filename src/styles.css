@@ -1,0 +1,187 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: Gellix;
+  src: url(./assets/fonts/Gellix-Regular.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Gellix;
+  src: url(./assets/fonts/Gellix-Medium.woff2) format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: UlmGrotesk;
+  src: url(./assets/fonts/UlmGrotesk-Bold.woff2) format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-peach: var(--hero-peach);
+  --color-violet-soft: var(--hero-violet);
+  --color-indigo-deep: var(--hero-indigo);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.98 0.008 80);
+  --foreground: oklch(0.18 0.03 270);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 270);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 270);
+  --primary: oklch(0.18 0.03 270);
+  --primary-foreground: oklch(0.98 0.005 80);
+  --secondary: oklch(0.96 0.01 80);
+  --secondary-foreground: oklch(0.18 0.03 270);
+  --muted: oklch(0.94 0.01 80);
+  --muted-foreground: oklch(0.45 0.02 270);
+  --accent: oklch(0.94 0.01 80);
+  --accent-foreground: oklch(0.18 0.03 270);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.015 270 / 50%);
+  --input: oklch(0.9 0.015 270);
+  --ring: oklch(0.68 0.18 295);
+
+  --hero-peach: oklch(0.92 0.08 55);
+  --hero-violet: oklch(0.62 0.20 290);
+  --hero-indigo: oklch(0.28 0.18 275);
+  --hero-deep: oklch(0.14 0.12 275);
+
+  --font-display: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
+  --font-sans: Gellix, ui-sans-serif, sans-serif;
+  --font-heading: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
+
+  --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #ffbb98  0%, #ffbb98 6.43%, #9e84ff  50.71%, #6e47ff 80.36%, #150079 100%);
+
+  --typo-heading-fluid-min-vw: 23.4375rem;
+  --typo-heading-fluid-max-vw: 90rem;
+  --typo-heading-fluid-span: calc(var(--typo-heading-fluid-max-vw) - var(--typo-heading-fluid-min-vw));
+  --typo-h2-size: clamp(1.875rem, calc(1.875rem + (4rem - 1.875rem) * ((100vw - var(--typo-heading-fluid-min-vw)) / var(--typo-heading-fluid-span))), 4rem);
+  --typo-h2-leading: 1.1;
+  --typo-h2-tracking: -0.06em;
+  --typo-h2-color: #1a182b;
+
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.035em; }
+  .font-heading { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.035em; }
+  .typo-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--typo-h2-size);
+    line-height: var(--typo-h2-leading);
+    letter-spacing: var(--typo-h2-tracking);
+    color: var(--typo-h2-color);
+  }
+}
+
+@layer utilities {
+  :root {
+    --conic-gradient-bg: conic-gradient(from -60deg at 62% 64%, #ffbd9e99 0%, #ffbd9e99 15%, #d2c6ff99 35%, #6748fd99 45%, #fde3aa99 80%, #ffbd9e99 100%);
+    --slack-message-pad-x: 12px;
+    --slack-message-pad-y: 8px;
+  }
+  .bg-conic-gradient-bg { background: var(--conic-gradient-bg); }
+  .rounded-section { border-radius: 28px; }
+  .min-h-112 { min-height: 28rem; }
+  .min-h-76 { min-height: 12rem; }
+  .bg-primitive-purple-100 { background-color: #ede9fe; }
+  .bg-section-cream { background-color: oklch(0.97 0.012 70); }
+  .slack-message-viktor { border-radius: 12px; }
+  .bg-ask-card {
+    background: radial-gradient(ellipse 120% 100% at 50% 0%, oklch(0.66 0.20 295) 0%, oklch(0.55 0.20 290) 45%, oklch(0.42 0.19 285) 100%);
+  }
+  .bg-startfree-card {
+    background: linear-gradient(120deg, oklch(0.80 0.12 30) 0%, oklch(0.74 0.15 350) 35%, oklch(0.62 0.19 300) 70%, oklch(0.50 0.20 290) 100%);
+  }
+  .glass-pill {
+    background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.25));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 8px 32px rgba(40,20,80,0.12);
+  }
+  .chat-card {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 20px 60px -20px rgba(40,20,80,0.25);
+    backdrop-filter: blur(20px);
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 40s linear infinite; }
+  @keyframes logo-slide-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .animate-logo-slide-up {
+    animation: logo-slide-up 0.55s ease-out;
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow { animation: spin-slow 40s linear infinite; }
+  .animate-spin-slow-reverse { animation: spin-slow 40s linear infinite reverse; }
+  @keyframes use-case-progress {
+    from { stroke-dashoffset: var(--use-case-circumference); }
+    to { stroke-dashoffset: 0; }
+  }
+  .animate-use-case-progress {
+    animation: use-case-progress linear forwards;
+  }
+}
+
+@utility bg-hero {
+  background: var(--gradient-hero);
+}
