@@ -101,17 +101,19 @@ function NavDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-1/2 top-full z-50 mt-1 -translate-x-1/2 min-w-[160px] rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
-          {items.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="block px-5 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-black/[0.03] hover:text-foreground whitespace-nowrap"
-              onClick={onClose}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3">
+          <div className="min-w-[160px] rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
+            {items.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="block px-5 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-black/[0.03] hover:text-foreground whitespace-nowrap"
+                onClick={onClose}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>
