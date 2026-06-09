@@ -481,7 +481,7 @@ function StartFreeCTA() {
               it makes 30 minutes.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <GetStartedButton size="sm" className="px-5 py-3" />
+              <GetStartedButton className="px-5 py-3" />
               <button className="px-5 py-3 rounded-full bg-white/15 text-white text-sm font-semibold border border-white/20 hover:bg-white/20 transition">
                 See all plans
               </button>

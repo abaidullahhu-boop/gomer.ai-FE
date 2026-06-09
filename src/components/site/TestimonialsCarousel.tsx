@@ -115,8 +115,13 @@ export function TestimonialsCarousel({
   }, [goNext]);
 
   return (
-    <section className={"sm:px-4 py-18 bg-section-cream " + (className ?? "")}>
-      <div className="mx-auto max-w-6xl rounded-[36px] overflow-hidden relative bg-hero py-16 md:py-20">
+    <section
+      className={
+        "py-18 bg-section-cream sm:px-6 lg:px-18 " + (className ?? "")
+      }
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="rounded-[36px] overflow-hidden relative bg-hero py-16 md:py-20 px-6 sm:px-10 md:px-14">
         <div
           aria-hidden
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[40%] rounded-full blur-3xl opacity-70"
@@ -153,7 +158,7 @@ export function TestimonialsCarousel({
 
         <div
           ref={containerRef}
-          className="relative mt-12 overflow-hidden"
+          className="relative mt-12 overflow-hidden px-2 sm:px-4"
           onMouseEnter={() => {
             pausedRef.current = true;
           }}
@@ -173,12 +178,9 @@ export function TestimonialsCarousel({
           >
             {extendedItems.map((t, i) => {
               const isActive = i === activeIndex;
-              const isTall = (i % items.length) % 2 === 0;
-              const heightClass = isActive
-                ? "h-[340px]"
-                : isTall
-                  ? "h-[300px]"
-                  : "h-[250px]";
+              const itemIndex = i % items.length;
+              const isTall = itemIndex % 2 === 0;
+              const heightClass = isTall ? "h-[340px]" : "h-[250px]";
 
               return (
                 <div
@@ -187,7 +189,10 @@ export function TestimonialsCarousel({
                     cardRefs.current[i] = el;
                   }}
                   data-card
-                  className="w-[min(85vw,320px)] md:w-[340px] shrink-0 h-[340px] flex items-start"
+                  className={
+                    "w-[min(85vw,320px)] md:w-[340px] shrink-0 flex items-start transition-[height] duration-500 " +
+                    heightClass
+                  }
                 >
                 <article
                   onClick={() => !isActive && goToCard(i)}
@@ -336,6 +341,7 @@ export function TestimonialsCarousel({
           >
             <ArrowRight className="w-5 h-5" strokeWidth={3.5} />
           </button>
+        </div>
         </div>
       </div>
     </section>

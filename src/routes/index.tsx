@@ -49,24 +49,25 @@ export default function Index() {
       <section className="relative pt-6 pb-14 overflow-hidden rounded-b-2xl bg-hero">
         <Nav />
         <div className="relative mx-auto max-w-5xl px-6 pt-40 text-center">
-          <div className="inline-flex items-center gap-3 px-4 py-4 rounded-full text-white/95 text-sm">
-            <div className="flex space-x-2">
-              <img src={slackLogo} alt="Slack" className="w-5 h-5" />
-              <img src={microsoftLogo} alt="Microsoft Teams" className="w-5 h-5" />
+          <div className="inline-flex items-center gap-3 px-4 pb-4 pt-8 rounded-full text-white/95 text-sm">
+            <div className="flex space-x-2 pr-1">
+              <img src={slackLogo} alt="Slack" className="w-4 h-4" />
+              <img src={microsoftLogo} alt="Microsoft Teams" className="w-4 h-4" />
             </div>
-            25,000+ workspaces hired Viktor
+            
+            <span className="text-white">25,000+ workspaces hired Viktor </span>
           </div>
 
           <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
             Not a tool.<br />A hire.
           </h1>
 
-          <p className="mt-10 mx-auto max-w-xl text-white text-lg leading-relaxed">
-            Viktor is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns.
+          <p className="mt-8 mx-auto max-w-136.75 font-medium text-white text-lg leading-[1.4]">
+            Viktor is the AI employee that connects to 3,200+ tools and does the work. Reports, dashboards, code, campaigns.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3">
-            <GetStartedButton size="lg" className="px-20 sm:px-8 py-4 text-base font-medium" />
+            <GetStartedButton />
             <a className="text-white/80 text-sm underline underline-offset-4">or talk to sales →</a>
           </div>
 
@@ -79,8 +80,8 @@ export default function Index() {
       </section>
 
       {/* OUTPUT / FEATURES — visuals overlap hero bottom */}
-      <section className="md:px-4 lg:px-20 relative z-10 pb-24 bg-section-cream">
-        <div className="mx-auto max-w-7xl grid lg:grid-cols-3 gap-5 items-start">
+      <section className="px-4 md:px-4 lg:px-20 relative z-10 pb-24 bg-section-cream overflow-x-clip">
+        <div className="mx-auto max-w-7xl grid lg:grid-cols-3 gap-5 items-start min-w-0">
           <FeatureCard
             title="Real output, not just text."
             body="Viktor doesn't brainstorm. It ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
@@ -183,27 +184,9 @@ function LogoMarquee({ logos }: { logos: string[] }) {
 
 function FeatureCard({ title, body, visual, tinted }: { title: string; body: string; visual: React.ReactNode; tinted?: boolean }) {
   return (
-    <div className="flex flex-col bg-white/50 rounded-[40px]">
-      <div
-        className="relative  rounded-[32px] overflow-hidden min-h-[340px] flex items-center justify-center px-4 py-8 "
-        
-      >
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-         
-        />
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            
-          }}
-        />
-        <div className="relative z-10 w-full flex items-center justify-center">{visual}</div>
+    <div className="flex min-w-0 flex-col overflow-hidden bg-white/50 rounded-[40px]">
+      <div className="relative rounded-[32px] overflow-hidden min-h-[340px] flex items-center justify-center px-4 py-8">
+        <div className="relative z-10 w-full min-w-0 max-w-full flex items-center justify-center overflow-hidden">{visual}</div>
       </div>
       <div className="pt-6 pb-6 px-3">
         <h3 className="font-display text-[22px] leading-tight text-foreground font-bold tracking-tight">{title}</h3>
@@ -230,7 +213,6 @@ const INTEGRATION_WHEEL_LOGOS = [
 const WHEEL_SIZE = 420;
 const WHEEL_RADIUS = 210;
 const LOGO_CARD_SIZE = 88;
-const INTEGRATION_ARC_VIEWPORT_W = 340;
 const INTEGRATION_STEP_HOLD_MS = 2500;
 const INTEGRATION_STEP_MS = 650;
 
@@ -283,9 +265,8 @@ function ToolIconsVisual() {
         
       />
       <div
-        className="relative z-0 mx-auto h-full overflow-hidden"
+        className="relative z-0 mx-auto h-full w-full max-w-[340px] overflow-hidden"
         style={{
-          width: INTEGRATION_ARC_VIEWPORT_W,
           maskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
         }}
@@ -426,7 +407,7 @@ function ChatPreview() {
         time="2:43 PM"
         body={
           <>
-            <span className="whitespace-nowrap">
+            <span>
               Here you go <Mention>@Lisa</Mention> and <br /> <Mention>@Anna</Mention>
             </span>
             <div className="mt-2.5 inline-flex items-center gap-1.5">

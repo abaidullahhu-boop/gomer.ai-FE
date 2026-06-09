@@ -152,55 +152,57 @@ export function CompareSection() {
           doing the work.
         </p>
 
-        {/* Tabs */}
-        <div
-          ref={tabsRef}
-          className="relative mt-20 px-3 py-1 flex flex-nowrap justify-evenly gap-2 w-full overflow-x-auto rounded-full bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {indicator && (
-            <div
-              aria-hidden="true"
-              className="absolute rounded-full bg-hero shadow-[0_4px_14px_-2px_rgba(60,40,180,0.45)] pointer-events-none transition-[left,top,width,height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
-              style={{
-                left: indicator.left,
-                top: indicator.top,
-                width: indicator.width,
-                height: indicator.height,
-              }}
-            />
-          )}
-          {TABS.map((t) => {
-            const Icon = t.icon;
-            const isActive = t.id === active;
-            return (
-              <button
-                key={t.id}
-                ref={(node) => {
-                  if (node) tabRefs.current.set(t.id, node);
-                  else tabRefs.current.delete(t.id);
+        {/* Tabs — same horizontal bounds as comparison cards below */}
+        <div className="mt-20 w-full sm:px-8 lg:px-0">
+          <div
+            ref={tabsRef}
+            className="relative w-full py-1 px-1 flex flex-nowrap items-center justify-between gap-2 overflow-x-auto rounded-full bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {indicator && (
+              <div
+                aria-hidden="true"
+                className="absolute rounded-full bg-hero pointer-events-none transition-[left,top,width,height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                style={{
+                  left: indicator.left,
+                  top: indicator.top,
+                  width: indicator.width,
+                  height: indicator.height,
                 }}
-                onClick={() => setActive(t.id)}
-                className={
-                  "relative z-10 inline-flex shrink-0 items-center gap-2 whitespace-nowrap px-6 sm:px-8 py-3 rounded-full text-md font-medium transition-colors duration-300 ease-out " +
-                  (isActive ? "text-white" : "text-foreground/70 hover:text-foreground")
-                }
-              >
-                <Icon
-                  className={`w-4 h-4 shrink-0 transition-colors duration-300 ease-out ${
-                    isActive ? "text-white" : "text-secondary/70"
-                  }`}
-                />
-                {t.label}
-              </button>
-            );
-          })}
+              />
+            )}
+            {TABS.map((t) => {
+              const Icon = t.icon;
+              const isActive = t.id === active;
+              return (
+                <button
+                  key={t.id}
+                  ref={(node) => {
+                    if (node) tabRefs.current.set(t.id, node);
+                    else tabRefs.current.delete(t.id);
+                  }}
+                  onClick={() => setActive(t.id)}
+                  className={
+                    "relative z-10 inline-flex w-fit flex-none items-center gap-5 whitespace-nowrap px-4 sm:px-12 py-3 rounded-full text-md font-medium transition-colors duration-300 ease-out " +
+                    (isActive ? "text-white" : "text-primary hover:text-foreground")
+                  }
+                >
+                  <Icon
+                    className={`w-5 h-5 shrink-0 transition-colors duration-300 ease-out ${
+                      isActive ? "text-[#D0CFD6]" : "text-[#D0CFD6]"
+                    }`}
+                  />
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Comparison cards with connector */}
-        <div className="mt-14 sm:px-8 lg:px-0 max-w-6xl mx-auto">
+        <div className="mt-14 w-full sm:px-8 lg:px-0">
           <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-0">
             <div
-              className="text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1"
+              className="text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1 ring-1 ring-white/50 "
               style={{
                 background:
                   "radial-gradient(482.96% 141.42% at .12% 0, #f2598a1a 0%, #f2598a00 100%), #fffc",
@@ -218,14 +220,53 @@ export function CompareSection() {
             <ComparisonConnector />
 
             <div className="relative bg-hero text-left px-5 pb-8 pt-4 rounded-xl text-white min-h-[135px] flex flex-col justify-between gap-4 md:justify-end md:gap-0 md:pt-0 md:pl-5 md:pr-0 shadow-[0_20px_60px_-20px_rgba(60,40,180,0.5)] md:flex-1">
-              <div className="relative z-10 inline-flex w-fit shrink-0 items-center gap-2 rounded-[40px] bg-white/20 px-4 py-3 shadow-lg backdrop-blur-md md:absolute md:-left-4 md:-top-5 md:px-8 md:py-8">
-                <img
-                  src={viktorBrandDark}
-                  alt="Viktor"
-                  width={108}
-                  height={32}
-                  className="h-6 w-auto md:h-8"
+              <div className="relative z-10 inline-flex h-auto w-fit shrink-0 rounded-[40px] px-4 py-3 shadow-lg backdrop-blur-[5px] backdrop-saturate-150 md:absolute md:-left-4 md:-top-5 md:px-10 md:py-8">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse 130% 100% at 50% 0%, rgba(254,177,142,0.4) 0%, rgba(255,201,173,0.4) 24%, rgba(211,196,252,0.4) 100%)",
+                  }}
                 />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+                  style={{
+                    background:
+                      "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                    padding: "1px",
+                  }}
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+                  style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
+                >
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={{
+                      background:
+                        "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                      padding: "4px",
+                    }}
+                  />
+                </div>
+                <div className="relative z-[2] flex h-full w-full items-center">
+                  <img
+                    src={viktorBrandDark}
+                    alt="Viktor"
+                    width={108}
+                    height={32}
+                    className="h-6 w-auto md:h-8"
+                  />
+                </div>
               </div>
               <p className="text-lg font-medium">
                 <span className="text-primitive-purple-700 inline-block px-2 py-0.5 rounded-[5px] bg-[#f1edff] mr-1.5 text-lg font-medium">
@@ -262,7 +303,7 @@ function ComparisonConnector() {
 
   return (
     <div
-      className="relative hidden w-28 shrink-0 overflow-visible md:block"
+      className="relative hidden w-56 shrink-0 overflow-visible md:block"
       style={{ minHeight: 160 }}
       aria-hidden="true"
     >

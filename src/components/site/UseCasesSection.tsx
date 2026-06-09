@@ -170,7 +170,7 @@ export function UseCasesSection() {
 
   return (
     <section className="lg:px-20 py-1 bg-section-cream">
-      <div className="mx-auto rounded-[36px] overflow-hidden relative bg-hero px-3 xl:pr-10 xl:pl-20 2xl:gap-[6.75rem] 2xl:pr-16 2xl:pl-40 lg:px-32 py-20">
+      <div className="mx-auto rounded-[36px] overflow-hidden relative bg-hero max-w-7xl px-3 xl:pr-10 xl:pl-20 2xl:gap-[6.75rem] 2xl:pr-16 2xl:pl-40 lg:px-32 py-20">
         {/* Peach glow */}
         <div
           aria-hidden
@@ -181,7 +181,7 @@ export function UseCasesSection() {
           }}
         />
 
-        <div className="relative grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-32 items-start">
+        <div className="relative grid gap-10 lg:grid-cols-[0.85fr_1.5fr] lg:gap-20 items-start">
           {/* LEFT */}
           <div>
             <p className="text-xs text-white/70">Use cases</p>
@@ -224,7 +224,7 @@ export function UseCasesSection() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative overflow-hidden rounded-[28px] bg-white p-8 md:p-10 shadow-[inset_0_0_18px_3px_#FFEEEE,inset_0_0_28px_6px_#FFEEEE]">
+          <div className="relative overflow-hidden rounded-[28px] bg-white p-8 md:p-12 min-h-[540px] lg:min-h-[570px] shadow-[inset_0_0_18px_3px_#FFEEEE,inset_0_0_28px_6px_#FFEEEE]">
             {/* Inner colored glow on all 4 sides */}
             <div
               aria-hidden
@@ -239,21 +239,24 @@ export function UseCasesSection() {
                 {current.headline}
               </h3>
 
-              <div className="mt-8 grid sm:grid-cols-2 gap-x-10 gap-y-8">
+              <div className="mt-10 grid sm:grid-cols-2 gap-x-10 gap-y-10">
                 {current.items.map((it) => (
                   <div
                     key={it.title}
-                    className="flex h-[170px] flex-col overflow-hidden"
+                    className="flex h-[200px] flex-col overflow-hidden"
                   >
                     <div className="flex shrink-0 items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-gradient-to-br from-[oklch(0.78_0.12_310)] to-[oklch(0.55_0.20_280)] flex items-center justify-center shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      <span
+                        className="flex shrink-0 items-center justify-center rounded-full shadow-[inset_0_0_8px_rgba(255,255,255,0.35)] gradient-dark-2 size-4 mt-0"
+                        aria-hidden="true"
+                      >
+                        <Check className="size-2.5 text-white" strokeWidth={2.6} aria-hidden="true" />
                       </span>
                       <h4 className="text-foreground text-sm font-medium">
                         {it.title}
                       </h4>
                     </div>
-                    <p className="mt-2.5 line-clamp-5 text-muted-foreground text-[13px] leading-relaxed">
+                    <p className="mt-3 line-clamp-6 text-muted-foreground text-[13px] leading-relaxed">
                       {it.body}
                     </p>
                   </div>
