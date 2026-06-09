@@ -530,6 +530,11 @@
     box-shadow: var(--integrations-icon-tile-shadow);
     transition: opacity 50ms ease-out, filter 50ms ease-out;
   }
+  .integrations-icon-tile--compact {
+    width: 3.85rem;
+    height: 3.85rem;
+    border-radius: 1rem;
+  }
   .integrations-connector {
     display: flex;
     flex-direction: column;
