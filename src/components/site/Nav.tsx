@@ -313,7 +313,7 @@ export function Nav() {
                 <div className="flex justify-end gap-3">
                   <a
                     href="/login"
-                    className="rounded-full border border-[#D9ADBC] px-5 py-2 text-sm hover:bg-black/5"
+                    className="rounded-full border border-[#b3b0c1] px-5 py-2 text-sm hover:bg-black/5"
                   >
                     Login
                   </a>
