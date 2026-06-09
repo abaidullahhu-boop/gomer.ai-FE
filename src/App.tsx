@@ -7,6 +7,9 @@ import BrandPage from "@/routes/brand";
 import CaseStudiesPage from "@/routes/case-studies";
 import ChangelogPage from "@/routes/changelog";
 import ComparePage from "@/routes/compare.viktor-vs-chatgpt";
+import CompareOpenClawPage from "@/routes/compare.viktor-vs-openclaw";
+import CompareClaudeInSlackPage from "@/routes/compare.viktor-vs-claude-in-slack";
+import CompareTaskletPage from "@/routes/compare.viktor-vs-tasklet";
 import CreatorsPage from "@/routes/creators";
 import DocsPage from "@/routes/docs";
 import EnterprisePage from "@/routes/enterprise";
@@ -31,6 +34,9 @@ export default function App() {
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/changelog" element={<ChangelogPage />} />
         <Route path="/compare/viktor-vs-chatgpt" element={<ComparePage />} />
+        <Route path="/compare/viktor-vs-openclaw" element={<CompareOpenClawPage />} />
+        <Route path="/compare/viktor-vs-claude-in-slack" element={<CompareClaudeInSlackPage />} />
+        <Route path="/compare/viktor-vs-tasklet" element={<CompareTaskletPage />} />
         <Route path="/creators" element={<CreatorsPage />} />
         <Route path="/docs" element={<DocsPage />} />
         <Route path="/enterprise" element={<EnterprisePage />} />

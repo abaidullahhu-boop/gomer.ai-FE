@@ -117,7 +117,7 @@ export function TestimonialsCarousel({
   return (
     <section
       className={
-        "py-18 bg-section-cream sm:px-6 lg:px-18 " + (className ?? "")
+        "py-18 bg-primitive-main-beige sm:px-6 lg:px-18 " + (className ?? "")
       }
     >
       <div className="mx-auto max-w-7xl">

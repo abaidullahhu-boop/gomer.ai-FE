@@ -59,7 +59,7 @@ export function StartFreeSection({
   primaryCtaTo = "/pricing",
   secondaryCtaLabel = "See all plans",
   onSecondaryCtaClick,
-  className = "sm:px-4 pb-20 pt-12",
+  className = "sm:px-4 pb-20 pt-12 bg-primitive-main-beige",
 }: StartFreeSectionProps) {
   return (
     <section className={className}>

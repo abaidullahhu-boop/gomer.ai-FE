@@ -514,7 +514,7 @@ const proseClasses =
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-screen bg-[#faf5f1]">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Changelog — Viktor"
         description="What's new across the Viktor platform — releases, improvements, and fixes."
@@ -524,7 +524,7 @@ export default function ChangelogPage() {
       {/* Hero */}
       <section className="border-0 py-0! pt-0 pb-12 sm:pb-[5rem]">
         <div className="relative w-full overflow-hidden rounded-b-[24px] bg-integrations-hero-surface sm:rounded-b-[32px]">
-          <Nav />
+          <Nav heroTone="light" />
           <div className="px-4 sm:px-6 md:px-12 lg:px-20">
             <div className="hero-page-stack-pt mx-auto w-full max-w-[1440px] pb-12 sm:pb-16 lg:pb-20">
               <div className="grid gap-8 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-5 mt-16">

@@ -27,7 +27,7 @@ import viktorSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 
 export default function SecurityPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Security — Viktor"
         description="The security behind your AI coworker. Independently audited, continuously verified. SOC 2 Type II, GDPR, encryption everywhere, and zero training on your data."

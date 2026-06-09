@@ -28,7 +28,7 @@ import { Footer } from "@/components/site/Footer";
 
 export default function CreatorsPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Become a Viktor Influencer — Earn for Posting Real Work"
         description="Viktor does the work. You take the screenshot. Post real product output, get paid up to $10,000 per post — or take 50% more in credits."
@@ -57,7 +57,7 @@ export default function CreatorsPage() {
 function Hero() {
   return (
     <section className="relative pt-6 pb-0">
-      <Nav />
+      <Nav heroTone="light" />
       <div className="mx-auto max-w-7xl px-4 mt-6">
         <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] bg-hero">
           <div className="relative z-10 px-6 sm:px-12 lg:px-20 pt-24 pb-20 lg:pt-32 lg:pb-28 text-center text-white">

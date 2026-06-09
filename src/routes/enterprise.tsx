@@ -34,7 +34,7 @@ const customerTestimonials = [
 
 export default function EnterprisePage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Enterprise — Viktor"
         description="One AI employee. Enterprise-ready. SSO, RBAC, audit logs, SOC 2, GDPR — everything your security, IT, and procurement teams ask for."
@@ -133,7 +133,7 @@ function EnterpriseHero() {
   return (
     <section className="border-0 py-0">
       <div className="relative w-full overflow-hidden rounded-b-section bg-integrations-hero-surface sm:rounded-b-section">
-        <Nav />
+        <Nav heroTone="light" />
         <div className="hero-page-stack-pt relative z-10 mx-auto flex w-full max-w-[1440px] flex-col items-center gap-16 px-5 pb-20 text-center sm:px-8 md:gap-20 md:px-12 md:pb-24 lg:px-20 lg:pb-28 mt-16">
           <div className="flex w-full max-w-4xl flex-col items-center gap-8">
             <h1 className="font-heading h2 text-balance sm:h1">
@@ -347,7 +347,7 @@ function ComplianceColumn({ data }: { data: ComplianceColumnData }) {
 
 function ComplianceGrid() {
   return (
-    <section className="bg-[var(--primitive-main-beige)] pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]">
+    <section className="bg-primitive-main-beige pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-20">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end">
@@ -1024,7 +1024,7 @@ function DeliverablesTabs() {
   }, [active]);
 
   return (
-    <section className="bg-[var(--primitive-main-beige)] pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]">
+    <section className="bg-primitive-main-beige pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-16">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
@@ -1330,7 +1330,7 @@ function SecurityControlCard({
 
 function SecurityAlly() {
   return (
-    <section className="bg-[var(--primitive-main-beige)] py-14 sm:py-[7rem]">
+    <section className="bg-primitive-main-beige py-14 sm:py-[7rem]">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-[72.625rem] flex-col items-center gap-16 text-center">
           <div className="flex max-w-[34.125rem] flex-col items-center">
@@ -1523,7 +1523,7 @@ function OnboardingGlassCard({
 function AddInTwoMinutes() {
   return (
     <section
-      className="bg-[var(--primitive-main-beige)] pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]"
+      className="bg-primitive-main-beige pt-14 pb-14 sm:pt-[7rem] sm:pb-[7rem]"
       aria-label="Enterprise onboarding"
     >
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">

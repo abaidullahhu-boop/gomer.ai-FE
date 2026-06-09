@@ -28,7 +28,7 @@ const CTA_GRADIENT =
 
 export default function ProductPage() {
   return (
-    <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Product — Viktor, an AI coworker for your entire team"
         description="Viktor is an AI coworker that plugs into your tools, talks in Slack, and ships real deliverables — built for teams, secure by default."
@@ -52,7 +52,7 @@ export default function ProductPage() {
 function Hero() {
   return (
     <section className="relative overflow-hidden py-14 sm:py-[7rem]" style={{ background: HERO_BG }}>
-      <Nav />
+      <Nav heroTone="light" />
       <div className="relative mx-auto max-w-4xl px-6 pt-16 text-center">
         <div className="mx-auto mb-6 w-12 h-12 rounded-2xl bg-white/70 backdrop-blur flex items-center justify-center shadow-sm">
           <Sparkles className="w-5 h-5 text-violet-600" />
@@ -81,7 +81,7 @@ function Hero() {
 /* ---------------- SECTION 2: WHAT VIKTOR IS ---------------- */
 function SectionWhatViktorIs() {
   return (
-    <section id="what-viktor-is" className="py-10 sm:py-12" style={{ background: "#faf5f1" }}>
+    <section id="what-viktor-is" className="py-10 sm:py-12 bg-primitive-main-beige">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-7xl">
           <div
@@ -172,7 +172,7 @@ function LightCard({ children }: { children: React.ReactNode }) {
 
 function SectionWhatCanDo() {
   return (
-    <section id="what-viktor-can-do" className="py-10 sm:py-12" style={{ background: "#faf5f1" }}>
+    <section id="what-viktor-can-do" className="py-10 sm:py-12 bg-primitive-main-beige">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-7xl flex flex-col gap-10 lg:gap-14">
           <div className="text-center">
@@ -212,7 +212,7 @@ function SectionWhatCanDo() {
 /* ---------------- SECTION 4: SPLIT DARK CARD ---------------- */
 function SectionBuiltForTeams() {
   return (
-    <section id="built-for-teams" className="py-10 sm:py-12" style={{ background: "#faf5f1" }}>
+    <section id="built-for-teams" className="py-10 sm:py-12 bg-primitive-main-beige">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-7xl">
           <div

@@ -123,7 +123,7 @@ export default function CaseStudiesPage() {
   const filtered = active === "All" ? cases : cases.filter((c) => c.category === filterKey[active]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Case Studies — Viktor"
         description="Real stories from teams running on Viktor. The numbers are the customers'. The tools are theirs. The workflows still run today."
@@ -137,7 +137,7 @@ export default function CaseStudiesPage() {
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 bottom-[-3rem] z-0 bg-case-study-hero-surface md:bottom-[-4rem]"
           />
-          <Nav />
+          <Nav heroTone="light" />
           <div className="hero-page-stack-pt relative z-10 mx-auto flex w-full max-w-[1440px] flex-col items-center gap-14 px-5 pb-20 text-center sm:px-8 md:px-12 md:pb-24 lg:gap-16 lg:px-20 lg:pb-20 ">
             <div className="mx-auto flex max-w-[66.5rem] flex-col items-center gap-8 mt-16">
               <div className="flex flex-col items-center gap-4">
@@ -212,7 +212,7 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-background py-1 sm:py-[7rem]">
+      <section className="bg-primitive-main-beige py-1 sm:py-[7rem]">
         <div className="px-4 sm:px-6 md:px-12 lg:px-20">
           <div className="mx-auto w-full max-w-7xl">
             <div className="dark relative mx-auto flex min-h-[29.8125rem] w-full max-w-[80rem] flex-col items-center gap-10 overflow-hidden rounded-[32px] px-6 pt-14 pb-10 text-center text-white gradient-dark-1 max-sm:-mx-4 max-sm:w-[calc(100%+2rem)] sm:gap-16 sm:px-10 sm:pt-20 sm:pb-16 lg:px-16">

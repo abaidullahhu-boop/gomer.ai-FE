@@ -2,7 +2,7 @@ import { Check, X, Download } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 
 const styles = `
-.vb { --vb-bg:#f3efe8; --vb-dark:#1a182b; --vb-grey:#6b6880; --vb-line:rgba(26,24,43,0.08);
+.vb { --vb-bg:#faf5f1; --vb-dark:#1a182b; --vb-grey:#6b6880; --vb-line:rgba(26,24,43,0.08);
   --vb-violet1:#a89bff; --vb-violet2:#7c66f5; --vb-violet3:#4224bc; --vb-peach:#ffd4b5;
   background:var(--vb-bg); color:var(--vb-dark); min-height:100vh; font-family:Gellix,ui-sans-serif,sans-serif; }
 .vb-wrap { max-width:1100px; margin:0 auto; padding:0 1.5rem; }

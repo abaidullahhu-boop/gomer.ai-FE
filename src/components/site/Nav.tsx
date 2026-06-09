@@ -20,8 +20,8 @@ const resourcesMenu: MenuItem[] = [
 const compareMenu: MenuItem[] = [
   { label: "vs ChatGPT", to: "/compare/viktor-vs-chatgpt" },
   { label: "vs OpenClaw", to: "/compare/viktor-vs-openclaw" },
-  { label: "vs Claude", to: "/compare/viktor-vs-claude-in-slack" },
-  { label: "vs Taskletor", to: "/compare/viktor-vs-taskletor" },
+  { label: "vs Claude in Slack", to: "/compare/viktor-vs-claude-in-slack" },
+  { label: "vs Tasklet", to: "/compare/viktor-vs-tasklet" },
 ];
 
 const solutionsMenu: MenuItem[] = [
@@ -32,11 +32,21 @@ const solutionsMenu: MenuItem[] = [
 const dropdownLinkClass =
   "rounded-xl px-3 py-2 text-sm text-[#1a182b] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none whitespace-nowrap";
 
-const navLoginButtonClass =
-  "inline-flex h-10 shrink-0 items-center justify-center rounded-full border-[1.25px] border-solid border-[#1a182b1a] bg-transparent px-6 text-sm font-medium tracking-[-0.01em] whitespace-nowrap transition-all hover:bg-[#1a182b]/[0.06]";
+type NavTheme = {
+  link: string;
+  linkOpen: string;
+  caretClosed: string;
+  caretOpen: string;
+};
 
-const navMobileLoginButtonClass =
-  "block rounded-full border border-[#E0E0E0] px-5 py-3 text-center text-sm font-medium text-foreground hover:bg-black/5";
+function getNavTheme(): NavTheme {
+  return {
+    link: "text-foreground hover:text-purple-500",
+    linkOpen: "text-purple-500",
+    caretClosed: "text-[#9693a3]",
+    caretOpen: "text-purple-500",
+  };
+}
 
 const navMobileCtaButtonClass = "py-3";
 
@@ -84,13 +94,13 @@ function NavGlassLayers() {
   );
 }
 
-function Caret({ open }: { open: boolean }) {
+function Caret({ open, closedClass, openClass }: { open: boolean; closedClass: string; openClass: string }) {
   return (
     <svg
       width="11"
       height="11"
       viewBox="0 0 12 12"
-      className={`transition-transform duration-200 ${open ? "rotate-180 text-purple-500" : "text-[#9693a3]"}`}
+      className={`transition-transform duration-200 ${open ? `rotate-180 ${openClass}` : closedClass}`}
       aria-hidden="true"
     >
       <path
@@ -109,12 +119,14 @@ function NavDropdown({
   open,
   onOpen,
   onClose,
+  theme,
 }: {
   label: string;
   items: MenuItem[];
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
+  theme: NavTheme;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -151,9 +163,9 @@ function NavDropdown({
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => (open ? onClose() : onOpen())}
-        className={`flex items-center gap-2 transition-colors text-sm font-medium cursor-pointer ${open ? "text-purple-500" : "hover:text-purple-500"}`}
+        className={`flex items-center gap-2 transition-colors text-sm font-medium cursor-pointer ${open ? theme.linkOpen : theme.link}`}
       >
-        {label} <Caret open={open} />
+        {label} <Caret open={open} closedClass={theme.caretClosed} openClass={theme.caretOpen} />
       </button>
 
       <div
@@ -193,12 +205,16 @@ function MobileNavAccordion({
   open,
   onToggle,
   onNavigate,
+  caretClosedClass,
+  caretOpenClass,
 }: {
   label: string;
   items: MenuItem[];
   open: boolean;
   onToggle: () => void;
   onNavigate: () => void;
+  caretClosedClass: string;
+  caretOpenClass: string;
 }) {
   return (
     <div className="border-b border-black/[0.06] last:border-b-0">
@@ -209,7 +225,7 @@ function MobileNavAccordion({
         className="flex w-full items-center justify-between py-4 text-[15px] font-medium text-foreground"
       >
         {label}
-        <Caret open={open} />
+        <Caret open={open} closedClass={caretClosedClass} openClass={caretOpenClass} />
       </button>
       {open && (
         <div className="flex flex-col gap-2 pb-3 pl-1">
@@ -258,7 +274,11 @@ function MenuToggleButton({ open, onClick }: { open: boolean; onClick: () => voi
   );
 }
 
-export function Nav() {
+type NavProps = {
+  heroTone?: "dark" | "light";
+};
+
+export function Nav({ heroTone = "dark" }: NavProps) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
@@ -302,6 +322,9 @@ export function Nav() {
       : "bg-white/10 backdrop-blur-[22px] transition-colors duration-200 ease-out";
 
   const showGlassOverlay = !scrolled && !mobileOpen;
+  const theme = getNavTheme();
+  const mobileCaretClosedClass = "text-[#9693a3]";
+  const mobileCaretOpenClass = "text-purple-500";
 
   return (
     <header className="fixed top-0 z-50 w-full">
@@ -329,9 +352,10 @@ export function Nav() {
                     open={openMenu === "product"}
                     onOpen={() => setOpenMenu("product")}
                     onClose={() => setOpenMenu(null)}
+                    theme={theme}
                   />
 
-                  <Link to="/enterprise" className="text-sm font-medium transition-colors hover:text-purple-500">
+                  <Link to="/enterprise" className={`text-sm font-medium transition-colors ${theme.link}`}>
                     Enterprise
                   </Link>
 
@@ -341,6 +365,7 @@ export function Nav() {
                     open={openMenu === "resources"}
                     onOpen={() => setOpenMenu("resources")}
                     onClose={() => setOpenMenu(null)}
+                    theme={theme}
                   />
 
                   <NavDropdown
@@ -349,6 +374,7 @@ export function Nav() {
                     open={openMenu === "compare"}
                     onOpen={() => setOpenMenu("compare")}
                     onClose={() => setOpenMenu(null)}
+                    theme={theme}
                   />
 
                   <NavDropdown
@@ -357,13 +383,11 @@ export function Nav() {
                     open={openMenu === "solutions"}
                     onOpen={() => setOpenMenu("solutions")}
                     onClose={() => setOpenMenu(null)}
+                    theme={theme}
                   />
                 </nav>
 
-                <div className="flex min-w-0 items-center justify-end gap-3">
-                  <a href="/login" className={navLoginButtonClass}>
-                    Login
-                  </a>
+                <div className="flex min-w-0 items-center justify-end">
                   <GetStartedButton variant="nav" />
                 </div>
                 </div>
@@ -402,6 +426,8 @@ export function Nav() {
                       setMobileAccordion((prev) => (prev === "product" ? null : "product"))
                     }
                     onNavigate={closeMobileMenu}
+                    caretClosedClass={mobileCaretClosedClass}
+                    caretOpenClass={mobileCaretOpenClass}
                   />
 
                   <Link
@@ -420,6 +446,8 @@ export function Nav() {
                       setMobileAccordion((prev) => (prev === "resources" ? null : "resources"))
                     }
                     onNavigate={closeMobileMenu}
+                    caretClosedClass={mobileCaretClosedClass}
+                    caretOpenClass={mobileCaretOpenClass}
                   />
 
                   <MobileNavAccordion
@@ -430,6 +458,8 @@ export function Nav() {
                       setMobileAccordion((prev) => (prev === "compare" ? null : "compare"))
                     }
                     onNavigate={closeMobileMenu}
+                    caretClosedClass={mobileCaretClosedClass}
+                    caretOpenClass={mobileCaretOpenClass}
                   />
 
                   <MobileNavAccordion
@@ -440,13 +470,12 @@ export function Nav() {
                       setMobileAccordion((prev) => (prev === "solutions" ? null : "solutions"))
                     }
                     onNavigate={closeMobileMenu}
+                    caretClosedClass={mobileCaretClosedClass}
+                    caretOpenClass={mobileCaretOpenClass}
                   />
                 </nav>
 
                 <div className="flex flex-col gap-3 border-t border-black/[0.06] py-5">
-                  <a href="/login" onClick={closeMobileMenu} className={navMobileLoginButtonClass}>
-                    Login
-                  </a>
                   <GetStartedButton
                     variant="nav"
                     fullWidth
