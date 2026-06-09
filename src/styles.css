@@ -54,6 +54,10 @@
   --color-peach: var(--hero-peach);
   --color-violet-soft: var(--hero-violet);
   --color-indigo-deep: var(--hero-indigo);
+  --color-primitive-main-dark: var(--primitive-main-dark);
+  --color-primitive-main-dblue: var(--primitive-main-dblue);
+  --color-primitive-main-grey: var(--primitive-main-grey);
+  --color-primitive-purple-500: var(--primitive-purple-500);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
@@ -61,6 +65,15 @@
 
 :root {
   --radius: 1rem;
+  --primitive-main-white: #fff;
+  --primitive-main-beige: #faf5f1;
+  --primitive-main-dark: #1a182b;
+  --primitive-main-dblue: #150079;
+  --primitive-main-grey: #9693a3;
+  --primitive-purple-500: #6e47ff;
+  --primitive-purple-300: #9e84ff;
+  --primitive-orange-500: #ffbb98;
+  --surface-hero-primary: radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, var(--primitive-main-beige), var(--primitive-main-beige));
   --background: oklch(0.98 0.008 80);
   --foreground: oklch(0.18 0.03 270);
   --card: oklch(1 0 0);
@@ -90,9 +103,10 @@
   --font-heading: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
 
   --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #ffbb98  0%, #ffbb98 6.43%, #9e84ff  50.71%, #6e47ff 80.36%, #150079 100%);
+  --gradient-dark3: radial-gradient(283.63% 201.39% at 31.42% -99.18%, #ffbd9e 0%, #fdbca0 6.43%, #947fff 50.71%, #6748fd 80.36%, #150079 100%), #d9d9d9;
 
-  --typo-heading-fluid-min-vw: 23.4375rem;
-  --typo-heading-fluid-max-vw: 90rem;
+  --typo-heading-fluid-min-vw: 24.375rem;
+  --typo-heading-fluid-max-vw: 80rem;
   --typo-heading-fluid-span: calc(var(--typo-heading-fluid-max-vw) - var(--typo-heading-fluid-min-vw));
   --typo-h2-size: clamp(1.875rem, calc(1.875rem + (4rem - 1.875rem) * ((100vw - var(--typo-heading-fluid-min-vw)) / var(--typo-heading-fluid-span))), 4rem);
   --typo-h2-leading: 1.1;
@@ -125,17 +139,99 @@
 
 @layer utilities {
   :root {
+    --radius-4xl: 28px;
     --conic-gradient-bg: conic-gradient(from -60deg at 62% 64%, #ffbd9e99 0%, #ffbd9e99 15%, #d2c6ff99 35%, #6748fd99 45%, #fde3aa99 80%, #ffbd9e99 100%);
     --slack-message-pad-x: 12px;
     --slack-message-pad-y: 8px;
+    --primitive-slack-ink: #0d061e;
+    --primitive-purple-100: #d2c6ff;
+    --slack-mention-bg: #f1edff;
+    --slack-mention-text: #4e32b5;
+    --slack-app-badge-bg: #f1edff;
+    --slack-app-badge-text: #4e32b5;
+    --slack-reaction-pill-bg: rgba(255, 255, 255, 0.6);
+    --slack-reaction-pill-hover-bg: rgba(255, 255, 255, 0.8);
+    --slack-add-reaction-icon: #9693a3;
+    --radius-full: 9999px;
+    --slack-attached-pill-bg: radial-gradient(ellipse 160% 120% at 52% -24%, #ffbd9e 0%, #fdbca0 6%, #947fff 51%, #6748fd 80%, #150079 100%);
+    --slack-attached-pill-text: #fff;
   }
   .bg-conic-gradient-bg { background: var(--conic-gradient-bg); }
-  .rounded-section { border-radius: 28px; }
+  .rounded-section { border-radius: var(--radius-4xl); }
+  .text-primitive-main-dark { color: var(--primitive-main-dark); }
+  .text-primitive-main-grey { color: var(--primitive-main-grey); }
+  .text-primitive-purple-500 { color: var(--primitive-purple-500); }
+  .bg-primitive-main-dark { background-color: var(--primitive-main-dark); }
   .min-h-112 { min-height: 28rem; }
   .min-h-76 { min-height: 12rem; }
-  .bg-primitive-purple-100 { background-color: #ede9fe; }
+  .bg-primitive-purple-100 { background-color: var(--primitive-purple-100); }
   .bg-section-cream { background-color: oklch(0.97 0.012 70); }
+  .text-accent-1 { color: var(--primitive-purple-500); }
+  .text-secondary { color: var(--primitive-main-grey); }
+  .text-slack { color: var(--primitive-slack-ink); }
+  .text-slack-secondary { color: var(--primitive-main-grey); }
+  .bg-slack-mention { background-color: var(--slack-mention-bg); }
+  .text-slack-mention { color: var(--slack-mention-text); }
+  .bg-slack-app-badge { background-color: var(--slack-app-badge-bg); }
+  .text-slack-app-badge { color: var(--slack-app-badge-text); }
+  .text-slack-reaction-pill { color: var(--primitive-main-grey); }
+  .slack-attached-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 20px;
+    padding-block: 2px;
+    padding-inline: 8px;
+    border-radius: var(--radius-full);
+    background: var(--slack-attached-pill-bg);
+    color: var(--slack-attached-pill-text);
+  }
   .slack-message-viktor { border-radius: 12px; }
+  .slack-viktor-bg-mount {
+    isolation: isolate;
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 0;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .slack-viktor-layer-glass-stack {
+    position: absolute;
+    inset: 0;
+    background: var(--conic-gradient-bg), linear-gradient(0deg, #fff3 0%, #fff3 100%), #3333;
+  }
+  .slack-viktor-layer-inner-depth-soft {
+    border-radius: inherit;
+    mix-blend-mode: plus-darker;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 43.23px #f2f2f2;
+  }
+  .slack-viktor-layer-inner-glow-overlay {
+    border-radius: inherit;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 8.11px #ffffff80;
+  }
+  .slack-viktor-layer-feather-blur {
+    background: #ffffff14;
+    position: absolute;
+    inset: 0;
+  }
+  .slack-viktor-layer-white-sheet {
+    z-index: 10;
+    border-radius: inherit;
+    background: radial-gradient(100% 150%, #fff 12%, #fff0 100%);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
   .bg-ask-card {
     background: radial-gradient(ellipse 120% 100% at 50% 0%, oklch(0.66 0.20 295) 0%, oklch(0.55 0.20 290) 45%, oklch(0.42 0.19 285) 100%);
   }
@@ -167,6 +263,13 @@
   .animate-logo-slide-up {
     animation: logo-slide-up 0.55s ease-out;
   }
+  @keyframes credits-word-in {
+    from { transform: translateY(50%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .animate-credits-word-in {
+    animation: credits-word-in 0.55s ease-out;
+  }
   @keyframes spin-slow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -180,8 +283,45 @@
   .animate-use-case-progress {
     animation: use-case-progress linear forwards;
   }
+  .credits-dropdown-panel {
+    transform-origin: top center;
+    transition:
+      opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .credits-dropdown-panel-closed {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    pointer-events: none;
+  }
+  .credits-dropdown-panel-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  .credits-dropdown-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #9693a3 #f4f4f6;
+  }
+  .credits-dropdown-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .credits-dropdown-scroll::-webkit-scrollbar-track {
+    margin: 8px 0;
+    background: #f4f4f6;
+    border-radius: 999px;
+  }
+  .credits-dropdown-scroll::-webkit-scrollbar-thumb {
+    background: #9693a3;
+    border-radius: 999px;
+  }
 }
 
 @utility bg-hero {
   background: var(--gradient-hero);
+}
+
+@utility bg-gradient-dark3 {
+  background: var(--gradient-dark3);
 }

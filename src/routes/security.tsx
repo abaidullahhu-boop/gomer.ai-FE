@@ -8,6 +8,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 
 export const Route = createFileRoute("/security")({
   head: () => ({
@@ -78,9 +79,7 @@ function SecurityHero() {
         </p>
 
         <div className="mt-10">
-          <button className="px-8 py-4 rounded-full bg-white text-foreground font-semibold text-sm shadow-xl hover:bg-white/95 transition">
-            Get Started for Free
-          </button>
+          <GetStartedButton size="lg" shadow />
         </div>
 
         <div className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/images/logo.svg";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 
 type MenuItem = { label: string; to: string };
 
@@ -312,13 +313,11 @@ export function Nav() {
                 <div className="flex justify-end gap-3">
                   <a
                     href="/login"
-                    className="rounded-full border border-[#E0E0E0] px-5 py-2 text-sm hover:bg-black/5"
+                    className="rounded-full border border-[#9B89F3] px-5 py-2 text-sm hover:bg-black/5"
                   >
                     Login
                   </a>
-                  <Link to="/get-started" className="rounded-full bg-black px-5 py-2 text-sm text-white">
-                    Get Started For Free
-                  </Link>
+                  <GetStartedButton variant="nav" size="sm" />
                 </div>
               </div>
             </div>
@@ -423,13 +422,13 @@ export function Nav() {
                   >
                     Login
                   </a>
-                  <Link
-                    to="/get-started"
+                  <GetStartedButton
+                    variant="nav"
+                    size="sm"
+                    fullWidth
+                    className="py-3"
                     onClick={closeMobileMenu}
-                    className="block rounded-full bg-[#1A1829] px-5 py-3 text-center text-sm font-medium text-white"
-                  >
-                    Get Started for Free
-                  </Link>
+                  />
                 </div>
               </div>
             )}
