@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" role="img" aria-label="CASA Tier 3 badge">
+  <circle cx="20" cy="20" r="20" fill="#D1C2F4"/>
+  <path d="M4.58 13.89h30.84M4.58 25.83h30.84" stroke="#FFFFFF" stroke-opacity=".22" stroke-width=".7"/>
+  <text x="20" y="11.35" text-anchor="middle" fill="#262219" font-family="Inter, Arial, sans-serif" font-size="4.45" font-weight="700" letter-spacing=".08em">TIER 3</text>
+  <text x="20" y="22.35" text-anchor="middle" fill="#262219" font-family="Inter, Arial, sans-serif" font-size="8.9" font-weight="800">CASA</text>
+  <text x="20" y="31.95" text-anchor="middle" fill="#262219" font-family="Inter, Arial, sans-serif" font-size="4.45" font-weight="600" letter-spacing=".08em">CERTIFIED</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 1440 824" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect width="1440" height="824" fill="#d9d9d9" />
+  <rect width="1440" height="824" fill="url(#security-risk-tabs-gradient)" />
+  <defs>
+    <radialGradient id="security-risk-tabs-gradient" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="10" gradientTransform="matrix(42.837 164.13 -382.35 82.167 452.5 -817.27)">
+      <stop stop-color="rgb(255,189,158)" offset="0" />
+      <stop stop-color="rgb(253,188,160)" offset="0.064286" />
+      <stop stop-color="rgb(201,158,208)" offset="0.28571" />
+      <stop stop-color="rgb(148,127,255)" offset="0.50714" />
+      <stop stop-color="rgb(126,100,254)" offset="0.65536" />
+      <stop stop-color="rgb(103,72,253)" offset="0.80357" />
+      <stop stop-color="rgb(83,54,220)" offset="0.85268" />
+      <stop stop-color="rgb(62,36,187)" offset="0.90179" />
+      <stop stop-color="rgb(42,18,154)" offset="0.95089" />
+      <stop stop-color="rgb(31,9,138)" offset="0.97545" />
+      <stop stop-color="rgb(21,0,121)" offset="1" />
+    </radialGradient>
+  </defs>
+</svg>

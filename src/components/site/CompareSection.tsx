@@ -139,7 +139,7 @@ export function CompareSection() {
   return (
     <section className="px-6 py-24 bg-section-cream">
       <div className="d-flex flex-col items-center justify-center mx-auto max-w-6xl text-center">
-        <p className="text-sm tracking-full text-[#4e32b5]">
+        <p className="text-sm tracking-full text-primitive-purple-700">
           Viktor vs AI tools
         </p>
         <h2 className="typo-h2 mt-5 text-foreground leading-[1.02]">
@@ -228,7 +228,7 @@ export function CompareSection() {
                 />
               </div>
               <p className="text-lg font-medium">
-                <span className="text-[#4e32b5] inline-block px-2 py-0.5 rounded-[5px] bg-[#f1edff] mr-1.5 text-lg font-medium">
+                <span className="text-primitive-purple-700 inline-block px-2 py-0.5 rounded-[5px] bg-[#f1edff] mr-1.5 text-lg font-medium">
                   {current.right.highlight}
                 </span>
                 {current.right.text}

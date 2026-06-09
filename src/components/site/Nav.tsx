@@ -29,6 +29,9 @@ const solutionsMenu: MenuItem[] = [
   { label: "Use Cases", to: "/use-cases" },
 ];
 
+const dropdownLinkClass =
+  "block mx-2 rounded-full px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-black/[0.06] hover:text-foreground whitespace-nowrap data-[status=active]:bg-black/[0.06] data-[status=active]:text-foreground";
+
 function Caret({ open }: { open: boolean }) {
   return (
     <svg
@@ -108,7 +111,7 @@ function NavDropdown({
               <Link
                 key={item.to}
                 to={item.to}
-                className="block px-5 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-black/[0.03] hover:text-foreground whitespace-nowrap"
+                className={dropdownLinkClass}
                 onClick={onClose}
               >
                 {item.label}
@@ -152,7 +155,7 @@ function MobileNavAccordion({
               key={item.to}
               to={item.to}
               onClick={onNavigate}
-              className="block py-2.5 text-sm text-foreground/70 transition-colors hover:text-foreground"
+              className={`${dropdownLinkClass} text-foreground/70 data-[status=active]:text-foreground`}
             >
               {item.label}
             </Link>
