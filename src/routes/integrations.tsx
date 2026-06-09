@@ -1,426 +1,879 @@
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { PageMeta } from "@/components/PageMeta";
-import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import { GetStartedButton } from "@/components/site/GetStartedButton";
-import {
-  Search, Check, ShieldCheck, Lock, Eye, KeyRound, ChevronDown,
-} from "lucide-react";
+import { StartFreeSection } from "@/components/site/StartFreeSection";
+import { ConicPriceCardShell } from "@/components/site/ConicPriceCardShell";
+import { IntegrationsCapabilitiesSection } from "@/components/integrations/IntegrationsCapabilitiesSection";
+import { IntegrationsHero } from "@/components/integrations/IntegrationsHero";
+import { IntegrationsUseCasesSection } from "@/components/integrations/IntegrationsUseCasesSection";
+import { IntegrationsControlSection } from "@/components/integrations/IntegrationsControlSection";
+import comparisonTabActiveBg from "@/assets/images/download (1).svg";
+import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
+import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import { Search, X } from "lucide-react";
 
-const orbitTools = ["Slack", "Notion", "GitHub", "HubSpot", "Stripe", "Linear", "Figma", "Jira", "Asana", "Drive", "Gmail", "Meta"];
+const mayaAvatar =
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
 
-const directoryTabs = ["All Integrations", "Featured", "Cloud Storage", "Communication", "Customer Support", "Developer Tools", "Marketing", "Productivity", "Sales & CRM", "Social Media", "Other"];
-
-const directoryItems: { name: string; cat: string }[] = [
-  { name: "Google Drive", cat: "Storage" },
-  { name: "Notion", cat: "Productivity" },
-  { name: "Linear", cat: "Dev" },
-  { name: "Slack", cat: "Comms" },
-  { name: "Dropbox", cat: "Storage" },
-  { name: "Airtable", cat: "Database" },
-  { name: "Asana", cat: "Productivity" },
-  { name: "Google Sites", cat: "Web" },
-  { name: "Calendly", cat: "Scheduling" },
-  { name: "Jira Cloud", cat: "Dev" },
-  { name: "Salesforce", cat: "CRM" },
-  { name: "Zoom", cat: "Comms" },
-  { name: "PayPal", cat: "Payments" },
-  { name: "Outlook", cat: "Email" },
-  { name: "HubSpot", cat: "CRM" },
-  { name: "Intercom", cat: "Support" },
-  { name: "Webflow", cat: "Web" },
-  { name: "Zendesk", cat: "Support" },
+const directoryTabs = [
+  "All",
+  "AI & Machine Learning",
+  "Analytics",
+  "Cloud & Data",
+  "Communication",
+  "Content & Media",
+  "Customer Support",
+  "Developer Tools",
+  "E-Commerce",
+  "Finance & Payments",
+  "HR & Recruiting",
+  "Marketing",
+  "Other",
+  "Productivity",
+  "Sales & CRM",
 ];
+
+type DirectoryCategory = (typeof directoryTabs)[number];
+
+type DirectoryItem = {
+  name: string;
+  category: Exclude<DirectoryCategory, "All">;
+  description: string;
+  iconSlug?: string;
+  iconColor?: string;
+};
+
+const directoryItems: DirectoryItem[] = [
+  {
+    name: "AI Coworker (Teams)",
+    category: "AI & Machine Learning",
+    description: "Microsoft Teams integration for messaging Viktor and running workflows in your workspace.",
+    iconSlug: "microsoftteams",
+  },
+  {
+    name: "Baremetrics",
+    category: "Analytics",
+    description: "Subscription analytics — MRR, churn, LTV, and revenue recovery metrics.",
+    iconSlug: "baremetrics",
+  },
+  {
+    name: "Bright Data Social",
+    category: "Marketing",
+    description: "YouTube, TikTok, Instagram, Reddit, Twitter/X, LinkedIn social media data",
+    iconSlug: "brightdata",
+  },
+  {
+    name: "Customer.io",
+    category: "Marketing",
+    description: "Behavioral messaging, email campaigns, and customer journey automation.",
+    iconSlug: "customerdotio",
+  },
+  {
+    name: "DeepWiki",
+    category: "AI & Machine Learning",
+    description: "AI-powered codebase documentation and knowledge base search.",
+  },
+  {
+    name: "GitHub (Git & CLI)",
+    category: "Developer Tools",
+    description: "Repositories, pull requests, issues, and Git operations via CLI.",
+    iconSlug: "github",
+    iconColor: "181717",
+  },
+  {
+    name: "Google Ads",
+    category: "Marketing",
+    description: "Campaign management, reporting, and optimization for Google Ads.",
+    iconSlug: "googleads",
+  },
+  {
+    name: "Google Drive",
+    category: "Productivity",
+    description: "Files, folders, and document access in Google Drive.",
+    iconSlug: "googledrive",
+  },
+  {
+    name: "Granola",
+    category: "Other",
+    description: "AI meeting notes and transcription from your meetings.",
+  },
+  {
+    name: "Jira & Confluence",
+    category: "Developer Tools",
+    description: "Issue tracking, sprints, and team documentation in Atlassian.",
+    iconSlug: "jira",
+  },
+  {
+    name: "Linear",
+    category: "Developer Tools",
+    description: "Issue tracking, project management, and engineering workflows.",
+    iconSlug: "linear",
+    iconColor: "5E6AD2",
+  },
+  {
+    name: "Meta Ads",
+    category: "Marketing",
+    description: "Facebook and Instagram ad campaign management and reporting.",
+    iconSlug: "meta",
+    iconColor: "0081FB",
+  },
+  {
+    name: "Monday.com",
+    category: "Productivity",
+    description: "Boards, tasks, and project management workflows.",
+    iconSlug: "mondaydotcom",
+  },
+  {
+    name: "Moz SEO",
+    category: "Marketing",
+    description: "Keyword research, site audits, and SEO ranking data.",
+    iconSlug: "moz",
+  },
+  {
+    name: "Neon",
+    category: "Cloud & Data",
+    description: "Serverless Postgres — queries, branches, and connection management.",
+    iconSlug: "neon",
+    iconColor: "00E599",
+  },
+  {
+    name: "Notion",
+    category: "Productivity",
+    description: "Pages, databases, and workspace content read/write access.",
+    iconSlug: "notion",
+    iconColor: "000000",
+  },
+  {
+    name: "OneDrive",
+    category: "Productivity",
+    description: "Files and folders in Microsoft OneDrive.",
+    iconSlug: "microsoftonedrive",
+  },
+  {
+    name: "PayPal",
+    category: "Finance & Payments",
+    description: "Payments, transactions, and merchant account data.",
+    iconSlug: "paypal",
+    iconColor: "00457C",
+  },
+  {
+    name: "PostHog",
+    category: "Analytics",
+    description: "Product analytics, feature flags, and session recordings.",
+    iconSlug: "posthog",
+    iconColor: "F54E00",
+  },
+  {
+    name: "PostHog (EU)",
+    category: "Analytics",
+    description: "Product analytics with EU data residency hosting.",
+    iconSlug: "posthog",
+    iconColor: "F54E00",
+  },
+];
+
+function ComparisonTabActiveBackground({ className }: { className?: string }) {
+  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={className} />;
+}
+
+function IntegrationDirectoryFilters({
+  activeTab,
+  onTabChange,
+}: {
+  activeTab: DirectoryCategory;
+  onTabChange: (tab: DirectoryCategory) => void;
+}) {
+  return (
+    <div
+      className="-mx-4 flex flex-wrap gap-2 px-4 pb-1 max-md:flex-nowrap max-md:overflow-x-auto max-md:overscroll-x-contain sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0"
+      aria-label="Integration categories"
+    >
+      {directoryTabs.map((tab) => {
+        const isActive = activeTab === tab;
+        return (
+          <button
+            key={tab}
+            type="button"
+            aria-pressed={isActive}
+            onClick={() => onTabChange(tab)}
+            className={`relative inline-flex h-10 min-w-16 shrink-0 items-center justify-center rounded-full px-5 body-main transition-[border-color,color] duration-300 ${
+              isActive
+                ? "text-white"
+                : "border border-[rgb(27_24_42/0.08)] bg-white text-primary hover:bg-primitive-main-dark/[0.04]"
+            }`}
+          >
+            {isActive && (
+              <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+                <ComparisonTabActiveBackground className="block h-full w-full object-fill" />
+              </span>
+            )}
+            <span className="relative z-10">{tab}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function IntegrationDetailModal({ item, onClose }: { item: DirectoryItem; onClose: () => void }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+      <button
+        type="button"
+        aria-label="Close integration details"
+        className="absolute inset-0 bg-primitive-main-beige/70 backdrop-blur-md"
+        onClick={onClose}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="integration-modal-title"
+        className="relative z-10 w-full max-w-[32rem]"
+      >
+        <ConicPriceCardShell contentClassName="rounded-section bg-white p-8">
+          <div className="flex items-start gap-4">
+            <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-primitive-main-beige p-2">
+              <IntegrationDirectoryIcon item={item} />
+            </span>
+            <div className="min-w-0 flex-1 pt-1">
+              <h3 id="integration-modal-title" className="font-heading h4 text-balance text-primary">
+                {item.name}
+              </h3>
+            </div>
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={onClose}
+              className="inline-flex size-8 shrink-0 items-center justify-center rounded-full text-secondary transition-colors hover:bg-primitive-main-dark/[0.06] hover:text-primary"
+            >
+              <X className="size-5" aria-hidden />
+            </button>
+          </div>
+          <p className="mt-6 body-main text-secondary">{item.description}</p>
+        </ConicPriceCardShell>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+function IntegrationDirectory() {
+  const [activeTab, setActiveTab] = useState<DirectoryCategory>(directoryTabs[0]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedItem, setSelectedItem] = useState<DirectoryItem | null>(null);
+
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredItems = directoryItems.filter((item) => {
+    const matchesCategory = activeTab === "All" || item.category === activeTab;
+    const matchesSearch = !normalizedQuery || item.name.toLowerCase().includes(normalizedQuery);
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <>
+      <div className="flex w-full flex-col gap-4">
+        <label className="flex w-full items-center gap-8 rounded-2xl border border-[rgb(27_24_42/0.08)] bg-white px-8 py-6">
+          <Search className="size-6 shrink-0 text-secondary opacity-40" aria-hidden />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search 3,200+ integrations..."
+            aria-label="Search integrations"
+            className="integrations-directory-search min-w-0 flex-1 cursor-text bg-transparent body-main text-primary outline-none placeholder:text-secondary"
+          />
+        </label>
+
+        <IntegrationDirectoryFilters activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
+
+      <div className="integrations-directory-grid-wrap relative">
+        <div
+          className="integrations-directory-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          aria-live="polite"
+        >
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
+              <button
+                key={item.name}
+                type="button"
+                className="w-full text-left cursor-pointer"
+                onClick={() => setSelectedItem(item)}
+              >
+                <div className="integrations-directory-card flex items-center gap-4 overflow-hidden rounded-4xl bg-white p-4 transition-colors hover:bg-white/90">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primitive-main-beige p-2">
+                    <IntegrationDirectoryIcon item={item} />
+                  </span>
+                  <p className="min-w-0 flex-1 truncate body-main font-medium text-primary">
+                    {item.name}
+                  </p>
+                </div>
+              </button>
+            ))
+          ) : (
+            <p className="col-span-full py-8 text-center body-main text-secondary">
+              No integrations match your search. Try another category or keyword.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {selectedItem && (
+        <IntegrationDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
+      )}
+    </>
+  );
+}
+
+function IntegrationDirectoryIcon({ item }: { item: DirectoryItem }) {
+  const [iconFailed, setIconFailed] = useState(false);
+  const initials = (
+    <span className="text-xs font-bold text-primitive-main-dark" aria-hidden>
+      {item.name.slice(0, 2)}
+    </span>
+  );
+
+  if (!item.iconSlug || iconFailed) {
+    return initials;
+  }
+
+  const colorParam = item.iconColor ? `/${item.iconColor}` : "";
+
+  return (
+    <img
+      alt=""
+      loading="lazy"
+      decoding="async"
+      className="max-h-full max-w-full object-contain"
+      src={`https://cdn.simpleicons.org/${item.iconSlug}${colorParam}`}
+      onError={() => setIconFailed(true)}
+    />
+  );
+}
 
 export default function IntegrationsPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Integrations — Viktor"
-        description="Viktor connects to 3,000+ tools and uses them like you do. One AI employee for your entire tool stack."
+        description="Viktor connects to 3,200+ tools and uses them the way you do. One AI employee for your entire tool stack."
         ogTitle="Integrations — Viktor"
         ogDescription="One AI employee. Your entire tool stack."
       />
-      {/* HERO */}
-      <section className="relative bg-hero pt-6 pb-32 overflow-hidden rounded-b-[40px]">
-        <Nav />
-        <div className="relative mx-auto max-w-5xl px-6 pt-20 text-center">
-          <h1 className="font-display text-white text-5xl md:text-7xl leading-[1.02] tracking-tight font-extrabold">
-            One AI employee.<br />Your entire tool stack.
-          </h1>
-          <p className="mt-6 mx-auto max-w-2xl text-white/90 text-base md:text-lg leading-relaxed">
-            Viktor connects to 3,000+ tools and uses them from the way you do.
-          </p>
+      <IntegrationsHero />
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <GetStartedButton variant="dark" shadow className="px-7 py-3.5" />
-            <button className="px-7 py-3.5 rounded-full text-white/95 text-sm font-semibold hover:bg-white/10 transition">
-              See it in action →
-            </button>
-          </div>
-
-          {/* Orbiting tools + V logo */}
-          <div className="mt-16 relative h-56 flex items-center justify-center">
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center items-center gap-6 flex-wrap">
-              {orbitTools.map((t, i) => (
-                <div
-                  key={t}
-                  className="w-11 h-11 rounded-xl bg-white/90 shadow-lg flex items-center justify-center text-[10px] font-bold text-foreground"
-                  style={{ opacity: 0.35 + 0.65 * (1 - Math.abs(i - orbitTools.length / 2) / orbitTools.length) }}
-                >
-                  {t.slice(0, 2)}
-                </div>
-              ))}
-            </div>
-            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-700 shadow-2xl flex items-center justify-center font-display text-white text-4xl font-extrabold">
-              V
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* THREE STEP CARDS */}
-      <section className="px-6 -mt-20 relative z-10">
-        <div className="mx-auto max-w-6xl grid md:grid-cols-3 gap-5">
-          <StepCard
-            number="1"
-            title="Connect your stack"
-            body="Securely connect to 3,000+ tools across cloud storage, comms, CRMs, and dev workflows."
-            visual={<GridIconsVisual />}
-          />
-          <StepCard
-            number="2"
-            title="Tell Viktor what you need"
-            body="Just chat in Slack, Teams, or the app. No prompt engineering, no setup."
-            visual={<ChatVisual />}
-          />
-          <StepCard
-            number="3"
-            title="Viktor operates, you review"
-            body="Viktor pulls data, runs the workflow, and ships output. You approve or course-correct."
-            visual={<ReviewVisual />}
-          />
-        </div>
-      </section>
-
-      {/* IF IT EXISTS */}
-      <section className="px-6 py-24 mt-12">
-        <div className="mx-auto max-w-6xl text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-foreground">
-            If it exists, Viktor connects to it.<br />If it doesn't, Viktor builds it.
-          </h2>
-
-          <div className="mt-10 inline-flex items-center gap-2 rounded-full bg-secondary p-1.5">
-            {["Connectors", "Integrations", "Build a tool"].map((t, i) => (
-              <button
-                key={t}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
-                  i === 0 ? "bg-white shadow text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-10 rounded-[32px] p-10 md:p-14 text-left relative overflow-hidden shadow-2xl"
-            style={{ background: "linear-gradient(135deg, oklch(0.78 0.16 35) 0%, oklch(0.65 0.22 320) 45%, oklch(0.45 0.22 285) 100%)" }}
-          >
-            <div className="grid md:grid-cols-2 gap-10 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white/95 text-xs font-semibold">
-                  Managed
-                </div>
-                <h3 className="mt-4 font-display text-white text-4xl md:text-5xl font-extrabold leading-tight">
-                  3,000+ via Managed<br />Connectors
-                </h3>
-                <p className="mt-4 text-white/85 leading-relaxed max-w-md">
-                  Viktor maintains direct connections to the tools your team uses, so workflows keep running even when APIs change.
-                </p>
-              </div>
-              <div className="grid grid-cols-4 gap-3">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="aspect-square rounded-2xl bg-white/90 shadow-lg flex items-center justify-center text-[11px] font-bold text-foreground">
-                    {orbitTools[i % orbitTools.length].slice(0, 2)}
+      {/* HOW INTEGRATIONS WORK */}
+      <section
+        className="relative z-10 bg-primitive-main-beige pt-12 pb-14 sm:pt-[5rem] sm:pb-[7rem]"
+        aria-label="How integrations work"
+      >
+        <div className="px-4 sm:px-6 md:px-12 lg:px-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+              <IntegrationStepCard
+                number="01"
+                title="Connect your stack"
+                body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Viktor handles auth and starts working. No webhooks, no Zapier zaps."
+                stepBadge="overlay"
+                visual={
+                  <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-hero">
+                    <img
+                      alt=""
+                      loading="lazy"
+                      width={826}
+                      height={680}
+                      decoding="async"
+                      className="h-full max-h-full w-auto max-w-full object-contain"
+                      src={integrationsTab1}
+                    />
                   </div>
-                ))}
-              </div>
-            </div>
-            <p className="mt-10 text-white/80 text-sm text-center max-w-3xl mx-auto">
-              Don't see what you need? Viktor can build a custom connector for any tool with an API — usually within a day.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* SEE IT IN ACTION */}
-      <section className="px-6 pb-24">
-        <div className="mx-auto max-w-6xl rounded-[32px] p-10 md:p-14 shadow-2xl"
-          style={{ background: "linear-gradient(135deg, oklch(0.42 0.20 285) 0%, oklch(0.32 0.20 285) 100%)" }}
-        >
-          <div className="grid md:grid-cols-2 gap-10">
-            <div>
-              <div className="text-white/70 text-xs font-semibold uppercase tracking-wider">Live Workflow</div>
-              <h3 className="mt-3 font-display text-white text-4xl md:text-5xl font-extrabold">See It In Action</h3>
-              <ul className="mt-8 space-y-3">
-                {["Connect data sources", "Build a workflow", "Get instant results"].map((t) => (
-                  <li key={t} className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/10 backdrop-blur border border-white/15 text-white">
-                    <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-                      <Check className="w-3.5 h-3.5" />
-                    </span>
-                    <span className="text-sm font-medium">{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="mt-8 px-6 py-3 rounded-full bg-white text-foreground text-sm font-semibold hover:bg-white/95">
-                See It in Action →
-              </button>
-            </div>
-
-            <div className="rounded-2xl bg-white p-6 shadow-xl">
-              <div className="text-xs text-muted-foreground">Monday morning</div>
-              <p className="mt-1 text-foreground font-semibold leading-snug">
-                Viktor pulls Meta Ads and Google Ads, runs cross-vendor, and ships them as a PDF.
-              </p>
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                {[
-                  { t: "Spend snapshot", d: "Across channels" },
-                  { t: "Performance", d: "vs last week" },
-                  { t: "Top creatives", d: "By CTR" },
-                  { t: "Recommendations", d: "Auto-generated" },
-                ].map((b) => (
-                  <div key={b.t} className="rounded-xl bg-secondary p-3">
-                    <div className="text-[12px] font-semibold text-foreground">{b.t}</div>
-                    <div className="text-[11px] text-muted-foreground mt-0.5">{b.d}</div>
+                }
+              />
+              <IntegrationStepCard
+                number="02"
+                title="Tell Viktor what you need"
+                body={'Message Viktor in Slack like you\'d message a teammate. "Pull this week\'s MRR from Stripe." "Triage new Linear bugs." "Pause Meta campaigns above $40 CPA." Plain English, any tool.'}
+                stepBadge="inline"
+                visual={
+                  <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
+                    <SlackUserMessage
+                      name="Maya Patel"
+                      time="11:32 AM"
+                      avatar={mayaAvatar}
+                      reactions={[{ emoji: "⏳", count: 1 }]}
+                      body={
+                        <>
+                          <SlackMention>@Viktor</SlackMention>
+                          pull this week&apos;s MRR from Stripe and post it to private channel.
+                        </>
+                      }
+                    />
+                    <SlackViktorMessage
+                      time="11:33 AM"
+                      reactions={[
+                        { emoji: "✅", count: 2 },
+                        { emoji: "🚀", count: 1 },
+                      ]}
+                      body="On it. Pulling Stripe MRR, checking week-over-week movement, and preparing a private channel snapshot."
+                    />
                   </div>
-                ))}
-              </div>
+                }
+              />
+              <IntegrationStepCard
+                number="03"
+                title="Viktor operates, you review"
+                body="Viktor opens the tools, runs the work, and posts back what changed. Sensitive actions wait for your approval. Everything is logged. You stop doing the work and start reviewing it."
+                stepBadge="inline"
+                visual={
+                  <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
+                    <SlackViktorMessage
+                      time="9:12 AM"
+                      reactions={[{ emoji: "👀", count: 2 }]}
+                      body={
+                        <>
+                          <span>📊 MRR this week:</span>
+                          <br />
+                          <strong className="font-bold">$84,210 (+6.4% WoW).</strong>
+                          <br />
+                          <span>
+                            Posted snapshot to private channel.
+                            <br />
+                            2 anomalies flagged for review.
+                          </span>
+                        </>
+                      }
+                      attachment={
+                        <div className="flex w-full items-center gap-1.5 py-1" role="group" aria-label="Approve or reject">
+                          <button
+                            type="button"
+                            className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[6px] bg-[#007a5a] px-1.5 py-1 text-xs font-medium whitespace-nowrap text-white"
+                          >
+                            Approve
+                          </button>
+                          <button
+                            type="button"
+                            className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[6px] bg-[#e01e5a] px-1.5 py-1 text-xs font-medium whitespace-nowrap text-white"
+                          >
+                            Reject
+                          </button>
+                        </div>
+                      }
+                    />
+                  </div>
+                }
+              />
             </div>
           </div>
         </div>
       </section>
+
+      <IntegrationsCapabilitiesSection />
+
+      <IntegrationsUseCasesSection />
 
       {/* MULTIPLE ACCOUNTS */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-12 items-center">
-          <div className="rounded-[28px] p-8 shadow-xl"
-            style={{ background: "linear-gradient(135deg, oklch(0.78 0.14 320) 0%, oklch(0.58 0.20 285) 100%)" }}
-          >
-            <div className="text-white/85 text-xs font-semibold uppercase tracking-wider mb-4">Your accounts</div>
-            <div className="grid grid-cols-2 gap-3">
-              {["HubSpot — Acme", "HubSpot — Globex", "Stripe — Live", "Stripe — Test", "GA4 — Site A", "GA4 — Site B", "Slack — Eng", "Slack — Sales"].map((t) => (
-                <div key={t} className="rounded-xl bg-white/15 backdrop-blur border border-white/20 px-3 py-2.5 text-[12px] text-white font-medium flex items-center gap-2">
-                  <span className="w-5 h-5 rounded bg-white/30" />
-                  {t}
-                </div>
-              ))}
+      <section className="bg-primitive-main-beige py-14 sm:py-[7rem]" aria-label="Multiple accounts">
+        <div className="px-4 sm:px-6 md:px-12 lg:px-20">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="grid gap-6 lg:grid-cols-2 lg:items-center lg:gap-32">
+              <div className="order-1 flex max-w-[32.625rem] flex-col gap-8 lg:order-2">
+                <h2 className="font-heading h3 text-balance text-primary">
+                  Multiple accounts? Connect them all.
+                </h2>
+                <p className="body-main max-w-[25.875rem] text-secondary">
+                  Got two Stripe accounts? Three Gmail inboxes? A staging and production GitHub? Connect
+                  them all. Viktor keeps them separate with dedicated tools per connection. No confusion,
+                  no crossed wires.
+                </p>
+              </div>
+              <div className="order-2 min-w-0 lg:order-1">
+                <ConnectedAccountsPanel />
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
-              Multiple accounts?<br />Connect them all.
-            </h3>
-            <p className="mt-5 text-muted-foreground leading-relaxed max-w-md">
-              Agencies, multi-brand teams, and consultants can link every workspace, environment, and account. Viktor keeps them organized and never mixes data.
-            </p>
           </div>
         </div>
       </section>
 
       {/* INTEGRATION DIRECTORY */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-center font-display text-3xl md:text-5xl font-extrabold tracking-tight">Integration Directory</h2>
+      <section className="bg-primitive-main-beige py-14 sm:py-[7rem]" id="integrations-directory">
+        <div className="px-4 sm:px-6 md:px-12 lg:px-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
+            <h2 className="w-full text-center font-heading h3 text-balance text-primary">
+              Integration Directory
+            </h2>
 
-          <div className="mt-10 rounded-2xl border border-border bg-card shadow-sm p-3 flex items-center gap-3">
-            <Search className="w-5 h-5 text-muted-foreground ml-2" />
-            <input
-              type="text"
-              placeholder="Search 3,000+ integrations..."
-              className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted-foreground"
-            />
-          </div>
+            <IntegrationDirectory />
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {directoryTabs.map((t, i) => (
+            <div className="flex flex-col items-center gap-6 text-center">
               <button
-                key={t}
-                className={`px-3.5 py-1.5 rounded-full text-[12px] font-semibold transition ${
-                  i === 0
-                    ? "bg-gradient-to-r from-violet-500 to-indigo-600 text-white shadow"
-                    : "bg-secondary text-foreground hover:bg-secondary/80"
-                }`}
+                type="button"
+                className="inline-flex h-10 min-h-10 shrink-0 items-center justify-center rounded-full border border-[rgb(27_24_42/0.08)] bg-white px-6 text-sm font-medium tracking-[-0.01em] text-primary hover:bg-primitive-main-dark/[0.06]"
               >
-                {t}
+                Show more
               </button>
-            ))}
-          </div>
-
-          <div className="mt-3 text-xs font-semibold text-muted-foreground">Top Picks</div>
-
-          <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {directoryItems.map((it) => (
-              <div key={it.name} className="rounded-2xl bg-card border border-border p-4 flex items-center gap-3 hover:shadow-md transition">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-200 to-indigo-200 flex items-center justify-center text-[11px] font-bold text-foreground shrink-0">
-                  {it.name.slice(0, 2)}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-foreground truncate">{it.name}</div>
-                  <div className="text-[11px] text-muted-foreground truncate">{it.cat}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <button className="inline-flex items-center gap-2 text-sm font-semibold text-foreground">
-              Show more <ChevronDown className="w-4 h-4" />
-            </button>
-          </div>
-          <p className="mt-6 text-center text-xs text-muted-foreground max-w-2xl mx-auto">
-            Need something specific? Viktor can build a custom connector for any tool with an API.
-          </p>
-        </div>
-      </section>
-
-      {/* YOUR TOOLS YOUR DATA */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-6xl text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight">
-            Your tools. Your data.<br />
-            <span className="bg-gradient-to-r from-violet-500 to-indigo-600 bg-clip-text text-transparent">Your control.</span>
-          </h2>
-
-          <div className="mt-12 grid md:grid-cols-4 gap-5 text-left">
-            {[
-              { icon: ShieldCheck, title: "Bank-grade security", body: "End-to-end encryption in transit and at rest. SOC 2 Type II audited." },
-              { icon: Lock, title: "SSO & granular access", body: "Workspace-level permissions, scoped tokens, audit trails on every action." },
-              { icon: Eye, title: "Approval workflows", body: "Review what Viktor will do before it runs. Step in or step out anytime." },
-              { icon: KeyRound, title: "Bring your own keys", body: "Use your own credentials and OAuth. We never store more than necessary." },
-            ].map((f) => (
-              <div key={f.title} className="rounded-2xl bg-card border border-border p-6 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center">
-                  <f.icon className="w-5 h-5" />
-                </div>
-                <div className="mt-4 text-base font-semibold text-foreground">{f.title}</div>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.body}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex items-center justify-center gap-3">
-            {["SOC", "GDPR", "HIPAA", "ISO"].map((b) => (
-              <div key={b} className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white text-[10px] font-bold flex items-center justify-center shadow">
-                {b}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* START FREE */}
-      <section className="px-6 pb-24">
-        <div className="mx-auto max-w-6xl rounded-[32px] p-10 md:p-14 shadow-2xl"
-          style={{ background: "linear-gradient(135deg, oklch(0.45 0.20 285) 0%, oklch(0.72 0.18 330) 100%)" }}
-        >
-          <div className="grid md:grid-cols-2 gap-10">
-            <div>
-              <h3 className="font-display text-white text-4xl md:text-5xl font-extrabold leading-tight">
-                Start free.<br />Pay only when you're ready.
-              </h3>
-              <p className="mt-5 text-white/85 max-w-md leading-relaxed">
-                $100 in free credits. No credit card required. Cancel anytime. Real work, real output, from day one.
+              <p className="w-full body-small text-secondary">
+                Don&apos;t see your tool? Viktor connects to 3,200+ tools via managed connectors. If
+                it&apos;s not here, Viktor can build a custom integration. Just ask.
               </p>
-              <div className="mt-8 flex gap-3">
-                <GetStartedButton />
-                <button className="px-6 py-3 rounded-full text-white text-sm font-semibold hover:bg-white/10">
-                  Talk to Sales
-                </button>
-              </div>
             </div>
-            <ul className="space-y-3">
-              {[
-                "$100 in free credits",
-                "No credit card required",
-                "Cancel anytime, no questions asked",
-                "SOC 2 Type II compliant",
-                "3,000+ integrations included",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-3 text-white/95 text-sm">
-                  <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                    <Check className="w-3 h-3" />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
+
+      <IntegrationsControlSection />
+
+      <StartFreeSection />
 
       <Footer />
     </div>
   );
 }
 
-function StepCard({ number, title, body, visual }: { number: string; title: string; body: string; visual: React.ReactNode }) {
+function StepBadge({ number, className = "" }: { number: string; className?: string }) {
   return (
-    <div className="rounded-3xl bg-card border border-border overflow-hidden shadow-sm">
-      <div className="h-56 relative flex items-center justify-center p-6"
-        style={{ background: "linear-gradient(135deg, oklch(0.96 0.04 50) 0%, oklch(0.88 0.10 310) 100%)" }}
-      >
-        {visual}
-      </div>
-      <div className="p-6">
-        <div className="flex items-center gap-2 text-xs font-semibold text-violet-600">
-          <span className="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center">{number}</span>
-          Step {number}
+    <span
+      className={`inline-flex h-8 items-center justify-center rounded-full bg-[#5c28d7]/16 px-5 backdrop-blur-[5px] font-sans text-sm leading-[1.3] font-medium tracking-[0.01em] text-[#5c28d7] ${className}`}
+    >
+      {number}
+    </span>
+  );
+}
+
+function ConicGradientCardShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="relative h-full w-full overflow-hidden rounded-[inherit]">
+      <div aria-hidden="true" className="bg-conic-gradient-bg pointer-events-none absolute inset-0 z-0" style={{ borderRadius: "inherit" }} />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-[20px] z-0"
+        style={{ borderRadius: "inherit", background: "#ffffff", filter: "blur(20px)", WebkitFilter: "blur(20px)" }}
+      />
+      <div className="relative z-[1] h-full w-full rounded-[inherit]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          style={{ background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 100%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          style={{
+            background: "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+            padding: "1px",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+          style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
+        >
+          <div
+            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            style={{
+              background: "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              padding: "4px",
+            }}
+          />
         </div>
-        <h3 className="mt-2 text-lg font-semibold text-foreground">{title}</h3>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{body}</p>
+        {children}
       </div>
     </div>
   );
 }
 
-function GridIconsVisual() {
+function IntegrationStepCard({
+  number,
+  title,
+  body,
+  visual,
+  stepBadge,
+}: {
+  number: string;
+  title: string;
+  body: string;
+  visual: ReactNode;
+  stepBadge: "overlay" | "inline";
+}) {
   return (
-    <div className="grid grid-cols-4 gap-2 w-full max-w-[220px]">
-      {Array.from({ length: 12 }).map((_, i) => (
-        <div key={i} className="aspect-square rounded-lg bg-white/95 shadow-sm flex items-center justify-center text-[9px] font-bold text-foreground">
-          {orbitTools[i % orbitTools.length].slice(0, 2)}
-        </div>
+    <article className="relative min-h-[34.6875rem] min-w-0 overflow-hidden rounded-section">
+      <div className="h-full min-h-[34.6875rem] w-full overflow-hidden rounded-[inherit] backdrop-blur-[20px]">
+        <ConicGradientCardShell>
+          <div className="relative z-[2] flex h-full w-full flex-col justify-between">
+            <div className="relative flex h-full min-h-0 flex-col rounded-[inherit]">
+              {stepBadge === "overlay" ? (
+                <div className="relative flex min-h-[21.25rem] flex-1 flex-col overflow-hidden p-0">
+                  <div className="relative flex min-h-[21.25rem] w-full flex-1 items-center justify-center overflow-hidden">
+                    {visual}
+                    <StepBadge number={number} className="absolute top-8 left-8 z-20" />
+                  </div>
+                </div>
+              ) : (
+                <div className="relative flex min-h-[21.25rem] flex-1 flex-col gap-8 p-0">
+                  <div className="shrink-0 px-8 pt-8">
+                    <StepBadge number={number} />
+                  </div>
+                  <div className="relative min-h-0 flex-1">{visual}</div>
+                </div>
+              )}
+              <div className="flex min-h-[12.5rem] shrink-0 flex-col justify-start p-8">
+                <div className="flex flex-col items-start gap-3">
+                  <h3 className="font-heading h5 text-primary">{title}</h3>
+                  <p className="body-main max-w-[21.875rem] text-secondary">{body}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ConicGradientCardShell>
+      </div>
+    </article>
+  );
+}
+
+function SlackMention({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-block rounded-sm bg-slack-mention px-1 py-0.5 align-baseline whitespace-nowrap text-sm leading-snug text-slack-mention">
+      {children}
+    </span>
+  );
+}
+
+function SlackReactionPills({ reactions }: { reactions: { emoji: string; count: number }[] }) {
+  return (
+    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
+      {reactions.map((reaction) => (
+        <span
+          key={reaction.emoji}
+          className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill"
+        >
+          <span aria-hidden="true">{reaction.emoji}</span>
+          <span className="tabular-nums">{reaction.count}</span>
+        </span>
       ))}
     </div>
   );
 }
 
-function ChatVisual() {
+function SlackUserMessage({
+  name,
+  time,
+  avatar,
+  body,
+  reactions,
+}: {
+  name: string;
+  time: string;
+  avatar: string;
+  body: ReactNode;
+  reactions?: { emoji: string; count: number }[];
+}) {
   return (
-    <div className="w-full max-w-[240px] space-y-2">
-      <div className="rounded-xl bg-white/95 shadow-sm p-3 text-[11px]">
-        <div className="font-semibold text-foreground">You</div>
-        <div className="text-foreground/80">@Viktor pull last week's Meta Ads spend by campaign.</div>
+    <div className="relative isolate flex w-full gap-2 rounded-lg border border-solid border-transparent bg-transparent px-[var(--slack-message-pad-x)] py-0 text-left">
+      <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primitive-purple-100">
+        <img alt={name} loading="lazy" width={36} height={36} className="size-full rounded-md object-cover" src={avatar} />
       </div>
-      <div className="rounded-xl bg-white/95 shadow-sm p-3 text-[11px]">
-        <div className="font-semibold text-violet-600">Viktor</div>
-        <div className="text-foreground/80">On it. Sending a chart in 30 seconds…</div>
+      <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+          <span className="body-small font-medium text-slack">{name}</span>
+          <span className="text-xs font-normal text-slack-secondary">{time}</span>
+        </div>
+        <div className="body-main font-normal text-slack">{body}</div>
+        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
       </div>
     </div>
   );
 }
 
-function ReviewVisual() {
+function SlackViktorMessage({
+  time,
+  body,
+  attachment,
+  reactions,
+}: {
+  time: string;
+  body: ReactNode;
+  attachment?: ReactNode;
+  reactions?: { emoji: string; count: number }[];
+}) {
   return (
-    <div className="w-full max-w-[240px] rounded-xl bg-white/95 shadow-sm p-4 text-[11px]">
-      <div className="font-semibold text-foreground">Weekly Report.pdf</div>
-      <div className="mt-2 h-2 rounded-full bg-secondary overflow-hidden">
-        <div className="h-full w-4/5 bg-gradient-to-r from-violet-500 to-indigo-600" />
+    <div
+      data-variant="viktor"
+      data-highlighted="true"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+    >
+      <div aria-hidden="true" className="slack-viktor-bg-mount">
+        <div className="slack-viktor-layer-glass-stack" />
+        <div className="slack-viktor-layer-inner-depth-soft" />
+        <div className="slack-viktor-layer-inner-glow-overlay" />
+        <div className="slack-viktor-layer-feather-blur" />
+        <div className="slack-viktor-layer-white-sheet" />
       </div>
-      <div className="mt-3 flex gap-2">
-        <span className="px-2 py-1 rounded-md bg-green-100 text-green-700 text-[10px] font-semibold flex items-center gap-1">
-          <Check className="w-3 h-3" /> Approved
-        </span>
-        <span className="px-2 py-1 rounded-md bg-secondary text-foreground text-[10px] font-semibold">Edit</span>
+      <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
+        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+      </div>
+      <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
+        <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
+          <span className="body-small font-medium text-slack">
+            <span className="inline-flex items-center gap-1.5">
+              <span>Viktor</span>
+              <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
+                APP
+              </span>
+            </span>
+          </span>
+          <span className="text-xs font-normal text-slack-secondary">{time}</span>
+        </div>
+        <div className="body-main font-normal text-slack">{body}</div>
+        {attachment}
+        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
+      </div>
+    </div>
+  );
+}
+
+const CONNECTED_ACCOUNTS = [
+  { id: "stripe-production", service: "Stripe", account: "Production", icon: "stripe" as const, fullWidth: false },
+  { id: "stripe-staging", service: "Stripe", account: "Staging", icon: "stripe" as const, fullWidth: false },
+  { id: "gmail-founders", service: "Gmail", account: "founders@acme.co", icon: "gmail" as const, fullWidth: false },
+  { id: "gmail-support", service: "Gmail", account: "support@acme.co", icon: "gmail" as const, fullWidth: false },
+  { id: "gmail-hiring", service: "Gmail", account: "hiring@acme.co", icon: "gmail" as const, fullWidth: true },
+  { id: "github-production", service: "GitHub", account: "Production", icon: "github" as const, fullWidth: false },
+  { id: "github-staging", service: "GitHub", account: "Staging", icon: "github" as const, fullWidth: false },
+];
+
+function ConnectedAccountIcon({ icon }: { icon: "stripe" | "gmail" | "github" }) {
+  if (icon === "stripe") {
+    return (
+      <svg viewBox="0 0 60 25" className="h-auto max-w-14 object-contain" aria-hidden>
+        <path
+          fill="#635BFF"
+          d="M59.5 12.8c0-6.9-3.3-12-10.2-12-3.5 0-6.5 1.2-8.5 3.2L37.8 7.5c1.5-1.4 3.6-2.2 5.8-2.2 4.1 0 6.6 2.5 6.6 6.7v.8H43.2c-7.6 0-11.8 3.6-11.8 9.2 0 5.5 3.4 8.8 9.1 8.8 3.6 0 6.4-1.6 8.1-4.3v3.7h7.9V12.8zm-7.9 6.5c-.3 3.5-2.6 5.8-6.2 5.8-2.5 0-4.1-1.5-4.1-3.9 0-2.6 2-4.1 5.7-4.1h4.6v2.2zM28.1 1.5h-7.9v23h7.9V1.5zM14.5 1.5H6.6L0 12.8 6.6 24.5h7.9L8.2 12.8 14.5 1.5z"
+        />
+      </svg>
+    );
+  }
+
+  if (icon === "gmail") {
+    return (
+      <svg viewBox="0 0 24 18" className="h-auto max-w-3/4 object-contain" aria-hidden>
+        <path fill="#4285F4" d="M22 4.5v9H2V4.5l10 6.75L22 4.5z" />
+        <path fill="#EA4335" d="M22 4.5 12 11.25 2 4.5 12 0l10 4.5z" />
+        <path fill="#FBBC04" d="M2 4.5v9l6.5-4.5L2 4.5z" />
+        <path fill="#34A853" d="M22 4.5v9l-6.5-4.5L22 4.5z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" className="h-auto max-w-3/4 object-contain" fill="#111" aria-hidden>
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
+    </svg>
+  );
+}
+
+function ConnectedAccountGlassCard({
+  service,
+  account,
+  icon,
+  fullWidth = false,
+}: {
+  service: string;
+  account: string;
+  icon: "stripe" | "gmail" | "github";
+  fullWidth?: boolean;
+}) {
+  return (
+    <div className={fullWidth ? "h-[7.6875rem] w-full" : "h-[7.6875rem] w-[calc(50%-0.25rem)]"}>
+      <div className="relative size-full rounded-2xl bg-white/20 p-[1.0625rem] backdrop-blur-sm">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          style={{ background: "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          style={{
+            background: "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+            padding: "1px",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+          style={{ filter: "blur(5px)" }}
+        >
+          <div
+            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            style={{
+              background: "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              padding: "4px",
+            }}
+          />
+        </div>
+        <div className="relative z-[2] flex h-full w-full flex-col justify-between">
+          <div className="flex items-start justify-between gap-3">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white">
+              <ConnectedAccountIcon icon={icon} />
+            </span>
+            <span className="flex items-center gap-2">
+              <span
+                className="size-2 shrink-0 rounded-full bg-[#43d08b] shadow-[inset_1.8px_1.8px_3.6px_0_#f5f1ed]"
+                aria-hidden="true"
+              />
+              <span className="text-xs leading-[1.3] font-medium text-white">Active</span>
+            </span>
+          </div>
+          <p className="body-small text-white">
+            <span className="font-medium">{service}</span>
+            <span className="opacity-30"> — </span>
+            <span className="opacity-60">{account}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ConnectedAccountsPanel() {
+  return (
+    <div className="bg-hero relative mx-auto flex min-h-0 w-full max-w-[39.375rem] flex-col gap-8 overflow-hidden rounded-[2rem] p-6 text-white lg:p-8">
+      <div className="flex items-center justify-between gap-4">
+        <p className="body-small font-medium">Connected accounts</p>
+        <p className="body-small opacity-70">Settings / Integrations</p>
+      </div>
+      <div className="flex flex-1 flex-wrap content-start gap-2">
+        {CONNECTED_ACCOUNTS.map((account) => (
+          <ConnectedAccountGlassCard key={account.id} {...account} />
+        ))}
       </div>
     </div>
   );
