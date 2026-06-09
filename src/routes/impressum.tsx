@@ -11,7 +11,7 @@ function Divider() {
 
 export default function ImpressumPage() {
   return (
-    <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Impressum — Viktor"
         description="Provider information and legal notice for Viktor."
@@ -23,7 +23,7 @@ export default function ImpressumPage() {
           className="relative w-full overflow-hidden rounded-b-[24px] sm:rounded-b-[32px]"
           style={{ background: HERO_SURFACE }}
         >
-          <Nav />
+          <Nav heroTone="light" />
           <div className="px-4 sm:px-6 md:px-12 lg:px-20">
             <div className="mx-auto w-full max-w-[1100px] pt-12 sm:pt-16 pb-12 sm:pb-16">
               <div className="text-sm font-medium text-[#6e47ff] mb-4">Legal</div>

@@ -64,7 +64,7 @@ function CopyForAIButton({ post }: { post: BlogPost }) {
 
 export function BlogPostLayout({ post }: { post: BlogPost }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title={`${post.title} — Viktor`}
         description={post.excerpt}

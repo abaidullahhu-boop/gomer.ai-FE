@@ -11,7 +11,7 @@ export default function DocsPage() {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Documentation — Viktor"
         description="Learn how to set up and get the most out of Viktor — your AI coworker in Slack and Microsoft Teams."
@@ -24,7 +24,7 @@ export default function DocsPage() {
           className="relative w-full overflow-hidden rounded-b-[24px] sm:rounded-b-[32px]"
           style={{ background: HERO_SURFACE }}
         >
-          <Nav />
+          <Nav heroTone="light" />
           <div className="px-4 sm:px-6 md:px-12 lg:px-20">
             <div className="mx-auto w-full max-w-[1440px] pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20">
               <div className="grid gap-8 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-5">

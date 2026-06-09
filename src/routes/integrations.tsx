@@ -33,7 +33,7 @@ const directoryItems: { name: string; cat: string }[] = [
 
 export default function IntegrationsPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Integrations — Viktor"
         description="Viktor connects to 3,000+ tools and uses them like you do. One AI employee for your entire tool stack."

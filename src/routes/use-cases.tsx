@@ -15,7 +15,7 @@ const testimonials = [
 
 export default function UseCasesPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Use Cases — One AI coworker. Every function. | Viktor"
         description="See how Viktor takes over the work that eats your week — from forecasts and compliance to overnight alert triage."
@@ -32,7 +32,7 @@ export default function UseCasesPage() {
               "radial-gradient(60% 60% at 50% 0%, oklch(0.92 0.06 50 / 0.55), transparent 70%), radial-gradient(50% 50% at 80% 10%, oklch(0.85 0.12 320 / 0.45), transparent 70%), radial-gradient(50% 50% at 15% 10%, oklch(0.85 0.10 280 / 0.45), transparent 70%)",
           }}
         />
-        <Nav />
+        <Nav heroTone="light" />
         <div className="relative mx-auto max-w-3xl px-6 pt-16 text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-violet-600 font-semibold">Use Cases</p>
           <h1 className="font-display mt-5 text-5xl md:text-7xl leading-[1.02] tracking-tight text-foreground">

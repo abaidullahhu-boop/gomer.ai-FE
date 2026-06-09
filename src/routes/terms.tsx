@@ -28,14 +28,14 @@ function Section({
 
 export default function TermsPage() {
   return (
-    <div style={{ backgroundColor: "#fffefd", minHeight: "100vh" }}>
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Terms of Service"
         description="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
         ogTitle="Terms of Service"
         ogDescription="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
       />
-      <Nav />
+      <Nav heroTone="light" />
       <main className="pt-32 pb-24 px-6 md:px-12">
         <div className="max-w-4xl mx-auto w-full">
           <div className="mb-12">

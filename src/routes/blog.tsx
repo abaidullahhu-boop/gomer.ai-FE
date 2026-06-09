@@ -8,7 +8,7 @@ const featured = blogPostMetas[0];
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Blog — Viktor"
         description="News, technical solutions, and background articles from the Viktor team."
@@ -16,7 +16,7 @@ export default function BlogPage() {
         ogDescription="News, technical solutions, and background articles from the Viktor team."
       />
       <div className="pt-6">
-        <Nav />
+        <Nav heroTone="light" />
       </div>
 
       <main className="mx-auto max-w-6xl px-2 sm:px-8 pt-48 pb-24">

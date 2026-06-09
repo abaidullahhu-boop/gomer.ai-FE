@@ -38,7 +38,7 @@ const testimonials = [
 
 export default function Index() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Viktor — Not a tool. A hire."
         description="Viktor is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."

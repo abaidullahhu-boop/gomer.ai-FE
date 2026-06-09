@@ -40,7 +40,7 @@ export function FAQSection({
   faqs = DEFAULT_FAQS,
   title = "FAQ",
   initialVisibleCount = 4,
-  className = "px-2 sm:px-20 py-5 sm:py-32 ",
+  className = "px-2 sm:px-20 py-5 sm:py-32 bg-primitive-main-beige ",
 }: FAQSectionProps) {
   const [open, setOpen] = useState<number | null>(0);
   const [showAll, setShowAll] = useState(false);
@@ -48,7 +48,7 @@ export function FAQSection({
 
   return (
     <section className={className}>
-      <div className="mx-auto w-full max-w-7xl grid gap-8 lg:grid-cols-[minmax(0,519fr)_minmax(0,630fr)] lg:items-start">
+      <div className=" mx-auto w-full max-w-7xl grid gap-8 lg:grid-cols-[minmax(0,519fr)_minmax(0,630fr)] lg:items-start">
         <h2 className="font-display text-5xl md:text-5xl">{title}</h2>
         <div>
           <div className="space-y-3">

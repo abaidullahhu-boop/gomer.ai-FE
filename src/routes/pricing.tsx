@@ -15,7 +15,7 @@ import fullProjectsImageTabs from "@/assets/images/full-projects-image-tabs.avif
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Pricing — Viktor"
         description="We'll front you $100. Put Viktor to work. Start free with $100 in credits — no credit card, no strings. Upgrade when you're ready."

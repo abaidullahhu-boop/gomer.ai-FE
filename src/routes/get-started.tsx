@@ -64,7 +64,7 @@ export default function GetStarted() {
   const t = testimonials[i];
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-primitive-main-beige">
       <PageMeta
         title="Try Viktor for free — $100 credits included"
         description="Sign up for Viktor with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
