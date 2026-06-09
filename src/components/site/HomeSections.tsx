@@ -286,14 +286,14 @@ export function AppBuilder() {
 
   return (
     <section className="px-2 md:px-6 py-24 bg-section-cream">
-      <div ref={scrollRef} className="mx-auto max-w-6xl max-lg:min-h-0 lg:min-h-[300vh]">
+      <div ref={scrollRef} className="mx-auto max-w-7xl sm:px-12 max-lg:min-h-0 lg:min-h-[300vh]">
         <div className="lg:sticky lg:top-28">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="pl-[108px] max-lg:pl-0 max-lg:px-4">
               <div className="inline-flex items-center gap-2 text-violet-700 text-xs">
                 How it works
               </div>
-              <h3 className="font-medium text-4xl md:text-5xl mt-4 leading-[1.05]">
+              <h3 className="font-heading text-[40px] max-sm:text-[35px] leading-[1.1] font-bold tracking-normal text-[#1a182b] sm:text-5xl">
                 Hiring your first AI employee has never been{" "}
                 <span
                   className="bg-clip-text leading-[1.1] text-transparent"
@@ -507,7 +507,7 @@ export function AskAI() {
   ];
   return (
     <section className="smpx-6 pt-2 sm:pt-32 sm:pb-10 bg-section-cream">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl sm:px-12">
         <div className="relative overflow-hidden rounded-[40px] bg-ask-card px-6 py-16 text-center">
         <span className="pointer-events-none absolute inset-x-0 top-[90%] -translate-y-1/2 text-center font-display text-[26vw] leading-none text-white/5 select-none">            VIKTOR
           </span>

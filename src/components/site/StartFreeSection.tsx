@@ -59,11 +59,11 @@ export function StartFreeSection({
   primaryCtaTo = "/pricing",
   secondaryCtaLabel = "See all plans",
   onSecondaryCtaClick,
-  className = "sm:px-6 pb-20 pt-12",
+  className = "sm:px-4 pb-20 pt-12",
 }: StartFreeSectionProps) {
   return (
     <section className={className}>
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl sm:px-12">
         <div className="rounded-[40px] bg-hero px-4 sm:px-8 py-12 sm:py-16 md:px-16 md:py-20">
           <div className="grid md:grid-cols-2 gap-12 items-stretch">
             <div className="flex flex-col justify-between">

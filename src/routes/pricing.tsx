@@ -53,7 +53,7 @@ function PricingHero() {
         </div>
 
         <div className="mt-10">
-          <GetStartedButton size="lg" shadow />
+          <GetStartedButton shadow />
         </div>
       </div>
 
@@ -542,7 +542,7 @@ function HowCreditsWork() {
               <p className="text-lg sm:text-2xl font-bold text-primitive-main-dark">
                 Your whole team gets an analyst, an ops lead, and an engineer. For the price of lunch.
               </p>
-              <GetStartedButton variant="dark" size="lg" fullWidth className="mt-6 px-6 py-4" />
+              <GetStartedButton variant="dark" fullWidth className="mt-6 px-6 py-4" />
             </div>
           </ConicGradientCardShell>
         </div>

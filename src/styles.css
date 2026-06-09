@@ -105,6 +105,7 @@
   --font-heading: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
 
   --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #ffbb98  0%, #ffbb98 6.43%, #9e84ff  50.71%, #6e47ff 80.36%, #150079 100%);
+  --gradient-dark2: radial-gradient(ellipse 160% 120% at 52% -24%, #ffbd9e 0%, #fdbca0 6%, #947fff 51%, #6748fd 80%, #150079 100%);
   --gradient-dark3: radial-gradient(283.63% 201.39% at 31.42% -99.18%, #ffbd9e 0%, #fdbca0 6.43%, #947fff 50.71%, #6748fd 80.36%, #150079 100%), #d9d9d9;
   --gradient-disclosure: radial-gradient(108.79% 100% at 50% 0%, rgba(255, 187, 152, 0.2) 0%, rgba(255, 187, 152, 0) 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9e84ff 0%, #8666ff 18.26%, #6e47ff 36.52%, #5835de 52.39%, #4224bc 68.26%, #2b129b 84.13%, #20098a 92.07%, #150079 100%);
 
@@ -331,6 +332,10 @@
 
 @utility bg-hero {
   background: var(--gradient-hero);
+}
+
+@utility gradient-dark-2 {
+  background: var(--gradient-dark2);
 }
 
 @utility bg-gradient-dark3 {

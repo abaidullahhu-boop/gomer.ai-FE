@@ -360,7 +360,7 @@ function SectionStartFree() {
                 your team when it makes sense.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <GetStartedButton size="sm" className="px-5 py-3" />
+                <GetStartedButton className="px-5 py-3" />
                 <Link to="/pricing" className="px-5 py-3 rounded-full bg-white/15 text-white text-sm font-semibold border border-white/20">See all plans</Link>
               </div>
             </div>

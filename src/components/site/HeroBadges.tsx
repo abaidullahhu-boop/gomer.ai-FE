@@ -60,7 +60,7 @@ export const pricingHeroBadges = [
 
 function BadgeItem({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`flex items-center gap-2${className ? ` ${className}` : ""}`}>
+    <div className={`flex items-center text-white gap-4.5 ${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );
@@ -117,7 +117,7 @@ export function HeroBadges({ badges = landingHeroBadges }: { badges?: readonly {
         </div>
       </div>
 
-      <div className="hidden md:flex mt-16 pb-3 flex-wrap justify-center items-center gap-8 text-white/85 text-sm">
+      <div className="hidden md:flex mt-20 pb-3 flex-wrap justify-center items-center gap-8 text-white/85 text-sm">
         {badges.map((badge) => (
           <BadgeItem key={badge.label}>
             {badge.icon}

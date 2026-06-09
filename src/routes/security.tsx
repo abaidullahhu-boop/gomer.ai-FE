@@ -82,7 +82,7 @@ function SecurityHero() {
           </p>
 
           <div className="mt-10">
-            <GetStartedButton size="lg" shadow />
+            <GetStartedButton shadow />
           </div>
 
           <div className="mt-10 mb-16 flex flex-wrap justify-center gap-x-8 gap-y-3">

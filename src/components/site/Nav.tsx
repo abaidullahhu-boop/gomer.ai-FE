@@ -30,7 +30,59 @@ const solutionsMenu: MenuItem[] = [
 ];
 
 const dropdownLinkClass =
-  "block mx-2 rounded-full px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-black/[0.06] hover:text-foreground whitespace-nowrap";
+  "rounded-xl px-3 py-2 text-sm text-[#1a182b] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none whitespace-nowrap";
+
+const navLoginButtonClass =
+  "inline-flex h-10 shrink-0 items-center justify-center rounded-full border-[1.25px] border-solid border-[#1a182b1a] bg-transparent px-6 text-sm font-medium tracking-[-0.01em] whitespace-nowrap transition-all hover:bg-[#1a182b]/[0.06]";
+
+const navMobileLoginButtonClass =
+  "block rounded-full border border-[#E0E0E0] px-5 py-3 text-center text-sm font-medium text-foreground hover:bg-black/5";
+
+const navMobileCtaButtonClass = "py-3";
+
+function NavGlassLayers() {
+  return (
+    <>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 rounded-full"
+        style={{
+          background:
+            "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 rounded-full"
+        style={{
+          background:
+            "linear-gradient(-15deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          padding: "1px",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-full"
+        style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background:
+              "linear-gradient(-15deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+            padding: "4px",
+          }}
+        />
+      </div>
+    </>
+  );
+}
 
 function Caret({ open }: { open: boolean }) {
   return (
@@ -38,7 +90,7 @@ function Caret({ open }: { open: boolean }) {
       width="11"
       height="11"
       viewBox="0 0 12 12"
-      className={`transition-transform duration-200 ${open ? "rotate-180 text-purple-500" : "text-foreground/40"}`}
+      className={`transition-transform duration-200 ${open ? "rotate-180 text-purple-500" : "text-[#9693a3]"}`}
       aria-hidden="true"
     >
       <path
@@ -99,29 +151,38 @@ function NavDropdown({
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => (open ? onClose() : onOpen())}
-        className={`flex items-center gap-2 transition-colors text-sm cursor-pointer ${open ? "text-purple-500" : "hover:text-purple-500"}`}
+        className={`flex items-center gap-2 transition-colors text-sm font-medium cursor-pointer ${open ? "text-purple-500" : "hover:text-purple-500"}`}
       >
         {label} <Caret open={open} />
       </button>
 
-      {open && (
-        <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3">
-          <div className="flex min-w-[160px] flex-col gap-2 rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
-            {items.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `${dropdownLinkClass}${isActive ? " bg-black/[0.06] text-foreground" : ""}`
-                }
-                onClick={onClose}
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </div>
+      <div
+        className={`absolute top-full left-1/2 z-50 w-max min-w-44 -translate-x-1/2 pt-3 transition duration-150 ${
+          open
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0"
+        }`}
+      >
+        <div
+          role="menu"
+          aria-label={label}
+          className="grid gap-1 rounded-xl border border-white/50 bg-white/88 p-2 shadow-[0_20px_48px_rgba(26,24,43,0.14)] backdrop-blur-xl"
+        >
+          {items.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              role="menuitem"
+              className={({ isActive }) =>
+                `${dropdownLinkClass}${isActive ? " bg-black/5" : ""}`
+              }
+              onClick={onClose}
+            >
+              {item.label}
+            </NavLink>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -238,7 +299,7 @@ export function Nav() {
   const navBarClass =
     scrolled || mobileOpen
       ? "bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
-      : "bg-white/10 backdrop-blur-[22px]";
+      : "bg-white/10 backdrop-blur-[22px] transition-colors duration-200 ease-out";
 
   const showGlassOverlay = !scrolled && !mobileOpen;
 
@@ -247,39 +308,21 @@ export function Nav() {
       <div className="px-5 pt-4 xl:px-10">
         <div className="mx-auto w-full max-w-[1360px]">
           {/* Desktop navbar */}
-          <div className="relative isolate hidden w-full overflow-visible rounded-full lg:block">
+          <div className="relative isolate hidden w-full overflow-visible rounded-full xl:block">
             <div
-              className={`relative z-10 h-full w-full rounded-full py-4 pr-4 pl-8 transition-all duration-300 ${navBarClass}`}
+              className={`relative h-full min-h-0 w-full rounded-full py-4 pr-4 pl-8 ${navBarClass}`}
             >
-              {showGlassOverlay && (
-                <>
-                  <div
-                    className="pointer-events-none absolute inset-0 rounded-full"
-                    style={{
-                      background:
-                        "radial-gradient(100% 100%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 100%)",
-                    }}
-                  />
+              {showGlassOverlay && <NavGlassLayers />}
 
-                  <div
-                    className="pointer-events-none absolute inset-0 rounded-full"
-                    style={{
-                      background:
-                        "linear-gradient(-15deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
-                      WebkitMask:
-                        "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
-                      padding: "1px",
-                    }}
-                  />
-                </>
-              )}
-
-              <div className="relative grid grid-cols-[1fr_auto_1fr] items-center">
-                <Link to="/" className="block">
+              <div className="relative z-10 h-full min-h-0 w-full">
+                <div className="relative z-10 grid h-full w-full grid-cols-[1fr_auto_1fr] items-center">
+                <div className="min-w-0">
+                <Link to="/" aria-label="Viktor home" className="block">
                   <img src={logo} alt="Viktor" width={80} height={24} />
                 </Link>
+                </div>
 
-                <nav className="flex cursor-pointer items-center gap-8">
+                <nav className="flex shrink-0 items-center gap-8" aria-label="Main">
                   <NavDropdown
                     label="Product"
                     items={productMenu}
@@ -288,7 +331,7 @@ export function Nav() {
                     onClose={() => setOpenMenu(null)}
                   />
 
-                  <Link to="/enterprise" className="text-sm transition-colors hover:text-purple-500">
+                  <Link to="/enterprise" className="text-sm font-medium transition-colors hover:text-purple-500">
                     Enterprise
                   </Link>
 
@@ -317,48 +360,26 @@ export function Nav() {
                   />
                 </nav>
 
-                <div className="flex justify-end gap-3">
-                  <a
-                    href="/login"
-                    className="rounded-full border border-[#b3b0c1] px-5 py-2 text-sm hover:bg-black/5"
-                  >
+                <div className="flex min-w-0 items-center justify-end gap-3">
+                  <a href="/login" className={navLoginButtonClass}>
                     Login
                   </a>
-                  <GetStartedButton variant="nav" size="sm" />
+                  <GetStartedButton variant="nav" />
+                </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Mobile navbar */}
-          <div className="lg:hidden">
-            <div className="relative isolate">
+          <div className="xl:hidden">
+            <div className="relative isolate w-full overflow-visible rounded-full">
               <div
-                className={`relative z-10 flex items-center justify-between rounded-full px-6 py-4 transition-all duration-300 ${navBarClass}`}
+                className={`relative h-full min-h-0 w-full rounded-full px-6 py-4 ${navBarClass}`}
               >
-                {showGlassOverlay && (
-                  <>
-                    <div
-                      className="pointer-events-none absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          "radial-gradient(100% 100%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 100%)",
-                      }}
-                    />
+                {showGlassOverlay && <NavGlassLayers />}
 
-                    <div
-                      className="pointer-events-none absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          "linear-gradient(-15deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
-                        WebkitMask:
-                          "linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0)",
-                        padding: "1px",
-                      }}
-                    />
-                  </>
-                )}
-
+                <div className="relative z-10 flex items-center justify-between">
                 <Link to="/" className="relative block" onClick={closeMobileMenu}>
                   <img src={logo} alt="Viktor" width={80} height={24} />
                 </Link>
@@ -366,6 +387,7 @@ export function Nav() {
                   open={mobileOpen}
                   onClick={() => (mobileOpen ? closeMobileMenu() : setMobileOpen(true))}
                 />
+                </div>
               </div>
             </div>
 
@@ -422,18 +444,13 @@ export function Nav() {
                 </nav>
 
                 <div className="flex flex-col gap-3 border-t border-black/[0.06] py-5">
-                  <a
-                    href="/login"
-                    onClick={closeMobileMenu}
-                    className="block rounded-full border border-[#E0E0E0] px-5 py-3 text-center text-sm font-medium text-foreground hover:bg-black/5"
-                  >
+                  <a href="/login" onClick={closeMobileMenu} className={navMobileLoginButtonClass}>
                     Login
                   </a>
                   <GetStartedButton
                     variant="nav"
-                    size="sm"
                     fullWidth
-                    className="py-3"
+                    className={navMobileCtaButtonClass}
                     onClick={closeMobileMenu}
                   />
                 </div>
