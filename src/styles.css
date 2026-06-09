@@ -77,6 +77,8 @@
   --primitive-orange-500: #ffbb98;
   --surface-hero-primary: radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, var(--primitive-main-beige), var(--primitive-main-beige));
   --integrations-hero-surface: var(--surface-hero-primary);
+  --case-study-hero-surface: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 985' preserveAspectRatio='none'%3E%3Cdefs%3E%3CradialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(61.15 102.42 -185.11 167.47 162 -71.914)'%3E%3Cstop offset='0' stop-color='rgba(148,127,255,1)'/%3E%3Cstop offset='0.32125' stop-color='rgba(201,158,208,0.5)'/%3E%3Cstop offset='0.6425' stop-color='rgba(253,188,160,0)'/%3E%3Cstop offset='1' stop-color='rgba(255,189,158,0)'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E"), linear-gradient(90deg, var(--primitive-main-beige) 0%, var(--primitive-main-beige) 100%);
+  --gradient-dark1: radial-gradient(108.79% 100% at 50% 0%, #ffbb9833 0%, #ffbb9800 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, var(--primitive-purple-300) 0%, var(--primitive-purple-500) 36.52%, var(--primitive-main-dblue) 100%);
   --integrations-hero-text-gradient: radial-gradient(120% 140% at 55% 0%, #ffbd9e 0%, #fdbca0 6%, #c99ed0 29%, #947fff 51%, #6748fd 80%, #150079 100%);
   --radius-section: var(--radius-4xl);
   --background: oklch(0.98 0.008 80);
@@ -194,6 +196,10 @@
     font-size: 1.125rem;
     line-height: 1.4;
   }
+  .body-large {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
 }
 
 @layer utilities {
@@ -217,6 +223,7 @@
   }
   .bg-conic-gradient-bg { background: var(--conic-gradient-bg); }
   .bg-integrations-hero-surface { background: var(--integrations-hero-surface); }
+  .bg-case-study-hero-surface { background: var(--case-study-hero-surface); }
   .rounded-section { border-radius: var(--radius-4xl); }
   .rounded-b-section {
     border-bottom-right-radius: var(--radius-section);
@@ -251,6 +258,7 @@
     color: var(--primitive-purple-700);
   }
   .text-primitive-purple-500 { color: var(--primitive-purple-500); }
+  .text-primitive-orange-500 { color: var(--primitive-orange-500); }
   .bg-primitive-main-dark { background-color: var(--primitive-main-dark); }
   .min-h-112 { min-height: 28rem; }
   .min-h-76 { min-height: 12rem; }
@@ -412,6 +420,10 @@
   background: var(--gradient-hero);
 }
 
+@utility gradient-dark-1 {
+  background: var(--gradient-dark1);
+}
+
 @utility gradient-dark-2 {
   background: var(--gradient-dark2);
 }
@@ -422,4 +434,9 @@
 
 @utility bg-disclosure-card {
   background: var(--gradient-disclosure);
+}
+
+@utility gradient-comparison-tab-active {
+  background: var(--gradient-dark2);
+  color: #fff;
 }
