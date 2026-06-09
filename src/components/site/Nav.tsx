@@ -106,7 +106,7 @@ function NavDropdown({
 
       {open && (
         <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3">
-          <div className="min-w-[160px] rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
+          <div className="flex min-w-[160px] flex-col gap-2 rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
             {items.map((item) => (
               <NavLink
                 key={item.to}
@@ -151,7 +151,7 @@ function MobileNavAccordion({
         <Caret open={open} />
       </button>
       {open && (
-        <div className="pb-3 pl-1">
+        <div className="flex flex-col gap-2 pb-3 pl-1">
           {items.map((item) => (
             <NavLink
               key={item.to}
