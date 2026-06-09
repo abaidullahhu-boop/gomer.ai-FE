@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 
 export type FAQItem = { q: string; a: string };
@@ -31,7 +31,7 @@ export const DEFAULT_FAQS: FAQItem[] = [
 
 type FAQSectionProps = {
   faqs?: FAQItem[];
-  title?: string;
+  title?: ReactNode;
   initialVisibleCount?: number;
   className?: string;
 };

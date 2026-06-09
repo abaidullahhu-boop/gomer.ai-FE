@@ -49,7 +49,7 @@ export default function Index() {
       <section className="relative pt-6 pb-14 overflow-hidden rounded-b-2xl bg-hero">
         <Nav />
         <div className="relative mx-auto max-w-5xl px-6 pt-40 text-center">
-          <div className="inline-flex items-center gap-3 px-4 pb-4 pt-8 rounded-full text-white/95 text-sm">
+          <div className="inline-flex items-center gap-3 px-4 pb-4 pt-4 rounded-full text-white/95 text-sm">
             <div className="flex space-x-2 pr-1">
               <img src={slackLogo} alt="Slack" className="w-4 h-4" />
               <img src={microsoftLogo} alt="Microsoft Teams" className="w-4 h-4" />

@@ -238,7 +238,7 @@ function MenuToggleButton({ open, onClick }: { open: boolean; onClick: () => voi
       aria-label={open ? "Close menu" : "Open menu"}
       aria-expanded={open}
       onClick={onClick}
-      className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#1A1829] text-white transition-opacity hover:opacity-90"
+      className="flex h-8 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1A1829] text-white transition-opacity hover:opacity-90"
     >
       {open ? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -375,7 +375,7 @@ export function Nav() {
           <div className="xl:hidden">
             <div className="relative isolate w-full overflow-visible rounded-full">
               <div
-                className={`relative h-full min-h-0 w-full rounded-full px-6 py-4 ${navBarClass}`}
+                className={`relative h-full min-h-0 w-full rounded-full px-6 py-3 ${navBarClass}`}
               >
                 {showGlassOverlay && <NavGlassLayers />}
 
