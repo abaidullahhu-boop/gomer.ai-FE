@@ -46,9 +46,27 @@ export function LightningIcon() {
   );
 }
 
+export function SlackAppDirectoryIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className={iconClass} aria-hidden="true">
+      <g fill="currentColor">
+        <path fillRule="evenodd" clipRule="evenodd" d="M3.65689 0.686515C5.69502 0.472444 7.82352 0.357117 9.99979 0.357117C12.1714 0.357117 14.2625 0.47953 16.2995 0.690157C17.8252 0.847908 19.0818 2.00209 19.3019 3.5454C19.5186 5.0642 19.6426 6.64696 19.6426 8.26147C19.6426 9.86736 19.5066 11.4236 19.2944 12.927C19.0736 14.4905 17.8038 15.6733 16.2502 15.831C14.2886 16.0303 12.2632 16.159 10.1698 16.1655C8.70482 17.8053 7.49113 18.679 5.48476 19.5801C5.26373 19.6794 5.00746 19.6598 4.80405 19.5283C4.60063 19.3965 4.47782 19.1708 4.47782 18.9285V15.8381L4.15689 15.8083L3.84579 15.7793C2.27276 15.6328 0.905386 14.4745 0.678439 12.8443C0.471919 11.3608 0.356934 9.83406 0.356934 8.26147C0.356934 6.63626 0.471722 5.03572 0.693276 3.50139C0.913238 1.97809 2.15375 0.844394 3.65689 0.686515ZM14.1711 5.3616C14.5364 5.03029 14.5638 4.46563 14.2325 4.1004C13.9012 3.73517 13.3366 3.70769 12.9713 4.03899C11.7845 5.11556 10.8931 6.08309 10.1405 7.25766C9.59251 8.11306 9.13115 9.05806 8.67941 10.2034L7.06935 8.54303C6.72606 8.18902 6.16081 8.18032 5.80681 8.5236C5.45281 8.86687 5.44411 9.43213 5.78738 9.78615L8.38478 12.4647C8.60043 12.6871 8.91596 12.7818 9.21845 12.715C9.52092 12.6481 9.76715 12.4293 9.86899 12.1367C10.4693 10.4122 11.0023 9.2228 11.6441 8.22099C12.2824 7.22467 13.0526 6.37626 14.1711 5.3616Z" />
+      </g>
+    </svg>
+  );
+}
+
 export const landingHeroBadges = [
   { label: "$100 in free credits", icon: <CoinIcon /> },
   { label: "No credit card required", icon: <CreditCardIcon /> },
+  { label: "SOC 2 compliant", icon: <Soc2Icon /> },
+] as const;
+
+export const enterpriseHeroBadges = [
+  { label: "Slack App Directory", icon: <SlackAppDirectoryIcon /> },
+  { label: "$100 in free credits", icon: <CoinIcon /> },
+  { label: "No credit card required", icon: <CreditCardIcon /> },
+  { label: "Free pilot credits", icon: <CoinIcon /> },
   { label: "SOC 2 compliant", icon: <Soc2Icon /> },
 ] as const;
 
@@ -92,6 +110,56 @@ export function HeroBadgeItem({
 }
 
 const HERO_BADGE_INTERVAL_MS = 3000;
+
+function EnterpriseHeroPoint({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <div className="flex shrink-0 items-center gap-4">
+      <span className="inline-flex text-[#1B182A33]">{icon}</span>
+      <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-primitive-main-dark">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+export function EnterpriseHeroPoints({
+  badges = enterpriseHeroBadges,
+}: {
+  badges?: readonly { label: string; icon: ReactNode }[];
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setActiveIndex((i) => (i + 1) % badges.length),
+      HERO_BADGE_INTERVAL_MS,
+    );
+    return () => clearInterval(t);
+  }, [badges.length]);
+
+  const activeBadge = badges[activeIndex];
+
+  return (
+    <div className="flex w-full max-w-[706px] flex-col justify-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-8">
+      <div aria-hidden="true" className="relative h-12 w-full shrink-0 overflow-hidden sm:hidden">
+        <div className="h-12 overflow-hidden">
+          <div key={activeIndex} className="flex h-12 min-h-12 w-full animate-logo-slide-up items-center justify-center gap-4">
+            <span className="inline-flex text-[#1B182A33]">{activeBadge.icon}</span>
+            <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-primitive-main-dark">
+              {activeBadge.label}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden flex-row flex-wrap items-center justify-center gap-6 sm:flex sm:gap-8">
+        {badges.map((badge) => (
+          <EnterpriseHeroPoint key={badge.label} icon={badge.icon} label={badge.label} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function HeroBadges({ badges = landingHeroBadges }: { badges?: readonly { label: string; icon: ReactNode }[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
