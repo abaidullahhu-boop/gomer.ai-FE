@@ -35,11 +35,11 @@ export function GetStartedButton({
   onClick,
 }: GetStartedButtonProps) {
   const classes = [
-    "cursor-pointer rounded-full font-semibold transition",
+    "cursor-pointer rounded-full font-medium transition",
     variantClasses[variant],
     sizeClasses[size],
     fullWidth ? "block w-full text-center" : "inline-block text-center",
-    shadow && "shadow-xl",
+    shadow && "",
     className,
   ]
     .filter(Boolean)

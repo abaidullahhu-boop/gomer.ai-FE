@@ -57,6 +57,7 @@
   --color-primitive-main-dark: var(--primitive-main-dark);
   --color-primitive-main-dblue: var(--primitive-main-dblue);
   --color-primitive-main-grey: var(--primitive-main-grey);
+  --color-primitive-purple-700: var(--primitive-purple-700);
   --color-primitive-purple-500: var(--primitive-purple-500);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
@@ -70,6 +71,7 @@
   --primitive-main-dark: #1a182b;
   --primitive-main-dblue: #150079;
   --primitive-main-grey: #9693a3;
+  --primitive-purple-700: #4e32b5;
   --primitive-purple-500: #6e47ff;
   --primitive-purple-300: #9e84ff;
   --primitive-orange-500: #ffbb98;
@@ -146,9 +148,9 @@
     --primitive-slack-ink: #0d061e;
     --primitive-purple-100: #d2c6ff;
     --slack-mention-bg: #f1edff;
-    --slack-mention-text: #4e32b5;
+    --slack-mention-text: var(--primitive-purple-700);
     --slack-app-badge-bg: #f1edff;
-    --slack-app-badge-text: #4e32b5;
+    --slack-app-badge-text: var(--primitive-purple-700);
     --slack-reaction-pill-bg: rgba(255, 255, 255, 0.6);
     --slack-reaction-pill-hover-bg: rgba(255, 255, 255, 0.8);
     --slack-add-reaction-icon: #9693a3;
@@ -160,6 +162,14 @@
   .rounded-section { border-radius: var(--radius-4xl); }
   .text-primitive-main-dark { color: var(--primitive-main-dark); }
   .text-primitive-main-grey { color: var(--primitive-main-grey); }
+  .text-primitive-purple-700 { color: var(--primitive-purple-700); }
+  .text-eyebrow-primitive-purple-700 {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--primitive-purple-700);
+  }
   .text-primitive-purple-500 { color: var(--primitive-purple-500); }
   .bg-primitive-main-dark { background-color: var(--primitive-main-dark); }
   .min-h-112 { min-height: 28rem; }
