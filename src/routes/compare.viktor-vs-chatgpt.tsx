@@ -1,22 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
 import { Check, ChevronDown, Play } from "lucide-react";
 import { SlackPurpleCard } from "@/components/site/SlackChangelogCards";
-
-export const Route = createFileRoute("/compare/viktor-vs-chatgpt")({
-  head: () => ({
-    meta: [
-      { title: "Viktor vs ChatGPT — The AI That Does the Work" },
-      { name: "description", content: "Compare Viktor and ChatGPT side-by-side. Viktor connects to 3,000+ tools and ships real work in Slack — ChatGPT talks about it." },
-      { property: "og:title", content: "Viktor vs ChatGPT — The AI That Does the Work" },
-      { property: "og:description", content: "How Viktor and ChatGPT stack up on integrations, deployment, pricing, security, and reliability." },
-    ],
-  }),
-  component: ComparePage,
-});
 
 type Row = { feature: string; viktor: string; chatgpt: string };
 const rows: Row[] = [
@@ -32,9 +20,15 @@ const rows: Row[] = [
   { feature: "Focus", viktor: "Built for businesses that want an AI that does the job — not one that explains the job back to them.", chatgpt: "Built for the widest possible audience: students, writers, developers, hobbyists, and curious people." },
 ];
 
-function ComparePage() {
+export default function ComparePage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Viktor vs ChatGPT — The AI That Does the Work"
+        description="Compare Viktor and ChatGPT side-by-side. Viktor connects to 3,000+ tools and ships real work in Slack — ChatGPT talks about it."
+        ogTitle="Viktor vs ChatGPT — The AI That Does the Work"
+        ogDescription="How Viktor and ChatGPT stack up on integrations, deployment, pricing, security, and reliability."
+      />
       <Hero />
       <ComparisonTable />
       <DoesTheWork />

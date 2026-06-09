@@ -10,21 +10,11 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:22-alpine AS runner
+FROM nginx:alpine AS runner
 
-WORKDIR /app
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=3000
+EXPOSE 80
 
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nitro
-
-COPY --from=builder --chown=nitro:nodejs /app/.output ./.output
-
-USER nitro
-
-EXPOSE 3000
-
-CMD ["node", ".output/server/index.mjs"]
+CMD ["nginx", "-g", "daemon off;"]

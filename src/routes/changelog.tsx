@@ -1,20 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { CalendarCheck2 } from "lucide-react";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { SlackLightCard, SlackPurpleCard } from "@/components/site/SlackChangelogCards";
-
-export const Route = createFileRoute("/changelog")({
-  head: () => ({
-    meta: [
-      { title: "Changelog — Viktor" },
-      { name: "description", content: "What's new across the Viktor platform — releases, improvements, and fixes." },
-      { property: "og:title", content: "Changelog — Viktor" },
-      { property: "og:description", content: "What's new across the Viktor platform." },
-    ],
-  }),
-  component: ChangelogPage,
-});
 
 type Entry = {
   date: string;
@@ -275,9 +263,15 @@ const heroBg = {
     "radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, #faf5f1, #faf5f1)",
 };
 
-function ChangelogPage() {
+export default function ChangelogPage() {
   return (
     <div className="min-h-screen bg-[#faf5f1]">
+      <PageMeta
+        title="Changelog — Viktor"
+        description="What's new across the Viktor platform — releases, improvements, and fixes."
+        ogTitle="Changelog — Viktor"
+        ogDescription="What's new across the Viktor platform."
+      />
       {/* Hero with gradient */}
       <section style={heroBg} className="relative">
         <div className="pt-6">

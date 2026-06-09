@@ -1,22 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import {
   Search, Check, ShieldCheck, Lock, Eye, KeyRound, ChevronDown,
 } from "lucide-react";
-
-export const Route = createFileRoute("/integrations")({
-  head: () => ({
-    meta: [
-      { title: "Integrations — Viktor" },
-      { name: "description", content: "Viktor connects to 3,000+ tools and uses them like you do. One AI employee for your entire tool stack." },
-      { property: "og:title", content: "Integrations — Viktor" },
-      { property: "og:description", content: "One AI employee. Your entire tool stack." },
-    ],
-  }),
-  component: IntegrationsPage,
-});
 
 const orbitTools = ["Slack", "Notion", "GitHub", "HubSpot", "Stripe", "Linear", "Figma", "Jira", "Asana", "Drive", "Gmail", "Meta"];
 
@@ -43,9 +31,15 @@ const directoryItems: { name: string; cat: string }[] = [
   { name: "Zendesk", cat: "Support" },
 ];
 
-function IntegrationsPage() {
+export default function IntegrationsPage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Integrations — Viktor"
+        description="Viktor connects to 3,000+ tools and uses them like you do. One AI employee for your entire tool stack."
+        ogTitle="Integrations — Viktor"
+        ogDescription="One AI employee. Your entire tool stack."
+      />
       {/* HERO */}
       <section className="relative bg-hero pt-6 pb-32 overflow-hidden rounded-b-[40px]">
         <Nav />

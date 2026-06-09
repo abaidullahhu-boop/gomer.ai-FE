@@ -1,21 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import { ShieldCheck, CreditCard, Lock } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-
-export const Route = createFileRoute("/case-studies")({
-  head: () => ({
-    meta: [
-      { title: "Case Studies — Viktor" },
-      { name: "description", content: "Real stories from teams running on Viktor. The numbers are the customers'. The tools are theirs. The workflows still run today." },
-      { property: "og:title", content: "Case Studies — Viktor" },
-      { property: "og:description", content: "Real stories from teams running on Viktor." },
-    ],
-  }),
-  component: CaseStudiesPage,
-});
 
 type Case = {
   category: string;
@@ -110,12 +98,18 @@ const filterKey: Record<string, string> = {
 
 const logos = ["Squidoo", "TRUE CLASSIC", "Accel", "LYFEfuel"];
 
-function CaseStudiesPage() {
+export default function CaseStudiesPage() {
   const [active, setActive] = useState("All");
   const filtered = active === "All" ? cases : cases.filter((c) => c.category === filterKey[active]);
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Case Studies — Viktor"
+        description="Real stories from teams running on Viktor. The numbers are the customers'. The tools are theirs. The workflows still run today."
+        ogTitle="Case Studies — Viktor"
+        ogDescription="Real stories from teams running on Viktor."
+      />
       <div className="pt-6">
         <Nav />
       </div>

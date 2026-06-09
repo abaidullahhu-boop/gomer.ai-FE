@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import {
   Sparkles,
   Zap,
@@ -9,25 +9,6 @@ import {
   Play,
   ArrowRight,
 } from "lucide-react";
-
-export const Route = createFileRoute("/landing")({
-  head: () => ({
-    meta: [
-      { title: "Viktor — The AI employee for everyone else" },
-      {
-        name: "description",
-        content:
-          "A focused AI coworker that connects to your tools and does the work — built for modern teams.",
-      },
-      { property: "og:title", content: "Viktor — The AI employee" },
-      {
-        property: "og:description",
-        content: "Premium AI workforce for modern teams.",
-      },
-    ],
-  }),
-  component: LandingPage,
-});
 
 const tokens = `
 .viktor-scope {
@@ -232,9 +213,15 @@ const videos = ["Dubai Offsite: Ep. 1", "Dubai Offsite: Ep. 2", "Dubai Offsite: 
 
 const avatars = ["KP", "JD", "MS", "AR", "EB", "CH"];
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="viktor-scope">
+      <PageMeta
+        title="Viktor — The AI employee for everyone else"
+        description="A focused AI coworker that connects to your tools and does the work — built for modern teams."
+        ogTitle="Viktor — The AI employee"
+        ogDescription="Premium AI workforce for modern teams."
+      />
       <style>{tokens}</style>
 
       <div className="vk-hero">

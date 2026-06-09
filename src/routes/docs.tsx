@@ -1,29 +1,23 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ChevronDown } from "lucide-react";
 
-export const Route = createFileRoute("/docs")({
-  head: () => ({
-    meta: [
-      { title: "Documentation — Viktor" },
-      { name: "description", content: "Learn how to set up and get the most out of Viktor — your AI coworker in Slack and Microsoft Teams." },
-      { property: "og:title", content: "Documentation — Viktor" },
-      { property: "og:description", content: "Set up Viktor and connect your tools in minutes." },
-    ],
-  }),
-  component: DocsPage,
-});
-
 const HERO_SURFACE =
   "radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, #faf5f1, #faf5f1)";
 
-function DocsPage() {
+export default function DocsPage() {
   const [open, setOpen] = useState(true);
 
   return (
     <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+      <PageMeta
+        title="Documentation — Viktor"
+        description="Learn how to set up and get the most out of Viktor — your AI coworker in Slack and Microsoft Teams."
+        ogTitle="Documentation — Viktor"
+        ogDescription="Set up Viktor and connect your tools in minutes."
+      />
       {/* SECTION 1 — HERO */}
       <section className="pt-0 pb-12 sm:pb-20 border-0">
         <div

@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import {
   ShieldCheck, KeyRound, Eye, CheckCircle2, Shield, UserCheck, Database,
   Play, Plug, Settings2, Boxes,
@@ -19,23 +19,17 @@ const customerTestimonials = [
   { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Viktor is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
 ];
 
-export const Route = createFileRoute("/enterprise")({
-  head: () => ({
-    meta: [
-      { title: "Enterprise — Viktor" },
-      { name: "description", content: "One AI coworker. Enterprise-ready. SSO, SCIM, audit logs, SOC 2, GDPR — everything your security, IT, and procurement teams ask for." },
-      { property: "og:title", content: "Enterprise — Viktor" },
-      { property: "og:description", content: "Enterprise-ready AI coworker with SSO, SCIM, audit logs, and SOC 2." },
-      { property: "og:url", content: "/enterprise" },
-    ],
-    links: [{ rel: "canonical", href: "/enterprise" }],
-  }),
-  component: EnterprisePage,
-});
-
-function EnterprisePage() {
+export default function EnterprisePage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Enterprise — Viktor"
+        description="One AI coworker. Enterprise-ready. SSO, SCIM, audit logs, SOC 2, GDPR — everything your security, IT, and procurement teams ask for."
+        ogTitle="Enterprise — Viktor"
+        ogDescription="Enterprise-ready AI coworker with SSO, SCIM, audit logs, and SOC 2."
+        ogUrl="/enterprise"
+        canonical="/enterprise"
+      />
       <EnterpriseHero />
       <ComplianceGrid />
       <DeliverablesTabs />
