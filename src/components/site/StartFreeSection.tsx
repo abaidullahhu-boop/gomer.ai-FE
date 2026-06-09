@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 
 const DEFAULT_POINTS = [
   "3,000+ integrations",
@@ -72,12 +72,11 @@ export function StartFreeSection({
                 <p className="mt-6 text-white max-w-md leading-relaxed">{description}</p>
               </div>
               <div className="mt-10 md:mt-0 flex flex-wrap gap-4">
-                <Link
+                <GetStartedButton
                   to={primaryCtaTo}
-                  className="cursor-pointer rounded-full bg-white px-7 py-3.5 text-md font-medium text-foreground hover:bg-white/95 transition"
-                >
-                  {primaryCtaLabel}
-                </Link>
+                  label={primaryCtaLabel}
+                  className="px-7 py-3.5 text-md font-medium"
+                />
                 <button
                   type="button"
                   onClick={onSecondaryCtaClick}

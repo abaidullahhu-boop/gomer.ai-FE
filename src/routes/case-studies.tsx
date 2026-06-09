@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ShieldCheck, CreditCard, Lock } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -224,9 +225,7 @@ function CaseStudiesPage() {
             over. Setup is two minutes. The rest is delegation.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <button className="px-6 py-3 rounded-full bg-white text-foreground text-sm font-semibold">
-              Get Started for Free
-            </button>
+            <GetStartedButton />
             <button className="px-6 py-3 rounded-full bg-white/10 text-white text-sm font-semibold border border-white/20">
               Book a demo
             </button>

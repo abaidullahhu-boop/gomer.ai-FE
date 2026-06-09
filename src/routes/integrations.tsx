@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 import {
   Search, Check, ShieldCheck, Lock, Eye, KeyRound, ChevronDown,
 } from "lucide-react";
@@ -57,9 +58,7 @@ function IntegrationsPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <button className="px-7 py-3.5 rounded-full bg-foreground text-background text-sm font-semibold shadow-xl hover:bg-foreground/90 transition">
-              Get Started for Free
-            </button>
+            <GetStartedButton variant="dark" shadow className="px-7 py-3.5" />
             <button className="px-7 py-3.5 rounded-full text-white/95 text-sm font-semibold hover:bg-white/10 transition">
               See it in action →
             </button>
@@ -338,9 +337,7 @@ function IntegrationsPage() {
                 $100 in free credits. No credit card required. Cancel anytime. Real work, real output, from day one.
               </p>
               <div className="mt-8 flex gap-3">
-                <button className="px-6 py-3 rounded-full bg-white text-foreground text-sm font-semibold hover:bg-white/95">
-                  Get Started for Free
-                </button>
+                <GetStartedButton />
                 <button className="px-6 py-3 rounded-full text-white text-sm font-semibold hover:bg-white/10">
                   Talk to Sales
                 </button>

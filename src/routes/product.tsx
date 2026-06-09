@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 
 export const Route = createFileRoute("/product")({
   head: () => ({
@@ -72,9 +73,7 @@ function Hero() {
           From briefs to backfills, Viktor operates end-to-end with humans in the loop.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <button className="px-6 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-foreground/90 transition">
-            Get Started for Free
-          </button>
+          <GetStartedButton variant="dark" />
           <button className="px-6 py-3 rounded-full bg-white/70 backdrop-blur border border-white/60 text-foreground text-sm font-semibold hover:bg-white transition">
             Book a Demo
           </button>
@@ -366,7 +365,7 @@ function SectionStartFree() {
                 your team when it makes sense.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <button className="px-5 py-3 rounded-full bg-white text-foreground text-sm font-semibold">Get Started for Free</button>
+                <GetStartedButton size="sm" className="px-5 py-3" />
                 <Link to="/pricing" className="px-5 py-3 rounded-full bg-white/15 text-white text-sm font-semibold border border-white/20">See all plans</Link>
               </div>
             </div>

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
 
 const avatar = (id: string) =>
@@ -78,9 +79,7 @@ function EnterpriseHero() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <button className="px-6 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-foreground/90 transition">
-            Get Started for Free
-          </button>
+          <GetStartedButton variant="dark" />
           <button className="px-6 py-3 rounded-full bg-white border border-border text-foreground text-sm font-semibold hover:bg-secondary transition">
             Book a Demo
           </button>
@@ -488,9 +487,7 @@ function StartFreeCTA() {
               it makes 30 minutes.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button className="px-5 py-3 rounded-full bg-white text-foreground text-sm font-semibold hover:bg-white/95 transition">
-                Get Started for Free
-              </button>
+              <GetStartedButton size="sm" className="px-5 py-3" />
               <button className="px-5 py-3 rounded-full bg-white/15 text-white text-sm font-semibold border border-white/20 hover:bg-white/20 transition">
                 See all plans
               </button>
