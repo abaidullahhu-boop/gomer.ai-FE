@@ -1,9 +1,7 @@
 node_modules
-.output
+dist
 .git
 .gitignore
-.tanstack
-.nitro
 .vscode
 .idea
 *.log

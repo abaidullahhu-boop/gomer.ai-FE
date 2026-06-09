@@ -1,26 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
-
-export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Terms of Service" },
-      {
-        name: "description",
-        content:
-          "Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more.",
-      },
-      { property: "og:title", content: "Terms of Service" },
-      {
-        property: "og:description",
-        content:
-          "Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more.",
-      },
-    ],
-  }),
-  component: TermsPage,
-});
 
 function Section({
   number,
@@ -46,9 +26,15 @@ function Section({
   );
 }
 
-function TermsPage() {
+export default function TermsPage() {
   return (
     <div style={{ backgroundColor: "#fffefd", minHeight: "100vh" }}>
+      <PageMeta
+        title="Terms of Service"
+        description="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
+        ogTitle="Terms of Service"
+        ogDescription="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
+      />
       <Nav />
       <main className="pt-32 pb-24 px-6 md:px-12">
         <div className="max-w-4xl mx-auto w-full">

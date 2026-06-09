@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
+import { PageMeta } from "@/components/PageMeta";
 import {
   Sparkles, MessageSquare, Zap, Shield, Workflow, Brain, GitBranch, Layers,
   CheckCircle2, ArrowRight, Plug, Eye, Lock, KeyRound,
@@ -6,19 +7,6 @@ import {
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-
-export const Route = createFileRoute("/product")({
-  head: () => ({
-    meta: [
-      { title: "Product — Viktor, an AI coworker for your entire team" },
-      { name: "description", content: "Viktor is an AI coworker that plugs into your tools, talks in Slack, and ships real deliverables — built for teams, secure by default." },
-      { property: "og:title", content: "Product — Viktor" },
-      { property: "og:description", content: "An AI coworker for your entire team." },
-    ],
-    links: [{ rel: "canonical", href: "/product" }],
-  }),
-  component: ProductPage,
-});
 
 /* ============================================================
    Design tokens used inline (mapped from prompt):
@@ -38,9 +26,16 @@ const CARD_GRADIENT =
 const CTA_GRADIENT =
   "radial-gradient(60% 80% at 20% 20%, #ffb08a55 0%, transparent 60%), radial-gradient(80% 90% at 80% 50%, #8267ff 0%, #4b2dbe 45%, #1a1342 100%)";
 
-function ProductPage() {
+export default function ProductPage() {
   return (
     <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+      <PageMeta
+        title="Product — Viktor, an AI coworker for your entire team"
+        description="Viktor is an AI coworker that plugs into your tools, talks in Slack, and ships real deliverables — built for teams, secure by default."
+        ogTitle="Product — Viktor"
+        ogDescription="An AI coworker for your entire team."
+        canonical="/product"
+      />
       <Hero />
       <SectionWhatViktorIs />
       <SectionWhatCanDo />

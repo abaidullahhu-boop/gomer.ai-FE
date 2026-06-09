@@ -1,15 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Check, X, Download } from "lucide-react";
-
-export const Route = createFileRoute("/brand")({
-  component: BrandPage,
-  head: () => ({
-    meta: [
-      { title: "Brand Usage Guidelines — Viktor" },
-      { name: "description", content: "Logo, colours, typography and tone of voice guidelines for the Viktor brand." },
-    ],
-  }),
-});
+import { PageMeta } from "@/components/PageMeta";
 
 const styles = `
 .vb { --vb-bg:#f3efe8; --vb-dark:#1a182b; --vb-grey:#6b6880; --vb-line:rgba(26,24,43,0.08);
@@ -90,9 +80,13 @@ function CardLogo({ variant, text = "viktor" }: { variant: string; text?: string
   );
 }
 
-function BrandPage() {
+export default function BrandPage() {
   return (
     <div className="vb">
+      <PageMeta
+        title="Brand Usage Guidelines — Viktor"
+        description="Logo, colours, typography and tone of voice guidelines for the Viktor brand."
+      />
       <style>{styles}</style>
       <div className="vb-wrap">
         <nav className="vb-nav">

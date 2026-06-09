@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { BarChart3, CalendarClock, Coins } from "lucide-react";
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { FAQSection } from "@/components/site/FAQSection";
@@ -13,23 +13,17 @@ import { CreditsPowerHeadline } from "@/components/site/CreditsPowerHeadline";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import fullProjectsImageTabs from "@/assets/images/full-projects-image-tabs.avif";
 
-export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Pricing — Viktor" },
-      { name: "description", content: "We'll front you $100. Put Viktor to work. Start free with $100 in credits — no credit card, no strings. Upgrade when you're ready." },
-      { property: "og:title", content: "Pricing — Viktor" },
-      { property: "og:description", content: "Start free with $100 in credits. Credits power everything Viktor does. No markup on model costs." },
-      { property: "og:url", content: "/pricing" },
-    ],
-    links: [{ rel: "canonical", href: "/pricing" }],
-  }),
-  component: PricingPage,
-});
-
-function PricingPage() {
+export default function PricingPage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Pricing — Viktor"
+        description="We'll front you $100. Put Viktor to work. Start free with $100 in credits — no credit card, no strings. Upgrade when you're ready."
+        ogTitle="Pricing — Viktor"
+        ogDescription="Start free with $100 in credits. Credits power everything Viktor does. No markup on model costs."
+        ogUrl="/pricing"
+        canonical="/pricing"
+      />
       <PricingHero />
       <CreditsPower />
       <HowCreditsWork />

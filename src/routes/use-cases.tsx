@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
@@ -13,21 +13,15 @@ const testimonials = [
   { name: "Richard Comer", role: "VP Eng, Flagship", saved: "10+ hrs/week", quote: "Viktor takes the morning alerts off my plate. I haven't read a Datadog email in two months and I sleep through the night.", image: avatar("photo-1580489944761-15a19d654956") },
 ];
 
-export const Route = createFileRoute("/use-cases")({
-  head: () => ({
-    meta: [
-      { title: "Use Cases — One AI coworker. Every function. | Viktor" },
-      { name: "description", content: "See how Viktor takes over the work that eats your week — from forecasts and compliance to overnight alert triage." },
-      { property: "og:title", content: "Use Cases — Viktor" },
-      { property: "og:description", content: "One AI coworker for every function on your team." },
-    ],
-  }),
-  component: UseCasesPage,
-});
-
-function UseCasesPage() {
+export default function UseCasesPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Use Cases — One AI coworker. Every function. | Viktor"
+        description="See how Viktor takes over the work that eats your week — from forecasts and compliance to overnight alert triage."
+        ogTitle="Use Cases — Viktor"
+        ogDescription="One AI coworker for every function on your team."
+      />
       {/* HERO */}
       <section className="relative pt-6 pb-20 overflow-hidden">
         <div

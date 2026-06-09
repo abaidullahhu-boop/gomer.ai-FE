@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/logo.svg";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 
@@ -30,7 +30,7 @@ const solutionsMenu: MenuItem[] = [
 ];
 
 const dropdownLinkClass =
-  "block mx-2 rounded-full px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-black/[0.06] hover:text-foreground whitespace-nowrap data-[status=active]:bg-black/[0.06] data-[status=active]:text-foreground";
+  "block mx-2 rounded-full px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-black/[0.06] hover:text-foreground whitespace-nowrap";
 
 function Caret({ open }: { open: boolean }) {
   return (
@@ -108,14 +108,16 @@ function NavDropdown({
         <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3">
           <div className="min-w-[160px] rounded-2xl bg-white py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
             {items.map((item) => (
-              <Link
+              <NavLink
                 key={item.to}
                 to={item.to}
-                className={dropdownLinkClass}
+                className={({ isActive }) =>
+                  `${dropdownLinkClass}${isActive ? " bg-black/[0.06] text-foreground" : ""}`
+                }
                 onClick={onClose}
               >
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>
@@ -151,14 +153,16 @@ function MobileNavAccordion({
       {open && (
         <div className="pb-3 pl-1">
           {items.map((item) => (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
               onClick={onNavigate}
-              className={`${dropdownLinkClass} text-foreground/70 data-[status=active]:text-foreground`}
+              className={({ isActive }) =>
+                `${dropdownLinkClass} text-foreground/70${isActive ? " bg-black/[0.06] text-foreground" : ""}`
+              }
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </div>
       )}

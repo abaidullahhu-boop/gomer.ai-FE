@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import {
   ChevronDown,
   Linkedin,
@@ -26,31 +26,17 @@ import {
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 
-export const Route = createFileRoute("/creators")({
-  head: () => ({
-    meta: [
-      { title: "Become a Viktor Influencer — Earn for Posting Real Work" },
-      {
-        name: "description",
-        content:
-          "Viktor does the work. You take the screenshot. Post real product output, get paid up to $10,000 per post — or take 50% more in credits.",
-      },
-      { property: "og:title", content: "Become a Viktor Influencer" },
-      {
-        property: "og:description",
-        content:
-          "Post real Viktor outputs and earn cash or credits. No follower minimum, no approvals.",
-      },
-      { property: "og:url", content: "/creators" },
-    ],
-    links: [{ rel: "canonical", href: "/creators" }],
-  }),
-  component: CreatorsPage,
-});
-
-function CreatorsPage() {
+export default function CreatorsPage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Become a Viktor Influencer — Earn for Posting Real Work"
+        description="Viktor does the work. You take the screenshot. Post real product output, get paid up to $10,000 per post — or take 50% more in credits."
+        ogTitle="Become a Viktor Influencer"
+        ogDescription="Post real Viktor outputs and earn cash or credits. No follower minimum, no approvals."
+        ogUrl="/creators"
+        canonical="/creators"
+      />
       <Hero />
       <Payouts />
       <HowItWorks />

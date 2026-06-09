@@ -1,18 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import logo from "@/assets/images/logo.svg";
 import { ConicPriceCardShell } from "@/components/site/ConicPriceCardShell";
 import { HeroBadgeItem, landingHeroBadges } from "@/components/site/HeroBadges";
-
-export const Route = createFileRoute("/get-started")({
-  head: () => ({
-    meta: [
-      { title: "Try Viktor for free — $100 credits included" },
-      { name: "description", content: "Sign up for Viktor with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant." },
-    ],
-  }),
-  component: GetStarted,
-});
 
 const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
@@ -65,7 +55,7 @@ function TestimonialCard({
   );
 }
 
-function GetStarted() {
+export default function GetStarted() {
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((p) => (p + 1) % testimonials.length), 5000);
@@ -75,6 +65,10 @@ function GetStarted() {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
+      <PageMeta
+        title="Try Viktor for free — $100 credits included"
+        description="Sign up for Viktor with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
+      />
       {/* LEFT */}
       <div className="hidden lg:grid lg:grid-rows-[auto_1fr_auto] bg-hero relative text-foreground min-h-screen overflow-hidden px-4 pb-8">
         <img src={logo} alt="Viktor" className="w-24 h-24" />

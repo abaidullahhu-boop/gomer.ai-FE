@@ -1,18 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-
-export const Route = createFileRoute("/impressum")({
-  head: () => ({
-    meta: [
-      { title: "Impressum — Viktor" },
-      { name: "description", content: "Provider information and legal notice for Viktor." },
-      { property: "og:title", content: "Impressum — Viktor" },
-      { property: "og:description", content: "Provider information and legal notice for Viktor." },
-    ],
-  }),
-  component: ImpressumPage,
-});
 
 const HERO_SURFACE =
   "radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, #faf5f1, #faf5f1)";
@@ -21,9 +9,15 @@ function Divider() {
   return <div className="border-t border-[#1a182b]/10 my-10" />;
 }
 
-function ImpressumPage() {
+export default function ImpressumPage() {
   return (
     <div className="min-h-screen" style={{ background: "#faf5f1" }}>
+      <PageMeta
+        title="Impressum — Viktor"
+        description="Provider information and legal notice for Viktor."
+        ogTitle="Impressum — Viktor"
+        ogDescription="Provider information and legal notice for Viktor."
+      />
       <section className="pt-0 pb-12 sm:pb-20 border-0">
         <div
           className="relative w-full overflow-hidden rounded-b-[24px] sm:rounded-b-[32px]"

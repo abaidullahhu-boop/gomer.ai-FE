@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
 import footerWordmark from "../../assets/images/footer-wordmark.svg";

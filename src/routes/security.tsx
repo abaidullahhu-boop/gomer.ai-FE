@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from "react";
+import { PageMeta } from "@/components/PageMeta";
 import {
   KeyRound,
   BadgeCheck, Rocket, Shield, type LucideIcon,
@@ -25,32 +25,23 @@ import riskTabsNoTrainingVisual from "@/assets/images/security/risk-tabs-no-trai
 import riskTabsIsolationVisual from "@/assets/images/security/risk-tabs-isolation-visual.webp";
 import viktorSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 
-export const Route = createFileRoute("/security")({
-  head: () => ({
-    meta: [
-      { title: "Security — Viktor" },
-      { name: "description", content: "The security behind your AI coworker. Independently audited, continuously verified. SOC 2 Type II, GDPR, encryption everywhere, and zero training on your data." },
-      { property: "og:title", content: "Security — Viktor" },
-      { property: "og:description", content: "Independently audited, continuously verified. Enterprise-grade security for your AI coworker." },
-      { property: "og:url", content: "/security" },
-    ],
-    links: [{ rel: "canonical", href: "/security" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: "Security — Viktor",
-        description: "The security behind your AI coworker.",
-      }),
-    }],
-  }),
-  component: SecurityPage,
-});
-
-function SecurityPage() {
+export default function SecurityPage() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Security — Viktor"
+        description="The security behind your AI coworker. Independently audited, continuously verified. SOC 2 Type II, GDPR, encryption everywhere, and zero training on your data."
+        ogTitle="Security — Viktor"
+        ogDescription="Independently audited, continuously verified. Enterprise-grade security for your AI coworker."
+        ogUrl="/security"
+        canonical="/security"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Security — Viktor",
+          description: "The security behind your AI coworker.",
+        }}
+      />
       <SecurityHero />
       <AuditedTable />
       <DoesDoesNot />

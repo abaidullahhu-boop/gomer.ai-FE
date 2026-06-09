@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { CompareSection } from "@/components/site/CompareSection";
@@ -16,17 +16,6 @@ import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { HeroBadges } from "@/components/site/HeroBadges";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Viktor — Not a tool. A hire." },
-      { name: "description", content: "Viktor is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns." },
-      { property: "og:title", content: "Viktor — Not a tool. A hire." },
-      { property: "og:description", content: "The AI coworker that ships real work in Slack and Teams." },
-    ],
-  }),
-  component: Index,
-});
 
 const trustedLogos = ["Squibler", "True Classic", "Accel", "Ridge", "LYFEfuel"];
 
@@ -47,9 +36,15 @@ const testimonials = [
   { name: "Matthias Lis", role: "CEO, CodeYourBrand", saved: "1-3 hrs/week", quote: "A proactive employee that learns what's important in your company and delivers without hesitation.", image: avatar("photo-1438761681033-6461ffad8d80") },
 ];
 
-function Index() {
+export default function Index() {
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Viktor — Not a tool. A hire."
+        description="Viktor is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."
+        ogTitle="Viktor — Not a tool. A hire."
+        ogDescription="The AI coworker that ships real work in Slack and Teams."
+      />
       {/* HERO with peach->violet->indigo gradient */}
       <section className="relative pt-6 pb-14 overflow-hidden rounded-b-2xl bg-hero">
         <Nav />

@@ -1,18 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-
-export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title: "Blog — Viktor" },
-      { name: "description", content: "News, technical solutions, and background articles from the Viktor team." },
-      { property: "og:title", content: "Blog — Viktor" },
-      { property: "og:description", content: "News, technical solutions, and background articles from the Viktor team." },
-    ],
-  }),
-  component: BlogPage,
-});
 
 type Post = {
   title: string;
@@ -57,9 +45,15 @@ const posts: Post[] = [
   { title: "The future of engineering automation is collaborative", excerpt: "Why the best automations come from engineers + AI, not AI alone.", date: "Feb 01, 2026", author: "Viktor" },
 ];
 
-function BlogPage() {
+export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Blog — Viktor"
+        description="News, technical solutions, and background articles from the Viktor team."
+        ogTitle="Blog — Viktor"
+        ogDescription="News, technical solutions, and background articles from the Viktor team."
+      />
       <div className="pt-6">
         <Nav />
       </div>
