@@ -115,7 +115,7 @@ export default function CaseStudiesPage() {
       </div>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 text-center">
+      <section className="mx-auto max-w-6xl px-6 pt-48 text-center">
         <h1 className="font-display text-6xl md:text-7xl tracking-tight">Real</h1>
         <p className="mt-5 mx-auto max-w-md text-sm text-muted-foreground leading-relaxed">
           Every story below is a working installation. The numbers are the
