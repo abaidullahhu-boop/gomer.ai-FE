@@ -681,6 +681,56 @@
   color: #fff;
 }
 
+@utility viktor-auth-gradient {
+  background-color: #150079;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 900' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(18.7 83.7 -139.11 31.08 298 0)'><stop stop-color='%23fdbca0' offset='0.064'/><stop stop-color='%23c99ed0' offset='0.286'/><stop stop-color='%23947fff' offset='0.507'/><stop stop-color='%237e64fe' offset='0.655'/><stop stop-color='%236748fd' offset='0.804'/><stop stop-color='%235336dc' offset='0.853'/><stop stop-color='%233e24bb' offset='0.902'/><stop stop-color='%232a129a' offset='0.951'/><stop stop-color='%231f098a' offset='0.975'/><stop stop-color='%23150079' offset='1'/></radialGradient></defs></svg>");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.viktor-glass-card {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 0 0 2px #fffffff2,
+    inset 0 0 8.106px #ffffff80,
+    inset 0 0 43.232px #f2f2f2;
+}
+
+.viktor-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(80% 70% at 0 0, #d8bcbff2 0%, #d8bcbf00 70%),
+    radial-gradient(75% 60% at 100% 0, #e9c2cfcc 0%, #e9c2cf00 70%),
+    radial-gradient(80% 70% at 100% 100%, #9d87fe 0%, #9d87fe00 75%),
+    radial-gradient(85% 75% at 0 100%, #b296d4 0%, #b296d400 75%);
+}
+
+.viktor-glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 15.74px 15px 13.74px;
+  z-index: 1;
+  border-radius: 32px;
+  pointer-events: none;
+  filter: blur(10px);
+  background: #ffffffed;
+}
+
+.viktor-glass-card > * {
+  position: relative;
+  z-index: 2;
+}
+
 .creators-credits-grid-width {
   max-width: min(100%, 68rem);
 }

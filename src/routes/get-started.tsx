@@ -1,197 +1,252 @@
 import { useEffect, useState } from "react";
 import { PageMeta } from "@/components/PageMeta";
-import logo from "@/assets/images/logo.svg";
-import { ConicPriceCardShell } from "@/components/site/ConicPriceCardShell";
-import { HeroBadgeItem, landingHeroBadges } from "@/components/site/HeroBadges";
-
-const avatar = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
+import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
+import { CasaTier3Badge, CcpaBadge, GdprBadge, Soc2Badge } from "@/components/icons/compliance-badges";
 
 const testimonials = [
-  { quote: "Nothing short of revolutionary. The best attempt I've ever had as a CEO to turn every employee into an AI-first operator.", name: "Ben Diamond", role: "CEO, True Classic", image: avatar("photo-1560250097-0b93528c311a") },
-  { quote: "Viktor is like the most capable all-round colleague you can imagine. He just does the work.", name: "Sam Kopelman", role: "CEO, Givr", image: avatar("photo-1472099645785-5658abf4ff4e") },
-  { quote: "Mindblowing all-in-one AI which does everything in a single solution.", name: "Antonín Štětina", role: "CEO, KULINA Group", image: avatar("photo-1560250097-0b93528c311a") },
-  { quote: "Viktor is our eyes, ears, and hands. It's made us realize that we might really never have to hire someone.", name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", image: avatar("photo-1506794778202-cad84cf45f1d") },
-  { quote: "An incredible tool — it was almost instantly adopted by the bulk of my team.", name: "Boris Wexler", role: "CEO, Space Dinosaurs", image: avatar("photo-1500648767791-00dcc994a43e") },
-  { quote: "Like a virtual personal assistant who you don't have to manage as their therapist.", name: "Richard Comer", role: "Owner, Flagship Financial", image: avatar("photo-1580489944761-15a19d654956") },
-  { quote: "A proactive employee that learns what's important in your company and delivers without hesitation.", name: "Matthias Lis", role: "CEO, CodeYourBrand", image: avatar("photo-1438761681033-6461ffad8d80") },
+  {
+    quote:
+      "Viktor is like Claude, but you can interact with him like with a colleague, not an LLM. He can run projects and scheduled tasks in the cloud, and everybody on the team can interact with it.",
+    name: "Tobias Giesen",
+    role: "CEO, Growably",
+    image: "/images/testimonials/tobias-giesen.webp",
+  },
+  {
+    quote:
+      "Nothing short of revolutionary. The best attempt I've ever had as a CEO to turn every employee into an AI-first operator.",
+    name: "Ben Diamond",
+    role: "CEO, True Classic",
+    image: "/images/testimonials/ben-diamond.webp",
+  },
+  {
+    quote: "Viktor is like the most capable all-round colleague you can imagine. He just does the work.",
+    name: "Sam Kopelman",
+    role: "CEO, Givr",
+    image: "/images/testimonials/sam-kopelman.webp",
+  },
+  {
+    quote: "Mindblowing all-in-one AI which does everything in a single solution.",
+    name: "Antonín Štětina",
+    role: "CEO, KULINA Group",
+    image: "/images/testimonials/antonin-stetina.webp",
+  },
+  {
+    quote:
+      "Viktor is our eyes, ears, and hands. It's made us realize that we might really never have to hire someone.",
+    name: "Jordan Dikoum",
+    role: "Co-Founder, UniTru Inc.",
+    image: "/images/testimonials/jordan-dikoum.webp",
+  },
+  {
+    quote: "An incredible tool — it was almost instantly adopted by the bulk of my team.",
+    name: "Boris Wexler",
+    role: "CEO, Space Dinosaurs",
+    image: "/images/testimonials/boris-wexler.webp",
+  },
+  {
+    quote: "Like a virtual personal assistant who you don't have to manage as their therapist.",
+    name: "Richard Comer",
+    role: "Owner, Flagship Financial",
+    image: "/images/testimonials/richard-comer.webp",
+  },
 ];
 
-function TestimonialCard({
-  quote,
-  name,
-  role,
-  image,
-}: {
-  quote: string;
-  name: string;
-  role: string;
-  image: string;
-}) {
-  return (
-    <div className="relative w-full max-w-md px-2">
-      <ConicPriceCardShell
-        className="text-foreground"
-        contentClassName="flex min-h-[360px] flex-col justify-between p-8 md:p-10"
-      >
-        <p className="text-lg font-medium leading-[1.65] tracking-[-0.01em] sm:text-[19px]">
-          &ldquo;{quote}&rdquo;
-        </p>
-        <div className="mt-10 flex items-center gap-3.5">
-          <img
-            src={image}
-            alt={name}
-            className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white/80"
-          />
-          <div className="leading-tight">
-            <div className="text-[15px] font-semibold tracking-[-0.01em] text-foreground">
-              {name}
-            </div>
-            <div className="mt-0.5 text-[13px] text-foreground/55">{role}</div>
-          </div>
-        </div>
-      </ConicPriceCardShell>
-    </div>
-  );
-}
+const engineerLogos = [
+  { alt: "Meta AI", src: "/images/engineer-logos/meta-ai.svg" },
+  { alt: "University of Oxford", src: "/images/engineer-logos/oxford.svg" },
+  { alt: "Google", src: "/images/engineer-logos/google.svg" },
+  { alt: "Tesla", src: "/images/engineer-logos/tesla.svg" },
+  { alt: "Amazon", src: "/images/engineer-logos/amazon.svg" },
+];
+
+const complianceBadges = [
+  { Icon: CasaTier3Badge, alt: "CASA Tier 3 Certified" },
+  { Icon: GdprBadge, alt: "GDPR Aligned" },
+  { Icon: CcpaBadge, alt: "CCPA Compliant" },
+  { Icon: Soc2Badge, alt: "SOC 2 Type 1 Audited" },
+];
+
+const authButtonClass =
+  "inline-flex w-full min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[6px] border border-[#d9d9d9] bg-transparent px-4 py-2 text-sm font-medium text-foreground outline-0 transition-[background-color,border-color,transform] hover:bg-accent active:scale-[0.98]";
 
 export default function GetStarted() {
-  const [i, setI] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % testimonials.length), 5000);
-    return () => clearInterval(t);
+    const timer = setInterval(
+      () => setActiveIndex((current) => (current + 1) % testimonials.length),
+      5000,
+    );
+    return () => clearInterval(timer);
   }, []);
-  const t = testimonials[i];
+
+  const testimonial = testimonials[activeIndex];
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-primitive-main-beige">
+    <div className="flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
       <PageMeta
         title="Try Viktor for free — $100 credits included"
         description="Sign up for Viktor with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
       />
-      {/* LEFT */}
-      <div className="hidden lg:grid lg:grid-rows-[auto_1fr_auto] bg-hero relative text-foreground min-h-screen overflow-hidden px-4 pb-8">
-        <img src={logo} alt="Viktor" className="w-24 h-24" />
 
-        <div className="relative z-10 flex flex-col items-center justify-center">
-          <TestimonialCard key={i} quote={t.quote} name={t.name} role={t.role} image={t.image} />
-          <div className="relative z-10 flex justify-center gap-1.5 mt-8">
-            {testimonials.map((_, idx) => (
+      {/* Sign-up panel */}
+      <div className="relative flex w-full flex-1 flex-col overflow-hidden lg:shrink-0">
+        <div className="absolute left-5 top-5 z-10 text-[#1b182a] md:hidden">
+          <ViktorLogo />
+        </div>
+
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <div className="w-full max-w-[440px] px-4">
+            <div className="flex flex-col gap-12">
+              <div className="flex flex-col gap-6">
+              <h1 className="text-center font-display text-[32px] font-bold leading-[1.25] tracking-[-0.64px] text-foreground">
+                Try Viktor for free.
+                <br />
+                <span>$100 credits included.</span>
+              </h1>
+
+              <div className="flex w-full flex-col gap-3">
+                <button type="button" className={authButtonClass}>
+                  <SlackIcon />
+                  Continue with Slack
+                </button>
+                <button type="button" className={authButtonClass}>
+                  <img src={microsoftTeamsIcon} alt="" className="size-5 shrink-0" aria-hidden />
+                  Continue with Microsoft Teams
+                </button>
+              </div>
+              </div>
+              <div className=" flex items-center justify-center gap-1 text-sm font-medium text-foreground sm:gap-2">
+                <span>No credit card required</span>
+                <span aria-hidden>•</span>
+                <span>SOC2 Type I compliant</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full max-w-[440px] self-center p-4">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-row items-center justify-center text-foreground/80 opacity-50">
+              {complianceBadges.map(({ Icon, alt }) => (
+                <Icon key={alt} className="h-14 w-14 shrink-0" aria-label={alt} />
+              ))}
+            </div>
+            <p className="text-center text-xs text-foreground/80">
+              By signing up, you agree to the Viktor{" "}
+              <a href="/privacy" target="_blank" rel="noreferrer" className="underline">
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a href="/terms" target="_blank" rel="noreferrer" className="underline">
+                Terms of Service
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonial panel */}
+      <div className="viktor-auth-gradient relative hidden flex-1 flex-col overflow-hidden md:flex md:h-auto">
+        <div className="absolute left-5 top-5 z-10 text-[#1b182a]">
+          <ViktorLogo />
+        </div>
+
+        <div className="flex h-full flex-col items-center justify-center gap-5 px-4 py-6 md:gap-6 md:px-10 md:py-0">
+          <div className="relative h-[280px] w-full max-w-[448px]">
+            <div className="viktor-glass-card flex h-[280px] flex-col gap-6 rounded-[32px] p-8 text-[#1b182a]">
+              <p className="flex-1 text-[16px] leading-6">{testimonial.quote}</p>
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="size-11 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-sm font-bold leading-5">{testimonial.name}</p>
+                    <p className="text-sm leading-5 text-[#1b182a]/80">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, index) => (
               <button
-                key={idx}
-                onClick={() => setI(idx)}
-                className={`h-1.5 rounded-full transition-all ${idx === i ? "w-8 bg-white" : "w-1.5 bg-white/50"}`}
-                aria-label={`Testimonial ${idx + 1}`}
+                key={index}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex ? "w-6 bg-white" : "w-2 bg-white/10"
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
           </div>
         </div>
 
-
-
-        <div className="relative z-10">
-          <p className="text-center text-white text-xs tracking-[0.2em] uppercase mb-5">Built by engineers from:</p>
-          <div className="flex items-center justify-around gap-6 text-white font-display text-xl flex-wrap">
-            <span>Meta AI</span>
-            <span className="text-sm">OXFORD</span>
-            <span>Google</span>
-            <span className="tracking-[0.3em] text-base">TESLA</span>
-            <span>amazon</span>
-          </div>
-        </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className="bg-white flex flex-col justify-between p-4 md:p-8 lg:p-12 min-h-screen">
-        <div />
-        <div className="max-w-md w-full mx-auto">
-          <h1 className="font-display text-[32px] leading-tight text-center tracking-tight">
-            Try Viktor for free.<br />$100 credits included.
-          </h1>
-
-          <div className="mt-8 space-y-3">
-            <button className="cursor-pointer w-full flex items-center justify-center gap-3 px-5 py-3 rounded-sm border border-border bg-card hover:bg-secondary transition font-medium">
-              <SlackIcon />
-              Continue with Slack
-            </button>
-            <button className="cursor-pointer w-full flex items-center justify-center gap-3 px-5 py-3 rounded-lg border border-border hover:bg-secondary/80 transition font-medium">
-              <TeamsIcon />
-              Continue with Microsoft Teams
-            </button>
-          </div>
-
-          <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-muted-foreground">
-            {landingHeroBadges.map((badge) => (
-              <HeroBadgeItem key={badge.label} icon={badge.icon} label={badge.label} />
+        <div className="relative z-20 flex shrink-0 flex-col items-center gap-[23px] p-6 text-white">
+          <p
+            className="text-xs uppercase tracking-[0.24px] text-[#f5f3f0]"
+            style={{ fontFamily: '"Roboto Mono", monospace' }}
+          >
+            Built by engineers from:
+          </p>
+          <div className="grid w-full grid-cols-5 gap-2">
+            {engineerLogos.map((logo) => (
+              <div key={logo.alt} className="flex h-14 items-center justify-center overflow-hidden">
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="max-h-[24px] max-w-[85%] object-contain"
+                />
+              </div>
             ))}
           </div>
         </div>
-
-        <div className="max-w-md w-full mx-auto">
-          <div className="flex items-center justify-center gap-10 text-muted-foreground/70">
-            <BadgeMark label="CASA" sub="Tier 3 Certified" icon={<ShieldCheck />} />
-            <BadgeMark label="GDPR" sub="Aligned" icon={<GdprRing />} />
-            <BadgeMark label="CCPA" sub="Compliant" icon={<LockMark />} />
-            <BadgeMark label="SOC 2" sub="Type 1 Audited" icon={<ShieldCheck />} />
-          </div>
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            By signing up, you agree to the Viktor <a className="underline">Privacy Policy</a> and <a className="underline">Terms of Service</a>
-          </p>
-        </div>
       </div>
     </div>
+  );
+}
+
+function ViktorLogo() {
+  return (
+    <img
+      src="/assets/brand/logos/viktor-logo-soft-black.svg"
+      alt="Viktor"
+      className="block h-6 w-auto"
+      width={81}
+      height={24}
+    />
   );
 }
 
 function SlackIcon() {
   return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none"><path fill="#E01E5A" d="M5 15a2 2 0 1 1-2-2h2v2zm1 0a2 2 0 1 1 4 0v5a2 2 0 1 1-4 0v-5z" /><path fill="#36C5F0" d="M9 5a2 2 0 1 1 2-2v2H9zm0 1a2 2 0 1 1 0 4H4a2 2 0 1 1 0-4h5z" /><path fill="#2EB67D" d="M19 9a2 2 0 1 1 2 2h-2V9zm-1 0a2 2 0 1 1-4 0V4a2 2 0 1 1 4 0v5z" /><path fill="#ECB22E" d="M15 19a2 2 0 1 1-2 2v-2h2zm0-1a2 2 0 1 1 0-4h5a2 2 0 1 1 0 4h-5z" /></svg>
-  );
-}
-function TeamsIcon() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#5059C9"><path d="M20.5 10h-5A1.5 1.5 0 0 0 14 11.5v7A1.5 1.5 0 0 0 15.5 20h5a1.5 1.5 0 0 0 1.5-1.5v-7a1.5 1.5 0 0 0-1.5-1.5zM12 4a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm-9 8.5A1.5 1.5 0 0 1 4.5 11h7A1.5 1.5 0 0 1 13 12.5v6A1.5 1.5 0 0 1 11.5 20h-7A1.5 1.5 0 0 1 3 18.5v-6z" /></svg>
-  );
-}
-
-function BadgeMark({ label, sub, icon }: { label: string; sub: string; icon: React.ReactNode }) {
-  return (
-    <div className="flex flex-col items-center gap-1.5">
-      <div className="w-9 h-10 flex items-center justify-center text-muted-foreground/80">{icon}</div>
-      <div className="text-[11px] font-semibold tracking-wide text-muted-foreground">{label}</div>
-      <div className="text-[9px] text-muted-foreground/70 -mt-1">{sub}</div>
-    </div>
-  );
-}
-
-function ShieldCheck() {
-  return (
-    <svg viewBox="0 0 24 28" fill="none" className="w-7 h-8" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 1l10 3v9c0 7-5 12-10 14C7 25 2 20 2 13V4l10-3z" />
-      <path d="M8 13l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function LockMark() {
-  return (
-    <svg viewBox="0 0 24 28" fill="none" className="w-7 h-8" stroke="currentColor" strokeWidth="1.5">
-      <rect x="4" y="11" width="16" height="13" rx="2" />
-      <path d="M8 11V7a4 4 0 018 0v4" />
-    </svg>
-  );
-}
-function GdprRing() {
-  return (
-    <svg viewBox="0 0 28 28" fill="none" className="w-8 h-8" stroke="currentColor" strokeWidth="1.2">
-      <circle cx="14" cy="14" r="7" />
-      {Array.from({ length: 12 }).map((_, i) => {
-        const a = (i / 12) * Math.PI * 2;
-        const x1 = 14 + 9 * Math.cos(a);
-        const y1 = 14 + 9 * Math.sin(a);
-        const x2 = 14 + 12 * Math.cos(a);
-        const y2 = 14 + 12 * Math.sin(a);
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeLinecap="round" />;
-      })}
+    <svg
+      viewBox="0 0 127 127"
+      xmlns="http://www.w3.org/2000/svg"
+      className="size-5 shrink-0"
+      aria-hidden
+    >
+      <path
+        d="M27.2 80c0 7.3-5.9 13.2-13.2 13.2C6.7 93.2.8 87.3.8 80c0-7.3 5.9-13.2 13.2-13.2h13.2V80zm6.6 0c0-7.3 5.9-13.2 13.2-13.2 7.3 0 13.2 5.9 13.2 13.2v33c0 7.3-5.9 13.2-13.2 13.2-7.3 0-13.2-5.9-13.2-13.2V80z"
+        fill="#E01E5A"
+      />
+      <path
+        d="M47 27c-7.3 0-13.2-5.9-13.2-13.2C33.8 6.5 39.7.6 47 .6c7.3 0 13.2 5.9 13.2 13.2V27H47zm0 6.7c7.3 0 13.2 5.9 13.2 13.2 0 7.3-5.9 13.2-13.2 13.2H13.9C6.6 60.1.7 54.2.7 46.9c0-7.3 5.9-13.2 13.2-13.2H47z"
+        fill="#36C5F0"
+      />
+      <path
+        d="M99.9 46.9c0-7.3 5.9-13.2 13.2-13.2 7.3 0 13.2 5.9 13.2 13.2 0 7.3-5.9 13.2-13.2 13.2H99.9V46.9zm-6.6 0c0 7.3-5.9 13.2-13.2 13.2-7.3 0-13.2-5.9-13.2-13.2V13.8C66.9 6.5 72.8.6 80.1.6c7.3 0 13.2 5.9 13.2 13.2v33.1z"
+        fill="#2EB67D"
+      />
+      <path
+        d="M80.1 99.8c7.3 0 13.2 5.9 13.2 13.2 0 7.3-5.9 13.2-13.2 13.2-7.3 0-13.2-5.9-13.2-13.2V99.8h13.2zm0-6.6c-7.3 0-13.2-5.9-13.2-13.2 0-7.3 5.9-13.2 13.2-13.2h33.1c7.3 0 13.2 5.9 13.2 13.2 0 7.3-5.9 13.2-13.2 13.2H80.1z"
+        fill="#ECB22E"
+      />
     </svg>
   );
 }

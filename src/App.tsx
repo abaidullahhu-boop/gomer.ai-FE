@@ -14,12 +14,14 @@ import CreatorsPage from "@/routes/creators";
 import DocsPage from "@/routes/docs";
 import EnterprisePage from "@/routes/enterprise";
 import GetStarted from "@/routes/get-started";
+import SignIn from "@/routes/sign-in";
 import ImpressumPage from "@/routes/impressum";
 import IntegrationsPage from "@/routes/integrations";
 import LandingPage from "@/routes/landing";
 import PricingPage from "@/routes/pricing";
 import ProductPage from "@/routes/product";
 import SecurityPage from "@/routes/security";
+import PrivacyPage from "@/routes/privacy";
 import TermsPage from "@/routes/terms";
 import UseCasesPage from "@/routes/use-cases";
 
@@ -41,12 +43,14 @@ export default function App() {
         <Route path="/docs" element={<DocsPage />} />
         <Route path="/enterprise" element={<EnterprisePage />} />
         <Route path="/get-started" element={<GetStarted />} />
+        <Route path="/sign-in" element={<SignIn />} />
         <Route path="/impressum" element={<ImpressumPage />} />
         <Route path="/integrations" element={<IntegrationsPage />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/security" element={<SecurityPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/use-cases" element={<UseCasesPage />} />
         <Route path="*" element={<NotFound />} />
