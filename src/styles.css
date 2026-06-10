@@ -332,6 +332,12 @@
   .bg-section-cream { background-color: oklch(0.97 0.012 70); }
   .text-accent-1 { color: var(--primitive-purple-500); }
   .text-secondary { color: var(--primitive-main-grey); }
+  .product-capabilities-fade-left {
+    background: linear-gradient(90deg, var(--primitive-main-beige) 0%, transparent 100%);
+  }
+  .product-capabilities-fade-right {
+    background: linear-gradient(270deg, var(--primitive-main-beige) 0%, transparent 100%);
+  }
   .text-slack { color: var(--primitive-slack-ink); }
   .text-slack-secondary { color: var(--primitive-main-grey); }
   .bg-slack-mention { background-color: var(--slack-mention-bg); }
@@ -578,6 +584,14 @@
   .integrations-viktor-avatar-glow {
     background: var(--integrations-viktor-avatar-glow);
     border-radius: 9999px;
+  }
+  .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::before,
+  .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::after {
+    background: linear-gradient(90deg, #150079 0%, #15007900 100%);
+  }
+  .product-what-viktor-is-animation .integrations-logo-loop-viewport::before,
+  .product-what-viktor-is-animation .integrations-logo-loop-viewport::after {
+    display: none;
   }
   .integrations-directory-search::placeholder {
     color: var(--primitive-main-grey);
