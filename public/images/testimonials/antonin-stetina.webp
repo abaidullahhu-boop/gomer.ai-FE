@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head><meta name="theme-color" content="color(srgb 0.98 0.98 0.98)" data-light-color="color(srgb 0.98 0.98 0.98)" data-dark-color="color(srgb 0.035 0.035 0.043)"><script src="/theme-script.js"></script><style>:root {
+	--color-shell: color(srgb 0.035 0.035 0.043);
+}
+.light {
+	--color-shell: color(srgb 0.98 0.98 0.98);
+}
+</style>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=0"
+		/>
+		<meta name="referrer" content="no-referrer" />
+		<title>Viktor</title>
+		<link
+			rel="icon"
+			type="image/png"
+			href="/favicons/favicon-96x96.png"
+			sizes="96x96"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+		<link rel="shortcut icon" href="/favicons/favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<meta name="apple-mobile-web-app-title" content="Viktor" />
+		<link rel="manifest" href="/favicons/site.webmanifest" />
+		<script type="module" crossorigin src="/assets/index-DXqzjr1Z.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/jsx-runtime-BhQZaPDU.js">
+		<link rel="modulepreload" crossorigin href="/assets/preload-helper-lqsI3teB.js">
+		<link rel="modulepreload" crossorigin href="/assets/route-urls-CuIlF6pg.js">
+		<link rel="modulepreload" crossorigin href="/assets/flag-DeCyXEgH.js">
+		<link rel="modulepreload" crossorigin href="/assets/root-fqcb0g9g.js">
+		<link rel="modulepreload" crossorigin href="/assets/redirect-DH885X3Y.js">
+		<link rel="modulepreload" crossorigin href="/assets/clsx-fiJc2n10.js">
+		<link rel="modulepreload" crossorigin href="/assets/tiny-invariant-iYB3fYOC.js">
+		<link rel="modulepreload" crossorigin href="/assets/utils-hVkgD8OO.js">
+		<link rel="stylesheet" crossorigin href="/assets/index-Dyg3WB9Y.css">
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>

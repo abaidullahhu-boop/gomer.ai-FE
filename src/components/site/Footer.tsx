@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
 import footerWordmark from "../../assets/images/footer-wordmark.svg";
-type Item = { label: string; to: string };
+type Item = { label: string; to: string; newTab?: boolean };
 
 const colsRow1: { h: string; items: Item[] }[] = [
   { h: "Product", items: [
@@ -28,7 +28,7 @@ const colsRow2: { h: string; items: Item[] }[] = [
     { label: "Become a Viktor influencer", to: "/creators" },
     { label: "About", to: "/landing" },
     { label: "Brand", to: "/brand" },
-    { label: "Careers", to: "/" },
+    { label: "Careers", to: "https://jobs.ashbyhq.com/viktor" },
   ]},
   { h: "Resources", items: [
     { label: "Blog", to: "/blog" },
@@ -36,8 +36,8 @@ const colsRow2: { h: string; items: Item[] }[] = [
     { label: "Changelog", to: "/changelog" },
   ]},
   { h: "Terms & Docs", items: [
-    { label: "Terms of service", to: "/terms" },
-    { label: "Privacy Policy", to: "/" },
+    { label: "Terms of service", to: "/terms", newTab: true },
+    { label: "Privacy Policy", to: "/privacy", newTab: true },
     { label: "Docs", to: "/docs" },
     { label: "Impressum", to: "/impressum" },
   ]},
@@ -64,7 +64,7 @@ function LinkCol({ h, items }: { h: string; items: Item[] }) {
       <ul className="space-y-3.5">
         {items.map(i => (
           <li key={i.label}>
-            {i.to.startsWith("http://") || i.to.startsWith("https://") ? (
+            {i.to.startsWith("http://") || i.to.startsWith("https://") || i.newTab ? (
               <a href={i.to} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</a>
             ) : i.to.includes("#") ? (
               <a href={i.to} className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</a>
