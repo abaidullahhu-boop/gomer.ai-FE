@@ -8,7 +8,7 @@ const colsRow1: { h: string; items: Item[] }[] = [
   { h: "Product", items: [
     { label: "Product", to: "/product" },
     { label: "Pricing", to: "/pricing" },
-    { label: "FAQ", to: "/" },
+    { label: "FAQ", to: "/#faq" },
   ]},
   { h: "Compare", items: [
     { label: "vs ChatGPT", to: "/compare/viktor-vs-chatgpt" },
@@ -18,13 +18,13 @@ const colsRow1: { h: string; items: Item[] }[] = [
   ]},
   { h: "Solutions", items: [
     { label: "Integrations", to: "/integrations" },
-    { label: "Personas", to: "/" },
+    { label: "Personas", to: "/use-cases" },
   ]},
 ];
 
 const colsRow2: { h: string; items: Item[] }[] = [
   { h: "About", items: [
-    { label: "Earn money with Viktor", to: "/creators" },
+    { label: "Earn money with Viktor", to: "https://partners.dub.co/viktor" },
     { label: "Become a Viktor influencer", to: "/creators" },
     { label: "About", to: "/landing" },
     { label: "Brand", to: "/brand" },
@@ -32,7 +32,7 @@ const colsRow2: { h: string; items: Item[] }[] = [
   ]},
   { h: "Resources", items: [
     { label: "Blog", to: "/blog" },
-    { label: "Case Studies", to: "/case-study" },
+    { label: "Case Studies", to: "/case-studies" },
     { label: "Changelog", to: "/changelog" },
   ]},
   { h: "Terms & Docs", items: [
@@ -64,7 +64,13 @@ function LinkCol({ h, items }: { h: string; items: Item[] }) {
       <ul className="space-y-3.5">
         {items.map(i => (
           <li key={i.label}>
-            <Link to={i.to} className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</Link>
+            {i.to.startsWith("http://") || i.to.startsWith("https://") ? (
+              <a href={i.to} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</a>
+            ) : i.to.includes("#") ? (
+              <a href={i.to} className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</a>
+            ) : (
+              <Link to={i.to} className="text-sm text-foreground/55 hover:text-foreground transition-colors">{i.label}</Link>
+            )}
           </li>
         ))}
       </ul>
