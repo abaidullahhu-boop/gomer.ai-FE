@@ -13,6 +13,18 @@ import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { Search, X } from "lucide-react";
+import {
+  integrationDirectoryItems,
+  type IntegrationDirectoryItem,
+} from "@/data/integrationDirectory";
+
+/** Grid card is 5rem tall (p-4 + size-12); gap-4 between rows. */
+const DIRECTORY_VISIBLE_ROWS = 5;
+const DIRECTORY_EXPANDED_ROWS = 8;
+
+function directoryGridMaxHeight(rows: number) {
+  return `calc(${rows} * 5rem + ${rows - 1} * 1rem)`;
+}
 
 const mayaAvatar =
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
@@ -37,142 +49,7 @@ const directoryTabs = [
 
 type DirectoryCategory = (typeof directoryTabs)[number];
 
-type DirectoryItem = {
-  name: string;
-  category: Exclude<DirectoryCategory, "All">;
-  description: string;
-  iconSlug?: string;
-  iconColor?: string;
-};
-
-const directoryItems: DirectoryItem[] = [
-  {
-    name: "AI Coworker (Teams)",
-    category: "AI & Machine Learning",
-    description: "Microsoft Teams integration for messaging Viktor and running workflows in your workspace.",
-    iconSlug: "microsoftteams",
-  },
-  {
-    name: "Baremetrics",
-    category: "Analytics",
-    description: "Subscription analytics — MRR, churn, LTV, and revenue recovery metrics.",
-    iconSlug: "baremetrics",
-  },
-  {
-    name: "Bright Data Social",
-    category: "Marketing",
-    description: "YouTube, TikTok, Instagram, Reddit, Twitter/X, LinkedIn social media data",
-    iconSlug: "brightdata",
-  },
-  {
-    name: "Customer.io",
-    category: "Marketing",
-    description: "Behavioral messaging, email campaigns, and customer journey automation.",
-    iconSlug: "customerdotio",
-  },
-  {
-    name: "DeepWiki",
-    category: "AI & Machine Learning",
-    description: "AI-powered codebase documentation and knowledge base search.",
-  },
-  {
-    name: "GitHub (Git & CLI)",
-    category: "Developer Tools",
-    description: "Repositories, pull requests, issues, and Git operations via CLI.",
-    iconSlug: "github",
-    iconColor: "181717",
-  },
-  {
-    name: "Google Ads",
-    category: "Marketing",
-    description: "Campaign management, reporting, and optimization for Google Ads.",
-    iconSlug: "googleads",
-  },
-  {
-    name: "Google Drive",
-    category: "Productivity",
-    description: "Files, folders, and document access in Google Drive.",
-    iconSlug: "googledrive",
-  },
-  {
-    name: "Granola",
-    category: "Other",
-    description: "AI meeting notes and transcription from your meetings.",
-  },
-  {
-    name: "Jira & Confluence",
-    category: "Developer Tools",
-    description: "Issue tracking, sprints, and team documentation in Atlassian.",
-    iconSlug: "jira",
-  },
-  {
-    name: "Linear",
-    category: "Developer Tools",
-    description: "Issue tracking, project management, and engineering workflows.",
-    iconSlug: "linear",
-    iconColor: "5E6AD2",
-  },
-  {
-    name: "Meta Ads",
-    category: "Marketing",
-    description: "Facebook and Instagram ad campaign management and reporting.",
-    iconSlug: "meta",
-    iconColor: "0081FB",
-  },
-  {
-    name: "Monday.com",
-    category: "Productivity",
-    description: "Boards, tasks, and project management workflows.",
-    iconSlug: "mondaydotcom",
-  },
-  {
-    name: "Moz SEO",
-    category: "Marketing",
-    description: "Keyword research, site audits, and SEO ranking data.",
-    iconSlug: "moz",
-  },
-  {
-    name: "Neon",
-    category: "Cloud & Data",
-    description: "Serverless Postgres — queries, branches, and connection management.",
-    iconSlug: "neon",
-    iconColor: "00E599",
-  },
-  {
-    name: "Notion",
-    category: "Productivity",
-    description: "Pages, databases, and workspace content read/write access.",
-    iconSlug: "notion",
-    iconColor: "000000",
-  },
-  {
-    name: "OneDrive",
-    category: "Productivity",
-    description: "Files and folders in Microsoft OneDrive.",
-    iconSlug: "microsoftonedrive",
-  },
-  {
-    name: "PayPal",
-    category: "Finance & Payments",
-    description: "Payments, transactions, and merchant account data.",
-    iconSlug: "paypal",
-    iconColor: "00457C",
-  },
-  {
-    name: "PostHog",
-    category: "Analytics",
-    description: "Product analytics, feature flags, and session recordings.",
-    iconSlug: "posthog",
-    iconColor: "F54E00",
-  },
-  {
-    name: "PostHog (EU)",
-    category: "Analytics",
-    description: "Product analytics with EU data residency hosting.",
-    iconSlug: "posthog",
-    iconColor: "F54E00",
-  },
-];
+type DirectoryItem = IntegrationDirectoryItem;
 
 function ComparisonTabActiveBackground({ className }: { className?: string }) {
   return <img aria-hidden alt="" src={comparisonTabActiveBg} className={className} />;
@@ -274,17 +151,49 @@ function IntegrationDetailModal({ item, onClose }: { item: DirectoryItem; onClos
   );
 }
 
+function useDirectoryGridColumns() {
+  const [columns, setColumns] = useState(4);
+
+  useEffect(() => {
+    function updateColumns() {
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        setColumns(4);
+      } else if (window.matchMedia("(min-width: 640px)").matches) {
+        setColumns(2);
+      } else {
+        setColumns(1);
+      }
+    }
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
+
+  return columns;
+}
+
 function IntegrationDirectory() {
   const [activeTab, setActiveTab] = useState<DirectoryCategory>(directoryTabs[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState<DirectoryItem | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const gridColumns = useDirectoryGridColumns();
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const filteredItems = directoryItems.filter((item) => {
+  const filteredItems = integrationDirectoryItems.filter((item) => {
     const matchesCategory = activeTab === "All" || item.category === activeTab;
     const matchesSearch = !normalizedQuery || item.name.toLowerCase().includes(normalizedQuery);
     return matchesCategory && matchesSearch;
   });
+
+  const initialVisibleCount = gridColumns * DIRECTORY_VISIBLE_ROWS;
+  const hasMoreItems = filteredItems.length > initialVisibleCount;
+  const visibleItems = showAll ? filteredItems : filteredItems.slice(0, initialVisibleCount);
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [activeTab, searchQuery]);
 
   return (
     <>
@@ -304,13 +213,18 @@ function IntegrationDirectory() {
         <IntegrationDirectoryFilters activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
-      <div className="integrations-directory-grid-wrap relative">
+      <div
+        className={`integrations-directory-grid-wrap relative ${
+          showAll ? "integrations-directory-scroll overflow-y-auto overscroll-y-contain pr-1" : ""
+        }`}
+        style={showAll ? { maxHeight: directoryGridMaxHeight(DIRECTORY_EXPANDED_ROWS) } : undefined}
+      >
         <div
           className="integrations-directory-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
           aria-live="polite"
         >
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item) => (
+          {visibleItems.length > 0 ? (
+            visibleItems.map((item) => (
               <button
                 key={item.name}
                 type="button"
@@ -334,6 +248,24 @@ function IntegrationDirectory() {
           )}
         </div>
       </div>
+
+      {(hasMoreItems || showAll) && (
+        <div className="flex flex-col items-center gap-6 text-center">
+          {hasMoreItems && (
+            <button
+              type="button"
+              onClick={() => setShowAll((current) => !current)}
+              className="cursor-pointer inline-flex h-10 min-h-10 shrink-0 items-center justify-center rounded-full border border-[rgb(27_24_42/0.08)] bg-white px-6 text-sm font-medium tracking-[-0.01em] text-primary hover:bg-primitive-main-dark/[0.06]"
+            >
+              {showAll ? "Show less" : "Show more"}
+            </button>
+          )}
+          <p className="w-full body-small text-secondary">
+            Don&apos;t see your tool? Viktor connects to 3,200+ tools via managed connectors. If
+            it&apos;s not here, Viktor can build a custom integration. Just ask.
+          </p>
+        </div>
+      )}
 
       {selectedItem && (
         <IntegrationDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
@@ -520,19 +452,6 @@ export default function IntegrationsPage() {
             </h2>
 
             <IntegrationDirectory />
-
-            <div className="flex flex-col items-center gap-6 text-center">
-              <button
-                type="button"
-                className="inline-flex h-10 min-h-10 shrink-0 items-center justify-center rounded-full border border-[rgb(27_24_42/0.08)] bg-white px-6 text-sm font-medium tracking-[-0.01em] text-primary hover:bg-primitive-main-dark/[0.06]"
-              >
-                Show more
-              </button>
-              <p className="w-full body-small text-secondary">
-                Don&apos;t see your tool? Viktor connects to 3,200+ tools via managed connectors. If
-                it&apos;s not here, Viktor can build a custom integration. Just ask.
-              </p>
-            </div>
           </div>
         </div>
       </section>

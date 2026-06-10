@@ -596,6 +596,25 @@
   .integrations-directory-search::placeholder {
     color: var(--primitive-main-grey);
   }
+
+  .integrations-directory-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #9693a3 #f4f4f6;
+  }
+
+  .integrations-directory-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .integrations-directory-scroll::-webkit-scrollbar-track {
+    border-radius: 999px;
+    background: #f4f4f6;
+  }
+
+  .integrations-directory-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #9693a3;
+  }
 }
 
 @utility bg-hero {
