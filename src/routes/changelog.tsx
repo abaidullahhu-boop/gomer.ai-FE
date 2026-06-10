@@ -537,10 +537,7 @@ export default function ChangelogPage() {
                     className="size-[4.25rem] shrink-0 rounded-xl"
                     aria-hidden
                   />
-                  <div
-                    className="hidden h-12 w-px bg-linear-to-b from-accent-1/40 via-accent-1/20 to-transparent lg:block"
-                    aria-hidden
-                  />
+                 
                 </div>
                 <div className="flex flex-col gap-8">
                   <h1 className="font-heading h1 text-primary">Changelog</h1>
@@ -577,14 +574,7 @@ export default function ChangelogPage() {
                         {entry.date}
                       </div>
                     </div>
-                    {!isLast && (
-                      <div
-                        className="mt-0 hidden min-h-8 w-[4.25rem] flex-1 lg:block"
-                        aria-hidden
-                      >
-                        <div className="mx-auto h-full w-px bg-linear-to-b from-accent-1/40 via-accent-1/20 to-transparent" />
-                      </div>
-                    )}
+                    
                   </div>
 
                   <div className="flex min-w-0 flex-col gap-8">

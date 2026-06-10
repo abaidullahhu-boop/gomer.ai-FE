@@ -117,7 +117,7 @@ export default function Index() {
       <AskAI />
 
       {/* FAQ */}
-      <FAQSection />
+      <FAQSection id="faq" />
 
       {/* START FREE */}
       <StartFreeSection />
