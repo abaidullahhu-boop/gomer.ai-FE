@@ -55,7 +55,7 @@ export default function Index() {
               <img src={microsoftLogo} alt="Microsoft Teams" className="w-4 h-4" />
             </div>
             
-            <span className="text-white">25,000+ workspaces hired Viktor </span>
+            <span className="text-white font-medium">30,000+ workspaces hired Viktor </span>
           </div>
 
           <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
