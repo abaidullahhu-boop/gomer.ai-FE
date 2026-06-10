@@ -267,6 +267,7 @@
   }
   .bg-conic-gradient-bg { background: var(--conic-gradient-bg); }
   .bg-integrations-hero-surface { background: var(--integrations-hero-surface); }
+  .about-glass-card-fill { background: var(--integrations-icon-tile-bg); }
   .bg-case-study-hero-surface { background: var(--case-study-hero-surface); }
   .rounded-section { border-radius: var(--radius-4xl); }
   .rounded-b-section {
@@ -643,6 +644,10 @@
 }
 
 @utility gradient-dark-1 {
+  background: var(--gradient-dark1);
+}
+
+@utility bg-about-investors-surface {
   background: var(--gradient-dark1);
 }
 
