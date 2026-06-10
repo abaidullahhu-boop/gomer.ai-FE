@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -8,7 +8,7 @@ import { UseCasesSection } from "@/components/site/UseCasesSection";
 import slackLogo from "@/assets/images/slack.svg";
 import zapierLogo from "@/assets/images/zapier.svg";
 import microsoftLogo from "@/assets/images/microsoft-teams.svg";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import viktorAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 import {
   WorkflowAutomation, ReportsAnalytics, AppBuilder, AskAI,
 } from "@/components/site/HomeSections";
@@ -80,23 +80,25 @@ export default function Index() {
       </section>
 
       {/* OUTPUT / FEATURES — visuals overlap hero bottom */}
-      <section className="px-4 md:px-4 lg:px-20 relative z-10 pb-24 bg-section-cream overflow-x-clip">
-        <div className="mx-auto max-w-7xl grid lg:grid-cols-3 gap-5 items-start min-w-0">
+      <section className="relative z-10 overflow-x-clip bg-section-cream px-4 pb-24 md:px-4 lg:px-20">
+        <div className="mx-auto grid w-full max-w-7xl min-w-0 gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-x-5 lg:gap-y-0">
           <FeatureCard
             title="Real output, not just text."
             body="Viktor doesn't brainstorm. It ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
             visual={<ChatPreview />}
+            contentClassName="pr-4"
           />
           <FeatureCard
             title="One message, all your tools."
             body="Stripe, Meta Ads, Notion, GitHub. Viktor queries them all in a single run. No tab-switching, no CSV exports."
             visual={<ToolIconsVisual />}
-            tinted
+            visualOverflow
           />
           <FeatureCard
             title="Never repeat yourself."
             body="Every conversation makes Viktor smarter about your business. It remembers what worked, what didn't, and how you like things done."
             visual={<FollowUpPreview />}
+            visualAlign="end"
           />
         </div>
       </section>
@@ -182,15 +184,179 @@ function LogoMarquee({ logos }: { logos: string[] }) {
   );
 }
 
-function FeatureCard({ title, body, visual, tinted }: { title: string; body: string; visual: React.ReactNode; tinted?: boolean }) {
+const annaAvatar =
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
+const lisaAvatar =
+  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
+const stevenAvatar =
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
+
+function FeatureGlassCardShell({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-w-0 flex-col overflow-hidden bg-white/50 rounded-[40px]">
-      <div className="relative rounded-[32px] overflow-hidden min-h-[340px] flex items-center justify-center px-4 py-8">
-        <div className="relative z-10 w-full min-w-0 max-w-full flex items-center justify-center overflow-hidden">{visual}</div>
+    <article className="relative h-full min-h-96 overflow-hidden rounded-section">
+      <div className="h-full min-h-96 w-full overflow-hidden rounded-[inherit] backdrop-blur-[20px]">
+        <div className="relative h-full w-full overflow-hidden rounded-[inherit]">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-[20px] z-0"
+            style={{ borderRadius: "inherit", background: "rgb(255, 255, 255)", filter: "blur(20px)" }}
+          />
+          <div className="relative z-[1] h-full w-full rounded-[inherit]">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+              style={{
+                background: "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+              style={{
+                background:
+                  "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
+                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+                padding: "1px",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+              style={{ filter: "blur(5px)" }}
+            >
+              <div
+                className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                style={{
+                  background:
+                    "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
+                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  maskComposite: "exclude",
+                  padding: "4px",
+                }}
+              />
+            </div>
+            <div className="relative z-[2] flex h-full w-full flex-col justify-between">{children}</div>
+          </div>
+        </div>
       </div>
-      <div className="pt-6 pb-6 px-3">
-        <h3 className="font-display text-[22px] leading-tight text-foreground font-bold tracking-tight">{title}</h3>
-        <p className="mt-3 text-foreground/60 leading-relaxed text-[15px]">{body}</p>
+    </article>
+  );
+}
+
+function FeatureCard({
+  title,
+  body,
+  visual,
+  visualAlign = "start",
+  visualOverflow,
+  contentClassName = "",
+}: {
+  title: string;
+  body: string;
+  visual: ReactNode;
+  visualAlign?: "start" | "end";
+  visualOverflow?: boolean;
+  contentClassName?: string;
+}) {
+  return (
+    <FeatureGlassCardShell>
+      <div className="relative flex h-full min-h-0 flex-col rounded-[inherit]">
+        <div
+          className={`flex min-h-0 flex-1 p-0 ${visualOverflow ? "overflow-hidden" : ""} ${visualAlign === "end" ? "flex-col justify-end" : ""}`}
+        >
+          {visual}
+        </div>
+        <div className={`shrink-0 p-8 ${contentClassName}`}>
+          <div className="flex flex-col gap-4">
+            <h5 className="font-heading h5 text-primitive-main-dark">{title}</h5>
+            <p className="body-main text-secondary">{body}</p>
+          </div>
+        </div>
+      </div>
+    </FeatureGlassCardShell>
+  );
+}
+
+function SlackMention({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-block rounded-sm bg-slack-mention px-1 py-0.5 align-baseline whitespace-nowrap text-sm leading-snug text-slack-mention">
+      {children}
+    </span>
+  );
+}
+
+function SlackUserMessage({
+  name,
+  time,
+  avatar,
+  body,
+  reactions,
+}: {
+  name: string;
+  time: string;
+  avatar: string;
+  body: ReactNode;
+  reactions?: ReactNode;
+}) {
+  return (
+    <div className="relative isolate flex w-full gap-2 rounded-lg border border-solid border-transparent bg-transparent px-[var(--slack-message-pad-x)] py-0 text-left">
+      <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primitive-purple-100">
+        <img alt={name} loading="lazy" width={36} height={36} className="size-full object-cover" src={avatar} />
+      </div>
+      <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+          <span className="body-small font-medium text-slack">{name}</span>
+          <span className="text-xs font-normal text-slack-secondary">{time}</span>
+        </div>
+        <div className="body-main font-normal text-slack">{body}</div>
+        {reactions}
+      </div>
+    </div>
+  );
+}
+
+function SlackViktorMessage({
+  time,
+  body,
+  attachment,
+}: {
+  time: string;
+  body: ReactNode;
+  attachment?: ReactNode;
+}) {
+  return (
+    <div
+      data-variant="viktor"
+      data-highlighted="true"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+    >
+      <div aria-hidden="true" className="slack-viktor-bg-mount">
+        <div className="slack-viktor-layer-glass-stack" />
+        <div className="slack-viktor-layer-inner-depth-soft" />
+        <div className="slack-viktor-layer-inner-glow-overlay" />
+        <div className="slack-viktor-layer-feather-blur" />
+        <div className="slack-viktor-layer-white-sheet" />
+      </div>
+      <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
+        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+      </div>
+      <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
+        <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
+          <span className="body-small font-medium text-slack">
+            <span className="inline-flex items-center gap-1.5">
+              <span>Viktor</span>
+              <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
+                APP
+              </span>
+            </span>
+          </span>
+          <span className="text-xs font-normal text-slack-secondary">{time}</span>
+        </div>
+        <div className="body-main font-normal text-slack">{body}</div>
+        {attachment}
       </div>
     </div>
   );
@@ -210,9 +376,9 @@ const INTEGRATION_WHEEL_LOGOS = [
   { id: "asana", icon: <svg viewBox="0 0 24 24" className="h-10 w-10" aria-hidden><circle cx="12" cy="6.5" r="3.5" fill="#F06A6A"/><circle cx="5.5" cy="16" r="3.5" fill="#F06A6A"/><circle cx="18.5" cy="16" r="3.5" fill="#F06A6A"/></svg> },
 ] as const;
 
-const WHEEL_SIZE = 420;
-const WHEEL_RADIUS = 210;
-const LOGO_CARD_SIZE = 88;
+const WHEEL_SIZE = 528;
+const WHEEL_RADIUS = 270;
+const LOGO_CARD_SIZE = 90;
 const INTEGRATION_STEP_HOLD_MS = 2500;
 const INTEGRATION_STEP_MS = 650;
 
@@ -223,16 +389,13 @@ function integrationRelativeSlot(logoIndex: number, activeIndex: number, count: 
   return diff;
 }
 
-function IntegrationLogoCard({ children, featured }: { children: React.ReactNode; featured?: boolean }) {
+function IntegrationLogoCard({ children, featured }: { children: ReactNode; featured?: boolean }) {
   return (
     <div
-      className={`flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] ${
-        featured
-          ? "shadow-[0_12px_24px_0_rgb(26_24_41/10%),inset_1.8px_1.8px_3.6px_0_#f5f1ed]"
-          : "shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed]"
-      }`}
+      className="flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-[filter,opacity] duration-[50ms] ease-out"
+      style={featured ? undefined : { filter: "blur(2px)", opacity: 0.9 }}
     >
-      <div className="flex size-full items-center justify-center overflow-hidden rounded-[inherit] p-2">
+      <div className="flex size-full items-center justify-center overflow-hidden rounded-[inherit] px-2 py-2">
         {children}
       </div>
     </div>
@@ -259,164 +422,95 @@ function ToolIconsVisual() {
   }, [activeIndex]);
 
   return (
-    <div className="relative h-[220px] w-full" aria-hidden="true">
+    <div className="relative h-full min-h-0 w-full flex-1 overflow-hidden" aria-hidden="true">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 z-10 mx-auto max-w-xl"
-        
+        style={{
+          height: "9.24rem",
+          background: "radial-gradient(60% 100% at 50% -10%, rgba(237, 229, 251, 0.95), transparent 62%)",
+        }}
       />
       <div
-        className="relative z-0 mx-auto h-full w-full max-w-[340px] overflow-hidden"
-        style={{
-          maskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
-          WebkitMaskImage: "linear-gradient(to right, transparent, black 14%, black 86%, transparent)",
-        }}
+        className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 translate-y-[5.5rem]"
+        style={{ width: WHEEL_SIZE, height: WHEEL_SIZE }}
       >
         <div
-          className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 translate-y-[3.75rem]"
-          style={{ width: WHEEL_SIZE, height: WHEEL_SIZE }}
+          className="relative h-full w-full will-change-transform"
+          style={{ transform: `rotate(${rotation}deg)`, transition: stepEase }}
         >
-          <div
-            className="relative h-full w-full will-change-transform"
-            style={{ transform: `rotate(${rotation}deg)`, transition: stepEase }}
-          >
-            {INTEGRATION_WHEEL_LOGOS.map((logo, i) => {
-              const angle = (i / count) * 360;
-              const slot = integrationRelativeSlot(i, displayIndex, count);
-              const featured = slot === 0;
+          {INTEGRATION_WHEEL_LOGOS.map((logo, i) => {
+            const angle = (i / count) * 360;
+            const slot = integrationRelativeSlot(i, displayIndex, count);
+            const featured = slot === 0;
 
-              return (
-                <div
-                  key={logo.id}
-                  className="absolute"
-                  style={{
-                    left: "50%",
-                    top: "50%",
-                    width: LOGO_CARD_SIZE,
-                    height: LOGO_CARD_SIZE,
-                    marginLeft: -LOGO_CARD_SIZE / 2,
-                    marginTop: -LOGO_CARD_SIZE / 2,
-                    transform: `rotate(${angle}deg) translateY(-${WHEEL_RADIUS}px) scale(${featured ? 1 : 0.94})`,
-                    transformOrigin: "50% 50%",
-                    zIndex: featured ? 3 : 1,
-                    transition: stepEase,
-                  }}
-                >
-                  <IntegrationLogoCard featured={featured}>{logo.icon}</IntegrationLogoCard>
-                </div>
-              );
-            })}
-          </div>
+            return (
+              <div
+                key={logo.id}
+                className="absolute"
+                style={{
+                  left: "50%",
+                  top: "50%",
+                  width: LOGO_CARD_SIZE,
+                  height: LOGO_CARD_SIZE,
+                  marginLeft: -LOGO_CARD_SIZE / 2,
+                  marginTop: -LOGO_CARD_SIZE / 2,
+                  transform: `rotate(${angle}deg) translateY(-${WHEEL_RADIUS}px)`,
+                  transformOrigin: "50% 50%",
+                  zIndex: featured ? 3 : 1,
+                  transition: stepEase,
+                }}
+              >
+                <IntegrationLogoCard featured={featured}>{logo.icon}</IntegrationLogoCard>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
-  );
-}
-
-function Avatar({ name }: { name: string }) {
-  if (name === "Anna") {
-    return (
-      <img
-        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        alt="Anna"
-        className="w-8 h-8 rounded-full object-cover shrink-0"
-      />
-    );
-  }
-  if (name === "Lisa") {
-    return (
-      <img
-        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        alt="Lisa"
-        className="w-8 h-8 rounded-full object-cover shrink-0"
-      />
-    );
-  }
-  if (name === "Steven") {
-    return (
-      <img
-        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        alt="Steven"
-        className="w-8 h-8 rounded-full object-cover shrink-0"
-      />
-    );
-  }
-  return (
-    <img
-      src={viktorAvatar}
-      alt="Viktor"
-      className="w-8 h-8 rounded-lg object-cover shrink-0 shadow-[0_2px_6px_rgba(98,54,255,0.25)]"
-    />
-  );
-}
-
-function ViktorBubble({ time, body }: { time: string; body: React.ReactNode }) {
-  return (
-    <div
-      className="rounded-xl p-3 border border-white/60 shadow-[0_4px_12px_rgba(98,54,255,0.2)] backdrop-blur-md w-full"
-      style={{
-        background: "linear-gradient(90deg, #FAF2ED 40%,rgb(241, 239, 249) 90%)",
-      }}
-    >
-      <ChatBubble name="Viktor" badge="APP" time={time} body={body} />
-    </div>
-  );
-}
-
-function ChatBubble({ name, time, body, badge }: { name: string; time: string; body: React.ReactNode; badge?: string }) {
-  return (
-    <div className="flex gap-3 items-start">
-      <Avatar name={name} />
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5 text-xs">
-          <span className="font-semibold text-foreground text-[13px]">{name}</span>
-          {badge && (
-            <span className="px-1.5 py-0.5 rounded-[4px] bg-[#6236FF] text-white text-[9px] font-bold tracking-wider leading-none">
-              {badge}
-            </span>
-          )}
-          <span className="text-[#A1A1AA] text-[11px] ml-1">{time}</span>
-        </div>
-        <div className="text-md text-foreground/90 leading-normal mt-0.5">{body}</div>
-      </div>
-    </div>
-  );
-}
-
-function Mention({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center px-1.5 py-0.5 rounded-[5px] bg-[#ECE9FE] text-[#6236FF]  text-md leading-none select-none">
-      {children}
-    </span>
   );
 }
 
 function ChatPreview() {
   return (
-    <div className="w-full max-w-[300px] flex flex-col gap-3">
-      <ChatBubble
+    <div className="flex min-h-0 w-full flex-col gap-2 px-3 pt-8 pb-3 sm:px-4 sm:pb-4">
+      <SlackUserMessage
         name="Anna"
         time="1:23 PM"
-        body={<><Mention>@Viktor</Mention> we need a competitive analysis</>}
+        avatar={annaAvatar}
+        body={
+          <>
+            <SlackMention>@Viktor</SlackMention> we need a competitive analysis
+          </>
+        }
       />
-      <ChatBubble
+      <SlackUserMessage
         name="Lisa"
         time="1:23 PM"
-        body={<><Mention>@Viktor</Mention> make it a PDF plssss</>}
+        avatar={lisaAvatar}
+        body={
+          <>
+            <SlackMention>@Viktor</SlackMention> make it a PDF plssss
+          </>
+        }
       />
-      <ViktorBubble
+      <SlackViktorMessage
         time="2:43 PM"
         body={
           <>
-            <span>
-              Here you go <Mention>@Lisa</Mention> and <br /> <Mention>@Anna</Mention>
-            </span>
-            <div className="mt-2.5 inline-flex items-center gap-1.5">
-              <span className="text-[13px] leading-none">📎</span>
-              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[radial-gradient(ellipse_160%_120%_at_52%_-24%,#ffbd9e_0%,#fdbca0_6%,#947fff_51%,#6748fd_80%,#150079_100%)] text-white text-xs font-semibold shadow-[0_4px_12px_rgba(98,54,255,0.2)] cursor-pointer select-none">
-                <span>competitive-analysis..</span>
-              </div>
-            </div>
+            Here you go <SlackMention>@Lisa</SlackMention> and <SlackMention>@Anna</SlackMention>
           </>
+        }
+        attachment={
+          <div className="mt-2 flex w-full max-w-full min-w-0 items-center gap-1" aria-label="Attachment competitive-analysis.pdf">
+            <span aria-hidden="true" className="inline-flex shrink-0 items-center justify-center text-[13px] leading-[1.4] text-[var(--slack-add-reaction-icon)] opacity-80">
+              📎
+            </span>
+            <div className="slack-attached-pill">
+              <span className="min-w-0 truncate text-[13px] leading-[1.4] tracking-[-0.26px] font-normal">
+                competitive-analysis.pdf
+              </span>
+            </div>
+          </div>
         }
       />
     </div>
@@ -447,30 +541,45 @@ function SpinningTools() {
 
 function FollowUpPreview() {
   return (
-    <div className="flex flex-col gap-3 w-full max-w-[300px]">
-      <div className="">
-        <ChatBubble
-          name="Steven"
-          time="2:43 PM"
-          body={<><Mention>@Viktor</Mention> any updates?</>}
-        />
-        <div className="flex items-center gap-2 mt-2.5 ml-11">
-          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F4F4F6] border border-[#E4E4E7] text-xs font-medium text-foreground/80 shadow-sm cursor-pointer select-none">
-            <span>👀</span>
-            <span className="font-bold text-[10px] text-foreground/70">1</span>
+    <div className="flex min-h-0 w-full flex-col justify-end gap-2 px-3 pt-8 pb-3 sm:px-4 sm:pb-4">
+      <SlackUserMessage
+        name="Steven"
+        time="2:43 PM"
+        avatar={stevenAvatar}
+        body={
+          <>
+            <SlackMention>@Viktor</SlackMention> any updates?
+          </>
+        }
+        reactions={
+          <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
+            <button
+              type="button"
+              aria-pressed="false"
+              className="inline-flex min-h-6 cursor-pointer items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
+            >
+              <span aria-hidden="true">👀</span>
+              <span className="tabular-nums">1</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Add reaction"
+              className="inline-flex min-h-6 shrink-0 cursor-pointer items-center justify-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
+            >
+              <svg aria-hidden="true" className="size-[15px] shrink-0 text-[var(--slack-add-reaction-icon)]" fill="none" viewBox="0 0 15 15" width="15" height="15">
+                <path d="M5.625 6.5625C5.625 7.08027 5.20527 7.5 4.6875 7.5C4.16973 7.5 3.75 7.08027 3.75 6.5625C3.75 6.04473 4.16973 5.625 4.6875 5.625C5.20527 5.625 5.625 6.04473 5.625 6.5625Z" fill="currentColor" />
+                <path d="M9.375 6.5625C9.375 7.08027 8.95527 7.5 8.4375 7.5C7.91973 7.5 7.5 7.08027 7.5 6.5625C7.5 6.04473 7.91973 5.625 8.4375 5.625C8.95527 5.625 9.375 6.04473 9.375 6.5625Z" fill="currentColor" />
+                <path d="M4.0106 10.1568C3.8824 9.77219 4.16867 9.375 4.57409 9.375H8.55091C8.95633 9.375 9.24261 9.77219 9.1144 10.1568L9.03043 10.4087C8.67634 11.471 7.68223 12.1875 6.5625 12.1875C5.44277 12.1875 4.44866 11.471 4.09457 10.4087L4.0106 10.1568Z" fill="currentColor" />
+                <path d="M7.5 1.94146C7.19381 1.89766 6.8808 1.875 6.5625 1.875C2.93813 1.875 0 4.81313 0 8.4375C0 12.0619 2.93813 15 6.5625 15C10.1869 15 13.125 12.0619 13.125 8.4375C13.125 8.1192 13.1023 7.80619 13.0585 7.5H11.9068C11.9598 7.80453 11.9875 8.11779 11.9875 8.4375C11.9875 11.4336 9.55865 13.8625 6.5625 13.8625C3.56636 13.8625 1.1375 11.4336 1.1375 8.4375C1.1375 5.44136 3.56636 3.0125 6.5625 3.0125C6.88221 3.0125 7.19547 3.04016 7.5 3.09321V1.94146Z" fill="currentColor" />
+                <path d="M11.25 0.46875C11.25 0.209866 11.4599 0 11.7188 0C11.9776 0 12.1875 0.209867 12.1875 0.46875V5.15625C12.1875 5.41513 11.9776 5.625 11.7188 5.625C11.4599 5.625 11.25 5.41513 11.25 5.15625V0.46875Z" fill="currentColor" />
+                <path d="M14.0625 2.34375C14.3214 2.34375 14.5312 2.55362 14.5312 2.8125C14.5312 3.07138 14.3214 3.28125 14.0625 3.28125L9.375 3.28125C9.11612 3.28125 8.90625 3.07138 8.90625 2.8125C8.90625 2.55362 9.11612 2.34375 9.375 2.34375L14.0625 2.34375Z" fill="currentColor" />
+              </svg>
+            </button>
           </div>
-          <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#F4F4F6] border border-[#E4E4E7] text-xs text-muted-foreground cursor-pointer select-none">
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-[#71717A] stroke-[2.5] fill-none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 14s1.5 2 4 2 4-2 4-2" strokeLinecap="round" />
-              <line x1="9" y1="9" x2="9.01" y2="9" strokeLinecap="round" />
-              <line x1="15" y1="9" x2="15.01" y2="9" strokeLinecap="round" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <ViktorBubble time="2:43 PM" body="No response from Acme. Smells fishy. 🐟" />
-      <ViktorBubble time="2:43 PM" body="I just followed up with them" />
+        }
+      />
+      <SlackViktorMessage time="2:43 PM" body="No response from Acme. Smells fishy. 🐟" />
+      <SlackViktorMessage time="2:43 PM" body="I just followed up with them" />
     </div>
   );
 }
