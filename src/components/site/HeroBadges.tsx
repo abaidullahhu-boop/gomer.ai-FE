@@ -46,6 +46,20 @@ export function LightningIcon() {
   );
 }
 
+export function ArrowUpCircleIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className={iconClass} aria-hidden="true">
+      <g opacity="0.5" fill="currentColor">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M2.88782 17.1123C1.19994 15.4243 0.357178 12.9886 0.357178 10C0.357178 7.01139 1.19994 4.57566 2.88782 2.88779C4.57569 1.19991 7.01142 0.357147 10 0.357147C12.9886 0.357147 15.4243 1.19991 17.1123 2.88779C18.8002 4.57566 19.6429 7.01139 19.6429 10C19.6429 12.9886 18.8002 15.4243 17.1123 17.1123C15.4243 18.8001 12.9886 19.6429 10 19.6429C7.01142 19.6429 4.57569 18.8001 2.88782 17.1123ZM13.9184 5.86195C13.8368 6.44803 13.2956 6.85705 12.7095 6.77549C10.4982 6.4678 9.37325 6.4636 7.30161 6.7739C6.71639 6.86155 6.17094 6.4582 6.08329 5.873C5.99564 5.28779 6.39898 4.74233 6.98419 4.65468C9.27592 4.31143 10.608 4.31959 13.0048 4.65309C13.5909 4.73463 13.9999 5.27586 13.9184 5.86195ZM13.9286 11.8865C13.9286 10.9295 13.3345 10.0451 12.7219 9.43248C12.0765 8.78709 11.1972 8.22426 10.2599 7.98993C10.0893 7.94728 9.91078 7.94728 9.74016 7.98993C8.80286 8.22426 7.92351 8.78709 7.27812 9.43248C6.66551 10.0451 6.07145 10.9295 6.07145 11.8865C6.07145 12.4782 6.55115 12.9579 7.14288 12.9579C7.73462 12.9579 8.21431 12.4782 8.21431 11.8865C8.21431 11.7721 8.33455 11.4065 8.79335 10.9477C8.83721 10.9038 8.88235 10.861 8.92861 10.8193V15C8.92861 15.5917 9.40831 16.0714 10 16.0714C10.5918 16.0714 11.0715 15.5917 11.0715 15V10.8194C11.1177 10.861 11.1629 10.9039 11.2067 10.9477C11.6655 11.4065 11.7857 11.7721 11.7857 11.8865C11.7857 12.4782 12.2654 12.9579 12.8572 12.9579C13.4489 12.9579 13.9286 12.4782 13.9286 11.8865Z"
+        />
+      </g>
+    </svg>
+  );
+}
+
 export function SlackAppDirectoryIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className={iconClass} aria-hidden="true">
@@ -71,9 +85,9 @@ export const enterpriseHeroBadges = [
 ] as const;
 
 export const pricingHeroBadges = [
-  { label: "Start free with $100 in credits", icon: <CoinIcon /> },
-  { label: "No credit card, no strings", icon: <CreditCardIcon /> },
-  { label: "Upgrade when you're ready", icon: <LightningIcon /> },
+  { label: "Start free with $100 in credits.", icon: <CoinIcon /> },
+  { label: "No credit card, no sales call.", icon: <CreditCardIcon /> },
+  { label: "Upgrade when you're ready.", icon: <ArrowUpCircleIcon /> },
 ] as const;
 
 function BadgeItem({ children, className }: { children: ReactNode; className?: string }) {
@@ -119,6 +133,54 @@ function EnterpriseHeroPoint({ icon, label }: { icon: ReactNode; label: string }
         {label}
       </p>
     </div>
+  );
+}
+
+function PricingHeroPoint({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <div className="flex shrink-0 items-center gap-4">
+      <span className="inline-flex text-primitive-main-white">{icon}</span>
+      <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-white">{label}</p>
+    </div>
+  );
+}
+
+export function PricingHeroPoints({
+  badges = pricingHeroBadges,
+}: {
+  badges?: readonly { label: string; icon: ReactNode }[];
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setActiveIndex((i) => (i + 1) % badges.length),
+      HERO_BADGE_INTERVAL_MS,
+    );
+    return () => clearInterval(t);
+  }, [badges.length]);
+
+  const activeBadge = badges[activeIndex];
+
+  return (
+    <>
+      <div aria-hidden="true" className="relative h-12 w-full shrink-0 overflow-hidden sm:hidden">
+        <div className="h-12 overflow-hidden">
+          <div key={activeIndex} className="flex h-12 min-h-12 w-full animate-logo-slide-up items-center justify-center gap-4">
+            <span className="inline-flex text-primitive-main-white">{activeBadge.icon}</span>
+            <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-white">
+              {activeBadge.label}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden flex-row flex-wrap items-center justify-center gap-6 sm:flex sm:gap-8">
+        {badges.map((badge) => (
+          <PricingHeroPoint key={badge.label} icon={badge.icon} label={badge.label} />
+        ))}
+      </div>
+    </>
   );
 }
 

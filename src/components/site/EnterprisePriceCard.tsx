@@ -32,8 +32,8 @@ function FeatureCheckIcon() {
 
 export function EnterprisePriceCard() {
   return (
-    <div className="group/card relative flex w-full flex-col gap-4 overflow-hidden rounded-section border-0 bg-white/10 p-0 text-sm text-white ring-0">
-      <div className="relative h-full w-full rounded-[inherit] p-6 py-8 sm:p-8">
+    <div className="group/card relative flex w-full flex-col gap-4 overflow-hidden rounded-[18px] border-0 bg-white/10 p-0 text-sm text-white ring-0">
+      <div className="relative h-full w-full p-6 py-8 sm:p-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"

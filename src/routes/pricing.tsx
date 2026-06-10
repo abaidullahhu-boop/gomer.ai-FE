@@ -8,7 +8,7 @@ import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { TeamPriceCard } from "@/components/site/TeamPriceCard";
 import { EnterprisePriceCard } from "@/components/site/EnterprisePriceCard";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-import { HeroBadgeItem, pricingHeroBadges } from "@/components/site/HeroBadges";
+import { PricingHeroPoints } from "@/components/site/HeroBadges";
 import { CreditsPowerHeadline } from "@/components/site/CreditsPowerHeadline";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import fullProjectsImageTabs from "@/assets/images/full-projects-image-tabs.avif";
@@ -38,30 +38,35 @@ export default function PricingPage() {
 
 function PricingHero() {
   return (
-    <section className="relative pt-36 pb-40 overflow-hidden rounded-b-[40px] bg-gradient-dark3">
-      <Nav />
-      <div className="relative mx-auto max-w-5xl px-6 pt-20 text-center">
-        <h1 className="font-heading text-white text-5xl max-sm:text-[2.625rem] leading-[1.05] font-bold tracking-[-0.06em]  sm:text-6xl lg:text-[5rem]">
-          We'll front you <span className="text-[#ffbb98]">$100.</span><br />
-          Put Viktor to work.
-        </h1>
+    <section className="border-0 py-0">
+      <div className="relative w-full overflow-hidden rounded-b-section text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-0 left-1/2 h-full w-screen max-w-none -translate-x-1/2 rounded-b-section bg-gradient-dark3"
+        />
+        <Nav />
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col">
+          <div className="hero-page-stack-pt relative z-10 flex w-full flex-col items-center gap-14 mt-16 px-5 pb-14 sm:gap-16 sm:pb-16 md:pb-20">
+            <div className="flex w-full max-w-5xl flex-col items-center gap-12 text-center">
+              <div className="flex flex-col items-center gap-8 sm:gap-12">
+                <h1 className="font-heading text-5xl max-sm:text-[2.625rem] leading-[1.05] font-bold tracking-[-0.06em] text-balance sm:text-6xl lg:text-[5rem]">
+                  We'll front you <span className="text-[#ffbb98]">$100.</span>
+                  <br className="hidden sm:block" /> Put Viktor to work.
+                </h1>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-white/85">
-          {pricingHeroBadges.map((badge) => (
-            <HeroBadgeItem key={badge.label} icon={badge.icon} label={badge.label} variant="circle" />
-          ))}
-        </div>
+                <div className="flex w-full flex-col justify-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-8">
+                  <PricingHeroPoints />
+                </div>
+              </div>
 
-        <div className="mt-10">
-          <GetStartedButton shadow />
-        </div>
-      </div>
+              <GetStartedButton className="inline-flex h-14 min-h-14 items-center justify-center border border-white bg-white px-10 text-base tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-white/90 active:translate-y-px" />
+            </div>
 
-      {/* PLAN CARDS overlapping hero */}
-      <div id="plans" className="relative mx-auto px-4 mt-16 scroll-mt-28">
-        <div className="grid md:grid-cols-2 gap-5">
-          <TeamPriceCard />
-          <EnterprisePriceCard />
+            <div id="plans" className="grid w-full gap-5 scroll-mt-28 lg:grid-cols-2 lg:items-stretch">
+              <TeamPriceCard />
+              <EnterprisePriceCard />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -108,7 +113,7 @@ function SlackReactionPill({
       type="button"
       aria-pressed="false"
       onClick={onClick}
-      className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill cursor-pointer transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
+      className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[#f8f5f1] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill cursor-pointer transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
     >
       <span aria-hidden="true">{emoji}</span>
       <span className="tabular-nums">{count}</span>
@@ -186,10 +191,10 @@ function SlackUserMessage({
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
-          <span className="text-sm text-slack font-medium">{name}</span>
+          <span className="body-small text-slack font-medium">{name}</span>
           <span className="text-xs text-slack-secondary font-normal">{time}</span>
         </div>
-        <div className="text-sm text-slack font-normal leading-snug">{body}</div>
+        <div className="body-main text-slack font-normal">{body}</div>
         {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
@@ -214,8 +219,9 @@ function SlackViktorMessage({
   return (
     <div
       data-variant="viktor"
-      className={`relative flex w-full text-left isolate overflow-hidden slack-message-viktor gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] ${
-        isPlain ? "shadow-none rounded-none bg-transparent" : ""
+      data-highlighted={isPlain ? "false" : "true"}
+      className={`relative flex w-full text-left isolate overflow-hidden slack-message-viktor gap-2 px-[var(--slack-message-pad-x)] py-4 ${
+        isPlain ? "shadow-none rounded-none! bg-transparent!" : ""
       }`}
     >
       {!isPlain && (
@@ -232,7 +238,7 @@ function SlackViktorMessage({
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 mb-0.5">
-          <span className="text-sm text-slack font-medium">
+          <span className="body-small text-slack font-medium">
             <span className="inline-flex items-center gap-1.5">
               <span>Viktor</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
@@ -242,7 +248,7 @@ function SlackViktorMessage({
           </span>
           <span className="text-xs text-slack-secondary font-normal">{time}</span>
         </div>
-        <div className="text-sm text-slack font-normal leading-snug">{body}</div>
+        <div className="body-main text-slack font-normal">{body}</div>
         {attachment}
         {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
@@ -266,18 +272,17 @@ function SlackFileAttachment({ name }: { name: string }) {
   );
 }
 
-function ExecutiveSummaryPreview() {
+function FullProjectsTabsImage() {
   return (
-    <div className="relative w-full max-w-[300px] sm:max-w-[360px]">
-      
-      <div
-        aria-hidden="true"
-        className="absolute bottom-3 left-5 right-3 top-8 rounded-2xl border border-black/[0.04] bg-[#f5f0e8] shadow-sm"
-        style={{ transform: "rotate(-3deg)" }}
+    <div className="flex min-h-44 w-full justify-end lg:pointer-events-none lg:w-auto lg:min-h-0 lg:shrink-0 lg:items-end lg:justify-end">
+      <img
+        alt="Browser windows and tabs for a multi-surface project"
+        loading="lazy"
+        width={352}
+        height={343}
+        src={fullProjectsImageTabs}
+        className="block h-auto w-[80%] object-contain object-bottom lg:block lg:h-auto md:w-auto lg:max-w-none lg:max-h-80 lg:object-contain lg:object-bottom"
       />
-      <div className="relative overflow-hidden">
-        <img src={fullProjectsImageTabs} alt="" className="block w-full h-auto" />
-      </div>
     </div>
   );
 }
@@ -290,7 +295,7 @@ function ConicGradientCardShell({
   className?: string;
 }) {
   return (
-    <div className={`relative w-full rounded-[inherit] overflow-hidden rounded-section text-primary ${className}`}>
+    <div className={`relative w-full rounded-[35px] overflow-hidden text-primary ${className}`}>
       <div aria-hidden="true" className="bg-conic-gradient-bg pointer-events-none absolute inset-0 z-0" style={{ borderRadius: "inherit" }} />
       <div
         aria-hidden="true"
@@ -341,7 +346,6 @@ function CreditPowerCard({
   credits,
   sub,
   children,
-  document,
   layout = "default",
   className = "",
 }: {
@@ -349,61 +353,71 @@ function CreditPowerCard({
   credits: string;
   sub?: string;
   children: ReactNode;
-  document?: ReactNode;
   layout?: "default" | "split";
   className?: string;
 }) {
+  const creditsRange = credits.replace(/\s*credits$/i, "").replace(/–/g, "-");
+
   return (
     <ConicGradientCardShell className={`min-h-112 h-full ${className}`}>
-        {layout === "split" ? (
-          <div className="relative z-[2] flex h-full w-full min-h-80 flex-col sm:min-h-96 md:min-h-[26rem] md:flex-row md:items-end">
-            <div className="relative flex min-w-0 flex-1 flex-col">
-              <div className="relative z-10 px-6 pt-6 sm:px-8 sm:pt-8">
-                <p className="text-sm text-accent-1">{tag}</p>
-              </div>
-              <div className="relative z-10 mt-auto flex flex-col gap-6 px-6 sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:px-8 ">
-                <div className="shrink-0">
-                  <h3 className="mb-5 font-heading text-2xl font-bold text-balance text-primitive-main-dark sm:text-3xl">{credits}</h3>
-                </div>
-                <div className="flex shrink-0 justify-end sm:justify-end">{document}</div>
-              </div>
+      {layout === "split" ? (
+        <div className="relative z-[2] flex h-full w-full flex-col justify-between">
+          <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row lg:items-stretch">
+            <div className="flex min-w-0 flex-col justify-between gap-8 pl-6 pt-6 max-lg:pr-0 max-lg:pb-0 sm:pl-8 sm:pt-8 lg:max-w-md lg:shrink-0 lg:px-8 lg:py-8">
+              <p className="body-small text-accent-1">{tag}</p>
+              <h3 className="font-heading h4 font-bold text-balance text-primary">
+                {creditsRange}
+                <br />
+                credits
+              </h3>
             </div>
-            <div className="relative z-10 flex w-full shrink-0 flex-col justify-end md:w-[36%] md:min-w-[220px] md:max-w-[340px]">
-              <div className="box-border flex w-full flex-col items-end p-4 sm:p-6">
-                <div className="min-w-0 flex w-full flex-col items-end">
-                  <div className="flex w-full min-w-0 flex-col [--slack-message-pad-x:0px] [--slack-message-pad-y:0px] p-0! gap-4 justify-end items-end">
-                    {children}
-                  </div>
+            <div className="relative z-10 w-full min-w-0 flex-1 overflow-visible flex flex-col items-end gap-0 pl-6 pt-6 max-lg:pr-0 max-lg:pb-0 sm:pl-8 sm:pt-8 lg:min-h-[400px] md:flex-row lg:items-end lg:justify-end lg:p-0">
+              <FullProjectsTabsImage />
+              <div className="relative z-10 w-full shrink-0 md:w-[353px] md:max-w-full">
+                <div className="relative w-full box-border rounded-2xl rounded-tr-none rounded-bl-none shadow-[0_12px_40px_-12px_rgba(26,24,41,0.2)] h-auto max-w-full overflow-visible backdrop-blur-[10px]">
+                  <ConicGradientCardShell className="min-h-0">
+                    <div className="relative z-[2] box-border flex w-full flex-col items-end p-4">
+                      <div className="min-w-0 flex w-full flex-col items-end">
+                        <div className="flex w-full min-w-0 flex-col p-3 sm:p-4 [--slack-message-pad-x:0px] [--slack-message-pad-y:0px] !p-0 gap-4 justify-start items-end">
+                          {children}
+                        </div>
+                      </div>
+                    </div>
+                  </ConicGradientCardShell>
                 </div>
               </div>
             </div>
           </div>
-        ) : (
-          <div className="relative z-[2] flex h-full w-full flex-col">
-            <div className="relative z-10 px-6 pt-6 sm:px-8 sm:pt-8">
-              <div className="flex max-w-md flex-col gap-2">
-                <p className="text-sm text-accent-1">{tag}</p>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-balance text-primitive-main-dark">{credits}</h3>
-                {sub && <p className="text-sm text-secondary">{sub}</p>}
-              </div>
-            </div>
-            <div className="relative z-10 w-full min-w-0 overflow-hidden px-3 pt-4 pb-3 sm:px-4 sm:pb-4">
-              <div className="flex w-full min-w-0 flex-col gap-2">{children}</div>
+        </div>
+      ) : (
+        <div className="relative z-[2] flex h-full w-full flex-col justify-between">
+          <div className="relative z-10 px-6 pt-6 sm:px-8 sm:pt-8">
+            <div className="flex max-w-md flex-col gap-2">
+              <p className="body-small text-accent-1">{tag}</p>
+              <h3 className="font-heading h4 font-bold text-balance text-primary">{credits}</h3>
+              {sub && <p className="body-small text-secondary">{sub}</p>}
             </div>
           </div>
-        )}
+          <div className="relative z-10 flex w-full min-w-0 items-end overflow-hidden min-h-76 flex-1 justify-center">
+            <div className="w-full min-w-0">
+              <div className="flex w-full min-w-0 flex-col justify-end gap-2 p-3 sm:p-4">{children}</div>
+            </div>
+          </div>
+        </div>
+      )}
     </ConicGradientCardShell>
   );
 }
 
 function CreditsPower() {
   return (
-    <section className="px-2 md:px-6 py-24">
-      <div className="mx-auto max-w-5xl">
-        <CreditsPowerHeadline />
+    <section className="overflow-hidden bg-background py-14 text-primary sm:py-28">
+      <div className="px-4 sm:px-6 md:px-12 lg:px-20">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-16 max-md:gap-10">
+          <CreditsPowerHeadline />
 
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
-          <CreditPowerCard tag="Quick Tasks" credits="100–300 credits" sub="Slack summary + CRM follow-up">
+          <div className="mx-auto grid w-full max-w-[66.5rem] items-stretch gap-5 lg:grid-cols-2">
+          <CreditPowerCard tag="Quick Tasks" credits="100-300 credits" sub="Slack summary + CRM follow-up">
             <SlackUserMessage
               name="Sarah"
               time="9:14 AM"
@@ -426,47 +440,41 @@ function CreditsPower() {
             />
           </CreditPowerCard>
 
-          <CreditPowerCard tag="Complex Workflows" credits="500–1,500 credits" sub="Multi-step research + analysis">
+          <CreditPowerCard tag="Complex Workflows" credits="500-1,500 credits" sub="Website change -> ready to review">
             <SlackUserMessage
               name="Mike"
-              time="11:30 AM"
+              time="11:32 AM"
               avatar="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80"
+              reactions={[{ emoji: "⏳", count: 1 }]}
               body={
                 <>
                   <SlackMention>@Viktor</SlackMention>
-                  the pricing page still says $50/mo. Can the slider fix it, should be $79/mo. Can you update it?
+                  the pricing page still says &quot;$99/mo&quot; on the starter tier. It should be &quot;$79/mo&quot;. Can you update it?
                 </>
               }
             />
             <SlackViktorMessage
-              time="11:46 AM"
+              time="11:38 AM"
               reactions={[
                 { emoji: "✅", count: 2 },
-                { emoji: "👀", count: 1 },
+                { emoji: "🚀", count: 1 },
               ]}
               body={
                 <>
-                  Done ✅ Updated the pricing page — Starter tier now shows $79/mo. Preview is ready for your review:{" "}
-                  <a
-                    href="https://acme.com/pricing-preview"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-violet-600 underline"
-                  >
-                    acme.com/pricing-preview
-                  </a>
+                  Done ✅ Updated the pricing page — Starter tier now shows $79/mo. Preview is ready for your review:
+                  <br />
+                  <span className="text-slack-mention underline decoration-solid">acme.com/pricing-preview</span>
                 </>
               }
             />
           </CreditPowerCard>
 
-          <div className="md:col-span-2">
+          <div className="lg:col-span-2">
             <CreditPowerCard
               layout="split"
               tag="Full Projects"
-              credits="2,000–5,000 credits"
-              sub="Deep research + deliverables"
-              document={<ExecutiveSummaryPreview />}
+              credits="2,000-5,000 credits"
+              className="lg:min-h-[400px]"
             >
               <SlackUserMessage
                 name="Lisa"
@@ -475,8 +483,7 @@ function CreditsPower() {
                 reactions={[{ emoji: "⏳", count: 1 }]}
                 body={
                   <>
-                    <SlackMention>@Viktor</SlackMention>
-                    we need a competitive analysis — us vs Notion AI, Glean, and Moveworks. Pricing, features, positioning. Make it a PDF I can share with the board
+                    <SlackMention>@Viktor</SlackMention> we need a competitive analysis — us vs Notion AI, Glean, and Moveworks. Pricing, features, positioning. Make it a PDF I can share with the board
                   </>
                 }
               />
@@ -495,6 +502,7 @@ function CreditsPower() {
                 }
               />
             </CreditPowerCard>
+          </div>
           </div>
         </div>
       </div>
@@ -519,7 +527,7 @@ function HowCreditsWork() {
           Credits are model costs, passed through. Smart caching brings them down.
         </p>
 
-        <div className="mt-10 grid md:grid-cols-2 gap-5 items-stretch">
+        <div className="mt-10 grid md:grid-cols-2 gap-5 items-start md:py-8">
           {howItems.map((it) => (
             <div
               key={it.title}
@@ -537,14 +545,16 @@ function HowCreditsWork() {
             </div>
           ))}
 
-          <ConicGradientCardShell className="min-h-[300px] h-full">
-            <div className="relative z-[2] flex h-full min-h-[300px] flex-col justify-between p-8">
-              <p className="text-lg sm:text-2xl font-bold text-primitive-main-dark">
-                Your whole team gets an analyst, an ops lead, and an engineer. For the price of lunch.
-              </p>
-              <GetStartedButton variant="dark" fullWidth className="mt-6 px-6 py-4" />
-            </div>
-          </ConicGradientCardShell>
+          <div>
+            <ConicGradientCardShell className="min-h-[290px] h-full w-full">
+              <div className="relative z-[2] flex h-full min-h-[290px] flex-col justify-between p-8">
+                <p className="text-lg sm:text-2xl font-semibold text-primitive-main-dark">
+                  Your whole team gets an analyst, an ops lead, and an engineer. For the price of lunch.
+                </p>
+                <GetStartedButton variant="dark" fullWidth className="mt-6 px-6 py-4" />
+              </div>
+            </ConicGradientCardShell>
+          </div>
         </div>
       </div>
     </section>
