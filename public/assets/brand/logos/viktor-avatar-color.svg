@@ -1,0 +1,26 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Slack_Viktor_Avatar_WH" clip-path="url(#clip0_0_190)">
+<rect width="56" height="56" fill="url(#paint0_radial_0_190)"/>
+<g id="glow" filter="url(#filter0_f_0_190)">
+<ellipse cx="28" cy="-6.17969" rx="28" ry="6.50781" fill="var(--fill-0, #FDE3AA)"/>
+</g>
+<path id="Vector" d="M12.9062 9.95312H24.0625C24.3906 9.95312 24.6094 10.1719 24.6094 10.5V33.7969H26.5058C29.7871 33.7969 31.3906 32.0469 31.3906 28.5469V10.5C31.3906 10.1719 31.6094 9.95312 31.9375 9.95312H43.0937C43.4219 9.95312 43.6406 10.1719 43.6406 10.5V31.7188C43.6406 39.4844 35.875 45.5 25.5938 45.5H12.9062C12.5781 45.5 12.3594 45.2812 12.3594 44.9532V10.5C12.3594 10.1719 12.5781 9.95312 12.9062 9.95312Z" fill="var(--fill-0, white)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_190" x="-12.3266" y="-25.0141" width="80.6531" height="37.6688" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="6.16328" result="effect1_foregroundBlur_0_190"/>
+</filter>
+<radialGradient id="paint0_radial_0_190" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(25.4844 -4.84895) rotate(73.0866) scale(61.6565 86.1544)">
+<stop stop-color="#FFBD9E"/>
+<stop offset="0.0642857" stop-color="#FDBCA0"/>
+<stop offset="0.507143" stop-color="#947FFF"/>
+<stop offset="0.803571" stop-color="#6748FD"/>
+<stop offset="1" stop-color="#150079"/>
+</radialGradient>
+<clipPath id="clip0_0_190">
+<rect width="56" height="56" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -75,7 +75,13 @@
   --primitive-main-grey: #9693a3;
   --primitive-purple-700: #4e32b5;
   --primitive-purple-500: #6e47ff;
+  --primitive-purple-50: #f1edff;
   --primitive-purple-300: #9e84ff;
+  --bg-brand-tag-initial: var(--primitive-purple-50);
+  --btn-primary: var(--primitive-main-dark);
+  --border-btn-primary: var(--primitive-main-dark);
+  --text-btn-primary: #fff;
+  --border-main: 1.25px;
   --primitive-orange-500: #ffbb98;
   --surface-hero-primary: radial-gradient(70% 44% at 52% 9rem, #ffbd9eb8 0%, #fdbca0a8 6%, #c99ed06b 29%, #947fff2e 51%, #faf5f100 92%), linear-gradient(90deg, var(--primitive-main-beige), var(--primitive-main-beige));
   --integrations-hero-surface: var(--surface-hero-primary);
@@ -267,6 +273,7 @@
   }
   .bg-conic-gradient-bg { background: var(--conic-gradient-bg); }
   .bg-integrations-hero-surface { background: var(--integrations-hero-surface); }
+  .bg-surface-hero-primary { background: var(--surface-hero-primary); }
   .about-glass-card-fill { background: var(--integrations-icon-tile-bg); }
   .bg-case-study-hero-surface { background: var(--case-study-hero-surface); }
   .rounded-section { border-radius: var(--radius-4xl); }
@@ -338,8 +345,14 @@
   .text-primitive-purple-500 { color: var(--primitive-purple-500); }
   .text-primitive-purple-400 { color: var(--primitive-purple-400); }
   .text-primitive-orange-500 { color: var(--primitive-orange-500); }
+  .bg-primary { background-color: var(--bg-primary); }
   .bg-primitive-main-beige { background-color: var(--primitive-main-beige); }
   .bg-primitive-main-dark { background-color: var(--primitive-main-dark); }
+  .bg-brand-tag-initial { background-color: var(--bg-brand-tag-initial); }
+  .bg-btn-primary { background-color: var(--btn-primary); }
+  .bg-primitive-purple-50 { background-color: var(--primitive-purple-50); }
+  .border-btn-primary { border-color: var(--border-btn-primary); }
+  .text-btn-primary { color: var(--text-btn-primary); }
   .min-h-112 { min-height: 28rem; }
   .min-h-76 { min-height: 12rem; }
   .bg-primitive-purple-100 { background-color: var(--primitive-purple-100); }
