@@ -13,7 +13,7 @@ export function ConicPriceCardShell({
     <div
       className={`group/card relative flex w-full flex-col overflow-visible rounded-section border-0 bg-transparent p-0 ring-0 ${className}`}
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[18px]">
         <div className="bg-conic-gradient-bg absolute inset-0 opacity-75" />
         <div
           className="absolute inset-[8px] rounded-[inherit]"
