@@ -1,4 +1,5 @@
 import { useCallback, useId, useLayoutEffect, useRef, useState } from "react";
+import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
@@ -92,10 +93,12 @@ const TABS = [
 
 type TabIndicator = {
   left: number;
-  top: number;
   width: number;
-  height: number;
 };
+
+function ComparisonTabActiveBackground({ className }: { className?: string }) {
+  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={className} />;
+}
 
 export function CompareSection() {
   const [active, setActive] = useState(TABS[0].id);
@@ -114,9 +117,7 @@ export function CompareSection() {
 
     setIndicator({
       left: buttonRect.left - containerRect.left,
-      top: buttonRect.top - containerRect.top,
       width: buttonRect.width,
-      height: buttonRect.height,
     });
   }, [active]);
 
@@ -139,7 +140,7 @@ export function CompareSection() {
   return (
     <section className="px-6 py-24 bg-section-cream">
       <div className="d-flex flex-col items-center justify-center mx-auto max-w-6xl text-center">
-        <p className="text-sm tracking-full text-primitive-purple-700">
+        <p className="text-sm tracking-full text-primitive-purple-700 font-medium">
           Viktor vs AI tools
         </p>
         <h2 className="typo-h2 mt-5 text-foreground leading-[1.02]">
@@ -147,7 +148,7 @@ export function CompareSection() {
           <br />
           The work is still there.
         </h2>
-        <p className="mt-6 text-foreground/50 max-w-xl mx-auto text-base">
+        <p className="mt-6 text-foreground/50 max-w-xl mx-auto text-base font-medium">
           ChatGPT. Claude. Zapier. Notion AI. You're already using AI. You're also still
           doing the work.
         </p>
@@ -156,19 +157,16 @@ export function CompareSection() {
         <div className="mt-20 w-full sm:px-8 lg:px-0">
           <div
             ref={tabsRef}
-            className="relative w-full py-1 px-1 flex flex-nowrap items-center justify-between gap-2 overflow-x-auto rounded-full bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="relative isolate w-full py-1 px-1 flex flex-nowrap items-center justify-between gap-2 overflow-x-auto rounded-full bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {indicator && (
-              <div
+              <span
                 aria-hidden="true"
-                className="absolute rounded-full bg-hero pointer-events-none transition-[left,top,width,height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
-                style={{
-                  left: indicator.left,
-                  top: indicator.top,
-                  width: indicator.width,
-                  height: indicator.height,
-                }}
-              />
+                className="pointer-events-none absolute top-1 bottom-1 z-0 overflow-hidden rounded-full transition-[left,width] duration-500 ease-out"
+                style={{ left: indicator.left, width: indicator.width }}
+              >
+                <ComparisonTabActiveBackground className="block h-full w-full object-fill" />
+              </span>
             )}
             {TABS.map((t) => {
               const Icon = t.icon;
@@ -214,7 +212,7 @@ export function CompareSection() {
                 </span>
                 <span className="text-md font-medium text-primary">{current.left.name}</span>
               </div>
-              <p className="text-foreground/70 text-[15px] mt-10">{current.left.text}</p>
+              <p className="text-foreground/70 text-[15px] mt-10 font-medium">{current.left.text}</p>
             </div>
 
             <ComparisonConnector />

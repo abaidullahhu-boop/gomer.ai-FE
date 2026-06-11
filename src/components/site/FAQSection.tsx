@@ -49,7 +49,7 @@ export function FAQSection({
   const visible = showAll ? faqs : faqs.slice(0, initialVisibleCount);
 
   return (
-    <section id={id} className={className}>
+    <section id={id} className={`${className}${id ? " scroll-mt-28" : ""}`}>
       <div className=" mx-auto w-full max-w-7xl grid gap-8 lg:grid-cols-[minmax(0,519fr)_minmax(0,630fr)] lg:items-start">
         <h2 className="font-display text-5xl md:text-5xl">{title}</h2>
         <div>
@@ -83,7 +83,7 @@ export function FAQSection({
                   >
                     <div className="overflow-hidden">
                       <div
-                        className={`px-7 pb-6 text-md text-[#9693a3] leading-relaxed transition-[opacity,transform] duration-300 ease-out ${
+                        className={`px-7 pb-6 text-md text-[#9693a3] leading-relaxed transition-[opacity,transform] duration-300 ease-out font-medium ${
                           isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
                         }`}
                       >
@@ -96,10 +96,10 @@ export function FAQSection({
             })}
           </div>
           {faqs.length > initialVisibleCount && (
-            <div className="mt-8 flex justify-start">
+            <div className="mt-8 flex justify-start ">
               <button
                 onClick={() => setShowAll((v) => !v)}
-                className="rounded-full border border-border px-7 py-3.5 text-md font-medium hover:bg-secondary transition"
+                className="cursor-pointer rounded-full border border-border px-7 py-3.5 text-md font-medium hover:bg-secondary transition"
               >
                 {showAll ? "Show Less" : `Show All ${faqs.length} Questions`}
               </button>

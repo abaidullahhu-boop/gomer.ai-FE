@@ -10,6 +10,7 @@ import type { LucideIcon } from "lucide-react";
 import { Megaphone, ShoppingBag, Sun } from "lucide-react";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
+import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const CYCLE_MS = 6000;
 const PROGRESS_R = 8;
@@ -17,8 +18,6 @@ const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_R;
 
 const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80`;
-
-type SlackReaction = { emoji: string; count: number };
 
 type StarterTab = {
   id: string;
@@ -275,56 +274,6 @@ function TabBadge({ label, variant }: { label: string; variant: "live" | "soon" 
   );
 }
 
-function SlackReactions({ reactions }: { reactions: SlackReaction[] }) {
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((r) => (
-        <span
-          key={r.emoji}
-          className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill"
-        >
-          <span aria-hidden="true">{r.emoji}</span>
-          <span className="tabular-nums">{r.count}</span>
-        </span>
-      ))}
-      <span className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-[var(--slack-add-reaction-icon)]">
-        <SlackAddReactionIcon />
-      </span>
-    </div>
-  );
-}
-
-function SlackAddReactionIcon() {
-  return (
-    <svg aria-hidden="true" className="size-[15px] shrink-0" fill="none" viewBox="0 0 15 15" width="15" height="15">
-      <path
-        d="M5.625 6.5625C5.625 7.08027 5.20527 7.5 4.6875 7.5C4.16973 7.5 3.75 7.08027 3.75 6.5625C3.75 6.04473 4.16973 5.625 4.6875 5.625C5.20527 5.625 5.625 6.04473 5.625 6.5625Z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.375 6.5625C9.375 7.08027 8.95527 7.5 8.4375 7.5C7.91973 7.5 7.5 7.08027 7.5 6.5625C7.5 6.04473 7.91973 5.625 8.4375 5.625C8.95527 5.625 9.375 6.04473 9.375 6.5625Z"
-        fill="currentColor"
-      />
-      <path
-        d="M4.0106 10.1568C3.8824 9.77219 4.16867 9.375 4.57409 9.375H8.55091C8.95633 9.375 9.24261 9.77219 9.1144 10.1568L9.03043 10.4087C8.67634 11.471 7.68223 12.1875 6.5625 12.1875C5.44277 12.1875 4.44866 11.471 4.09457 10.4087L4.0106 10.1568Z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.5 1.94146C7.19381 1.89766 6.8808 1.875 6.5625 1.875C2.93813 1.875 0 4.81313 0 8.4375C0 12.0619 2.93813 15 6.5625 15C10.1869 15 13.125 12.0619 13.125 8.4375C13.125 8.1192 13.1023 7.80619 13.0585 7.5H11.9068C11.9598 7.80453 11.9875 8.11779 11.9875 8.4375C11.9875 11.4336 9.55865 13.8625 6.5625 13.8625C3.56636 13.8625 1.1375 11.4336 1.1375 8.4375C1.1375 5.44136 3.56636 3.0125 6.5625 3.0125C6.88221 3.0125 7.19547 3.04016 7.5 3.09321V1.94146Z"
-        fill="currentColor"
-      />
-      <path
-        d="M11.25 0.46875C11.25 0.209866 11.4599 0 11.7188 0C11.9776 0 12.1875 0.209867 12.1875 0.46875V5.15625C12.1875 5.41513 11.9776 5.625 11.7188 5.625C11.4599 5.625 11.25 5.41513 11.25 5.15625V0.46875Z"
-        fill="currentColor"
-      />
-      <path
-        d="M14.0625 2.34375C14.3214 2.34375 14.5312 2.55362 14.5312 2.8125C14.5312 3.07138 14.3214 3.28125 14.0625 3.28125L9.375 3.28125C9.11612 3.28125 8.90625 3.07138 8.90625 2.8125C8.90625 2.55362 9.11612 2.34375 9.375 2.34375L14.0625 2.34375Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
 function StarterSlackUserMessage({
   name,
   time,
@@ -349,7 +298,7 @@ function StarterSlackUserMessage({
           <span className="text-xs text-slack-secondary font-normal">{time}</span>
         </div>
         <div className="body-main text-slack font-normal">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -393,7 +342,7 @@ function StarterSlackViktorMessage({
           <span className="text-xs text-slack-secondary font-normal">{time}</span>
         </div>
         <div className="body-main text-slack font-normal">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );

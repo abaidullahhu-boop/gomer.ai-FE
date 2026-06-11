@@ -44,8 +44,8 @@ function ControlCard({ icon, title, body }: { icon: ReactNode; title: string; bo
     >
       {icon}
       <div className="flex flex-col gap-3">
-        <h3 className="body-medium text-primary">{title}</h3>
-        <p className="body-main text-secondary">{body}</p>
+        <h3 className="body-medium text-primary font-medium">{title}</h3>
+        <p className="body-main text-secondary font-medium">{body}</p>
       </div>
     </article>
   );

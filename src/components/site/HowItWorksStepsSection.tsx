@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import { SlackReactions } from "@/components/site/SlackReactions";
 
 const mayaAvatar =
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
@@ -100,7 +101,7 @@ function HowItWorksStepCard({
               <div className="flex min-h-[12.5rem] shrink-0 flex-col justify-start p-8">
                 <div className="flex flex-col items-start gap-3">
                   <h3 className="font-heading h5 text-primary">{title}</h3>
-                  <p className="body-main max-w-[21.875rem] text-secondary">{body}</p>
+                  <p className="body-main max-w-[21.875rem] text-secondary font-medium">{body}</p>
                 </div>
               </div>
             </div>
@@ -116,22 +117,6 @@ function SlackMention({ children }: { children: ReactNode }) {
     <span className="inline-block rounded-sm bg-slack-mention px-1 py-0.5 align-baseline whitespace-nowrap text-sm leading-snug text-slack-mention">
       {children}
     </span>
-  );
-}
-
-function SlackReactionPills({ reactions }: { reactions: { emoji: string; count: number }[] }) {
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((reaction) => (
-        <span
-          key={reaction.emoji}
-          className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill"
-        >
-          <span aria-hidden="true">{reaction.emoji}</span>
-          <span className="tabular-nums">{reaction.count}</span>
-        </span>
-      ))}
-    </div>
   );
 }
 
@@ -159,7 +144,7 @@ function SlackUserMessage({
           <span className="text-xs font-normal text-slack-secondary">{time}</span>
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -206,7 +191,7 @@ function SlackViktorMessage({
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
         {attachment}
-        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );

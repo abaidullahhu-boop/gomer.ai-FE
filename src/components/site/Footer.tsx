@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
 import footerWordmark from "../../assets/images/footer-wordmark.svg";
 
-type Item = { label: string; to: string; external?: boolean };
+type Item = { label: string; to: string; external?: boolean; newTab?: boolean };
 
 const colsRow1: { h: string; items: Item[] }[] = [
   {
@@ -54,8 +54,8 @@ const colsRow2: { h: string; items: Item[] }[] = [
   {
     h: "Terms & Docs",
     items: [
-      { label: "Terms of service", to: "/terms" },
-      { label: "Privacy Policy", to: "/privacy" },
+      { label: "Terms of service", to: "/terms", newTab: true },
+      { label: "Privacy Policy", to: "/privacy", newTab: true },
       { label: "Docs", to: "/docs" },
       { label: "Impressum", to: "/impressum" },
     ],
@@ -92,6 +92,14 @@ function Social({ label, href, d }: { label: string; href: string; d: string }) 
 function FooterLink({ item }: { item: Item }) {
   const className = "text-sm text-secondary transition-colors hover:text-primary";
 
+  if (item.newTab) {
+    return (
+      <a href={item.to} target="_blank" rel="noopener noreferrer" className={className}>
+        {item.label}
+      </a>
+    );
+  }
+
   if (item.external || item.to.startsWith("http://") || item.to.startsWith("https://")) {
     return (
       <a href={item.to} target="_blank" rel="noopener noreferrer" className={className}>
@@ -102,9 +110,9 @@ function FooterLink({ item }: { item: Item }) {
 
   if (item.to.includes("#")) {
     return (
-      <a href={item.to} className={className}>
+      <Link to={item.to} className={className}>
         {item.label}
-      </a>
+      </Link>
     );
   }
 

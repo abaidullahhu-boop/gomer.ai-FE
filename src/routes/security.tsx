@@ -60,132 +60,150 @@ export default function SecurityPage() {
 
 function HeroBadge({ icon, text }: { icon: string; text: string }) {
   return (
-    <div className="flex items-center gap-6 text-white/85 text-sm">
-      <img src={icon} alt="" className="w-12 h-12 shrink-0" aria-hidden />
-      {text}
-    </div>
+    <li className="flex items-center gap-4 whitespace-nowrap">
+      <img
+        src={icon}
+        alt=""
+        loading="lazy"
+        width={40}
+        height={40}
+        decoding="async"
+        className="size-10 shrink-0"
+        aria-hidden
+      />
+      <span className="body-small text-white font-medium">{text}</span>
+    </li>
   );
 }
 
 function SecurityHero() {
   return (
-    <>
-      <section className="relative bg-hero pt-6 overflow-visible rounded-b-[40px] pb-[15rem] lg:pb-[17rem]">
+    <section className="border-0 py-0!" id="hero">
+      <div className="relative w-full overflow-hidden rounded-b-section bg-primitive-main-beige">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-0 left-1/2 h-[44rem] w-screen max-w-none -translate-x-1/2 rounded-b-section gradient-dark-2 sm:h-[48rem] lg:h-[56.25rem]"
+        />
         <Nav />
-        <div className="relative mx-auto max-w-4xl px-2 sm:px-6 pt-40 text-center">
-          <h1 className="font-display text-white text-5xl md:text-7xl leading-[1.02] tracking-tight">
-            The security behind<br />
-            your <span className="text-[#ffbb98]">AI coworker.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg mx-auto text-white leading-relaxed">
-            Built so your credentials never touch the AI, every sensitive action waits for approval, and your data never trains a model.
-          </p>
+        <div className="hero-page-stack-pt relative z-10 mx-auto flex w-full max-w-[1440px] flex-col items-center gap-12 px-5 pb-16 text-center sm:px-10 sm:pb-20 md:px-14 lg:gap-20 lg:px-20 lg:pb-20">
+          <div className="flex w-full flex-col items-center gap-8 lg:gap-12 mt-16">
+            <div className="flex w-full max-w-[55.5rem] flex-col items-center gap-8">
+              <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
+                The security behind your{" "}
+                <span className="text-primitive-orange-500">AI employee.</span>
+              </h1>
+              <div className="flex w-full max-w-[34.1875rem] flex-col items-center gap-8">
+                <p className="max-w-[34.1875rem] body-main text-white sm:text-lg sm:leading-[1.4] font-medium">
+                  Built so your credentials never touch the AI, every sensitive action waits for approval, and your data never trains a model.
+                </p>
+                <GetStartedButton
+                  shadow
+                  className="inline-flex h-14 min-h-14 w-full items-center justify-center border border-white bg-white px-10 text-base tracking-[-0.01em] text-primitive-main-dark transition-all hover:opacity-90 active:translate-y-px sm:w-auto"
+                />
+              </div>
+            </div>
 
-          <div className="mt-10">
-            <GetStartedButton shadow />
+            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 lg:flex-nowrap lg:gap-8">
+              <HeroBadge icon={soc2Badge} text="SOC 2 compliant." />
+              <HeroBadge icon={gdprBadge} text="GDPR aligned" />
+              <HeroBadge icon={ccpaBadge} text="CCPA compliant" />
+              <HeroBadge icon={casaTier3Badge} text="CASA Tier 3 certified" />
+            </ul>
           </div>
 
-          <div className="mt-10 mb-16 flex flex-wrap justify-center gap-x-8 gap-y-3">
-            <HeroBadge icon={soc2Badge} text="SOC 2 compliant" />
-            <HeroBadge icon={gdprBadge} text="GDPR aligned" />
-            <HeroBadge icon={ccpaBadge} text="CCPA compliant" />
-            <HeroBadge icon={casaTier3Badge} text="CASA Tier 3 certified" />
-          </div>
-        </div>
-
-        {/* Card center sits on hero bottom edge — half purple, half beige */}
-        <div className="absolute bottom-0 left-1/2 z-20 w-full max-w-[42rem] -translate-x-1/2 translate-y-1/2 px-6">
-          <div className="w-full rounded-[32px] shadow-[0_16px_32px_0_rgba(26,24,41,0.16)]">
-            <div
-              className="relative h-full w-full overflow-hidden rounded-[32px]"
-              style={{ backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}
-            >
+          <div className="flex w-full max-w-[42rem] flex-col items-center gap-8 lg:gap-12">
+            <div className="w-full rounded-[32px] shadow-[0_16px_32px_0_rgba(26,24,41,0.16)]">
               <div
-                aria-hidden
-                className="pointer-events-none absolute inset-[20px] z-0"
-                style={{
-                  borderRadius: "inherit",
-                  background: "rgb(255, 255, 255)",
-                  filter: "blur(10px)",
-                }}
-              />
-              <div className="relative z-[1] h-full w-full rounded-[inherit]">
+                className="relative h-full w-full overflow-hidden rounded-[32px]"
+                style={{ backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}
+              >
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+                  className="pointer-events-none absolute inset-[20px] z-0"
                   style={{
-                    background:
-                      "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
+                    borderRadius: "inherit",
+                    background: "rgb(255, 255, 255)",
+                    filter: "blur(10px)",
                   }}
                 />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
-                  style={{
-                    background:
-                      "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
-                    mask: "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
-                    WebkitMask:
-                      "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
-                    padding: "1px",
-                  }}
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
-                  style={{ filter: "blur(5px)" }}
-                >
+                <div className="relative z-[1] h-full w-full rounded-[inherit]">
                   <div
-                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
                     style={{
                       background:
-                        "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
+                        "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
+                    }}
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+                    style={{
+                      background:
+                        "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
                       mask: "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
                       WebkitMask:
                         "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
-                      padding: "4px",
+                      padding: "1px",
                     }}
                   />
-                </div>
-                <div className="relative z-[2] flex h-full w-full flex-col justify-between">
-                  <div className="flex min-h-0 flex-col rounded-[inherit] pt-12 sm:min-h-[26rem] sm:pt-16 lg:min-h-[28.9375rem]">
-                    <div className="relative mx-auto w-full max-w-[438px] overflow-hidden rounded-t-[inherit]">
-                      <img
-                        src={securityHeroIllustration}
-                        alt=""
-                        aria-hidden
-                        width={502}
-                        height={264}
-                        decoding="async"
-                        className="h-auto w-full max-w-full"
-                      />
-                    </div>
-                    <div className="mt-auto flex flex-col gap-4 p-2 pb-10 text-left sm:p-8 sm:pb-14">
-                      <h2 className="font-heading text-xl font-bold leading-snug text-primitive-main-dark sm:text-2xl">
-                        Approved by Slack. Listed in the App Directory.
-                      </h2>
-                      <p className="text-sm leading-relaxed text-secondary">
-                        Viktor is published in the official Slack App Directory. That
-                        means our OAuth scopes, security posture, and store listing
-                        have been reviewed and approved by Slack before we were allowed
-                        to ship to customers through their store.
-                      </p>
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+                    style={{ filter: "blur(5px)" }}
+                  >
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                      style={{
+                        background:
+                          "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
+                        mask: "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
+                        WebkitMask:
+                          "linear-gradient(#fff, #fff) content-box exclude, linear-gradient(#fff, #fff)",
+                        padding: "4px",
+                      }}
+                    />
+                  </div>
+                  <div className="relative z-[2] flex h-full w-full flex-col justify-between">
+                    <div className="flex min-h-[26rem] flex-col rounded-[inherit] pt-16 lg:min-h-[28.9375rem]">
+                      <div className="relative mx-auto w-full max-w-[438px] overflow-hidden rounded-t-[inherit]">
+                        <img
+                          src={securityHeroIllustration}
+                          alt=""
+                          aria-hidden
+                          width={502}
+                          height={264}
+                          decoding="async"
+                          className="h-auto w-full max-w-full"
+                        />
+                      </div>
+                      <div className="mt-auto flex flex-col gap-4 p-6 text-left sm:p-8">
+                        <h2 className="font-heading h5 text-primitive-main-dark">
+                          Approved by Slack. Listed in the App Directory.
+                        </h2>
+                        <p className="body-main text-secondary font-medium">
+                          Viktor is published in the official Slack App Directory. That
+                          means our OAuth scopes, security posture, and store listing
+                          have been reviewed and approved by Slack before we were allowed
+                          to ship to customers through their store.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div className="w-full px-4 sm:px-8">
+              <p className="text-left body-main text-secondary font-medium">
+                One-click install from inside Slack. No infra to provision. No long
+                procurement detour just to start a pilot.
+              </p>
+            </div>
           </div>
         </div>
-      </section>
-
-      <div className="relative z-10 mx-auto w-full max-w-[42rem] px-10 sm:px-14 pt-[20rem] sm:pt-[16rem] lg:pt-[17rem] pb-16">
-        <p className="text-left text-sm leading-relaxed text-secondary">
-          One-click install from inside Slack. No infra to provision. No long
-          procurement detour just to start a pilot.
-        </p>
       </div>
-    </>
+    </section>
   );
 }
 
@@ -204,12 +222,12 @@ function AuditedTable() {
   return (
     <section className="p-2 sm:px-6 py-36">
       <div className="mx-auto max-w-6xl">
-        <p className="text-eyebrow-primitive-purple-700">Compliance</p>
+        <p className="text-eyebrow-primitive-purple-700 font-medium">Compliance</p>
         <div className="mt-4 grid md:grid-cols-[1fr_300px] gap-8 items-end">
           <h2 className="font-display text-4xl md:text-5xl leading-[1.05]">
             Independently audited.<br />Continuously verified.
           </h2>
-          <p className="text-muted-foreground text-xs leading-relaxed">
+          <p className="text-secondary text-md leading-relaxed font-medium">
             The audit reports are real, the controls are continuously monitored,
             and the next audit is always on the calendar.
           </p>
@@ -348,7 +366,7 @@ function DoesDoesNot() {
           <h2 className="font-display text-4xl md:text-6xl mt-4 leading-tight">
             What Viktor does.<br />What Viktor does not.
           </h2>
-          <p className="mt-5 text-muted-foreground max-w-xl mx-auto">
+          <p className="mt-5 text-secondary max-w-xl mx-auto font-medium">
             The audit reports are real, the controls are continuously monitored,
             and the next audit is always on the calendar.
           </p>
@@ -370,8 +388,8 @@ function DoesDoesNot() {
                   >
                     <DoesCheckIcon />
                     <div>
-                      <div className="font-semibold text-sm">{item.t}</div>
-                      <div className="mt-1 text-md text-muted-foreground leading-relaxed">{item.d}</div>
+                      <div className="font-medium text-xl">{item.t}</div>
+                      <div className="mt-1 text-md font-medium text-secondary leading-relaxed">{item.d}</div>
                     </div>
                   </div>
                   <div
@@ -380,8 +398,8 @@ function DoesDoesNot() {
                   >
                     <DoesNotXIcon />
                     <div>
-                      <div className="font-semibold text-sm">{notItem.t}</div>
-                      <div className="mt-1 text-md text-secondary leading-relaxed">{notItem.d}</div>
+                      <div className="font-medium text-xl">{notItem.t}</div>
+                      <div className="mt-1 text-md font-medium text-secondary leading-relaxed">{notItem.d}</div>
                     </div>
                   </div>
                 </div>
@@ -597,7 +615,7 @@ function RisksHandled() {
             <div className="flex flex-col gap-12 md:gap-14 xl:flex-row xl:items-start xl:justify-between xl:gap-[106px]">
               <div className="w-full xl:w-[434px] xl:pt-[42px]">
                 <div className="pb-4">
-                  <p className="text-sm text-[#f1edff]">AI Safety</p>
+                  <p className="text-sm text-[#f1edff] font-medium">AI Safety</p>
                 </div>
                 <h2 className="font-heading text-[36px] max-sm:text-[31.5px] leading-[1.1] font-bold tracking-[-0.06em] text-balance text-white sm:text-[40px] md:text-[44px] xl:text-[48px]">
                   AI brings new risks, and we know how to handle them
@@ -651,7 +669,7 @@ function RisksHandled() {
                               >
                                 <div className="min-h-0 overflow-hidden">
                                   <p
-                                    className="mt-1 text-sm leading-relaxed text-white/75"
+                                    className="mt-1 text-sm leading-relaxed text-white/75 font-medium"
                                     aria-hidden={!isActive}
                                   >
                                     {tab.description}
@@ -697,8 +715,8 @@ function RisksHandled() {
                           src={tab.visual}
                         />
                         <div className="relative z-10 mx-auto flex max-w-[454px] flex-col gap-5 text-center">
-                          <p className="text-sm leading-relaxed text-white">{tab.lead}</p>
-                          <p className="text-sm leading-relaxed text-white">{tab.subhead}</p>
+                          <p className="text-sm leading-relaxed text-white font-medium">{tab.lead}</p>
+                          <p className="text-sm leading-relaxed text-white font-medium">{tab.subhead}</p>
                         </div>
                       </div>
                     </div>
@@ -782,7 +800,7 @@ function Pillars() {
             Independently audited.<br />
             AI brings new risks, and we know how to handle them
           </h2>
-          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto font-medium">
             Three principles guide every security decision we make — control,
             visibility, and protection that's continuously tested.
           </p>
@@ -800,7 +818,7 @@ function Pillars() {
             >
               <p.icon />
               <div className="font-semibold text-lg">{p.title}</div>
-              <p className="text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              <p className="text-sm leading-relaxed text-secondary font-medium">{p.body}</p>
             </div>
           ))}
         </div>
@@ -862,8 +880,8 @@ function FoundSomething() {
         <div className="relative overflow-hidden rounded-[40px] bg-disclosure-card px-6 py-20 text-center">
           <svg width="499" height="386" viewBox="0 0 499 386" fill="none" aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-auto w-[min(32.3125rem,92vw)] max-w-none -translate-x-1/2 select-none"><defs><radialGradient id="ask-ai-keyhole-radial-_S_1_" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(249.268 249.267) rotate(90) scale(249.267 463.944)"><stop stop-color="white" stop-opacity="0.2"></stop><stop offset="1" stop-color="white"></stop></radialGradient><linearGradient id="ask-ai-keyhole-linear-_S_1_" x1="0" y1="0" x2="498.535" y2="498.536" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="0.248762" stop-color="white" stop-opacity="0"></stop><stop offset="0.749473" stop-color="white" stop-opacity="0"></stop><stop offset="1" stop-color="white"></stop></linearGradient><filter id="ask-ai-keyhole-bezel-blur-_S_1_" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur></filter><clipPath id="ask-ai-keyhole-clip-_S_1_"><path fill-rule="evenodd" clip-rule="evenodd" d="M82.0542 5.70306C85.5376 2.06036 90.3587 0 95.3987 0H403.138C408.179 0 412.998 2.06036 416.48 5.70306C426.566 16.2491 447.386 38.0361 465.474 75.8668C483.546 113.663 498.536 166.682 498.536 239.708C498.536 326.965 457.069 387 406.115 427.186C355.732 466.917 295.804 487.597 256.259 497.934C253.197 498.735 249.981 498.735 246.918 497.934C207.46 487.62 146.426 466.973 94.9127 427.319C42.849 387.237 0 327.191 0 239.708C0 166.682 14.9891 113.663 33.061 75.8668C51.149 38.0361 71.9693 16.2491 82.0542 5.70306ZM317.369 203.105C317.369 238.265 301.41 261.013 272.355 268.487V332.355C272.355 345.102 262.022 355.435 249.275 355.435C236.528 355.435 226.194 345.102 226.194 332.355V268.482C197.151 261.003 181.199 238.258 181.199 203.105C181.199 159.531 205.709 135.02 249.284 135.02C292.858 135.02 317.369 159.531 317.369 203.105Z"></path></clipPath></defs><g opacity="0.3"><g clip-path="url(#ask-ai-keyhole-clip-_S_1_)"><path fill-rule="evenodd" clip-rule="evenodd" d="M82.0542 5.70306C85.5376 2.06036 90.3587 0 95.3987 0H403.138C408.179 0 412.998 2.06036 416.48 5.70306C426.566 16.2491 447.386 38.0361 465.474 75.8668C483.546 113.663 498.536 166.682 498.536 239.708C498.536 326.965 457.069 387 406.115 427.186C355.732 466.917 295.804 487.597 256.259 497.934C253.197 498.735 249.981 498.735 246.918 497.934C207.46 487.62 146.426 466.973 94.9127 427.319C42.849 387.237 0 327.191 0 239.708C0 166.682 14.9891 113.663 33.061 75.8668C51.149 38.0361 71.9693 16.2491 82.0542 5.70306ZM317.369 203.105C317.369 238.265 301.41 261.013 272.355 268.487V332.355C272.355 345.102 262.022 355.435 249.275 355.435C236.528 355.435 226.194 345.102 226.194 332.355V268.482C197.151 261.003 181.199 238.258 181.199 203.105C181.199 159.531 205.709 135.02 249.284 135.02C292.858 135.02 317.369 159.531 317.369 203.105Z" fill="none" stroke="white" stroke-width="8" stroke-opacity="0.45" filter="url(#ask-ai-keyhole-bezel-blur-_S_1_)"></path></g><path fill-rule="evenodd" clip-rule="evenodd" d="M82.0542 5.70306C85.5376 2.06036 90.3587 0 95.3987 0H403.138C408.179 0 412.998 2.06036 416.48 5.70306C426.566 16.2491 447.386 38.0361 465.474 75.8668C483.546 113.663 498.536 166.682 498.536 239.708C498.536 326.965 457.069 387 406.115 427.186C355.732 466.917 295.804 487.597 256.259 497.934C253.197 498.735 249.981 498.735 246.918 497.934C207.46 487.62 146.426 466.973 94.9127 427.319C42.849 387.237 0 327.191 0 239.708C0 166.682 14.9891 113.663 33.061 75.8668C51.149 38.0361 71.9693 16.2491 82.0542 5.70306ZM317.369 203.105C317.369 238.265 301.41 261.013 272.355 268.487V332.355C272.355 345.102 262.022 355.435 249.275 355.435C236.528 355.435 226.194 345.102 226.194 332.355V268.482C197.151 261.003 181.199 238.258 181.199 203.105C181.199 159.531 205.709 135.02 249.284 135.02C292.858 135.02 317.369 159.531 317.369 203.105Z" fill="url(#ask-ai-keyhole-radial-_S_1_)" fill-opacity="0.2"></path><path d="M95.3984 0.5H403.138C408.042 0.5 412.731 2.50479 416.119 6.04883C426.192 16.5816 446.969 38.323 465.022 76.082C483.062 113.808 498.036 166.753 498.036 239.708C498.036 326.78 456.665 386.681 405.805 426.793C355.5 466.463 295.649 487.121 256.133 497.45H256.132C253.339 498.181 250.415 498.226 247.605 497.587L247.045 497.45C207.613 487.143 146.654 466.517 95.2178 426.923C43.2459 386.911 0.500065 327 0.5 239.708C0.5 166.753 15.4734 113.808 33.5117 76.082C51.5656 38.3227 72.3439 16.5815 82.416 6.04883C85.8051 2.5049 90.4951 0.500064 95.3984 0.5ZM249.284 134.521C227.405 134.521 210.241 140.675 198.548 152.368C186.854 164.062 180.699 181.226 180.699 203.104C180.699 220.754 184.703 235.337 192.394 246.456C200.022 257.486 211.251 265.067 225.694 268.866V332.354C225.694 345.378 236.251 355.935 249.274 355.936C262.298 355.936 272.854 345.378 272.854 332.354V268.871C287.304 265.074 298.537 257.493 306.169 246.463C313.862 235.343 317.868 220.758 317.868 203.104C317.868 181.226 311.714 164.062 300.021 152.368C288.327 140.675 271.163 134.521 249.284 134.521Z" fill="none" stroke="url(#ask-ai-keyhole-linear-_S_1_)" stroke-opacity="0.6"></path></g></svg>
           <div className="relative">
-            <p className="text-white/70 text-sm">Responsible disclosure</p>
-            <h2 className="font-display text-white text-4xl md:text-5xl mt-3">Found something? Tell us.</h2>
+            <p className="text-white/70 text-sm font-medium">Responsible disclosure</p>
+            <h2 className="font-display text-white text-4xl md:text-5xl mt-3 ">Found something? Tell us.</h2>
             <p className="mt-4 mx-auto max-w-md text-white/80 leading-relaxed">
               We run a responsible disclosure program and reward valid reports.
               Reach our security team directly — we read every message.
@@ -875,7 +893,7 @@ function FoundSomething() {
             </div>
           </div>
         </div>
-        <p className="mt-8 mx-auto max-w-2xl text-center text-sm text-muted-foreground leading-relaxed">
+        <p className="mt-8 mx-auto max-w-2xl text-center text-sm text-muted-foreground leading-relaxed font-medium">
           We are building a formal bug bounty program. In the meantime, we recognize meaningful security research with a thank you, public credit if you want it, and Viktor credits.
         </p>
       </div>

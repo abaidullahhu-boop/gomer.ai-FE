@@ -9,6 +9,7 @@ import {
 
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import { SlackReactions } from "@/components/site/SlackReactions";
 
 const sarahAvatar =
   "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
@@ -532,12 +533,7 @@ function BuildsSlackPreview() {
                     I need data from [obscure internal tool]. Here&apos;s the API docs:{" "}
                     <span className="text-slack-mention underline decoration-solid">[link]</span>
                   </div>
-                  <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-                    <span className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill">
-                      <span aria-hidden="true">⏳</span>
-                      <span className="tabular-nums">1</span>
-                    </span>
-                  </div>
+                  <SlackReactions initial={[{ emoji: "⏳", count: 1 }]} />
                 </div>
               </div>
 
@@ -571,16 +567,12 @@ function BuildsSlackPreview() {
                   <div className="body-main font-normal text-slack">
                     Got it. I&apos;ve built a custom connector for [tool]. I can now pull and push data. Want me to set up a daily sync?
                   </div>
-                  <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-                    <span className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill">
-                      <span aria-hidden="true">✅</span>
-                      <span className="tabular-nums">2</span>
-                    </span>
-                    <span className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill">
-                      <span aria-hidden="true">🚀</span>
-                      <span className="tabular-nums">1</span>
-                    </span>
-                  </div>
+                  <SlackReactions
+                    initial={[
+                      { emoji: "✅", count: 2 },
+                      { emoji: "🚀", count: 1 },
+                    ]}
+                  />
                 </div>
               </div>
             </div>
@@ -696,7 +688,7 @@ export function IntegrationsCapabilitiesSection() {
                       )}
                       <span className="relative z-10 flex items-center justify-center gap-4">
                         <span
-                          className={`transition-[color,opacity] duration-300 ${isActive ? "text-white opacity-100" : "text-primitive-main-grey opacity-45"}`}
+                          className={`transition-[color,opacity] duration-300 ${isActive ? "text-white opacity-100 font-medium" : "text-primitive-main-grey font-medium opacity-45"}`}
                         >
                           {tab.icon}
                         </span>
@@ -744,16 +736,16 @@ export function IntegrationsCapabilitiesSection() {
                       onClick={() => setActive(index)}
                       className={[
                         "relative z-10 flex items-center justify-center gap-4 rounded-full bg-transparent text-center whitespace-nowrap transition-[border-color,color] duration-300 h-12 body-main px-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
-                        isActive ? "text-white" : "text-primary",
+                        isActive ? "text-white font-medium" : "text-primary font-medium",
                       ].join(" ")}
                     >
                       <span className="relative z-10 flex items-center justify-center gap-4">
                         <span
-                          className={`transition-[color,opacity] duration-300 ${isActive ? "text-white opacity-50" : "text-primitive-main-grey opacity-50"}`}
+                          className={`transition-[color,opacity] duration-300 ${isActive ? "text-white opacity-50 font-medium" : "text-primitive-main-grey font-medium opacity-50"}`}
                         >
                           {tab.icon}
                         </span>
-                        <span>{tab.label}</span>
+                        <span className="font-medium">{tab.label}</span>
                       </span>
                     </button>
                   );

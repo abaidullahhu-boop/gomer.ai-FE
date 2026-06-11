@@ -3,6 +3,7 @@ import claudeAppIcon from "@/assets/images/claude-app-icon.png";
 import viktorMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import viktorAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const lisaAvatar =
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
@@ -10,26 +11,33 @@ const lisaAvatar =
 const HEADING_GRADIENT =
   "radial-gradient(125% 115% at 58% -8%, rgb(255, 187, 152) 0%, rgb(255, 187, 152) 7%, rgb(207, 160, 204) 29%, rgb(158, 132, 255) 51%, rgb(110, 71, 255) 80%, rgb(21, 0, 121) 100%)";
 
-const STEPS = [
+export type HowItWorksStep = {
+  number: string;
+  title: string;
+  body: string;
+  visual: "marketplace" | "slack-connect" | "slack-work";
+};
+
+const PRODUCT_STEPS: HowItWorksStep[] = [
   {
     number: "/01",
     title: "Add Viktor to your workspace",
     body: "Install the Slack app or the Microsoft Teams (soon) app. No servers to spin up, no code to write, no developer required.",
-    visual: "marketplace" as const,
+    visual: "marketplace",
   },
   {
     number: "/02",
     title: "Connect your tools",
     body: "Link the platforms your team already uses — CRM, analytics, ad platforms, project management, version control. Each integration authenticates through OAuth. One click per tool.",
-    visual: "slack-connect" as const,
+    visual: "slack-connect",
   },
   {
     number: "/03",
     title: "Just work",
     body: "Message Viktor the way you'd message a coworker. It pulls the relevant data, does the work in a secure cloud sandbox, and delivers the result — right back into your conversation.",
-    visual: "slack-work" as const,
+    visual: "slack-work",
   },
-] as const;
+];
 
 function GlassCardShell({ children }: { children: ReactNode }) {
   return (
@@ -147,55 +155,6 @@ function SlackMention({ children }: { children: ReactNode }) {
   );
 }
 
-type SlackReaction = { emoji: string; count: number };
-
-function SlackReactionPill({
-  emoji,
-  count,
-  onClick,
-}: {
-  emoji: string;
-  count: number;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed="false"
-      onClick={onClick}
-      className="inline-flex min-h-6 cursor-pointer items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-    >
-      <span aria-hidden="true">{emoji}</span>
-      <span className="tabular-nums">{count}</span>
-    </button>
-  );
-}
-
-function SlackReactions({ reactions: initial }: { reactions: SlackReaction[] }) {
-  const [reactions, setReactions] = useState(initial);
-
-  const increment = (emoji: string) => {
-    setReactions((prev) =>
-      prev.map((reaction) =>
-        reaction.emoji === emoji ? { ...reaction, count: reaction.count + 1 } : reaction,
-      ),
-    );
-  };
-
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((reaction) => (
-        <SlackReactionPill
-          key={reaction.emoji}
-          emoji={reaction.emoji}
-          count={reaction.count}
-          onClick={() => increment(reaction.emoji)}
-        />
-      ))}
-    </div>
-  );
-}
-
 function SlackUserMessage({
   name,
   time,
@@ -220,7 +179,7 @@ function SlackUserMessage({
           <span className="text-xs font-normal text-slack-secondary">{time}</span>
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -267,13 +226,13 @@ function SlackViktorMessage({
         </div>
         <div className="body-main space-y-3 font-normal text-slack">{body}</div>
         {attachment}
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
 }
 
-function StepVisual({ type }: { type: (typeof STEPS)[number]["visual"] }) {
+function StepVisual({ type }: { type: HowItWorksStep["visual"] }) {
   if (type === "marketplace") {
     return (
       <div className="min-w-0 overflow-hidden p-6 sm:p-8">
@@ -292,7 +251,7 @@ function StepVisual({ type }: { type: (typeof STEPS)[number]["visual"] }) {
           reactions={[{ emoji: "⏳", count: 1 }]}
           body={
             <>
-              <SlackMention>@Viktor</SlackMention> audit our Meta Ads and Google Ads spend. Compare vs last month.
+              <SlackMention>@Viktor</SlackMention><span className="text-white"> audit our Meta Ads and Google Ads spend. Compare vs last month.</span>
             </>
           }
         />
@@ -350,7 +309,7 @@ function StepVisual({ type }: { type: (typeof STEPS)[number]["visual"] }) {
   );
 }
 
-function HowItWorksStepCard({ step }: { step: (typeof STEPS)[number] }) {
+function HowItWorksStepCard({ step }: { step: HowItWorksStep }) {
   return (
     <article className="relative min-h-0 min-w-0 overflow-hidden rounded-section">
       <GlassCardShell>
@@ -358,15 +317,29 @@ function HowItWorksStepCard({ step }: { step: (typeof STEPS)[number] }) {
           <StepVisual type={step.visual} />
         </div>
         <div className="relative flex shrink-0 flex-col items-start gap-3 p-6 sm:p-8">
-          <p className="body-small text-primitive-orange-500">{step.number}</p>
+          <p className="body-small text-accent-2 font-medium">{step.number}</p>
           <h3 className="font-heading text-2xl max-sm:text-[1.3125rem] leading-[1.2] font-bold tracking-normal text-white">
             {step.title}
           </h3>
-          <p className="body-main text-white/70">{step.body}</p>
+          <p className="body-main text-white/70 font-medium">{step.body}</p>
         </div>
       </GlassCardShell>
     </article>
   );
+}
+
+function getHowItWorksPanelBackground(scrollProgress: number) {
+  const n = Math.min(1, Math.max(0, scrollProgress));
+  const t = 1 - n;
+  const e = Math.min(1, Math.max(0, t));
+
+  return {
+    backgroundColor: "#150079",
+    backgroundImage: `radial-gradient(ellipse ${128 + 18 * e}% ${108 + 32 * e}% at ${50 + (e - 0.5) * 7}% ${-8 + 5 * e}%, #ffbd9e 0%, #fdbca0 6%, #947fff 51%, #6748fd 80%, #150079 100%)`,
+    backgroundRepeat: "no-repeat" as const,
+    backgroundSize: `${103 + 12 * t}% ${218 + 95 * t}%`,
+    backgroundPosition: `${50 + (t - 0.5) * 10}% ${96 - 58 * t}%`,
+  };
 }
 
 function getCardMotion(needle: number, index: number) {
@@ -413,7 +386,15 @@ function getCardMotion(needle: number, index: number) {
   };
 }
 
-export function ProductHowItWorksSection() {
+export function HowItWorksScrollSection({
+  steps,
+  description,
+  sectionId,
+}: {
+  steps: HowItWorksStep[];
+  description?: string;
+  sectionId?: string;
+}) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
@@ -430,11 +411,12 @@ export function ProductHowItWorksSection() {
       const container = scrollRef.current;
       if (!container) return;
 
+      const stickyTop = Math.max(64, (window.innerHeight - 712) / 2);
       const { top, height } = container.getBoundingClientRect();
-      const scrollRange = height - window.innerHeight;
-      if (scrollRange <= 0) return;
+      if (height === 0) return;
 
-      const progress = Math.min(1, Math.max(0, -top / scrollRange));
+      const scrollRange = Math.max(height - window.innerHeight + stickyTop, 1);
+      const progress = Math.min(1, Math.max(0, (stickyTop - top) / scrollRange));
       setScrollProgress(progress);
     }
 
@@ -458,12 +440,13 @@ export function ProductHowItWorksSection() {
     };
   }, []);
 
-  const needle = scrollProgress * (STEPS.length - 1);
-  const activeStep = Math.min(STEPS.length - 1, Math.max(0, Math.round(needle)));
+  const needle = scrollProgress * (steps.length - 1);
+  const activeStep = Math.min(steps.length - 1, Math.max(0, Math.round(needle)));
+  const panelBackground = getHowItWorksPanelBackground(scrollProgress);
 
   return (
     <section
-      id="how-it-works"
+      id={sectionId}
       aria-label="How it works"
       className="relative bg-primitive-main-beige py-14 pt-16 pb-1 sm:py-[7rem] sm:pt-16 sm:pb-[7rem]"
     >
@@ -478,15 +461,12 @@ export function ProductHowItWorksSection() {
                   this easy.
                 </span>
               </h2>
-              <p className="body-main mt-6 text-secondary">
-                There is no prompt engineering. No workflow builder. No &quot;agent configuration.&quot; You describe what
-                you need in plain language. Viktor figures out how to do it.
-              </p>
+              {description ? <p className="body-main mt-6 text-secondary font-medium">{description}</p> : null}
             </div>
           </div>
 
           <div className="gradient-dark-2 flex min-w-0 w-full max-w-[min(630px,100%)] flex-col gap-8 rounded-section p-4 max-sm:-mx-4 max-sm:w-[calc(100%+2rem)] max-sm:max-w-none sm:p-8 min-[1360px]:hidden">
-            {STEPS.map((step) => (
+            {steps.map((step) => (
               <HowItWorksStepCard key={step.number} step={step} />
             ))}
           </div>
@@ -494,20 +474,13 @@ export function ProductHowItWorksSection() {
           <div ref={scrollRef} className="relative hidden min-w-0 w-full max-w-[min(630px,100%)] min-[1360px]:block min-[1360px]:h-[300vh]">
             <div
               className="sticky top-[max(64px,calc((100vh-712px)/2))] isolate flex min-h-0 min-w-0 items-center justify-center overflow-hidden rounded-section p-16"
-              style={{
-                backgroundColor: "#150079",
-                backgroundImage:
-                  "radial-gradient(146% 140% at 53.5% -3%, rgb(255, 189, 158) 0%, rgb(253, 188, 160) 6%, rgb(148, 127, 255) 51%, rgb(103, 72, 253) 80%, rgb(21, 0, 121) 100%)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "115% 313%",
-                backgroundPosition: "55% 38%",
-              }}
+              style={panelBackground}
             >
               <div
                 className="relative mx-auto grid w-full max-w-[502px] min-h-0 shrink-0 grid-rows-[minmax(0,1fr)] place-items-center [grid-template-areas:'stack']"
-                style={{ height: 597 }}
+                style={{ height: 574 }}
               >
-                {STEPS.map((step, i) => {
+                {steps.map((step, i) => {
                   const motion = getCardMotion(needle, i);
 
                   return (
@@ -537,5 +510,15 @@ export function ProductHowItWorksSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function ProductHowItWorksSection() {
+  return (
+    <HowItWorksScrollSection
+      sectionId="how-it-works"
+      steps={PRODUCT_STEPS}
+      description='There is no prompt engineering. No workflow builder. No "agent configuration." You describe what you need in plain language. Viktor figures out how to do it.'
+    />
   );
 }
