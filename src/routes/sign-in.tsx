@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
+import { startSlackLogin } from "@/lib/auth";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
@@ -33,7 +34,7 @@ export default function SignIn() {
           </div>
 
           <div className="flex w-full flex-col gap-3">
-            <button type="button" className={authButtonClass}>
+            <button type="button" className={authButtonClass} onClick={startSlackLogin}>
               <SlackIcon />
               Continue with Slack
             </button>

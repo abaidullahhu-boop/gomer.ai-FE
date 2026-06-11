@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PageMeta } from "@/components/PageMeta";
+import { startSlackLogin } from "@/lib/auth";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 import { CasaTier3Badge, CcpaBadge, GdprBadge, Soc2Badge } from "@/components/icons/compliance-badges";
 
@@ -106,7 +107,7 @@ export default function GetStarted() {
               </h1>
 
               <div className="flex w-full flex-col gap-3">
-                <button type="button" className={authButtonClass}>
+                <button type="button" className={authButtonClass} onClick={startSlackLogin}>
                   <SlackIcon />
                   Continue with Slack
                 </button>
