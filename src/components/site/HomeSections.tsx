@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Workflow, BarChart3, GitBranch, Globe, Users, ShieldCheck, Check } from "lucide-react";
-import claudeAppIcon from "@/assets/images/claude-app-icon.png";
-import viktorMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
-import chatgptIcon from "@/assets/images/chatgpt.svg";
+import { HowItWorksScrollSection, type HowItWorksStep } from "@/components/site/ProductHowItWorksSection";
+import askaiWordmark from "@/assets/images/askai-wordmark-color.svg";
+import chatgptLogo from "@/assets/images/chatgpt.svg";
+import claudeLogo from "@/assets/images/claude.svg";
+import perplexityLogo from "@/assets/images/perplexity.svg";
 
 function CapabilityRow({
   eyebrow, icon: Icon, title, body, bullets, visual, reverse, eyebrowNoBg,
@@ -118,231 +120,29 @@ export function ReportsAnalytics() {
   );
 }
 
-const HOW_IT_WORKS_STEPS = [
+const HOME_HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
   {
     number: "/01",
     title: "Connect",
     body: "Install Viktor from the Slack App Directory or Microsoft Teams. Connect your tools: Stripe, Notion, Google Ads, whatever you use. Takes 2 minutes.",
+    visual: "marketplace",
   },
   {
     number: "/02",
-    title: "Delegate",
-    body: "Message Viktor in Slack like you'd message a teammate. Describe the outcome — reports, audits, campaigns — no workflows to build.",
+    title: "Ask",
+    body: 'Talk to Viktor like a colleague. "Pull our Meta Ads data and compare vs. last month." "Create a Linear issue for the pricing update." "Build me a revenue dashboard."',
+    visual: "slack-connect",
   },
   {
     number: "/03",
-    title: "Ship",
-    body: "Viktor pulls data, runs the work, and delivers finished output right in your channel. You review, approve, and move on.",
+    title: "Viktor delivers",
+    body: "Viktor queries your tools, analyzes data, and delivers real outputs: PDFs, spreadsheets, web apps, code. He also schedules recurring tasks and proposes automations you didn't think to ask for.",
+    visual: "slack-work",
   },
-] as const;
-
-function MarketplaceApps() {
-  return (
-    <div className="p-6 space-y-3">
-      <div className="flex items-center gap-3 py-1">
-        <img src={claudeAppIcon} alt="" className="w-10 h-10 rounded-full shrink-0 object-cover" />
-        <div className="min-w-0">
-          <div className="font-semibold text-sm text-white">Claude</div>
-          <div className="text-xs text-white/60 leading-snug">
-            Anthropic&apos;s AI agent for any task, think, write, and code with Claude.
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
-        <img src={viktorMarketplaceAvatar} alt="" className="w-10 h-10 rounded-full shrink-0" />
-        <div className="min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-semibold text-sm text-[#0a1128]">Viktor</span>
-            <span className="px-2 py-0.5 rounded-full bg-sky-100 text-sky-600 text-[10px] font-semibold inline-flex items-center gap-1">
-              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                <path d="M2.5 7C1.12 7 0 5.88 0 4.5 0 3.12 1.12 2 2.5 2c.28-1.24 1.44-2 2.5-2s2.22.76 2.5 2C8.88 2 10 3.12 10 4.5 10 5.88 8.88 7 7.5 7H2.5Z" fill="currentColor" />
-              </svg>
-              Salesforce Partner
-            </span>
-          </div>
-          <div className="text-xs text-[#0a1128]/60">Your AI employee in Slack</div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3 py-1">
-        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
-          <img src={chatgptIcon} alt="" className="w-5 h-5" />
-        </div>
-        <div className="min-w-0">
-          <div className="font-semibold text-sm text-white">ChatGPT</div>
-          <div className="text-xs text-white/60 leading-snug">
-            ChatGPT in Slack: Search, write, summarize and get work done.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function HowItWorksCard({ number, title, body }: { number: string; title: string; body: string }) {
-  return (
-    <div className="rounded-[28px] bg-white/10 backdrop-blur-xl border border-white/20 p-4 w-full max-w-sm shadow-[0_20px_60px_-20px_rgba(60,40,180,0.4)]">
-      <MarketplaceApps />
-      <div className="relative flex shrink-0 flex-col items-start gap-3 p-6 sm:p-8">
-        <p className="body-small text-[#ffbb98]">{number}</p>
-        <h3 className="font-heading text-2xl max-sm:text-[1.3125rem] leading-[1.2] font-bold tracking-normal text-white">{title}</h3>
-        <p className="body-main text-white/70">{body}</p>
-      </div>
-    </div>
-  );
-}
-
-function getHowItWorksCardMotion(needle: number, index: number) {
-  const distance = needle - index;
-  const exitX = -64;
-  const exitY = 96;
-  const enterX = 48;
-  const enterY = 112;
-
-  if (distance >= 1) {
-    return {
-      opacity: 0,
-      transform: `translate(${exitX}px, ${exitY}px) rotate(-12deg) scale(0.96)`,
-      zIndex: 10,
-      pointerEvents: "none" as const,
-    };
-  }
-
-  if (distance <= -1) {
-    return {
-      opacity: 0,
-      transform: `translate(${enterX}px, ${enterY}px) rotate(12deg) scale(0.98)`,
-      zIndex: 10,
-      pointerEvents: "none" as const,
-    };
-  }
-
-  if (distance >= 0) {
-    const t = distance;
-    return {
-      opacity: 1 - t,
-      transform: `translate(${exitX * t}px, ${exitY * t}px) rotate(${-12 * t}deg) scale(${1 - 0.04 * t})`,
-      zIndex: t < 0.5 ? 30 : 20,
-      pointerEvents: t < 0.5 ? ("auto" as const) : ("none" as const),
-    };
-  }
-
-  const t = distance + 1;
-  return {
-    opacity: t,
-    transform: `translate(${enterX * (1 - t)}px, ${enterY * (1 - t)}px) rotate(${12 * (1 - t)}deg) scale(${0.98 + 0.02 * t})`,
-    zIndex: t > 0.5 ? 30 : 10,
-    pointerEvents: t > 0.5 ? ("auto" as const) : ("none" as const),
-  };
-}
+];
 
 export function AppBuilder() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const lgQuery = window.matchMedia("(min-width: 1024px)");
-
-    function updateScrollProgress() {
-      if (!lgQuery.matches) {
-        setScrollProgress(0);
-        return;
-      }
-
-      const container = scrollRef.current;
-      if (!container) return;
-
-      const { top, height } = container.getBoundingClientRect();
-      const scrollRange = height - window.innerHeight;
-      if (scrollRange <= 0) return;
-
-      const progress = Math.min(1, Math.max(0, -top / scrollRange));
-      setScrollProgress(progress);
-    }
-
-    function onScroll() {
-      if (rafRef.current !== null) return;
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        updateScrollProgress();
-      });
-    }
-
-    updateScrollProgress();
-    lgQuery.addEventListener("change", onScroll);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      lgQuery.removeEventListener("change", onScroll);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  const needle = scrollProgress * (HOW_IT_WORKS_STEPS.length - 1);
-
-  return (
-    <section className="px-2 md:px-6 py-24 bg-section-cream">
-      <div ref={scrollRef} className="mx-auto max-w-7xl sm:px-12 max-lg:min-h-0 lg:min-h-[300vh]">
-        <div className="lg:sticky lg:top-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="pl-[108px] max-lg:pl-0 max-lg:px-4">
-              <div className="inline-flex items-center gap-2 text-violet-700 text-xs">
-                How it works
-              </div>
-              <h3 className="font-heading text-[40px] max-sm:text-[35px] leading-[1.1] font-bold tracking-normal text-[#1a182b] sm:text-5xl">
-                Hiring your first AI employee has never been{" "}
-                <span
-                  className="bg-clip-text leading-[1.1] text-transparent"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(125% 115% at 58% -8%, rgb(255, 187, 152) 0%, rgb(255, 187, 152) 7%, rgb(207, 160, 204) 29%, rgb(158, 132, 255) 51%, rgb(110, 71, 255) 80%, rgb(21, 0, 121) 100%)",
-                  }}
-                >
-                  this easy.
-                </span>
-              </h3>
-            </div>
-
-            <div className="max-lg:flex lg:hidden flex-col gap-6 w-full px-2 sm:px-0">
-              {HOW_IT_WORKS_STEPS.map((step) => (
-                <div
-                  key={step.number}
-                  className="rounded-3xl bg-hero p-6 sm:p-8 shadow-xl flex justify-center"
-                >
-                  <HowItWorksCard {...step} />
-                </div>
-              ))}
-            </div>
-
-            <div className="max-lg:hidden lg:flex relative overflow-hidden rounded-3xl bg-hero p-8 min-h-[560px] h-[640px] shadow-xl">
-              {HOW_IT_WORKS_STEPS.map((step, i) => {
-                const motion = getHowItWorksCardMotion(needle, i);
-
-                return (
-                  <div
-                    key={step.number}
-                    className="absolute right-20 top-20 will-change-transform"
-                    style={{
-                      opacity: motion.opacity,
-                      transform: motion.transform,
-                      zIndex: motion.zIndex,
-                      pointerEvents: motion.pointerEvents,
-                    }}
-                  >
-                    <HowItWorksCard {...step} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <HowItWorksScrollSection steps={HOME_HOW_IT_WORKS_STEPS} />;
 }
 
 export function Engineering() {
@@ -499,34 +299,81 @@ export function SecurityCompliance() {
   );
 }
 
+const ASK_AI_QUERY =
+  "I'm evaluating Viktor, the AI employee for Slack and Microsoft Teams (Viktor.com). What does he do, what are his strengths and weaknesses, and who is he best for?";
+
+const ASK_AI_OPTIONS = [
+  {
+    name: "Ask ChatGPT",
+    logo: chatgptLogo,
+    link: `https://chatgpt.com/?q=${encodeURIComponent(ASK_AI_QUERY)}`,
+  },
+  {
+    name: "Ask Perplexity",
+    logo: perplexityLogo,
+    link: `https://www.perplexity.ai/search?q=${encodeURIComponent(ASK_AI_QUERY)}`,
+  },
+  {
+    name: "Ask Claude",
+    logo: claudeLogo,
+    link: `https://claude.ai/new?q=${encodeURIComponent(ASK_AI_QUERY)}`,
+  },
+];
+
 export function AskAI() {
-  const options = [
-    { name: "Ask ChatGPT", icon: "💬", link: "https://chatgpt.com" },
-    { name: "Ask Perplexity", icon: "🔎", link: "https://perplexity.com" },
-    { name: "Ask Claude", icon: "✳️", link: "https://claude.com" },
-  ];
   return (
-    <section className="smpx-6 pt-2 sm:pt-32 sm:pb-10 bg-section-cream">
-      <div className="mx-auto max-w-7xl sm:px-12">
-        <div className="relative overflow-hidden rounded-[40px] bg-ask-card px-6 py-16 text-center">
-        <span className="pointer-events-none absolute inset-x-0 top-[90%] -translate-y-1/2 text-center font-display text-[26vw] leading-none text-white/5 select-none">            VIKTOR
-          </span>
-          <div className="relative">
-            <p className="text-white/70 text-sm">Don't take our word for it</p>
-            <h2 className="font-display text-white text-4xl md:text-5xl mt-4">Ask AI about Viktor</h2>
-            <p className="mt-8 mx-auto max-w-md text-white/80 leading-relaxed">
-              Pick your favorite AI and ask what it thinks about Viktor. No filter, no spin.
-            </p>
-            <div className="cursor-pointer mt-10 flex flex-wrap justify-center gap-4">
-              {options.map((o) => (
-                <button
-                  key={o.name}
-                  className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-md font-medium text-foreground shadow-lg hover:bg-white/95 transition"
-                  onClick={() => window.open(o.link, "_blank")}
-                >
-                  <span>{o.icon}</span> {o.name}
-                </button>
-              ))}
+    <section className="bg-primary py-1 sm:py-[7rem]">
+      <div className="px-4 sm:px-6 md:px-12 lg:px-20">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="dark relative flex min-h-[25.8125rem] w-full flex-col items-center justify-center overflow-hidden rounded-section px-6 py-12 text-center max-sm:-mx-4 max-sm:w-[calc(100%+2rem)] sm:px-10 sm:py-16 lg:px-16 gradient-dark-1">
+            <img
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              src={askaiWordmark}
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[46rem] max-w-none opacity-90"
+            />
+            <div className="relative z-10 flex w-full flex-col items-center gap-16">
+              <div className="flex w-full flex-col items-center gap-8">
+                <div className="flex w-full flex-col items-center">
+                  <div className="pb-4">
+                    <p className="body-small text-[#f1edff] font-medium">Don't take our word for it</p>
+                  </div>
+                  <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
+                    Ask AI about Viktor
+                  </h2>
+                </div>
+                <p className="body-main max-w-[35.625rem] text-white opacity-80 font-medium">
+                  Pick your favorite AI and ask what it thinks about Viktor.
+                  <br className="hidden sm:block" />
+                  <span className="sm:hidden"> </span>
+                  No filter, no spin.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-start justify-center gap-x-4 gap-y-3">
+                {ASK_AI_OPTIONS.map((option) => (
+                  <a
+                    key={option.name}
+                    href={option.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center gap-2.5 rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-[#292737] transition-all hover:bg-white/95 active:translate-y-px sm:w-auto"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      width={20}
+                      height={20}
+                      decoding="async"
+                      src={option.logo}
+                      className="size-5 brightness-0"
+                    />
+                    {option.name}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { Search, X } from "lucide-react";
+import { SlackReactions } from "@/components/site/SlackReactions";
 import {
   integrationDirectoryItems,
   type IntegrationDirectoryItem,
@@ -260,7 +261,7 @@ function IntegrationDirectory() {
               {showAll ? "Show less" : "Show more"}
             </button>
           )}
-          <p className="w-full body-small text-secondary">
+          <p className="w-full body-small text-secondary font-medium">
             Don&apos;t see your tool? Viktor connects to 3,200+ tools via managed connectors. If
             it&apos;s not here, Viktor can build a custom integration. Just ask.
           </p>
@@ -429,7 +430,7 @@ export default function IntegrationsPage() {
                 <h2 className="font-heading h3 text-balance text-primary">
                   Multiple accounts? Connect them all.
                 </h2>
-                <p className="body-main max-w-[25.875rem] text-secondary">
+                <p className="body-main max-w-[25.875rem] text-secondary font-medium">
                   Got two Stripe accounts? Three Gmail inboxes? A staging and production GitHub? Connect
                   them all. Viktor keeps them separate with dedicated tools per connection. No confusion,
                   no crossed wires.
@@ -579,22 +580,6 @@ function SlackMention({ children }: { children: ReactNode }) {
   );
 }
 
-function SlackReactionPills({ reactions }: { reactions: { emoji: string; count: number }[] }) {
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((reaction) => (
-        <span
-          key={reaction.emoji}
-          className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill"
-        >
-          <span aria-hidden="true">{reaction.emoji}</span>
-          <span className="tabular-nums">{reaction.count}</span>
-        </span>
-      ))}
-    </div>
-  );
-}
-
 function SlackUserMessage({
   name,
   time,
@@ -619,7 +604,7 @@ function SlackUserMessage({
           <span className="text-xs font-normal text-slack-secondary">{time}</span>
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -666,7 +651,7 @@ function SlackViktorMessage({
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
         {attachment}
-        {reactions && reactions.length > 0 && <SlackReactionPills reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );

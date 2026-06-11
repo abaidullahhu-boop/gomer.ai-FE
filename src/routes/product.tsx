@@ -108,7 +108,7 @@ function Hero() {
               <br />
               <span className="text-accent-1">for your entire team.</span>
             </h1>
-            <p className="max-w-[34.1875rem] body-medium text-secondary">
+            <p className="max-w-[34.1875rem] body-medium text-secondary font-medium">
               Viktor doesn&apos;t just answer questions. It does the work: pulling reports, managing
               campaigns, building dashboards, researching leads, automating workflows, and writing code.
               Like a new hire that already knows your stack.
@@ -451,8 +451,8 @@ function SectionHowDifferent() {
                 <div className="flex flex-col gap-8">
                   <div>{c.icon}</div>
                   <div className="flex flex-col gap-3">
-                    <h3 className="body-medium text-primary">{c.title}</h3>
-                    <p className="body-small text-secondary">{c.desc}</p>
+                    <h3 className="body-medium text-primary font-medium">{c.title}</h3>
+                    <p className="body-small text-secondary font-medium">{c.desc}</p>
                   </div>
                 </div>
               </CapabilityCard>

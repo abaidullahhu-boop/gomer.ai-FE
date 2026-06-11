@@ -20,8 +20,8 @@
 
 @font-face {
   font-family: UlmGrotesk;
-  src: url(./assets/fonts/UlmGrotesk-Bold.woff2) format("woff2");
-  font-weight: 700;
+  src: url(./assets/fonts/UlmGrotesk-Bold.otf) format("opentype");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -51,6 +51,16 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-sidebar-background: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-shell: var(--shell);
+  --color-highlight: var(--highlight);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
   --color-peach: var(--hero-peach);
   --color-violet-soft: var(--hero-violet);
   --color-indigo-deep: var(--hero-indigo);
@@ -61,6 +71,8 @@
   --color-primitive-purple-700: var(--primitive-purple-700);
   --color-primitive-purple-500: var(--primitive-purple-500);
   --color-accent-1: var(--primitive-purple-500);
+  --color-cream: #faf8f5;
+  --color-cobalt: #2563eb;
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
@@ -109,6 +121,17 @@
   --input: oklch(0.9 0.015 270);
   --ring: oklch(0.68 0.18 295);
 
+  --sidebar-background: #fff;
+  --sidebar-foreground: oklch(0.45 0.02 270);
+  --sidebar-primary-foreground: oklch(0.18 0.03 270);
+  --sidebar-accent: oklch(0.92 0.01 270);
+  --sidebar-border: oklch(0.92 0.01 270);
+  --shell: oklch(0.98 0.005 270);
+  --highlight: #8a63e3;
+  --success: oklch(0.95 0.052 163);
+  --success-foreground: oklch(0.596 0.145 163);
+  --warning: oklch(0.75 0.183 55);
+
   --hero-peach: oklch(0.92 0.08 55);
   --hero-violet: oklch(0.62 0.20 290);
   --hero-indigo: oklch(0.28 0.18 275);
@@ -119,7 +142,7 @@
   --font-heading: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
 
   --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #ffbb98  0%, #ffbb98 6.43%, #9e84ff  50.71%, #6e47ff 80.36%, #150079 100%);
-  --gradient-dark2: radial-gradient(ellipse 160% 120% at 52% -24%, #ffbd9e 0%, #fdbca0 6%, #947fff 51%, #6748fd 80%, #150079 100%);
+  --gradient-dark2: radial-gradient(145.58% 104.75% at 52.06% -4.35%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 6.43%, var(--primitive-purple-300) 50.71%, var(--primitive-purple-500) 80.36%, var(--primitive-main-dblue) 100%);
   --gradient-dark3: radial-gradient(283.63% 201.39% at 31.42% -99.18%, #ffbd9e 0%, #fdbca0 6.43%, #947fff 50.71%, #6748fd 80.36%, #150079 100%), #d9d9d9;
   --gradient-disclosure: radial-gradient(108.79% 100% at 50% 0%, rgba(255, 187, 152, 0.2) 0%, rgba(255, 187, 152, 0) 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9e84ff 0%, #8666ff 18.26%, #6e47ff 36.52%, #5835de 52.39%, #4224bc 68.26%, #2b129b 84.13%, #20098a 92.07%, #150079 100%);
 
@@ -174,9 +197,36 @@
   --integrations-hero-surface: var(--surface-hero-primary);
 }
 
+.dashboard-shell {
+  --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
+  --font-body: Gellix, ui-sans-serif, sans-serif;
+  font-family: var(--font-sans);
+}
+
+.dashboard-shell :where(
+  .text-xs,
+  .text-sm,
+  .body-small,
+  [class~="text-[11px]"],
+  [class~="text-[15px]"]
+) {
+  font-family: var(--font-body);
+}
+
+.dashboard-shell :where(
+  .text-base.text-muted-foreground,
+  .text-base.leading-6,
+  .text-base.leading-relaxed
+) {
+  font-family: var(--font-body);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+  html, body, #root {
+    height: 100%;
   }
   html, body {
     background-color: var(--color-background);
@@ -186,6 +236,7 @@
   }
   .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.035em; }
   .font-heading { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.035em; }
+  .font-body { font-family: var(--font-body, Gellix, ui-sans-serif, sans-serif); }
   .typo-h2, .h2 {
     font-family: var(--font-display);
     font-weight: 700;
@@ -357,6 +408,18 @@
   .min-h-76 { min-height: 12rem; }
   .bg-primitive-purple-100 { background-color: var(--primitive-purple-100); }
   .bg-section-cream { background-color: oklch(0.97 0.012 70); }
+  .bg-cream { background-color: var(--color-cream); }
+  .text-cream { color: var(--color-cream); }
+  .bg-cobalt { background-color: var(--color-cobalt); }
+  .text-cobalt { color: var(--color-cobalt); }
+  .hover\:bg-cobalt:hover { background-color: var(--color-cobalt); }
+  .selection\:bg-cobalt ::selection,
+  .selection\:bg-cobalt::selection { background-color: var(--color-cobalt); }
+  .selection\:text-cream ::selection,
+  .selection\:text-cream::selection { color: var(--color-cream); }
+  .font-support-serif {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  }
   .text-accent-1 { color: var(--primitive-purple-500); }
   .text-accent-2 { color: var(--primitive-orange-500); }
   .text-secondary { color: var(--primitive-main-grey); }
@@ -389,8 +452,8 @@
   .slack-message-viktor {
     border-radius: 12px;
     box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.08),
-      0 2px 6px rgba(0, 0, 0, 0.05);
+      0 10px 28px rgba(0, 0, 0, 0.11),
+      0 4px 10px rgba(0, 0, 0, 0.07);
   }
   .slack-viktor-bg-mount {
     isolation: isolate;
@@ -650,6 +713,34 @@
     border-radius: 999px;
     background: #9693a3;
   }
+
+  .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #d4d4d8 transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #d4d4d8;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: #a1a1aa;
+  }
 }
 
 @utility bg-hero {
@@ -679,6 +770,20 @@
 @utility gradient-comparison-tab-active {
   background: var(--gradient-dark2);
   color: #fff;
+}
+
+@utility viktor-focus-ring {
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-sidebar-background), 0 0 0 4px var(--ring);
+  }
+}
+
+@utility viktor-focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
 @utility viktor-auth-gradient {
@@ -729,6 +834,11 @@
 .viktor-glass-card > * {
   position: relative;
   z-index: 2;
+}
+
+.viktor-focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .creators-credits-grid-width {

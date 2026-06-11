@@ -19,7 +19,7 @@ export default function BlogPage() {
         <Nav heroTone="light" />
       </div>
 
-      <main className="mx-auto max-w-6xl px-2 sm:px-8 pt-48 pb-24">
+      <main className="mx-auto max-w-6xl px-2 sm:px-12 pt-44 pb-24">
         <header className="text-left px-2 sm:px-24 mx-auto">
           <h1 className="font-display text-6xl md:text-7xl tracking-tight leading-[1]">Blog</h1>
           <p className="mt-6 text-primary font-medium text-lg">
@@ -29,7 +29,7 @@ export default function BlogPage() {
 
         <Link
           to={`/blog/${featured.slug}`}
-          className="block mt-28 rounded-[30px] overflow-hidden bg-hero p-10 md:p-14 text-white shadow-xl dark flex min-h-[22rem] flex-col justify-end gap-3 overflow-hidden p-8 text-contrast gradient-dark-2 transition-transform duration-300 hover:-translate-y-1 sm:min-h-[24rem] sm:p-12 lg:min-h-[29rem] lg:px-20 lg:py-16"
+          className="block mt-28 rounded-[30px] overflow-hidden bg-hero py-12 px-12 md:p-14 text-white shadow-xl dark flex min-h-[22rem] flex-col justify-end gap-3 overflow-hidden p-8 text-contrast gradient-dark-2 transition-transform duration-300 hover:-translate-y-1 sm:min-h-[24rem] sm:p-12 lg:min-h-[29rem] lg:px-20 lg:py-16"
         >
           <h2 className="font-display text-3xl md:text-5xl leading-[1.05] max-w-2xl">
             {featured.title}
@@ -59,30 +59,7 @@ export default function BlogPage() {
           ))}
         </section>
 
-        <nav className="mt-14 flex items-center justify-center gap-2 text-sm">
-          <button className="px-3 py-1.5 rounded-full text-muted-foreground hover:text-foreground">
-            Prev
-          </button>
-          {[1, 2, 3, 4].map((n) => (
-            <button
-              key={n}
-              className={`w-9 h-9 rounded-full font-semibold ${
-                n === 1
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-secondary"
-              }`}
-            >
-              {n}
-            </button>
-          ))}
-          <span className="px-1 text-muted-foreground">…</span>
-          <button className="w-9 h-9 rounded-full text-muted-foreground hover:bg-secondary font-semibold">
-            39
-          </button>
-          <button className="px-3 py-1.5 rounded-full text-muted-foreground hover:text-foreground">
-            Next
-          </button>
-        </nav>
+       
       </main>
 
       <Footer />

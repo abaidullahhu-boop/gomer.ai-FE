@@ -1,14 +1,13 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const sarahAvatar =
   "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
 
-type SlackReaction = { emoji: string; count: number };
-
 function EyebrowBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex h-5 w-fit shrink-0 items-center justify-center rimitive-purple-200 bg-primitive-purple-50 px-2 py-0.5 text-xs font-medium text-primitive-purple-700">
+    <span className="inline-flex h-5 w-fit shrink-0 items-center justify-center rimitive-purple-200 text-xs font-medium text-primitive-purple-700">
       {children}
     </span>
   );
@@ -72,53 +71,6 @@ function SlackMention({ children }: { children: ReactNode }) {
   );
 }
 
-function SlackReactionPill({
-  emoji,
-  count,
-  onClick,
-}: {
-  emoji: string;
-  count: number;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed="false"
-      onClick={onClick}
-      className="inline-flex min-h-6 cursor-pointer items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-    >
-      <span aria-hidden="true">{emoji}</span>
-      <span className="tabular-nums">{count}</span>
-    </button>
-  );
-}
-
-function SlackReactions({ reactions: initial }: { reactions: SlackReaction[] }) {
-  const [reactions, setReactions] = useState(initial);
-
-  const increment = (emoji: string) => {
-    setReactions((prev) =>
-      prev.map((reaction) =>
-        reaction.emoji === emoji ? { ...reaction, count: reaction.count + 1 } : reaction,
-      ),
-    );
-  };
-
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((reaction) => (
-        <SlackReactionPill
-          key={reaction.emoji}
-          emoji={reaction.emoji}
-          count={reaction.count}
-          onClick={() => increment(reaction.emoji)}
-        />
-      ))}
-    </div>
-  );
-}
-
 function SlackUserMessage({
   name,
   time,
@@ -143,7 +95,7 @@ function SlackUserMessage({
           <span className="text-xs font-normal text-slack-secondary">{time}</span>
         </div>
         <div className="body-main font-normal text-slack">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -193,7 +145,7 @@ function SlackViktorMessage({
         <div className="body-main font-normal text-slack">{body}</div>
         {attachment}
         {actions}
-        {reactions && reactions.length > 0 && <SlackReactions reactions={reactions} />}
+        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
       </div>
     </div>
   );
@@ -260,7 +212,7 @@ function UseCaseCopy({
         <h2 className="font-heading h4 text-balance text-primary">{title}</h2>
       </div>
       <div className="flex flex-col gap-3">
-        <p className="body-main text-secondary">{description}</p>
+        <p className="body-main text-secondary font-medium">{description}</p>
       </div>
       <div className="flex items-center">{tools}</div>
     </div>

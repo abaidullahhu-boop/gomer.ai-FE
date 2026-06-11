@@ -139,7 +139,7 @@ function EnterpriseHeroPoint({ icon, label }: { icon: ReactNode; label: string }
 function PricingHeroPoint({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className="flex shrink-0 items-center gap-4">
-      <span className="inline-flex text-primitive-main-white">{icon}</span>
+      <span className="inline-flex text-white">{icon}</span>
       <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-white">{label}</p>
     </div>
   );
@@ -167,7 +167,7 @@ export function PricingHeroPoints({
       <div aria-hidden="true" className="relative h-12 w-full shrink-0 overflow-hidden sm:hidden">
         <div className="h-12 overflow-hidden">
           <div key={activeIndex} className="flex h-12 min-h-12 w-full animate-logo-slide-up items-center justify-center gap-4">
-            <span className="inline-flex text-primitive-main-white">{activeBadge.icon}</span>
+            <span className="inline-flex text-white">{activeBadge.icon}</span>
             <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-white">
               {activeBadge.label}
             </p>

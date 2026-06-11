@@ -55,7 +55,7 @@ export default function DocsPage() {
                   <nav className="flex flex-col gap-2" aria-label="Getting Started documentation">
                     <a
                       href="#getting-started"
-                      className="body-small transition-colors text-accent-1"
+                      className="body-small transition-colors text-accent-1 font-medium"
                       aria-current="page"
                     >
                       Getting Started with Viktor

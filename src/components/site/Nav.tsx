@@ -97,8 +97,8 @@ function NavGlassLayers() {
 function Caret({ open, closedClass, openClass }: { open: boolean; closedClass: string; openClass: string }) {
   return (
     <svg
-      width="11"
-      height="11"
+      width="12"
+      height="12"
       viewBox="0 0 12 12"
       className={`transition-transform duration-200 ${open ? `rotate-180 ${openClass}` : closedClass}`}
       aria-hidden="true"
@@ -217,25 +217,27 @@ function MobileNavAccordion({
   caretOpenClass: string;
 }) {
   return (
-    <div className="border-b border-black/[0.06] last:border-b-0">
+    <div className="">
       <button
         type="button"
         aria-expanded={open}
         onClick={onToggle}
-        className="flex w-full items-center justify-between py-4 text-[15px] font-medium text-foreground"
+        className="cursor-pointer flex w-full items-center justify-between py-4 text-xl text-foreground font-medium"
       >
         {label}
         <Caret open={open} closedClass={caretClosedClass} openClass={caretOpenClass} />
       </button>
       {open && (
-        <div className="flex flex-col gap-2 pb-3 pl-1">
+        <div className="mb-3 flex flex-col gap-1 rounded-2xl bg-[#f5f5f5] px-4 py-3">
           {items.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               onClick={onNavigate}
               className={({ isActive }) =>
-                `${dropdownLinkClass} text-foreground/70${isActive ? " bg-black/[0.06] text-foreground" : ""}`
+                `rounded-xl px-1 py-2 text-xl font-medium text-[#2d2e32] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none${
+                  isActive ? " bg-black/[0.06]" : ""
+                }`
               }
             >
               {item.label}
@@ -254,7 +256,7 @@ function MenuToggleButton({ open, onClick }: { open: boolean; onClick: () => voi
       aria-label={open ? "Close menu" : "Open menu"}
       aria-expanded={open}
       onClick={onClick}
-      className="flex h-8 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1A1829] text-white transition-opacity hover:opacity-90"
+      className="cursor-pointer flex h-8 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1A1829] text-white transition-opacity hover:opacity-90"
     >
       {open ? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -433,7 +435,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
                   <Link
                     to="/enterprise"
                     onClick={closeMobileMenu}
-                    className="flex items-center border-b border-black/[0.06] py-4 text-[15px] font-medium text-foreground"
+                    className="flex items-center py-4 text-xl font-medium text-foreground"
                   >
                     Enterprise
                   </Link>

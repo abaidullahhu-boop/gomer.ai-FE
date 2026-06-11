@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { BarChart3, CalendarClock, Coins } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
@@ -12,6 +12,7 @@ import { PricingHeroPoints } from "@/components/site/HeroBadges";
 import { CreditsPowerHeadline } from "@/components/site/CreditsPowerHeadline";
 import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import fullProjectsImageTabs from "@/assets/images/full-projects-image-tabs.avif";
+import { SlackReactions } from "@/components/site/SlackReactions";
 
 export default function PricingPage() {
   return (
@@ -86,91 +87,6 @@ function SlackMention({ children }: { children: ReactNode }) {
   );
 }
 
-function AddReactionIcon() {
-  return (
-    <svg aria-hidden="true" className="size-[15px] shrink-0 text-[var(--slack-add-reaction-icon)]" fill="none" viewBox="0 0 15 15" width="15" height="15">
-      <path d="M5.625 6.5625C5.625 7.08027 5.20527 7.5 4.6875 7.5C4.16973 7.5 3.75 7.08027 3.75 6.5625C3.75 6.04473 4.16973 5.625 4.6875 5.625C5.20527 5.625 5.625 6.04473 5.625 6.5625Z" fill="currentColor" />
-      <path d="M9.375 6.5625C9.375 7.08027 8.95527 7.5 8.4375 7.5C7.91973 7.5 7.5 7.08027 7.5 6.5625C7.5 6.04473 7.91973 5.625 8.4375 5.625C8.95527 5.625 9.375 6.04473 9.375 6.5625Z" fill="currentColor" />
-      <path d="M4.0106 10.1568C3.8824 9.77219 4.16867 9.375 4.57409 9.375H8.55091C8.95633 9.375 9.24261 9.77219 9.1144 10.1568L9.03043 10.4087C8.67634 11.471 7.68223 12.1875 6.5625 12.1875C5.44277 12.1875 4.44866 11.471 4.09457 10.4087L4.0106 10.1568Z" fill="currentColor" />
-      <path d="M7.5 1.94146C7.19381 1.89766 6.8808 1.875 6.5625 1.875C2.93813 1.875 0 4.81313 0 8.4375C0 12.0619 2.93813 15 6.5625 15C10.1869 15 13.125 12.0619 13.125 8.4375C13.125 8.1192 13.1023 7.80619 13.0585 7.5H11.9068C11.9598 7.80453 11.9875 8.11779 11.9875 8.4375C11.9875 11.4336 9.55865 13.8625 6.5625 13.8625C3.56636 13.8625 1.1375 11.4336 1.1375 8.4375C1.1375 5.44136 3.56636 3.0125 6.5625 3.0125C6.88221 3.0125 7.19547 3.04016 7.5 3.09321V1.94146Z" fill="currentColor" />
-      <path d="M11.25 0.46875C11.25 0.209866 11.4599 0 11.7188 0C11.9776 0 12.1875 0.209867 12.1875 0.46875V5.15625C12.1875 5.41513 11.9776 5.625 11.7188 5.625C11.4599 5.625 11.25 5.41513 11.25 5.15625V0.46875Z" fill="currentColor" />
-      <path d="M14.0625 2.34375C14.3214 2.34375 14.5312 2.55362 14.5312 2.8125C14.5312 3.07138 14.3214 3.28125 14.0625 3.28125L9.375 3.28125C9.11612 3.28125 8.90625 3.07138 8.90625 2.8125C8.90625 2.55362 9.11612 2.34375 9.375 2.34375L14.0625 2.34375Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function SlackReactionPill({
-  emoji,
-  count,
-  onClick,
-}: {
-  emoji: string;
-  count: number;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed="false"
-      onClick={onClick}
-      className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[#f8f5f1] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill cursor-pointer transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-    >
-      <span aria-hidden="true">{emoji}</span>
-      <span className="tabular-nums">{count}</span>
-    </button>
-  );
-}
-
-function SlackAddReaction({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      aria-label="Add reaction"
-      onClick={onClick}
-      className="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs text-slack-reaction-pill shrink-0 justify-center cursor-pointer h-full transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-    >
-      <AddReactionIcon />
-    </button>
-  );
-}
-
-function SlackReactions({
-  initial,
-}: {
-  initial: { emoji: string; count: number }[];
-}) {
-  const [reactions, setReactions] = useState(initial);
-
-  const increment = (emoji: string) => {
-    setReactions((prev) =>
-      prev.map((r) => (r.emoji === emoji ? { ...r, count: r.count + 1 } : r)),
-    );
-  };
-
-  const addReaction = () => {
-    setReactions((prev) => {
-      const heart = prev.find((r) => r.emoji === "❤️");
-      if (heart) {
-        return prev.map((r) => (r.emoji === "❤️" ? { ...r, count: r.count + 1 } : r));
-      }
-      return [...prev, { emoji: "❤️", count: 1 }];
-    });
-  };
-
-  if (reactions.length === 0) return null;
-
-  return (
-    <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-      {reactions.map((r) => (
-        <SlackReactionPill key={r.emoji} emoji={r.emoji} count={r.count} onClick={() => increment(r.emoji)} />
-      ))}
-      <div className="relative flex self-stretch">
-        <SlackAddReaction onClick={addReaction} />
-      </div>
-    </div>
-  );
-}
-
 function SlackUserMessage({
   name,
   time,
@@ -195,7 +111,12 @@ function SlackUserMessage({
           <span className="text-xs text-slack-secondary font-normal">{time}</span>
         </div>
         <div className="body-main text-slack font-normal">{body}</div>
-        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
+        {reactions && reactions.length > 0 && (
+          <SlackReactions
+            initial={reactions}
+            pillClassName="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[#f8f5f1] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill cursor-pointer transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
+          />
+        )}
       </div>
     </div>
   );
@@ -220,7 +141,7 @@ function SlackViktorMessage({
     <div
       data-variant="viktor"
       data-highlighted={isPlain ? "false" : "true"}
-      className={`relative flex w-full text-left isolate overflow-hidden slack-message-viktor gap-2 px-[var(--slack-message-pad-x)] py-4 ${
+      className={`relative flex w-full text-left isolate overflow-hidden gap-2 px-[var(--slack-message-pad-x)] py-4 ${
         isPlain ? "shadow-none rounded-none! bg-transparent!" : ""
       }`}
     >
@@ -250,7 +171,12 @@ function SlackViktorMessage({
         </div>
         <div className="body-main text-slack font-normal">{body}</div>
         {attachment}
-        {reactions && reactions.length > 0 && <SlackReactions initial={reactions} />}
+        {reactions && reactions.length > 0 && (
+          <SlackReactions
+            initial={reactions}
+            pillClassName="inline-flex min-h-6 items-center gap-1 rounded-full border-0 bg-[#f8f5f1] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill cursor-pointer transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
+          />
+        )}
       </div>
     </div>
   );
@@ -374,7 +300,7 @@ function CreditPowerCard({
             <div className="relative z-10 w-full min-w-0 flex-1 overflow-visible flex flex-col items-end gap-0 pl-6 pt-6 max-lg:pr-0 max-lg:pb-0 sm:pl-8 sm:pt-8 lg:min-h-[400px] md:flex-row lg:items-end lg:justify-end lg:p-0">
               <FullProjectsTabsImage />
               <div className="relative z-10 w-full shrink-0 md:w-[353px] md:max-w-full">
-                <div className="relative w-full box-border rounded-2xl rounded-tr-none rounded-bl-none shadow-[0_12px_40px_-12px_rgba(26,24,41,0.2)] h-auto max-w-full overflow-visible backdrop-blur-[10px]">
+                <div className="relative w-full box-border rounded-[34px] shadow-[0_12px_40px_-12px_rgba(26,24,41,0.2)] h-auto max-w-full overflow-visible backdrop-blur-[10px]">
                   <ConicGradientCardShell className="min-h-0">
                     <div className="relative z-[2] box-border flex w-full flex-col items-end p-4">
                       <div className="min-w-0 flex w-full flex-col items-end">
@@ -523,7 +449,7 @@ function HowCreditsWork() {
     <section className="px-2 md:px-6 pb-12">
       <div className="mx-auto max-w-5xl">
         <h2 className="font-display text-3xl md:text-4xl">How credits work</h2>
-        <p className="mt-3 text-muted-foreground text-sm max-w-md">
+        <p className="mt-3 text-secondary text-sm max-w-md font-medium">
           Credits are model costs, passed through. Smart caching brings them down.
         </p>
 
@@ -540,8 +466,8 @@ function HowCreditsWork() {
               <div className="w-10 h-10 flex items-center justify-center">
                 {it.icon}
               </div>
-              <div className="mt-4 font-semibold">{it.title}</div>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.body}</p>
+              <div className="mt-4 font-medium">{it.title}</div>
+              <p className="mt-2 text-sm font-medium text-secondary leading-relaxed">{it.body}</p>
             </div>
           ))}
 

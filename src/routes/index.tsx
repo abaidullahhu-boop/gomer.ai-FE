@@ -14,10 +14,10 @@ import {
 } from "@/components/site/HomeSections";
 import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
-import { HeroBadges } from "@/components/site/HeroBadges";
+import { PricingHeroPoints, landingHeroBadges } from "@/components/site/HeroBadges";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-
-const trustedLogos = ["Squibler", "True Classic", "Accel", "Ridge", "LYFEfuel"];
+import { LogoWall } from "@/components/site/LogoWall";
+import { SlackReactions } from "@/components/site/SlackReactions";
 
 const toolLogos = ["Slack", "Zapier", "ClickUp", "GitHub", "HubSpot"];
 
@@ -45,61 +45,81 @@ export default function Index() {
         ogTitle="Viktor — Not a tool. A hire."
         ogDescription="The AI coworker that ships real work in Slack and Teams."
       />
-      {/* HERO with peach->violet->indigo gradient */}
-      <section className="relative pt-6 pb-14 overflow-hidden rounded-b-2xl bg-hero">
-        <Nav />
-        <div className="relative mx-auto max-w-5xl px-6 pt-40 text-center">
-          <div className="inline-flex items-center gap-3 px-4 pb-4 pt-4 rounded-full text-white/95 text-sm">
-            <div className="flex space-x-2 pr-1">
-              <img src={slackLogo} alt="Slack" className="w-4 h-4" />
-              <img src={microsoftLogo} alt="Microsoft Teams" className="w-4 h-4" />
+      <section className="border-0 py-0!" id="hero">
+        <div className="relative w-full overflow-hidden rounded-b-section">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 left-1/2 h-[56.25rem] w-screen max-w-none -translate-x-1/2 rounded-b-section gradient-dark-2"
+          />
+          <Nav />
+          <div className="hero-page-stack-pt relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-14 px-3 sm:px-5 pb-14 sm:gap-16 sm:px-10 sm:pb-16 md:px-14 md:pb-20 lg:gap-20 lg:px-20">
+            <div className="flex w-full mt-13 sm:mt-16 flex-col items-center gap-8 text-center">
+              <div className="flex w-full flex-col items-center gap-2">
+                <div
+                  data-slot="workspace-counter"
+                  className="inline-flex max-h-10 max-w-full items-center gap-4 rounded-full border-0 bg-transparent px-6 py-2 text-white [&_span]:text-white"
+                >
+                  <span className="flex shrink-0 items-center gap-2" aria-hidden="true">
+                    <img src={slackLogo} alt="" width={16} height={16} className="size-4 shrink-0" />
+                    <img src={microsoftLogo} alt="" width={16} height={16} className="size-4 shrink-0" />
+                  </span>
+                  <span className="body-small font-medium min-w-0 truncate">30,000+ workspaces hired Viktor</span>
+                </div>
+
+                <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
+                  <span className="block">Not a tool.</span>
+                  <span className="block">A hire.</span>
+                </h1>
+              </div>
+
+              <div className="flex max-w-136.75 flex-col items-center gap-8">
+                <p className="text-lg leading-[1.4] font-medium text-white">
+                  Viktor is the AI employee that connects to 3,200+ tools and does the work. Reports, dashboards, code, campaigns.
+                </p>
+
+                <div className="flex w-full flex-col items-center gap-3">
+                  <GetStartedButton className="inline-flex h-14 min-h-14 w-full items-center justify-center border border-white bg-white px-10 text-base tracking-[-0.01em] text-primitive-main-dark transition-all hover:opacity-90 active:translate-y-px sm:w-auto" />
+                  <a
+                    href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/70 underline underline-offset-4 hover:text-white"
+                  >
+                    or talk to sales →
+                  </a>
+                </div>
+              </div>
             </div>
-            
-            <span className="text-white font-medium">30,000+ workspaces hired Viktor </span>
+
+            <div className="flex w-full flex-col justify-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-8 [--text-primary:var(--primitive-main-white)]">
+              <PricingHeroPoints badges={landingHeroBadges} />
+            </div>
+
+            <div className="flex w-full flex-col gap-10">
+              <LogoWall />
+
+              <div className="grid w-full gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-x-5 lg:gap-y-0">
+                <FeatureCard
+                  title="Real output, not just text."
+                  body="Viktor doesn't brainstorm. He ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
+                  visual={<ChatPreview />}
+                  contentClassName="pr-4"
+                />
+                <FeatureCard
+                  title="One message, all your tools."
+                  body="Stripe, Meta Ads, Notion, GitHub. Viktor queries them all in a single run. No tab-switching, no CSV exports."
+                  visual={<ToolIconsVisual />}
+                  visualOverflow
+                />
+                <FeatureCard
+                  title="Never repeat yourself."
+                  body="Every conversation makes Viktor smarter about your business. He remembers what worked, what didn't, and how you like things done."
+                  visual={<FollowUpPreview />}
+                  visualAlign="end"
+                />
+              </div>
+            </div>
           </div>
-
-          <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
-            Not a tool.<br />A hire.
-          </h1>
-
-          <p className="mt-8 mx-auto max-w-136.75 font-medium text-white text-lg leading-[1.4]">
-            Viktor is the AI employee that connects to 3,200+ tools and does the work. Reports, dashboards, code, campaigns.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <GetStartedButton />
-            <a className="text-white/80 text-sm underline underline-offset-4">or talk to sales →</a>
-          </div>
-
-          <HeroBadges />
-
-          <div className="mt-20 mb-6">
-            <LogoMarquee logos={trustedLogos} />
-          </div>
-        </div>
-      </section>
-
-      {/* OUTPUT / FEATURES — visuals overlap hero bottom */}
-      <section className="relative z-10 overflow-x-clip bg-section-cream px-4 pb-24 md:px-4 lg:px-20">
-        <div className="mx-auto grid w-full max-w-7xl min-w-0 gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-x-5 lg:gap-y-0">
-          <FeatureCard
-            title="Real output, not just text."
-            body="Viktor doesn't brainstorm. It ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
-            visual={<ChatPreview />}
-            contentClassName="pr-4"
-          />
-          <FeatureCard
-            title="One message, all your tools."
-            body="Stripe, Meta Ads, Notion, GitHub. Viktor queries them all in a single run. No tab-switching, no CSV exports."
-            visual={<ToolIconsVisual />}
-            visualOverflow
-          />
-          <FeatureCard
-            title="Never repeat yourself."
-            body="Every conversation makes Viktor smarter about your business. It remembers what worked, what didn't, and how you like things done."
-            visual={<FollowUpPreview />}
-            visualAlign="end"
-          />
         </div>
       </section>
 
@@ -129,61 +149,6 @@ export default function Index() {
   );
 }
 
-const LOGO_REVEAL_MS = 900;
-const LOGO_HOLD_MS = 2500;
-
-function logoRevealOrder(count: number): number[] {
-  const order: number[] = [];
-  for (let group = 0; group * 3 < count; group++) {
-    const base = group * 3;
-    for (const i of [base, base + 2, base + 1]) {
-      if (i < count) order.push(i);
-    }
-  }
-  return order;
-}
-
-function logoRevealDelay(slotIndex: number, count: number) {
-  const pos = logoRevealOrder(count).indexOf(slotIndex);
-  return (pos >= 0 ? pos : slotIndex) * (LOGO_REVEAL_MS / 1000);
-}
-
-function LogoMarquee({ logos }: { logos: string[] }) {
-  const count = logos.length;
-  const revealOrder = logoRevealOrder(count);
-  const [offset, setOffset] = useState(0);
-
-  const batch = Array.from({ length: count }, (_, i) => logos[(offset + i) % logos.length]);
-
-  useEffect(() => {
-    const cycleMs = revealOrder.length * LOGO_REVEAL_MS + LOGO_HOLD_MS;
-    const t = setInterval(() => setOffset((o) => (o + 1) % logos.length), cycleMs);
-    return () => clearInterval(t);
-  }, [logos.length, revealOrder.length]);
-
-  return (
-    <div className="flex flex-wrap items-center justify-center gap-y-4">
-      <span className="text-white/70 text-sm shrink-0 mr-6 md:mr-10">Trusted by:</span>
-      <div className="flex items-center justify-center">
-        {batch.map((name, i) => (
-          <div key={i} className="flex items-center">
-            {i > 0 && <div className="w-px h-8 bg-white/25 mx-5 md:mx-8 shrink-0" aria-hidden />}
-            <div className="h-10 overflow-hidden flex items-center justify-center">
-              <span
-                key={`${offset}-${i}`}
-                className="animate-logo-slide-up text-white/80 text-lg md:text-2xl font-display whitespace-nowrap"
-                style={{ animationDelay: `${logoRevealDelay(i, count)}s` }}
-              >
-                {name}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 const annaAvatar =
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
 const lisaAvatar =
@@ -194,7 +159,7 @@ const stevenAvatar =
 function FeatureGlassCardShell({ children }: { children: ReactNode }) {
   return (
     <article className="relative h-full min-h-96 overflow-hidden rounded-section">
-      <div className="h-full min-h-96 w-full overflow-hidden rounded-[inherit] backdrop-blur-[20px]">
+      <div className="h-full min-h-96 w-full overflow-hidden rounded-[35px] backdrop-blur-[20px]">
         <div className="relative h-full w-full overflow-hidden rounded-[inherit]">
           <div
             aria-hidden="true"
@@ -272,7 +237,7 @@ function FeatureCard({
         <div className={`shrink-0 p-8 ${contentClassName}`}>
           <div className="flex flex-col gap-4">
             <h5 className="font-heading h5 text-primitive-main-dark">{title}</h5>
-            <p className="body-main text-secondary">{body}</p>
+            <p className="body-main text-secondary font-medium">{body}</p>
           </div>
         </div>
       </div>
@@ -331,7 +296,7 @@ function SlackViktorMessage({
     <div
       data-variant="viktor"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-4 text-left slack-message-viktor"
     >
       <div aria-hidden="true" className="slack-viktor-bg-mount">
         <div className="slack-viktor-layer-glass-stack" />
@@ -392,8 +357,7 @@ function integrationRelativeSlot(logoIndex: number, activeIndex: number, count: 
 function IntegrationLogoCard({ children, featured }: { children: ReactNode; featured?: boolean }) {
   return (
     <div
-      className="flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-[filter,opacity] duration-[50ms] ease-out"
-      style={featured ? undefined : { filter: "blur(2px)", opacity: 0.9 }}
+      className={`flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-opacity duration-[50ms] ease-out ${featured ? "opacity-100" : "opacity-90"}`}
     >
       <div className="flex size-full items-center justify-center overflow-hidden rounded-[inherit] px-2 py-2">
         {children}
@@ -404,22 +368,17 @@ function IntegrationLogoCard({ children, featured }: { children: ReactNode; feat
 
 function ToolIconsVisual() {
   const count = INTEGRATION_WHEEL_LOGOS.length;
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [displayIndex, setDisplayIndex] = useState(0);
-  const rotation = activeIndex * (360 / count);
+  const [step, setStep] = useState(0);
+  const activeIndex = ((step % count) + count) % count;
+  const rotation = step * (360 / count);
   const stepEase = `transform ${INTEGRATION_STEP_MS}ms cubic-bezier(0.45, 0, 0.2, 1)`;
 
   useEffect(() => {
     const t = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % count);
+      setStep((s) => s + 1);
     }, INTEGRATION_STEP_HOLD_MS);
     return () => clearInterval(t);
-  }, [count]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setDisplayIndex(activeIndex), INTEGRATION_STEP_MS);
-    return () => clearTimeout(t);
-  }, [activeIndex]);
+  }, []);
 
   return (
     <div className="relative h-full min-h-0 w-full flex-1 overflow-hidden" aria-hidden="true">
@@ -440,7 +399,7 @@ function ToolIconsVisual() {
         >
           {INTEGRATION_WHEEL_LOGOS.map((logo, i) => {
             const angle = (i / count) * 360;
-            const slot = integrationRelativeSlot(i, displayIndex, count);
+            const slot = integrationRelativeSlot(i, activeIndex, count);
             const featured = slot === 0;
 
             return (
@@ -551,32 +510,7 @@ function FollowUpPreview() {
             <SlackMention>@Viktor</SlackMention> any updates?
           </>
         }
-        reactions={
-          <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
-            <button
-              type="button"
-              aria-pressed="false"
-              className="inline-flex min-h-6 cursor-pointer items-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-xs font-normal text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-            >
-              <span aria-hidden="true">👀</span>
-              <span className="tabular-nums">1</span>
-            </button>
-            <button
-              type="button"
-              aria-label="Add reaction"
-              className="inline-flex min-h-6 shrink-0 cursor-pointer items-center justify-center gap-1 rounded-full border-0 bg-[var(--slack-reaction-pill-bg)] px-2 py-0.5 text-slack-reaction-pill transition-colors hover:bg-[var(--slack-reaction-pill-hover-bg)]"
-            >
-              <svg aria-hidden="true" className="size-[15px] shrink-0 text-[var(--slack-add-reaction-icon)]" fill="none" viewBox="0 0 15 15" width="15" height="15">
-                <path d="M5.625 6.5625C5.625 7.08027 5.20527 7.5 4.6875 7.5C4.16973 7.5 3.75 7.08027 3.75 6.5625C3.75 6.04473 4.16973 5.625 4.6875 5.625C5.20527 5.625 5.625 6.04473 5.625 6.5625Z" fill="currentColor" />
-                <path d="M9.375 6.5625C9.375 7.08027 8.95527 7.5 8.4375 7.5C7.91973 7.5 7.5 7.08027 7.5 6.5625C7.5 6.04473 7.91973 5.625 8.4375 5.625C8.95527 5.625 9.375 6.04473 9.375 6.5625Z" fill="currentColor" />
-                <path d="M4.0106 10.1568C3.8824 9.77219 4.16867 9.375 4.57409 9.375H8.55091C8.95633 9.375 9.24261 9.77219 9.1144 10.1568L9.03043 10.4087C8.67634 11.471 7.68223 12.1875 6.5625 12.1875C5.44277 12.1875 4.44866 11.471 4.09457 10.4087L4.0106 10.1568Z" fill="currentColor" />
-                <path d="M7.5 1.94146C7.19381 1.89766 6.8808 1.875 6.5625 1.875C2.93813 1.875 0 4.81313 0 8.4375C0 12.0619 2.93813 15 6.5625 15C10.1869 15 13.125 12.0619 13.125 8.4375C13.125 8.1192 13.1023 7.80619 13.0585 7.5H11.9068C11.9598 7.80453 11.9875 8.11779 11.9875 8.4375C11.9875 11.4336 9.55865 13.8625 6.5625 13.8625C3.56636 13.8625 1.1375 11.4336 1.1375 8.4375C1.1375 5.44136 3.56636 3.0125 6.5625 3.0125C6.88221 3.0125 7.19547 3.04016 7.5 3.09321V1.94146Z" fill="currentColor" />
-                <path d="M11.25 0.46875C11.25 0.209866 11.4599 0 11.7188 0C11.9776 0 12.1875 0.209867 12.1875 0.46875V5.15625C12.1875 5.41513 11.9776 5.625 11.7188 5.625C11.4599 5.625 11.25 5.41513 11.25 5.15625V0.46875Z" fill="currentColor" />
-                <path d="M14.0625 2.34375C14.3214 2.34375 14.5312 2.55362 14.5312 2.8125C14.5312 3.07138 14.3214 3.28125 14.0625 3.28125L9.375 3.28125C9.11612 3.28125 8.90625 3.07138 8.90625 2.8125C8.90625 2.55362 9.11612 2.34375 9.375 2.34375L14.0625 2.34375Z" fill="currentColor" />
-              </svg>
-            </button>
-          </div>
-        }
+        reactions={<SlackReactions initial={[{ emoji: "👀", count: 1 }]} />}
       />
       <SlackViktorMessage time="2:43 PM" body="No response from Acme. Smells fishy. 🐟" />
       <SlackViktorMessage time="2:43 PM" body="I just followed up with them" />

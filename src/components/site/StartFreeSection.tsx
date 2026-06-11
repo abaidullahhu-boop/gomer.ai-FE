@@ -69,7 +69,7 @@ export function StartFreeSection({
             <div className="flex flex-col justify-between">
               <div>
                 <h2 className="font-display text-white text-3xl leading-[1.05]">{title}</h2>
-                <p className="mt-6 text-white max-w-md leading-relaxed">{description}</p>
+                <p className="mt-6 text-white max-w-md leading-relaxed font-medium">{description}</p>
               </div>
               <div className="mt-10 md:mt-0 flex flex-wrap gap-4">
                 <GetStartedButton
@@ -88,7 +88,7 @@ export function StartFreeSection({
             </div>
             <ul className="divide-y divide-white/15 md:pl-10">
               {points.map((p) => (
-                <li key={p} className="flex items-center gap-3.5 py-8 text-lg text-white first:pt-0 last:pb-0">
+                <li key={p} className="flex items-center gap-3.5 py-8 text-lg text-white first:pt-0 last:pb-0 font-medium">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full">
                     <CheckIcon />
                   </span>
