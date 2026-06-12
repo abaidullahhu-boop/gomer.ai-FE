@@ -4,6 +4,8 @@ import { NotFound } from "@/components/NotFound";
 import Index from "@/routes/index";
 import BlogPage from "@/routes/blog";
 import BlogPostPage from "@/routes/blog.post";
+import ResearchPage from "@/routes/research";
+import ResearchPostPage from "@/routes/research.post";
 import BrandPage from "@/routes/brand";
 import CaseStudiesPage from "@/routes/case-studies";
 import ChangelogPage from "@/routes/changelog";
@@ -54,6 +56,8 @@ export default function App() {
         <Route path="/" element={<Index />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/research" element={<ResearchPage />} />
+        <Route path="/research/:slug" element={<ResearchPostPage />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/changelog" element={<ChangelogPage />} />
