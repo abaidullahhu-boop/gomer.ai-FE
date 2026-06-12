@@ -35,7 +35,7 @@ function SecondaryButton({ children }: { children: React.ReactNode }) {
   return (
     <button
       type="button"
-      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[#F4F4F5] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
     >
       {children}
     </button>
@@ -44,7 +44,7 @@ function SecondaryButton({ children }: { children: React.ReactNode }) {
 
 function EmailPill({ email, onRemove }: { email: string; onRemove: () => void }) {
   return (
-    <div className="inline-flex h-7 items-center gap-2 rounded-full border border-border bg-[#f8ece1] px-2 text-xs font-medium text-secondary">
+    <div className="inline-flex h-7 items-center gap-2 rounded-full border border-border bg-secondary px-2 text-xs font-medium text-secondary-foreground">
       {email}
       <button
         type="button"
@@ -136,7 +136,7 @@ export default function DashboardAccount() {
                     </span>
                   </div>
                 </div>
-                <div className="flex w-full items-center justify-start border-t border-border bg-white/[0.02] p-4">
+                <div className="flex w-full items-center justify-start border-t border-border bg-muted/30 p-4">
                   <div className="flex flex-wrap gap-2">
                     <SecondaryButton>Disconnect</SecondaryButton>
                     <SecondaryButton>Disconnect + Uninstall</SecondaryButton>
@@ -183,7 +183,7 @@ export default function DashboardAccount() {
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="example.com"
                               value={domainInput}
@@ -199,7 +199,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!domainInput.trim()}
                           onClick={addDomain}
-                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[#FAFAFA] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Domain
                         </button>
@@ -230,7 +230,7 @@ export default function DashboardAccount() {
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="user@example.com"
                               value={emailInput}
@@ -246,7 +246,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!emailInput.trim()}
                           onClick={addEmail}
-                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[#FAFAFA] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Email
                         </button>

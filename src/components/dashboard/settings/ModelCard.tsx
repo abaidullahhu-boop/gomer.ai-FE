@@ -134,7 +134,7 @@ export function ModelCard({ model, selected, onSelect }: ModelCardProps) {
         model.disabled
           ? "cursor-not-allowed border-border bg-card/60 opacity-60"
           : selected
-            ? "cursor-pointer border-success-foreground bg-[#F4F4F5]"
+            ? "cursor-pointer border-success-foreground bg-secondary"
             : "cursor-pointer border-border bg-card hover:bg-accent/40",
       ].join(" ")}
     >

@@ -67,8 +67,8 @@ export function UsageLayout() {
                       [
                         "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 whitespace-nowrap rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                         isActive
-                          ? "bg-[#F4F4F5] text-secondary-foreground"
-                          : "bg-transparent text-muted-foreground hover:bg-[#F4F4F5]",
+                          ? "bg-secondary text-secondary-foreground"
+                          : "bg-transparent text-muted-foreground hover:bg-accent",
                       ].join(" ")
                     }
                   >

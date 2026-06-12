@@ -57,7 +57,7 @@ export function WorkspaceSwitcher() {
         <div
           role="menu"
           aria-label="Workspaces"
-          className="absolute top-[calc(100%+4px)] right-0 left-0 z-50 overflow-hidden rounded-[7px] border border-border bg-white py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)]"
+          className="absolute top-[calc(100%+4px)] right-0 left-0 z-50 overflow-hidden rounded-[7px] border border-border bg-popover py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
         >
           <div
             role="menuitem"
@@ -82,7 +82,7 @@ export function WorkspaceSwitcher() {
           <button
             type="button"
             role="menuitem"
-            className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-[#F4F4F5]"
+            className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             <span className="flex size-6 shrink-0 items-center justify-center rounded-[7px] border border-dashed border-border">
               <Plus className="size-3.5 text-muted-foreground" strokeWidth={2} aria-hidden />

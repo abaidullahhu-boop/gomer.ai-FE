@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { LogOut, Monitor } from "lucide-react";
 import { accountData } from "@/data/account";
 import { billingData } from "@/data/billing";
+import { themeLabels, useTheme } from "@/lib/theme";
 
 const MENU_WIDTH = 260;
 const MENU_GAP = 8;
@@ -13,17 +14,14 @@ const user = {
   initial: "Z",
 };
 
-const themes = ["System", "Light", "Dark"] as const;
-type Theme = (typeof themes)[number];
-
 type MenuPosition = {
   top: number;
   left: number;
 };
 
 export function ProfileMenu() {
+  const { theme, cycleTheme } = useTheme();
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>("System");
   const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -75,13 +73,6 @@ export function ProfileMenu() {
     };
   }, [open]);
 
-  function cycleTheme() {
-    setTheme((current) => {
-      const index = themes.indexOf(current);
-      return themes[(index + 1) % themes.length];
-    });
-  }
-
   const menu =
     open && menuPosition
       ? createPortal(
@@ -96,7 +87,7 @@ export function ProfileMenu() {
               width: MENU_WIDTH,
               transform: "translateY(-100%)",
             }}
-            className="z-[100] overflow-hidden rounded-[7px] border border-border bg-white shadow-[0_4px_16px_rgba(26,24,43,0.08)]"
+            className="z-[100] overflow-hidden rounded-[7px] border border-border bg-popover shadow-[0_4px_16px_rgba(26,24,43,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
           >
             <div className="px-3.5 py-3">
               <div className="flex flex-col gap-1.5">
@@ -126,16 +117,16 @@ export function ProfileMenu() {
               type="button"
               role="menuitem"
               onClick={cycleTheme}
-              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-[#F4F4F5]"
+              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
             >
               <Monitor className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} aria-hidden />
-              Theme: {theme}
+              Theme: {themeLabels[theme]}
             </button>
 
             <button
               type="button"
               role="menuitem"
-              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-[#F4F4F5]"
+              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
             >
               <LogOut className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} aria-hidden />
               Sign out

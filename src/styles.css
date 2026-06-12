@@ -124,7 +124,7 @@
   --sidebar-background: #fff;
   --sidebar-foreground: oklch(0.45 0.02 270);
   --sidebar-primary-foreground: oklch(0.18 0.03 270);
-  --sidebar-accent: oklch(0.92 0.01 270);
+  --sidebar-accent: #f4f4f5;
   --sidebar-border: oklch(0.92 0.01 270);
   --shell: oklch(0.98 0.005 270);
   --highlight: #8a63e3;
@@ -195,12 +195,68 @@
     #faf5f100 92%
   ), linear-gradient(90deg, var(--bg-primary), var(--bg-primary));
   --integrations-hero-surface: var(--surface-hero-primary);
+
+  --dashboard-dark-bg: color(srgb 0.0941177 0.0941177 0.105882);
+  --dashboard-dark-card: var(--dashboard-dark-bg);
+  --dashboard-dark-raised: color-mix(in srgb, var(--dashboard-dark-bg), white 14%);
+  --dashboard-dark-muted: color-mix(in srgb, var(--dashboard-dark-bg), white 6%);
+  --dashboard-dark-hover: color-mix(in srgb, var(--dashboard-dark-bg), white 18%);
+  --dashboard-dark-border: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--dashboard-dark-bg), white 22%),
+    transparent 42%
+  );
+
+  --background: var(--dashboard-dark-bg);
+  --foreground: oklch(0.95 0 0);
+  --card: var(--dashboard-dark-card);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: color-mix(in srgb, var(--dashboard-dark-bg), white 11%);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: var(--dashboard-dark-bg);
+  --secondary: var(--dashboard-dark-raised);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: var(--dashboard-dark-muted);
+  --muted-foreground: oklch(0.62 0 0);
+  --accent: var(--dashboard-dark-hover);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.65 0.2 27);
+  --border: var(--dashboard-dark-border);
+  --input: var(--dashboard-dark-muted);
+  --ring: oklch(0.68 0.18 295);
+
+  --sidebar-background: var(--dashboard-dark-bg);
+  --sidebar-foreground: oklch(0.62 0 0);
+  --sidebar-primary-foreground: oklch(0.95 0 0);
+  --sidebar-accent: color-mix(in srgb, var(--dashboard-dark-bg), white 12%);
+  --sidebar-border: color-mix(in srgb, var(--dashboard-dark-bg), white 16%);
+  --shell: var(--dashboard-dark-bg);
+  --highlight: #9e84ff;
+  --success: oklch(0.25 0.05 163);
+  --success-foreground: oklch(0.72 0.15 163);
+  --warning: oklch(0.75 0.183 55);
+
+  --typo-h1-color: oklch(0.95 0.01 270);
+  --typo-h2-color: oklch(0.95 0.01 270);
+  --typo-h3-color: oklch(0.95 0.01 270);
 }
 
 .dashboard-shell {
+  --background: #fff;
+  --muted: #f4f4f5;
+  --accent: #f4f4f5;
+  --secondary: #f4f4f5;
   --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
   --font-body: Gellix, ui-sans-serif, sans-serif;
   font-family: var(--font-sans);
+}
+
+.dark .dashboard-shell {
+  --background: var(--dashboard-dark-bg);
+  --muted: var(--dashboard-dark-muted);
+  --accent: var(--dashboard-dark-hover);
+  --secondary: var(--dashboard-dark-raised);
 }
 
 .dashboard-shell :where(

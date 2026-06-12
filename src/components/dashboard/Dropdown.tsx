@@ -95,7 +95,7 @@ export function Dropdown({
         aria-haspopup="listbox"
         onClick={() => setOpen((prev) => !prev)}
         onKeyDown={handleTriggerKeyDown}
-        className="viktor-focus-ring flex h-10 w-full cursor-pointer items-center justify-between gap-3 rounded-[7px] border border-border bg-[#FAFAFA] px-4 text-sm font-medium text-foreground transition-[border-color,box-shadow] duration-150 hover:border-border/80"
+        className="viktor-focus-ring flex h-10 w-full cursor-pointer items-center justify-between gap-3 rounded-[7px] border border-border bg-muted px-4 text-sm font-medium text-foreground transition-[border-color,box-shadow] duration-150 hover:border-border/80"
       >
         <span className="truncate">{selected?.label}</span>
         <ChevronDown
@@ -111,7 +111,7 @@ export function Dropdown({
           aria-label={ariaLabel}
           tabIndex={-1}
           onKeyDown={handleListKeyDown}
-          className="absolute top-[calc(100%+4px)] right-0 left-0 z-50 overflow-hidden rounded-[7px] border border-border bg-white py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)]"
+          className="absolute top-[calc(100%+4px)] right-0 left-0 z-50 overflow-hidden rounded-[7px] border border-border bg-popover py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
         >
           {options.map((option, index) => {
             const isSelected = option.value === value;
@@ -127,7 +127,7 @@ export function Dropdown({
                 onClick={() => selectOption(option)}
                 className={[
                   "flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-2 text-left text-sm text-foreground transition-colors",
-                  isActive ? "bg-[#F4F4F5]" : "bg-white",
+                  isActive ? "bg-secondary" : "bg-popover",
                 ].join(" ")}
               >
                 <span className="truncate">{option.label}</span>

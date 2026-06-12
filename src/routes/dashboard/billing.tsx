@@ -172,7 +172,7 @@ export default function DashboardBilling() {
                             type="button"
                             onClick={copyInviteLink}
                             aria-label={copied ? "Copied" : "Copy invite link"}
-                            className="viktor-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-white/5"
+                            className="viktor-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-accent"
                           >
                             <Copy className="size-4" />
                           </button>
@@ -193,7 +193,7 @@ export default function DashboardBilling() {
                       <div>
                         <Link
                           to="/creators"
-                          className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-[#F4F4F5] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+                          className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
                         >
                           <span className="flex items-center gap-1.5">
                             Join Viktor Creator Program

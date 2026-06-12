@@ -31,8 +31,8 @@ function TabButton({
       aria-pressed={active}
       onClick={onClick}
       className={[
-        "flex shrink-0 grow basis-0 flex-row items-center justify-center gap-2 rounded-[7px] px-3 py-1.5 text-sm font-medium leading-sm text-muted-foreground outline-0 transition-colors hover:cursor-pointer hover:bg-[#F4F4F5] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-        active ? "bg-[#F4F4F5] text-accent-foreground" : "",
+        "flex shrink-0 grow basis-0 flex-row items-center justify-center gap-2 rounded-[7px] px-3 py-1.5 text-sm font-medium leading-sm text-muted-foreground outline-0 transition-colors hover:cursor-pointer hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+        active ? "bg-secondary text-accent-foreground" : "",
       ].join(" ")}
     >
       {children}
@@ -86,7 +86,7 @@ function InviteFriendsTab({
               Your invite link
             </label>
           </div>
-          <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm leading-sm transition-colors outline-0 hover:border-border/80 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
+          <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm leading-sm transition-colors outline-0 hover:border-border/80 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
             <div className="flex shrink-0 items-center text-muted-foreground">
               <LinkIcon className="size-3.5" strokeWidth={1.5} />
             </div>
@@ -119,7 +119,7 @@ function InviteFriendsTab({
               Invite via email
             </label>
           </div>
-          <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm leading-sm transition-colors outline-0 hover:border-border/80 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
+          <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm leading-sm transition-colors outline-0 hover:border-border/80 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
             <input
               id={emailInputId}
               value={email}
@@ -133,7 +133,7 @@ function InviteFriendsTab({
         <button
           type="button"
           disabled={!hasEmail}
-          className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-[#FAFAFA] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Send className="size-4" strokeWidth={1.5} />
           Invite via Email
@@ -233,13 +233,13 @@ export function GetFreeCreditsModal({ open, onClose }: GetFreeCreditsModalProps)
         role="dialog"
         aria-modal="true"
         aria-label="Get free credits"
-        className="relative w-full max-w-lg rounded-md border border-border bg-white p-6 font-body text-foreground outline-none"
+        className="relative w-full max-w-lg rounded-md border border-border bg-popover p-6 font-body text-foreground outline-none"
       >
         <button
           type="button"
           aria-label="Close dialog"
           onClick={onClose}
-          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
         >
           <X className="size-4" strokeWidth={1.5} />
         </button>
@@ -257,7 +257,7 @@ export function GetFreeCreditsModal({ open, onClose }: GetFreeCreditsModalProps)
           <div
             role="group"
             aria-label="Referral sections"
-            className="flex flex-row items-stretch justify-center gap-1 rounded-[6px] border border-border bg-white p-1"
+            className="flex flex-row items-stretch justify-center gap-1 rounded-[6px] border border-border bg-background p-1"
           >
             <TabButton active={tab === "invite"} onClick={() => setTab("invite")}>
               Invite friends

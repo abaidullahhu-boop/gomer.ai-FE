@@ -145,13 +145,13 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
         role="dialog"
         aria-modal="true"
         aria-label="Invite team members"
-        className="relative w-full max-w-lg rounded-md border border-border bg-white p-6 text-foreground outline-none transition-all duration-200 ease-out"
+        className="relative w-full max-w-lg rounded-md border border-border bg-popover p-6 text-foreground outline-none transition-all duration-200 ease-out"
       >
         <button
           type="button"
           aria-label="Close dialog"
           onClick={onClose}
-          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
         >
           <X className="size-4" strokeWidth={1.5} />
         </button>
@@ -187,7 +187,7 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
                 </label>
               </div>
               <div
-                className="viktor-focus-ring flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-[#F4F4F5] px-3 py-[5px] text-base outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring"
+                className="viktor-focus-ring flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-secondary px-3 py-[5px] text-base outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring"
                 onClick={() => inputRef.current?.focus()}
               >
                 {emails.map((email) => (
