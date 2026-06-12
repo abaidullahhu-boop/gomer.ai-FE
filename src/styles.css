@@ -243,7 +243,9 @@
 }
 
 .dashboard-shell {
-  --background: #fff;
+  --background: var(--primitive-main-beige);
+  --card: color-mix(in srgb, var(--primitive-main-beige), white 96%);
+  --sidebar-background: var(--primitive-main-beige);
   --muted: #f4f4f5;
   --accent: #f4f4f5;
   --secondary: #f4f4f5;
@@ -254,6 +256,8 @@
 
 .dark .dashboard-shell {
   --background: var(--dashboard-dark-bg);
+  --card: var(--dashboard-dark-card);
+  --sidebar-background: var(--dashboard-dark-bg);
   --muted: var(--dashboard-dark-muted);
   --accent: var(--dashboard-dark-hover);
   --secondary: var(--dashboard-dark-raised);

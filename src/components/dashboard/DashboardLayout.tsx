@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { SessionProvider } from "@/lib/session";
 import { GetFreeCreditsModal } from "./GetFreeCreditsModal";
 import { InviteTeamMembersModal } from "./InviteTeamMembersModal";
 import { MobileMenuButton, Sidebar } from "./Sidebar";
@@ -43,38 +44,34 @@ export function DashboardLayout() {
   }, []);
 
   return (
-    <div className="dashboard-shell flex h-screen overflow-hidden bg-background">
-      {sidebarOpen && (
-        <button
-          type="button"
-          aria-label="Close menu"
-          className="fixed inset-0 z-40 bg-black/20 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+    <SessionProvider>
+      <div className="dashboard-shell flex h-screen overflow-hidden bg-background">
+        {sidebarOpen && (
+          <button
+            type="button"
+            aria-label="Close menu"
+            className="fixed inset-0 z-40 bg-black/20 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
-      <header className="fixed top-0 right-0 left-0 z-30 flex items-center justify-between border-b border-border bg-background px-5 py-4 md:hidden">
-        <ViktorLogo />
-        <MobileMenuButton
-          open={sidebarOpen}
-          onClick={() => setSidebarOpen((open) => !open)}
-        />
-      </header>
+        <header className="fixed top-0 right-0 left-0 z-30 flex items-center justify-between bg-background px-5 py-4 md:hidden">
+          <ViktorLogo />
+          <MobileMenuButton open={sidebarOpen} onClick={() => setSidebarOpen((open) => !open)} />
+        </header>
 
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        onMobileClose={() => setSidebarOpen(false)}
-        onGetFreeCredits={() => setCreditsModalOpen(true)}
-        onInviteTeammates={() => setInviteModalOpen(true)}
-      />
-      <main className="min-w-0 flex-1 overflow-y-auto bg-background pt-[72px] md:pt-0">
-        <Outlet context={{ openInviteModal: () => setInviteModalOpen(true) }} />
-      </main>
-      <GetFreeCreditsModal open={creditsModalOpen} onClose={() => setCreditsModalOpen(false)} />
-      <InviteTeamMembersModal
-        open={inviteModalOpen}
-        onClose={() => setInviteModalOpen(false)}
-      />
-    </div>
+        <Sidebar
+          mobileOpen={sidebarOpen}
+          onMobileClose={() => setSidebarOpen(false)}
+          onGetFreeCredits={() => setCreditsModalOpen(true)}
+          onInviteTeammates={() => setInviteModalOpen(true)}
+        />
+        <main className="min-w-0 flex-1 overflow-y-auto bg-background pt-[72px] md:pt-0">
+          <Outlet context={{ openInviteModal: () => setInviteModalOpen(true) }} />
+        </main>
+        <GetFreeCreditsModal open={creditsModalOpen} onClose={() => setCreditsModalOpen(false)} />
+        <InviteTeamMembersModal open={inviteModalOpen} onClose={() => setInviteModalOpen(false)} />
+      </div>
+    </SessionProvider>
   );
 }
