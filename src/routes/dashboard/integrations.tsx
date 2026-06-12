@@ -1,64 +1,176 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Loader2, Plus, Search } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { IntegrationCard } from "@/components/dashboard/IntegrationCard";
-import { integrations } from "@/data/integrations";
+import { Toast } from "@/components/dashboard/Toast";
+import {
+  fetchConnectedIntegrations,
+  fetchIntegrationApps,
+  integrationConfigurePath,
+  type CatalogApp,
+  type ConnectedIntegration,
+} from "@/lib/api";
+import { usePipedreamConnect } from "@/lib/pipedream";
 
 type Tab = "all" | "popular";
 
-const PAGE_SIZE = 120;
+// How many cards to reveal at a time. We render a growing window over the
+// loaded apps and only fetch the next server page once the window catches up,
+// so the grid starts small and lazy-loads as the user scrolls to the end.
+const PAGE_SIZE = 48;
+
+const accountsLabel = (count: number) => `${count} account${count === 1 ? "" : "s"} connected`;
 
 export default function DashboardIntegrations() {
+  const { connect, ready } = usePipedreamConnect();
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [tab, setTab] = useState<Tab>("all");
   const [connectedOnly, setConnectedOnly] = useState(false);
+
+  const [apps, setApps] = useState<CatalogApp[]>([]);
+  const [cursor, setCursor] = useState<string | undefined>(undefined);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const filtered = useMemo(() => {
-    const query = search.trim().toLowerCase();
+  const [connected, setConnected] = useState<ConnectedIntegration[]>([]);
+  const [busySlug, setBusySlug] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
 
-    return integrations.filter((integration) => {
-      if (tab === "popular" && !integration.popular) return false;
-      if (connectedOnly) return false;
-      if (!query) return true;
-      return integration.name.toLowerCase().includes(query);
-    });
-  }, [search, tab, connectedOnly]);
+  // Connected accounts grouped by app slug — an app can have several accounts.
+  const connectedGroups = useMemo(() => {
+    const map = new Map<string, ConnectedIntegration[]>();
+    for (const integration of connected) {
+      const group = map.get(integration.appSlug) ?? [];
+      group.push(integration);
+      map.set(integration.appSlug, group);
+    }
+    return map;
+  }, [connected]);
 
-  const visible = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
+  // One representative entry per connected app, for the "connected only" view.
+  const connectedApps = useMemo(
+    () => Array.from(connectedGroups.values(), (group) => group[0]),
+    [connectedGroups],
+  );
 
-  const loadMore = useCallback(() => {
-    if (!hasMore || loadingMore) return;
-    setLoadingMore(true);
-    window.setTimeout(() => {
-      setVisibleCount((count) => Math.min(count + PAGE_SIZE, filtered.length));
-      setLoadingMore(false);
-    }, 400);
-  }, [filtered.length, hasMore, loadingMore]);
+  const goToConfigure = useCallback(
+    (appSlug: string) => navigate(integrationConfigurePath(appSlug)),
+    [navigate],
+  );
+
+  const refreshConnected = useCallback(async () => {
+    try {
+      setConnected(await fetchConnectedIntegrations());
+    } catch (error) {
+      console.error("Failed to load connected integrations", error);
+    }
+  }, []);
 
   useEffect(() => {
+    void refreshConnected();
+  }, [refreshConnected]);
+
+  // Debounce the search box.
+  useEffect(() => {
+    const id = window.setTimeout(() => setDebouncedSearch(search.trim()), 300);
+    return () => window.clearTimeout(id);
+  }, [search]);
+
+  // Load the first page whenever the query changes (or a retry is requested).
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
     setVisibleCount(PAGE_SIZE);
-  }, [search, tab, connectedOnly]);
+    fetchIntegrationApps(debouncedSearch)
+      .then((result) => {
+        if (cancelled) return;
+        setApps(result.apps);
+        setCursor(result.after);
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        console.error("Failed to load integration catalogue", err);
+        setApps([]);
+        setCursor(undefined);
+        setError(
+          err instanceof Error && err.message
+            ? err.message
+            : "Could not load integrations from Pipedream.",
+        );
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [debouncedSearch, reloadKey]);
+
+  // On the Popular tab we cap to the first page of (popularity-ordered) apps; the
+  // All tab keeps revealing more and fetching further server pages on scroll.
+  const cap = tab === "popular" ? PAGE_SIZE : visibleCount;
+  const visibleApps = apps.slice(0, cap);
+  const hasMore =
+    !connectedOnly && tab === "all" && (visibleCount < apps.length || Boolean(cursor));
+
+  const loadMore = useCallback(() => {
+    if (loadingMore) return;
+    // Reveal already-loaded apps first; only hit the server once the window
+    // reaches the end of what we have.
+    if (visibleCount < apps.length) {
+      setVisibleCount((count) => count + PAGE_SIZE);
+      return;
+    }
+    if (!cursor) return;
+    setLoadingMore(true);
+    fetchIntegrationApps(debouncedSearch, cursor)
+      .then((result) => {
+        setApps((prev) => [...prev, ...result.apps]);
+        setCursor(result.after);
+        setVisibleCount((count) => count + PAGE_SIZE);
+      })
+      .catch((error) => console.error("Failed to load more integrations", error))
+      .finally(() => setLoadingMore(false));
+  }, [apps.length, cursor, debouncedSearch, loadingMore, visibleCount]);
 
   useEffect(() => {
     const node = loadMoreRef.current;
     if (!node || !hasMore) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) loadMore();
       },
       { rootMargin: "200px" },
     );
-
     observer.observe(node);
     return () => observer.disconnect();
   }, [hasMore, loadMore]);
 
-  const searchLabel = "Search from 3,000 integrations";
+  const handleConnect = useCallback(
+    async (app: CatalogApp) => {
+      if (!ready) return;
+      setBusySlug(app.nameSlug);
+      try {
+        await connect(app.nameSlug);
+        await refreshConnected();
+        setToast(`Successfully connected your ${app.name} account!`);
+      } catch (error) {
+        console.error(`Failed to connect ${app.name}`, error);
+      } finally {
+        setBusySlug(null);
+      }
+    },
+    [connect, ready, refreshConnected],
+  );
 
   return (
     <>
@@ -97,7 +209,7 @@ export default function DashboardIntegrations() {
                   <input
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
-                    placeholder={searchLabel}
+                    placeholder="Search from 3,000 integrations"
                     className="flex-1 bg-transparent text-foreground outline-none placeholder:text-muted-foreground placeholder:opacity-50"
                   />
                 </div>
@@ -156,22 +268,69 @@ export default function DashboardIntegrations() {
               </div>
 
               {connectedOnly ? (
-                <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
-                  <p className="text-sm text-muted-foreground">No connected integrations yet.</p>
+                connectedApps.length === 0 ? (
+                  <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
+                    <p className="text-sm text-muted-foreground">No connected integrations yet.</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                    {connectedApps.map((integration) => (
+                      <IntegrationCard
+                        key={integration.appSlug}
+                        name={integration.appName}
+                        iconUrl={integration.iconUrl ?? undefined}
+                        connected
+                        subtitle={accountsLabel(
+                          connectedGroups.get(integration.appSlug)?.length ?? 1,
+                        )}
+                        onClick={() => goToConfigure(integration.appSlug)}
+                      />
+                    ))}
+                  </div>
+                )
+              ) : loading ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="size-5 animate-spin text-muted-foreground" aria-hidden />
                 </div>
-              ) : visible.length === 0 ? (
+              ) : error ? (
+                <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
+                  <p className="text-sm text-muted-foreground">{error}</p>
+                  <button
+                    type="button"
+                    onClick={() => setReloadKey((key) => key + 1)}
+                    className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center rounded-[7px] bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                  >
+                    Retry
+                  </button>
+                </div>
+              ) : visibleApps.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
-                  <p className="text-sm text-muted-foreground">No integrations match your search.</p>
+                  <p className="text-sm text-muted-foreground">
+                    No integrations match your search.
+                  </p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                  {visible.map((integration) => (
-                    <IntegrationCard key={integration.name} integration={integration} />
-                  ))}
+                  {visibleApps.map((app) => {
+                    const group = connectedGroups.get(app.nameSlug);
+                    return (
+                      <IntegrationCard
+                        key={app.nameSlug || app.name}
+                        name={app.name}
+                        iconUrl={app.iconUrl || undefined}
+                        connected={Boolean(group)}
+                        subtitle={group ? accountsLabel(group.length) : undefined}
+                        busy={busySlug === app.nameSlug}
+                        onClick={
+                          group ? () => goToConfigure(app.nameSlug) : () => handleConnect(app)
+                        }
+                      />
+                    );
+                  })}
                 </div>
               )}
 
-              {hasMore && !connectedOnly && (
+              {hasMore && (
                 <div ref={loadMoreRef} className="flex justify-center py-4">
                   <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden />
                 </div>
@@ -180,6 +339,7 @@ export default function DashboardIntegrations() {
           </div>
         </div>
       </div>
+      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </>
   );
 }

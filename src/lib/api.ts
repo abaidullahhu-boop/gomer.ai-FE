@@ -118,3 +118,93 @@ export async function logout(): Promise<void> {
     clearTokens();
   }
 }
+
+/** A connected account owned by the current workspace. */
+export type ConnectedIntegration = {
+  id: string;
+  appName: string;
+  appSlug: string;
+  accountName: string | null;
+  iconUrl: string | null;
+  externalAccountId: string | null;
+  isActive: boolean;
+  connectedAt: string;
+  userId: string;
+  userName: string | null;
+};
+
+/** An app from the Pipedream catalogue, shaped for the connect UI. */
+export type CatalogApp = {
+  name: string;
+  nameSlug: string;
+  iconUrl: string;
+  description?: string;
+};
+
+type CatalogAppRaw = {
+  name: string;
+  nameSlug: string;
+  imgSrc: string;
+  description?: string;
+};
+
+/** The single-use token returned by `tokens.create`, consumed by the browser SDK. */
+export type ConnectTokenResponse = {
+  token: string;
+  expiresAt: string;
+  connectLinkUrl: string;
+};
+
+export function fetchConnectedIntegrations(): Promise<ConnectedIntegration[]> {
+  return apiFetch<ConnectedIntegration[]>("/integrations");
+}
+
+/** Route to the per-app configure view. Namespaced so non-Pipedream providers can be added later. */
+export function integrationConfigurePath(appSlug: string): string {
+  return `/dashboard/integrations/configure/pipedream-${appSlug}`;
+}
+
+/** Inverse of {@link integrationConfigurePath}: extract the app slug from a route param. */
+export function parseConfigureProvider(provider: string): string | null {
+  return provider.startsWith("pipedream-") ? provider.slice("pipedream-".length) : null;
+}
+
+export async function fetchIntegrationApps(
+  query?: string,
+  after?: string,
+): Promise<{ apps: CatalogApp[]; after?: string }> {
+  const params = new URLSearchParams();
+  if (query) params.set("query", query);
+  if (after) params.set("after", after);
+  const qs = params.toString();
+  const result = await apiFetch<{ apps: CatalogAppRaw[]; after?: string }>(
+    `/integrations/apps${qs ? `?${qs}` : ""}`,
+  );
+  return {
+    after: result.after,
+    apps: result.apps.map((app) => ({
+      name: app.name,
+      nameSlug: app.nameSlug,
+      iconUrl: app.imgSrc,
+      description: app.description,
+    })),
+  };
+}
+
+export function createConnectToken(): Promise<ConnectTokenResponse> {
+  return apiFetch<ConnectTokenResponse>("/integrations/connect-token", { method: "POST" });
+}
+
+export function confirmIntegration(
+  accountId: string,
+  appSlug: string,
+): Promise<ConnectedIntegration> {
+  return apiFetch<ConnectedIntegration>("/integrations/confirm", {
+    method: "POST",
+    body: JSON.stringify({ accountId, appSlug }),
+  });
+}
+
+export async function disconnectIntegration(id: string): Promise<void> {
+  await apiFetch<{ success: boolean }>(`/integrations/${id}`, { method: "DELETE" });
+}
