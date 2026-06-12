@@ -13,6 +13,7 @@ const productMenu: MenuItem[] = [
 
 const resourcesMenu: MenuItem[] = [
   { label: "Blog", to: "/blog" },
+  { label: "Research", to: "/research" },
   { label: "Case Studies", to: "/case-studies" },
   { label: "Changelog", to: "/changelog" },
 ];

@@ -47,6 +47,7 @@ const colsRow2: { h: string; items: Item[] }[] = [
     h: "Resources",
     items: [
       { label: "Blog", to: "/blog" },
+      { label: "Research", to: "/research" },
       { label: "Case Studies", to: "/case-studies" },
       { label: "Changelog", to: "/changelog" },
     ],
