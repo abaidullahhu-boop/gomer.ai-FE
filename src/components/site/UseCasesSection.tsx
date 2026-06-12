@@ -326,7 +326,7 @@ export function UseCasesSection() {
                         isActive ? "text-white opacity-100" : "text-white hover:text-white",
                       ].join(" ")}
                     >
-                      <span className="relative z-10 flex h-full w-full min-w-0 items-center justify-between gap-4 px-8">
+                      <span className="cursor-pointer relative z-10 flex h-full w-full min-w-0 items-center justify-between gap-4 px-8">
                         <span className="flex min-w-0 items-center gap-4">
                           <Icon className="size-5 shrink-0" strokeWidth={2.5} aria-hidden="true" />
                           <span className="truncate text-white">{tab.label}</span>

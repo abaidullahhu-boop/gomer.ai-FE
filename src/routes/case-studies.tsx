@@ -183,7 +183,7 @@ export default function CaseStudiesPage() {
                     type="button"
                     disabled
                     aria-label="Previous case studies page"
-                    className="flex h-10 w-16 items-center justify-center rounded-full border border-primary bg-primitive-main-dark text-white transition-colors disabled:pointer-events-none disabled:border-transparent disabled:bg-primitive-main-dark/20 disabled:text-primary disabled:opacity-20"
+                    className="cursor-pointer flex h-10 w-16 items-center justify-center rounded-full border border-primary bg-primitive-main-dark text-white transition-colors disabled:pointer-events-none disabled:border-transparent disabled:bg-primitive-main-dark/20 disabled:text-primary disabled:opacity-20"
                   >
                     <ArrowLeft className="size-4" aria-hidden />
                   </button>

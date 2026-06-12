@@ -951,7 +951,7 @@ function DeliverablesTabs() {
                       }}
                       onClick={() => setActive(index)}
                       className={[
-                        "relative z-10 flex items-center justify-center gap-4 rounded-full bg-transparent text-center whitespace-nowrap transition-[border-color,color] duration-300 h-12 body-main px-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
+                        "cursor-pointer relative z-10 flex items-center justify-center gap-4 rounded-full bg-transparent text-center whitespace-nowrap transition-[border-color,color] duration-300 h-12 body-main px-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
                         isActive ? "text-white" : "text-secondary",
                       ].join(" ")}
                     >
