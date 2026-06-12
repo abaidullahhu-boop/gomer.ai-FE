@@ -86,7 +86,7 @@ function TeamOptionsMenu({
       {open ? (
         <div
           role="menu"
-          className="absolute top-[calc(100%+4px)] right-0 z-50 min-w-[200px] overflow-hidden rounded-[7px] border border-border bg-white py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)]"
+          className="absolute top-[calc(100%+4px)] right-0 z-50 min-w-[200px] overflow-hidden rounded-[7px] border border-border bg-popover py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
         >
           <button
             type="button"
@@ -95,7 +95,7 @@ function TeamOptionsMenu({
               onEditTeamInfo();
               setOpen(false);
             }}
-            className="flex w-full cursor-pointer items-center gap-3 px-4 py-2 text-left text-sm text-foreground transition-colors hover:bg-[#F4F4F5]"
+            className="flex w-full cursor-pointer items-center gap-3 px-4 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
           >
             <Pencil className="size-4 shrink-0" strokeWidth={1.5} />
             Edit team info
@@ -122,7 +122,7 @@ function SettingsCard({
         <h2 className="font-body text-base font-medium text-foreground">{title}</h2>
         <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{description}</p>
       </div>
-      <div className="flex w-full items-center justify-start border-t border-border bg-white/[0.02] p-4">
+      <div className="flex w-full items-center justify-start border-t border-border bg-muted/30 p-4">
         {children}
       </div>
     </div>
@@ -191,7 +191,7 @@ export default function DashboardTeam() {
                     <button
                       type="button"
                       onClick={openInviteModal}
-                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[#F4F4F5] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
                     >
                       <UserPlus className="size-4" strokeWidth={1.5} />
                       Invite members

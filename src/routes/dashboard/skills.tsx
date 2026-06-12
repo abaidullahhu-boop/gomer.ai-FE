@@ -75,7 +75,7 @@ export default function DashboardSkills() {
                     className={[
                       "rounded-[7px] px-4 py-2 text-sm font-medium transition-colors",
                       tab === "library"
-                        ? "bg-[#F4F4F5] text-foreground"
+                        ? "bg-secondary text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                     ].join(" ")}
                   >
@@ -107,7 +107,7 @@ export default function DashboardSkills() {
                     className={[
                       "rounded-[7px] px-4 py-2 text-sm font-medium transition-colors",
                       installedSubTab === "shared"
-                        ? "bg-[#F4F4F5] text-foreground"
+                        ? "bg-secondary text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                     ].join(" ")}
                   >
@@ -118,7 +118,7 @@ export default function DashboardSkills() {
                     className={[
                       "rounded-[7px] px-4 py-2 text-sm font-medium transition-colors",
                       installedSubTab === "library"
-                        ? "bg-[#F4F4F5] text-foreground"
+                        ? "bg-secondary text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                     ].join(" ")}
                   >
@@ -130,7 +130,7 @@ export default function DashboardSkills() {
               <div className="flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center">
                 <div className="min-w-0 flex-1">
                   <div className="flex w-full flex-col gap-1.5">
-                    <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm leading-5 transition-colors outline-none hover:border-border/80 focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-2">
+                    <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm leading-5 transition-colors outline-none hover:border-border/80 focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-2">
                       <div className="flex shrink-0 items-center text-muted-foreground">
                         <Search className="size-4" strokeWidth={1.5} aria-hidden />
                       </div>

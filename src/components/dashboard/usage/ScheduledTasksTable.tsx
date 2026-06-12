@@ -18,7 +18,7 @@ export function ScheduledTasksTable() {
         </button>
 
         <div className="min-w-0 sm:w-1/4">
-          <div className="flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-[#FAFAFA] px-3 py-[5px]">
+          <div className="flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-muted px-3 py-[5px]">
             <input
               type="text"
               name="usage-scheduled-tasks-user-filter"

@@ -76,7 +76,7 @@ export default function DashboardIntegrations() {
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+                  className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                 >
                   <Plus className="size-4 shrink-0" strokeWidth={1.5} />
                   Add Custom MCP
@@ -90,7 +90,7 @@ export default function DashboardIntegrations() {
               </p>
 
               <div className="flex w-full flex-col gap-1.5">
-                <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-[#FAFAFA] px-3 text-sm leading-5 transition-colors outline-none hover:border-border/80 focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-2">
+                <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm leading-5 transition-colors outline-none hover:border-border/80 focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-2">
                   <div className="flex shrink-0 items-center text-muted-foreground">
                     <Search className="size-4" strokeWidth={1.5} aria-hidden />
                   </div>
@@ -111,8 +111,8 @@ export default function DashboardIntegrations() {
                     className={[
                       "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                       tab === "all"
-                        ? "bg-[#F4F4F5] text-secondary-foreground"
-                        : "bg-transparent text-muted-foreground hover:bg-[#F4F4F5]",
+                        ? "bg-secondary text-secondary-foreground"
+                        : "bg-transparent text-muted-foreground hover:bg-accent",
                     ].join(" ")}
                   >
                     All integrations
@@ -123,8 +123,8 @@ export default function DashboardIntegrations() {
                     className={[
                       "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                       tab === "popular"
-                        ? "bg-[#F4F4F5] text-secondary-foreground"
-                        : "bg-transparent text-muted-foreground hover:bg-[#F4F4F5]",
+                        ? "bg-secondary text-secondary-foreground"
+                        : "bg-transparent text-muted-foreground hover:bg-accent",
                     ].join(" ")}
                   >
                     Popular integrations
@@ -142,7 +142,7 @@ export default function DashboardIntegrations() {
                     onClick={() => setConnectedOnly((value) => !value)}
                     className={[
                       "viktor-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
-                      connectedOnly ? "border-highlight bg-highlight" : "bg-[#F4F4F5]",
+                      connectedOnly ? "border-highlight bg-highlight" : "bg-secondary",
                     ].join(" ")}
                   >
                     <span

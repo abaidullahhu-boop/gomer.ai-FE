@@ -68,7 +68,7 @@ export function PersonalizationSection() {
 
           <div className="flex w-full flex-col gap-1.5 font-mono">
             <div
-              className="viktor-focus-ring grid w-full overflow-hidden rounded-md border border-border bg-[#FAFAFA] text-sm leading-5 transition-colors hover:border-border/80 focus-within:outline-2"
+              className="viktor-focus-ring grid w-full overflow-hidden rounded-md border border-border bg-muted text-sm leading-5 transition-colors hover:border-border/80 focus-within:outline-2"
               style={{ maxHeight: 220 }}
             >
               <textarea
@@ -89,7 +89,7 @@ export function PersonalizationSection() {
               type="button"
               disabled={!hasChanges}
               onClick={handleSave}
-              className="viktor-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-[#F4F4F5] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+              className="viktor-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Save changes
             </button>

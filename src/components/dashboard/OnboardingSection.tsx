@@ -47,7 +47,7 @@ const tasks: OnboardingTask[] = [
 
 function SecondaryButton({ label, href }: { label: string; href?: string }) {
   const className =
-    "inline-flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-[#F4F4F5] px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 select-none hover:bg-secondary/50 active:scale-[0.98] md:w-auto";
+    "inline-flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 select-none hover:bg-secondary/80 active:scale-[0.98] md:w-auto";
 
   if (href) {
     return (
@@ -132,7 +132,7 @@ export function OnboardingSection() {
               {menuOpen ? (
                 <div
                   role="menu"
-                  className="absolute top-full right-0 z-50 mt-1 min-w-[220px] overflow-hidden rounded-[7px] border border-border bg-white py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)]"
+                  className="absolute top-full right-0 z-50 mt-1 min-w-[220px] overflow-hidden rounded-[7px] border border-border bg-popover py-1 shadow-[0_4px_16px_rgba(26,24,43,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
                 >
                   <button
                     type="button"
@@ -141,7 +141,7 @@ export function OnboardingSection() {
                       setShowCompletedSteps((prev) => !prev);
                       setMenuOpen(false);
                     }}
-                    className="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-[#F4F4F5]"
+                    className="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
                   >
                     <Eye className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
                     Show completed steps
@@ -153,7 +153,7 @@ export function OnboardingSection() {
                       setDismissed(true);
                       setMenuOpen(false);
                     }}
-                    className="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-[#F4F4F5]"
+                    className="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
                   >
                     <X className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
                     Dismiss onboarding

@@ -33,8 +33,8 @@ export function SettingsLayout() {
                     [
                       "viktor-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium whitespace-nowrap transition-[background-color,border-color,transform] duration-200 select-none active:scale-[0.98]",
                       isActive
-                        ? "bg-[#F4F4F5] text-secondary-foreground"
-                        : "bg-transparent text-muted-foreground hover:bg-[#F4F4F5]",
+                        ? "bg-secondary text-secondary-foreground"
+                        : "bg-transparent text-muted-foreground hover:bg-accent",
                     ].join(" ")
                   }
                 >

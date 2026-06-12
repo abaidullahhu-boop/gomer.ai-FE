@@ -43,7 +43,7 @@ export function DashboardLayout() {
   }, []);
 
   return (
-    <div className="dashboard-shell flex h-screen overflow-hidden bg-white">
+    <div className="dashboard-shell flex h-screen overflow-hidden bg-background">
       {sidebarOpen && (
         <button
           type="button"
@@ -53,7 +53,7 @@ export function DashboardLayout() {
         />
       )}
 
-      <header className="fixed top-0 right-0 left-0 z-30 flex items-center justify-between bg-white px-5 py-4 md:hidden">
+      <header className="fixed top-0 right-0 left-0 z-30 flex items-center justify-between border-b border-border bg-background px-5 py-4 md:hidden">
         <ViktorLogo />
         <MobileMenuButton
           open={sidebarOpen}
@@ -67,7 +67,7 @@ export function DashboardLayout() {
         onGetFreeCredits={() => setCreditsModalOpen(true)}
         onInviteTeammates={() => setInviteModalOpen(true)}
       />
-      <main className="min-w-0 flex-1 overflow-y-auto bg-white pt-[72px] md:pt-0">
+      <main className="min-w-0 flex-1 overflow-y-auto bg-background pt-[72px] md:pt-0">
         <Outlet context={{ openInviteModal: () => setInviteModalOpen(true) }} />
       </main>
       <GetFreeCreditsModal open={creditsModalOpen} onClose={() => setCreditsModalOpen(false)} />

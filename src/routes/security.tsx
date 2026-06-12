@@ -643,7 +643,7 @@ function RisksHandled() {
                         id={`${tab.id}-tab`}
                         tabIndex={isActive ? 0 : -1}
                         onClick={() => selectTab(i)}
-                        className={`group relative z-10 flex w-full min-h-[61px] items-center rounded-section px-8 py-4 text-left transition-colors duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/45 ${
+                        className={`cursor-pointer group relative z-10 flex w-full min-h-[61px] items-center rounded-section px-8 py-4 text-left transition-colors duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/45 ${
                           isActive ? "text-white" : "text-white/70 hover:text-white/90"
                         }`}
                       >
@@ -887,7 +887,7 @@ function FoundSomething() {
               Reach our security team directly — we read every message.
             </p>
             <div className="mt-10">
-              <button className="rounded-full bg-white px-8 py-3.5 text-sm text-foreground shadow-lg hover:bg-white/95 transition">
+              <button className="cursor-pointer font-medium rounded-full bg-white px-8 py-3.5 text-sm text-foreground shadow-lg hover:bg-white/95 transition">
                 Send Security Report
               </button>
             </div>

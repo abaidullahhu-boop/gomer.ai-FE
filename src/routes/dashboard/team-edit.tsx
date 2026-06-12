@@ -51,14 +51,14 @@ export default function DashboardTeamEdit() {
                 <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
-                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <Upload className="size-4" strokeWidth={1.5} />
                     Upload avatar
                   </button>
                   <button
                     type="button"
-                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-[#F4F4F5] active:scale-[0.98]"
+                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <RefreshCw className="size-4" strokeWidth={1.5} />
                     Sync from Slack
@@ -75,7 +75,7 @@ export default function DashboardTeamEdit() {
                   type="text"
                   value={teamName}
                   onChange={(event) => setTeamName(event.target.value)}
-                  className="viktor-focus-ring h-10 w-full rounded-[7px] border border-border bg-white px-4 text-sm text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80"
+                  className="viktor-focus-ring h-10 w-full rounded-[7px] border border-border bg-background px-4 text-sm text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80"
                 />
               </div>
 

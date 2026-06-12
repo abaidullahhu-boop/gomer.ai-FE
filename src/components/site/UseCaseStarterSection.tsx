@@ -594,7 +594,7 @@ export function UseCaseStarterSection() {
                     }}
                     onClick={() => selectTab(index)}
                     className={[
-                      "group relative z-10 grid w-full min-h-[3.75rem] grid-cols-[1.25rem_minmax(0,1fr)_1.25rem] items-start gap-x-4 rounded-section px-6 py-4 text-left transition-colors duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/45 md:px-6 lg:px-8",
+                      "cursor-pointer group relative z-10 grid w-full min-h-[3.75rem] grid-cols-[1.25rem_minmax(0,1fr)_1.25rem] items-start gap-x-4 rounded-section px-6 py-4 text-left transition-colors duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/45 md:px-6 lg:px-8",
                       isActive ? "text-white" : "text-white/45 hover:text-white/65",
                     ].join(" ")}
                   >
