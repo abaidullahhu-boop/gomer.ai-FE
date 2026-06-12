@@ -622,7 +622,7 @@ export default function BrandPage() {
                 <h2 className="font-heading text-3xl leading-tight font-semibold tracking-tight text-balance text-primary max-sm:text-[1.625rem] sm:text-4xl lg:text-5xl">
                   Logo
                 </h2>
-                <p className="body-main max-w-xl text-secondary">
+                <p className="body-main max-w-xl font-medium text-secondary">
                   Use the logo with clear space and sufficient contrast. Available in dark and light variants, gradient or flat.
                 </p>
               </div>

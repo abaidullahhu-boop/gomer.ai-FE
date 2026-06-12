@@ -26,7 +26,7 @@
   font-display: swap;
 }
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark .dashboard-shell *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -185,16 +185,20 @@
 
 }
 
-.dark {
-  --bg-primary: var(--primitive-main-dblue);
-  --surface-hero-primary: radial-gradient(
-    88% 56% at 50% clamp(7rem, 22vw, 11rem),
-    #947fff66 0%,
-    #6748fd3d 28%,
-    #947fff1a 52%,
-    #faf5f100 92%
-  ), linear-gradient(90deg, var(--bg-primary), var(--bg-primary));
-  --integrations-hero-surface: var(--surface-hero-primary);
+.dashboard-shell {
+  --background: var(--primitive-main-white);
+  --card: var(--primitive-main-white);
+  --sidebar-background: var(--primitive-main-white);
+  --muted: #f4f4f5;
+  --accent: #f4f4f5;
+  --secondary: #f4f4f5;
+  --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
+  --font-body: Gellix, ui-sans-serif, sans-serif;
+  font-family: var(--font-sans);
+}
+
+.dark .dashboard-shell {
+  color-scheme: dark;
 
   --dashboard-dark-bg: color(srgb 0.0941177 0.0941177 0.105882);
   --dashboard-dark-card: var(--dashboard-dark-bg);
@@ -236,31 +240,6 @@
   --success: oklch(0.25 0.05 163);
   --success-foreground: oklch(0.72 0.15 163);
   --warning: oklch(0.75 0.183 55);
-
-  --typo-h1-color: oklch(0.95 0.01 270);
-  --typo-h2-color: oklch(0.95 0.01 270);
-  --typo-h3-color: oklch(0.95 0.01 270);
-}
-
-.dashboard-shell {
-  --background: var(--primitive-main-white);
-  --card: var(--primitive-main-white);
-  --sidebar-background: var(--primitive-main-white);
-  --muted: #f4f4f5;
-  --accent: #f4f4f5;
-  --secondary: #f4f4f5;
-  --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
-  --font-body: Gellix, ui-sans-serif, sans-serif;
-  font-family: var(--font-sans);
-}
-
-.dark .dashboard-shell {
-  --background: var(--dashboard-dark-bg);
-  --card: var(--dashboard-dark-card);
-  --sidebar-background: var(--dashboard-dark-bg);
-  --muted: var(--dashboard-dark-muted);
-  --accent: var(--dashboard-dark-hover);
-  --secondary: var(--dashboard-dark-raised);
 }
 
 .dashboard-shell :where(
@@ -287,6 +266,9 @@
   }
   html, body, #root {
     height: 100%;
+  }
+  html {
+    color-scheme: light;
   }
   html, body {
     background-color: var(--color-background);
@@ -609,6 +591,13 @@
   }
   .animate-spin-slow { animation: spin-slow 40s linear infinite; }
   .animate-spin-slow-reverse { animation: spin-slow 40s linear infinite reverse; }
+  @keyframes compare-connector-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-compare-connector-float {
+    animation: compare-connector-float 5s ease-in-out infinite;
+  }
   @keyframes use-case-progress {
     from { stroke-dashoffset: var(--use-case-circumference); }
     to { stroke-dashoffset: 0; }

@@ -5,17 +5,21 @@ export function ScrollToHash() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (!hash) return;
+    if (hash) {
+      const id = hash.slice(1);
+      const scrollToTarget = () => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
 
-    const id = hash.slice(1);
-    const scrollToTarget = () => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
+      requestAnimationFrame(() => {
+        requestAnimationFrame(scrollToTarget);
+      });
+      return;
+    }
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(scrollToTarget);
-    });
+    window.scrollTo(0, 0);
+    document.querySelector<HTMLElement>(".dashboard-shell main")?.scrollTo(0, 0);
   }, [pathname, hash]);
 
   return null;

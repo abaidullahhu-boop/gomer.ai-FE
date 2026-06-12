@@ -305,7 +305,7 @@ function ComparisonConnector() {
       style={{ minHeight: 160 }}
       aria-hidden="true"
     >
-      <span className="pointer-events-none absolute inset-0 isolate overflow-visible">
+      <span className="pointer-events-none absolute inset-0 isolate overflow-visible animate-compare-connector-float motion-reduce:animate-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 398 156"
