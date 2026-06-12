@@ -117,7 +117,7 @@ export function ProfileMenu() {
               type="button"
               role="menuitem"
               onClick={cycleTheme}
-              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-sidebar-accent"
             >
               <Monitor className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} aria-hidden />
               Theme: {themeLabels[theme]}
