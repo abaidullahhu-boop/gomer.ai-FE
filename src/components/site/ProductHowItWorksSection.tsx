@@ -342,48 +342,98 @@ function getHowItWorksPanelBackground(scrollProgress: number) {
   };
 }
 
-function getCardMotion(needle: number, index: number) {
-  const distance = needle - index;
-  const exitX = -64;
-  const exitY = 96;
-  const enterX = 48;
-  const enterY = 112;
+const HOW_IT_WORKS_SLIDE_MS = 440;
+const HOW_IT_WORKS_SLIDE_EASE = "cubic-bezier(0.19, 1, 0.22, 1)";
+const HOW_IT_WORKS_CENTER = "translateX(0) translateY(0) rotate(0deg)";
 
-  if (distance >= 1) {
+function getHowItWorksSlideTransforms(slideSweep: "left" | "right") {
+  if (slideSweep === "left") {
     return {
-      opacity: 0,
-      transform: `translate(${exitX}px, ${exitY}px) rotate(-12deg) scale(0.96)`,
-      zIndex: 10,
-      pointerEvents: "none" as const,
+      enterFrom: "translateX(125%) translateY(52%) rotate(11deg)",
+      exitTo: "translateX(-125%) translateY(52%) rotate(-10deg)",
     };
   }
 
-  if (distance <= -1) {
-    return {
-      opacity: 0,
-      transform: `translate(${enterX}px, ${enterY}px) rotate(12deg) scale(0.98)`,
-      zIndex: 10,
-      pointerEvents: "none" as const,
-    };
-  }
-
-  if (distance >= 0) {
-    const t = distance;
-    return {
-      opacity: 1 - t,
-      transform: `translate(${exitX * t}px, ${exitY * t}px) rotate(${-12 * t}deg) scale(${1 - 0.04 * t})`,
-      zIndex: t < 0.5 ? 30 : 20,
-      pointerEvents: t < 0.5 ? ("auto" as const) : ("none" as const),
-    };
-  }
-
-  const t = distance + 1;
   return {
-    opacity: t,
-    transform: `translate(${enterX * (1 - t)}px, ${enterY * (1 - t)}px) rotate(${12 * (1 - t)}deg) scale(${0.98 + 0.02 * t})`,
-    zIndex: t > 0.5 ? 30 : 10,
-    pointerEvents: t > 0.5 ? ("auto" as const) : ("none" as const),
+    enterFrom: "translateX(-125%) translateY(52%) rotate(-11deg)",
+    exitTo: "translateX(125%) translateY(52%) rotate(10deg)",
   };
+}
+
+function HowItWorksCardMotion({
+  step,
+  slideSweep,
+  phase,
+  stepIndex,
+  totalSteps,
+  isActive,
+}: {
+  step: HowItWorksStep;
+  slideSweep: "left" | "right";
+  phase: "idle" | "enter" | "exit";
+  stepIndex: number;
+  totalSteps: number;
+  isActive: boolean;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el || phase === "idle") return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      el.style.transform = phase === "exit" ? getHowItWorksSlideTransforms(slideSweep).exitTo : HOW_IT_WORKS_CENTER;
+      return;
+    }
+
+    const { enterFrom, exitTo } = getHowItWorksSlideTransforms(slideSweep);
+
+    if (phase === "enter") {
+      el.style.transform = enterFrom;
+      const animation = el.animate(
+        [{ transform: enterFrom }, { transform: HOW_IT_WORKS_CENTER }],
+        {
+          duration: HOW_IT_WORKS_SLIDE_MS,
+          easing: HOW_IT_WORKS_SLIDE_EASE,
+          fill: "forwards",
+        },
+      );
+
+      return () => animation.cancel();
+    }
+
+    el.style.transform = HOW_IT_WORKS_CENTER;
+    const animation = el.animate(
+      [{ transform: HOW_IT_WORKS_CENTER }, { transform: exitTo }],
+      {
+        duration: HOW_IT_WORKS_SLIDE_MS,
+        easing: HOW_IT_WORKS_SLIDE_EASE,
+        fill: "forwards",
+      },
+    );
+
+    return () => animation.cancel();
+  }, [step.number, slideSweep, phase]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="relative flex h-full max-h-none min-h-0 w-full items-stretch justify-center will-change-transform"
+      style={{
+        gridArea: "stack",
+        zIndex: phase === "exit" ? 10 : 20,
+        pointerEvents: isActive ? "auto" : "none",
+      }}
+      aria-live={isActive ? "polite" : undefined}
+      aria-atomic={isActive ? "true" : undefined}
+      aria-hidden={!isActive}
+      role="group"
+      aria-label={`Step ${stepIndex + 1} of ${totalSteps}: ${step.title}`}
+    >
+      <HowItWorksStepCard step={step} />
+    </div>
+  );
 }
 
 export function HowItWorksScrollSection({
@@ -398,6 +448,14 @@ export function HowItWorksScrollSection({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
+  const stepRef = useRef(0);
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const [slideSweep, setSlideSweep] = useState<"left" | "right">("left");
+  const [transition, setTransition] = useState<{
+    entering: number;
+    exiting: number;
+    slideSweep: "left" | "right";
+  } | null>(null);
 
   useEffect(() => {
     const xlQuery = window.matchMedia("(min-width: 1360px)");
@@ -440,8 +498,30 @@ export function HowItWorksScrollSection({
     };
   }, []);
 
-  const needle = scrollProgress * (steps.length - 1);
-  const activeStep = Math.min(steps.length - 1, Math.max(0, Math.round(needle)));
+  const computedStep = Math.min(steps.length - 1, Math.floor(scrollProgress * steps.length));
+
+  useEffect(() => {
+    if (computedStep === stepRef.current) return;
+
+    const sweep = computedStep > stepRef.current ? "left" : "right";
+    const previousStep = stepRef.current;
+
+    setSlideSweep(sweep);
+    setTransition({
+      entering: computedStep,
+      exiting: previousStep,
+      slideSweep: sweep,
+    });
+    stepRef.current = computedStep;
+    setActiveStepIndex(computedStep);
+
+    const timer = window.setTimeout(() => {
+      setTransition(null);
+    }, HOW_IT_WORKS_SLIDE_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [computedStep]);
+
   const panelBackground = getHowItWorksPanelBackground(scrollProgress);
 
   return (
@@ -480,30 +560,38 @@ export function HowItWorksScrollSection({
                 className="relative mx-auto grid w-full max-w-[502px] min-h-0 shrink-0 grid-rows-[minmax(0,1fr)] place-items-center [grid-template-areas:'stack']"
                 style={{ height: 574 }}
               >
-                {steps.map((step, i) => {
-                  const motion = getCardMotion(needle, i);
-
-                  return (
-                    <div
-                      key={step.number}
-                      className="relative z-10 flex h-full max-h-none min-h-0 w-full items-stretch justify-center will-change-transform"
-                      style={{
-                        gridArea: "stack",
-                        opacity: motion.opacity,
-                        transform: motion.transform,
-                        zIndex: motion.zIndex,
-                        pointerEvents: motion.pointerEvents,
-                      }}
-                      aria-live={i === activeStep ? "polite" : undefined}
-                      aria-atomic={i === activeStep ? "true" : undefined}
-                      role="group"
-                      aria-label={`Step ${i + 1}: ${step.title}`}
-                      aria-hidden={i !== activeStep}
-                    >
-                      <HowItWorksStepCard step={step} />
-                    </div>
-                  );
-                })}
+                {transition ? (
+                  <>
+                    <HowItWorksCardMotion
+                      key={`exit-${steps[transition.exiting].number}`}
+                      step={steps[transition.exiting]}
+                      slideSweep={transition.slideSweep}
+                      phase="exit"
+                      stepIndex={transition.exiting}
+                      totalSteps={steps.length}
+                      isActive={false}
+                    />
+                    <HowItWorksCardMotion
+                      key={`enter-${steps[transition.entering].number}`}
+                      step={steps[transition.entering]}
+                      slideSweep={transition.slideSweep}
+                      phase="enter"
+                      stepIndex={transition.entering}
+                      totalSteps={steps.length}
+                      isActive
+                    />
+                  </>
+                ) : (
+                  <HowItWorksCardMotion
+                    key={steps[activeStepIndex].number}
+                    step={steps[activeStepIndex]}
+                    slideSweep={slideSweep}
+                    phase="idle"
+                    stepIndex={activeStepIndex}
+                    totalSteps={steps.length}
+                    isActive
+                  />
+                )}
               </div>
             </div>
           </div>
