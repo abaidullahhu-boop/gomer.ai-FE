@@ -454,7 +454,7 @@ function Payouts() {
                         tabIndex={isActive ? 0 : -1}
                         onClick={() => setActive(index)}
                         className={[
-                          "relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
+                          "cursor-pointer relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
                           isActive ? "text-white" : "text-primary",
                         ].join(" ")}
                       >
@@ -830,7 +830,7 @@ function HowItWorks() {
                         tabIndex={isActive ? 0 : -1}
                         onClick={() => setActive(index)}
                         className={[
-                          "relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
+                          "cursor-pointer relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
                           isActive ? "text-white" : "text-primary",
                         ].join(" ")}
                       >
@@ -1702,7 +1702,7 @@ function Rules() {
                           tabIndex={isActive ? 0 : -1}
                           onClick={() => setActive(index)}
                           className={[
-                            "relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
+                            "cursor-pointer relative z-10 flex h-12 items-center justify-center gap-4 rounded-full px-5 body-main transition-[border-color,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primitive-purple-500",
                             isActive ? "text-white" : "text-primary",
                           ].join(" ")}
                         >

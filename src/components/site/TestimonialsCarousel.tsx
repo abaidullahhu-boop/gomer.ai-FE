@@ -453,7 +453,7 @@ export function TestimonialsCarousel({
                     type="button"
                     onClick={goPrev}
                     aria-label="Previous testimonial"
-                    className="inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
+                    className="cursor-pointer inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
                   >
                     <CarouselArrowIcon className="size-4 rotate-180" />
                   </button>

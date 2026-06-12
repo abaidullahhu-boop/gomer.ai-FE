@@ -180,7 +180,7 @@ export function CompareSection() {
                   }}
                   onClick={() => setActive(t.id)}
                   className={
-                    "relative z-10 inline-flex w-fit flex-none items-center gap-5 whitespace-nowrap px-4 sm:px-12 py-3 rounded-full text-md font-medium transition-colors duration-300 ease-out " +
+                    "cursor-pointer relative z-10 inline-flex w-fit flex-none items-center gap-5 whitespace-nowrap px-4 sm:px-12 py-3 rounded-full text-md font-medium transition-colors duration-300 ease-out " +
                     (isActive ? "text-white" : "text-primary hover:text-foreground")
                   }
                 >

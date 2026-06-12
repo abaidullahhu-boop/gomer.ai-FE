@@ -234,7 +234,7 @@ function InvestorsCarousel() {
           type="button"
           aria-label="Previous investors"
           onClick={goPrev}
-          className="inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
+          className="cursor-pointer inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
         >
           <CarouselChevron className="size-4 rotate-180" />
         </button>
@@ -242,7 +242,7 @@ function InvestorsCarousel() {
           type="button"
           aria-label="Next investors"
           onClick={goNext}
-          className="inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
+          className="cursor-pointer inline-flex h-10 min-h-10 items-center justify-center rounded-full border border-white bg-white px-6 text-primitive-main-dark transition-opacity hover:opacity-90 focus-visible:ring-3 focus-visible:ring-white/60 focus-visible:outline-none"
         >
           <CarouselChevron className="size-4" />
         </button>
@@ -258,7 +258,7 @@ function FunderLogoLink({ logo }: { logo: FunderLogo }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={logo.label}
-      className="flex h-14 shrink-0 items-center justify-center transition-opacity hover:opacity-80 focus-visible:ring-3 focus-visible:outline-none focus-visible:ring-white/60 sm:h-16"
+      className="cursor-pointer flex h-14 shrink-0 items-center justify-center transition-opacity hover:opacity-80 focus-visible:ring-3 focus-visible:outline-none focus-visible:ring-white/60 sm:h-16"
     >
       <img
         alt=""
