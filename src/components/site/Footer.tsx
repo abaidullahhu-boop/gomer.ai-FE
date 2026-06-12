@@ -172,14 +172,7 @@ function Copyright() {
   return (
     <div className="mt-10 space-y-1 text-xs text-secondary lg:mt-auto">
       <p>2026 viktor.com. All rights reserved.</p>
-      <a
-        href="https://www.grafit.agency/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block text-secondary transition-colors hover:text-primary"
-      >
-        Website by Grafit
-      </a>
+
     </div>
   );
 }
