@@ -243,9 +243,9 @@
 }
 
 .dashboard-shell {
-  --background: var(--primitive-main-beige);
-  --card: color-mix(in srgb, var(--primitive-main-beige), white 96%);
-  --sidebar-background: var(--primitive-main-beige);
+  --background: var(--primitive-main-white);
+  --card: var(--primitive-main-white);
+  --sidebar-background: var(--primitive-main-white);
   --muted: #f4f4f5;
   --accent: #f4f4f5;
   --secondary: #f4f4f5;
