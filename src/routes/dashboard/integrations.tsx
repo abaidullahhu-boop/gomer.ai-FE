@@ -5,12 +5,17 @@ import { PageMeta } from "@/components/PageMeta";
 import { IntegrationCard } from "@/components/dashboard/IntegrationCard";
 import { Toast } from "@/components/dashboard/Toast";
 import {
-  fetchConnectedIntegrations,
   fetchIntegrationApps,
   integrationConfigurePath,
   type CatalogApp,
   type ConnectedIntegration,
 } from "@/lib/api";
+import {
+  getCachedConnected,
+  getCatalogSnapshot,
+  loadConnected,
+  setCatalogSnapshot,
+} from "@/lib/integrations-cache";
 import { usePipedreamConnect } from "@/lib/pipedream";
 
 type Tab = "all" | "popular";
@@ -31,16 +36,21 @@ export default function DashboardIntegrations() {
   const [tab, setTab] = useState<Tab>("all");
   const [connectedOnly, setConnectedOnly] = useState(false);
 
-  const [apps, setApps] = useState<CatalogApp[]>([]);
-  const [cursor, setCursor] = useState<string | undefined>(undefined);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [loading, setLoading] = useState(true);
+  // Seed from the cached default view so a revisit restores instantly with no
+  // network call; falls back to a fresh load when the cache is cold.
+  const cachedCatalog = getCatalogSnapshot();
+  const [apps, setApps] = useState<CatalogApp[]>(() => cachedCatalog?.apps ?? []);
+  const [cursor, setCursor] = useState<string | undefined>(() => cachedCatalog?.cursor);
+  const [visibleCount, setVisibleCount] = useState(() => cachedCatalog?.visibleCount ?? PAGE_SIZE);
+  const [loading, setLoading] = useState(() => !cachedCatalog);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const [connected, setConnected] = useState<ConnectedIntegration[]>([]);
+  const [connected, setConnected] = useState<ConnectedIntegration[]>(
+    () => getCachedConnected() ?? [],
+  );
   const [busySlug, setBusySlug] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -66,9 +76,11 @@ export default function DashboardIntegrations() {
     [navigate],
   );
 
-  const refreshConnected = useCallback(async () => {
+  // `force` refetches after a connect/disconnect; otherwise the cached list is
+  // reused so revisiting the page makes no extra call.
+  const refreshConnected = useCallback(async (force = false) => {
     try {
-      setConnected(await fetchConnectedIntegrations());
+      setConnected(await loadConnected(force));
     } catch (error) {
       console.error("Failed to load connected integrations", error);
     }
@@ -85,8 +97,20 @@ export default function DashboardIntegrations() {
   }, [search]);
 
   // Load the first page whenever the query changes (or a retry is requested).
+  // The default (no-search) view is served from the cached snapshot when warm.
   useEffect(() => {
     let cancelled = false;
+    if (debouncedSearch === "") {
+      const snapshot = getCatalogSnapshot();
+      if (snapshot) {
+        setApps(snapshot.apps);
+        setCursor(snapshot.cursor);
+        setVisibleCount(snapshot.visibleCount);
+        setError(null);
+        setLoading(false);
+        return;
+      }
+    }
     setLoading(true);
     setError(null);
     setVisibleCount(PAGE_SIZE);
@@ -114,6 +138,14 @@ export default function DashboardIntegrations() {
       cancelled = true;
     };
   }, [debouncedSearch, reloadKey]);
+
+  // Keep the cached snapshot in sync with the default view (including pages
+  // revealed by scrolling), so a later revisit restores at the same depth.
+  useEffect(() => {
+    if (debouncedSearch === "" && !loading && !error) {
+      setCatalogSnapshot({ apps, cursor, visibleCount });
+    }
+  }, [apps, cursor, visibleCount, debouncedSearch, loading, error]);
 
   // On the Popular tab we cap to the first page of (popularity-ordered) apps; the
   // All tab keeps revealing more and fetching further server pages on scroll.
@@ -161,7 +193,7 @@ export default function DashboardIntegrations() {
       setBusySlug(app.nameSlug);
       try {
         await connect(app.nameSlug);
-        await refreshConnected();
+        await refreshConnected(true);
         setToast(`Successfully connected your ${app.name} account!`);
       } catch (error) {
         console.error(`Failed to connect ${app.name}`, error);

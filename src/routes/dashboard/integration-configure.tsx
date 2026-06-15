@@ -6,12 +6,12 @@ import { IntegrationIcon } from "@/components/dashboard/IntegrationIcon";
 import { Toast } from "@/components/dashboard/Toast";
 import {
   disconnectIntegration,
-  fetchConnectedIntegrations,
   fetchIntegrationTools,
   parseConfigureProvider,
   type AppTool,
   type ConnectedIntegration,
 } from "@/lib/api";
+import { loadConnected } from "@/lib/integrations-cache";
 import { usePipedreamConnect } from "@/lib/pipedream";
 
 export default function DashboardIntegrationConfigure() {
@@ -31,17 +31,21 @@ export default function DashboardIntegrationConfigure() {
   const [toolsLoading, setToolsLoading] = useState(true);
   const [toolsError, setToolsError] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
-    if (!appSlug) return;
-    try {
-      const all = await fetchConnectedIntegrations();
-      setAccounts(all.filter((account) => account.appSlug === appSlug));
-    } catch (error) {
-      console.error("Failed to load connected accounts", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [appSlug]);
+  // Shares the Integrations page cache; `force` refreshes it after a mutation.
+  const load = useCallback(
+    async (force = false) => {
+      if (!appSlug) return;
+      try {
+        const all = await loadConnected(force);
+        setAccounts(all.filter((account) => account.appSlug === appSlug));
+      } catch (error) {
+        console.error("Failed to load connected accounts", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [appSlug],
+  );
 
   useEffect(() => {
     void load();
@@ -98,7 +102,7 @@ export default function DashboardIntegrationConfigure() {
     setAdding(true);
     try {
       await connect(appSlug);
-      await load();
+      await load(true);
       setToast(`Successfully connected your ${app?.appName ?? appSlug} account!`);
     } catch (error) {
       console.error("Failed to connect account", error);
@@ -112,7 +116,7 @@ export default function DashboardIntegrationConfigure() {
       setBusyId(account.id);
       try {
         await disconnectIntegration(account.id);
-        const remaining = await fetchConnectedIntegrations();
+        const remaining = await loadConnected(true);
         const stillHere = remaining.filter((entry) => entry.appSlug === appSlug);
         if (stillHere.length === 0) {
           navigate("/dashboard/integrations");
