@@ -35,7 +35,7 @@ function SecondaryButton({ children }: { children: React.ReactNode }) {
   return (
     <button
       type="button"
-      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
+      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
     >
       {children}
     </button>
@@ -71,7 +71,7 @@ export default function DashboardAccount() {
 
   async function copyEmailAddress() {
     try {
-      await navigator.clipboard.writeText(accountData.email.viktorAddress);
+      await navigator.clipboard.writeText(accountData.email.gomerAddress);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -96,7 +96,7 @@ export default function DashboardAccount() {
   return (
     <>
       <PageMeta
-        title="Account — Viktor"
+        title="Account — Gomer"
         description="Manage your Slack connection, email settings, and account."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -121,8 +121,8 @@ export default function DashboardAccount() {
                     </div>
                   </h2>
                   <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    Viktor is connected to {accountData.slack.workspaceName}. If you disconnect,
-                    Viktor will immediately stop accessing your Slack data. You can reconnect
+                    Gomer is connected to {accountData.slack.workspaceName}. If you disconnect,
+                    Gomer will immediately stop accessing your Slack data. You can reconnect
                     anytime.
                   </p>
                   <div className="mt-1 flex items-center gap-2">
@@ -149,25 +149,25 @@ export default function DashboardAccount() {
                 <div className="flex flex-col gap-2 p-5">
                   <h2 className="font-body text-base font-medium text-foreground">Email Settings</h2>
                   <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    Only emails from the domains and addresses listed below can reach Viktor. Emails
+                    Only emails from the domains and addresses listed below can reach Gomer. Emails
                     from other senders will be rejected.
                   </p>
 
                   <div className="mt-4 flex flex-col gap-6">
                     <div className="flex flex-col gap-1">
-                      <h4 className="text-sm font-medium">Viktor&apos;s Email Address</h4>
+                      <h4 className="text-sm font-medium">Gomer&apos;s Email Address</h4>
                       <p className="text-xs text-muted-foreground">
-                        Send emails to this address to have Viktor process them
+                        Send emails to this address to have Gomer process them
                       </p>
                       <div className="mt-1 flex items-center gap-2">
                         <span className="text-sm text-foreground">
-                          {accountData.email.viktorAddress}
+                          {accountData.email.gomerAddress}
                         </span>
                         <button
                           type="button"
                           onClick={copyEmailAddress}
                           aria-label={copied ? "Copied" : "Copy email address"}
-                          className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                          className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                         >
                           <Copy className="size-3.5" strokeWidth={1.5} />
                         </button>
@@ -183,7 +183,7 @@ export default function DashboardAccount() {
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="gomer-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="example.com"
                               value={domainInput}
@@ -199,7 +199,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!domainInput.trim()}
                           onClick={addDomain}
-                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Domain
                         </button>
@@ -225,12 +225,12 @@ export default function DashboardAccount() {
                       <div className="flex flex-col gap-1">
                         <h4 className="text-sm font-medium">Allowed Email Addresses</h4>
                         <p className="text-xs text-muted-foreground">
-                          Specific email addresses that can email Viktor
+                          Specific email addresses that can email Gomer
                         </p>
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="viktor-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="gomer-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="user@example.com"
                               value={emailInput}
@@ -246,7 +246,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!emailInput.trim()}
                           onClick={addEmail}
-                          className="viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Email
                         </button>
@@ -292,7 +292,7 @@ export default function DashboardAccount() {
                 >
                   <button
                     type="button"
-                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-destructive/90 px-4 py-2 text-sm font-medium text-white transition-[background-color,border-color,transform] duration-200 hover:bg-destructive/90 active:scale-[0.98]"
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-destructive/90 px-4 py-2 text-sm font-medium text-white transition-[background-color,border-color,transform] duration-200 hover:bg-destructive/90 active:scale-[0.98]"
                   >
                     Cancel Subscription &amp; Delete Account
                   </button>

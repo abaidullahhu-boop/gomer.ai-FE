@@ -31,9 +31,9 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Privacy Policy"
-        description="Learn how Viktor collects, uses, and protects your personal information — data practices, your rights, and security."
+        description="Learn how Gomer collects, uses, and protects your personal information — data practices, your rights, and security."
         ogTitle="Privacy Policy"
-        ogDescription="Learn how Viktor collects, uses, and protects your personal information — data practices, your rights, and security."
+        ogDescription="Learn how Gomer collects, uses, and protects your personal information — data practices, your rights, and security."
       />
       <Nav heroTone="light" />
       <main className="pt-32 pb-24 px-6 md:px-12">
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
 
           <Section number="1" title="Introduction">
             <p>
-              Viktor ("we," "us," or "our") is committed to protecting your privacy. This
+              Gomer ("we," "us," or "our") is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and safeguard your
               personal information when you use our AI-powered platform and related services
               (the "Service").
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Integration data:</strong> information from third-party services you
-                connect to Viktor, as authorized by you.
+                connect to Gomer, as authorized by you.
               </li>
             </ul>
           </Section>
@@ -280,7 +280,7 @@ export default function PrivacyPage() {
               style={{ backgroundColor: "oklch(97% 0.001 106.424)" }}
             >
               <p className="mb-2" style={{ color: "#293045" }}>
-                <strong>Viktor</strong>
+                <strong>Gomer</strong>
               </p>
               <p className="mb-2" style={{ color: "#293045" }}>
                 Privacy Team

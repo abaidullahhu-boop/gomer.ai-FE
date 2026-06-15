@@ -60,7 +60,7 @@ export function SkillBundleCard({ bundle }: SkillBundleCardProps) {
           <button
             type="button"
             onClick={(event) => event.preventDefault()}
-            className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+            className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
           >
             <ArrowDownToLine className="size-3.5 shrink-0" strokeWidth={1.5} />
             Install bundle

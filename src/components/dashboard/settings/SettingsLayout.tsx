@@ -9,7 +9,7 @@ const tabs = [
 export function SettingsLayout() {
   return (
     <>
-      <PageMeta title="Settings — Viktor" description="Manage workspace settings." />
+      <PageMeta title="Settings — Gomer" description="Manage workspace settings." />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
           className="flex-1 overflow-y-auto px-5 py-8"
@@ -31,7 +31,7 @@ export function SettingsLayout() {
                   role="tab"
                   className={({ isActive }) =>
                     [
-                      "viktor-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium whitespace-nowrap transition-[background-color,border-color,transform] duration-200 select-none active:scale-[0.98]",
+                      "gomer-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium whitespace-nowrap transition-[background-color,border-color,transform] duration-200 select-none active:scale-[0.98]",
                       isActive
                         ? "bg-secondary text-secondary-foreground"
                         : "bg-transparent text-muted-foreground hover:bg-accent",

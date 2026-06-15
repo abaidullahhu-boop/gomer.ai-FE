@@ -10,7 +10,7 @@ import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { SlackPurpleCard, SlackTeammateCard } from "@/components/site/SlackChangelogCards";
 import compareVisual3 from "@/assets/images/compare-visual-3.avif";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import type { ComparePageConfig } from "@/components/compare/types";
 
 const glassBorderLayers = (
@@ -67,7 +67,7 @@ const whenChooseTrustBadges = [
   { label: "SOC 2 compliant", icon: <Soc2Icon /> },
 ] as const;
 
-function ViktorCheckBadge() {
+function GomerCheckBadge() {
   return (
     <span
       className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(145.58%_104.75%_at_52.06%_-4.35%,#ffbb98_0%,#ffbb98_6.43%,#9e84ff_50.71%,#6e47ff_80.36%,#150079_100%)] shadow-[inset_0_0_8px_rgba(255,255,255,0.35)]"
@@ -114,13 +114,13 @@ function WhenChooseItemCard({ children }: { children: string }) {
   );
 }
 
-function WhenChooseLabel({ children, variant }: { children: string; variant: "viktor" | "competitor" }) {
+function WhenChooseLabel({ children, variant }: { children: string; variant: "gomer" | "competitor" }) {
   return (
     <div className="flex items-center justify-center gap-3 px-1 sm:gap-5">
       <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(26,24,43,0.12)_0%,rgba(26,24,43,0)_100%)]" />
       <span
         className={`relative z-30 inline-flex h-8 items-center justify-center rounded-full px-4 text-base leading-[1.3] font-medium tracking-[0.01em] sm:px-5 sm:text-[1.125rem] ${
-          variant === "viktor" ? "bg-[#5c28d7]/16 text-[#5c28d7]" : "bg-[#1a182b]/5 text-secondary"
+          variant === "gomer" ? "bg-[#5c28d7]/16 text-[#5c28d7]" : "bg-[#1a182b]/5 text-secondary"
         }`}
       >
         {children}
@@ -135,7 +135,7 @@ function CompareIntegrationsVisual() {
     <div className="dark relative flex w-full overflow-hidden rounded-[32px] gradient-dark-1 min-h-[22rem] flex-col items-center justify-center p-4 lg:min-h-[616px] lg:p-16">
       <img
         src={compareVisual3}
-        alt="Logos of tools Viktor integrates with"
+        alt="Logos of tools Gomer integrates with"
         loading="lazy"
         width={1608}
         height={1515}
@@ -164,9 +164,9 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
     );
   }
 
-  function CompareHeroViktorCard() {
+  function CompareHeroGomerCard() {
     return (
-      <div className="compare-hero-viktor-card relative min-h-112 overflow-hidden rounded-[36px]">
+      <div className="compare-hero-gomer-card relative min-h-112 overflow-hidden rounded-[36px]">
         <div className="relative h-full w-full rounded-[16px]">
           <div
             aria-hidden
@@ -206,24 +206,24 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
             <div className="relative z-[2] flex h-full w-full flex-col justify-between">
               <div className="flex h-full flex-col gap-8 p-8 text-primitive-main-dark sm:p-16">
                 <img
-                  src={viktorAvatar}
-                  alt="Viktor"
+                  src={gomerAvatar}
+                  alt="Gomer"
                   width={80}
                   height={80}
                   className="size-20 shrink-0 rounded-[16px] object-cover"
                 />
                 <div className="flex flex-col gap-4">
                   <h2 className="font-heading text-2xl leading-[1.2] font-bold tracking-[-0.06em] text-primitive-main-dark">
-                    Viktor
+                    Gomer
                   </h2>
                   <div className="flex flex-col gap-4">
                     <p className="body-main text-primitive-main-grey">
-                      Viktor is an autonomous AI employee that lives in your Slack, connects to 3,200+ business
+                      Gomer is an autonomous AI employee that lives in your Slack, connects to 3,200+ business
                       tools, and does real work: pulling data from Stripe, managing Google Ads campaigns,
                       delivering board-ready PDFs, and building web applications.
                     </p>
                     <p className="body-main text-primitive-main-grey">
-                      Choose Viktor when you need an AI that actually touches your tools and delivers outputs your
+                      Choose Gomer when you need an AI that actually touches your tools and delivers outputs your
                       team can use.
                     </p>
                   </div>
@@ -306,13 +306,13 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
                   rel="noopener noreferrer"
                   className="inline-flex h-14 min-h-14 shrink-0 items-center justify-center rounded-full border border-white/15 bg-transparent px-10 text-base font-medium tracking-[-0.01em] text-white transition-all hover:bg-white/10 active:translate-y-px"
                 >
-                  Watch Viktor Work
+                  Watch Gomer Work
                 </a>
               </div>
             </div>
 
             <div className="grid w-full max-w-[1280px] gap-5 lg:grid-cols-2">
-              <CompareHeroViktorCard />
+              <CompareHeroGomerCard />
               <CompareHeroCompetitorCard />
             </div>
           </div>
@@ -333,13 +333,13 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
                   <th className="w-[34%] py-6 pr-4">
                     <div className="flex min-w-0 items-center gap-3">
                       <img
-                        src={viktorAvatar}
-                        alt="Viktor"
+                        src={gomerAvatar}
+                        alt="Gomer"
                         width={32}
                         height={32}
                         className="size-8 shrink-0 rounded-lg object-cover"
                       />
-                      <span className="truncate font-medium body-main text-primary">Viktor</span>
+                      <span className="truncate font-medium body-main text-primary">Gomer</span>
                     </div>
                   </th>
                   <th className="w-[34%] py-6">
@@ -356,8 +356,8 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
                     <td className="py-6 pr-4 align-top font-medium body-main text-primary">{row.feature}</td>
                     <td className="py-6 pr-4 align-top">
                       <div className="flex gap-3">
-                        <ViktorCheckBadge />
-                        <p className="min-w-0 body-main font-medium text-secondary">{row.viktor}</p>
+                        <GomerCheckBadge />
+                        <p className="min-w-0 body-main font-medium text-secondary">{row.gomer}</p>
                       </div>
                     </td>
                     <td className="py-6 align-top">
@@ -378,13 +378,13 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
                   <div className="flex flex-col gap-5">
                     <div className="flex gap-3">
                       <img
-                        src={viktorAvatar}
-                        alt="Viktor"
+                        src={gomerAvatar}
+                        alt="Gomer"
                         width={24}
                         height={24}
                         className="mt-0.5 size-6 shrink-0 rounded-md object-cover"
                       />
-                      <p className="min-w-0 body-main text-secondary">{row.viktor}</p>
+                      <p className="min-w-0 body-main text-secondary">{row.gomer}</p>
                     </div>
                     <div className="flex gap-3">
                       <CompetitorIconTile size="sm" />
@@ -432,7 +432,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
     );
   }
 
-  function WhenChooseViktorHeader() {
+  function WhenChooseGomerHeader() {
     return (
       <div className="relative h-24 overflow-visible rounded-section sm:h-28 lg:h-32">
         <div className="absolute inset-0 isolate rounded-section" style={{ boxShadow: whenChooseHeaderShadow }}>
@@ -447,8 +447,8 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
         <div className="absolute bottom-0 left-1/2 z-10 flex -translate-x-1/2 items-end justify-center">
           <span className="block size-10 shrink-0 rounded-[17px] shadow-[0_0_0_24px_var(--primitive-main-beige)] sm:size-11 lg:size-[3.25rem]">
             <img
-              src={viktorAvatar}
-              alt="Viktor"
+              src={gomerAvatar}
+              alt="Gomer"
               width={52}
               height={52}
               className="block size-full rounded-[17px] object-cover"
@@ -491,7 +491,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
     items,
     header,
   }: {
-    variant: "viktor" | "competitor";
+    variant: "gomer" | "competitor";
     label: string;
     items: string[];
     header: ReactNode;
@@ -524,10 +524,10 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
 
             <div className="mx-auto grid w-full max-w-[66.5rem] gap-10 lg:grid-cols-2 lg:gap-8 xl:gap-12">
               <WhenChooseColumn
-                variant="viktor"
-                label="Choose Viktor if:"
-                items={config.whenToChoose.viktorWhen}
-                header={<WhenChooseViktorHeader />}
+                variant="gomer"
+                label="Choose Gomer if:"
+                items={config.whenToChoose.gomerWhen}
+                header={<WhenChooseGomerHeader />}
               />
               <WhenChooseColumn
                 variant="competitor"
@@ -563,7 +563,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
     <>
       Questions people ask
       <br />
-      before adding Viktor
+      before adding Gomer
     </>
   );
 

@@ -95,7 +95,7 @@ export function Dropdown({
         aria-haspopup="listbox"
         onClick={() => setOpen((prev) => !prev)}
         onKeyDown={handleTriggerKeyDown}
-        className="viktor-focus-ring flex h-10 w-full cursor-pointer items-center justify-between gap-3 rounded-[7px] border border-border bg-muted px-4 text-sm font-medium text-foreground transition-[border-color,box-shadow] duration-150 hover:border-border/80"
+        className="gomer-focus-ring flex h-10 w-full cursor-pointer items-center justify-between gap-3 rounded-[7px] border border-border bg-muted px-4 text-sm font-medium text-foreground transition-[border-color,box-shadow] duration-150 hover:border-border/80"
       >
         <span className="truncate">{selected?.label}</span>
         <ChevronDown

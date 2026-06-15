@@ -9,10 +9,10 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Impressum — Viktor"
-        description="Provider information and legal notice for Viktor."
-        ogTitle="Impressum — Viktor"
-        ogDescription="Provider information and legal notice for Viktor."
+        title="Impressum — Gomer"
+        description="Provider information and legal notice for Gomer."
+        ogTitle="Impressum — Gomer"
+        ogDescription="Provider information and legal notice for Gomer."
       />
       <Nav heroTone="light" />
       <section className="pt-12 sm:pt-[5rem] pb-14 sm:pb-[7rem]">
@@ -29,7 +29,7 @@ export default function ImpressumPage() {
                 </div>
                 <h1 className="font-heading h2 sm:h1 text-primary ">Impressum</h1>
                 <p className="body-medium text-secondary font-medium">
-                  Provider information and legal notice for Viktor.
+                  Provider information and legal notice for Gomer.
                 </p>
               </header>
 
@@ -52,9 +52,9 @@ export default function ImpressumPage() {
                       <br />
                       United States
                       <br />
-                      Product: Viktor (
-                      <a href="https://viktor.com" className={linkClassName}>
-                        viktor.com
+                      Product: Gomer (
+                      <a href="https://gomer.com" className={linkClassName}>
+                        gomer.com
                       </a>
                       )
                     </address>
@@ -92,8 +92,8 @@ export default function ImpressumPage() {
                     <ul className="space-y-1 body-main text-secondary font-medium">
                       <li>
                         Email:{" "}
-                        <a href="mailto:legal@viktor.com" className={linkClassName}>
-                          legal@viktor.com
+                        <a href="mailto:legal@gomer.com" className={linkClassName}>
+                          legal@gomer.com
                         </a>
                       </li>
                       <li>Phone: +1 929 243 9664</li>

@@ -59,7 +59,7 @@ export type TopUser = {
 export const topUsers: TopUser[] = [
   {
     id: "viktor",
-    name: "Viktor",
+    name: "Gomer",
     initials: "V",
     credits: 549,
     avatarColor: "bg-highlight",
@@ -106,7 +106,7 @@ export const scheduledTaskRows: ScheduledTaskRow[] = [
     cronPath: "/workflow_discovery",
     totalRuns: 1,
     lastActivity: "8 hours ago",
-    createdBy: { name: "Viktor", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
+    createdBy: { name: "Gomer", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
     totalCredits: 332,
   },
   {
@@ -115,7 +115,7 @@ export const scheduledTaskRows: ScheduledTaskRow[] = [
     cronPath: "/heartbeat",
     totalRuns: 1,
     lastActivity: "7 hours ago",
-    createdBy: { name: "Viktor", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
+    createdBy: { name: "Gomer", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
     totalCredits: 127,
   },
   {
@@ -124,7 +124,7 @@ export const scheduledTaskRows: ScheduledTaskRow[] = [
     cronPath: "/onboarding_followup_1",
     totalRuns: 1,
     lastActivity: "4 hours ago",
-    createdBy: { name: "Viktor", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
+    createdBy: { name: "Gomer", avatarUrl: "/assets/brand/logos/viktor-avatar-color.svg" },
     totalCredits: 90,
   },
 ];

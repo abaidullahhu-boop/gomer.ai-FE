@@ -102,7 +102,7 @@ function InviteFriendsTab({
         <button
           type="button"
           onClick={onCopy}
-          className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+          className="gomer-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
         >
           {copied ? "Copied!" : "Copy referral link"}
         </button>
@@ -133,7 +133,7 @@ function InviteFriendsTab({
         <button
           type="button"
           disabled={!hasEmail}
-          className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          className="gomer-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Send className="size-4" strokeWidth={1.5} />
           Invite via Email
@@ -239,7 +239,7 @@ export function GetFreeCreditsModal({ open, onClose }: GetFreeCreditsModalProps)
           type="button"
           aria-label="Close dialog"
           onClick={onClose}
-          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+          className="gomer-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
         >
           <X className="size-4" strokeWidth={1.5} />
         </button>
@@ -250,7 +250,7 @@ export function GetFreeCreditsModal({ open, onClose }: GetFreeCreditsModalProps)
               Refer and earn credits
             </div>
             <div className="text-sm font-medium text-secondary">
-              Get 10,000 credits for every friend that adds Viktor to their own Slack workspace.
+              Get 10,000 credits for every friend that adds Gomer to their own Slack workspace.
             </div>
           </div>
 

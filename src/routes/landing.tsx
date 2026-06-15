@@ -195,9 +195,9 @@ export default function LandingPage() {
   return (
     <div className="viktor-scope">
       <PageMeta
-        title="Viktor — The AI employee for everyone else"
+        title="Gomer — The AI employee for everyone else"
         description="A focused AI coworker that connects to your tools and does the work — built for modern teams."
-        ogTitle="Viktor — The AI employee"
+        ogTitle="Gomer — The AI employee"
         ogDescription="Premium AI workforce for modern teams."
       />
       <style>{tokens}</style>
@@ -230,7 +230,7 @@ export default function LandingPage() {
                 />
                 <div className="relative z-10">
                   <img
-                    alt="Viktor team"
+                    alt="Gomer team"
                     loading="eager"
                     width={1920}
                     height={1280}
@@ -334,7 +334,7 @@ export default function LandingPage() {
                       <p className="body-small text-[#f1edff] font-medium">Let's work together</p>
                     </div>
                     <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
-                      Build Viktor with us
+                      Build Gomer with us
                     </h2>
                   </div>
                   <p className="body-main max-w-[35.625rem] text-white font-medium opacity-80">

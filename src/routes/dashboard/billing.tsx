@@ -62,8 +62,8 @@ export default function DashboardBilling() {
   return (
     <>
       <PageMeta
-        title="Billing & Credits — Viktor"
-        description="Manage your plan and see how Viktor is working for your team."
+        title="Billing & Credits — Gomer"
+        description="Manage your plan and see how Gomer is working for your team."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
@@ -79,7 +79,7 @@ export default function DashboardBilling() {
 
             <div className="flex w-full flex-col gap-6">
               <p className="font-body text-base text-foreground">
-                Manage your plan and see how Viktor is working for your team.
+                Manage your plan and see how Gomer is working for your team.
               </p>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -98,7 +98,7 @@ export default function DashboardBilling() {
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
-                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
                     >
                       Upgrade your plan
                     </button>
@@ -150,7 +150,7 @@ export default function DashboardBilling() {
                       <div className="flex flex-col gap-1">
                         <h3 className="font-body text-base font-medium text-foreground">Invite friends</h3>
                         <p className="text-sm leading-relaxed text-muted-foreground">
-                          Get 10k credits for every friend that adds Viktor to their own Slack
+                          Get 10k credits for every friend that adds Gomer to their own Slack
                           workspace.
                         </p>
                       </div>
@@ -172,7 +172,7 @@ export default function DashboardBilling() {
                             type="button"
                             onClick={copyInviteLink}
                             aria-label={copied ? "Copied" : "Copy invite link"}
-                            className="viktor-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-accent"
+                            className="gomer-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-accent"
                           >
                             <Copy className="size-4" />
                           </button>
@@ -186,17 +186,17 @@ export default function DashboardBilling() {
                       <div className="flex flex-col gap-1">
                         <h3 className="font-body text-base font-medium text-foreground">Share a use case</h3>
                         <p className="text-sm leading-relaxed text-muted-foreground">
-                          Show others on LinkedIn or X how Viktor helps you in your work and get extra
+                          Show others on LinkedIn or X how Gomer helps you in your work and get extra
                           credits for it.
                         </p>
                       </div>
                       <div>
                         <Link
                           to="/creators"
-                          className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
+                          className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
                         >
                           <span className="flex items-center gap-1.5">
-                            Join Viktor Creator Program
+                            Join Gomer Creator Program
                             <ExternalLink className="size-3.5" strokeWidth={1.5} />
                           </span>
                         </Link>
@@ -211,7 +211,7 @@ export default function DashboardBilling() {
                   <Users className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
                   <p className="text-sm text-muted-foreground">
                     All plans share credits across your entire Slack or Teams workspace. No per-seat
-                    limits — everyone can work with Viktor.
+                    limits — everyone can work with Gomer.
                   </p>
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function DashboardBilling() {
                   to="/privacy"
                   target="_blank"
                   rel="noreferrer"
-                  className="viktor-focus-ring relative inline-flex min-h-0 cursor-pointer select-none items-center justify-center gap-1 rounded-sm border-0 bg-transparent px-0 py-0 text-sm font-medium text-foreground transition-[background-color,border-color,transform] duration-200 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:scale-x-0 after:bg-border hover:text-accent-foreground hover:after:scale-x-100 active:scale-[0.98]"
+                  className="gomer-focus-ring relative inline-flex min-h-0 cursor-pointer select-none items-center justify-center gap-1 rounded-sm border-0 bg-transparent px-0 py-0 text-sm font-medium text-foreground transition-[background-color,border-color,transform] duration-200 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:scale-x-0 after:bg-border hover:text-accent-foreground hover:after:scale-x-100 active:scale-[0.98]"
                 >
                   Privacy Policy
                 </Link>

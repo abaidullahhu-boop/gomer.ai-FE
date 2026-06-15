@@ -173,7 +173,7 @@
   --integrations-icon-tile-shadow: 0 8px 16px 0 #1a18290f, inset 1.8px 1.8px 3.6px 0 #f5f1ed;
   --integrations-rail-edge-fade: linear-gradient(90deg, #f8f5f1 0%, #f8f5f100 100%);
   --integrations-connector-line: linear-gradient(180deg, var(--primitive-main-dblue) 0%, var(--primitive-purple-500) 58%, var(--primitive-purple-300) 100%);
-  --integrations-viktor-avatar-glow: radial-gradient(50% 50% at 50% 50%, #6e47ff57 0%, #ffbb983d 36%, #faf5f100 72%);
+  --integrations-gomer-avatar-glow: radial-gradient(50% 50% at 50% 50%, #6e47ff57 0%, #ffbb983d 36%, #faf5f100 72%);
   --integrations-logo-loop-duration: 20s;
   --integrations-logo-loop-tile-size: 7rem;
   --integrations-logo-loop-gap: 1.5rem;
@@ -491,13 +491,13 @@
     background: var(--slack-attached-pill-bg);
     color: var(--slack-attached-pill-text);
   }
-  .slack-message-viktor {
+  .slack-message-gomer {
     border-radius: 12px;
     box-shadow:
       0 10px 28px rgba(0, 0, 0, 0.11),
       0 4px 10px rgba(0, 0, 0, 0.07);
   }
-  .slack-viktor-bg-mount {
+  .slack-gomer-bg-mount {
     isolation: isolate;
     pointer-events: none;
     border-radius: inherit;
@@ -506,12 +506,12 @@
     inset: 0;
     overflow: hidden;
   }
-  .slack-viktor-layer-glass-stack {
+  .slack-gomer-layer-glass-stack {
     position: absolute;
     inset: 0;
     background: var(--conic-gradient-bg), linear-gradient(0deg, #fff3 0%, #fff3 100%), #3333;
   }
-  .slack-viktor-layer-inner-depth-soft {
+  .slack-gomer-layer-inner-depth-soft {
     border-radius: inherit;
     mix-blend-mode: plus-darker;
     pointer-events: none;
@@ -519,7 +519,7 @@
     inset: 0;
     box-shadow: inset 0 0 43.23px #f2f2f2;
   }
-  .slack-viktor-layer-inner-glow-overlay {
+  .slack-gomer-layer-inner-glow-overlay {
     border-radius: inherit;
     mix-blend-mode: overlay;
     pointer-events: none;
@@ -527,12 +527,12 @@
     inset: 0;
     box-shadow: inset 0 0 8.11px #ffffff80;
   }
-  .slack-viktor-layer-feather-blur {
+  .slack-gomer-layer-feather-blur {
     background: #ffffff14;
     position: absolute;
     inset: 0;
   }
-  .slack-viktor-layer-white-sheet {
+  .slack-gomer-layer-white-sheet {
     z-index: 10;
     border-radius: inherit;
     background: radial-gradient(100% 150%, #fff 12%, #fff0 100%);
@@ -728,16 +728,16 @@
       0 0 8px rgb(255 187 152 / 55%),
       0 0 14px rgb(110 71 255 / 28%);
   }
-  .integrations-viktor-avatar-glow {
-    background: var(--integrations-viktor-avatar-glow);
+  .integrations-gomer-avatar-glow {
+    background: var(--integrations-gomer-avatar-glow);
     border-radius: 9999px;
   }
   .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::before,
   .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::after {
     background: linear-gradient(90deg, #150079 0%, #15007900 100%);
   }
-  .product-what-viktor-is-animation .integrations-logo-loop-viewport::before,
-  .product-what-viktor-is-animation .integrations-logo-loop-viewport::after {
+  .product-what-gomer-is-animation .integrations-logo-loop-viewport::before,
+  .product-what-gomer-is-animation .integrations-logo-loop-viewport::after {
     display: none;
   }
   .integrations-directory-search::placeholder {
@@ -821,21 +821,21 @@
   color: #fff;
 }
 
-@utility viktor-focus-ring {
+@utility -focus-ring {
   outline: none;
   &:focus-visible {
     box-shadow: 0 0 0 2px var(--color-sidebar-background), 0 0 0 4px var(--ring);
   }
 }
 
-@utility viktor-focus-ring {
+@utility gomer-focus-ring {
   &:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 }
 
-@utility viktor-auth-gradient {
+@utility gomer-auth-gradient {
   background-color: #150079;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 900' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(18.7 83.7 -139.11 31.08 298 0)'><stop stop-color='%23fdbca0' offset='0.064'/><stop stop-color='%23c99ed0' offset='0.286'/><stop stop-color='%23947fff' offset='0.507'/><stop stop-color='%237e64fe' offset='0.655'/><stop stop-color='%236748fd' offset='0.804'/><stop stop-color='%235336dc' offset='0.853'/><stop stop-color='%233e24bb' offset='0.902'/><stop stop-color='%232a129a' offset='0.951'/><stop stop-color='%231f098a' offset='0.975'/><stop stop-color='%23150079' offset='1'/></radialGradient></defs></svg>");
   background-position: 0 0;
@@ -843,7 +843,7 @@
   background-size: 100% 100%;
 }
 
-.viktor-glass-card {
+.gomer-glass-card {
   position: relative;
   overflow: hidden;
   background-color: transparent;
@@ -855,7 +855,7 @@
     inset 0 0 43.232px #f2f2f2;
 }
 
-.viktor-glass-card::before {
+.gomer-glass-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -869,7 +869,7 @@
     radial-gradient(85% 75% at 0 100%, #b296d4 0%, #b296d400 75%);
 }
 
-.viktor-glass-card::after {
+.gomer-glass-card::after {
   content: "";
   position: absolute;
   inset: 15.74px 15px 13.74px;
@@ -880,12 +880,12 @@
   background: #ffffffed;
 }
 
-.viktor-glass-card > * {
+.gomer-glass-card > * {
   position: relative;
   z-index: 2;
 }
 
-.viktor-focus-ring:focus-visible {
+.gomer-focus-ring:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }

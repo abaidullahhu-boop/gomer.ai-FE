@@ -57,14 +57,14 @@ export default function ProductPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Product — Viktor, an AI coworker for your entire team"
-        description="Viktor is an AI coworker that plugs into your tools, talks in Slack, and ships real deliverables — built for teams, secure by default."
-        ogTitle="Product — Viktor"
+        title="Product — Gomer, an AI coworker for your entire team"
+        description="Gomer is an AI coworker that plugs into your tools, talks in Slack, and ships real deliverables — built for teams, secure by default."
+        ogTitle="Product — Gomer"
         ogDescription="An AI coworker for your entire team."
         canonical="/product"
       />
       <Hero />
-      <SectionWhatViktorIs />
+      <SectionWhatGomerIs />
       <ProductHowItWorksSection />
       <SectionWhatCanDo />
       <SectionBuiltForTeams />
@@ -104,12 +104,12 @@ function Hero() {
 
           <div className="flex max-w-5xl flex-col items-center gap-6">
             <h1 className="font-heading h2 text-center text-balance sm:h1">
-              Viktor is an AI employee
+              Gomer is an AI employee
               <br />
               <span className="text-accent-1">for your entire team.</span>
             </h1>
             <p className="max-w-[34.1875rem] body-medium text-secondary font-medium">
-              Viktor doesn&apos;t just answer questions. It does the work: pulling reports, managing
+              Gomer doesn&apos;t just answer questions. It does the work: pulling reports, managing
               campaigns, building dashboards, researching leads, automating workflows, and writing code.
               Like a new hire that already knows your stack.
             </p>
@@ -135,12 +135,12 @@ function Hero() {
   );
 }
 
-/* ---------------- SECTION 2: WHAT VIKTOR IS ---------------- */
-const whatViktorIsFeatures = [
+/* ---------------- SECTION 2: WHAT GOMER IS ---------------- */
+const whatGomerIsFeatures = [
   {
     title: "Your AI employee",
     description:
-      "Viktor is a managed AI employee that operates across your entire organization. Add it to Slack or Microsoft Teams (soon) — and every person on your team gets access to an AI that can do real, meaningful work across every department.",
+      "Gomer is a managed AI employee that operates across your entire organization. Add it to Slack or Microsoft Teams (soon) — and every person on your team gets access to an AI that can do real, meaningful work across every department.",
     icon: (
       <svg
         preserveAspectRatio="none"
@@ -214,24 +214,24 @@ const whatViktorIsFeatures = [
   },
 ];
 
-function SectionWhatViktorIs() {
+function SectionWhatGomerIs() {
   return (
-    <section id="what-viktor-is" className="py-10 sm:py-12 bg-primitive-main-beige">
+    <section id="what-gomer-is" className="py-10 sm:py-12 bg-primitive-main-beige">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-7xl">
           <div className="bg-hero dark mx-auto w-full max-w-[1440px] overflow-hidden rounded-[2.5rem]">
             <div className="flex flex-col gap-10">
               <div className="px-6 sm:px-10 lg:px-16 pt-10 sm:pt-12 lg:pt-16">
-                <h2 className="font-heading h3 text-center text-white sm:h2">What Viktor is</h2>
+                <h2 className="font-heading h3 text-center text-white sm:h2">What Gomer is</h2>
               </div>
 
               <IntegrationsLogoLoop
                 variant="product"
-                className="product-what-viktor-is-animation"
+                className="product-what-gomer-is-animation"
               />
 
               <div className="grid gap-8 px-6 sm:px-10 lg:px-16 pb-10 sm:pb-12 lg:pb-16 md:grid-cols-3 md:gap-6 lg:gap-8">
-                {whatViktorIsFeatures.map((feature) => (
+                {whatGomerIsFeatures.map((feature) => (
                   <article key={feature.title} className="flex flex-col gap-4">
                     {feature.icon}
                     <div className="flex flex-col gap-3">
@@ -251,7 +251,7 @@ function SectionWhatViktorIs() {
   );
 }
 
-/* ---------------- SECTION 3: WHAT VIKTOR CAN DO (cards grid) ---------------- */
+/* ---------------- SECTION 3: WHAT GOMER CAN DO (cards grid) ---------------- */
 const capabilityCardShadow =
   "inset 2.702px 2.702px 1.351px -2.702px rgb(255, 255, 255), inset -2.702px -2.702px 1.351px -2.702px rgb(255, 255, 255), inset 0 0 8.106px rgba(255, 255, 255, 0.5), inset 0 0 43.232px rgb(242, 242, 242)";
 
@@ -272,7 +272,7 @@ const capabilityCards: { icon: ReactNode; tag: string; title: string; desc: stri
     icon: <ProductScheduleIcon />,
     tag: "Scheduling",
     title: "Scheduled tasks",
-    desc: "Recurring workflows that execute automatically: daily standups with real data, weekly competitive scans, monthly performance reviews. Viktor manages the schedule, execution, and delivery.",
+    desc: "Recurring workflows that execute automatically: daily standups with real data, weekly competitive scans, monthly performance reviews. Gomer manages the schedule, execution, and delivery.",
   },
   {
     icon: <ProductResearchIcon />,
@@ -284,7 +284,7 @@ const capabilityCards: { icon: ReactNode; tag: string; title: string; desc: stri
     icon: <ProductAppsIcon />,
     tag: "Apps",
     title: "App building",
-    desc: "Describe what you need and Viktor builds it: live dashboards, internal tools, calculators — real web apps with databases, auth, and hosting. Deployed via a link. No design team needed.",
+    desc: "Describe what you need and Gomer builds it: live dashboards, internal tools, calculators — real web apps with databases, auth, and hosting. Deployed via a link. No design team needed.",
   },
   {
     icon: <ProductEngineeringIcon />,
@@ -296,7 +296,7 @@ const capabilityCards: { icon: ReactNode; tag: string; title: string; desc: stri
     icon: <ProductBrowserIcon />,
     tag: "Browser",
     title: "Browser automation",
-    desc: "Operates a real browser — filling forms, navigating complex workflows, scraping data, capturing screenshots. Anything you'd do manually in a browser, Viktor can do programmatically.",
+    desc: "Operates a real browser — filling forms, navigating complex workflows, scraping data, capturing screenshots. Anything you'd do manually in a browser, Gomer can do programmatically.",
   },
 ];
 
@@ -319,10 +319,10 @@ function CapabilityCard({ children }: { children: React.ReactNode }) {
 
 function SectionWhatCanDo() {
   return (
-    <section id="what-viktor-can-do" className="bg-primitive-main-beige py-10 sm:py-12">
+    <section id="what-gomer-can-do" className="bg-primitive-main-beige py-10 sm:py-12">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:gap-14">
-          <h2 className="font-heading h3 text-center sm:h2">What Viktor can do</h2>
+          <h2 className="font-heading h3 text-center sm:h2">What Gomer can do</h2>
 
           <div className="relative">
             <div
@@ -376,7 +376,7 @@ function SectionBuiltForTeams() {
                   user.
                 </p>
                 <p>
-                  Viktor is built for organizations. It understands that your marketing team needs campaign
+                  Gomer is built for organizations. It understands that your marketing team needs campaign
                   metrics, your finance lead needs revenue data, and your support team needs ticket
                   analysis — all at the same time.
                 </p>
@@ -389,7 +389,7 @@ function SectionBuiltForTeams() {
             <div className="flex min-w-0 items-center justify-center lg:justify-end">
               <img
                 src={builtForTeamsImg}
-                alt="Teams across marketing, engineering, sales, and support using Viktor"
+                alt="Teams across marketing, engineering, sales, and support using Gomer"
                 loading="lazy"
                 decoding="async"
                 width={1368}
@@ -409,32 +409,32 @@ const diffCards: { icon: ReactNode; title: string; desc: string }[] = [
   {
     icon: <ProductManagedIcon />,
     title: "Managed, not self-hosted",
-    desc: "Viktor is a fully hosted service. There's nothing to install on your machine, no infrastructure to maintain, no updates to manage. Compare this to open-source alternatives like OpenClaw, which require a developer to set up, configure, host, and keep running. Viktor works out of the box — for your entire team, not just the person who set it up.",
+    desc: "Gomer is a fully hosted service. There's nothing to install on your machine, no infrastructure to maintain, no updates to manage. Compare this to open-source alternatives like OpenClaw, which require a developer to set up, configure, host, and keep running. Gomer works out of the box — for your entire team, not just the person who set it up.",
   },
   {
     icon: <ProductSecureIcon />,
     title: "Secure by design",
-    desc: "Viktor stores all credentials in the cloud with enterprise-grade encryption. Your API keys, passwords, and sensitive data never touch a local machine. Self-hosted tools like OpenClaw store credentials directly on your computer — meaning a single prompt injection attack could compromise every password and API key in one breach.",
+    desc: "Gomer stores all credentials in the cloud with enterprise-grade encryption. Your API keys, passwords, and sensitive data never touch a local machine. Self-hosted tools like OpenClaw store credentials directly on your computer — meaning a single prompt injection attack could compromise every password and API key in one breach.",
   },
   {
     icon: <ProductTeamFirstIcon />,
     title: "Team-first, not personal-first",
-    desc: "OpenClaw is a personal productivity tool — it excels at managing one person's calendar, email, and tasks. Viktor is purpose-built for teams. It navigates complex multi-channel workspaces, maintains context across different team members' conversations, and creates automations that benefit the entire company.",
+    desc: "OpenClaw is a personal productivity tool — it excels at managing one person's calendar, email, and tasks. Gomer is purpose-built for teams. It navigates complex multi-channel workspaces, maintains context across different team members' conversations, and creates automations that benefit the entire company.",
   },
   {
     icon: <ProductWorksEverywhereIcon />,
     title: "Works everywhere your team works",
-    desc: "Viktor is available in Slack and Microsoft Teams (soon). Not everyone can install a Slack bot. Not everyone uses Teams. Viktor ensures nobody on your team is locked out — regardless of their platform or admin permissions.",
+    desc: "Gomer is available in Slack and Microsoft Teams (soon). Not everyone can install a Slack bot. Not everyone uses Teams. Gomer ensures nobody on your team is locked out — regardless of their platform or admin permissions.",
   },
   {
     icon: <ProductNoSetupIcon />,
     title: "No setup required",
-    desc: "OpenClaw requires a developer to install, configure, and maintain. Viktor requires a Slack install, a Teams install, or a browser login. Anyone on your team — marketing, sales, support, leadership — can start using it in minutes with zero technical background.",
+    desc: "OpenClaw requires a developer to install, configure, and maintain. Gomer requires a Slack install, a Teams install, or a browser login. Anyone on your team — marketing, sales, support, leadership — can start using it in minutes with zero technical background.",
   },
   {
     icon: <ProductIntegrationsIcon />,
     title: "3,000+ native integrations, zero configuration",
-    desc: "Every integration is pre-built, secured with OAuth, and connects in one click. No API keys to paste, no webhooks to wire up, no YAML to edit. Need a tool that isn't in the catalog? Viktor can build custom integrations on the fly.",
+    desc: "Every integration is pre-built, secured with OAuth, and connects in one click. No API keys to paste, no webhooks to wire up, no YAML to edit. Need a tool that isn't in the catalog? Gomer can build custom integrations on the fly.",
   },
 ];
 
@@ -443,7 +443,7 @@ function SectionHowDifferent() {
     <section id="how-different" className=" py-10 sm:py-12">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:gap-14">
-          <h2 className="font-heading h3 text-center sm:h2">How Viktor is different</h2>
+          <h2 className="font-heading h3 text-center sm:h2">How Gomer is different</h2>
 
           <div className="flex flex-wrap justify-center gap-5">
             {diffCards.map((c) => (

@@ -62,7 +62,7 @@ export default function DashboardIntegrations() {
 
   return (
     <>
-      <PageMeta title="Integrations — Viktor" description="Connect the tools you use with Viktor." />
+      <PageMeta title="Integrations — Gomer" description="Connect the tools you use with Gomer." />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
           className="flex-1 overflow-y-auto px-2 sm:px-12 py-8 "
@@ -76,7 +76,7 @@ export default function DashboardIntegrations() {
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                  className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                 >
                   <Plus className="size-4 shrink-0" strokeWidth={1.5} />
                   Add Custom MCP
@@ -86,7 +86,7 @@ export default function DashboardIntegrations() {
 
             <div className="flex w-full flex-col gap-6">
               <p className="text-sm text-secondary-foreground">
-                Connect the tools you use and let Viktor perform tasks across various apps.
+                Connect the tools you use and let Gomer perform tasks across various apps.
               </p>
 
               <div className="flex w-full flex-col gap-1.5">
@@ -109,7 +109,7 @@ export default function DashboardIntegrations() {
                     type="button"
                     onClick={() => setTab("all")}
                     className={[
-                      "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
+                      "gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                       tab === "all"
                         ? "bg-secondary text-secondary-foreground"
                         : "bg-transparent text-muted-foreground hover:bg-accent",
@@ -121,7 +121,7 @@ export default function DashboardIntegrations() {
                     type="button"
                     onClick={() => setTab("popular")}
                     className={[
-                      "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
+                      "gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                       tab === "popular"
                         ? "bg-secondary text-secondary-foreground"
                         : "bg-transparent text-muted-foreground hover:bg-accent",
@@ -141,7 +141,7 @@ export default function DashboardIntegrations() {
                     aria-checked={connectedOnly}
                     onClick={() => setConnectedOnly((value) => !value)}
                     className={[
-                      "viktor-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+                      "gomer-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
                       connectedOnly ? "border-highlight bg-highlight" : "bg-secondary",
                     ].join(" ")}
                   >

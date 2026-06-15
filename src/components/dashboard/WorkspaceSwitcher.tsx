@@ -64,7 +64,7 @@ export function WorkspaceSwitcher() {
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((prev) => !prev)}
-        className="viktor-focus-ring group flex w-full cursor-pointer items-center gap-2.5 rounded-[7px] border border-sidebar-border bg-sidebar-background/40 px-2.5 py-2 text-left text-foreground transition-colors hover:bg-sidebar-accent"
+        className="gomer-focus-ring group flex w-full cursor-pointer items-center gap-2.5 rounded-[7px] border border-sidebar-border bg-sidebar-background/40 px-2.5 py-2 text-left text-foreground transition-colors hover:bg-sidebar-accent"
       >
         <WorkspaceTile name={currentName} />
         <span className="min-w-0 flex-1 truncate text-sm font-medium">{currentName}</span>
@@ -87,7 +87,7 @@ export function WorkspaceSwitcher() {
                 aria-current={isCurrent || undefined}
                 disabled={switchingTo !== null}
                 onClick={() => void handleSwitch(workspace.workspaceId)}
-                className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left transition-colors hover:bg-[#F4F4F5] disabled:cursor-wait"
+                className="gomer-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left transition-colors hover:bg-[#F4F4F5] disabled:cursor-wait"
               >
                 <WorkspaceTile name={workspace.name} />
                 <div className="min-w-0 flex-1">
@@ -115,7 +115,7 @@ export function WorkspaceSwitcher() {
             type="button"
             role="menuitem"
             onClick={addWorkspace}
-            className="viktor-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="gomer-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-2.5 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             <span className="flex size-6 shrink-0 items-center justify-center rounded-[7px] border border-dashed border-border">
               <Plus className="size-3.5 text-muted-foreground" strokeWidth={2} aria-hidden />

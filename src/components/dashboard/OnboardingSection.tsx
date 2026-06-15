@@ -19,24 +19,24 @@ type OnboardingTask = {
 
 const tasks: OnboardingTask[] = [
   {
-    title: "Send Viktor your first task",
+    title: "Send Gomer your first task",
     description:
-      "DM Viktor or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
+      "DM Gomer or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
     image: gettingSayHi,
-    buttonLabel: "Message Viktor",
+    buttonLabel: "Message Gomer",
     completed: true,
   },
   {
     title: "Connect 5 integrations",
     description:
-      "Give Viktor enough access to work across your stack. Connect five integrations to unlock the full setup.",
+      "Give Gomer enough access to work across your stack. Connect five integrations to unlock the full setup.",
     image: gettingConnectTools,
     buttonLabel: "Browse Integrations",
     href: "/dashboard/integrations",
     badge: "0 / 5 integrations",
   },
   {
-    title: "Teach Viktor new skills",
+    title: "Teach Gomer new skills",
     description:
       "Skills are prebuilt workflows — from drafting emails to pulling reports. Browse the directory and install what fits.",
     image: gettingInstallSkills,
@@ -104,15 +104,15 @@ export function OnboardingSection() {
       <div className="px-6 pt-5 pb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold tracking-tight">Get Viktor up to speed</h2>
+            <h2 className="text-xl font-semibold tracking-tight">Get Gomer up to speed</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Complete the core setup steps so Viktor is fully ready for your workspace.
+              Complete the core setup steps so Gomer is fully ready for your workspace.
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1">
             <button
               type="button"
-              className="cursor-pointer viktor-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none"
+              className="cursor-pointer gomer-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none"
               aria-label="Refresh progress"
             >
               <RefreshCw className="size-4" strokeWidth={1.5} />
@@ -120,7 +120,7 @@ export function OnboardingSection() {
             <div ref={menuRef} className="relative">
               <button
                 type="button"
-                className="cursor-pointer viktor-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="cursor-pointer gomer-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="More options"
                 aria-expanded={menuOpen}
                 aria-haspopup="menu"

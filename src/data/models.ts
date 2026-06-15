@@ -113,7 +113,7 @@ export const models: ModelDefinition[] = [
   {
     id: "gemini-flash-3",
     name: "Gemini Flash 3",
-    description: "Deprecated model. Makes too many mistakes to be usable as a default for Viktor.",
+    description: "Deprecated model. Makes too many mistakes to be usable as a default for Gomer.",
     provider: "google",
     badges: [{ type: "deprecated" }],
     reasoning: "low",
@@ -122,7 +122,7 @@ export const models: ModelDefinition[] = [
   {
     id: "kimi-k2-6",
     name: "Kimi K2.6",
-    description: "Deprecated model. Makes too many mistakes to be usable as a default for Viktor.",
+    description: "Deprecated model. Makes too many mistakes to be usable as a default for Gomer.",
     provider: "other",
     badges: [{ type: "deprecated" }],
     reasoning: "label",

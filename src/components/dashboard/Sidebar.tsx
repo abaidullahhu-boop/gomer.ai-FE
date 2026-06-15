@@ -15,7 +15,7 @@ import {
   WrenchIcon,
 } from "./NavIcons";
 import { ProfileMenu } from "./ProfileMenu";
-import { ViktorLogo } from "./ViktorLogo";
+import { GomerLogo } from "./GomerLogo";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 
 type NavIcon = LucideIcon | ((props: SVGProps<SVGSVGElement>) => React.ReactNode);
@@ -54,7 +54,7 @@ function NavItemLink({
       onClick={onNavigate}
       className={({ isActive }) =>
         [
-          "viktor-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
+          "gomer-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
           isActive
             ? "bg-sidebar-accent text-sidebar-primary-foreground"
             : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-primary-foreground",
@@ -88,7 +88,7 @@ function SecondaryButton({
     <button
       type="button"
       onClick={onClick}
-      className="viktor-focus-ring font-body flex w-full cursor-pointer items-center gap-3 rounded-[7px] px-3 py-2.5 text-left text-sm font-medium text-sidebar-foreground transition-all duration-150 hover:bg-sidebar-accent hover:text-sidebar-primary-foreground"
+      className="gomer-focus-ring font-body flex w-full cursor-pointer items-center gap-3 rounded-[7px] px-3 py-2.5 text-left text-sm font-medium text-sidebar-foreground transition-all duration-150 hover:bg-sidebar-accent hover:text-sidebar-primary-foreground"
     >
       <Icon className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} />
       {label}
@@ -129,7 +129,7 @@ export function MobileMenuButton({
       aria-label={open ? "Close menu" : "Open menu"}
       aria-expanded={open}
       onClick={onClick}
-      className="viktor-focus-ring flex size-10 cursor-pointer items-center justify-center text-foreground"
+      className="gomer-focus-ring flex size-10 cursor-pointer items-center justify-center text-foreground"
     >
       {open ? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -161,7 +161,7 @@ export function Sidebar({
       ].join(" ")}
     >
       <div className="shrink-0 px-5 pt-6 pb-4">
-        <ViktorLogo />
+        <GomerLogo />
       </div>
 
       <div className="px-3 pb-2">
@@ -183,7 +183,7 @@ export function Sidebar({
             onClick={onMobileClose}
             className={({ isActive }) =>
               [
-                "viktor-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
+                "gomer-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
                 isActive
                   ? "bg-sidebar-accent text-sidebar-primary-foreground"
                   : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-primary-foreground",

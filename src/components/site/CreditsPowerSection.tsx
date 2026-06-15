@@ -16,11 +16,11 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Sarah", time: "1:15 AM", initial: "S" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Viktor</span> summarize yesterday's #sales thread and flag anything I need to follow up on
+            <span className="text-violet-600">@Gomer</span> summarize yesterday's #sales thread and flag anything I need to follow up on
           </>
         ),
-        viktorTime: "1:16 AM",
-        viktorMsg:
+        gomerTime: "1:16 AM",
+        gomerMsg:
           "3 deals discussed. Two on track — Acme closes Friday. Bloom signed. One needs you: DataSync went silent after the demo. I drafted a follow-up in HubSpot, want me to send it?",
       },
       {
@@ -30,11 +30,11 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Mike", time: "11:30 AM", initial: "M" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Viktor</span> the pricing page still says $50/mo. Can the slider fix it, should be $79/mo. Can you update it?
+            <span className="text-violet-600">@Gomer</span> the pricing page still says $50/mo. Can the slider fix it, should be $79/mo. Can you update it?
           </>
         ),
-        viktorTime: "11:46 AM",
-        viktorMsg: "Done ✅ Updated the pricing page — $79/mo for new. Preview is ready for your review.",
+        gomerTime: "11:46 AM",
+        gomerMsg: "Done ✅ Updated the pricing page — $79/mo for new. Preview is ready for your review.",
       },
     ],
   },
@@ -51,11 +51,11 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Sarah", time: "9:14 AM", initial: "S" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Viktor</span> summarize yesterday's #sales thread and flag anything I need to follow up on
+            <span className="text-violet-600">@Gomer</span> summarize yesterday's #sales thread and flag anything I need to follow up on
           </>
         ),
-        viktorTime: "9:15 AM",
-        viktorMsg:
+        gomerTime: "9:15 AM",
+        gomerMsg:
           "3 deals discussed. Two on track — Acme closes Friday, Bloom signed. One needs you: DataSync went silent after the demo. I drafted a follow-up in HubSpot, want me to send it?",
       },
       {
@@ -65,11 +65,11 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Mike", time: "11:32 AM", initial: "M" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Viktor</span> the pricing page still says "$99/mo" on the starter tier. It should be "$79/mo". Can you update it?
+            <span className="text-violet-600">@Gomer</span> the pricing page still says "$99/mo" on the starter tier. It should be "$79/mo". Can you update it?
           </>
         ),
-        viktorTime: "11:38 AM",
-        viktorMsg: (
+        gomerTime: "11:38 AM",
+        gomerMsg: (
           <>
             Done ✅ Updated the pricing page — Starter tier now shows $79/mo. Preview is ready for your review:{" "}
             <a className="text-violet-600 underline">acme.com/pricing-preview</a>
@@ -86,8 +86,8 @@ type CardData = {
   subtitle: string;
   user: { name: string; time: string; initial: string };
   userMsg: ReactNode;
-  viktorTime: string;
-  viktorMsg: ReactNode;
+  gomerTime: string;
+  gomerMsg: ReactNode;
 };
 
 export function CreditsPowerSection({ variant = "organization" }: { variant?: Variant }) {
@@ -98,7 +98,7 @@ export function CreditsPowerSection({ variant = "organization" }: { variant?: Va
         <h2 className="font-display text-center text-5xl md:text-6xl text-foreground leading-[1.05]">
           Credits power everything
           <br />
-          Viktor does: <span className="inline-flex items-baseline gap-3 align-middle">{v.icon}{v.label}</span>
+          Gomer does: <span className="inline-flex items-baseline gap-3 align-middle">{v.icon}{v.label}</span>
         </h2>
 
         <div className="mt-14 grid md:grid-cols-2 gap-6">
@@ -179,8 +179,8 @@ function CreditCard({ data }: { data: CardData }) {
                   initial={data.user.initial}
                   body={data.userMsg}
                 />
-                {/* viktor message wrapper - 22 with gradient bg */}
-                <ViktorMessage time={data.viktorTime} body={data.viktorMsg} />
+                {/* gomer message wrapper - 22 with gradient bg */}
+                <GomerMessage time={data.gomerTime} body={data.gomerMsg} />
               </div>
             </div>
           </div>
@@ -217,12 +217,12 @@ function SlackMessage({
   );
 }
 
-function ViktorMessage({ time, body }: { time: string; body: ReactNode }) {
+function GomerMessage({ time, body }: { time: string; body: ReactNode }) {
   return (
     <div className="mt-1.5 flex flex-wrap items-stretch gap-1">
       <div className="relative flex self-stretch w-full">
         {/* 22 */}
-        <div className="relative flex w-full text-left isolate overflow-hidden slack-message-viktor gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]">
+        <div className="relative flex w-full text-left isolate overflow-hidden slack-message-gomer gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]">
           {/* 23 - bg mount */}
           <div
             style={{
@@ -288,7 +288,7 @@ function ViktorMessage({ time, body }: { time: string; body: ReactNode }) {
           {/* body */}
           <div className="relative z-[20] flex min-w-0 flex-1 flex-col gap-0">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
-              <span className="font-semibold text-foreground text-sm">Viktor</span>
+              <span className="font-semibold text-foreground text-sm">Gomer</span>
               <span className="px-1.5 py-0.5 rounded text-[10px] bg-violet-100 text-violet-700 font-semibold">
                 APP
               </span>

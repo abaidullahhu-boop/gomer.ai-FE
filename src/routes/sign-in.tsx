@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
 import { startSlackLogin } from "@/lib/auth";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
 const authButtonClass =
@@ -11,19 +11,19 @@ export default function SignIn() {
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
       <PageMeta
-        title="Sign in to Viktor"
-        description="Sign in to Viktor with Slack or join the Microsoft Teams waitlist."
+        title="Sign in to Gomer"
+        description="Sign in to Gomer with Slack or join the Microsoft Teams waitlist."
       />
 
       <div className="absolute left-5 top-5 z-10">
-        <ViktorLogo />
+        <GomerLogo />
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center px-4">
         <div className="flex w-full max-w-[360px] flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-4">
             <img
-              src={viktorAvatar}
+              src={gomerAvatar}
               alt=""
               className="size-14 rounded-lg"
               width={56}
@@ -55,7 +55,7 @@ export default function SignIn() {
 
       <div className="p-6">
         <p className="text-center text-xs text-muted-foreground">
-          By logging in, you agree to the Viktor{" "}
+          By logging in, you agree to the Gomer{" "}
           <a href="/privacy" target="_blank" rel="noreferrer" className="underline">
             Privacy Policy
           </a>{" "}
@@ -69,14 +69,14 @@ export default function SignIn() {
   );
 }
 
-function ViktorLogo() {
+function GomerLogo() {
   return (
     <img
       src="/assets/brand/logos/viktor-logo-soft-black.svg"
-      alt="Viktor"
-      className="block h-6 w-auto"
-      width={81}
-      height={24}
+      alt="Gomer"
+      className="block h-7 w-auto"
+      width={112}
+      height={28}
     />
   );
 }

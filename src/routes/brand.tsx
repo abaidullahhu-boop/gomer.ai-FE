@@ -182,25 +182,25 @@ const primaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
     logoSrc: "/assets/brand/logos/viktor-logo-pure-white.svg",
-    logoAlt: "Viktor wordmark (pure white) on brand gradient",
+    logoAlt: "Gomer wordmark (pure white) on brand gradient",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
     logoSrc: "/assets/brand/logos/viktor-logo-soft-black.svg",
-    logoAlt: "Viktor wordmark on light blurred background",
+    logoAlt: "Gomer wordmark on light blurred background",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
     logoSrc: "/assets/brand/logos/viktor-logo-soft-black.svg",
-    logoAlt: "Viktor wordmark (soft black) on white background",
+    logoAlt: "Gomer wordmark (soft black) on white background",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
     logoSrc: "/assets/brand/logos/viktor-logo-pure-white.svg",
-    logoAlt: "Viktor wordmark (pure white) on dark background",
+    logoAlt: "Gomer wordmark (pure white) on dark background",
     background: "dark",
   },
 ];
@@ -243,8 +243,8 @@ function AvatarShowcaseCard({
         <img
           alt={
             background === "white"
-              ? "Viktor avatar on white background"
-              : "Viktor avatar on dark background"
+              ? "Gomer avatar on white background"
+              : "Gomer avatar on dark background"
           }
           className="size-40 object-contain"
           loading="lazy"
@@ -348,33 +348,33 @@ const toneOfVoiceIsRules = [
   "A persistent agent that remembers context, learns over time, and acts proactively.",
   "The most capable colleague on your team: research, reports, code, workflows, dashboards.",
   "Built for teams. Connects to 3,000+ tools via browser and native APIs.",
-  "Human-in-the-loop: Viktor proposes, the human decides.",
+  "Human-in-the-loop: Gomer proposes, the human decides.",
 ] as const;
 
 const toneOfVoiceIsNotRules = [
-  "Not a chatbot. Viktor does not just answer questions. It actually does the work.",
+  "Not a chatbot. Gomer does not just answer questions. It actually does the work.",
   "Not a simple automation tool. It thinks, plans, and adapts with full reasoning.",
   "Not autonomous without oversight. Every significant action requires approval.",
   "Not a replacement for people. It augments your team's capabilities.",
-  'Not "AI-powered X". Viktor is the coworker, not a feature inside something else.',
+  'Not "AI-powered X". Gomer is the coworker, not a feature inside something else.',
 ] as const;
 
 const dosRules = [
-  'Always say Viktor. Do not say "the Viktor bot" or "the Viktor AI assistant."',
-  "Emphasize that Viktor does real work, not only answers.",
-  "Position Viktor as a coworker. Use team language.",
-  "Mention Slack-first. Viktor lives where your team already works.",
-  "Highlight execution: code, browser, build, and deploy. Viktor is not chat-only.",
-  "Use concrete examples of what Viktor can do (research, reports, apps, automations).",
+  'Always say Gomer. Do not say "the Gomer bot" or "the Gomer AI assistant."',
+  "Emphasize that Gomer does real work, not only answers.",
+  "Position Gomer as a coworker. Use team language.",
+  "Mention Slack-first. Gomer lives where your team already works.",
+  "Highlight execution: code, browser, build, and deploy. Gomer is not chat-only.",
+  "Use concrete examples of what Gomer can do (research, reports, apps, automations).",
 ] as const;
 
 const dontRuleGroups = [
   {
     title: "Messaging",
     rules: [
-      "Do not call Viktor a chatbot, virtual assistant, or copilot.",
+      "Do not call Gomer a chatbot, virtual assistant, or copilot.",
       "Do not imply full autonomy. Always show where a human approves or reviews.",
-      "Do not position Viktor as ChatGPT or Claude in Slack. Viktor is a different category: an AI employee wired into your tools and Slack.",
+      "Do not position Gomer as ChatGPT or Claude in Slack. Gomer is a different category: an AI employee wired into your tools and Slack.",
     ],
   },
   {
@@ -566,28 +566,28 @@ const secondaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
     logoSrc: "/assets/brand/logos/viktor-logo-secondary-pure-white.svg",
-    logoAlt: "Viktor secondary lockup (pure white) on brand gradient",
+    logoAlt: "Gomer secondary lockup (pure white) on brand gradient",
     logoMaxWidth: "24rem",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
     logoSrc: "/assets/brand/logos/viktor-logo-secondary-soft-black.svg",
-    logoAlt: "Viktor secondary lockup on soft blurred background",
+    logoAlt: "Gomer secondary lockup on soft blurred background",
     logoMaxWidth: "24rem",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
     logoSrc: "/assets/brand/logos/viktor-logo-secondary-soft-black.svg",
-    logoAlt: "Viktor secondary lockup (soft black) on white background",
+    logoAlt: "Gomer secondary lockup (soft black) on white background",
     logoMaxWidth: "24rem",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
     logoSrc: "/assets/brand/logos/viktor-logo-secondary-pure-white.svg",
-    logoAlt: "Viktor secondary lockup (pure white) on dark background",
+    logoAlt: "Gomer secondary lockup (pure white) on dark background",
     logoMaxWidth: "24rem",
     background: "dark",
   },
@@ -597,8 +597,8 @@ export default function BrandPage() {
   return (
     <div className="vb">
       <PageMeta
-        title="Brand Usage Guidelines — Viktor"
-        description="Logo, colours, typography and tone of voice guidelines for the Viktor brand."
+        title="Brand Usage Guidelines — Gomer"
+        description="Logo, colours, typography and tone of voice guidelines for the Gomer brand."
       />
       <style>{styles}</style>
 
@@ -644,7 +644,7 @@ export default function BrandPage() {
                   </p>
                   <div className="flex min-w-0 max-w-xl flex-col gap-3 md:max-w-[32.5rem] md:flex-1">
                     <p className="body-main leading-relaxed text-secondary font-medium">
-                      The Viktor wordmark is our primary logo and should be used in most applications. Its bold, distinctive form makes it the most recognizable expression of the brand.
+                      The Gomer wordmark is our primary logo and should be used in most applications. Its bold, distinctive form makes it the most recognizable expression of the brand.
                     </p>
                   </div>
                 </div>
@@ -662,7 +662,7 @@ export default function BrandPage() {
                   </p>
                   <div className="flex min-w-0 max-w-xl flex-col gap-3 md:max-w-[32.5rem] md:flex-1">
                     <p className="body-main leading-relaxed text-secondary font-medium">
-                      The Viktor.com lockup is a secondary logo used in applications where added clarity or direct navigation is important.
+                      The Gomer.com lockup is a secondary logo used in applications where added clarity or direct navigation is important.
                     </p>
                     <p className="body-main leading-relaxed text-secondary font-medium">
                       It is most effective in digital advertising, out-of-home, and campaign environments where driving recognition and traffic to the website is a priority.
@@ -689,7 +689,7 @@ export default function BrandPage() {
                   Avatar
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  The Viktor avatar — not the logo. Use it where the wordmark won't fit: a messaging-app
+                  The Gomer avatar — not the logo. Use it where the wordmark won't fit: a messaging-app
                   profile, a favicon, an app icon. Avatar and wordmark are never paired — pick one or the
                   other based on context.
                 </p>
@@ -726,7 +726,7 @@ export default function BrandPage() {
                   Colours
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  Viktor&apos;s palette runs from warm peach through lilac and violet into deep navy.
+                  Gomer&apos;s palette runs from warm peach through lilac and violet into deep navy.
                   Soft-black and white anchor it; the radial gradient ties them together.
                 </p>
               </div>
@@ -811,7 +811,7 @@ export default function BrandPage() {
                   Typography
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  Font styles, weights, and how to apply Viktor&apos;s typography in design.
+                  Font styles, weights, and how to apply Gomer&apos;s typography in design.
                 </p>
               </div>
             </div>
@@ -868,14 +868,14 @@ export default function BrandPage() {
                   Tone of voice
                 </h2>
                 <p className="body-main max-w-xl text-secondary">
-                  Write like Viktor: direct, capable, and human. Not a chatbot. A coworker.
+                  Write like Gomer: direct, capable, and human. Not a chatbot. A coworker.
                 </p>
               </div>
             </div>
 
             <div className="mx-auto grid w-full max-w-full gap-10 lg:grid-cols-2 lg:gap-8 xl:gap-12">
-              <ToneOfVoiceColumn variant="do" label="What Viktor is" rules={toneOfVoiceIsRules} />
-              <ToneOfVoiceColumn variant="dont" label="What Viktor is not" rules={toneOfVoiceIsNotRules} />
+              <ToneOfVoiceColumn variant="do" label="What Gomer is" rules={toneOfVoiceIsRules} />
+              <ToneOfVoiceColumn variant="dont" label="What Gomer is not" rules={toneOfVoiceIsNotRules} />
             </div>
           </div>
         </div>

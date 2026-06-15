@@ -61,10 +61,10 @@ export default function App() {
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/changelog" element={<ChangelogPage />} />
-        <Route path="/compare/viktor-vs-chatgpt" element={<ComparePage />} />
-        <Route path="/compare/viktor-vs-openclaw" element={<CompareOpenClawPage />} />
-        <Route path="/compare/viktor-vs-claude-in-slack" element={<CompareClaudeInSlackPage />} />
-        <Route path="/compare/viktor-vs-tasklet" element={<CompareTaskletPage />} />
+        <Route path="/compare/gomer-vs-chatgpt" element={<ComparePage />} />
+        <Route path="/compare/gomer-vs-openclaw" element={<CompareOpenClawPage />} />
+        <Route path="/compare/gomer-vs-claude-in-slack" element={<CompareClaudeInSlackPage />} />
+        <Route path="/compare/gomer-vs-tasklet" element={<CompareTaskletPage />} />
         <Route path="/creators" element={<CreatorsPage />} />
         <Route path="/docs" element={<DocsPage />} />
         <Route path="/enterprise" element={<EnterprisePage />} />

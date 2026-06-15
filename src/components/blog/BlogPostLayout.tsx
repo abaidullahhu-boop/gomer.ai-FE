@@ -74,7 +74,7 @@ export function BlogPostLayout({
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title={`${post.title} — Viktor`}
+        title={`${post.title} — Gomer`}
         description={post.excerpt}
         ogTitle={post.title}
         ogDescription={post.excerpt}

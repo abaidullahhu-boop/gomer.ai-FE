@@ -19,10 +19,10 @@ const resourcesMenu: MenuItem[] = [
 ];
 
 const compareMenu: MenuItem[] = [
-  { label: "vs ChatGPT", to: "/compare/viktor-vs-chatgpt" },
-  { label: "vs OpenClaw", to: "/compare/viktor-vs-openclaw" },
-  { label: "vs Claude in Slack", to: "/compare/viktor-vs-claude-in-slack" },
-  { label: "vs Tasklet", to: "/compare/viktor-vs-tasklet" },
+  { label: "vs ChatGPT", to: "/compare/gomer-vs-chatgpt" },
+  { label: "vs OpenClaw", to: "/compare/gomer-vs-openclaw" },
+  { label: "vs Claude in Slack", to: "/compare/gomer-vs-claude-in-slack" },
+  { label: "vs Tasklet", to: "/compare/gomer-vs-tasklet" },
 ];
 
 const solutionsMenu: MenuItem[] = [
@@ -343,8 +343,8 @@ export function Nav({ heroTone = "dark" }: NavProps) {
               <div className="relative z-10 h-full min-h-0 w-full">
                 <div className="relative z-10 grid h-full w-full grid-cols-[1fr_auto_1fr] items-center">
                 <div className="min-w-0">
-                <Link to="/" aria-label="Viktor home" className="block">
-                  <img src={logo} alt="Viktor" width={80} height={24} />
+                <Link to="/" aria-label="Gomer home" className="block">
+                  <img src={logo} alt="Gomer" width={112} height={28} />
                 </Link>
                 </div>
 
@@ -408,7 +408,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
 
                 <div className="relative z-10 flex items-center justify-between">
                 <Link to="/" className="relative block" onClick={closeMobileMenu}>
-                  <img src={logo} alt="Viktor" width={80} height={24} />
+                  <img src={logo} alt="Gomer" width={112} height={28} />
                 </Link>
                 <MenuToggleButton
                   open={mobileOpen}

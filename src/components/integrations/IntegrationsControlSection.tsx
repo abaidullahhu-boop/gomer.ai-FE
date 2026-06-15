@@ -18,7 +18,7 @@ const controlCards: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: <FingerprintIcon />,
     title: "OAuth, not passwords.",
-    body: "Viktor authenticates through official OAuth flows. We never see or store your passwords. Disconnect any integration with one click.",
+    body: "Gomer authenticates through official OAuth flows. We never see or store your passwords. Disconnect any integration with one click.",
   },
   {
     icon: <ShieldSecurityIcon />,
@@ -28,12 +28,12 @@ const controlCards: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: <ReceiptCheckIcon />,
     title: "Approval before action.",
-    body: "Viktor asks before doing anything risky. Sensitive actions require your explicit approval. You're always in control.",
+    body: "Gomer asks before doing anything risky. Sensitive actions require your explicit approval. You're always in control.",
   },
   {
     icon: <KeyholeShieldIcon />,
     title: "Per-tool permissions.",
-    body: "Connect only what you need. Each integration has granular scopes. Viktor only accesses what you authorize.",
+    body: "Connect only what you need. Each integration has granular scopes. Gomer only accesses what you authorize.",
   },
 ];
 

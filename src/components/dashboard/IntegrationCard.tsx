@@ -14,7 +14,7 @@ export function IntegrationCard({ integration, onClick }: IntegrationCardProps) 
       <button
         type="button"
         onClick={onClick}
-        className="viktor-focus-ring flex h-[60px] w-full cursor-pointer items-center gap-3 rounded-sm border border-border bg-card p-3 text-left transition-[background-color,border-color,transform] duration-150 hover:bg-accent active:scale-[0.98]"
+        className="gomer-focus-ring flex h-[60px] w-full cursor-pointer items-center gap-3 rounded-sm border border-border bg-card p-3 text-left transition-[background-color,border-color,transform] duration-150 hover:bg-accent active:scale-[0.98]"
       >
         <div
           className={`flex size-9 shrink-0 items-center justify-center rounded-lg bg-card ${hasImageIcon ? "p-1" : ""}`}

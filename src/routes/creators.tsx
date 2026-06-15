@@ -18,7 +18,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { FAQSection, type FAQItem } from "@/components/site/FAQSection";
 import { CoinIcon, CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
-import viktorSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 
 function ComparisonTabActiveBackground({ className }: { className?: string }) {
@@ -29,10 +29,10 @@ export default function CreatorsPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Become a Viktor Influencer — Earn for Posting Real Work"
-        description="Viktor does the work. You take the screenshot. Post real product output, get paid up to $10,000 per post — or take 50% more in credits."
-        ogTitle="Become a Viktor Influencer"
-        ogDescription="Post real Viktor outputs and earn cash or credits. No follower minimum, no approvals."
+        title="Become a Gomer Influencer — Earn for Posting Real Work"
+        description="Gomer does the work. You take the screenshot. Post real product output, get paid up to $10,000 per post — or take 50% more in credits."
+        ogTitle="Become a Gomer Influencer"
+        ogDescription="Post real Gomer outputs and earn cash or credits. No follower minimum, no approvals."
         ogUrl="/creators"
         canonical="/creators"
       />
@@ -77,7 +77,7 @@ function MoneyBagIcon() {
 }
 
 const creatorHeroPoints = [
-  { icon: <CoinIcon />, label: "Every qualifying post earns 10,000 Viktor credits" },
+  { icon: <CoinIcon />, label: "Every qualifying post earns 10,000 Gomer credits" },
   { icon: <CreditCardIcon />, label: "Cash tiers unlock above each platform's threshold" },
   { icon: <MoneyBagIcon />, label: "No follower minimum" },
   { icon: <Soc2Icon />, label: "No approvals" },
@@ -115,7 +115,7 @@ function Hero() {
             </div>
 
             <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
-              Viktor does the work.{" "}
+              Gomer does the work.{" "}
               <span className="text-accent-2">You take the screenshot.</span>
             </h1>
 
@@ -631,15 +631,15 @@ const howItWorksStepIcons = [
 const howItWorksStepsBase = [
   {
     title: "Capture the output",
-    body: "Viktor did something in Slack or Microsoft Teams. Screenshot it. Or screen-record it. Whatever shows the real output.",
+    body: "Gomer did something in Slack or Microsoft Teams. Screenshot it. Or screen-record it. Whatever shows the real output.",
   },
   {
     title: "Post it",
     body: "Add your take. What did you ask? What happened? Why does it matter?",
   },
   {
-    title: "Tag Viktor",
-    body: "Tag @viktor.com. That's how we find you.",
+    title: "Tag Gomer",
+    body: "Tag @gomer.com. That's how we find you.",
   },
   {
     title: "Let it run",
@@ -651,7 +651,7 @@ const howItWorksStepsBase = [
   },
   {
     title: "Get paid",
-    body: "We review within 48 hours. Credits hit your Viktor account immediately. Cash goes through Dub within 5 business days.",
+    body: "We review within 48 hours. Credits hit your Gomer account immediately. Cash goes through Dub within 5 business days.",
   },
 ] as const;
 
@@ -948,7 +948,7 @@ function CreditsOrCash() {
               <div className="relative z-[2] flex h-full w-full flex-col justify-between">
                 <div className="flex flex-col gap-10 p-8 md:gap-16 md:p-16">
                   <img
-                    src={viktorSlackAvatar}
+                    src={gomerSlackAvatar}
                     alt=""
                     aria-hidden
                     loading="lazy"
@@ -958,13 +958,13 @@ function CreditsOrCash() {
                   />
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <h3 className="font-heading h5 text-accent-1 font-medium">Viktor Credits</h3>
+                      <h3 className="font-heading h5 text-accent-1 font-medium">Gomer Credits</h3>
                       <span className="font-medium inline-flex h-7 w-fit shrink-0 items-center justify-center rounded-full border border-transparent bg-accent-1 px-4 text-xs text-white">
                         50% more with credits
                       </span>
                     </div>
                     <p className="body-main text-secondary font-medium">
-                      We add 1.5x the cash equivalent to your Viktor account. More tasks, more automations,
+                      We add 1.5x the cash equivalent to your Gomer account. More tasks, more automations,
                       more AI employee time. Automatic. No strings.
                     </p>
                   </div>
@@ -1012,7 +1012,7 @@ function CreditsOrCash() {
                     <p className="body-main text-secondary font-medium">
                       Paid through{" "}
                       <a
-                        href="https://partners.dub.co/getviktor/creator-program/apply"
+                        href="https://partners.dub.co/getgomer/creator-program/apply"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="underline underline-offset-2 hover:text-accent-1"
@@ -1067,31 +1067,31 @@ const storyAngleIcons = [
 
 const storyAngles = [
   {
-    title: "“We hired Viktor”",
+    title: "“We hired Gomer”",
     quote: "“We didn’t buy software last month. We hired someone.”",
     description:
-      "Tell it like a hiring story: what role was open, what Viktor took over, what your team stopped doing by hand. The screenshot is the new hire’s work.",
-    skip: "Skip: calling Viktor a tool or an assistant. Employees hand you finished work. That’s the story.",
+      "Tell it like a hiring story: what role was open, what Gomer took over, what your team stopped doing by hand. The screenshot is the new hire’s work.",
+    skip: "Skip: calling Gomer a tool or an assistant. Employees hand you finished work. That’s the story.",
   },
   {
     title: "“Asked at 9:04, done at 9:06”",
-    quote: "“Asked Viktor for the competitor breakdown at 9:04. Had the finished report at 9:06.”",
+    quote: "“Asked Gomer for the competitor breakdown at 9:04. Had the finished report at 9:06.”",
     description:
-      "Name the task, what it used to take, and the exact thing Viktor handed back: the report, the PR, the dashboard, the follow-up email. Specific numbers beat adjectives.",
+      "Name the task, what it used to take, and the exact thing Gomer handed back: the report, the PR, the dashboard, the follow-up email. Specific numbers beat adjectives.",
     skip: "Skip: the vague “AI saves me so much time” line. Show the finished work instead.",
   },
   {
-    title: "“Viktor went first”",
-    quote: "“I didn’t ask for this. Viktor flagged it before I knew it was a problem.”",
+    title: "“Gomer went first”",
+    quote: "“I didn’t ask for this. Gomer flagged it before I knew it was a problem.”",
     description:
-      "Scheduled tasks, monitoring, a heads-up that arrived unprompted. Show the message Viktor sent before anyone asked. That’s the moment people don’t believe until they see it.",
+      "Scheduled tasks, monitoring, a heads-up that arrived unprompted. Show the message Gomer sent before anyone asked. That’s the moment people don’t believe until they see it.",
     skip: "Skip: cropping out the timestamp or context. Unprompted only lands if it’s visibly unprompted.",
   },
   {
     title: "“Employee > chatbot”",
     quote: "“A chatbot answers questions. An AI employee hands you finished work.”",
     description:
-      "Take a side. Put your Viktor screenshot next to the chat-only workflow it replaced and let the contrast argue for you.",
+      "Take a side. Put your Gomer screenshot next to the chat-only workflow it replaced and let the contrast argue for you.",
     skip: "Skip: the 5-tools roundup. Multi-tool posts don’t qualify, and they don’t convert anyway.",
   },
 ] as const;
@@ -1152,7 +1152,7 @@ function PostIdeas() {
             <h2 className="font-heading h3 text-balance text-primary font-medium">Four stories that get paid</h2>
             <p className="body-main text-secondary font-medium">
               Any real output qualifies. But the posts that break out tell one of four stories. Pick the one that
-              matches your screenshot. The best ones get engagement from Viktor’s own accounts, and more reach means a
+              matches your screenshot. The best ones get engagement from Gomer’s own accounts, and more reach means a
               higher tier.
             </p>
           </div>
@@ -1191,10 +1191,10 @@ function PostIdeas() {
 
 const postAnatomyLines = [
   "Our Monday ad report used to eat half a day.",
-  "Last week I handed it to Viktor. It pulled Meta, Google Ads, and Stripe, flagged a campaign quietly burning $1,400 a week, and posted the full breakdown in Slack before my coffee was done.",
+  "Last week I handed it to Gomer. It pulled Meta, Google Ads, and Stripe, flagged a campaign quietly burning $1,400 a week, and posted the full breakdown in Slack before my coffee was done.",
   "We didn't add another tool. We hired an AI employee.",
   "Output below. 👇",
-  "#ad @viktor.com",
+  "#ad @gomer.com",
 ] as const;
 
 const postAnatomySteps = [
@@ -1288,32 +1288,32 @@ const audiences = [
   {
     icon: Rocket,
     title: "Startup founders",
-    body: "Viktor built your internal tool and deployed it in 10 minutes. Screenshot the link.",
+    body: "Gomer built your internal tool and deployed it in 10 minutes. Screenshot the link.",
   },
   {
     icon: LineChart,
     title: "Ops & RevOps leads",
-    body: "Viktor audited your ad spend across platforms, found the waste, handed you the PDF.",
+    body: "Gomer audited your ad spend across platforms, found the waste, handed you the PDF.",
   },
   {
     icon: Sun,
     title: "Engineering managers",
-    body: "Viktor read your codebase, opened a PR, and ran the tests. Post the diff.",
+    body: "Gomer read your codebase, opened a PR, and ran the tests. Post the diff.",
   },
   {
     icon: Megaphone,
     title: "Marketing teams",
-    body: "Viktor cross-referenced HubSpot and Google Ads, then built a board-ready report.",
+    body: "Gomer cross-referenced HubSpot and Google Ads, then built a board-ready report.",
   },
   {
     icon: MessageCircle,
     title: "Customer success",
-    body: "Viktor summarized 200 support tickets and spotted the pattern your team missed.",
+    body: "Gomer summarized 200 support tickets and spotted the pattern your team missed.",
   },
   {
     icon: UserCircle2,
     title: "Anyone, really",
-    body: "If Viktor does work for your team in Slack or Microsoft Teams, that's the post.",
+    body: "If Gomer does work for your team in Slack or Microsoft Teams, that's the post.",
   },
 ] as const;
 
@@ -1392,7 +1392,7 @@ function WhoFor() {
           <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-20 sm:px-6 md:gap-16 md:px-12 md:py-28 lg:px-20">
             <div className="mx-auto flex max-w-[570px] flex-col items-center gap-4 text-center">
               <h2 className="font-heading h3 text-balance text-white">Who this is for</h2>
-              <p className="body-main text-white/75 font-medium">If Viktor does work for your team, you qualify.</p>
+              <p className="body-main text-white/75 font-medium">If Gomer does work for your team, you qualify.</p>
             </div>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {audiences.map((a) => (
@@ -1512,10 +1512,10 @@ const ruleColumns = [
     Icon: RulesReceiptCheckIcon,
     items: [
       "Disclose the partnership: add #ad at the end of your post (required even if you choose credits)",
-      "Tag @viktor.com in your post",
-      "Include a screenshot or screen recording of Viktor's output in Slack or Microsoft Teams",
+      "Tag @gomer.com in your post",
+      "Include a screenshot or screen recording of Gomer's output in Slack or Microsoft Teams",
       "Organic reach only, no boosted or promoted posts",
-      "Real Viktor output from a real workspace",
+      "Real Gomer output from a real workspace",
     ],
   },
   {
@@ -1526,7 +1526,7 @@ const ruleColumns = [
       "4 posts per month",
       "5 days between submissions",
       "$10,000 cap per post",
-      "Post must feature Viktor, not a multi-tool roundup",
+      "Post must feature Gomer, not a multi-tool roundup",
     ],
   },
   {
@@ -1778,7 +1778,7 @@ const submitChannels = [
   { label: "Submit on Twitter / X", icon: Twitter, href: "https://forms.gle/evAxXmXxzZRs8o7B9" },
   { label: "Submit on Instagram", icon: Instagram, href: "https://forms.gle/5QkhJ2S6vgnfkRpJ7" },
   { label: "Submit on YouTube", icon: Youtube, href: "https://forms.gle/vvUZLjNGa57iYH5BA" },
-  { label: "Submit on TikTok", icon: Music2, href: "https://ref.viktor.com/tiktok_form" },
+  { label: "Submit on TikTok", icon: Music2, href: "https://ref.gomer.com/tiktok_form" },
 ];
 
 function SubmitCTA() {
@@ -1793,7 +1793,7 @@ function SubmitCTA() {
                   Ready to get paid
                 </span>
                 <h2 className="font-heading h4 text-white">
-                  <span className="block">Viktor already did the work.</span>
+                  <span className="block">Gomer already did the work.</span>
                   <span className="block">Submit your post.</span>
                 </h2>
                 <p className="max-w-[480px] body-main text-white font-medium">

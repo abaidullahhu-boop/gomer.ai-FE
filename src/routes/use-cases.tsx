@@ -14,18 +14,18 @@ const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
 
 const testimonials = [
-  { name: "Maya Chen", role: "CFO, Northwind", saved: "3-5 hrs/week", quote: "Viktor handles the weekly cash recap I used to dread. Now it's just there in Slack on Monday morning.", image: avatar("photo-1573496359142-b8d87734a5a2") },
-  { name: "Jacob Aldridge", role: "Founder, Como Coaching", saved: "10+ hrs/week", quote: "Viktor may feel expensive for a monthly subscription, but he's the cheapest hire I've ever made — and the only one who acts on my midnight asks.", image: avatar("photo-1507003211169-0a1dd7228f2d") },
-  { name: "Richard Comer", role: "VP Eng, Flagship", saved: "10+ hrs/week", quote: "Viktor takes the morning alerts off my plate. I haven't read a Datadog email in two months and I sleep through the night.", image: avatar("photo-1580489944761-15a19d654956") },
+  { name: "Maya Chen", role: "CFO, Northwind", saved: "3-5 hrs/week", quote: "Gomer handles the weekly cash recap I used to dread. Now it's just there in Slack on Monday morning.", image: avatar("photo-1573496359142-b8d87734a5a2") },
+  { name: "Jacob Aldridge", role: "Founder, Como Coaching", saved: "10+ hrs/week", quote: "Gomer may feel expensive for a monthly subscription, but he's the cheapest hire I've ever made — and the only one who acts on my midnight asks.", image: avatar("photo-1507003211169-0a1dd7228f2d") },
+  { name: "Richard Comer", role: "VP Eng, Flagship", saved: "10+ hrs/week", quote: "Gomer takes the morning alerts off my plate. I haven't read a Datadog email in two months and I sleep through the night.", image: avatar("photo-1580489944761-15a19d654956") },
 ];
 
 export default function UseCasesPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Use Cases — One AI employee. Every function. | Viktor"
-        description="Viktor lives in Slack, connects to 3,200+ tools, and does the work. Media buying, finance, ops, engineering — pick your team's biggest time sink."
-        ogTitle="Use Cases — Viktor"
+        title="Use Cases — One AI employee. Every function. | Gomer"
+        description="Gomer lives in Slack, connects to 3,200+ tools, and does the work. Media buying, finance, ops, engineering — pick your team's biggest time sink."
+        ogTitle="Use Cases — Gomer"
         ogDescription="One AI employee for every function on your team."
       />
       {/* HERO */}
@@ -41,8 +41,8 @@ export default function UseCasesPage() {
                 Every function.
               </h1>
               <p className="max-w-[630px] font-medium body-main text-secondary">
-                Viktor lives in Slack, connects to 3,200+ tools, and does the work. Media buying,
-                finance, ops, engineering. Pick your team&apos;s biggest time sink. Viktor handles it.
+                Gomer lives in Slack, connects to 3,200+ tools, and does the work. Media buying,
+                finance, ops, engineering. Pick your team&apos;s biggest time sink. Gomer handles it.
               </p>
               <div className="flex w-full flex-col items-stretch justify-center gap-4 sm:w-auto sm:flex-row sm:items-center">
                 <GetStartedButton

@@ -39,7 +39,7 @@ export default function AuthCallback() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4">
-      <PageMeta title="Signing you in…" description="Completing sign-in to Viktor." />
+      <PageMeta title="Signing you in…" description="Completing sign-in to Gomer." />
       {error ? (
         <div className="flex flex-col items-center gap-3 text-center">
           <h1 className="text-xl font-semibold text-foreground">Sign-in failed</h1>

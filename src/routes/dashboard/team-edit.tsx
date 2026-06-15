@@ -27,7 +27,7 @@ export default function DashboardTeamEdit() {
 
   return (
     <>
-      <PageMeta title="Edit team info — Viktor" description="Edit your team name and avatar." />
+      <PageMeta title="Edit team info — Gomer" description="Edit your team name and avatar." />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
           className="flex-1 overflow-y-auto px-4 sm:px-12 py-8"
@@ -38,7 +38,7 @@ export default function DashboardTeamEdit() {
               <Link
                 to="/dashboard/team"
                 aria-label="Back to team"
-                className="viktor-focus-ring inline-flex size-9 cursor-pointer select-none items-center justify-center rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                className="gomer-focus-ring inline-flex size-9 cursor-pointer select-none items-center justify-center rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
               >
                 <ArrowLeft className="size-5" strokeWidth={1.5} />
               </Link>
@@ -51,14 +51,14 @@ export default function DashboardTeamEdit() {
                 <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
-                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <Upload className="size-4" strokeWidth={1.5} />
                     Upload avatar
                   </button>
                   <button
                     type="button"
-                    className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <RefreshCw className="size-4" strokeWidth={1.5} />
                     Sync from Slack
@@ -75,7 +75,7 @@ export default function DashboardTeamEdit() {
                   type="text"
                   value={teamName}
                   onChange={(event) => setTeamName(event.target.value)}
-                  className="viktor-focus-ring h-10 w-full rounded-[7px] border border-border bg-background px-4 text-sm text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80"
+                  className="gomer-focus-ring h-10 w-full rounded-[7px] border border-border bg-background px-4 text-sm text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80"
                 />
               </div>
 
@@ -83,7 +83,7 @@ export default function DashboardTeamEdit() {
                 type="button"
                 disabled={!hasChanges}
                 onClick={handleSave}
-                className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[linear-gradient(to_right,#d1c2f4,#edc2e7,#ffdc61)] px-4 py-2 text-sm font-medium text-zinc-900 transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                className="gomer-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[linear-gradient(to_right,#d1c2f4,#edc2e7,#ffdc61)] px-4 py-2 text-sm font-medium text-zinc-900 transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Save changes
               </button>
