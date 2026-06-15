@@ -208,3 +208,21 @@ export function confirmIntegration(
 export async function disconnectIntegration(id: string): Promise<void> {
   await apiFetch<{ success: boolean }>(`/integrations/${id}`, { method: "DELETE" });
 }
+
+/** An action an app exposes — what Gomer can do with it. */
+export type AppTool = {
+  key: string;
+  name: string;
+  description?: string;
+};
+
+/** List the actions/tools an app exposes, for the "what can Gomer do?" panel. */
+export async function fetchIntegrationTools(
+  appSlug: string,
+  after?: string,
+): Promise<{ tools: AppTool[]; after?: string }> {
+  const qs = after ? `?after=${encodeURIComponent(after)}` : "";
+  return apiFetch<{ tools: AppTool[]; after?: string }>(
+    `/integrations/${encodeURIComponent(appSlug)}/tools${qs}`,
+  );
+}

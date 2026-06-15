@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChevronRight, Loader2, Plus, Search, Users } from "lucide-react";
+import { ChevronRight, Loader2, Plus, Search, Users, Zap } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { IntegrationIcon } from "@/components/dashboard/IntegrationIcon";
 import { Toast } from "@/components/dashboard/Toast";
 import {
   disconnectIntegration,
   fetchConnectedIntegrations,
+  fetchIntegrationTools,
   parseConfigureProvider,
+  type AppTool,
   type ConnectedIntegration,
 } from "@/lib/api";
 import { usePipedreamConnect } from "@/lib/pipedream";
@@ -25,6 +27,10 @@ export default function DashboardIntegrationConfigure() {
   const [adding, setAdding] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
+  const [tools, setTools] = useState<AppTool[]>([]);
+  const [toolsLoading, setToolsLoading] = useState(true);
+  const [toolsError, setToolsError] = useState<string | null>(null);
+
   const load = useCallback(async () => {
     if (!appSlug) return;
     try {
@@ -41,6 +47,33 @@ export default function DashboardIntegrationConfigure() {
     void load();
   }, [load]);
 
+  // The actions this app exposes — what Gomer can actually do with it.
+  useEffect(() => {
+    if (!appSlug) return;
+    let cancelled = false;
+    setToolsLoading(true);
+    setToolsError(null);
+    fetchIntegrationTools(appSlug)
+      .then((result) => {
+        if (!cancelled) setTools(result.tools);
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        console.error("Failed to load app tools", error);
+        setToolsError(
+          error instanceof Error && error.message
+            ? error.message
+            : "Could not load this app's actions.",
+        );
+      })
+      .finally(() => {
+        if (!cancelled) setToolsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [appSlug]);
+
   // The app's display name/icon come from any of its connected accounts.
   const app = accounts[0];
 
@@ -51,6 +84,14 @@ export default function DashboardIntegrationConfigure() {
       (account.accountName ?? account.externalAccountId ?? "").toLowerCase().includes(query),
     );
   }, [accounts, search]);
+
+  const filteredTools = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return tools;
+    return tools.filter((tool) =>
+      `${tool.name} ${tool.description ?? ""}`.toLowerCase().includes(query),
+    );
+  }, [tools, search]);
 
   const handleAddAccount = useCallback(async () => {
     if (!appSlug || !ready) return;
@@ -153,7 +194,7 @@ export default function DashboardIntegrationConfigure() {
                   <input
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
-                    placeholder="Search connected accounts"
+                    placeholder="Search accounts and actions"
                     className="flex-1 bg-transparent text-foreground outline-none placeholder:text-muted-foreground placeholder:opacity-50"
                   />
                 </div>
@@ -227,6 +268,63 @@ export default function DashboardIntegrationConfigure() {
                       )}
                     </tbody>
                   </table>
+                </div>
+
+                {/* What Gomer can do with this app — the live MCP tool list. */}
+                <div className="mt-2 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <Zap
+                      className="size-4 shrink-0 text-muted-foreground"
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                    <h2 className="text-sm font-semibold text-foreground">
+                      What Gomer can do with {appName}
+                    </h2>
+                    {!toolsLoading && !toolsError && (
+                      <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
+                        {tools.length}
+                      </span>
+                    )}
+                  </div>
+
+                  {toolsLoading ? (
+                    <div className="flex justify-center py-8">
+                      <Loader2 className="size-5 animate-spin text-muted-foreground" aria-hidden />
+                    </div>
+                  ) : toolsError ? (
+                    <p className="rounded-xl border border-border bg-muted px-4 py-6 text-center text-sm text-muted-foreground">
+                      {toolsError}
+                    </p>
+                  ) : tools.length === 0 ? (
+                    <p className="rounded-xl border border-border bg-muted px-4 py-6 text-center text-sm text-muted-foreground">
+                      This app doesn’t expose any actions Gomer can use yet.
+                    </p>
+                  ) : (
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                      {filteredTools.length === 0 ? (
+                        <p className="col-span-full px-1 py-4 text-sm text-muted-foreground">
+                          No actions match your search.
+                        </p>
+                      ) : (
+                        filteredTools.map((tool) => (
+                          <div
+                            key={tool.key}
+                            className="flex flex-col gap-1 rounded-xl border border-border bg-card p-3"
+                          >
+                            <span className="truncate text-sm font-medium text-foreground">
+                              {tool.name}
+                            </span>
+                            {tool.description && (
+                              <span className="line-clamp-2 text-xs leading-4 text-muted-foreground">
+                                {tool.description}
+                              </span>
+                            )}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
