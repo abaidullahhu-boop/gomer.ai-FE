@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const mayaAvatar =
@@ -150,7 +150,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackViktorMessage({
+function SlackGomerMessage({
   time,
   body,
   attachment,
@@ -163,25 +163,25 @@ function SlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
+      data-variant="gomer"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-gomer"
     >
-      <div aria-hidden="true" className="slack-viktor-bg-mount">
-        <div className="slack-viktor-layer-glass-stack" />
-        <div className="slack-viktor-layer-inner-depth-soft" />
-        <div className="slack-viktor-layer-inner-glow-overlay" />
-        <div className="slack-viktor-layer-feather-blur" />
-        <div className="slack-viktor-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gomer-bg-mount">
+        <div className="slack-gomer-layer-glass-stack" />
+        <div className="slack-gomer-layer-inner-depth-soft" />
+        <div className="slack-gomer-layer-inner-glow-overlay" />
+        <div className="slack-gomer-layer-feather-blur" />
+        <div className="slack-gomer-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+        <img alt="Gomer" loading="lazy" width={36} height={36} className="size-full object-cover" src={gomerAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Viktor</span>
+              <span>Gomer</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -211,7 +211,7 @@ export function HowItWorksStepsSection() {
             <HowItWorksStepCard
               number="01"
               title="Connect your stack"
-              body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Viktor handles auth and starts working. No webhooks, no Zapier zaps."
+              body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Gomer handles auth and starts working. No webhooks, no Zapier zaps."
               stepBadge="overlay"
               visual={
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-hero">
@@ -229,8 +229,8 @@ export function HowItWorksStepsSection() {
             />
             <HowItWorksStepCard
               number="02"
-              title="Tell Viktor what you need"
-              body="Message Viktor in Slack like you'd message a teammate."
+              title="Tell Gomer what you need"
+              body="Message Gomer in Slack like you'd message a teammate."
               stepBadge="inline"
               visual={
                 <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
@@ -241,12 +241,12 @@ export function HowItWorksStepsSection() {
                     reactions={[{ emoji: "⏳", count: 1 }]}
                     body={
                       <>
-                        <SlackMention>@Viktor</SlackMention>
+                        <SlackMention>@Gomer</SlackMention>
                         pull this week&apos;s MRR from Stripe and post it to private channel.
                       </>
                     }
                   />
-                  <SlackViktorMessage
+                  <SlackGomerMessage
                     time="11:33 AM"
                     reactions={[
                       { emoji: "✅", count: 2 },
@@ -259,12 +259,12 @@ export function HowItWorksStepsSection() {
             />
             <HowItWorksStepCard
               number="03"
-              title="Viktor operates, you review"
-              body="Viktor executes the action, confirms what changed, and logs everything. You stop doing the work and start reviewing completed work."
+              title="Gomer operates, you review"
+              body="Gomer executes the action, confirms what changed, and logs everything. You stop doing the work and start reviewing completed work."
               stepBadge="inline"
               visual={
                 <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
-                  <SlackViktorMessage
+                  <SlackGomerMessage
                     time="9:12 AM"
                     reactions={[{ emoji: "👀", count: 2 }]}
                     body={

@@ -92,7 +92,7 @@ const cases: Case[] = [
     tags: ["Private network for founders & CEOs", "Founders & Power users"],
     title: "Editors, not creators",
     excerpt:
-      "How Hampton's 25-person team started operating like a much larger one, in 44 days with Viktor.",
+      "How Hampton's 25-person team started operating like a much larger one, in 44 days with Gomer.",
     pills: ["26 scheduled tasks", "44 days to full setup"],
     logoLabel: "H",
   },
@@ -125,10 +125,10 @@ export default function CaseStudiesPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Case Studies — Viktor"
-        description="Real stories from teams running on Viktor. The numbers are the customers'. The tools are theirs. The workflows still run today."
-        ogTitle="Case Studies — Viktor"
-        ogDescription="Real stories from teams running on Viktor."
+        title="Case Studies — Gomer"
+        description="Real stories from teams running on Gomer. The numbers are the customers'. The tools are theirs. The workflows still run today."
+        ogTitle="Case Studies — Gomer"
+        ogDescription="Real stories from teams running on Gomer."
       />
       {/* Hero + featured case */}
       <section className="relative border-0">

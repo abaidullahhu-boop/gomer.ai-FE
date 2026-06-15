@@ -30,10 +30,10 @@ export default function SupportPage() {
   return (
     <div className="support-page relative min-h-screen bg-cream text-stone-900 selection:bg-cobalt selection:text-cream">
       <PageMeta
-        title="Support — Viktor"
-        description="Need help with the Viktor app? Contact our support team at support@getviktor.com."
-        ogTitle="Support — Viktor"
-        ogDescription="Need help with the Viktor app? We're here to assist."
+        title="Support — Gomer"
+        description="Need help with the Gomer app? Contact our support team at support@getviktor.com."
+        ogTitle="Support — Gomer"
+        ogDescription="Need help with the Gomer app? We're here to assist."
       />
 
       <div
@@ -48,7 +48,7 @@ export default function SupportPage() {
             to="/"
             className="shrink-0 font-support-serif text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
           >
-            Viktor
+            Gomer
           </Link>
           <nav className="flex shrink-0 items-center gap-2 sm:gap-6">
             <Link
@@ -72,7 +72,7 @@ export default function SupportPage() {
           <div>
             <h1 className="font-support-serif mb-8 text-5xl tracking-tight md:text-7xl">Support</h1>
             <p className="mb-16 text-xl text-stone-500">
-              Need help with the Viktor app? We&apos;re here to assist.
+              Need help with the Gomer app? We&apos;re here to assist.
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export default function SupportPage() {
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
-              <span className="font-support-serif text-xl font-bold">Viktor</span>
+              <span className="font-support-serif text-xl font-bold">Gomer</span>
               <p className="mt-1 text-sm text-stone-500">© Zeta AI, Inc. All rights reserved.</p>
             </div>
             <div className="flex flex-wrap items-center gap-6">

@@ -11,7 +11,7 @@ import { IntegrationsUseCasesSection } from "@/components/integrations/Integrati
 import { IntegrationsControlSection } from "@/components/integrations/IntegrationsControlSection";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { Search, X } from "lucide-react";
 import { SlackReactions } from "@/components/site/SlackReactions";
 import {
@@ -262,8 +262,8 @@ function IntegrationDirectory() {
             </button>
           )}
           <p className="w-full body-small text-secondary font-medium">
-            Don&apos;t see your tool? Viktor connects to 3,200+ tools via managed connectors. If
-            it&apos;s not here, Viktor can build a custom integration. Just ask.
+            Don&apos;t see your tool? Gomer connects to 3,200+ tools via managed connectors. If
+            it&apos;s not here, Gomer can build a custom integration. Just ask.
           </p>
         </div>
       )}
@@ -305,9 +305,9 @@ export default function IntegrationsPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Integrations — Viktor"
-        description="Viktor connects to 3,200+ tools and uses them the way you do. One AI employee for your entire tool stack."
-        ogTitle="Integrations — Viktor"
+        title="Integrations — Gomer"
+        description="Gomer connects to 3,200+ tools and uses them the way you do. One AI employee for your entire tool stack."
+        ogTitle="Integrations — Gomer"
         ogDescription="One AI employee. Your entire tool stack."
       />
       <IntegrationsHero />
@@ -323,7 +323,7 @@ export default function IntegrationsPage() {
               <IntegrationStepCard
                 number="01"
                 title="Connect your stack"
-                body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Viktor handles auth and starts working. No webhooks, no Zapier zaps."
+                body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Gomer handles auth and starts working. No webhooks, no Zapier zaps."
                 stepBadge="overlay"
                 visual={
                   <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-hero">
@@ -341,8 +341,8 @@ export default function IntegrationsPage() {
               />
               <IntegrationStepCard
                 number="02"
-                title="Tell Viktor what you need"
-                body={'Message Viktor in Slack like you\'d message a teammate. "Pull this week\'s MRR from Stripe." "Triage new Linear bugs." "Pause Meta campaigns above $40 CPA." Plain English, any tool.'}
+                title="Tell Gomer what you need"
+                body={'Message Gomer in Slack like you\'d message a teammate. "Pull this week\'s MRR from Stripe." "Triage new Linear bugs." "Pause Meta campaigns above $40 CPA." Plain English, any tool.'}
                 stepBadge="inline"
                 visual={
                   <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
@@ -353,12 +353,12 @@ export default function IntegrationsPage() {
                       reactions={[{ emoji: "⏳", count: 1 }]}
                       body={
                         <>
-                          <SlackMention>@Viktor</SlackMention>
+                          <SlackMention>@Gomer</SlackMention>
                           pull this week&apos;s MRR from Stripe and post it to private channel.
                         </>
                       }
                     />
-                    <SlackViktorMessage
+                    <SlackGomerMessage
                       time="11:33 AM"
                       reactions={[
                         { emoji: "✅", count: 2 },
@@ -371,12 +371,12 @@ export default function IntegrationsPage() {
               />
               <IntegrationStepCard
                 number="03"
-                title="Viktor operates, you review"
-                body="Viktor opens the tools, runs the work, and posts back what changed. Sensitive actions wait for your approval. Everything is logged. You stop doing the work and start reviewing it."
+                title="Gomer operates, you review"
+                body="Gomer opens the tools, runs the work, and posts back what changed. Sensitive actions wait for your approval. Everything is logged. You stop doing the work and start reviewing it."
                 stepBadge="inline"
                 visual={
                   <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
-                    <SlackViktorMessage
+                    <SlackGomerMessage
                       time="9:12 AM"
                       reactions={[{ emoji: "👀", count: 2 }]}
                       body={
@@ -432,7 +432,7 @@ export default function IntegrationsPage() {
                 </h2>
                 <p className="body-main max-w-[25.875rem] text-secondary font-medium">
                   Got two Stripe accounts? Three Gmail inboxes? A staging and production GitHub? Connect
-                  them all. Viktor keeps them separate with dedicated tools per connection. No confusion,
+                  them all. Gomer keeps them separate with dedicated tools per connection. No confusion,
                   no crossed wires.
                 </p>
               </div>
@@ -610,7 +610,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackViktorMessage({
+function SlackGomerMessage({
   time,
   body,
   attachment,
@@ -623,25 +623,25 @@ function SlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
+      data-variant="gomer"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-gomer"
     >
-      <div aria-hidden="true" className="slack-viktor-bg-mount">
-        <div className="slack-viktor-layer-glass-stack" />
-        <div className="slack-viktor-layer-inner-depth-soft" />
-        <div className="slack-viktor-layer-inner-glow-overlay" />
-        <div className="slack-viktor-layer-feather-blur" />
-        <div className="slack-viktor-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gomer-bg-mount">
+        <div className="slack-gomer-layer-glass-stack" />
+        <div className="slack-gomer-layer-inner-depth-soft" />
+        <div className="slack-gomer-layer-inner-glow-overlay" />
+        <div className="slack-gomer-layer-feather-blur" />
+        <div className="slack-gomer-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+        <img alt="Gomer" loading="lazy" width={36} height={36} className="size-full object-cover" src={gomerAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Viktor</span>
+              <span>Gomer</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>

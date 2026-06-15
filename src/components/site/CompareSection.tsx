@@ -3,7 +3,7 @@ import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
-import viktorBrandDark from "@/assets/images/viktor-brand-dark.svg";
+import gomerBrandDark from "@/assets/images/viktor-brand-dark.svg";
 import zapierIcon from "@/assets/images/zapier.svg";
 
 type TabIconProps = { className?: string };
@@ -141,7 +141,7 @@ export function CompareSection() {
     <section className="px-6 py-24 bg-section-cream">
       <div className="d-flex flex-col items-center justify-center mx-auto max-w-6xl text-center">
         <p className="text-sm tracking-full text-primitive-purple-700 font-medium">
-          Viktor vs AI tools
+          Gomer vs AI tools
         </p>
         <h2 className="typo-h2 mt-5 text-foreground leading-[1.02]">
           You've tried the AI tools.
@@ -258,8 +258,8 @@ export function CompareSection() {
                 </div>
                 <div className="relative z-[2] flex h-full w-full items-center">
                   <img
-                    src={viktorBrandDark}
-                    alt="Viktor"
+                    src={gomerBrandDark}
+                    alt="Gomer"
                     width={108}
                     height={32}
                     className="h-6 w-auto md:h-8"

@@ -29,7 +29,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     label: "Marketing",
     icon: Megaphone,
     headline:
-      "Monday morning. Viktor pulls Meta Ads and Google Ads, compares weeks, and ships the standup PDF.",
+      "Monday morning. Gomer pulls Meta Ads and Google Ads, compares weeks, and ships the standup PDF.",
     items: [
       {
         title: "Cross-channel reporting",
@@ -37,11 +37,11 @@ const USE_CASE_TABS: UseCaseTab[] = [
       },
       {
         title: "Deliverables, not screenshots",
-        body: "Viktor generates PDFs and summaries your team can drop straight into standups.",
+        body: "Gomer generates PDFs and summaries your team can drop straight into standups.",
       },
       {
         title: "Scheduled repeats",
-        body: "Run the same report every Monday at 8 AM. Viktor posts when it's ready.",
+        body: "Run the same report every Monday at 8 AM. Gomer posts when it's ready.",
       },
       {
         title: "Human review",
@@ -57,7 +57,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     items: [
       {
         title: "Issue triage",
-        body: "Viktor reads new Linear issues, labels priority, and assigns owners based on your rules.",
+        body: "Gomer reads new Linear issues, labels priority, and assigns owners based on your rules.",
       },
       {
         title: "PR workflows",
@@ -85,7 +85,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
       },
       {
         title: "Multi-account Stripe",
-        body: "Connect production and staging Stripe accounts — Viktor keeps them separate.",
+        body: "Connect production and staging Stripe accounts — Gomer keeps them separate.",
       },
       {
         title: "CRM alignment",
@@ -101,7 +101,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     id: "custom",
     label: "The Custom Integration",
     icon: Plug,
-    headline: "Tool not in the catalog? Viktor builds a custom integration or uses the browser directly.",
+    headline: "Tool not in the catalog? Gomer builds a custom integration or uses the browser directly.",
     items: [
       {
         title: "3,200+ connectors",
@@ -109,15 +109,15 @@ const USE_CASE_TABS: UseCaseTab[] = [
       },
       {
         title: "Custom from API docs",
-        body: "Viktor can scaffold integrations from your API documentation when needed.",
+        body: "Gomer can scaffold integrations from your API documentation when needed.",
       },
       {
         title: "Browser fallback",
-        body: "For tools without APIs, Viktor can operate through the browser with your approval.",
+        body: "For tools without APIs, Gomer can operate through the browser with your approval.",
       },
       {
         title: "No Zapier required",
-        body: "No webhooks to wire up. Viktor handles auth and starts working in Slack.",
+        body: "No webhooks to wire up. Gomer handles auth and starts working in Slack.",
       },
     ],
   },

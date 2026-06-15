@@ -25,7 +25,7 @@ export function UsageLayout() {
   const period = (searchParams.get("period") as UsagePeriod) ?? "last_30_days";
   return (
     <>
-      <PageMeta title="Usage — Viktor" description="Track workspace credit usage." />
+      <PageMeta title="Usage — Gomer" description="Track workspace credit usage." />
       <div className="flex h-full min-h-0 min-w-0 flex-1 flex-col font-sans text-foreground">
         <div
           className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-4 py-8 sm:px-12"
@@ -65,7 +65,7 @@ export function UsageLayout() {
                     role="tab"
                     className={({ isActive }) =>
                       [
-                        "viktor-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 whitespace-nowrap rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
+                        "gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 whitespace-nowrap rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
                         isActive
                           ? "bg-secondary text-secondary-foreground"
                           : "bg-transparent text-muted-foreground hover:bg-accent",

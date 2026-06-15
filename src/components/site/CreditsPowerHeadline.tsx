@@ -118,10 +118,10 @@ export function CreditsPowerHeadline() {
         Credits power everything
       </h2>
       <div className="relative z-0 flex w-full items-start justify-center gap-x-4 font-heading h2 font-bold max-lg:flex-col max-lg:items-center max-lg:gap-3 text-primary">
-        <span className="whitespace-nowrap">Viktor does:</span>
+        <span className="whitespace-nowrap">Gomer does:</span>
         <div
           className={`relative overflow-hidden text-left max-lg:max-w-full max-lg:text-center ${itemHeightVar}`}
-          aria-label="Viktor capabilities"
+          aria-label="Gomer capabilities"
           style={{
             maxWidth: "min(32.5rem, 100%)",
             transition: "width 0.6s cubic-bezier(0.645, 0.045, 0.355, 1)",

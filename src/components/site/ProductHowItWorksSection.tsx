@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import claudeAppIcon from "@/assets/images/claude-app-icon.png";
-import viktorMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
-import viktorAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const lisaAvatar =
@@ -21,7 +21,7 @@ export type HowItWorksStep = {
 const PRODUCT_STEPS: HowItWorksStep[] = [
   {
     number: "/01",
-    title: "Add Viktor to your workspace",
+    title: "Add Gomer to your workspace",
     body: "Install the Slack app or the Microsoft Teams (soon) app. No servers to spin up, no code to write, no developer required.",
     visual: "marketplace",
   },
@@ -34,7 +34,7 @@ const PRODUCT_STEPS: HowItWorksStep[] = [
   {
     number: "/03",
     title: "Just work",
-    body: "Message Viktor the way you'd message a coworker. It pulls the relevant data, does the work in a secure cloud sandbox, and delivers the result — right back into your conversation.",
+    body: "Message Gomer the way you'd message a coworker. It pulls the relevant data, does the work in a secure cloud sandbox, and delivers the result — right back into your conversation.",
     visual: "slack-work",
   },
 ];
@@ -108,11 +108,11 @@ function MarketplaceAppsVisual() {
         />
         <span aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-white/8 mix-blend-plus-lighter backdrop-blur-[10px]" />
         <span aria-hidden="true" className="absolute inset-4 rounded-2xl bg-white blur-2xl mix-blend-plus-lighter" />
-        <img alt="" className="relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={viktorMarketplaceAvatar} />
+        <img alt="" className="relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={gomerMarketplaceAvatar} />
         <div className="relative z-10 flex min-w-0 flex-1 items-start">
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <div className="flex min-w-0 flex-wrap items-center gap-1">
-              <p className="text-sm leading-[1.3] font-medium whitespace-nowrap text-[#262219]">Viktor</p>
+              <p className="text-sm leading-[1.3] font-medium whitespace-nowrap text-[#262219]">Gomer</p>
               <div className="flex items-center justify-center gap-2 rounded-full bg-[#cff2ff] px-2 py-px">
                 <svg width="17" height="12" viewBox="0 0 17 12" fill="none" aria-hidden="true" className="h-3 w-[17px] shrink-0">
                   <path
@@ -185,7 +185,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackViktorMessage({
+function SlackGomerMessage({
   time,
   body,
   attachment,
@@ -198,25 +198,25 @@ function SlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
+      data-variant="gomer"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-viktor"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-gomer"
     >
-      <div aria-hidden="true" className="slack-viktor-bg-mount">
-        <div className="slack-viktor-layer-glass-stack" />
-        <div className="slack-viktor-layer-inner-depth-soft" />
-        <div className="slack-viktor-layer-inner-glow-overlay" />
-        <div className="slack-viktor-layer-feather-blur" />
-        <div className="slack-viktor-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gomer-bg-mount">
+        <div className="slack-gomer-layer-glass-stack" />
+        <div className="slack-gomer-layer-inner-depth-soft" />
+        <div className="slack-gomer-layer-inner-glow-overlay" />
+        <div className="slack-gomer-layer-feather-blur" />
+        <div className="slack-gomer-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+        <img alt="Gomer" loading="lazy" width={36} height={36} className="size-full object-cover" src={gomerAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Viktor</span>
+              <span>Gomer</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -251,11 +251,11 @@ function StepVisual({ type }: { type: HowItWorksStep["visual"] }) {
           reactions={[{ emoji: "⏳", count: 1 }]}
           body={
             <>
-              <SlackMention>@Viktor</SlackMention><span className="text-white"> audit our Meta Ads and Google Ads spend. Compare vs last month.</span>
+              <SlackMention>@Gomer</SlackMention><span className="text-white"> audit our Meta Ads and Google Ads spend. Compare vs last month.</span>
             </>
           }
         />
-        <SlackViktorMessage
+        <SlackGomerMessage
           time="9:02 AM"
           reactions={[
             { emoji: "🎯", count: 4 },
@@ -276,7 +276,7 @@ function StepVisual({ type }: { type: HowItWorksStep["visual"] }) {
   return (
     <div className="flex min-w-0 justify-start overflow-hidden p-6 sm:p-8">
       <div className="min-w-0 w-full max-w-[438px]">
-        <SlackViktorMessage
+        <SlackGomerMessage
           time="9:02 AM"
           reactions={[{ emoji: "❤️", count: 4 }]}
           body={
@@ -606,7 +606,7 @@ export function ProductHowItWorksSection() {
     <HowItWorksScrollSection
       sectionId="how-it-works"
       steps={PRODUCT_STEPS}
-      description='There is no prompt engineering. No workflow builder. No "agent configuration." You describe what you need in plain language. Viktor figures out how to do it.'
+      description='There is no prompt engineering. No workflow builder. No "agent configuration." You describe what you need in plain language. Gomer figures out how to do it.'
     />
   );
 }

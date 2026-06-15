@@ -22,6 +22,6 @@ export const teamData = {
   ] satisfies TeamMember[],
   botSettings: {
     slackInviteEnabled: true,
-    description: "Allow Viktor to invite Slack workspace members to join your team via DM.",
+    description: "Allow Gomer to invite Slack workspace members to join your team via DM.",
   },
 } as const;

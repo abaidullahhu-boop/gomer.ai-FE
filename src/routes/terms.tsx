@@ -31,9 +31,9 @@ export default function TermsPage() {
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Terms of Service"
-        description="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
+        description="Read the Terms of Service that govern your use of Gomer — acceptance, accounts, data, IP, liability, and more."
         ogTitle="Terms of Service"
-        ogDescription="Read the Terms of Service that govern your use of Viktor — acceptance, accounts, data, IP, liability, and more."
+        ogDescription="Read the Terms of Service that govern your use of Gomer — acceptance, accounts, data, IP, liability, and more."
       />
       <Nav heroTone="light" />
       <main className="pt-32 pb-24 px-6 md:px-12">
@@ -52,10 +52,10 @@ export default function TermsPage() {
 
           <Section number="1" title="Acceptance of Terms">
             <p>
-              By accessing or using Viktor (the "Service"), you agree to be bound by these
+              By accessing or using Gomer (the "Service"), you agree to be bound by these
               Terms of Service ("Terms"). If you do not agree to these Terms, you may not
               access or use the Service. These Terms constitute a legally binding agreement
-              between you and Viktor.
+              between you and Gomer.
             </p>
             <p>
               We may update these Terms from time to time. Your continued use of the Service
@@ -65,7 +65,7 @@ export default function TermsPage() {
 
           <Section number="2" title="Description of the Service">
             <p>
-              Viktor provides an AI-powered platform that helps users create, organize, and
+              Gomer provides an AI-powered platform that helps users create, organize, and
               manage their work through intelligent assistance and automation. The Service
               includes:
             </p>
@@ -95,7 +95,7 @@ export default function TermsPage() {
           <Section number="4" title="User Content and Data Privacy">
             <p>
               You retain ownership of any content you submit, upload, or create through the
-              Service ("User Content"). By providing User Content, you grant Viktor a
+              Service ("User Content"). By providing User Content, you grant Gomer a
               worldwide, non-exclusive, royalty-free license to host, store, process, and
               display it solely to operate and improve the Service.
             </p>
@@ -156,10 +156,10 @@ export default function TermsPage() {
             <p>
               All rights, title, and interest in and to the Service, including software,
               design, trademarks, and documentation, are and will remain the exclusive
-              property of Viktor and its licensors.
+              property of Gomer and its licensors.
             </p>
             <ul>
-              <li>The Viktor name, logo, and visual identity are trademarks of Viktor.</li>
+              <li>The Gomer name, logo, and visual identity are trademarks of Gomer.</li>
               <li>You may not use our trademarks without prior written consent.</li>
               <li>Feedback you provide may be used by us without obligation to you.</li>
               <li>Open-source components are governed by their respective licenses.</li>
@@ -173,7 +173,7 @@ export default function TermsPage() {
             </p>
             <ul>
               <li>You should review and verify AI-generated content before relying on it.</li>
-              <li>Viktor does not guarantee the accuracy or fitness of AI outputs.</li>
+              <li>Gomer does not guarantee the accuracy or fitness of AI outputs.</li>
               <li>AI-generated content may not be eligible for copyright protection in some jurisdictions.</li>
               <li>You are responsible for how you use AI-generated content.</li>
             </ul>
@@ -200,7 +200,7 @@ export default function TermsPage() {
             <p>
               We may suspend or terminate your access to the Service immediately if you
               violate these Terms, engage in fraudulent activity, or otherwise create risk or
-              legal exposure for Viktor.
+              legal exposure for Gomer.
             </p>
             <p>
               Upon termination, your right to use the Service ceases immediately. Provisions
@@ -223,7 +223,7 @@ export default function TermsPage() {
 
           <Section number="13" title="Limitation of Liability">
             <p>
-              To the maximum extent permitted by law, Viktor shall not be liable for any
+              To the maximum extent permitted by law, Gomer shall not be liable for any
               indirect, incidental, special, consequential, or punitive damages, including
               but not limited to:
             </p>
@@ -241,7 +241,7 @@ export default function TermsPage() {
 
           <Section number="14" title="Indemnification">
             <p>
-              You agree to indemnify, defend, and hold harmless Viktor and its affiliates,
+              You agree to indemnify, defend, and hold harmless Gomer and its affiliates,
               officers, employees, and agents from any claims, damages, losses, liabilities,
               and expenses arising out of:
             </p>
@@ -264,7 +264,7 @@ export default function TermsPage() {
           <Section number="16" title="Governing Law and Jurisdiction">
             <p>
               These Terms are governed by and construed in accordance with the laws of the
-              jurisdiction in which Viktor is established, without regard to its conflict of
+              jurisdiction in which Gomer is established, without regard to its conflict of
               law principles. Any disputes arising out of or relating to these Terms shall be
               resolved exclusively in the competent courts of that jurisdiction.
             </p>
@@ -273,7 +273,7 @@ export default function TermsPage() {
           <Section number="17" title="Notices and Dispute Resolution">
             <p>
               Notices to you may be made via email or through postings within the Service.
-              Notices to Viktor must be sent to the contact address provided below.
+              Notices to Gomer must be sent to the contact address provided below.
             </p>
             <p>
               Before initiating formal proceedings, both parties agree to attempt to resolve
@@ -285,7 +285,7 @@ export default function TermsPage() {
 
           <Section number="18" title="Miscellaneous">
             <ul>
-              <li>These Terms constitute the entire agreement between you and Viktor.</li>
+              <li>These Terms constitute the entire agreement between you and Gomer.</li>
               <li>If any provision is found unenforceable, the remaining provisions remain in effect.</li>
               <li>Our failure to enforce any right is not a waiver of that right.</li>
               <li>You may not assign these Terms without our prior written consent.</li>
@@ -302,7 +302,7 @@ export default function TermsPage() {
               style={{ backgroundColor: "oklch(97% 0.001 106.424)" }}
             >
               <p className="mb-2" style={{ color: "#293045" }}>
-                <strong>Viktor</strong>
+                <strong>Gomer</strong>
               </p>
               <p className="mb-2" style={{ color: "#293045" }}>
                 Legal Department

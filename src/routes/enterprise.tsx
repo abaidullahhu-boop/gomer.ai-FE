@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
@@ -27,18 +27,18 @@ const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
 
 const customerTestimonials = [
-  { name: "Boris Wexler", role: "CEO, Space Dinosaurs", saved: "10+ hrs/week", quote: "Viktor is an incredible tool — it was almost instantly adopted by the bulk of my team.", image: avatar("photo-1500648767791-00dcc994a43e") },
-  { name: "Robert Tyrrell", role: "Owner, TalentBright", saved: "10+ hrs/week", quote: "It's blown my mind seeing what Viktor can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring actual people.", image: avatar("photo-1519345182560-3f2917c472ef") },
-  { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Viktor is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
+  { name: "Boris Wexler", role: "CEO, Space Dinosaurs", saved: "10+ hrs/week", quote: "Gomer is an incredible tool — it was almost instantly adopted by the bulk of my team.", image: avatar("photo-1500648767791-00dcc994a43e") },
+  { name: "Robert Tyrrell", role: "Owner, TalentBright", saved: "10+ hrs/week", quote: "It's blown my mind seeing what Gomer can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring actual people.", image: avatar("photo-1519345182560-3f2917c472ef") },
+  { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Gomer is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
 ];
 
 export default function EnterprisePage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Enterprise — Viktor"
+        title="Enterprise — Gomer"
         description="One AI employee. Enterprise-ready. SSO, RBAC, audit logs, SOC 2, GDPR — everything your security, IT, and procurement teams ask for."
-        ogTitle="Enterprise — Viktor"
+        ogTitle="Enterprise — Gomer"
         ogDescription="Enterprise-ready AI coworker with SSO, SCIM, audit logs, and SOC 2."
         ogUrl="/enterprise"
         canonical="/enterprise"
@@ -55,7 +55,7 @@ export default function EnterprisePage() {
           <>
             Questions people ask
             <br />
-            before adding Viktor
+            before adding Gomer
           </>
         }
       />
@@ -67,7 +67,7 @@ export default function EnterprisePage() {
             Pay only when you're ready.
           </>
         }
-        description="Every Viktor Team integration is $30 / month per seat. Unlimited tasks lived and aided with no admin. Bring your team start when it makes 30 minutes."
+        description="Every Gomer Team integration is $30 / month per seat. Unlimited tasks lived and aided with no admin. Bring your team start when it makes 30 minutes."
         points={[
           "SAML + integrations",
           "Users and Teams",
@@ -225,7 +225,7 @@ const complianceColumns: ComplianceColumnData[] = [
     rows: [
       {
         t: "Slack-native auth",
-        d: "Viktor inherits your existing Slack SSO/SAML, MFA, and provisioning. No separate Viktor password or identity store.",
+        d: "Gomer inherits your existing Slack SSO/SAML, MFA, and provisioning. No separate Gomer password or identity store.",
       },
       {
         t: "Approval policies",
@@ -244,7 +244,7 @@ const complianceColumns: ComplianceColumnData[] = [
     rows: [
       {
         t: "Per-user OAuth",
-        d: "Each person connects their own Google, HubSpot, Linear, GitHub, and other tools. Viktor only sees what that user has granted access to. Credentials stay in your SSO layer, never in ours.",
+        d: "Each person connects their own Google, HubSpot, Linear, GitHub, and other tools. Gomer only sees what that user has granted access to. Credentials stay in your SSO layer, never in ours.",
       },
       {
         t: "Retention roadmap",
@@ -252,7 +252,7 @@ const complianceColumns: ComplianceColumnData[] = [
       },
       {
         t: "Workspace-scoped skills",
-        d: "Skills, memory, and scheduled tasks live inside your Viktor workspace and never cross to another customer.",
+        d: "Skills, memory, and scheduled tasks live inside your Gomer workspace and never cross to another customer.",
       },
     ],
   },
@@ -263,7 +263,7 @@ const complianceColumns: ComplianceColumnData[] = [
     rows: [
       {
         t: "Usage reporting",
-        d: "The Viktor team can generate usage reports from admin data to support rollout reviews, adoption tracking, and procurement conversations.",
+        d: "The Gomer team can generate usage reports from admin data to support rollout reviews, adoption tracking, and procurement conversations.",
       },
       {
         t: "DPA included",
@@ -271,7 +271,7 @@ const complianceColumns: ComplianceColumnData[] = [
       },
       {
         t: "Direct line to our team",
-        d: "A dedicated channel in the Viktor Community Slack where you talk to the engineers building Viktor and other power users.",
+        d: "A dedicated channel in the Gomer Community Slack where you talk to the engineers building Gomer and other power users.",
       },
     ],
   },
@@ -426,7 +426,7 @@ type SlackMessage =
       reactions?: SlackReaction[];
     }
   | {
-      kind: "viktor";
+      kind: "gomer";
       time: string;
       body: ReactNode;
       reactions?: SlackReaction[];
@@ -457,12 +457,12 @@ const TEAM_TABS: TeamTab[] = [
         avatar: teamAvatar("photo-1494790108377-be9c29b29330"),
         body: (
           <>
-            <SlackMention>@Viktor</SlackMention>, audit our Google Ads account and flag anything underperforming.
+            <SlackMention>@Gomer</SlackMention>, audit our Google Ads account and flag anything underperforming.
           </>
         ),
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "10:24 AM",
         body: "✅ Done. 3 campaigns above target CPA: Brand US, Retargeting EU, Lookalike APAC. Ranked PDF with the cuts and reallocations is in the thread.",
         reactions: [{ emoji: "🙌", count: 2 }],
@@ -476,7 +476,7 @@ const TEAM_TABS: TeamTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "10:27 AM",
         body: "Top performer was the product launch post (4.2% engagement). Carousel posts averaged 2.8x more clicks than text-only. Full breakdown in the thread.",
         reactions: [{ emoji: "📊", count: 2 }],
@@ -496,12 +496,12 @@ const TEAM_TABS: TeamTab[] = [
         avatar: teamAvatar("photo-1472099645785-5658abf4ff4e"),
         body: (
           <>
-            <SlackMention>@Viktor</SlackMention> Build a morning briefing covering MRR, signups, and churn. Post it to #business-team every weekday at 8am.
+            <SlackMention>@Gomer</SlackMention> Build a morning briefing covering MRR, signups, and churn. Post it to #business-team every weekday at 8am.
           </>
         ),
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "8:02 AM",
         body: "Scheduled. Pulling from Stripe, the prod DB, and ChartMogul at 7:55, posting to #business-team at 8 sharp. First run goes out tomorrow.",
         reactions: [{ emoji: "🗓️", count: 2 }],
@@ -515,7 +515,7 @@ const TEAM_TABS: TeamTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "8:05 AM",
         body: "Monitoring live. Hourly Stripe check, immediate DM if daily revenue drops more than 10% vs the prior day.",
         reactions: [
@@ -538,12 +538,12 @@ const TEAM_TABS: TeamTab[] = [
         avatar: teamAvatar("photo-1507003211169-0a1dd7228f2d"),
         body: (
           <>
-            <SlackMention>@Viktor</SlackMention> Clone the repo, create a branch, fix this bug, and open a PR.
+            <SlackMention>@Gomer</SlackMention> Clone the repo, create a branch, fix this bug, and open a PR.
           </>
         ),
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "2:16 PM",
         body: "PR opened: fix/null-check-user-profile (#247). Missing null check on the user profile response. Tests pass, ready for review.",
         reactions: [{ emoji: "🙌", count: 2 }],
@@ -557,7 +557,7 @@ const TEAM_TABS: TeamTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "2:19 PM",
         body: "Top 5: pricing page (38%), onboarding step 3 (29%), checkout (24%), invite flow (19%), settings (15%). Funnel chart in the thread.",
         reactions: [
@@ -580,12 +580,12 @@ const TEAM_TABS: TeamTab[] = [
         avatar: teamAvatar("photo-1506794778202-cad84cf45f1d"),
         body: (
           <>
-            <SlackMention>@Viktor</SlackMention> Excel of every closed-won deal this quarter, by owner and ARR.
+            <SlackMention>@Gomer</SlackMention> Excel of every closed-won deal this quarter, by owner and ARR.
           </>
         ),
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "9:14 AM",
         body: "47 closed deals, $312K total. Excel attached: deal name, owner, ARR, close date, source.",
         reactions: [{ emoji: "📊", count: 2 }],
@@ -595,11 +595,11 @@ const TEAM_TABS: TeamTab[] = [
         name: "Maya",
         time: "9:16 AM",
         avatar: teamAvatar("photo-1534528741775-53994a69daeb"),
-        body: "Research Acme Corp before my 11am call. Pain points, recent news, fit with Viktor.",
+        body: "Research Acme Corp before my 11am call. Pain points, recent news, fit with Gomer.",
         reactions: [{ emoji: "⏳", count: 1 }],
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "9:18 AM",
         body: "One-pager ready: 240 employees, recent Series B, expanding RevOps team, struggling with cross-tool reporting per their job posts. Strong fit. Talk track in the thread.",
         reactions: [
@@ -613,7 +613,7 @@ const TEAM_TABS: TeamTab[] = [
     id: "leadership",
     label: "Leadership",
     icon: LeadershipIcon,
-    headline: "Same Viktor, same context, same security policies across the org.",
+    headline: "Same Gomer, same context, same security policies across the org.",
     messages: [
       {
         kind: "user",
@@ -622,12 +622,12 @@ const TEAM_TABS: TeamTab[] = [
         avatar: teamAvatar("photo-1560250097-0b93528c311a"),
         body: (
           <>
-            <SlackMention>@Viktor</SlackMention> Summarize what happened across all team channels this week.
+            <SlackMention>@Gomer</SlackMention> Summarize what happened across all team channels this week.
           </>
         ),
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "9:01 AM",
         body: "Weekly digest ready. Eng shipped the payments refactor, marketing launched the LinkedIn campaign (2.1K clicks), ops flagged a vendor pricing issue. 3 blockers need your attention. Details in the thread.",
         reactions: [{ emoji: "🙌", count: 2 }],
@@ -641,7 +641,7 @@ const TEAM_TABS: TeamTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
       },
       {
-        kind: "viktor",
+        kind: "gomer",
         time: "9:04 AM",
         body: "Draft ready. MRR ($48.2K, +12%), 8 new logos, 1.2% churn, product highlights. Tone matches your last three updates. Pasted in the thread for review.",
         reactions: [
@@ -691,7 +691,7 @@ function EnterpriseSlackUserMessage({
   );
 }
 
-function EnterpriseSlackViktorMessage({
+function EnterpriseSlackGomerMessage({
   time,
   body,
   reactions,
@@ -702,24 +702,24 @@ function EnterpriseSlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
-      className="relative flex w-full text-left isolate slack-message-viktor gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
+      data-variant="gomer"
+      className="relative flex w-full text-left isolate slack-message-gomer gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
     >
-      <div aria-hidden="true" className="slack-viktor-bg-mount">
-        <div className="slack-viktor-layer-glass-stack" />
-        <div className="slack-viktor-layer-inner-depth-soft" />
-        <div className="slack-viktor-layer-inner-glow-overlay" />
-        <div className="slack-viktor-layer-feather-blur" />
-        <div className="slack-viktor-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gomer-bg-mount">
+        <div className="slack-gomer-layer-glass-stack" />
+        <div className="slack-gomer-layer-inner-depth-soft" />
+        <div className="slack-gomer-layer-inner-glow-overlay" />
+        <div className="slack-gomer-layer-feather-blur" />
+        <div className="slack-gomer-layer-white-sheet" />
       </div>
       <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md z-[1] bg-transparent">
-        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+        <img alt="Gomer" loading="lazy" width={36} height={36} className="size-full object-cover" src={gomerAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 mb-0.5">
           <span className="body-small text-slack font-medium">
             <span className="inline-flex items-center gap-1.5">
-              <span>Viktor</span>
+              <span>Gomer</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -749,8 +749,8 @@ function EnterpriseChatPreview({ messages }: { messages: SlackMessage[] }) {
               reactions={message.reactions}
             />
           ) : (
-            <EnterpriseSlackViktorMessage
-              key={`viktor-${message.time}-${index}`}
+            <EnterpriseSlackGomerMessage
+              key={`gomer-${message.time}-${index}`}
               time={message.time}
               body={message.body}
               reactions={message.reactions}
@@ -859,7 +859,7 @@ function DeliverablesTabs() {
             </div>
             <h2 className="font-heading h3 text-balance">One coworker. Every team. Real deliverables.</h2>
             <p className="max-w-[570px] body-main text-secondary font-medium">
-              Viktor doesn&apos;t pick a department. Same Viktor, same context, same security policies — across
+              Gomer doesn&apos;t pick a department. Same Gomer, same context, same security policies — across
               marketing, ops, finance, engineering, sales, and leadership.
             </p>
           </div>
@@ -1361,7 +1361,7 @@ function AddInTwoMinutes() {
               </div>
             </div>
             <h2 className="font-heading h3 text-balance text-primitive-main-dark">
-              You can add Viktor in 2 minutes.
+              You can add Gomer in 2 minutes.
             </h2>
             <p className="body-main max-w-[570px] font-medium text-secondary">
               One-click install from the Slack App Directory. Connect tools as you need them, with OAuth
@@ -1383,7 +1383,7 @@ function AddInTwoMinutes() {
 
 const ENTERPRISE_FAQS = [
   { q: "What does the Enterprise plan include?", a: "SSO via SAML, SCIM provisioning, audit log export, US/EU data residency, custom retention policies, a signed DPA, priority support, and a dedicated Slack channel with our engineering team — plus everything in the Team plan." },
-  { q: "How long does Viktor to install?", a: "Most teams are live in under 10 minutes: install from the Slack App Directory, connect OAuth for the tools you need, and set admin policies." },
-  { q: "Do we control which tools Viktor has access to?", a: "Yes. Admins decide which integrations are enabled, which actions require approval, and which scopes each integration uses. Anything can be revoked instantly." },
-  { q: "Does Viktor support SSO?", a: "Yes — SAML 2.0 with Okta, Google Workspace, OneLogin, JumpCloud, Microsoft Entra ID, or any standards-compliant IdP. SCIM provisioning is included on Enterprise." },
+  { q: "How long does Gomer to install?", a: "Most teams are live in under 10 minutes: install from the Slack App Directory, connect OAuth for the tools you need, and set admin policies." },
+  { q: "Do we control which tools Gomer has access to?", a: "Yes. Admins decide which integrations are enabled, which actions require approval, and which scopes each integration uses. Anything can be revoked instantly." },
+  { q: "Does Gomer support SSO?", a: "Yes — SAML 2.0 with Okta, Google Workspace, OneLogin, JumpCloud, Microsoft Entra ID, or any standards-compliant IdP. SCIM provisioning is included on Enterprise." },
 ];

@@ -15,7 +15,7 @@ export default function SettingsGeneral() {
           Default model
         </h2>
         <p className="mt-1 mb-4 max-w-[640px] text-sm leading-normal text-muted-foreground">
-          Used for conversations with Viktor and as a default for scheduled tasks.
+          Used for conversations with Gomer and as a default for scheduled tasks.
         </p>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

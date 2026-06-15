@@ -3,7 +3,7 @@ import { CalendarCheck2 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import viktorSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
 
 type ChangelogItem = {
   label: string;
@@ -22,12 +22,12 @@ const entries: Entry[] = [
     date: "June 3, 2026",
     title: "Workspace personalization settings",
     intro:
-      "Set a personality and custom instructions that shape how Viktor responds across your entire workspace.",
+      "Set a personality and custom instructions that shape how Gomer responds across your entire workspace.",
     items: [
       {
         label: "Workspace personalization",
         description:
-          'A new section in Settings lets you pick a personality preset and write custom instructions that apply to every Viktor conversation in your workspace. Use it to adjust tone, set standing context ("we\'re a B2B SaaS company", "always reply in Spanish"), or reduce sycophancy — the instructions are injected into Viktor\'s system prompt so they take effect immediately, no restart needed.',
+          'A new section in Settings lets you pick a personality preset and write custom instructions that apply to every Gomer conversation in your workspace. Use it to adjust tone, set standing context ("we\'re a B2B SaaS company", "always reply in Spanish"), or reduce sycophancy — the instructions are injected into Gomer\'s system prompt so they take effect immediately, no restart needed.',
       },
     ],
   },
@@ -35,7 +35,7 @@ const entries: Entry[] = [
     date: "May 30, 2026",
     title: "Claude Opus 4.8",
     intro:
-      "Anthropic's latest frontier model is now available in Viktor's model picker.",
+      "Anthropic's latest frontier model is now available in Gomer's model picker.",
     items: [
       {
         label: "Claude Opus 4.8",
@@ -48,12 +48,12 @@ const entries: Entry[] = [
     date: "May 23, 2026",
     title: "Read-only GitHub integration",
     intro:
-      "Connect GitHub in read-only mode so Viktor can browse repos, issues, and PRs without write permissions.",
+      "Connect GitHub in read-only mode so Gomer can browse repos, issues, and PRs without write permissions.",
     items: [
       {
         label: "Read-only GitHub integration",
         description:
-          "A separate read-only GitHub connection is now available alongside the existing read-write one. Connect it when you want Viktor to browse your repos, review code, and read issues or PRs without granting write access — useful for security-conscious teams or when full repo access isn't needed.",
+          "A separate read-only GitHub connection is now available alongside the existing read-write one. Connect it when you want Gomer to browse your repos, review code, and read issues or PRs without granting write access — useful for security-conscious teams or when full repo access isn't needed.",
       },
     ],
   },
@@ -67,7 +67,7 @@ const entries: Entry[] = [
         label: "Redesigned Spaces page",
         description: (
           <>
-            The <code>/viktor-spaces</code> page now shows each space as a thumbnail
+            The <code>/gomer-spaces</code> page now shows each space as a thumbnail
             card instead of a flat list. You can launch production or preview apps
             directly from the card without entering the management page first. A grid /
             list toggle in the header lets you pick your preferred layout — the choice
@@ -104,7 +104,7 @@ const entries: Entry[] = [
       {
         label: "Longer Claude outputs",
         description:
-          "Output caps for Claude Opus 4.6 / 4.7 and the Sonnet 4 family were raised significantly, so Viktor can now return much longer reports, drafts, and analyses in a single response without truncation.",
+          "Output caps for Claude Opus 4.6 / 4.7 and the Sonnet 4 family were raised significantly, so Gomer can now return much longer reports, drafts, and analyses in a single response without truncation.",
       },
       {
         label: "\"You're installing X\" on signup",
@@ -122,22 +122,22 @@ const entries: Entry[] = [
     date: "April 28, 2026",
     title: "Google Ads Negative Keywords & Smarter Slack Replies",
     intro:
-      "Manage Google Ads negative keywords from Viktor, and get DM replies that stay in thread with quick status acks.",
+      "Manage Google Ads negative keywords from Gomer, and get DM replies that stay in thread with quick status acks.",
     items: [
       {
         label: "Google Ads negative keywords",
         description:
-          "New tools to list, add, and remove negative keywords at the campaign or ad-group level, with batch updates and match-type support, so you can prune wasted spend without leaving Viktor.",
+          "New tools to list, add, and remove negative keywords at the campaign or ad-group level, with batch updates and match-type support, so you can prune wasted spend without leaving Gomer.",
       },
       {
         label: "Slack DM replies stay in thread",
         description:
-          "When you DM Viktor about a specific channel thread, replies now land back in that same thread instead of bouncing to the channel root.",
+          "When you DM Gomer about a specific channel thread, replies now land back in that same thread instead of bouncing to the channel root.",
       },
       {
         label: "Quick acks on status checks",
         description:
-          "If you ping Viktor mid-task to ask where things stand, you'll get a short Slack status update first before it resumes the work.",
+          "If you ping Gomer mid-task to ask where things stand, you'll get a short Slack status update first before it resumes the work.",
       },
     ],
   },
@@ -190,7 +190,7 @@ const entries: Entry[] = [
       {
         label: "\"Always approve this tool\" in Slack",
         description:
-          "When Viktor asks for permission to use a tool in Slack, you can now choose to always approve future uses of the same tool. The preference is saved to your MCP settings so you stop getting re-prompted for tools you trust.",
+          "When Gomer asks for permission to use a tool in Slack, you can now choose to always approve future uses of the same tool. The preference is saved to your MCP settings so you stop getting re-prompted for tools you trust.",
       },
       {
         label: "Atlassian pre-connect setup guide",
@@ -205,7 +205,7 @@ const entries: Entry[] = [
       {
         label: "Clearer account deletion for admins",
         description:
-          "When you're the last admin deleting a workspace, Viktor now shows exactly which teammates will lose access and how many scheduled tasks each person has, so you know the impact before you confirm.",
+          "When you're the last admin deleting a workspace, Gomer now shows exactly which teammates will lose access and how many scheduled tasks each person has, so you know the impact before you confirm.",
       },
       {
         label: "Softer past-due experience",
@@ -223,7 +223,7 @@ const entries: Entry[] = [
       {
         label: "Claude Opus 4.7 available",
         description:
-          "Anthropic's newest frontier model is now available in Viktor for everyone, with a 1M context window, adaptive thinking, and summarized reasoning output.",
+          "Anthropic's newest frontier model is now available in Gomer for everyone, with a 1M context window, adaptive thinking, and summarized reasoning output.",
       },
       {
         label: "Instant integrations page",
@@ -253,7 +253,7 @@ const entries: Entry[] = [
       {
         label: "Multi-account integrations",
         description:
-          'You can now connect multiple accounts for the same service. For example, link two Gmail inboxes or two YouTube channels and Viktor gives each connection its own dedicated tools. Manage them individually from the integrations dashboard with per-account disconnect and a simple "Connect another" button.',
+          'You can now connect multiple accounts for the same service. For example, link two Gmail inboxes or two YouTube channels and Gomer gives each connection its own dedicated tools. Manage them individually from the integrations dashboard with per-account disconnect and a simple "Connect another" button.',
       },
     ],
   },
@@ -261,7 +261,7 @@ const entries: Entry[] = [
     date: "March 20, 2026",
     title: "Speech & Video Generation",
     intro:
-      "Viktor can now generate spoken audio, transcribe media files, and create AI-powered videos.",
+      "Gomer can now generate spoken audio, transcribe media files, and create AI-powered videos.",
     items: [
       {
         label: "Text-to-speech & audio transcription",
@@ -297,12 +297,12 @@ const entries: Entry[] = [
     date: "March 18, 2026",
     title: "Privacy-First Slack Connect Support",
     intro:
-      "Viktor now handles external shared channels with a private DM handoff and approval before replying.",
+      "Gomer now handles external shared channels with a private DM handoff and approval before replying.",
     items: [
       {
         label: "External shared channel → DM handoff",
         description:
-          "When Viktor is @mentioned in a Slack Connect channel, it now moves the conversation into a private DM instead of replying publicly. You'll be asked to approve before any response is posted back to the shared thread — keeping cross-org conversations secure by default.",
+          "When Gomer is @mentioned in a Slack Connect channel, it now moves the conversation into a private DM instead of replying publicly. You'll be asked to approve before any response is posted back to the shared thread — keeping cross-org conversations secure by default.",
       },
     ],
   },
@@ -320,7 +320,7 @@ const entries: Entry[] = [
       {
         label: "Issue reporting from Slack",
         description:
-          "You can now ask Viktor to submit an issue report directly from your Slack conversation. Viktor will draft the report and ask for your approval before sending — no need to leave the chat.",
+          "You can now ask Gomer to submit an issue report directly from your Slack conversation. Gomer will draft the report and ask for your approval before sending — no need to leave the chat.",
       },
     ],
   },
@@ -328,7 +328,7 @@ const entries: Entry[] = [
     date: "March 11, 2026",
     title: "Yearly Billing & Expanded Google Drive Tools",
     intro:
-      "Teams can now switch to annual billing, and Viktor gains new Google Drive and Sheets management tools.",
+      "Teams can now switch to annual billing, and Gomer gains new Google Drive and Sheets management tools.",
     items: [
       {
         label: "Yearly billing",
@@ -338,19 +338,19 @@ const entries: Entry[] = [
       {
         label: "Google Drive & Sheets tools",
         description:
-          "Viktor can now copy and move files in Google Drive, and manage Google Sheets tabs — create, rename, and delete sheets within a spreadsheet.",
+          "Gomer can now copy and move files in Google Drive, and manage Google Sheets tabs — create, rename, and delete sheets within a spreadsheet.",
       },
       {
         label: "Meta Ads product catalogs",
         description:
-          "Viktor can now create, update, and delete items in your Meta Ads product catalogs, making it easier to manage your ad inventory.",
+          "Gomer can now create, update, and delete items in your Meta Ads product catalogs, making it easier to manage your ad inventory.",
       },
     ],
   },
   {
     date: "March 8, 2026",
     title: "GPT-5.4 Now Available",
-    intro: "GPT-5.4 is now available as a model option in Viktor.",
+    intro: "GPT-5.4 is now available as a model option in Gomer.",
     items: [
       {
         label: "GPT-5.4 model",
@@ -363,12 +363,12 @@ const entries: Entry[] = [
     date: "March 7, 2026",
     title: "Granola Meeting Notes Integration",
     intro:
-      "Viktor can now connect to Granola to access and work with your meeting notes.",
+      "Gomer can now connect to Granola to access and work with your meeting notes.",
     items: [
       {
         label: "Granola integration",
         description:
-          "Viktor can now connect to Granola, giving it access to your meeting notes. Summarize discussions, pull out action items, or reference past meetings — all directly through Viktor.",
+          "Gomer can now connect to Granola, giving it access to your meeting notes. Summarize discussions, pull out action items, or reference past meetings — all directly through Gomer.",
       },
     ],
   },
@@ -376,12 +376,12 @@ const entries: Entry[] = [
     date: "March 5, 2026",
     title: "Auto-Resume After Integration Connect",
     intro:
-      "Viktor automatically picks up where it left off after you connect an integration — no manual confirmation needed.",
+      "Gomer automatically picks up where it left off after you connect an integration — no manual confirmation needed.",
     items: [
       {
         label: "Auto-resume after integration connect",
         description:
-          'When Viktor asks you to connect an integration and you complete the OAuth flow, it now automatically picks up where it left off. No more having to manually say "I\'ve connected it" — the conversation continues seamlessly.',
+          'When Gomer asks you to connect an integration and you complete the OAuth flow, it now automatically picks up where it left off. No more having to manually say "I\'ve connected it" — the conversation continues seamlessly.',
       },
     ],
   },
@@ -389,17 +389,17 @@ const entries: Entry[] = [
     date: "March 3, 2026",
     title: "Channel Selection & Personalized Skills",
     intro:
-      "Pick which Slack channels Viktor joins during setup, and each team member now gets their own personalized skills.",
+      "Pick which Slack channels Gomer joins during setup, and each team member now gets their own personalized skills.",
     items: [
       {
         label: "Channel selection during setup",
         description:
-          "When onboarding through the web, you now pick exactly which Slack channels Viktor joins before the agent starts. No more guessing — you're in control from the first step.",
+          "When onboarding through the web, you now pick exactly which Slack channels Gomer joins before the agent starts. No more guessing — you're in control from the first step.",
       },
       {
         label: "Personal skills per team member",
         description:
-          "Each person on your team can now have their own personalized Viktor skills. Different team members see different skills based on their role and access, making Viktor more relevant to each individual.",
+          "Each person on your team can now have their own personalized Gomer skills. Different team members see different skills based on their role and access, making Gomer more relevant to each individual.",
       },
     ],
   },
@@ -407,17 +407,17 @@ const entries: Entry[] = [
     date: "February 21, 2026",
     title: "Slack Channel Privacy",
     intro:
-      "Viktor now enforces per-user channel privacy — each team member only sees their own channels.",
+      "Gomer now enforces per-user channel privacy — each team member only sees their own channels.",
     items: [
       {
         label: "Slack channel privacy",
         description:
-          "When multiple people share a Viktor workspace, each user's agent now only sees the Slack channels they're actually a member of. Private channels, DMs, and group DMs stay private — matching the access rules you already have in Slack. Access updates automatically when someone joins or leaves a channel.",
+          "When multiple people share a Gomer workspace, each user's agent now only sees the Slack channels they're actually a member of. Private channels, DMs, and group DMs stay private — matching the access rules you already have in Slack. Access updates automatically when someone joins or leaves a channel.",
       },
       {
         label: "Create group DMs",
         description:
-          "You can now ask Viktor to start a group DM with specific people directly — no approval step needed.",
+          "You can now ask Gomer to start a group DM with specific people directly — no approval step needed.",
       },
     ],
   },
@@ -425,22 +425,22 @@ const entries: Entry[] = [
     date: "February 20, 2026",
     title: "Group DMs, Custom Sender Names & Channel Controls",
     intro:
-      "Viktor now works in group DMs, scheduled tasks can post under custom names, and you can ask Viktor to leave channels.",
+      "Gomer now works in group DMs, scheduled tasks can post under custom names, and you can ask Gomer to leave channels.",
     items: [
       {
         label: "Group DM support",
         description:
-          "Viktor can now join and participate in group direct messages (multi-person DMs), not just channels and 1:1 conversations. Mention him in any group DM to get started.",
+          "Gomer can now join and participate in group direct messages (multi-person DMs), not just channels and 1:1 conversations. Mention him in any group DM to get started.",
       },
       {
         label: "Custom sender names for scheduled tasks",
         description:
-          'Scheduled tasks can now post messages under a custom display name instead of always appearing as "Viktor."',
+          'Scheduled tasks can now post messages under a custom display name instead of always appearing as "Gomer."',
       },
       {
         label: "Leave channel on request",
         description:
-          "You can now ask Viktor to leave a Slack channel. Both joining and leaving channels go through a confirmation step so nothing happens by accident.",
+          "You can now ask Gomer to leave a Slack channel. Both joining and leaving channels go through a confirmation step so nothing happens by accident.",
       },
     ],
   },
@@ -453,7 +453,7 @@ const entries: Entry[] = [
       {
         label: "Model selection for teams",
         description:
-          "Your team can now choose which AI model Viktor uses. Viktor can also pick the optimal model per scheduled task. Cost comparison badges show how much you save with each option.",
+          "Your team can now choose which AI model Gomer uses. Gomer can also pick the optimal model per scheduled task. Cost comparison badges show how much you save with each option.",
       },
       {
         label: "Detailed scheduled tasks usage",
@@ -466,16 +466,16 @@ const entries: Entry[] = [
     date: "February 18, 2026",
     title: "Account Insights, Claude Sonnet 4-6 & Live Spaces",
     intro:
-      "Ask Viktor about your plan and usage, try the new Claude Sonnet 4-6 model, and get real-time Spaces updates.",
+      "Ask Gomer about your plan and usage, try the new Claude Sonnet 4-6 model, and get real-time Spaces updates.",
     items: [
       {
-        label: "Ask Viktor about your account & billing",
+        label: "Ask Gomer about your account & billing",
         description:
-          "You can now ask Viktor directly about your subscription, usage, active threads, and integration settings. Just ask about your plan or credits and he'll pull the data for you.",
+          "You can now ask Gomer directly about your subscription, usage, active threads, and integration settings. Just ask about your plan or credits and he'll pull the data for you.",
       },
       {
         label: "Claude Sonnet 4-6 now available",
-        description: "New model option added to Viktor.",
+        description: "New model option added to Gomer.",
       },
       {
         label: "Live Spaces updates",
@@ -516,10 +516,10 @@ export default function ChangelogPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Changelog — Viktor"
-        description="What's new across the Viktor platform — releases, improvements, and fixes."
-        ogTitle="Changelog — Viktor"
-        ogDescription="What's new across the Viktor platform."
+        title="Changelog — Gomer"
+        description="What's new across the Gomer platform — releases, improvements, and fixes."
+        ogTitle="Changelog — Gomer"
+        ogDescription="What's new across the Gomer platform."
       />
       {/* Hero */}
       <section className="border-0 py-0! pt-0 pb-12 sm:pb-[5rem]">
@@ -530,7 +530,7 @@ export default function ChangelogPage() {
               <div className="grid gap-8 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-5 mt-16">
                 <div className="flex flex-col items-center gap-3 lg:items-start ">
                   <img
-                    src={viktorSlackAvatar}
+                    src={gomerSlackAvatar}
                     alt=""
                     width={68}
                     height={68}
@@ -542,7 +542,7 @@ export default function ChangelogPage() {
                 <div className="flex flex-col gap-8">
                   <h1 className="font-heading h1 text-primary">Changelog</h1>
                   <p className="max-w-[34.1875rem] body-medium text-primary">
-                    New features, improvements, and fixes shipped to Viktor.
+                    New features, improvements, and fixes shipped to Gomer.
                   </p>
                 </div>
               </div>

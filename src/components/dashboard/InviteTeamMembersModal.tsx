@@ -25,7 +25,7 @@ function EmailChip({ email, onRemove }: { email: string; onRemove: () => void })
         type="button"
         aria-label={`Remove ${email}`}
         onClick={onRemove}
-        className="viktor-focus-ring inline-flex size-4 cursor-pointer items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="gomer-focus-ring inline-flex size-4 cursor-pointer items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <X className="size-3" strokeWidth={1.5} />
       </button>
@@ -151,7 +151,7 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
           type="button"
           aria-label="Close dialog"
           onClick={onClose}
-          className="viktor-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+          className="gomer-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
         >
           <X className="size-4" strokeWidth={1.5} />
         </button>
@@ -163,7 +163,7 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
             </div>
             <div className="text-sm text-muted-foreground">
               Add team members to collaborate on projects and share your workspace benefits. Invites
-              do not change your billing amount in Viktor&apos;s credit-based plans.{" "}
+              do not change your billing amount in Gomer&apos;s credit-based plans.{" "}
               <Link
                 to="/dashboard/billing"
                 target="_blank"
@@ -187,7 +187,7 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
                 </label>
               </div>
               <div
-                className="viktor-focus-ring flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-secondary px-3 py-[5px] text-base outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring"
+                className="gomer-focus-ring flex min-h-10 flex-wrap items-center gap-1.5 rounded-[7px] border border-border bg-secondary px-3 py-[5px] text-base outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring"
                 onClick={() => inputRef.current?.focus()}
               >
                 {emails.map((email) => (
@@ -225,7 +225,7 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
               disabled={!canInvite || submitting}
               onClick={handleInvite}
               data-loading={submitting}
-              className="viktor-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[loading=true]:cursor-wait"
+              className="gomer-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[loading=true]:cursor-wait"
             >
               Invite
             </button>

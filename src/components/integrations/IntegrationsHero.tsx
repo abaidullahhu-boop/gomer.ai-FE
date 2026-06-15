@@ -20,7 +20,7 @@ export function IntegrationsHero() {
 
               <div className="flex w-full flex-col items-center gap-8">
                 <p className="flex max-w-4xl flex-wrap items-center justify-center gap-x-1.5 gap-y-0 font-heading h6 text-balance sm:h5">
-                  <span>Viktor connects to</span>
+                  <span>Gomer connects to</span>
                   <span className="text-primitive-purple-400">3,200+</span>
                   <span>tools and uses them the way you do.</span>
                 </p>

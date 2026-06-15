@@ -3,29 +3,29 @@ import type { BlogPost, BlogPostMeta } from "@/data/blog-posts";
 export const researchPosts: BlogPost[] = [
   {
     slug: "how-we-built-viktor-around-prompt-caching",
-    title: "How We Built Viktor Around Prompt Caching",
+    title: "How We Built Gomer Around Prompt Caching",
     excerpt:
-      "A deep dive into how Viktor's SDK, thread engine, and prompt caching architecture work together to cut inference costs by up to 90% without sacrificing agent quality.",
+      "A deep dive into how Gomer's SDK, thread engine, and prompt caching architecture work together to cut inference costs by up to 90% without sacrificing agent quality.",
     subtitle:
-      "Engineering deep-dive on Viktor's prompt caching architecture — from SDK design to thread engines and real-world cost savings.",
+      "Engineering deep-dive on Gomer's prompt caching architecture — from SDK design to thread engines and real-world cost savings.",
     date: "June 8, 2024",
     author: "Toni Albert",
     keyTakeaways: [
       "Prompt caching shifts cost from repeated context to a one-time cache write — critical for long-running agent threads.",
-      "Viktor's thread engine structures messages so cache breakpoints land on stable prefixes, not volatile tail content.",
+      "Gomer's thread engine structures messages so cache breakpoints land on stable prefixes, not volatile tail content.",
       "The SDK exposes cache-aware composition so skills and tool definitions stay in the cached layer.",
       "Cache hit rates above 80% are achievable when system prompts, tool schemas, and conversation history are ordered correctly.",
       "Cost savings compound: a 10-turn thread with a 50k-token context can drop from dollars to cents per session.",
     ],
     intro: [
-      "When we started building Viktor, we knew agents would run long threads — dozens of tool calls, megabytes of context, conversations that span days. Standard LLM pricing makes that economically impossible at scale.",
-      "Anthropic's prompt caching gave us a path forward. But caching is not automatic: you have to architect your entire request pipeline around where breakpoints land, what stays stable, and what mutates every turn. This post walks through how we did that in Viktor.",
+      "When we started building Gomer, we knew agents would run long threads — dozens of tool calls, megabytes of context, conversations that span days. Standard LLM pricing makes that economically impossible at scale.",
+      "Anthropic's prompt caching gave us a path forward. But caching is not automatic: you have to architect your entire request pipeline around where breakpoints land, what stays stable, and what mutates every turn. This post walks through how we did that in Gomer.",
     ],
     sections: [
       {
         title: "Why prompt caching matters for agents",
         paragraphs: [
-          "A typical Viktor session might include a 15k-token system prompt, 30k tokens of tool definitions, and a growing conversation history. Without caching, every turn re-processes the full context at input-token rates.",
+          "A typical Gomer session might include a 15k-token system prompt, 30k tokens of tool definitions, and a growing conversation history. Without caching, every turn re-processes the full context at input-token rates.",
           "With caching, stable prefixes are stored server-side after the first request. Subsequent turns only pay full price for new tokens — the cached prefix is billed at a fraction of the cost.",
         ],
         bullets: [
@@ -37,7 +37,7 @@ export const researchPosts: BlogPost[] = [
       {
         title: "Thread engine design",
         paragraphs: [
-          "Viktor's thread engine maintains a structured message list with explicit cache control markers. On each turn, the engine assembles the request in a deterministic order: system → tools → stable context → conversation tail.",
+          "Gomer's thread engine maintains a structured message list with explicit cache control markers. On each turn, the engine assembles the request in a deterministic order: system → tools → stable context → conversation tail.",
           "The engine tracks which message blocks are immutable within a thread. When a skill is installed or a tool is added, the engine invalidates only the affected cache layer — not the entire thread history.",
         ],
         codeBlock: `// Simplified cache breakpoint placement
@@ -50,7 +50,7 @@ const request = {
       {
         title: "SDK-level cache awareness",
         paragraphs: [
-          "We exposed cache semantics directly in the Viktor SDK so skill authors do not accidentally bust the cache. Skills declare whether their context is stable (cacheable) or dynamic (per-turn).",
+          "We exposed cache semantics directly in the Gomer SDK so skill authors do not accidentally bust the cache. Skills declare whether their context is stable (cacheable) or dynamic (per-turn).",
           "The SDK validates composition at build time: if a dynamic block would appear before a cache breakpoint, it raises a warning. This caught dozens of cache-busting patterns during internal development.",
         ],
       },
@@ -72,7 +72,7 @@ const request = {
     ],
     faqs: [
       {
-        q: "Does prompt caching work with all models Viktor supports?",
+        q: "Does prompt caching work with all models Gomer supports?",
         a: "Caching is currently optimized for Claude models via Anthropic's API. Other providers have different caching semantics — we abstract the breakpoint logic so new providers can be added without changing skill or thread code.",
       },
       {
@@ -91,7 +91,7 @@ const request = {
     excerpt:
       "Tool selection at scale is not a search problem — it is an architecture problem. We explore context window limits, latency cliffs, and the routing patterns that actually work.",
     subtitle:
-      "Why connecting thousands of integrations to an AI agent breaks naive tool-calling — and how Viktor routes, filters, and scopes tools in production.",
+      "Why connecting thousands of integrations to an AI agent breaks naive tool-calling — and how Gomer routes, filters, and scopes tools in production.",
     date: "March 3, 2024",
     author: "Peter Albert",
     keyTakeaways: [
@@ -102,7 +102,7 @@ const request = {
       "The agent should never see tools it cannot authenticate — auth gates precede tool exposure.",
     ],
     intro: [
-      "Viktor connects to over 3,000 integrations, each with dozens of actions. In theory, that is 100,000+ callable tools. In practice, sending even 1,000 tool definitions to an LLM degrades quality, blows context budgets, and makes the model worse at picking the right action.",
+      "Gomer connects to over 3,000 integrations, each with dozens of actions. In theory, that is 100,000+ callable tools. In practice, sending even 1,000 tool definitions to an LLM degrades quality, blows context budgets, and makes the model worse at picking the right action.",
       "We learned this the hard way in early prototypes. This post documents what breaks and the architecture we built to fix it.",
     ],
     sections: [
@@ -128,7 +128,7 @@ const request = {
       {
         title: "Hierarchical tool routing",
         paragraphs: [
-          "Viktor scopes tools in layers. The workspace defines which integrations are connected and authenticated. Skills declare which integration categories they need. The thread engine activates only the relevant tool subset for the current task.",
+          "Gomer scopes tools in layers. The workspace defines which integrations are connected and authenticated. Skills declare which integration categories they need. The thread engine activates only the relevant tool subset for the current task.",
           "At runtime, the agent sees a curated surface — typically 20–80 tools, not 100,000. When the task scope expands (e.g., user asks to also update the CRM), the engine promotes additional tool namespaces into the active set on the next turn.",
         ],
         subsections: [
@@ -155,7 +155,7 @@ const request = {
     ],
     faqs: [
       {
-        q: "How many tools does Viktor expose per turn?",
+        q: "How many tools does Gomer expose per turn?",
         a: "Typically 20–80, depending on active skills, connected integrations, and task scope. The thread engine dynamically expands the set when the conversation requires new capabilities.",
       },
       {

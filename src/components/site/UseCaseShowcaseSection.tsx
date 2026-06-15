@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import viktorAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const sarahAvatar =
@@ -101,7 +101,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackViktorMessage({
+function SlackGomerMessage({
   time,
   body,
   attachment,
@@ -116,25 +116,25 @@ function SlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
+      data-variant="gomer"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-3 text-left slack-message-viktor"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-3 text-left slack-message-gomer"
     >
-      <div aria-hidden="true" className="slack-viktor-bg-mount">
-        <div className="slack-viktor-layer-glass-stack" />
-        <div className="slack-viktor-layer-inner-depth-soft" />
-        <div className="slack-viktor-layer-inner-glow-overlay" />
-        <div className="slack-viktor-layer-feather-blur" />
-        <div className="slack-viktor-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gomer-bg-mount">
+        <div className="slack-gomer-layer-glass-stack" />
+        <div className="slack-gomer-layer-inner-depth-soft" />
+        <div className="slack-gomer-layer-inner-glow-overlay" />
+        <div className="slack-gomer-layer-feather-blur" />
+        <div className="slack-gomer-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Viktor" loading="lazy" width={36} height={36} className="size-full object-cover" src={viktorAvatar} />
+        <img alt="Gomer" loading="lazy" width={36} height={36} className="size-full object-cover" src={gomerAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Viktor</span>
+              <span>Gomer</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -290,7 +290,7 @@ export function UseCaseShowcaseSection() {
               className="order-1"
               eyebrow="Finance & Ops"
               title="Cash flow forecast before your Monday meeting"
-              description="Viktor pulls actuals from Stripe, invoices from QuickBooks, and payroll from Gusto. You get a board-ready summary in Slack."
+              description="Gomer pulls actuals from Stripe, invoices from QuickBooks, and payroll from Gusto. You get a board-ready summary in Slack."
               tools={
                 <>
                   <ToolIconTile alt="Stripe">
@@ -318,12 +318,12 @@ export function UseCaseShowcaseSection() {
                   reactions={[{ emoji: "⏳", count: 1 }]}
                   body={
                     <>
-                      <SlackMention>@Viktor</SlackMention>
+                      <SlackMention>@Gomer</SlackMention>
                       pull last week&apos;s cash position. Net revenue, outstanding invoices, and payroll due this week. Format it for the leadership meeting.
                     </>
                   }
                 />
-                <SlackViktorMessage
+                <SlackGomerMessage
                   time="7:49 AM"
                   reactions={[
                     { emoji: "❤️", count: 4 },
@@ -352,7 +352,7 @@ export function UseCaseShowcaseSection() {
               className="order-1 lg:order-2"
               eyebrow="Engineering"
               title="Triage overnight alerts without context-switching"
-              description="Viktor monitors Sentry and Linear, groups related issues, and posts a morning summary with suggested priorities."
+              description="Gomer monitors Sentry and Linear, groups related issues, and posts a morning summary with suggested priorities."
               tools={
                 <>
                   <ToolIconTile alt="Linear">
@@ -373,7 +373,7 @@ export function UseCaseShowcaseSection() {
                 title="Morning triage"
                 badge={<CardStatusBadge icon={<AutoSummaryIcon />} label="Auto Summary" />}
               >
-                <SlackViktorMessage
+                <SlackGomerMessage
                   time="8:12 AM"
                   reactions={[
                     { emoji: "❤️", count: 4 },

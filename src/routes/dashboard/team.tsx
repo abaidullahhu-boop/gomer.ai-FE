@@ -78,7 +78,7 @@ function TeamOptionsMenu({
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((value) => !value)}
-        className="viktor-focus-ring inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+        className="gomer-focus-ring inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
       >
         <MoreVertical className="size-4" strokeWidth={1.5} />
       </button>
@@ -139,7 +139,7 @@ export default function DashboardTeam() {
   return (
     <>
       <PageMeta
-        title="Team members — Viktor"
+        title="Team members — Gomer"
         description="Manage your team members, seats, and permissions."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -176,14 +176,14 @@ export default function DashboardTeam() {
                   <div className="flex w-full flex-col gap-4 lg:w-auto lg:flex-row lg:gap-2">
                     <Link
                       to="/dashboard/billing"
-                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
                     >
                       <ExternalLink className="size-4" strokeWidth={1.5} />
                       Manage plan
                     </Link>
                     <button
                       type="button"
-                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                     >
                       <RefreshCw className="size-4" strokeWidth={1.5} />
                       Check Slack members
@@ -191,7 +191,7 @@ export default function DashboardTeam() {
                     <button
                       type="button"
                       onClick={openInviteModal}
-                      className="viktor-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
+                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
                     >
                       <UserPlus className="size-4" strokeWidth={1.5} />
                       Invite members
@@ -230,7 +230,7 @@ export default function DashboardTeam() {
                   aria-checked={slackInviteEnabled}
                   onClick={() => setSlackInviteEnabled((value) => !value)}
                   className={[
-                    "viktor-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+                    "gomer-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
                     slackInviteEnabled ? "border-highlight bg-highlight" : "bg-input",
                   ].join(" ")}
                 >
@@ -245,11 +245,11 @@ export default function DashboardTeam() {
 
               <SettingsCard
                 title="Permissions"
-                description="Slack Connect, guest access, what teammates can do, and who can use Viktor are managed in the Permissions section."
+                description="Slack Connect, guest access, what teammates can do, and who can use Gomer are managed in the Permissions section."
               >
                 <Link
                   to="/dashboard/settings/permissions"
-                  className="viktor-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                  className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                 >
                   Open Permissions
                 </Link>

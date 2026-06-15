@@ -8,7 +8,7 @@ import { billingData } from "@/data/billing";
 export default function DashboardHome() {
   return (
     <>
-      <PageMeta title="Dashboard — Viktor" description="Viktor dashboard" />
+      <PageMeta title="Dashboard — Gomer" description="Gomer dashboard" />
       <div className="mx-auto w-full max-w-5xl px-5 py-8">
         <h1 className="text-3xl font-bold leading-8 text-foreground">Dashboard</h1>
 

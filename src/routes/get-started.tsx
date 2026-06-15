@@ -7,7 +7,7 @@ import { CasaTier3Badge, CcpaBadge, GdprBadge, Soc2Badge } from "@/components/ic
 const testimonials = [
   {
     quote:
-      "Viktor is like Claude, but you can interact with him like with a colleague, not an LLM. He can run projects and scheduled tasks in the cloud, and everybody on the team can interact with it.",
+      "Gomer is like Claude, but you can interact with him like with a colleague, not an LLM. He can run projects and scheduled tasks in the cloud, and everybody on the team can interact with it.",
     name: "Tobias Giesen",
     role: "CEO, Growably",
     image: "/images/testimonials/tobias-giesen.webp",
@@ -20,7 +20,7 @@ const testimonials = [
     image: "/images/testimonials/ben-diamond.webp",
   },
   {
-    quote: "Viktor is like the most capable all-round colleague you can imagine. He just does the work.",
+    quote: "Gomer is like the most capable all-round colleague you can imagine. He just does the work.",
     name: "Sam Kopelman",
     role: "CEO, Givr",
     image: "/images/testimonials/sam-kopelman.webp",
@@ -33,7 +33,7 @@ const testimonials = [
   },
   {
     quote:
-      "Viktor is our eyes, ears, and hands. It's made us realize that we might really never have to hire someone.",
+      "Gomer is our eyes, ears, and hands. It's made us realize that we might really never have to hire someone.",
     name: "Jordan Dikoum",
     role: "Co-Founder, UniTru Inc.",
     image: "/images/testimonials/jordan-dikoum.webp",
@@ -86,14 +86,14 @@ export default function GetStarted() {
   return (
     <div className="flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
       <PageMeta
-        title="Try Viktor for free — $100 credits included"
-        description="Sign up for Viktor with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
+        title="Try Gomer for free — $100 credits included"
+        description="Sign up for Gomer with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
       />
 
       {/* Sign-up panel */}
       <div className="relative flex w-full flex-1 flex-col overflow-hidden lg:shrink-0">
         <div className="absolute left-5 top-5 z-10 text-[#1b182a] md:hidden">
-          <ViktorLogo />
+          <GomerLogo />
         </div>
 
         <div className="flex flex-1 flex-col items-center justify-center">
@@ -101,7 +101,7 @@ export default function GetStarted() {
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-6">
               <h1 className="text-center font-display text-[32px] font-bold leading-[1.25] tracking-[-0.64px] text-foreground">
-                Try Viktor for free.
+                Try Gomer for free.
                 <br />
                 <span>$100 credits included.</span>
               </h1>
@@ -134,7 +134,7 @@ export default function GetStarted() {
               ))}
             </div>
             <p className="text-center text-xs text-foreground/80">
-              By signing up, you agree to the Viktor{" "}
+              By signing up, you agree to the Gomer{" "}
               <a href="/privacy" target="_blank" rel="noreferrer" className="underline">
                 Privacy Policy
               </a>{" "}
@@ -148,14 +148,14 @@ export default function GetStarted() {
       </div>
 
       {/* Testimonial panel */}
-      <div className="viktor-auth-gradient relative hidden flex-1 flex-col overflow-hidden md:flex md:h-auto">
+      <div className="gomer-auth-gradient relative hidden flex-1 flex-col overflow-hidden md:flex md:h-auto">
         <div className="absolute left-5 top-5 z-10 text-[#1b182a]">
-          <ViktorLogo />
+          <GomerLogo />
         </div>
 
         <div className="flex h-full flex-col items-center justify-center gap-5 px-4 py-6 md:gap-6 md:px-10 md:py-0">
           <div className="relative h-[280px] w-full max-w-[448px]">
-            <div className="viktor-glass-card flex h-[280px] flex-col gap-6 rounded-[32px] p-8 text-[#1b182a]">
+            <div className="gomer-glass-card flex h-[280px] flex-col gap-6 rounded-[32px] p-8 text-[#1b182a]">
               <p className="flex-1 text-[16px] leading-6">{testimonial.quote}</p>
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -212,14 +212,14 @@ export default function GetStarted() {
   );
 }
 
-function ViktorLogo() {
+function GomerLogo() {
   return (
     <img
       src="/assets/brand/logos/viktor-logo-soft-black.svg"
-      alt="Viktor"
-      className="block h-6 w-auto"
-      width={81}
-      height={24}
+      alt="Gomer"
+      className="block h-7 w-auto"
+      width={112}
+      height={28}
     />
   );
 }
