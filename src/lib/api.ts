@@ -1,5 +1,5 @@
 /**
- * Minimal authenticated client for the hektor.ai backend.
+ * Minimal authenticated client for the gomer.ai backend.
  *
  * Attaches the stored access token as a Bearer header and transparently
  * retries once after refreshing an expired token. A failed refresh clears

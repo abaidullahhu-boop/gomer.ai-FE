@@ -1,4 +1,4 @@
-const ASSET_BASE = "https://viktor.com";
+const ASSET_BASE = "https://gomer.com";
 
 export function investorAsset(path: string) {
   return `${ASSET_BASE}${path}`;

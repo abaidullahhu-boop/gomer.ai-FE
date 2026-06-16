@@ -8,7 +8,7 @@ import { UseCasesSection } from "@/components/site/UseCasesSection";
 import slackLogo from "@/assets/images/slack.svg";
 import zapierLogo from "@/assets/images/zapier.svg";
 import microsoftLogo from "@/assets/images/microsoft-teams.svg";
-import gomerAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerAvatar from "@/assets/images/gomer-slack-avatar (1).svg";
 import {
   WorkflowAutomation, ReportsAnalytics, AppBuilder, AskAI,
 } from "@/components/site/HomeSections";

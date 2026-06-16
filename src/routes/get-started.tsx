@@ -215,7 +215,7 @@ export default function GetStarted() {
 function GomerLogo() {
   return (
     <img
-      src="/assets/brand/logos/viktor-logo-soft-black.svg"
+      src="/assets/brand/logos/gomer-logo-soft-black.svg"
       alt="Gomer"
       className="block h-7 w-auto"
       width={112}

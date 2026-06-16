@@ -3,7 +3,7 @@ import { CalendarCheck2 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import gomerSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerSlackAvatar from "@/assets/images/gomer-slack-avatar (1).svg";
 
 type ChangelogItem = {
   label: string;

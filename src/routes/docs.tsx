@@ -84,12 +84,12 @@ export default function DocsPage() {
                     <li>
                       Go to{" "}
                       <a
-                        href="https://app.viktor.com/signup"
+                        href="https://app.gomer.com/signup"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-accent-1 underline underline-offset-4"
                       >
-                        app.viktor.com/signup
+                        app.gomer.com/signup
                       </a>{" "}
                       and create your account.
                     </li>

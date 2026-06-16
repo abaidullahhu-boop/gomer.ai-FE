@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import claudeAppIcon from "@/assets/images/claude-app-icon.png";
-import gomerMarketplaceAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerMarketplaceAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
-import gomerAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerAvatar from "@/assets/images/gomer-slack-avatar (1).svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const lisaAvatar =

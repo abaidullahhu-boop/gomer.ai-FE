@@ -91,7 +91,7 @@ export function WhatsNewCarousel() {
 
       <div className="mt-4">
         <a
-          href="https://viktor.com/changelog"
+          href="https://gomer.com/changelog"
           target="_blank"
           rel="noopener noreferrer"
           className="flex min-w-0 flex-col gap-4 rounded-xl border bg-card transition-colors hover:border-muted-foreground/30 sm:flex-row sm:items-center sm:gap-6"

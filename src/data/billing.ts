@@ -26,7 +26,7 @@ export const billingData = {
     reward: "39.4k",
     progressPercent: 100,
   },
-  inviteLink: "https://app.viktor.com/signin?ref=eY9xAiDrEahAt3NDC5CNLH",
+  inviteLink: "https://app.gomer.com/signin?ref=eY9xAiDrEahAt3NDC5CNLH",
   referrals: {
     totalEarned: "0 credits",
     rewards: [] as Array<{

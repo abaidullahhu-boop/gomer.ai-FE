@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const sarahAvatar =

@@ -23,7 +23,7 @@ import riskTabsCredentialsVisual from "@/assets/images/security/risk-tabs-creden
 import riskTabsApprovalsVisual from "@/assets/images/security/risk-tabs-approvals-visual.webp";
 import riskTabsNoTrainingVisual from "@/assets/images/security/risk-tabs-no-training-visual.webp";
 import riskTabsIsolationVisual from "@/assets/images/security/risk-tabs-isolation-visual.webp";
-import gomerSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerSlackAvatar from "@/assets/images/gomer-slack-avatar (1).svg";
 
 export default function SecurityPage() {
   return (

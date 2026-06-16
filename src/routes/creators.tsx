@@ -18,7 +18,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { FAQSection, type FAQItem } from "@/components/site/FAQSection";
 import { CoinIcon, CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
-import gomerSlackAvatar from "@/assets/images/viktor-slack-avatar (1).svg";
+import gomerSlackAvatar from "@/assets/images/gomer-slack-avatar (1).svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 
 function ComparisonTabActiveBackground({ className }: { className?: string }) {

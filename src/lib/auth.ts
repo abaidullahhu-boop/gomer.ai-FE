@@ -1,7 +1,7 @@
 /**
  * Auth helpers for the Slack OAuth flow.
  *
- * The backend (hektor.ai) owns the OAuth exchange:
+ * The backend (gomer.ai) owns the OAuth exchange:
  *   1. We send the browser to `${API_URL}/auth/slack/install`.
  *   2. Slack bounces back to the backend callback, which provisions the
  *      user/workspace and redirects here to `/auth/callback` with the
@@ -10,10 +10,10 @@
  * Microsoft Teams login is planned but not yet implemented on the backend.
  */
 
-const ACCESS_TOKEN_KEY = "viktor_access_token";
-const REFRESH_TOKEN_KEY = "viktor_refresh_token";
+const ACCESS_TOKEN_KEY = "gomer_access_token";
+const REFRESH_TOKEN_KEY = "gomer_refresh_token";
 
-/** Base URL of the hektor.ai backend. */
+/** Base URL of the gomer.ai backend. */
 export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
 /** Kick off the Slack OAuth flow by handing the browser to the backend. */
