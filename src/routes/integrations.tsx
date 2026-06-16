@@ -11,7 +11,7 @@ import { IntegrationsUseCasesSection } from "@/components/integrations/Integrati
 import { IntegrationsControlSection } from "@/components/integrations/IntegrationsControlSection";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import { Search, X } from "lucide-react";
 import { SlackReactions } from "@/components/site/SlackReactions";
 import {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
-import gomerIcon from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerIcon from "@/assets/images/gomer-marketplace-avatar.svg";
 
 const HERO_ICON_CLASS =
   "h-auto max-h-20 w-auto max-w-[5rem] object-contain sm:max-h-32 sm:max-w-[7rem]";

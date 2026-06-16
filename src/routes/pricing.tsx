@@ -10,7 +10,7 @@ import { EnterprisePriceCard } from "@/components/site/EnterprisePriceCard";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { PricingHeroPoints } from "@/components/site/HeroBadges";
 import { CreditsPowerHeadline } from "@/components/site/CreditsPowerHeadline";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import fullProjectsImageTabs from "@/assets/images/full-projects-image-tabs.avif";
 import { SlackReactions } from "@/components/site/SlackReactions";
 

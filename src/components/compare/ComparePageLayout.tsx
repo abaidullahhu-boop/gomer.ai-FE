@@ -10,7 +10,7 @@ import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { SlackPurpleCard, SlackTeammateCard } from "@/components/site/SlackChangelogCards";
 import compareVisual3 from "@/assets/images/compare-visual-3.avif";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import type { ComparePageConfig } from "@/components/compare/types";
 
 const glassBorderLayers = (

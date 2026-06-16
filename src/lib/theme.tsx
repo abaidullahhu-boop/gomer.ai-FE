@@ -17,7 +17,7 @@ export const themeLabels: Record<Theme, string> = {
   dark: "Dark",
 };
 
-const STORAGE_KEY = "viktor-theme";
+const STORAGE_KEY = "gomer-theme";
 
 function getStoredTheme(): Theme {
   const stored = localStorage.getItem(STORAGE_KEY);

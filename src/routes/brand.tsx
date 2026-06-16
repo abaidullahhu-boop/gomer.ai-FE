@@ -111,7 +111,7 @@ function SolidColorSwatch({
 }
 
 const mockupGeneratorUrl =
-  "https://slack-mockup-f361ab3c.viktor.space/?s=N4IgxgFghgdjCmAbEAuUAXAngB3q80cSIANCDFALZ4ogDOUi8dIAvmdXQwObOoDaoAJYATfJgCMlAE4AWaZVIgoANyjoo0-AHpV6zXW24A9tia61AOmwxuSitXwBBNUqF0n2bKgBmjOvBk6EKcGpTetACcKBKyAAROALJKAEbGIpj4AAIAakIA1ujG0nF0AK6UlJpCAF7wcZjM6PDSIlCYAOR0cQDEDEzd6BDS8FAicbDjPohQ3BMwmENCtnEAknEI8ONFcT7GiIjGAO5xZdhxxjBKI1BgwZcsKIIg8JTGAFZC%2BIDPxEpgxmUYOhUBJWABdMjqDSQahAx78MHsYRiWgAJnyADZpJEwABmJR6DRaWgWfTSQwqAC0KiE%2B3g6GstnsVBoIDyhWKbg8XlQ6GkZUCIGCoSoERA0QkAFYEskyGkMvhcXERKNEN0RO4wGUuFtLHEACpHYwXGBxPm3fJxQAoBAkwNQ4mBDgFugAxaSidokOIAIUOxkopSE3AQIj1AHkEBt4FtupgASg4gARfQAZUwMDAcSO8CBgaYuagPmaJSG9RVbz16xE0kLzXGUF2%2B0OR0pZziyziAAkyikU9hjOgvUdYOg4vadgEYOMhOgAPzXUZ3WkweGgV4fL60QAm5IB4P7%2BAKBqFkSJeb0%2B%2BEAvBuAAR394DgTFwZD0NCILD0PDERCQCkLdxpAeUVAbARgCe8QGwKA6GaZAyAgkQNSZFBJQxMg-ygZZeX5eB2HAWA1EeUAa3ufAQP7FchBUPAyGMSjpGmY4nAzCBOVoIpvBw0tHFoRAgwgYFWCAA";
+  "https://slack-mockup-f361ab3c.gomer.space/?s=N4IgxgFghgdjCmAbEAuUAXAngB3q80cSIANCDFALZ4ogDOUi8dIAvmdXQwObOoDaoAJYATfJgCMlAE4AWaZVIgoANyjoo0-AHpV6zXW24A9tia61AOmwxuSitXwBBNUqF0n2bKgBmjOvBk6EKcGpTetACcKBKyAAROALJKAEbGIpj4AAIAakIA1ujG0nF0AK6UlJpCAF7wcZjM6PDSIlCYAOR0cQDEDEzd6BDS8FAicbDjPohQ3BMwmENCtnEAknEI8ONFcT7GiIjGAO5xZdhxxjBKI1BgwZcsKIIg8JTGAFZC%2BIDPxEpgxmUYOhUBJWABdMjqDSQahAx78MHsYRiWgAJnyADZpJEwABmJR6DRaWgWfTSQwqAC0KiE%2B3g6GstnsVBoIDyhWKbg8XlQ6GkZUCIGCoSoERA0QkAFYEskyGkMvhcXERKNEN0RO4wGUuFtLHEACpHYwXGBxPm3fJxQAoBAkwNQ4mBDgFugAxaSidokOIAIUOxkopSE3AQIj1AHkEBt4FtupgASg4gARfQAZUwMDAcSO8CBgaYuagPmaJSG9RVbz16xE0kLzXGUF2%2B0OR0pZziyziAAkyikU9hjOgvUdYOg4vadgEYOMhOgAPzXUZ3WkweGgV4fL60QAm5IB4P7%2BAKBqFkSJeb0%2B%2BEAvBuAAR394DgTFwZD0NCILD0PDERCQCkLdxpAeUVAbARgCe8QGwKA6GaZAyAgkQNSZFBJQxMg-ygZZeX5eB2HAWA1EeUAa3ufAQP7FchBUPAyGMSjpGmY4nAzCBOVoIpvBw0tHFoRAgwgYFWCAA";
 
 const mockupTemplates = [
   { label: "Pastel", image: mockupGenerator1 },
@@ -181,25 +181,25 @@ function LogoShowcaseCard({
 const primaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
-    logoSrc: "/assets/brand/logos/viktor-logo-pure-white.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-pure-white.svg",
     logoAlt: "Gomer wordmark (pure white) on brand gradient",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/viktor-logo-soft-black.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-soft-black.svg",
     logoAlt: "Gomer wordmark on light blurred background",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/viktor-logo-soft-black.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-soft-black.svg",
     logoAlt: "Gomer wordmark (soft black) on white background",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/viktor-logo-pure-white.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-pure-white.svg",
     logoAlt: "Gomer wordmark (pure white) on dark background",
     background: "dark",
   },
@@ -248,7 +248,7 @@ function AvatarShowcaseCard({
           }
           className="size-40 object-contain"
           loading="lazy"
-          src="/assets/brand/logos/viktor-avatar-color.svg"
+          src="/assets/brand/logos/gomer-avatar-color.svg"
         />
       </div>
     </div>
@@ -565,28 +565,28 @@ function DosDontsDontColumn({
 const secondaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
-    logoSrc: "/assets/brand/logos/viktor-logo-secondary-pure-white.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-secondary-pure-white.svg",
     logoAlt: "Gomer secondary lockup (pure white) on brand gradient",
     logoMaxWidth: "24rem",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/viktor-logo-secondary-soft-black.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-secondary-soft-black.svg",
     logoAlt: "Gomer secondary lockup on soft blurred background",
     logoMaxWidth: "24rem",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/viktor-logo-secondary-soft-black.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-secondary-soft-black.svg",
     logoAlt: "Gomer secondary lockup (soft black) on white background",
     logoMaxWidth: "24rem",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/viktor-logo-secondary-pure-white.svg",
+    logoSrc: "/assets/brand/logos/gomer-logo-secondary-pure-white.svg",
     logoAlt: "Gomer secondary lockup (pure white) on dark background",
     logoMaxWidth: "24rem",
     background: "dark",
@@ -629,7 +629,7 @@ export default function BrandPage() {
               <div className="w-full shrink-0 lg:w-auto">
                 <a
                   className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/viktor-logo-pack.zip"
+                  href="/assets/downloads/brand/gomer-logo-pack.zip"
                 >
                   Download all logos
                 </a>
@@ -697,7 +697,7 @@ export default function BrandPage() {
               <div className="w-full shrink-0 lg:w-auto">
                 <a
                   className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/viktor-avatar-pack.zip"
+                  href="/assets/downloads/brand/gomer-avatar-pack.zip"
                 >
                   Download avatar (PNG)
                 </a>

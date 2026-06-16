@@ -31,7 +31,7 @@ export default function SupportPage() {
     <div className="support-page relative min-h-screen bg-cream text-stone-900 selection:bg-cobalt selection:text-cream">
       <PageMeta
         title="Support — Gomer"
-        description="Need help with the Gomer app? Contact our support team at support@getviktor.com."
+        description="Need help with the Gomer app? Contact our support team at support@getgomer.com."
         ogTitle="Support — Gomer"
         ogDescription="Need help with the Gomer app? We're here to assist."
       />
@@ -82,10 +82,10 @@ export default function SupportPage() {
               <p className="mb-6 text-lg text-stone-700">
                 Email us at:{" "}
                 <a
-                  href="mailto:support@getviktor.com"
+                  href="mailto:support@getgomer.com"
                   className="font-semibold text-cobalt hover:underline"
                 >
-                  support@getviktor.com
+                  support@getgomer.com
                 </a>
               </p>
               <p className="mb-4 text-stone-600">Please include:</p>

@@ -2,7 +2,7 @@ import type { BlogPost, BlogPostMeta } from "@/data/blog-posts";
 
 export const researchPosts: BlogPost[] = [
   {
-    slug: "how-we-built-viktor-around-prompt-caching",
+    slug: "how-we-built-gomer-around-prompt-caching",
     title: "How We Built Gomer Around Prompt Caching",
     excerpt:
       "A deep dive into how Gomer's SDK, thread engine, and prompt caching architecture work together to cut inference costs by up to 90% without sacrificing agent quality.",

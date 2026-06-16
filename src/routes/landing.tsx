@@ -15,7 +15,7 @@ import { AboutInvestorsSection } from "@/components/landing/AboutInvestorsSectio
 import { Footer } from "@/components/site/Footer";
 
 const tokens = `
-.viktor-scope {
+.gomer-scope {
   --vk-beige: #faf5f1;
   --vk-white: #fff;
   --vk-dark: #1a182b;
@@ -39,7 +39,7 @@ const tokens = `
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
 }
-.viktor-scope * { box-sizing: border-box; }
+.gomer-scope * { box-sizing: border-box; }
 .vk-container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
 .vk-hero { background: var(--vk-hero-surface); padding: 7rem 0 5rem; text-align: center; }
 .vk-eyebrow {
@@ -193,7 +193,7 @@ function VideoPlayIcon() {
 
 export default function LandingPage() {
   return (
-    <div className="viktor-scope">
+    <div className="gomer-scope">
       <PageMeta
         title="Gomer — The AI employee for everyone else"
         description="A focused AI coworker that connects to your tools and does the work — built for modern teams."
@@ -342,7 +342,7 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <a
-                  href="https://jobs.ashbyhq.com/viktor"
+                  href="https://jobs.ashbyhq.com/gomer"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex h-14 min-h-14 shrink-0 items-center justify-center rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-[#292737] transition-all hover:bg-white/95 active:translate-y-px"

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const mayaAvatar =

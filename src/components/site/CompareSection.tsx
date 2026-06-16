@@ -3,7 +3,7 @@ import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
-import gomerBrandDark from "@/assets/images/viktor-brand-dark.svg";
+import gomerBrandDark from "@/assets/images/gomer-brand-dark.svg";
 import zapierIcon from "@/assets/images/zapier.svg";
 
 type TabIconProps = { className?: string };

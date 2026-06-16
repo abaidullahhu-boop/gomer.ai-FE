@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
 import { startSlackLogin } from "@/lib/auth";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
 const authButtonClass =
@@ -72,7 +72,7 @@ export default function SignIn() {
 function GomerLogo() {
   return (
     <img
-      src="/assets/brand/logos/viktor-logo-soft-black.svg"
+      src="/assets/brand/logos/gomer-logo-soft-black.svg"
       alt="Gomer"
       className="block h-7 w-auto"
       width={112}

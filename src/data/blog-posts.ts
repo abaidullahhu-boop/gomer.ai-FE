@@ -191,7 +191,7 @@ post it for me to review before it goes out.`,
     ],
   },
   {
-    slug: "build-engineering-apps-claude-code-viktor-sdk",
+    slug: "build-engineering-apps-claude-code-gomer-sdk",
     title: "Build engineering apps with Claude Code + Gomer SDK, and share them safely on the Gomer platform",
     excerpt:
       "Learn how to build a real engineering app with Claude Code and the Gomer SDK, from setup and development to debugging and visualization.",
@@ -218,7 +218,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("Claude Code + Gomer SDK"),
   },
   {
-    slug: "4-engineering-workflows-automate-ai-viktor",
+    slug: "4-engineering-workflows-automate-ai-gomer",
     title: "4 Engineering workflows you can easily automate with AI in Gomer",
     excerpt:
       "Discover 4 practical ways engineers can use AI inside Gomer apps, from extracting borehole data and reading PDFs to querying IFC models.",
@@ -282,7 +282,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("production AI automation"),
   },
   {
-    slug: "whats-new-viktor-may-2026",
+    slug: "whats-new-gomer-may-2026",
     title: "What's new in Gomer (May 2026)",
     excerpt:
       "Gomer's May 2026 updates make it easier to build, manage, and collaborate on engineering apps. From new App Builder capabilities to smarter app management.",
@@ -369,7 +369,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("structural Python libraries"),
   },
   {
-    slug: "infraspace-viktor-infrastructure-planning",
+    slug: "infraspace-gomer-infrastructure-planning",
     title: "How InfraSpace and Gomer improve early-stage infrastructure planning with AI",
     excerpt:
       "Combining route optimization with engineering analysis for roads, transmission lines, and heavy transport projects.",
@@ -499,7 +499,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("AI coworkers for engineering"),
   },
   {
-    slug: "vibe-coding-viktor-tutorial",
+    slug: "vibe-coding-gomer-tutorial",
     title: "Vibe coding in Gomer: a hands-on tutorial",
     excerpt:
       "A new way to prototype engineering tools — describe what you want, iterate with AI, and ship in hours not weeks.",
@@ -578,7 +578,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("civil report automation"),
   },
   {
-    slug: "visualizing-3d-models-viktor-app",
+    slug: "visualizing-3d-models-gomer-app",
     title: "Visualizing 3D models in your Gomer app",
     excerpt:
       "A walk-through of Gomer's 3D viewer and how to integrate it with parametric models.",
@@ -604,7 +604,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("3D visualization"),
   },
   {
-    slug: "engineers-guide-api-integrations-viktor",
+    slug: "engineers-guide-api-integrations-gomer",
     title: "The Engineer's Guide to API integrations in Gomer",
     excerpt:
       "Connect Gomer apps to your favorite engineering tools and external services with minimal glue code.",
@@ -630,7 +630,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("API integrations"),
   },
   {
-    slug: "deploy-first-viktor-app-production",
+    slug: "deploy-first-gomer-app-production",
     title: "How to deploy your first Gomer app to production",
     excerpt:
       "A step-by-step guide from local development to a fully managed deployment with versioning and rollback.",
@@ -708,7 +708,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("spreadsheet migration"),
   },
   {
-    slug: "working-ifc-bim-data-viktor",
+    slug: "working-ifc-bim-data-gomer",
     title: "Working with IFC and BIM data in Gomer",
     excerpt:
       "Open, parse, and manipulate BIM models with Gomer's BIM toolkit.",
@@ -734,7 +734,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("IFC and BIM"),
   },
   {
-    slug: "digital-twin-viktor-azure",
+    slug: "digital-twin-gomer-azure",
     title: "Building a digital twin with Gomer and Azure",
     excerpt:
       "Combine sensor data with parametric models for true real-time digital twins.",
@@ -760,7 +760,7 @@ post it for me to review before it goes out.`,
     faqs: faqs("digital twins"),
   },
   {
-    slug: "whats-new-viktor-february-2026",
+    slug: "whats-new-gomer-february-2026",
     title: "What's new in Gomer (February 2026)",
     excerpt:
       "New views, better collaboration, and faster apps — here's a roundup of February's releases.",

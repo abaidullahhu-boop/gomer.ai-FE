@@ -8,7 +8,7 @@ import {
 } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Megaphone, ShoppingBag, Sun } from "lucide-react";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
@@ -304,7 +304,7 @@ function StarterSlackUserMessage({
   );
 }
 
-function StarterSlackViktorMessage({
+function StarterSlackGomerMessage({
   time,
   body,
   reactions,
@@ -315,7 +315,7 @@ function StarterSlackViktorMessage({
 }) {
   return (
     <div
-      data-variant="viktor"
+      data-variant="gomer"
       data-highlighted="true"
       className="relative flex w-full text-left isolate overflow-hidden slack-message-gomer gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
     >
@@ -434,7 +434,7 @@ function GlassChatCard({
             body={user.body}
             reactions={user.reactions}
           />
-          <StarterSlackViktorMessage time={gomer.time} body={gomer.body} reactions={gomer.reactions} />
+          <StarterSlackGomerMessage time={gomer.time} body={gomer.body} reactions={gomer.reactions} />
         </div>
       </div>
     </div>

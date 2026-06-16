@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import gomerAvatar from "@/assets/images/viktor-marketplace-avatar.svg";
+import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const lisaAvatar =
