@@ -308,7 +308,7 @@ export default function TermsPage() {
                 Legal Department
               </p>
               <p>
-                <a href="mailto:legal@gomer.app">legal@gomer.app</a>
+                <a href="mailto:legal@gomer.com">legal@gomer.com</a>
               </p>
             </div>
           </Section>
