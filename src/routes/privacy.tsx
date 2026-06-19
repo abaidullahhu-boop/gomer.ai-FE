@@ -286,7 +286,7 @@ export default function PrivacyPage() {
                 Privacy Team
               </p>
               <p>
-                <a href="mailto:privacy@gomer.app">privacy@gomer.app</a>
+                <a href="mailto:privacy@gomer.com">privacy@gomer.com</a>
               </p>
             </div>
           </Section>

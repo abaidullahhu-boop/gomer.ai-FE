@@ -31,7 +31,7 @@ export default function SupportPage() {
     <div className="support-page relative min-h-screen bg-cream text-stone-900 selection:bg-cobalt selection:text-cream">
       <PageMeta
         title="Support — Gomer"
-        description="Need help with the Gomer app? Contact our support team at support@getgomer.com."
+        description="Need help with the Gomer app? Contact our support team at support@gomer.com."
         ogTitle="Support — Gomer"
         ogDescription="Need help with the Gomer app? We're here to assist."
       />
