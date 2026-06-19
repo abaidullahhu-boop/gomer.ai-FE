@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, RefreshCw, Upload } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
-import { teamData } from "@/data/team";
+import { useSession } from "@/lib/session";
 
 function TeamAvatarLarge() {
   return (
@@ -16,8 +16,10 @@ function TeamAvatarLarge() {
 }
 
 export default function DashboardTeamEdit() {
-  const [teamName, setTeamName] = useState<string>(teamData.team.name);
-  const [savedName, setSavedName] = useState<string>(teamData.team.name);
+  const { currentWorkspace } = useSession();
+  const initialName = currentWorkspace?.name ?? "";
+  const [teamName, setTeamName] = useState<string>(initialName);
+  const [savedName, setSavedName] = useState<string>(initialName);
 
   const hasChanges = teamName !== savedName;
 

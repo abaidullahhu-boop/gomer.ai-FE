@@ -1,9 +1,47 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { ExternalLink, MoreVertical, Pencil, RefreshCw, UserPlus } from "lucide-react";
 import type { DashboardOutletContext } from "@/components/dashboard/DashboardLayout";
 import { PageMeta } from "@/components/PageMeta";
-import { teamData } from "@/data/team";
+import { useSession } from "@/lib/session";
+import { ApiError, fetchTeamMembers, updateMemberRole, type TeamMember } from "@/lib/api";
+
+const SLACK_INVITE_DESCRIPTION =
+  "Allow Gomer to invite Slack workspace members to join your team via DM.";
+
+function MemberRoleControl({
+  member,
+  canManage,
+  saving,
+  onChange,
+}: {
+  member: TeamMember;
+  canManage: boolean;
+  saving: boolean;
+  onChange: (role: "admin" | "member") => void;
+}) {
+  // The current user can't change their own role here (mirrors Slack-style admin UIs).
+  if (!canManage || member.isCurrentUser) {
+    return (
+      <span className="inline-flex min-h-9 items-center px-3 text-sm capitalize text-muted-foreground">
+        {member.role}
+      </span>
+    );
+  }
+
+  return (
+    <select
+      aria-label={`Role for ${member.name}`}
+      value={member.role}
+      disabled={saving}
+      onChange={(event) => onChange(event.target.value as "admin" | "member")}
+      className="gomer-focus-ring min-h-9 cursor-pointer rounded-md border border-border bg-background px-3 py-1.5 text-sm capitalize text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <option value="member">Member</option>
+      <option value="admin">Admin</option>
+    </select>
+  );
+}
 
 function TeamAvatar() {
   return (
@@ -132,14 +170,68 @@ function SettingsCard({
 export default function DashboardTeam() {
   const navigate = useNavigate();
   const { openInviteModal } = useOutletContext<DashboardOutletContext>();
-  const [slackInviteEnabled, setSlackInviteEnabled] = useState<boolean>(
-    teamData.botSettings.slackInviteEnabled,
+  const { user, currentWorkspace } = useSession();
+  const [activeTab, setActiveTab] = useState<"members" | "settings">("members");
+  const [slackInviteEnabled, setSlackInviteEnabled] = useState<boolean>(true);
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [savingId, setSavingId] = useState<string | null>(null);
+
+  const isAdmin = user?.role === "admin";
+  const teamName = currentWorkspace?.name ?? "Your Team";
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    fetchTeamMembers()
+      .then((data) => {
+        if (active) {
+          setMembers(data);
+          setError(null);
+        }
+      })
+      .catch((err) => {
+        if (active) {
+          setError(err instanceof ApiError ? err.message : "Failed to load team members");
+        }
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const handleRoleChange = useCallback(
+    async (memberId: string, role: "admin" | "member") => {
+      const previous = members;
+      setSavingId(memberId);
+      setError(null);
+      // Optimistically reflect the change, then reconcile with the server response.
+      setMembers((current) =>
+        current.map((member) => (member.id === memberId ? { ...member, role } : member)),
+      );
+      try {
+        const updated = await updateMemberRole(memberId, role);
+        setMembers((current) =>
+          current.map((member) => (member.id === memberId ? updated : member)),
+        );
+      } catch (err) {
+        setMembers(previous);
+        setError(err instanceof ApiError ? err.message : "Failed to update role");
+      } finally {
+        setSavingId(null);
+      }
+    },
+    [members],
   );
 
   return (
     <>
       <PageMeta
-        title="Team members — Gomer"
+        title="Team — Gomer"
         description="Manage your team members, seats, and permissions."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -149,111 +241,156 @@ export default function DashboardTeam() {
         >
           <div className="mx-auto w-full max-w-[1000px]">
             <div className="mb-6 flex items-center justify-between gap-4">
-              <div className="flex min-w-0 items-center gap-4">
-                <h1 className="text-3xl font-bold leading-8 text-foreground">Team members</h1>
-              </div>
+              <h1 className="text-3xl font-bold leading-8 text-foreground">Team</h1>
               <TeamOptionsMenu
                 onEditTeamInfo={() => navigate("/dashboard/team/edit")}
                 onInviteMembers={openInviteModal}
               />
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="flex w-full flex-col gap-4">
-                <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="flex items-center gap-4">
-                    <TeamAvatar />
-                    <div className="flex flex-col items-start justify-start">
-                      <h2 className="text-xl font-medium leading-normal text-foreground">
-                        {teamData.team.name}
-                      </h2>
-                      <p className="text-xs leading-normal text-muted-foreground">
-                        {teamData.team.seatsUsed} seats used
-                      </p>
-                    </div>
+            <div className="flex flex-col gap-6">
+              <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-center gap-4">
+                  <TeamAvatar />
+                  <div className="flex flex-col items-start justify-start">
+                    <h2 className="text-xl font-medium leading-normal text-foreground">
+                      {teamName}
+                    </h2>
+                    <p className="text-xs leading-normal text-muted-foreground">
+                      {members.length} {members.length === 1 ? "seat" : "seats"} used
+                    </p>
                   </div>
+                </div>
 
-                  <div className="flex w-full flex-col gap-4 lg:w-auto lg:flex-row lg:gap-2">
-                    <Link
-                      to="/dashboard/billing"
-                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
-                    >
-                      <ExternalLink className="size-4" strokeWidth={1.5} />
-                      Manage plan
-                    </Link>
-                    <button
-                      type="button"
-                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
-                    >
-                      <RefreshCw className="size-4" strokeWidth={1.5} />
-                      Check Slack members
-                    </button>
-                    <button
-                      type="button"
-                      onClick={openInviteModal}
-                      className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
-                    >
-                      <UserPlus className="size-4" strokeWidth={1.5} />
-                      Invite members
-                    </button>
-                  </div>
+                <div className="flex w-full flex-col gap-4 lg:w-auto lg:flex-row lg:gap-2">
+                  <Link
+                    to="/dashboard/billing"
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                  >
+                    <ExternalLink className="size-4" strokeWidth={1.5} />
+                    Manage plan
+                  </Link>
+                  <button
+                    type="button"
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                  >
+                    <RefreshCw className="size-4" strokeWidth={1.5} />
+                    Check Slack members
+                  </button>
+                  <button
+                    type="button"
+                    onClick={openInviteModal}
+                    className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                  >
+                    <UserPlus className="size-4" strokeWidth={1.5} />
+                    Invite members
+                  </button>
                 </div>
               </div>
 
-              <div className="flex flex-col">
-                <p className="mt-2 text-xs leading-tight text-muted-foreground/80">Team members</p>
-                <div>
-                  {teamData.members.map((member) => (
-                    <div
-                      key={member.id}
-                      className="flex h-16 w-full items-center justify-start gap-3"
-                    >
-                      <MemberAvatar name={member.name} avatar={member.avatar} />
-                      <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-0.5">
-                        <p className="w-full truncate text-[15px] font-medium leading-[1.3] text-foreground">
-                          {member.name}
-                          {member.isCurrentUser ? <span> (You)</span> : null}
-                        </p>
-                        <p className="w-full truncate text-xs leading-normal text-sidebar-foreground">
-                          {member.email}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <SettingsCard title="Bot settings" description={teamData.botSettings.description}>
+              <div className="flex items-center gap-1 border-b border-border">
                 <button
                   type="button"
-                  role="switch"
-                  aria-checked={slackInviteEnabled}
-                  onClick={() => setSlackInviteEnabled((value) => !value)}
+                  onClick={() => setActiveTab("members")}
                   className={[
-                    "gomer-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
-                    slackInviteEnabled ? "border-highlight bg-highlight" : "bg-input",
+                    "gomer-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
+                    activeTab === "members"
+                      ? "border-foreground text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground",
                   ].join(" ")}
                 >
-                  <span
-                    className={[
-                      "size-4 rounded-full bg-muted-foreground transition-all duration-150",
-                      slackInviteEnabled ? "translate-x-4 bg-primary-foreground" : "",
-                    ].join(" ")}
-                  />
+                  Members
+                  <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-xs font-medium text-muted-foreground">
+                    {members.length}
+                  </span>
                 </button>
-              </SettingsCard>
-
-              <SettingsCard
-                title="Permissions"
-                description="Slack Connect, guest access, what teammates can do, and who can use Gomer are managed in the Permissions section."
-              >
-                <Link
-                  to="/dashboard/settings/permissions"
-                  className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("settings")}
+                  className={[
+                    "gomer-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
+                    activeTab === "settings"
+                      ? "border-foreground text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground",
+                  ].join(" ")}
                 >
-                  Open Permissions
-                </Link>
-              </SettingsCard>
+                  Team settings
+                </button>
+              </div>
+
+              {activeTab === "members" ? (
+                <div className="flex flex-col">
+                  <p className="text-xs leading-tight text-muted-foreground/80">Team members</p>
+                  {error ? (
+                    <p className="mt-2 text-sm text-destructive" role="alert">
+                      {error}
+                    </p>
+                  ) : null}
+                  <div>
+                    {loading ? (
+                      <p className="py-6 text-sm text-muted-foreground">Loading team members…</p>
+                    ) : (
+                      members.map((member) => (
+                        <div
+                          key={member.id}
+                          className="flex h-16 w-full items-center justify-start gap-3"
+                        >
+                          <MemberAvatar name={member.name} avatar={member.avatarUrl ?? ""} />
+                          <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-0.5">
+                            <p className="w-full truncate text-[15px] font-medium leading-[1.3] text-foreground">
+                              {member.name}
+                              {member.isCurrentUser ? <span> (You)</span> : null}
+                            </p>
+                            <p className="w-full truncate text-xs leading-normal text-sidebar-foreground">
+                              {member.email}
+                            </p>
+                          </div>
+                          <MemberRoleControl
+                            member={member}
+                            canManage={isAdmin}
+                            saving={savingId === member.id}
+                            onChange={(role) => handleRoleChange(member.id, role)}
+                          />
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <SettingsCard title="Bot settings" description={SLACK_INVITE_DESCRIPTION}>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={slackInviteEnabled}
+                      onClick={() => setSlackInviteEnabled((value) => !value)}
+                      className={[
+                        "gomer-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+                        slackInviteEnabled ? "border-highlight bg-highlight" : "bg-input",
+                      ].join(" ")}
+                    >
+                      <span
+                        className={[
+                          "size-4 rounded-full bg-muted-foreground transition-all duration-150",
+                          slackInviteEnabled ? "translate-x-4 bg-primary-foreground" : "",
+                        ].join(" ")}
+                      />
+                    </button>
+                  </SettingsCard>
+
+                  <SettingsCard
+                    title="Permissions"
+                    description="Slack Connect, guest access, what teammates can do, and who can use Gomer are managed in the Permissions section."
+                  >
+                    <Link
+                      to="/dashboard/settings/permissions"
+                      className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    >
+                      Open Permissions
+                    </Link>
+                  </SettingsCard>
+                </div>
+              )}
             </div>
           </div>
         </div>

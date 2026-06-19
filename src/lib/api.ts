@@ -94,6 +94,34 @@ export function fetchMe(): Promise<AuthUser> {
   return apiFetch<AuthUser>("/auth/me");
 }
 
+/** A member of the current user's workspace, as shown on the Team page. */
+export type TeamMember = {
+  id: string;
+  name: string;
+  email: string | null;
+  avatarUrl: string | null;
+  role: "admin" | "member";
+  isCurrentUser: boolean;
+  lastActiveAt: string | null;
+  createdAt: string;
+};
+
+/** List the members of the current workspace, oldest first. */
+export function fetchTeamMembers(): Promise<TeamMember[]> {
+  return apiFetch<TeamMember[]>("/users");
+}
+
+/** Promote or demote a member. Admins only; returns the updated member. */
+export function updateMemberRole(
+  id: string,
+  role: "admin" | "member",
+): Promise<TeamMember> {
+  return apiFetch<TeamMember>(`/users/${id}/role`, {
+    method: "PATCH",
+    body: JSON.stringify({ role }),
+  });
+}
+
 export function fetchCurrentWorkspace(): Promise<Workspace> {
   return apiFetch<Workspace>("/workspaces/me");
 }
@@ -119,12 +147,17 @@ export async function logout(): Promise<void> {
   }
 }
 
-/** A connected account owned by the current workspace. */
+/** Who in the workspace may see and use a connected account. */
+export type IntegrationAccessLevel = "team" | "private";
+
+/** A connected account visible to the current member (team or own private). */
 export type ConnectedIntegration = {
   id: string;
   appName: string;
   appSlug: string;
   accountName: string | null;
+  nickname: string | null;
+  accessLevel: IntegrationAccessLevel;
   iconUrl: string | null;
   externalAccountId: string | null;
   isActive: boolean;
@@ -191,22 +224,112 @@ export async function fetchIntegrationApps(
   };
 }
 
-export function createConnectToken(): Promise<ConnectTokenResponse> {
-  return apiFetch<ConnectTokenResponse>("/integrations/connect-token", { method: "POST" });
+export function createConnectToken(
+  accessLevel: IntegrationAccessLevel = "team",
+): Promise<ConnectTokenResponse> {
+  return apiFetch<ConnectTokenResponse>("/integrations/connect-token", {
+    method: "POST",
+    body: JSON.stringify({ accessLevel }),
+  });
 }
 
 export function confirmIntegration(
   accountId: string,
   appSlug: string,
+  accessLevel: IntegrationAccessLevel = "team",
+  nickname?: string,
 ): Promise<ConnectedIntegration> {
   return apiFetch<ConnectedIntegration>("/integrations/confirm", {
     method: "POST",
-    body: JSON.stringify({ accountId, appSlug }),
+    body: JSON.stringify({ accountId, appSlug, accessLevel, nickname }),
   });
 }
 
 export async function disconnectIntegration(id: string): Promise<void> {
   await apiFetch<{ success: boolean }>(`/integrations/${id}`, { method: "DELETE" });
+}
+
+/** A category slug/label pair for filtering skills. */
+export type SkillCategory = { slug: string; label: string };
+
+/** A skill from the catalogue, flagged with the current user's install state. */
+export type Skill = {
+  id: string;
+  slug: string;
+  title: string;
+  category: SkillCategory;
+  description: string;
+  tags: string[];
+  author: string;
+  isBundle: boolean;
+  requiredIntegrations: string[];
+  installed: boolean;
+};
+
+/** The full skill catalogue, each entry flagged with the user's install state. */
+export function fetchSkills(): Promise<Skill[]> {
+  return apiFetch<Skill[]>("/skills");
+}
+
+/** Only the skills the current user has installed. */
+export function fetchInstalledSkills(): Promise<Skill[]> {
+  return apiFetch<Skill[]>("/skills/installed");
+}
+
+/** Install a skill for the current user. Returns the skill with `installed: true`. */
+export function installSkill(id: string): Promise<Skill> {
+  return apiFetch<Skill>(`/skills/${id}/install`, { method: "POST" });
+}
+
+/** Uninstall a skill for the current user. Returns the skill with `installed: false`. */
+export function uninstallSkill(id: string): Promise<Skill> {
+  return apiFetch<Skill>(`/skills/${id}/install`, { method: "DELETE" });
+}
+
+/** A web app Gomer built, as listed on the dashboard. */
+export type Space = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  status: "draft" | "published";
+  url: string;
+  entityCount: number;
+  viewCount: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/** An end-user who has logged into a Space. */
+export type SpaceMember = {
+  id: string;
+  email: string;
+  name: string | null;
+  role: "admin" | "member";
+  lastLoginAt: string | null;
+  createdAt: string;
+};
+
+/** The Spaces built for the current workspace, newest first. */
+export function fetchSpaces(): Promise<Space[]> {
+  return apiFetch<Space[]>("/spaces");
+}
+
+export function fetchSpace(id: string): Promise<Space> {
+  return apiFetch<Space>(`/spaces/${id}`);
+}
+
+export function fetchSpaceMembers(id: string): Promise<SpaceMember[]> {
+  return apiFetch<SpaceMember[]>(`/spaces/${id}/members`);
+}
+
+export async function deleteSpace(id: string): Promise<void> {
+  await apiFetch<{ success: boolean }>(`/spaces/${id}`, { method: "DELETE" });
+}
+
+/** The relative path where a Space's deployed app is served. */
+export function spacePath(slug: string): string {
+  return `/s/${slug}`;
 }
 
 /** An action an app exposes — what Gomer can do with it. */

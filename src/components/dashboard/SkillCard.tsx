@@ -1,12 +1,15 @@
-import { ArrowDownToLine, MoreVertical } from "lucide-react";
+import { ArrowDownToLine, Loader2, MoreVertical } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { Skill } from "@/data/skills";
+import type { Skill } from "@/lib/api";
 
 type SkillCardProps = {
   skill: Skill;
+  busy?: boolean;
+  onInstall?: (skill: Skill) => void;
+  onUninstall?: (skill: Skill) => void;
 };
 
-export function SkillCard({ skill }: SkillCardProps) {
+export function SkillCard({ skill, busy = false, onInstall, onUninstall }: SkillCardProps) {
   return (
     <div className="h-full rounded-xl border border-border bg-card p-3">
       <div className="flex h-full flex-col gap-4">
@@ -25,10 +28,18 @@ export function SkillCard({ skill }: SkillCardProps) {
                 <>
                   <button
                     type="button"
-                    disabled
-                    className="inline-flex min-h-8 cursor-not-allowed select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground opacity-50"
+                    onClick={() => onUninstall?.(skill)}
+                    disabled={busy || !onUninstall}
+                    className="group inline-flex min-h-8 min-w-[84px] cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Installed
+                    {busy ? (
+                      <Loader2 className="size-3.5 shrink-0 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <>
+                        <span className="group-hover:hidden">Installed</span>
+                        <span className="hidden group-hover:inline">Uninstall</span>
+                      </>
+                    )}
                   </button>
                   <button
                     type="button"
@@ -41,10 +52,18 @@ export function SkillCard({ skill }: SkillCardProps) {
               ) : (
                 <button
                   type="button"
-                  className="gomer-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                  onClick={() => onInstall?.(skill)}
+                  disabled={busy || !onInstall}
+                  className="gomer-focus-ring inline-flex min-h-8 min-w-[84px] cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <ArrowDownToLine className="size-3.5 shrink-0" strokeWidth={1.5} />
-                  Install
+                  {busy ? (
+                    <Loader2 className="size-3.5 shrink-0 animate-spin" strokeWidth={1.5} />
+                  ) : (
+                    <>
+                      <ArrowDownToLine className="size-3.5 shrink-0" strokeWidth={1.5} />
+                      Install
+                    </>
+                  )}
                 </button>
               )}
             </div>

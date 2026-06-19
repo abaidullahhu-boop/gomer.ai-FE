@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
-import footerWordmark from "../../assets/images/footer-wordmark.svg";
 
 type Item = { label: string; to: string; external?: boolean; newTab?: boolean };
 
@@ -226,14 +225,87 @@ export function Footer() {
               decoding="async"
               draggable={false}
             />
-            <img
-              src={footerWordmark}
-              alt=""
+            <svg
               width={1280}
               height={379}
+              viewBox="0 0 1280 379"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              overflow="visible"
               className="relative z-[1] block h-auto w-full overflow-visible select-none"
               aria-hidden="true"
-            />
+            >
+              <defs>
+                <radialGradient
+                  id="footer-wordmark-glass-radial-gomer"
+                  cx="50%"
+                  cy="32%"
+                  r="72%"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop stopColor="white" stopOpacity="0.18" />
+                  <stop offset="1" stopColor="white" stopOpacity="0.42" />
+                </radialGradient>
+                <linearGradient
+                  id="footer-wordmark-glass-linear-gomer"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop stopColor="white" stopOpacity="0.7" />
+                  <stop offset="0.38" stopColor="white" stopOpacity="0" />
+                  <stop offset="0.62" stopColor="white" stopOpacity="0" />
+                  <stop offset="1" stopColor="white" stopOpacity="0.7" />
+                </linearGradient>
+                <filter
+                  id="footer-wordmark-bezel-blur-gomer"
+                  x="-40%"
+                  y="-40%"
+                  width="180%"
+                  height="180%"
+                  colorInterpolationFilters="sRGB"
+                >
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                </filter>
+              </defs>
+              <text
+                x="640"
+                y="375"
+                textAnchor="middle"
+                fontFamily="UlmGrotesk, 'Segoe UI', sans-serif"
+                fontSize="300"
+                fontWeight="700"
+                letterSpacing="4px"
+                fill="none"
+                stroke="white"
+                strokeWidth="10"
+                strokeOpacity="0.45"
+                filter="url(#footer-wordmark-bezel-blur-gomer)"
+                style={{ mixBlendMode: "luminosity" }}
+                opacity="0.95"
+              >
+                GOMER
+              </text>
+              <text
+                x="640"
+                y="375"
+                textAnchor="middle"
+                fontFamily="UlmGrotesk, 'Segoe UI', sans-serif"
+                fontSize="300"
+                fontWeight="700"
+                letterSpacing="4px"
+                fill="url(#footer-wordmark-glass-radial-gomer)"
+                fillOpacity="0.35"
+                stroke="url(#footer-wordmark-glass-linear-gomer)"
+                strokeWidth="1"
+                style={{ mixBlendMode: "luminosity" }}
+                opacity="0.9"
+              >
+                GOMER
+              </text>
+            </svg>
           </div>
         </div>
       </div>

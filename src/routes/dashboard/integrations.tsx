@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, Plus, Search } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { IntegrationCard } from "@/components/dashboard/IntegrationCard";
+import { ConnectAccountModal } from "@/components/dashboard/ConnectAccountModal";
 import { Toast } from "@/components/dashboard/Toast";
+import type { ConnectOptions } from "@/lib/pipedream";
 import {
   fetchIntegrationApps,
   integrationConfigurePath,
@@ -53,6 +55,8 @@ export default function DashboardIntegrations() {
   );
   const [busySlug, setBusySlug] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  // The app awaiting access-level/nickname selection before its connect popup.
+  const [pendingApp, setPendingApp] = useState<CatalogApp | null>(null);
 
   // Connected accounts grouped by app slug — an app can have several accounts.
   const connectedGroups = useMemo(() => {
@@ -188,11 +192,11 @@ export default function DashboardIntegrations() {
   }, [hasMore, loadMore]);
 
   const handleConnect = useCallback(
-    async (app: CatalogApp) => {
+    async (app: CatalogApp, options: ConnectOptions) => {
       if (!ready) return;
       setBusySlug(app.nameSlug);
       try {
-        await connect(app.nameSlug);
+        await connect(app.nameSlug, options);
         await refreshConnected(true);
         setToast(`Successfully connected your ${app.name} account!`);
       } catch (error) {
@@ -230,7 +234,9 @@ export default function DashboardIntegrations() {
 
             <div className="flex w-full flex-col gap-6">
               <p className="text-sm text-secondary-foreground">
-                Connect the tools you use and let Gomer perform tasks across various apps.
+                Connect the tools you use and let Gomer perform tasks across various apps. Choose
+                Team-only to share an account with your workspace, or Private to keep it to
+                yourself.
               </p>
 
               <div className="flex w-full flex-col gap-1.5">
@@ -354,7 +360,7 @@ export default function DashboardIntegrations() {
                         subtitle={group ? accountsLabel(group.length) : undefined}
                         busy={busySlug === app.nameSlug}
                         onClick={
-                          group ? () => goToConfigure(app.nameSlug) : () => handleConnect(app)
+                          group ? () => goToConfigure(app.nameSlug) : () => setPendingApp(app)
                         }
                       />
                     );
@@ -371,6 +377,18 @@ export default function DashboardIntegrations() {
           </div>
         </div>
       </div>
+      {pendingApp && (
+        <ConnectAccountModal
+          open
+          appName={pendingApp.name}
+          onClose={() => setPendingApp(null)}
+          onConfirm={(options) => {
+            const app = pendingApp;
+            setPendingApp(null);
+            void handleConnect(app, options);
+          }}
+        />
+      )}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </>
   );

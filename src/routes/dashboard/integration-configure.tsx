@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChevronRight, Loader2, Plus, Search, Users, Zap } from "lucide-react";
+import { ChevronRight, Loader2, Lock, Plus, Search, Users, Zap } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { IntegrationIcon } from "@/components/dashboard/IntegrationIcon";
+import { ConnectAccountModal } from "@/components/dashboard/ConnectAccountModal";
 import { Toast } from "@/components/dashboard/Toast";
 import {
   disconnectIntegration,
@@ -12,7 +13,7 @@ import {
   type ConnectedIntegration,
 } from "@/lib/api";
 import { loadConnected } from "@/lib/integrations-cache";
-import { usePipedreamConnect } from "@/lib/pipedream";
+import { usePipedreamConnect, type ConnectOptions } from "@/lib/pipedream";
 
 export default function DashboardIntegrationConfigure() {
   const { provider = "" } = useParams();
@@ -25,6 +26,7 @@ export default function DashboardIntegrationConfigure() {
   const [search, setSearch] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
   const [tools, setTools] = useState<AppTool[]>([]);
@@ -85,7 +87,9 @@ export default function DashboardIntegrationConfigure() {
     const query = search.trim().toLowerCase();
     if (!query) return accounts;
     return accounts.filter((account) =>
-      (account.accountName ?? account.externalAccountId ?? "").toLowerCase().includes(query),
+      (account.nickname ?? account.accountName ?? account.externalAccountId ?? "")
+        .toLowerCase()
+        .includes(query),
     );
   }, [accounts, search]);
 
@@ -97,19 +101,22 @@ export default function DashboardIntegrationConfigure() {
     );
   }, [tools, search]);
 
-  const handleAddAccount = useCallback(async () => {
-    if (!appSlug || !ready) return;
-    setAdding(true);
-    try {
-      await connect(appSlug);
-      await load(true);
-      setToast(`Successfully connected your ${app?.appName ?? appSlug} account!`);
-    } catch (error) {
-      console.error("Failed to connect account", error);
-    } finally {
-      setAdding(false);
-    }
-  }, [app?.appName, appSlug, connect, load, ready]);
+  const handleAddAccount = useCallback(
+    async (options: ConnectOptions) => {
+      if (!appSlug || !ready) return;
+      setAdding(true);
+      try {
+        await connect(appSlug, options);
+        await load(true);
+        setToast(`Successfully connected your ${app?.appName ?? appSlug} account!`);
+      } catch (error) {
+        console.error("Failed to connect account", error);
+      } finally {
+        setAdding(false);
+      }
+    },
+    [app?.appName, appSlug, connect, load, ready],
+  );
 
   const handleDisconnect = useCallback(
     async (account: ConnectedIntegration) => {
@@ -170,7 +177,7 @@ export default function DashboardIntegrationConfigure() {
               </div>
               <button
                 type="button"
-                onClick={handleAddAccount}
+                onClick={() => setAddOpen(true)}
                 disabled={adding || !ready}
                 className="gomer-focus-ring inline-flex min-h-9 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] bg-secondary px-3 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-70"
               >
@@ -236,14 +243,26 @@ export default function DashboardIntegrationConfigure() {
                                   className={`size-2 shrink-0 rounded-full ${account.isActive ? "bg-highlight" : "bg-muted-foreground"}`}
                                 />
                                 <span className="truncate font-medium">
-                                  {account.accountName || account.externalAccountId || "Account"}
+                                  {account.nickname ||
+                                    account.accountName ||
+                                    account.externalAccountId ||
+                                    "Account"}
                                 </span>
                               </span>
                             </td>
                             <td className="px-4 py-3 text-muted-foreground">
                               <span className="inline-flex items-center gap-1.5">
-                                <Users className="size-3.5" strokeWidth={1.5} aria-hidden />
-                                Workspace
+                                {account.accessLevel === "private" ? (
+                                  <>
+                                    <Lock className="size-3.5" strokeWidth={1.5} aria-hidden />
+                                    Private
+                                  </>
+                                ) : (
+                                  <>
+                                    <Users className="size-3.5" strokeWidth={1.5} aria-hidden />
+                                    Team-only
+                                  </>
+                                )}
                               </span>
                             </td>
                             <td className="px-4 py-3 text-muted-foreground">
@@ -335,6 +354,15 @@ export default function DashboardIntegrationConfigure() {
           </div>
         </div>
       </div>
+      <ConnectAccountModal
+        open={addOpen}
+        appName={appName}
+        onClose={() => setAddOpen(false)}
+        onConfirm={(options) => {
+          setAddOpen(false);
+          void handleAddAccount(options);
+        }}
+      />
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </>
   );

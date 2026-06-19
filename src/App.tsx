@@ -38,6 +38,7 @@ import UsageTeam from "@/routes/dashboard/usage/team";
 import UsageActivity from "@/routes/dashboard/usage/activity";
 import UsageScheduledTasks from "@/routes/dashboard/usage/scheduled-tasks";
 import AuthCallback from "@/routes/auth.callback";
+import SpaceApp from "@/spaces-runtime/SpaceApp";
 import ImpressumPage from "@/routes/impressum";
 import IntegrationsPage from "@/routes/integrations";
 import LandingPage from "@/routes/landing";
@@ -72,6 +73,7 @@ export default function App() {
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/s/:slug" element={<SpaceApp />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardHome />} />
           <Route path="integrations" element={<DashboardIntegrations />} />

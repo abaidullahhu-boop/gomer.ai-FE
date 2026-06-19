@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, type LucideIcon } from "lucide-react";
 
 export type DropdownOption = {
   value: string;
   label: string;
+  /** Optional leading icon shown in both the trigger and the option row. */
+  icon?: LucideIcon;
 };
 
 type DropdownProps = {
@@ -60,7 +62,12 @@ export function Dropdown({
   }
 
   function handleTriggerKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key === "Enter" || event.key === " ") {
+    if (
+      event.key === "ArrowDown" ||
+      event.key === "ArrowUp" ||
+      event.key === "Enter" ||
+      event.key === " "
+    ) {
       event.preventDefault();
       setOpen(true);
     }
@@ -97,7 +104,16 @@ export function Dropdown({
         onKeyDown={handleTriggerKeyDown}
         className="gomer-focus-ring flex h-10 w-full cursor-pointer items-center justify-between gap-3 rounded-[7px] border border-border bg-muted px-4 text-sm font-medium text-foreground transition-[border-color,box-shadow] duration-150 hover:border-border/80"
       >
-        <span className="truncate">{selected?.label}</span>
+        <span className="flex min-w-0 items-center gap-2">
+          {selected?.icon ? (
+            <selected.icon
+              className="size-4 shrink-0 text-muted-foreground"
+              strokeWidth={1.5}
+              aria-hidden
+            />
+          ) : null}
+          <span className="truncate">{selected?.label}</span>
+        </span>
         <ChevronDown
           className={`size-4 shrink-0 text-muted-foreground transition-transform duration-150 ${open ? "rotate-180" : ""}`}
           strokeWidth={1.5}
@@ -130,7 +146,16 @@ export function Dropdown({
                   isActive ? "bg-secondary" : "bg-popover",
                 ].join(" ")}
               >
-                <span className="truncate">{option.label}</span>
+                <span className="flex min-w-0 items-center gap-2">
+                  {option.icon ? (
+                    <option.icon
+                      className="size-4 shrink-0 text-muted-foreground"
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                  ) : null}
+                  <span className="truncate">{option.label}</span>
+                </span>
                 {isSelected ? (
                   <Check className="size-4 shrink-0 text-foreground" strokeWidth={2} aria-hidden />
                 ) : (
