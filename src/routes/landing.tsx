@@ -10,7 +10,7 @@ import {
   AboutStarIcon,
   AboutStartupIcon,
 } from "@/components/landing/AboutValueIcons";
-import askaiWordmark from "@/assets/images/askai-wordmark-color.svg";
+import gomerWordmark from "@/assets/images/gomer.svg";
 import { AboutInvestorsSection } from "@/components/landing/AboutInvestorsSection";
 import { Footer } from "@/components/site/Footer";
 
@@ -324,8 +324,10 @@ export default function LandingPage() {
                 aria-hidden="true"
                 loading="lazy"
                 decoding="async"
-                src={askaiWordmark}
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[46rem] max-w-none opacity-90"
+                width={1938}
+                height={518}
+                src={gomerWordmark}
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
               />
               <div className="relative z-10 flex w-full flex-col items-center gap-16">
                 <div className="flex w-full flex-col items-center gap-8">

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
-import footerWordmark from "../../assets/images/footer-wordmark.svg";
+import footerWordmark from "../../assets/images/gomer.svg";
 
 type Item = { label: string; to: string; external?: boolean; newTab?: boolean };
 
@@ -229,8 +229,8 @@ export function Footer() {
             <img
               src={footerWordmark}
               alt=""
-              width={1280}
-              height={379}
+              width={1938}
+              height={518}
               className="relative z-[1] block h-auto w-full overflow-visible select-none"
               aria-hidden="true"
             />

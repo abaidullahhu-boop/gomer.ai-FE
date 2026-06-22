@@ -4,7 +4,7 @@
 <g id="glow" filter="url(#filter0_f_0_171)">
 <ellipse cx="18" cy="-3.97266" rx="18" ry="4.18359" fill="var(--fill-0, #FDE3AA)"/>
 </g>
-<path id="Vector" d="M8.29687 6.39844H15.4688C15.6797 6.39844 15.8203 6.53907 15.8203 6.75001V21.7266H17.0394C19.1488 21.7266 20.1797 20.6016 20.1797 18.3516V6.75001C20.1797 6.53907 20.3203 6.39844 20.5312 6.39844H27.7031C27.9141 6.39844 28.0547 6.53907 28.0547 6.75001V20.3906C28.0547 25.3828 23.0625 29.25 16.4531 29.25H8.29687C8.08594 29.25 7.94531 29.1094 7.94531 28.8985V6.75001C7.94531 6.53907 8.08594 6.39844 8.29687 6.39844Z" fill="var(--fill-0, white)"/>
+<text x="18" y="20" text-anchor="middle" dominant-baseline="central" fill="white" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="800">G</text>
 </g>
 <defs>
 <filter id="filter0_f_0_171" x="-7.92422" y="-16.0805" width="51.8484" height="24.2156" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

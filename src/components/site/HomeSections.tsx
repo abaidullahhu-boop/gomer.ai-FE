@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { Workflow, BarChart3, GitBranch, Globe, Users, ShieldCheck, Check } from "lucide-react";
 import { HowItWorksScrollSection, type HowItWorksStep } from "@/components/site/ProductHowItWorksSection";
-import askaiWordmark from "@/assets/images/askai-wordmark-color.svg";
+import gomerWordmark from "@/assets/images/gomer.svg";
 import chatgptLogo from "@/assets/images/chatgpt.svg";
 import claudeLogo from "@/assets/images/claude.svg";
 import perplexityLogo from "@/assets/images/perplexity.svg";
@@ -331,8 +331,10 @@ export function AskAI() {
               aria-hidden="true"
               loading="lazy"
               decoding="async"
-              src={askaiWordmark}
-              className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[46rem] max-w-none opacity-90"
+              width={1938}
+              height={518}
+              src={gomerWordmark}
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
             />
             <div className="relative z-10 flex w-full flex-col items-center gap-16">
               <div className="flex w-full flex-col items-center gap-8">
