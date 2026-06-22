@@ -5,7 +5,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
-import askaiWordmark from "@/assets/images/askai-wordmark-color.svg";
+import gomerWordmark from "@/assets/images/gomer.svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 
 type Case = {
@@ -221,8 +221,10 @@ export default function CaseStudiesPage() {
                 aria-hidden="true"
                 loading="lazy"
                 decoding="async"
-                src={askaiWordmark}
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[46rem] max-w-none opacity-90"
+                width={1938}
+                height={518}
+                src={gomerWordmark}
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
               />
               <div className="relative flex w-full flex-col items-center gap-10 sm:gap-16">
                 <div className="flex w-full flex-col items-center gap-8">

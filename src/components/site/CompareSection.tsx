@@ -3,7 +3,7 @@ import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
-import gomerBrandDark from "@/assets/images/gomer-brand-dark.svg";
+import gomerWordmark from "@/assets/images/gomer.svg";
 import zapierIcon from "@/assets/images/zapier.svg";
 
 type TabIconProps = { className?: string };
@@ -258,11 +258,11 @@ export function CompareSection() {
                 </div>
                 <div className="relative z-[2] flex h-full w-full items-center">
                   <img
-                    src={gomerBrandDark}
+                    src={gomerWordmark}
                     alt="Gomer"
-                    width={108}
-                    height={32}
-                    className="h-6 w-auto md:h-8"
+                    width={1938}
+                    height={518}
+                    className="h-7 w-auto opacity-90 md:h-9"
                   />
                 </div>
               </div>
