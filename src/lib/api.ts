@@ -112,10 +112,7 @@ export function fetchTeamMembers(): Promise<TeamMember[]> {
 }
 
 /** Promote or demote a member. Admins only; returns the updated member. */
-export function updateMemberRole(
-  id: string,
-  role: "admin" | "member",
-): Promise<TeamMember> {
+export function updateMemberRole(id: string, role: "admin" | "member"): Promise<TeamMember> {
   return apiFetch<TeamMember>(`/users/${id}/role`, {
     method: "PATCH",
     body: JSON.stringify({ role }),
@@ -330,6 +327,69 @@ export async function deleteSpace(id: string): Promise<void> {
 /** The relative path where a Space's deployed app is served. */
 export function spacePath(slug: string): string {
   return `/s/${slug}`;
+}
+
+/** A scheduled task, as listed and managed on the Scheduled Tasks page. */
+export type ScheduledTask = {
+  id: string;
+  name: string;
+  description: string | null;
+  cronExpression: string;
+  /** IANA timezone the schedule runs in, or null for server-local time. */
+  timezone: string | null;
+  prompt: string;
+  isActive: boolean;
+  isSystem: boolean;
+  /** Pinned model id, or null for the workspace ("Team") default. */
+  model: string | null;
+  oneTime: boolean;
+  lastRun: string | null;
+  nextRun: string | null;
+  createdAt: string;
+  authorName: string | null;
+  authorIsCurrentUser: boolean;
+};
+
+/** Fields accepted when creating a task. */
+export type CreateTaskInput = {
+  name: string;
+  prompt: string;
+  cronExpression: string;
+  timezone?: string;
+  description?: string;
+  model?: string | null;
+  oneTime?: boolean;
+};
+
+/** Fields accepted when updating a task; all optional. */
+export type UpdateTaskInput = Partial<CreateTaskInput> & { isActive?: boolean };
+
+/** The scheduled tasks for the current workspace, newest first. */
+export function fetchTasks(): Promise<ScheduledTask[]> {
+  return apiFetch<ScheduledTask[]>("/tasks");
+}
+
+export function createTask(input: CreateTaskInput): Promise<ScheduledTask> {
+  return apiFetch<ScheduledTask>("/tasks", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+export function updateTask(id: string, input: UpdateTaskInput): Promise<ScheduledTask> {
+  return apiFetch<ScheduledTask>(`/tasks/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(input),
+  });
+}
+
+/** Run a task immediately, regardless of its schedule. Returns the updated task. */
+export function runTask(id: string): Promise<ScheduledTask> {
+  return apiFetch<ScheduledTask>(`/tasks/${id}/run`, { method: "POST" });
+}
+
+export async function deleteTask(id: string): Promise<void> {
+  await apiFetch<{ success: boolean }>(`/tasks/${id}`, { method: "DELETE" });
 }
 
 /** An action an app exposes — what Gomer can do with it. */
