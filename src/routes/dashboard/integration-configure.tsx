@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChevronRight, Loader2, Lock, Plus, Search, Users, Zap } from "lucide-react";
+import { ChevronRight, Loader2, Lock, Pencil, Plus, Search, Users, Zap } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { IntegrationIcon } from "@/components/dashboard/IntegrationIcon";
 import { ConnectAccountModal } from "@/components/dashboard/ConnectAccountModal";
 import { Toast } from "@/components/dashboard/Toast";
 import {
-  disconnectIntegration,
   fetchIntegrationTools,
+  integrationAccountPath,
   parseConfigureProvider,
   type AppTool,
   type ConnectedIntegration,
@@ -24,7 +24,6 @@ export default function DashboardIntegrationConfigure() {
   const [accounts, setAccounts] = useState<ConnectedIntegration[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [busyId, setBusyId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -116,27 +115,6 @@ export default function DashboardIntegrationConfigure() {
       }
     },
     [app?.appName, appSlug, connect, load, ready],
-  );
-
-  const handleDisconnect = useCallback(
-    async (account: ConnectedIntegration) => {
-      setBusyId(account.id);
-      try {
-        await disconnectIntegration(account.id);
-        const remaining = await loadConnected(true);
-        const stillHere = remaining.filter((entry) => entry.appSlug === appSlug);
-        if (stillHere.length === 0) {
-          navigate("/dashboard/integrations");
-          return;
-        }
-        setAccounts(stillHere);
-      } catch (error) {
-        console.error("Failed to disconnect account", error);
-      } finally {
-        setBusyId(null);
-      }
-    },
-    [appSlug, navigate],
   );
 
   // Bad route param, or every account was disconnected elsewhere — go back.
@@ -276,14 +254,13 @@ export default function DashboardIntegrationConfigure() {
                             <td className="px-4 py-3 text-right">
                               <button
                                 type="button"
-                                onClick={() => handleDisconnect(account)}
-                                disabled={busyId === account.id}
-                                className="gomer-focus-ring inline-flex cursor-pointer items-center gap-1 rounded-[7px] px-2 py-1 text-xs font-medium text-destructive transition-colors hover:bg-destructive/15 disabled:cursor-default disabled:opacity-60"
+                                onClick={() =>
+                                  navigate(integrationAccountPath(appSlug, account.id))
+                                }
+                                className="gomer-focus-ring inline-flex cursor-pointer items-center gap-1 rounded-[7px] px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                               >
-                                {busyId === account.id ? (
-                                  <Loader2 className="size-3.5 animate-spin" aria-hidden />
-                                ) : null}
-                                Disconnect
+                                <Pencil className="size-3.5" strokeWidth={1.5} aria-hidden />
+                                Edit
                               </button>
                             </td>
                           </tr>

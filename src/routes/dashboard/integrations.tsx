@@ -9,6 +9,8 @@ import type { ConnectOptions } from "@/lib/pipedream";
 import {
   fetchIntegrationApps,
   integrationConfigurePath,
+  startMetaConnect,
+  NATIVE_APPS,
   type CatalogApp,
   type ConnectedIntegration,
 } from "@/lib/api";
@@ -94,6 +96,22 @@ export default function DashboardIntegrations() {
     void refreshConnected();
   }, [refreshConnected]);
 
+  // After a native OAuth round-trip (e.g. Meta) the backend bounces back here
+  // with a status flag; surface it, refresh the connected list, and clean the URL.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const connectedFlag = params.get("connected");
+    const errorFlag = params.get("error");
+    if (!connectedFlag && !errorFlag) return;
+    if (connectedFlag === "meta") {
+      setToast("Successfully connected your Meta Ads account!");
+      void refreshConnected(true);
+    } else if (errorFlag === "meta") {
+      setToast("Could not connect Meta Ads. Please try again.");
+    }
+    window.history.replaceState({}, "", window.location.pathname);
+  }, [refreshConnected]);
+
   // Debounce the search box.
   useEffect(() => {
     const id = window.setTimeout(() => setDebouncedSearch(search.trim()), 300);
@@ -151,10 +169,21 @@ export default function DashboardIntegrations() {
     }
   }, [apps, cursor, visibleCount, debouncedSearch, loading, error]);
 
+  // Native apps (e.g. Meta Ads) aren't in the Pipedream catalogue, so merge them
+  // in client-side, filtered by the search and shown first (like featured apps).
+  const catalogApps = useMemo(() => {
+    const q = debouncedSearch.toLowerCase();
+    const natives = NATIVE_APPS.filter(
+      (app) => !q || app.name.toLowerCase().includes(q) || app.nameSlug.toLowerCase().includes(q),
+    );
+    const nativeSlugs = new Set(natives.map((app) => app.nameSlug));
+    return [...natives, ...apps.filter((app) => !nativeSlugs.has(app.nameSlug))];
+  }, [apps, debouncedSearch]);
+
   // On the Popular tab we cap to the first page of (popularity-ordered) apps; the
   // All tab keeps revealing more and fetching further server pages on scroll.
   const cap = tab === "popular" ? PAGE_SIZE : visibleCount;
-  const visibleApps = apps.slice(0, cap);
+  const visibleApps = catalogApps.slice(0, cap);
   const hasMore =
     !connectedOnly && tab === "all" && (visibleCount < apps.length || Boolean(cursor));
 
@@ -193,6 +222,19 @@ export default function DashboardIntegrations() {
 
   const handleConnect = useCallback(
     async (app: CatalogApp, options: ConnectOptions) => {
+      // Native providers (Meta) use their own OAuth: fetch the consent URL and
+      // hand off the browser; the backend callback returns to this page.
+      if (app.provider === "meta") {
+        setBusySlug(app.nameSlug);
+        try {
+          const { url } = await startMetaConnect(options.accessLevel);
+          window.location.href = url;
+        } catch (error) {
+          console.error(`Failed to start ${app.name} connect`, error);
+          setBusySlug(null);
+        }
+        return;
+      }
       if (!ready) return;
       setBusySlug(app.nameSlug);
       try {

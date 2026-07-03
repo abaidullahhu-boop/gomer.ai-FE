@@ -30,6 +30,7 @@ import SettingsGeneral from "@/routes/dashboard/settings/general";
 import SettingsPermissions from "@/routes/dashboard/settings/permissions";
 import DashboardIntegrations from "@/routes/dashboard/integrations";
 import DashboardIntegrationConfigure from "@/routes/dashboard/integration-configure";
+import DashboardIntegrationAccount from "@/routes/dashboard/integration-account";
 import DashboardSkills from "@/routes/dashboard/skills";
 import DashboardSpaces from "@/routes/dashboard/spaces";
 import { UsageLayout } from "@/components/dashboard/usage/UsageLayout";
@@ -80,6 +81,10 @@ export default function App() {
           <Route
             path="integrations/configure/:provider"
             element={<DashboardIntegrationConfigure />}
+          />
+          <Route
+            path="integrations/configure/:provider/:accountId"
+            element={<DashboardIntegrationAccount />}
           />
           <Route path="skills" element={<DashboardSkills />} />
           <Route path="skills/installed" element={<DashboardSkills />} />

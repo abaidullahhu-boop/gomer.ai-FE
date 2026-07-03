@@ -147,9 +147,13 @@ export async function logout(): Promise<void> {
 /** Who in the workspace may see and use a connected account. */
 export type IntegrationAccessLevel = "team" | "private";
 
+/** Which backend brokers a connection: Pipedream (most apps) or native Meta. */
+export type IntegrationProvider = "pipedream" | "meta";
+
 /** A connected account visible to the current member (team or own private). */
 export type ConnectedIntegration = {
   id: string;
+  provider: IntegrationProvider;
   appName: string;
   appSlug: string;
   accountName: string | null;
@@ -163,13 +167,28 @@ export type ConnectedIntegration = {
   userName: string | null;
 };
 
-/** An app from the Pipedream catalogue, shaped for the connect UI. */
+/** An app shown in the connect UI. `provider` defaults to Pipedream when absent. */
 export type CatalogApp = {
   name: string;
   nameSlug: string;
   iconUrl: string;
   description?: string;
+  provider?: IntegrationProvider;
 };
+
+/**
+ * Natively-brokered apps that don't live in the Pipedream catalogue. Merged into
+ * the catalogue grid so they're discoverable and searchable alongside the rest.
+ */
+export const NATIVE_APPS: CatalogApp[] = [
+  {
+    name: "Meta Ads",
+    nameSlug: "meta_ads",
+    iconUrl: "https://www.facebook.com/images/fb_icon_325x325.png",
+    description: "Manage Meta advertising campaigns and insights",
+    provider: "meta",
+  },
+];
 
 type CatalogAppRaw = {
   name: string;
@@ -221,6 +240,18 @@ export async function fetchIntegrationApps(
   };
 }
 
+/**
+ * Start a native Meta Ads connect. Returns the Meta consent URL the browser
+ * should navigate to; Meta redirects back to the backend callback, which lands
+ * on `/dashboard/integrations?connected=meta`.
+ */
+export function startMetaConnect(
+  accessLevel: IntegrationAccessLevel = "team",
+): Promise<{ url: string }> {
+  const params = new URLSearchParams({ accessLevel });
+  return apiFetch<{ url: string }>(`/integrations/meta/authorize?${params.toString()}`);
+}
+
 export function createConnectToken(
   accessLevel: IntegrationAccessLevel = "team",
 ): Promise<ConnectTokenResponse> {
@@ -244,6 +275,29 @@ export function confirmIntegration(
 
 export async function disconnectIntegration(id: string): Promise<void> {
   await apiFetch<{ success: boolean }>(`/integrations/${id}`, { method: "DELETE" });
+}
+
+/** Fields a member can edit from a connected account's configure screen. */
+export type IntegrationUpdate = {
+  nickname?: string;
+  accessLevel?: IntegrationAccessLevel;
+  isActive?: boolean;
+};
+
+/** Update a connected account (label, access level, or enabled state). */
+export function updateIntegration(
+  id: string,
+  patch: IntegrationUpdate,
+): Promise<ConnectedIntegration> {
+  return apiFetch<ConnectedIntegration>(`/integrations/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(patch),
+  });
+}
+
+/** Route to a single account's configure view (Tools / Access / Settings). */
+export function integrationAccountPath(appSlug: string, accountId: string): string {
+  return `${integrationConfigurePath(appSlug)}/${accountId}`;
 }
 
 /** A category slug/label pair for filtering skills. */
