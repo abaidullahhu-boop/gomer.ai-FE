@@ -24,6 +24,7 @@ import DashboardTasks from "@/routes/dashboard/tasks";
 import DashboardTeam from "@/routes/dashboard/team";
 import DashboardTeamEdit from "@/routes/dashboard/team-edit";
 import DashboardBilling from "@/routes/dashboard/billing";
+import DashboardAdmin from "@/routes/dashboard/admin";
 import DashboardAccount from "@/routes/dashboard/account";
 import { SettingsLayout } from "@/components/dashboard/settings/SettingsLayout";
 import SettingsGeneral from "@/routes/dashboard/settings/general";
@@ -100,6 +101,7 @@ export default function App() {
             <Route path="scheduled-tasks" element={<UsageScheduledTasks />} />
           </Route>
           <Route path="billing" element={<DashboardBilling />} />
+          <Route path="admin" element={<DashboardAdmin />} />
           <Route path="account" element={<DashboardAccount />} />
           <Route path="settings" element={<SettingsLayout />}>
             <Route index element={<SettingsGeneral />} />

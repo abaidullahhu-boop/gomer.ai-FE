@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { CircleHelp, Gift, UserPlus } from "lucide-react";
+import { CircleHelp, Gift, ShieldCheck, UserPlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { SVGProps } from "react";
 import {
@@ -17,6 +17,7 @@ import {
 import { ProfileMenu } from "./ProfileMenu";
 import { GomerLogo } from "./GomerLogo";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
+import { useSession } from "@/lib/session";
 
 type NavIcon = LucideIcon | ((props: SVGProps<SVGSVGElement>) => React.ReactNode);
 
@@ -39,6 +40,9 @@ const mainNav: NavItem[] = [
   { label: "Account", to: "/dashboard/account", icon: AccountIcon },
   { label: "Settings", to: "/dashboard/settings", icon: SettingsIcon },
 ];
+
+/** Shown only to workspace admins, between Billing and Account. */
+const adminNavItem: NavItem = { label: "Admin", to: "/dashboard/admin", icon: ShieldCheck };
 
 function NavItemLink({
   label,
@@ -116,13 +120,7 @@ function MobileMenuIcon() {
   );
 }
 
-export function MobileMenuButton({
-  open,
-  onClick,
-}: {
-  open?: boolean;
-  onClick: () => void;
-}) {
+export function MobileMenuButton({ open, onClick }: { open?: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
@@ -153,6 +151,15 @@ export function Sidebar({
   onGetFreeCredits,
   onInviteTeammates,
 }: SidebarProps) {
+  const { user } = useSession();
+  const nav =
+    user?.role === "admin"
+      ? [
+          ...mainNav.slice(0, mainNav.length - 2),
+          adminNavItem,
+          ...mainNav.slice(mainNav.length - 2),
+        ]
+      : mainNav;
   return (
     <aside
       className={[
@@ -170,7 +177,7 @@ export function Sidebar({
 
       <div className="sidebar-scroll flex min-h-0 flex-1 flex-col overflow-y-auto overflow-x-hidden pt-1">
         <nav className="flex-1 space-y-0.5 px-3">
-          {mainNav.map((item) => (
+          {nav.map((item) => (
             <NavItemLink key={item.to} {...item} onNavigate={onMobileClose} />
           ))}
         </nav>
@@ -192,7 +199,10 @@ export function Sidebar({
           >
             {({ isActive }) => (
               <>
-                <CircleHelp className={`size-[18px] shrink-0 ${isActive ? "opacity-100" : "opacity-50"}`} strokeWidth={1.5} />
+                <CircleHelp
+                  className={`size-[18px] shrink-0 ${isActive ? "opacity-100" : "opacity-50"}`}
+                  strokeWidth={1.5}
+                />
                 Support
               </>
             )}

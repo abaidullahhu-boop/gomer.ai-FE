@@ -463,3 +463,109 @@ export async function fetchIntegrationTools(
     `/integrations/${encodeURIComponent(appSlug)}/tools${qs}`,
   );
 }
+
+// ── Billing & credits ────────────────────────────────────────────────────────
+
+/** The workspace's credit position. 1 credit = $0.01. */
+export type CreditBalance = {
+  granted: number;
+  used: number;
+  balance: number;
+};
+
+/** A purchasable credit bundle offered on the billing page. */
+export type CreditPack = {
+  id: string;
+  label: string;
+  amountCents: number;
+  credits: number;
+};
+
+/** One credit addition: onboarding gift, Stripe top-up, or manual grant. */
+export type CreditGrant = {
+  id: string;
+  reason: "onboarding" | "topup" | "manual";
+  credits: number;
+  amountCents: number | null;
+  currency: string | null;
+  note: string | null;
+  createdAt: string;
+};
+
+export type BillingSummary = {
+  balance: CreditBalance;
+  packs: CreditPack[];
+  grants: CreditGrant[];
+};
+
+export function fetchBillingSummary(): Promise<BillingSummary> {
+  return apiFetch<BillingSummary>("/billing/summary");
+}
+
+/** Start a Stripe Checkout for a pack; caller redirects to the returned URL. */
+export function startTopup(packId: string): Promise<{ checkoutUrl: string }> {
+  return apiFetch<{ checkoutUrl: string }>("/billing/topup", {
+    method: "POST",
+    body: JSON.stringify({ packId }),
+  });
+}
+
+// ── Admin dashboard ──────────────────────────────────────────────────────────
+
+/** A member row on the admin roster (includes deactivated members). */
+export type AdminMember = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  avatarUrl: string | null;
+  role: "admin" | "member";
+  isActive: boolean;
+  lastActiveAt: string | null;
+  createdAt: string;
+};
+
+export type AdminOverview = {
+  members: { total: number; active: number; admins: number };
+  credits: CreditBalance;
+  usage: { totalCreditsUsed: number; totalTokensUsed: number; eventCount: number };
+  connectedAccounts: number;
+};
+
+export type AdminAnalytics = {
+  days: number;
+  daily: Array<{ day: string; credits: number; tokens: number; events: number }>;
+  topSpenders: Array<{ userId: string | null; name: string; credits: number; events: number }>;
+};
+
+export type AdminRevenue = {
+  totalPaidCents: number;
+  creditsGranted: number;
+  creditsConsumed: number;
+  creditsRemaining: number;
+  byReason: Array<{ reason: string; credits: number; amountCents: number; count: number }>;
+  recentGrants: CreditGrant[];
+};
+
+export function fetchAdminOverview(): Promise<AdminOverview> {
+  return apiFetch<AdminOverview>("/admin/overview");
+}
+
+export function fetchAdminAnalytics(days = 30): Promise<AdminAnalytics> {
+  return apiFetch<AdminAnalytics>(`/admin/analytics?days=${days}`);
+}
+
+export function fetchAdminRevenue(): Promise<AdminRevenue> {
+  return apiFetch<AdminRevenue>("/admin/revenue");
+}
+
+export function fetchAdminUsers(): Promise<AdminMember[]> {
+  return apiFetch<AdminMember[]>("/admin/users");
+}
+
+/** Activate or deactivate a member. Admins only; returns the updated member. */
+export function setMemberActive(id: string, isActive: boolean): Promise<AdminMember> {
+  return apiFetch<AdminMember>(`/admin/users/${id}/active`, {
+    method: "PATCH",
+    body: JSON.stringify({ isActive }),
+  });
+}
