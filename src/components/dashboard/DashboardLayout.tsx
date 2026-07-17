@@ -45,7 +45,7 @@ export function DashboardLayout() {
 
   return (
     <SessionProvider>
-      <div className="dashboard-shell flex h-screen overflow-hidden bg-background">
+      <div className="dashboard-shell flex h-screen overflow-hidden bg-background text-foreground">
         {sidebarOpen && (
           <button
             type="button"

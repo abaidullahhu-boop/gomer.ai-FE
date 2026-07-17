@@ -67,7 +67,7 @@ export function WorkspaceSwitcher() {
         className="gomer-focus-ring group flex w-full cursor-pointer items-center gap-2.5 rounded-[7px] border border-sidebar-border bg-sidebar-background/40 px-2.5 py-2 text-left text-foreground transition-colors hover:bg-sidebar-accent"
       >
         <WorkspaceTile name={currentName} />
-        <span className="min-w-0 flex-1 truncate text-sm font-medium">{currentName}</span>
+        <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">{currentName}</span>
         <ChevronsUpDown className="size-[18px] shrink-0 opacity-60 transition-opacity group-hover:opacity-100" />
       </button>
 

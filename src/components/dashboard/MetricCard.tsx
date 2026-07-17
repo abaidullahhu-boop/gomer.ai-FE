@@ -22,7 +22,9 @@ export function MetricCard({ label, value, href, linkLabel, icon: Icon }: Metric
         </span>
         <Icon className="size-4 shrink-0 text-muted-foreground/50" strokeWidth={1.5} />
       </div>
-      <span className="text-xl font-semibold leading-tight tracking-tight">{value}</span>
+      <span className="text-xl font-semibold leading-tight tracking-tight text-foreground">
+        {value}
+      </span>
       <Link
         to={href}
         className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"

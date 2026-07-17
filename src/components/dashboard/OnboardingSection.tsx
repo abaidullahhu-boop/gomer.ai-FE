@@ -104,7 +104,7 @@ export function OnboardingSection() {
       <div className="px-6 pt-5 pb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold tracking-tight">Get Gomer up to speed</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">Get Gomer up to speed</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               Complete the core setup steps so Gomer is fully ready for your workspace.
             </p>
@@ -205,7 +205,7 @@ export function OnboardingSection() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="truncate text-sm font-medium">{task.title}</span>
+                    <span className="truncate text-sm font-medium text-foreground">{task.title}</span>
                     {task.badge && (
                       <span className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-highlight/10 px-2 py-1 text-xs font-medium text-highlight">
                         <Puzzle className="size-3.5" strokeWidth={1.5} />

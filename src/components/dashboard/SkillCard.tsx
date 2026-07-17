@@ -30,7 +30,7 @@ export function SkillCard({ skill, busy = false, onInstall, onUninstall }: Skill
                     type="button"
                     onClick={() => onUninstall?.(skill)}
                     disabled={busy || !onUninstall}
-                    className="group inline-flex min-h-8 min-w-[84px] cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="cursor-pointer group inline-flex min-h-8 min-w-[84px] select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {busy ? (
                       <Loader2 className="size-3.5 shrink-0 animate-spin" strokeWidth={1.5} />

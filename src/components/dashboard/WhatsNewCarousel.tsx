@@ -64,7 +64,7 @@ export function WhatsNewCarousel() {
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-xl font-semibold tracking-tight">What&apos;s new</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">What&apos;s new</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             New features, improvements, and fixes shipped to Gomer.
           </p>
@@ -72,7 +72,7 @@ export function WhatsNewCarousel() {
         <div className="flex shrink-0 items-center gap-1">
           <button
             type="button"
-            className="gomer-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="cursor-pointer gomer-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="Previous update"
             onClick={() => goTo(activeIndex - 1)}
           >
@@ -80,7 +80,7 @@ export function WhatsNewCarousel() {
           </button>
           <button
             type="button"
-            className="gomer-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="cursor-pointer gomer-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="Next update"
             onClick={() => goTo(activeIndex + 1)}
           >
