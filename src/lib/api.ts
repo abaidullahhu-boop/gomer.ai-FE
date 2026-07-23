@@ -23,6 +23,24 @@ export type Workspace = {
   name: string;
   slackTeamId: string;
   credits: number;
+  /** Model chosen in Settings; null means the deployment's fallback is used. */
+  defaultModel: string | null;
+  personalityTone: string | null;
+  workspaceInstructions: string | null;
+};
+
+/** A model the API can actually run, as served by the backend catalog. */
+export type ApiModel = {
+  id: string;
+  name: string;
+  description: string;
+  provider: "anthropic" | "gateway";
+  inputPricePerMillion: number;
+  outputPricePerMillion: number;
+  supportsTools: boolean;
+  badges?: { type: string; value?: string }[];
+  /** False when this deployment has no credentials for the model's provider. */
+  available: boolean;
 };
 
 export type WorkspaceMembership = {
@@ -121,6 +139,26 @@ export function updateMemberRole(id: string, role: "admin" | "member"): Promise<
 
 export function fetchCurrentWorkspace(): Promise<Workspace> {
   return apiFetch<Workspace>("/workspaces/me");
+}
+
+/** The models this deployment can run, for the settings picker. */
+export function fetchModels(): Promise<ApiModel[]> {
+  return apiFetch<ApiModel[]>("/ai/models");
+}
+
+/**
+ * Save workspace settings. Admins only. Send just the fields that changed —
+ * omitted ones are left untouched.
+ */
+export function updateWorkspaceSettings(settings: {
+  defaultModel?: string | null;
+  personalityTone?: string | null;
+  workspaceInstructions?: string | null;
+}): Promise<Workspace> {
+  return apiFetch<Workspace>("/workspaces/me", {
+    method: "PATCH",
+    body: JSON.stringify(settings),
+  });
 }
 
 export function fetchWorkspaces(): Promise<WorkspaceMembership[]> {

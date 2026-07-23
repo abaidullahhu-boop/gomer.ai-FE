@@ -1,12 +1,7 @@
-import type { ModelBadge, ModelDefinition, ReasoningLevel } from "@/data/models";
+import type { ApiModel } from "@/lib/api";
+import type { ModelBadge } from "@/data/models";
+import { pricePerMillionOutput } from "@/data/models";
 import { ProviderIcon } from "./ProviderIcon";
-
-const reasoningLevels: { key: ReasoningLevel; label: string }[] = [
-  { key: "none", label: "N" },
-  { key: "low", label: "L" },
-  { key: "medium", label: "M" },
-  { key: "high", label: "H" },
-];
 
 function Badge({ badge }: { badge: ModelBadge }) {
   switch (badge.type) {
@@ -17,11 +12,6 @@ function Badge({ badge }: { badge: ModelBadge }) {
         </span>
       );
     case "discount":
-      return (
-        <span className="inline-flex items-center rounded-full border border-warning/30 bg-warning/10 px-1.5 py-px text-xs leading-tight font-medium tracking-tight text-warning">
-          {badge.value}
-        </span>
-      );
     case "premium":
       return (
         <span className="inline-flex items-center rounded-full border border-warning/30 bg-warning/10 px-1.5 py-px text-xs leading-tight font-medium tracking-tight text-warning">
@@ -40,6 +30,8 @@ function Badge({ badge }: { badge: ModelBadge }) {
           Deprecated
         </span>
       );
+    default:
+      return null;
   }
 }
 
@@ -49,7 +41,9 @@ function RadioIndicator({ selected }: { selected: boolean }) {
       aria-hidden="true"
       className={[
         "relative inline-block size-3.5 shrink-0 rounded-full border-[1.5px] transition-[background,border-color] duration-150",
-        selected ? "border-success-foreground bg-transparent" : "border-muted-foreground/40 bg-transparent",
+        selected
+          ? "border-success-foreground bg-transparent"
+          : "border-muted-foreground/40 bg-transparent",
       ].join(" ")}
     >
       {selected && (
@@ -62,98 +56,50 @@ function RadioIndicator({ selected }: { selected: boolean }) {
   );
 }
 
-function ReasoningSelector({
-  value,
-  disabled,
-}: {
-  value: ReasoningLevel;
-  disabled?: boolean;
-}) {
-  return (
-    <div className="inline-flex gap-0.5">
-      {reasoningLevels.map((level) => {
-        const isActive = value === level.key;
-        return (
-          <button
-            key={level.key}
-            type="button"
-            disabled={disabled}
-            aria-pressed={isActive}
-            aria-label={`${level.label === "N" ? "None" : level.label === "L" ? "Low" : level.label === "M" ? "Medium" : "High"} reasoning`}
-            className={[
-              "rounded-md border px-2 py-[3px] text-xs font-medium tracking-wide outline-none transition-[background,color,border-color] duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
-              disabled
-                ? "cursor-not-allowed opacity-50"
-                : isActive
-                  ? "cursor-pointer border-border bg-accent text-foreground"
-                  : "cursor-pointer border-transparent text-muted-foreground hover:border-border/60 hover:bg-accent/40 hover:text-foreground",
-            ].join(" ")}
-          >
-            {level.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 type ModelCardProps = {
-  model: ModelDefinition;
+  model: ApiModel;
   selected: boolean;
+  /** Admins only; members see the current choice but cannot change it. */
+  readOnly?: boolean;
   onSelect: () => void;
 };
 
-export function ModelCard({ model, selected, onSelect }: ModelCardProps) {
-  const isPreset = model.provider === "preset";
-  const presetColorClass =
-    model.presetColor === "success"
-      ? "text-success-foreground"
-      : "text-violet-600 dark:text-violet-400";
-  const topBarClass =
-    model.presetColor === "success"
-      ? "bg-success-foreground opacity-100"
-      : model.presetColor === "violet"
-        ? "bg-violet-500 opacity-50"
-        : "opacity-0";
+export function ModelCard({ model, selected, readOnly, onSelect }: ModelCardProps) {
+  // A model with no configured provider, or one that cannot call tools, would
+  // fail on every request — show it greyed out with the reason rather than
+  // hiding it, so the choice on offer is explainable.
+  const disabled = !model.available || readOnly;
+  const unavailableReason = !model.supportsTools
+    ? "No tool support"
+    : !model.available
+      ? "Not configured"
+      : null;
 
   return (
     <div
       role="button"
-      tabIndex={model.disabled ? -1 : 0}
+      tabIndex={disabled ? -1 : 0}
       aria-pressed={selected}
-      aria-disabled={model.disabled}
-      onClick={() => !model.disabled && onSelect()}
+      aria-disabled={disabled}
+      onClick={() => !disabled && onSelect()}
       onKeyDown={(event) => {
-        if (!model.disabled && (event.key === "Enter" || event.key === " ")) {
+        if (!disabled && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           onSelect();
         }
       }}
       className={[
         "relative flex min-h-[156px] w-full flex-col overflow-hidden rounded-[10px] border px-4 pt-3.5 pb-3 text-left outline-none transition-[background,border-color] duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
-        model.disabled
+        !model.available
           ? "cursor-not-allowed border-border bg-card/60 opacity-60"
           : selected
-            ? "cursor-pointer border-success-foreground bg-secondary"
-            : "cursor-pointer border-border bg-card hover:bg-accent/40",
+            ? "border-success-foreground bg-secondary"
+            : "border-border bg-card",
+        disabled ? "cursor-not-allowed" : "cursor-pointer hover:bg-accent/40",
       ].join(" ")}
     >
-      <span
-        aria-hidden="true"
-        className={[
-          "absolute inset-x-0 top-0 h-0.5 transition-opacity duration-150",
-          isPreset ? topBarClass : "opacity-0",
-        ].join(" ")}
-      />
-
       <div className="mb-2 flex min-h-[18px] items-center justify-between">
-        {isPreset ? (
-          <span className={`text-xs font-semibold tracking-widest uppercase ${presetColorClass}`}>
-            ★ {model.presetLabel}
-          </span>
-        ) : (
-          <ProviderIcon provider={model.provider} />
-        )}
+        <ProviderIcon provider={model.provider} />
 
         <div className="flex items-center gap-2">
           {model.badges && model.badges.length > 0 && (
@@ -170,7 +116,7 @@ export function ModelCard({ model, selected, onSelect }: ModelCardProps) {
       <div
         className={[
           "mb-0.5 text-sm leading-tight font-medium",
-          model.disabled ? "text-muted-foreground" : "text-foreground",
+          model.available ? "text-foreground" : "text-muted-foreground",
         ].join(" ")}
       >
         {model.name}
@@ -179,7 +125,7 @@ export function ModelCard({ model, selected, onSelect }: ModelCardProps) {
       <div
         className={[
           "mb-auto text-xs leading-normal",
-          model.disabled ? "text-muted-foreground/60" : "text-muted-foreground",
+          model.available ? "text-muted-foreground" : "text-muted-foreground/60",
         ].join(" ")}
       >
         {model.description}
@@ -187,14 +133,12 @@ export function ModelCard({ model, selected, onSelect }: ModelCardProps) {
 
       <div className="mt-2.5 flex items-center justify-between border-t border-border pt-2">
         <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          REASONING
+          {unavailableReason ?? "Output"}
         </span>
-        {model.reasoning === "label" ? (
-          <span className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
-            {model.reasoningLabel}
+        {!unavailableReason && (
+          <span className="text-xs font-medium tracking-wider text-muted-foreground">
+            {pricePerMillionOutput(model.outputPricePerMillion)}
           </span>
-        ) : (
-          <ReasoningSelector value={model.reasoning} disabled={model.disabled} />
         )}
       </div>
     </div>

@@ -3,13 +3,14 @@ import { ChevronDown, Pause, Play, Plus, Search } from "lucide-react";
 import cronstrue from "cronstrue";
 import { PageMeta } from "@/components/PageMeta";
 import { TaskFormModal } from "@/components/dashboard/TaskFormModal";
-import { modelLabel, taskModelOptions } from "@/lib/task-models";
+import { modelLabel, useSelectableModels } from "@/lib/task-models";
 import {
   createTask,
   deleteTask,
   fetchTasks,
   runTask,
   updateTask,
+  type ApiModel,
   type CreateTaskInput,
   type ScheduledTask,
 } from "@/lib/api";
@@ -60,6 +61,7 @@ function MetaRow({ label, children }: { label: string; children: React.ReactNode
 }
 
 export default function DashboardTasks() {
+  const selectableModels = useSelectableModels();
   const [tasks, setTasks] = useState<ScheduledTask[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -312,7 +314,9 @@ export default function DashboardTasks() {
                         </button>
 
                         <span className="hidden shrink-0 text-xs text-muted-foreground sm:block">
-                          {task.isSystem ? "Team default" : modelLabel(task.model)}
+                          {task.isSystem
+                            ? "Team default"
+                            : modelLabel(selectableModels, task.model)}
                         </span>
 
                         {!task.isSystem && (
@@ -355,7 +359,7 @@ export default function DashboardTasks() {
                                   className="rounded-md border border-border bg-muted px-2 py-1 text-sm text-foreground outline-none focus:border-ring disabled:opacity-50"
                                 >
                                   <option value="">Team default</option>
-                                  {taskModelOptionsForSelect()}
+                                  {taskModelOptionsForSelect(selectableModels)}
                                 </select>
                               )}
                             </MetaRow>
@@ -416,8 +420,8 @@ export default function DashboardTasks() {
 }
 
 // Rendered options for the inline model <select> on each task card.
-function taskModelOptionsForSelect() {
-  return taskModelOptions.map((option) => (
+function taskModelOptionsForSelect(models: ApiModel[]) {
+  return models.map((option) => (
     <option key={option.id} value={option.id}>
       {option.name}
     </option>

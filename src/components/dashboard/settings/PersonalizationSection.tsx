@@ -1,22 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Info } from "lucide-react";
 import { Dropdown } from "@/components/dashboard/Dropdown";
-import { personalityOptions } from "@/data/models";
+import { MAX_INSTRUCTIONS, personalityOptions } from "@/data/models";
+import { updateWorkspaceSettings, type Workspace } from "@/lib/api";
 
-const MAX_INSTRUCTIONS = 4000;
+const DEFAULT_TONE = "standard";
 
-export function PersonalizationSection() {
-  const [personality, setPersonality] = useState("standard");
+type PersonalizationSectionProps = {
+  /** Null while the workspace is still loading. */
+  workspace: Workspace | null;
+  /** Members can read the settings but not change them. */
+  readOnly?: boolean;
+  onSaved: (workspace: Workspace) => void;
+};
+
+export function PersonalizationSection({
+  workspace,
+  readOnly,
+  onSaved,
+}: PersonalizationSectionProps) {
+  const [personality, setPersonality] = useState(DEFAULT_TONE);
   const [instructions, setInstructions] = useState("");
-  const [savedPersonality, setSavedPersonality] = useState("standard");
+  const [savedPersonality, setSavedPersonality] = useState(DEFAULT_TONE);
   const [savedInstructions, setSavedInstructions] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Seed the form once the workspace arrives, and re-seed if it is replaced by
+  // a save elsewhere on the page so the dirty check stays honest.
+  useEffect(() => {
+    if (!workspace) return;
+    const tone = workspace.personalityTone ?? DEFAULT_TONE;
+    const text = workspace.workspaceInstructions ?? "";
+    setPersonality(tone);
+    setSavedPersonality(tone);
+    setInstructions(text);
+    setSavedInstructions(text);
+  }, [workspace]);
 
   const hasChanges = personality !== savedPersonality || instructions !== savedInstructions;
 
   function handleSave() {
-    setSavedPersonality(personality);
-    setSavedInstructions(instructions);
+    setSaving(true);
+    setError(null);
+    updateWorkspaceSettings({
+      personalityTone: personality,
+      workspaceInstructions: instructions,
+    })
+      .then((updated) => {
+        setSavedPersonality(personality);
+        setSavedInstructions(instructions);
+        onSaved(updated);
+      })
+      .catch((err: Error) => setError(err.message))
+      .finally(() => setSaving(false));
   }
+
+  const disabled = readOnly || !workspace || saving;
 
   return (
     <section>
@@ -77,6 +117,7 @@ export function PersonalizationSection() {
                 maxLength={MAX_INSTRUCTIONS}
                 rows={8}
                 value={instructions}
+                readOnly={readOnly}
                 onChange={(event) => setInstructions(event.target.value)}
                 className="col-start-1 row-start-1 resize-none overflow-auto bg-transparent px-3 py-2 text-foreground outline-none placeholder:text-muted-foreground"
                 style={{ maxHeight: 220 }}
@@ -84,14 +125,25 @@ export function PersonalizationSection() {
             </div>
           </div>
 
-          <div className="mt-3 flex justify-end">
+          {error && (
+            <p role="alert" className="mt-3 text-sm text-destructive">
+              {error}
+            </p>
+          )}
+
+          <div className="mt-3 flex items-center justify-end gap-3">
+            {readOnly && (
+              <span className="text-sm text-muted-foreground">
+                Only admins can change these settings.
+              </span>
+            )}
             <button
               type="button"
-              disabled={!hasChanges}
+              disabled={disabled || !hasChanges}
               onClick={handleSave}
               className="gomer-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Save changes
+              {saving ? "Saving…" : "Save changes"}
             </button>
           </div>
         </div>
