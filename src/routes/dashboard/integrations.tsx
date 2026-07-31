@@ -22,14 +22,41 @@ import {
 } from "@/lib/integrations-cache";
 import { usePipedreamConnect } from "@/lib/pipedream";
 
-type Tab = "all" | "popular";
-
 // How many cards to reveal at a time. We render a growing window over the
 // loaded apps and only fetch the next server page once the window catches up,
 // so the grid starts small and lazy-loads as the user scrolls to the end.
 const PAGE_SIZE = 48;
 
+// How many catalogue apps get promoted into the "Popular" section; the
+// catalogue is already popularity-ordered so the first slice is the top apps.
+const POPULAR_COUNT = 16;
+
 const accountsLabel = (count: number) => `${count} account${count === 1 ? "" : "s"} connected`;
+
+const reconnectLabel = (count: number) =>
+  `${count} account${count === 1 ? " needs" : "s need"} to be reconnected`;
+
+function SectionHeading({
+  label,
+  count,
+  attention = false,
+}: {
+  label: string;
+  count?: number;
+  attention?: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      {attention && <span className="size-1.5 shrink-0 rounded-full bg-warning" />}
+      <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </span>
+      {count !== undefined && (
+        <span className="text-xs font-medium text-muted-foreground opacity-60">{count}</span>
+      )}
+    </div>
+  );
+}
 
 export default function DashboardIntegrations() {
   const { connect, ready } = usePipedreamConnect();
@@ -37,8 +64,6 @@ export default function DashboardIntegrations() {
 
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [tab, setTab] = useState<Tab>("all");
-  const [connectedOnly, setConnectedOnly] = useState(false);
 
   // Seed from the cached default view so a revisit restores instantly with no
   // network call; falls back to a fresh load when the cache is cold.
@@ -71,11 +96,21 @@ export default function DashboardIntegrations() {
     return map;
   }, [connected]);
 
-  // One representative entry per connected app, for the "connected only" view.
-  const connectedApps = useMemo(
-    () => Array.from(connectedGroups.values(), (group) => group[0]),
-    [connectedGroups],
-  );
+  // Split connected apps into ones needing reconnection (any inactive account)
+  // and healthy ones, one representative entry per app.
+  const { attentionApps, healthyApps } = useMemo(() => {
+    const attention: { app: ConnectedIntegration; inactiveCount: number }[] = [];
+    const healthy: { app: ConnectedIntegration; accountCount: number }[] = [];
+    for (const group of connectedGroups.values()) {
+      const inactiveCount = group.filter((account) => !account.isActive).length;
+      if (inactiveCount > 0) {
+        attention.push({ app: group[0], inactiveCount });
+      } else {
+        healthy.push({ app: group[0], accountCount: group.length });
+      }
+    }
+    return { attentionApps: attention, healthyApps: healthy };
+  }, [connectedGroups]);
 
   const goToConfigure = useCallback(
     (appSlug: string) => navigate(integrationConfigurePath(appSlug)),
@@ -180,12 +215,21 @@ export default function DashboardIntegrations() {
     return [...natives, ...apps.filter((app) => !nativeSlugs.has(app.nameSlug))];
   }, [apps, debouncedSearch]);
 
-  // On the Popular tab we cap to the first page of (popularity-ordered) apps; the
-  // All tab keeps revealing more and fetching further server pages on scroll.
-  const cap = tab === "popular" ? PAGE_SIZE : visibleCount;
-  const visibleApps = catalogApps.slice(0, cap);
-  const hasMore =
-    !connectedOnly && tab === "all" && (visibleCount < apps.length || Boolean(cursor));
+  const searching = debouncedSearch !== "";
+
+  // Connected apps get their own sections, so drop them from the catalogue
+  // groups; search results keep them, with their status shown inline.
+  const availableApps = useMemo(
+    () => catalogApps.filter((app) => !connectedGroups.has(app.nameSlug)),
+    [catalogApps, connectedGroups],
+  );
+
+  const visibleApps = (searching ? catalogApps : availableApps).slice(0, visibleCount);
+  // The catalogue is popularity-ordered: the first slice is "Popular", the
+  // rest is "All", which keeps revealing more server pages on scroll.
+  const popularApps = visibleApps.slice(0, POPULAR_COUNT);
+  const remainingApps = visibleApps.slice(POPULAR_COUNT);
+  const hasMore = visibleCount < apps.length || Boolean(cursor);
 
   const loadMore = useCallback(() => {
     if (loadingMore) return;
@@ -250,6 +294,30 @@ export default function DashboardIntegrations() {
     [connect, ready, refreshConnected],
   );
 
+  // Renders a catalogue app card; in search results connected apps show their
+  // status inline, in the grouped view `group` is always absent.
+  const renderCatalogCard = (app: CatalogApp) => {
+    const group = connectedGroups.get(app.nameSlug);
+    const inactiveCount = group?.filter((account) => !account.isActive).length ?? 0;
+    return (
+      <IntegrationCard
+        key={app.nameSlug || app.name}
+        name={app.name}
+        iconUrl={app.iconUrl || undefined}
+        tone={group ? (inactiveCount > 0 ? "attention" : "connected") : undefined}
+        subtitle={
+          group
+            ? inactiveCount > 0
+              ? reconnectLabel(inactiveCount)
+              : accountsLabel(group.length)
+            : undefined
+        }
+        busy={busySlug === app.nameSlug}
+        onClick={group ? () => goToConfigure(app.nameSlug) : () => setPendingApp(app)}
+      />
+    );
+  };
+
   return (
     <>
       <PageMeta title="Integrations — Gomer" description="Connect the tools you use with Gomer." />
@@ -295,80 +363,7 @@ export default function DashboardIntegrations() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-                <div className="scrollbar-hide flex justify-end gap-0.5 overflow-x-auto sm:justify-start">
-                  <button
-                    type="button"
-                    onClick={() => setTab("all")}
-                    className={[
-                      "gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
-                      tab === "all"
-                        ? "bg-secondary text-secondary-foreground"
-                        : "bg-transparent text-muted-foreground hover:bg-accent",
-                    ].join(" ")}
-                  >
-                    All integrations
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTab("popular")}
-                    className={[
-                      "gomer-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
-                      tab === "popular"
-                        ? "bg-secondary text-secondary-foreground"
-                        : "bg-transparent text-muted-foreground hover:bg-accent",
-                    ].join(" ")}
-                  >
-                    Popular integrations
-                  </button>
-                </div>
-
-                <label className="flex shrink-0 cursor-pointer select-none items-center gap-2 self-end sm:self-auto">
-                  <span className="whitespace-nowrap text-sm text-secondary-foreground opacity-50">
-                    Show connected only
-                  </span>
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={connectedOnly}
-                    onClick={() => setConnectedOnly((value) => !value)}
-                    className={[
-                      "gomer-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
-                      connectedOnly ? "border-highlight bg-highlight" : "bg-secondary",
-                    ].join(" ")}
-                  >
-                    <span
-                      className={[
-                        "size-4 rounded-full bg-muted-foreground transition-all duration-150",
-                        connectedOnly ? "translate-x-4 bg-primary-foreground" : "",
-                      ].join(" ")}
-                    />
-                  </button>
-                </label>
-              </div>
-
-              {connectedOnly ? (
-                connectedApps.length === 0 ? (
-                  <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
-                    <p className="text-sm text-muted-foreground">No connected integrations yet.</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                    {connectedApps.map((integration) => (
-                      <IntegrationCard
-                        key={integration.appSlug}
-                        name={integration.appName}
-                        iconUrl={integration.iconUrl ?? undefined}
-                        connected
-                        subtitle={accountsLabel(
-                          connectedGroups.get(integration.appSlug)?.length ?? 1,
-                        )}
-                        onClick={() => goToConfigure(integration.appSlug)}
-                      />
-                    ))}
-                  </div>
-                )
-              ) : loading ? (
+              {loading ? (
                 <div className="flex justify-center py-12">
                   <Loader2 className="size-5 animate-spin text-muted-foreground" aria-hidden />
                 </div>
@@ -383,31 +378,78 @@ export default function DashboardIntegrations() {
                     Retry
                   </button>
                 </div>
-              ) : visibleApps.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
-                  <p className="text-sm text-muted-foreground">
-                    No integrations match your search.
-                  </p>
-                </div>
+              ) : searching ? (
+                visibleApps.length === 0 ? (
+                  <div className="rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
+                    <p className="text-sm text-muted-foreground">
+                      No integrations match your search.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                    {visibleApps.map(renderCatalogCard)}
+                  </div>
+                )
               ) : (
-                <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                  {visibleApps.map((app) => {
-                    const group = connectedGroups.get(app.nameSlug);
-                    return (
-                      <IntegrationCard
-                        key={app.nameSlug || app.name}
-                        name={app.name}
-                        iconUrl={app.iconUrl || undefined}
-                        connected={Boolean(group)}
-                        subtitle={group ? accountsLabel(group.length) : undefined}
-                        busy={busySlug === app.nameSlug}
-                        onClick={
-                          group ? () => goToConfigure(app.nameSlug) : () => setPendingApp(app)
-                        }
+                <>
+                  {attentionApps.length > 0 && (
+                    <section className="flex flex-col gap-3">
+                      <SectionHeading
+                        label="Needs attention"
+                        count={attentionApps.length}
+                        attention
                       />
-                    );
-                  })}
-                </div>
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                        {attentionApps.map(({ app, inactiveCount }) => (
+                          <IntegrationCard
+                            key={app.appSlug}
+                            name={app.appName}
+                            iconUrl={app.iconUrl ?? undefined}
+                            tone="attention"
+                            subtitle={reconnectLabel(inactiveCount)}
+                            onClick={() => goToConfigure(app.appSlug)}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {healthyApps.length > 0 && (
+                    <section className="flex flex-col gap-3">
+                      <SectionHeading label="Connected" count={healthyApps.length} />
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                        {healthyApps.map(({ app, accountCount }) => (
+                          <IntegrationCard
+                            key={app.appSlug}
+                            name={app.appName}
+                            iconUrl={app.iconUrl ?? undefined}
+                            tone="connected"
+                            subtitle={accountsLabel(accountCount)}
+                            onClick={() => goToConfigure(app.appSlug)}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {popularApps.length > 0 && (
+                    <section className="flex flex-col gap-3">
+                      <SectionHeading label="Popular" />
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                        {popularApps.map(renderCatalogCard)}
+                      </div>
+                    </section>
+                  )}
+
+                  {remainingApps.length > 0 && (
+                    <section className="flex flex-col gap-3">
+                      <SectionHeading label="All" />
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                        {remainingApps.map(renderCatalogCard)}
+                      </div>
+                    </section>
+                  )}
+                </>
               )}
 
               {hasMore && (

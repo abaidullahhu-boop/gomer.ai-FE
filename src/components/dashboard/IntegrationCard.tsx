@@ -6,7 +6,8 @@ type IntegrationCardProps = {
   iconUrl?: string;
   /** Secondary line under the name, e.g. "2 accounts connected". */
   subtitle?: string;
-  connected?: boolean;
+  /** Status dot next to the subtitle: green when connected, orange when attention is needed. */
+  tone?: "connected" | "attention";
   busy?: boolean;
   onClick?: () => void;
 };
@@ -15,7 +16,7 @@ export function IntegrationCard({
   name,
   iconUrl,
   subtitle,
-  connected = false,
+  tone,
   busy = false,
   onClick,
 }: IntegrationCardProps) {
@@ -37,7 +38,13 @@ export function IntegrationCard({
         <p className="truncate text-sm font-semibold leading-5 text-foreground">{name}</p>
         {subtitle && (
           <span className="flex items-center gap-1.5 text-xs leading-4 text-muted-foreground">
-            {connected && <span className="size-1.5 shrink-0 rounded-full bg-highlight" />}
+            {tone && (
+              <span
+                className={`size-1.5 shrink-0 rounded-full ${
+                  tone === "attention" ? "bg-warning" : "bg-success-foreground"
+                }`}
+              />
+            )}
             <span className="truncate">{subtitle}</span>
           </span>
         )}
