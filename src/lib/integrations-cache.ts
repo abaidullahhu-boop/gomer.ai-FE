@@ -5,31 +5,24 @@
  * freshness boundary.
  *
  * Two things are cached:
- *  - the default (no-search) catalogue view, including any pages revealed by
- *    scrolling, so the grid restores instantly at the same depth;
+ *  - how far the catalogue grid was scrolled, so a revisit restores at the same
+ *    depth (the catalogue itself is local — see `integration-catalog.ts`);
  *  - the workspace's connected integrations, with in-flight de-duplication.
- *
- * Searches are never cached — only the default view is restored.
  */
-import { fetchConnectedIntegrations, type CatalogApp, type ConnectedIntegration } from "./api";
+import { fetchConnectedIntegrations, type ConnectedIntegration } from "./api";
 
-export type CatalogSnapshot = {
-  apps: CatalogApp[];
-  cursor?: string;
-  visibleCount: number;
-};
-
-let catalogSnapshot: CatalogSnapshot | null = null;
+let catalogVisibleCount: number | null = null;
 
 let connectedCache: ConnectedIntegration[] | null = null;
 let connectedInflight: Promise<ConnectedIntegration[]> | null = null;
 
-export function getCatalogSnapshot(): CatalogSnapshot | null {
-  return catalogSnapshot;
+/** How many catalogue cards were revealed last visit, if the page was open before. */
+export function getCatalogVisibleCount(): number | null {
+  return catalogVisibleCount;
 }
 
-export function setCatalogSnapshot(snapshot: CatalogSnapshot): void {
-  catalogSnapshot = snapshot;
+export function setCatalogVisibleCount(count: number): void {
+  catalogVisibleCount = count;
 }
 
 export function getCachedConnected(): ConnectedIntegration[] | null {
