@@ -16,15 +16,16 @@ import {
 } from "@/lib/api";
 import {
   getCachedConnected,
-  getCatalogSnapshot,
+  getCatalogVisibleCount,
   loadConnected,
-  setCatalogSnapshot,
+  setCatalogVisibleCount,
 } from "@/lib/integrations-cache";
+import { getLoadedCatalog, loadIntegrationCatalog, searchCatalog } from "@/lib/integration-catalog";
 import { usePipedreamConnect } from "@/lib/pipedream";
 
-// How many cards to reveal at a time. We render a growing window over the
-// loaded apps and only fetch the next server page once the window catches up,
-// so the grid starts small and lazy-loads as the user scrolls to the end.
+// How many cards to reveal at a time. The catalogue is local, so this is purely
+// a rendering window over it — 3,000-odd cards at once would cost more than the
+// data ever does — grown as the user scrolls to the end.
 const PAGE_SIZE = 48;
 
 // How many catalogue apps get promoted into the "Popular" section; the
@@ -65,17 +66,20 @@ export default function DashboardIntegrations() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  // Seed from the cached default view so a revisit restores instantly with no
-  // network call; falls back to a fresh load when the cache is cold.
-  const cachedCatalog = getCatalogSnapshot();
-  const [apps, setApps] = useState<CatalogApp[]>(() => cachedCatalog?.apps ?? []);
-  const [cursor, setCursor] = useState<string | undefined>(() => cachedCatalog?.cursor);
-  const [visibleCount, setVisibleCount] = useState(() => cachedCatalog?.visibleCount ?? PAGE_SIZE);
-  const [loading, setLoading] = useState(() => !cachedCatalog);
-  const [loadingMore, setLoadingMore] = useState(false);
+  // The catalogue ships with the app, so a warm module cache renders it on the
+  // first frame with no network call at all; a cold one only waits on a local
+  // chunk. `visibleCount` is restored so a revisit lands at the same depth.
+  const [apps, setApps] = useState<CatalogApp[]>(() => getLoadedCatalog() ?? []);
+  const [visibleCount, setVisibleCount] = useState(() => getCatalogVisibleCount() ?? PAGE_SIZE);
+  const [loading, setLoading] = useState(() => !getLoadedCatalog());
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  // Apps added to Pipedream since the catalogue was built: when a search has no
+  // local match we ask the live endpoint before declaring "no results".
+  const [remoteResults, setRemoteResults] = useState<CatalogApp[]>([]);
+  const [remoteSearching, setRemoteSearching] = useState(false);
 
   const [connected, setConnected] = useState<ConnectedIntegration[]>(
     () => getCachedConnected() ?? [],
@@ -153,40 +157,21 @@ export default function DashboardIntegrations() {
     return () => window.clearTimeout(id);
   }, [search]);
 
-  // Load the first page whenever the query changes (or a retry is requested).
-  // The default (no-search) view is served from the cached snapshot when warm.
+  // Load the bundled catalogue once (a retry re-attempts the import).
   useEffect(() => {
+    if (getLoadedCatalog()) return;
     let cancelled = false;
-    if (debouncedSearch === "") {
-      const snapshot = getCatalogSnapshot();
-      if (snapshot) {
-        setApps(snapshot.apps);
-        setCursor(snapshot.cursor);
-        setVisibleCount(snapshot.visibleCount);
-        setError(null);
-        setLoading(false);
-        return;
-      }
-    }
     setLoading(true);
     setError(null);
-    setVisibleCount(PAGE_SIZE);
-    fetchIntegrationApps(debouncedSearch)
-      .then((result) => {
-        if (cancelled) return;
-        setApps(result.apps);
-        setCursor(result.after);
+    loadIntegrationCatalog()
+      .then((catalog) => {
+        if (!cancelled) setApps(catalog);
       })
       .catch((err) => {
         if (cancelled) return;
         console.error("Failed to load integration catalogue", err);
         setApps([]);
-        setCursor(undefined);
-        setError(
-          err instanceof Error && err.message
-            ? err.message
-            : "Could not load integrations from Pipedream.",
-        );
+        setError("Could not load the integration catalogue.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -194,28 +179,66 @@ export default function DashboardIntegrations() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedSearch, reloadKey]);
+  }, [reloadKey]);
 
-  // Keep the cached snapshot in sync with the default view (including pages
-  // revealed by scrolling), so a later revisit restores at the same depth.
+  // Reset the window whenever the query changes; matching itself is local.
   useEffect(() => {
-    if (debouncedSearch === "" && !loading && !error) {
-      setCatalogSnapshot({ apps, cursor, visibleCount });
-    }
-  }, [apps, cursor, visibleCount, debouncedSearch, loading, error]);
-
-  // Native apps (e.g. Meta Ads) aren't in the Pipedream catalogue, so merge them
-  // in client-side, filtered by the search and shown first (like featured apps).
-  const catalogApps = useMemo(() => {
-    const q = debouncedSearch.toLowerCase();
-    const natives = NATIVE_APPS.filter(
-      (app) => !q || app.name.toLowerCase().includes(q) || app.nameSlug.toLowerCase().includes(q),
-    );
-    const nativeSlugs = new Set(natives.map((app) => app.nameSlug));
-    return [...natives, ...apps.filter((app) => !nativeSlugs.has(app.nameSlug))];
-  }, [apps, debouncedSearch]);
+    setVisibleCount(PAGE_SIZE);
+  }, [debouncedSearch]);
 
   const searching = debouncedSearch !== "";
+
+  const localMatches = useMemo(
+    () => (searching ? searchCatalog(apps, debouncedSearch) : apps),
+    [apps, debouncedSearch, searching],
+  );
+
+  // Native apps (e.g. Meta Ads) aren't in the Pipedream catalogue, so they are
+  // matched separately and shown first, like featured apps.
+  const nativeMatches = useMemo(() => {
+    const q = debouncedSearch.toLowerCase();
+    return NATIVE_APPS.filter(
+      (app) => !q || app.name.toLowerCase().includes(q) || app.nameSlug.toLowerCase().includes(q),
+    );
+  }, [debouncedSearch]);
+
+  const noLocalMatch = localMatches.length === 0 && nativeMatches.length === 0;
+
+  // Only a search nothing local can answer reaches the network, so a stale
+  // snapshot costs latency on misses rather than hiding new apps.
+  useEffect(() => {
+    setRemoteResults([]);
+    if (!searching || loading || !noLocalMatch) {
+      setRemoteSearching(false);
+      return;
+    }
+    let cancelled = false;
+    setRemoteSearching(true);
+    fetchIntegrationApps(debouncedSearch)
+      .then((result) => {
+        if (!cancelled) setRemoteResults(result.apps);
+      })
+      .catch((err) => {
+        if (!cancelled) console.error("Failed to search the live catalogue", err);
+      })
+      .finally(() => {
+        if (!cancelled) setRemoteSearching(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [debouncedSearch, searching, loading, noLocalMatch]);
+
+  // Remember how deep the default view was scrolled, for the next visit.
+  useEffect(() => {
+    if (!searching) setCatalogVisibleCount(visibleCount);
+  }, [visibleCount, searching]);
+
+  const catalogApps = useMemo(() => {
+    const nativeSlugs = new Set(nativeMatches.map((app) => app.nameSlug));
+    const matches = localMatches.length > 0 ? localMatches : remoteResults;
+    return [...nativeMatches, ...matches.filter((app) => !nativeSlugs.has(app.nameSlug))];
+  }, [localMatches, nativeMatches, remoteResults]);
 
   // Connected apps get their own sections, so drop them from the catalogue
   // groups; search results keep them, with their status shown inline.
@@ -224,32 +247,15 @@ export default function DashboardIntegrations() {
     [catalogApps, connectedGroups],
   );
 
-  const visibleApps = (searching ? catalogApps : availableApps).slice(0, visibleCount);
+  const matchedApps = searching ? catalogApps : availableApps;
+  const visibleApps = matchedApps.slice(0, visibleCount);
   // The catalogue is popularity-ordered: the first slice is "Popular", the
-  // rest is "All", which keeps revealing more server pages on scroll.
+  // rest is "All", which keeps revealing more of the catalogue on scroll.
   const popularApps = visibleApps.slice(0, POPULAR_COUNT);
   const remainingApps = visibleApps.slice(POPULAR_COUNT);
-  const hasMore = visibleCount < apps.length || Boolean(cursor);
+  const hasMore = visibleCount < matchedApps.length;
 
-  const loadMore = useCallback(() => {
-    if (loadingMore) return;
-    // Reveal already-loaded apps first; only hit the server once the window
-    // reaches the end of what we have.
-    if (visibleCount < apps.length) {
-      setVisibleCount((count) => count + PAGE_SIZE);
-      return;
-    }
-    if (!cursor) return;
-    setLoadingMore(true);
-    fetchIntegrationApps(debouncedSearch, cursor)
-      .then((result) => {
-        setApps((prev) => [...prev, ...result.apps]);
-        setCursor(result.after);
-        setVisibleCount((count) => count + PAGE_SIZE);
-      })
-      .catch((error) => console.error("Failed to load more integrations", error))
-      .finally(() => setLoadingMore(false));
-  }, [apps.length, cursor, debouncedSearch, loadingMore, visibleCount]);
+  const loadMore = useCallback(() => setVisibleCount((count) => count + PAGE_SIZE), []);
 
   useEffect(() => {
     const node = loadMoreRef.current;
@@ -363,7 +369,7 @@ export default function DashboardIntegrations() {
                 </div>
               </div>
 
-              {loading ? (
+              {loading || remoteSearching ? (
                 <div className="flex justify-center py-12">
                   <Loader2 className="size-5 animate-spin text-muted-foreground" aria-hidden />
                 </div>
