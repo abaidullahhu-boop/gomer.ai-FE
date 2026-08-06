@@ -491,15 +491,13 @@ export type AppTool = {
   description?: string;
 };
 
-/** List the actions/tools an app exposes, for the "what can Gomer do?" panel. */
-export async function fetchIntegrationTools(
-  appSlug: string,
-  after?: string,
-): Promise<{ tools: AppTool[]; after?: string }> {
-  const qs = after ? `?after=${encodeURIComponent(after)}` : "";
-  return apiFetch<{ tools: AppTool[]; after?: string }>(
-    `/integrations/${encodeURIComponent(appSlug)}/tools${qs}`,
-  );
+/**
+ * Every action an app exposes, for the "what can Gomer do?" panel. The API pages
+ * through Pipedream and caches server-side, so this returns the complete list in
+ * one request.
+ */
+export async function fetchIntegrationTools(appSlug: string): Promise<{ tools: AppTool[] }> {
+  return apiFetch<{ tools: AppTool[] }>(`/integrations/${encodeURIComponent(appSlug)}/tools`);
 }
 
 // ── Billing & credits ────────────────────────────────────────────────────────
