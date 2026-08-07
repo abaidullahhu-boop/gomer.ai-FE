@@ -17,7 +17,7 @@ import {
   type AuthUser,
   type WorkspaceMembership,
 } from "./api";
-import { getAccessToken, startSlackLogin } from "./auth";
+import { getAccessToken, startSlackLogin, storeSessionHint } from "./auth";
 
 type SessionContextValue = {
   /** The Slack-authenticated user, or null while loading / on error. */
@@ -48,6 +48,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       const [me, memberships] = await Promise.all([fetchMe(), fetchWorkspaces()]);
       setUser(me);
       setWorkspaces(memberships);
+
+      // Let the marketing nav greet the user by workspace on their next visit.
+      const current = memberships.find((membership) => membership.isCurrent);
+      if (current) {
+        storeSessionHint({ workspaceId: current.workspaceId, workspaceName: current.name });
+      }
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
         navigate("/sign-in", { replace: true });

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/logo.svg";
-import { GetStartedButton } from "@/components/site/GetStartedButton";
+import { NavAuthCta } from "@/components/site/NavAuthCta";
 
 type MenuItem = { label: string; to: string };
 
@@ -391,7 +391,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
                 </nav>
 
                 <div className="flex min-w-0 items-center justify-end">
-                  <GetStartedButton variant="nav" />
+                  <NavAuthCta />
                 </div>
                 </div>
               </div>
@@ -479,8 +479,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
                 </nav>
 
                 <div className="flex flex-col gap-3 border-t border-black/[0.06] py-5">
-                  <GetStartedButton
-                    variant="nav"
+                  <NavAuthCta
                     fullWidth
                     className={navMobileCtaButtonClass}
                     onClick={closeMobileMenu}
