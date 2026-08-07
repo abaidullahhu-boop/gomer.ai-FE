@@ -41,6 +41,7 @@ import UsageActivity from "@/routes/dashboard/usage/activity";
 import UsageScheduledTasks from "@/routes/dashboard/usage/scheduled-tasks";
 import AuthCallback from "@/routes/auth.callback";
 import SpaceApp from "@/spaces-runtime/SpaceApp";
+import DataDeletionPage from "@/routes/data-deletion";
 import ImpressumPage from "@/routes/impressum";
 import IntegrationsPage from "@/routes/integrations";
 import LandingPage from "@/routes/landing";
@@ -115,6 +116,7 @@ export default function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/security" element={<SecurityPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/data-deletion" element={<DataDeletionPage />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/use-cases" element={<UseCasesPage />} />
