@@ -9,6 +9,8 @@ import {
   fetchIntegrationTools,
   integrationAccountPath,
   parseConfigureProvider,
+  startMetaConnect,
+  NATIVE_APPS,
   type AppTool,
   type ConnectedIntegration,
 } from "@/lib/api";
@@ -20,6 +22,12 @@ export default function DashboardIntegrationConfigure() {
   const appSlug = parseConfigureProvider(provider);
   const navigate = useNavigate();
   const { connect, ready } = usePipedreamConnect();
+
+  /** Set when this app is brokered natively rather than through Pipedream. */
+  const nativeProvider = useMemo(
+    () => NATIVE_APPS.find((native) => native.nameSlug === appSlug)?.provider,
+    [appSlug],
+  );
 
   const [accounts, setAccounts] = useState<ConnectedIntegration[]>([]);
   const [loading, setLoading] = useState(true);
@@ -102,7 +110,23 @@ export default function DashboardIntegrationConfigure() {
 
   const handleAddAccount = useCallback(
     async (options: ConnectOptions) => {
-      if (!appSlug || !ready) return;
+      if (!appSlug) return;
+      // Native providers (Meta) use their own OAuth, exactly as the Integrations
+      // page does: fetch the consent URL and hand off the browser. Pipedream has
+      // no Meta app in its catalogue at all, so falling through to `connect`
+      // here fails with an opaque "session has expired" from its popup.
+      if (nativeProvider === "meta") {
+        setAdding(true);
+        try {
+          const { url } = await startMetaConnect(options.accessLevel);
+          window.location.href = url;
+        } catch (error) {
+          console.error("Failed to start Meta connect", error);
+          setAdding(false);
+        }
+        return;
+      }
+      if (!ready) return;
       setAdding(true);
       try {
         await connect(appSlug, options);
@@ -114,7 +138,7 @@ export default function DashboardIntegrationConfigure() {
         setAdding(false);
       }
     },
-    [app?.appName, appSlug, connect, load, ready],
+    [app?.appName, appSlug, connect, load, nativeProvider, ready],
   );
 
   // Bad route param, or every account was disconnected elsewhere — go back.
