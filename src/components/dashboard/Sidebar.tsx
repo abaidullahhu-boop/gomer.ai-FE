@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { CircleHelp, Gift, ShieldCheck, UserPlus } from "lucide-react";
+import { CircleHelp, Gift, Repeat2, ShieldCheck, UserPlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { SVGProps } from "react";
 import {
@@ -34,6 +34,7 @@ const mainNav: NavItem[] = [
   { label: "Skills", to: "/dashboard/skills", icon: WrenchIcon },
   { label: "Spaces", to: "/dashboard/spaces", icon: SpacesIcon },
   { label: "Scheduled Tasks", to: "/dashboard/tasks", icon: ScheduledTasksIcon },
+  { label: "Automations", to: "/dashboard/automations", icon: Repeat2 },
   { label: "Team", to: "/dashboard/team", icon: TeamIcon },
   { label: "Usage", to: "/dashboard/usage", icon: UsageIcon },
   { label: "Billing", to: "/dashboard/billing", icon: BillingIcon },

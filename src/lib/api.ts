@@ -605,3 +605,114 @@ export function setMemberActive(id: string, isActive: boolean): Promise<AdminMem
     body: JSON.stringify({ isActive }),
   });
 }
+
+// ── Automations (read-only) ──────────────────────────────────────────────────
+// Rules, exports, memory facts and ROAS snapshots are created and changed
+// conversationally; the dashboard only reports on them.
+
+/** An automated ad rule: a metric threshold checked on a schedule. */
+export type AdRule = {
+  id: string;
+  name: string;
+  adAccountId: string;
+  scope: "account" | "campaign" | "adset";
+  metric: "spend" | "cpa" | "roas" | "verified_roas" | "ctr" | "cpc";
+  comparator: "gt" | "gte" | "lt" | "lte";
+  threshold: string;
+  windowDays: number;
+  action: "alert" | "pause" | "scale";
+  scalePct: number | null;
+  autoExecute: boolean;
+  maxScalePct: number;
+  maxActionsPerRun: number;
+  dailyActionCap: number;
+  cronExpression: string;
+  timezone: string | null;
+  slackChannelId: string | null;
+  isActive: boolean;
+  lastRun: string | null;
+  nextRun: string | null;
+  createdAt: string;
+};
+
+/** Something a rule actually did on one entity. */
+export type AdRuleAction = {
+  id: string;
+  ruleId: string;
+  entityType: string;
+  entityId: string | null;
+  entityName: string | null;
+  metricValue: string | null;
+  action: string;
+  detail: string | null;
+  success: boolean;
+  error: string | null;
+  createdAt: string;
+  rule?: { id: string; name: string } | null;
+};
+
+/** A durable fact the assistant remembers about the workspace. */
+export type WorkspaceMemoryFact = {
+  id: string;
+  key: string;
+  value: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/** A recurring Google Sheets export. */
+export type ScheduledExportRow = {
+  id: string;
+  name: string;
+  dataset: string;
+  cronExpression: string;
+  timezone: string | null;
+  spreadsheetId: string | null;
+  spreadsheetTitle: string | null;
+  spreadsheetUrl: string | null;
+  sheetTitle: string;
+  windowDays: number;
+  isActive: boolean;
+  lastRun: string | null;
+  nextRun: string | null;
+  lastRowCount: number | null;
+  lastError: string | null;
+  createdAt: string;
+};
+
+/** One verified-ROAS check: ad spend paired with real Stripe revenue. */
+export type RoasSnapshot = {
+  id: string;
+  adAccountId: string;
+  sinceDate: string;
+  untilDate: string;
+  metaSpend: string;
+  spendCurrency: string | null;
+  stripeRevenue: string;
+  revenueCurrency: string | null;
+  roas: string | null;
+  purchases: number;
+  cpa: string | null;
+  caveats: string[] | null;
+  createdAt: string;
+};
+
+export function fetchRules(): Promise<AdRule[]> {
+  return apiFetch<AdRule[]>("/rules");
+}
+
+export function fetchRuleActions(limit = 50): Promise<AdRuleAction[]> {
+  return apiFetch<AdRuleAction[]>(`/rules/actions?limit=${limit}`);
+}
+
+export function fetchMemoryFacts(): Promise<WorkspaceMemoryFact[]> {
+  return apiFetch<WorkspaceMemoryFact[]>("/memory");
+}
+
+export function fetchScheduledExports(): Promise<ScheduledExportRow[]> {
+  return apiFetch<ScheduledExportRow[]>("/exports");
+}
+
+export function fetchRoasSnapshots(limit = 20): Promise<RoasSnapshot[]> {
+  return apiFetch<RoasSnapshot[]>(`/roas/snapshots?limit=${limit}`);
+}

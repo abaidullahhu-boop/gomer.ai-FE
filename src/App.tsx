@@ -25,6 +25,7 @@ import DashboardTeam from "@/routes/dashboard/team";
 import DashboardTeamEdit from "@/routes/dashboard/team-edit";
 import DashboardBilling from "@/routes/dashboard/billing";
 import DashboardAdmin from "@/routes/dashboard/admin";
+import DashboardAutomations from "@/routes/dashboard/automations";
 import DashboardAccount from "@/routes/dashboard/account";
 import { SettingsLayout } from "@/components/dashboard/settings/SettingsLayout";
 import SettingsGeneral from "@/routes/dashboard/settings/general";
@@ -93,6 +94,7 @@ export default function App() {
           <Route path="skills/installed/library" element={<DashboardSkills />} />
           <Route path="spaces" element={<DashboardSpaces />} />
           <Route path="tasks" element={<DashboardTasks />} />
+          <Route path="automations" element={<DashboardAutomations />} />
           <Route path="team" element={<DashboardTeam />} />
           <Route path="team/edit" element={<DashboardTeamEdit />} />
           <Route path="usage" element={<UsageLayout />}>
