@@ -59,9 +59,14 @@ export default function DashboardBilling() {
   useEffect(() => {
     fetchBillingSummary()
       .then(setSummary)
-      .catch((err) =>
-        setError(err instanceof ApiError ? err.message : "Failed to load billing data"),
-      );
+      .catch((err) => {
+        const status = err instanceof ApiError ? err.status : 0;
+        setError(
+          status > 0 && status < 500 && err instanceof ApiError
+            ? err.message
+            : "Failed to load billing data",
+        );
+      });
   }, [topupResult]);
 
   async function buyPack(packId: string) {
@@ -71,7 +76,17 @@ export default function DashboardBilling() {
       const { checkoutUrl } = await startTopup(packId);
       window.location.href = checkoutUrl;
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Could not start the checkout");
+      // DigitalOcean's edge replaces a component's 5xx with its own HTML error
+      // page, so the API's message ("Could not start the checkout — try again
+      // shortly") never reaches us and ApiError carries only "Request failed
+      // (504)". Prefer our own wording for anything gateway-shaped.
+      const status = err instanceof ApiError ? err.status : 0;
+      const useOwnWording = status === 0 || status >= 500;
+      setError(
+        !useOwnWording && err instanceof ApiError
+          ? err.message
+          : "Could not start the checkout — please try again shortly.",
+      );
       setPayingPackId(null);
     }
   }

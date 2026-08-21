@@ -538,6 +538,59 @@ export function fetchBillingSummary(): Promise<BillingSummary> {
   return apiFetch<BillingSummary>("/billing/summary");
 }
 
+/** One day's metered consumption, as returned by /usage/analytics. */
+export type UsageDailyPoint = {
+  /** ISO date, YYYY-MM-DD. */
+  day: string;
+  /** Credits spent in interactive Slack threads that day. */
+  thread: number;
+  /** Credits spent by rules and scheduled tasks that day. */
+  scheduledTask: number;
+  credits: number;
+};
+
+/** A credit spender over the window. `userId` is null for unattended work. */
+export type UsageSpender = {
+  userId: string | null;
+  name: string;
+  avatarUrl: string | null;
+  credits: number;
+  events: number;
+};
+
+/** Credits attributed to one scheduled task over the window. */
+export type UsageTaskSpend = {
+  taskId: string;
+  name: string;
+  /** Null when the task predates author tracking or the member was removed. */
+  createdByName: string | null;
+  createdByUserId: string | null;
+  cronExpression: string | null;
+  isActive: boolean;
+  credits: number;
+  runs: number;
+  lastRun: string | null;
+};
+
+export type UsageAnalytics = {
+  days: number;
+  daily: UsageDailyPoint[];
+  totalCredits: number;
+  burnPerDay: number;
+  byType: { thread: number; scheduledTask: number };
+  topTasks: UsageTaskSpend[];
+  topSpenders: UsageSpender[];
+};
+
+/**
+ * Daily spend and the spender leaderboard for the caller's own workspace.
+ * The admin tab reads the same numbers from /admin/analytics, which is
+ * admin-only; this route is the unprivileged view.
+ */
+export function fetchUsageAnalytics(days: number): Promise<UsageAnalytics> {
+  return apiFetch<UsageAnalytics>(`/usage/analytics?days=${days}`);
+}
+
 /** Start a Stripe Checkout for a pack; caller redirects to the returned URL. */
 export function startTopup(packId: string): Promise<{ checkoutUrl: string }> {
   return apiFetch<{ checkoutUrl: string }>("/billing/topup", {
