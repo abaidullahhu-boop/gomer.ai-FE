@@ -3,7 +3,6 @@ import { CircleHelp, Gift, Repeat2, ShieldCheck, UserPlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { SVGProps } from "react";
 import {
-  AccountIcon,
   BillingIcon,
   HomeIcon,
   IntegrationIcon,
@@ -38,11 +37,10 @@ const mainNav: NavItem[] = [
   { label: "Team", to: "/dashboard/team", icon: TeamIcon },
   { label: "Usage", to: "/dashboard/usage", icon: UsageIcon },
   { label: "Billing", to: "/dashboard/billing", icon: BillingIcon },
-  { label: "Account", to: "/dashboard/account", icon: AccountIcon },
   { label: "Settings", to: "/dashboard/settings", icon: SettingsIcon },
 ];
 
-/** Shown only to workspace admins, between Billing and Account. */
+/** Shown only to workspace admins, between Billing and Settings. */
 const adminNavItem: NavItem = { label: "Admin", to: "/dashboard/admin", icon: ShieldCheck };
 
 function NavItemLink({

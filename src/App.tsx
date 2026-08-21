@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { NotFound } from "@/components/NotFound";
 import Index from "@/routes/index";
@@ -26,7 +26,6 @@ import DashboardTeamEdit from "@/routes/dashboard/team-edit";
 import DashboardBilling from "@/routes/dashboard/billing";
 import DashboardAdmin from "@/routes/dashboard/admin";
 import DashboardAutomations from "@/routes/dashboard/automations";
-import DashboardAccount from "@/routes/dashboard/account";
 import { SettingsLayout } from "@/components/dashboard/settings/SettingsLayout";
 import SettingsGeneral from "@/routes/dashboard/settings/general";
 import SettingsPermissions from "@/routes/dashboard/settings/permissions";
@@ -105,7 +104,12 @@ export default function App() {
           </Route>
           <Route path="billing" element={<DashboardBilling />} />
           <Route path="admin" element={<DashboardAdmin />} />
-          <Route path="account" element={<DashboardAccount />} />
+          {/* The Account page renders placeholder data end to end — a fixed
+              workspace name and a "Gomer email address" feature that has no
+              backend at all. Hidden from the sidebar and redirected here
+              rather than deleted, so the work survives for whenever it is
+              wired to real data. */}
+          <Route path="account" element={<Navigate to="/dashboard" replace />} />
           <Route path="settings" element={<SettingsLayout />}>
             <Route index element={<SettingsGeneral />} />
             <Route path="permissions" element={<SettingsPermissions />} />

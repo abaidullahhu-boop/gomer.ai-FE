@@ -26,6 +26,19 @@ function share(part: number, total: number): number {
   return total > 0 ? Math.round((part / total) * 100) : 0;
 }
 
+/**
+ * The window as real dates rather than a day count.
+ *
+ * A count was fine while every period was a trailing window, but "last month"
+ * is now an exact calendar range — describing it as "the last 31 days" would
+ * name a window the chart is not showing.
+ */
+function formatWindow(range: { from: string; to: string }): string {
+  const day = (iso: string) =>
+    new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  return `${day(range.from)} – ${day(range.to)}`;
+}
+
 /** Day-of-month from an ISO date, which is all the axis has room for. */
 function dayLabel(iso: string): string {
   const day = Number(iso.slice(8, 10));
@@ -41,7 +54,7 @@ export function CreditUsageChart({ analytics, loading }: CreditUsageChartProps) 
     Math.round((max / TICK_COUNT) * i),
   );
   const barWidth = daily.length ? 100 / daily.length : 0;
-  const windowLabel = analytics ? `the last ${analytics.days} days` : "the selected period";
+  const windowLabel = analytics ? formatWindow(analytics.range) : "the selected period";
 
   return (
     <div className="min-w-0 rounded-[7px] border border-border bg-card">

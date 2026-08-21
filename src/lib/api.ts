@@ -573,6 +573,8 @@ export type UsageTaskSpend = {
 };
 
 export type UsageAnalytics = {
+  /** The window the server actually reported over, echoed back. */
+  range: { from: string; to: string };
   days: number;
   daily: UsageDailyPoint[];
   totalCredits: number;
@@ -582,13 +584,49 @@ export type UsageAnalytics = {
   topSpenders: UsageSpender[];
 };
 
+/** One row of the activity feed, with its user and task already resolved. */
+export type UsageActivityEntry = {
+  id: string;
+  createdAt: string;
+  type: string;
+  sourceName: string;
+  model: string;
+  credits: number;
+  tokens: number;
+  /** Null for unattended work — a rule or scheduled task, not a person. */
+  user: { id: string; name: string; avatarUrl: string | null } | null;
+  task: { id: string; name: string } | null;
+};
+
 /**
  * Daily spend and the spender leaderboard for the caller's own workspace.
  * The admin tab reads the same numbers from /admin/analytics, which is
  * admin-only; this route is the unprivileged view.
+ *
+ * The window is sent as two absolute instants rather than a day count, so a
+ * calendar period such as "last month" is exact instead of approximated by a
+ * trailing 30 days.
  */
-export function fetchUsageAnalytics(days: number): Promise<UsageAnalytics> {
-  return apiFetch<UsageAnalytics>(`/usage/analytics?days=${days}`);
+export function fetchUsageAnalytics(range: { from: Date; to: Date }): Promise<UsageAnalytics> {
+  const query = new URLSearchParams({
+    from: range.from.toISOString(),
+    to: range.to.toISOString(),
+  });
+  return apiFetch<UsageAnalytics>(`/usage/analytics?${query.toString()}`);
+}
+
+/** Recent spend for the activity feed, optionally narrowed to one task. */
+export function fetchUsageActivity(
+  options: {
+    taskId?: string;
+    limit?: number;
+  } = {},
+): Promise<UsageActivityEntry[]> {
+  const query = new URLSearchParams();
+  if (options.taskId) query.set("taskId", options.taskId);
+  if (options.limit) query.set("limit", String(options.limit));
+  const suffix = query.toString();
+  return apiFetch<UsageActivityEntry[]>(`/usage/activity${suffix ? `?${suffix}` : ""}`);
 }
 
 /** Start a Stripe Checkout for a pack; caller redirects to the returned URL. */
