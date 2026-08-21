@@ -77,13 +77,18 @@ export default function DashboardBilling() {
   }
 
   const balance = summary?.balance ?? null;
+  // Until the summary lands there is no honest number to show. The placeholder
+  // this used to fall back to was a hardcoded "39.4k", which rendered as a real
+  // balance on a failed fetch — the one moment the figure most needs to be true.
   const creditsLabel = balance
     ? `${balance.balance.toLocaleString()} (≈ $${(balance.balance / 100).toFixed(2)})`
-    : billingData.credits.available;
+    : error
+      ? "Unavailable"
+      : "—";
   const progressPercent =
     balance && balance.granted > 0
       ? Math.max(Math.min((balance.balance / balance.granted) * 100, 100), 0)
-      : billingData.credits.progressPercent;
+      : 0;
 
   async function copyInviteLink() {
     try {
