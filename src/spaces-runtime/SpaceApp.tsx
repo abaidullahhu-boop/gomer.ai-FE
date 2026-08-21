@@ -18,14 +18,17 @@ export default function SpaceApp() {
   const { slug = "" } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [space, setSpace] = useState<PublicSpace | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // Fatal: the Space itself could not be loaded, so there is nothing to sign in to.
+  const [loadError, setLoadError] = useState<string | null>(null);
+  // Recoverable: sign-in failed, but the login form is still worth showing.
+  const [authError, setAuthError] = useState<string | null>(null);
   const [authed, setAuthed] = useState(() => Boolean(getSpaceToken(slug)));
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
     fetchPublicSpace(slug)
       .then(setSpace)
-      .catch((err: Error) => setError(err.message));
+      .catch((err: Error) => setLoadError(err.message));
   }, [slug]);
 
   // Redeem a magic-link token if the URL carries one, then strip it.
@@ -38,11 +41,14 @@ export default function SpaceApp() {
         storeSpaceToken(slug, session.token);
         setAuthed(true);
       })
-      .catch((err: Error) => setError(err.message))
+      // A bad or expired link is not fatal — surface it on the login form so the
+      // user can just request a fresh one.
+      .catch((err: Error) => setAuthError(err.message))
       .finally(() => {
         setVerifying(false);
-        searchParams.delete("token");
-        setSearchParams(searchParams, { replace: true });
+        const next = new URLSearchParams(searchParams);
+        next.delete("token");
+        setSearchParams(next, { replace: true });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
@@ -52,14 +58,27 @@ export default function SpaceApp() {
     setAuthed(false);
   }
 
-  if (error) {
-    return <Centered>{error}</Centered>;
+  if (loadError) {
+    return (
+      <Centered>
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h1 className="text-lg font-semibold text-foreground">This app isn’t available</h1>
+          <p className="max-w-[320px]">{loadError}</p>
+        </div>
+      </Centered>
+    );
   }
   if (!space || verifying) {
     return <Centered>Loading…</Centered>;
   }
   if (!authed) {
-    return <SpaceLogin space={space} />;
+    return (
+      <SpaceLogin
+        space={space}
+        initialError={authError}
+        onDismissError={() => setAuthError(null)}
+      />
+    );
   }
   return <SpaceShell space={space} onSignOut={signOut} />;
 }
@@ -74,22 +93,62 @@ function Centered({ children }: { children: React.ReactNode }) {
 
 // ---- Login -----------------------------------------------------------------
 
-function SpaceLogin({ space }: { space: PublicSpace }) {
+/** Mirrors the browser's own `type="email"` check so we can style the failure. */
+function emailError(value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return "Enter your email address.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+    return "That doesn’t look like a valid email address.";
+  }
+  return null;
+}
+
+function SpaceLogin({
+  space,
+  initialError,
+  onDismissError,
+}: {
+  space: PublicSpace;
+  initialError: string | null;
+  onDismissError: () => void;
+}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [devLink, setDevLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // A failed magic link lands here; show it until the user edits the field.
+  const shownError = error ?? initialError;
+
+  function updateEmail(value: string) {
+    setEmail(value);
+    if (error) setError(null);
+    if (initialError) onDismissError();
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "sending") return;
+
+    const invalid = emailError(email);
+    if (invalid) {
+      setError(invalid);
+      return;
+    }
+
     setStatus("sending");
     setError(null);
+    onDismissError();
     try {
-      const result = await requestMagicLink(space.slug, email);
+      const result = await requestMagicLink(space.slug, email.trim());
       setDevLink(result.devLink ?? null);
       setStatus("sent");
     } catch (err) {
-      setError((err as Error).message);
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "We couldn’t send your sign-in link. Please try again.",
+      );
       setStatus("idle");
     }
   }
@@ -122,16 +181,27 @@ function SpaceLogin({ space }: { space: PublicSpace }) {
               </button>
             </div>
           ) : (
-            <form onSubmit={submit} className="mt-6 space-y-3">
+            <form onSubmit={submit} noValidate className="mt-6 space-y-3">
               <input
                 type="email"
-                required
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => updateEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
+                autoComplete="email"
+                aria-label="Email address"
+                aria-invalid={shownError ? true : undefined}
+                aria-describedby={shownError ? "space-login-error" : undefined}
+                className={`w-full rounded-lg border bg-background px-3 py-2 text-sm text-foreground outline-none ${
+                  shownError
+                    ? "border-destructive focus:border-destructive"
+                    : "border-border focus:border-primary"
+                }`}
               />
-              {error && <p className="text-xs text-destructive">{error}</p>}
+              {shownError && (
+                <p id="space-login-error" role="alert" className="text-xs text-destructive">
+                  {shownError}
+                </p>
+              )}
               <button
                 type="submit"
                 disabled={status === "sending"}
