@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { ApiError, fetchUsageAnalytics, type UsageAnalytics } from "@/lib/api";
-import type { UsagePeriod } from "@/data/usage";
+import {
+  ApiError,
+  fetchUsageActivity,
+  fetchUsageAnalytics,
+  type UsageActivityEntry,
+  type UsageAnalytics,
+} from "@/lib/api";
+import { periodToRange, type UsagePeriod } from "@/data/usage";
 
 export type UsageAnalyticsState = {
   analytics: UsageAnalytics | null;
@@ -10,33 +16,24 @@ export type UsageAnalyticsState = {
 };
 
 /**
- * Trailing-day window for each period the dropdown offers.
- *
- * The API takes a number of days back from now, so the two calendar-month
- * options are the imperfect fit. "This month" is exact — days since the 1st is
- * genuinely a trailing window. "Last month" is not: a trailing 30 days is the
- * closest this endpoint can express, and it overlaps the current month. Making
- * it exact needs a from/to range on the API rather than a day count.
+ * A gateway-rewritten status carries no useful body, so our own wording beats
+ * surfacing "Request failed (504)" to someone looking at a spend chart.
  */
-export function daysForPeriod(period: UsagePeriod): number {
-  const now = new Date();
-  switch (period) {
-    case "today":
-      return 1;
-    case "last_7_days":
-      return 7;
-    case "this_month":
-      return now.getDate();
-    case "last_month":
-      return 30;
-    case "last_30_days":
-    default:
-      return 30;
-  }
+function describeError(err: unknown): string {
+  const status = err instanceof ApiError ? err.status : 0;
+  if (status >= 502 || status === 0) return "Usage data is unavailable right now.";
+  return err instanceof Error ? err.message : "Usage data is unavailable right now.";
 }
 
-/** Fetches the workspace's usage for a window, refetching when it changes. */
-export function useUsageAnalytics(days: number): UsageAnalyticsState {
+/**
+ * Fetches the workspace's usage for a period, refetching when it changes.
+ *
+ * Takes the period rather than a resolved range: a range is an object, and a
+ * fresh one every render would never compare equal as an effect dependency,
+ * so the page would refetch in a loop. The period is a string, and the range
+ * is derived from it inside the effect.
+ */
+export function useUsageAnalytics(period: UsagePeriod): UsageAnalyticsState {
   const [analytics, setAnalytics] = useState<UsageAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +42,7 @@ export function useUsageAnalytics(days: number): UsageAnalyticsState {
     let cancelled = false;
     setLoading(true);
     setError(null);
-    fetchUsageAnalytics(days)
+    fetchUsageAnalytics(periodToRange(period))
       .then((result) => {
         if (cancelled) return;
         setAnalytics(result);
@@ -53,24 +50,50 @@ export function useUsageAnalytics(days: number): UsageAnalyticsState {
       })
       .catch((err: unknown) => {
         if (cancelled) return;
-        // A gateway rewrote status carries no useful body, so prefer our own
-        // wording over "Request failed (504)".
-        const status = err instanceof ApiError ? err.status : 0;
-        setError(
-          status >= 502 || status === 0
-            ? "Usage data is unavailable right now."
-            : err instanceof Error
-              ? err.message
-              : "Usage data is unavailable right now.",
-        );
+        setError(describeError(err));
         setLoading(false);
       });
     return () => {
       cancelled = true;
     };
-  }, [days]);
+  }, [period]);
 
   return { analytics, loading, error };
+}
+
+export type UsageActivityState = {
+  entries: UsageActivityEntry[];
+  loading: boolean;
+  error: string | null;
+};
+
+/** Recent spend for the activity feed, optionally narrowed to one task. */
+export function useUsageActivity(taskId?: string): UsageActivityState {
+  const [entries, setEntries] = useState<UsageActivityEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    fetchUsageActivity(taskId ? { taskId } : {})
+      .then((result) => {
+        if (cancelled) return;
+        setEntries(result);
+        setLoading(false);
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        setError(describeError(err));
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [taskId]);
+
+  return { entries, loading, error };
 }
 
 /** The layout fetches once; the tabs below it read the result from here. */

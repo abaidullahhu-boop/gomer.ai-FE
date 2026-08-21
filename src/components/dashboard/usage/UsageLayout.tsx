@@ -2,7 +2,7 @@ import { NavLink, Outlet, useSearchParams } from "react-router-dom";
 import { Dropdown } from "@/components/dashboard/Dropdown";
 import { PageMeta } from "@/components/PageMeta";
 import { usagePeriods, type UsagePeriod } from "@/data/usage";
-import { daysForPeriod, useUsageAnalytics } from "./useUsageAnalytics";
+import { useUsageAnalytics } from "./useUsageAnalytics";
 
 type UsageTab = {
   label: string;
@@ -26,7 +26,7 @@ export function UsageLayout() {
   const period = (searchParams.get("period") as UsagePeriod) ?? "last_30_days";
   // Fetched once here and handed to the tabs, so switching between Overview and
   // Team does not refetch the same window.
-  const usage = useUsageAnalytics(daysForPeriod(period));
+  const usage = useUsageAnalytics(period);
   return (
     <>
       <PageMeta title="Usage — Gomer" description="Track workspace credit usage." />
