@@ -1,3 +1,17 @@
+/**
+ * NOT ROUTED. Hidden from the dashboard on 2026-08-21.
+ *
+ * Every value on this page is placeholder data from src/data/account.ts — the
+ * same workspace name and email render for every user, whoever is signed in.
+ * The "Gomer email address" section is the worse half: it advertises being able
+ * to email the assistant, and no such feature exists anywhere in the backend
+ * (grep for gomer-mail / allowedEmails / allowedDomains / inboundEmail returns
+ * nothing).
+ *
+ * Kept rather than deleted so the layout survives for whenever there is real
+ * data to put in it. /dashboard/account redirects to /dashboard; restoring the
+ * page means restoring the route in App.tsx and the Sidebar entry.
+ */
 import { useState } from "react";
 import { Copy, X } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
@@ -101,7 +115,7 @@ export default function DashboardAccount() {
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
-            className="flex-1 overflow-y-auto px-4 sm:px-12 py-8 "
+          className="flex-1 overflow-y-auto px-4 sm:px-12 py-8 "
           style={{ scrollbarGutter: "stable" }}
         >
           <div className="mx-auto w-full max-w-[1000px]">
@@ -147,7 +161,9 @@ export default function DashboardAccount() {
 
               <div className="overflow-hidden rounded-md border border-border bg-card">
                 <div className="flex flex-col gap-2 p-5">
-                  <h2 className="font-body text-base font-medium text-foreground">Email Settings</h2>
+                  <h2 className="font-body text-base font-medium text-foreground">
+                    Email Settings
+                  </h2>
                   <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
                     Only emails from the domains and addresses listed below can reach Gomer. Emails
                     from other senders will be rejected.
