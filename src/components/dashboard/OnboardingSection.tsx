@@ -4,8 +4,13 @@ import { Ellipsis, Eye, Puzzle, RefreshCw, X } from "lucide-react";
 import gettingSayHi from "@/assets/images/getting.png";
 import gettingConnectTools from "@/assets/images/getting2.png";
 import gettingInstallSkills from "@/assets/images/getting-started-install-skills.png";
+import type { DashboardOverview } from "./useDashboardOverview";
 
-const TOTAL_TASKS = 4;
+/** How many connected accounts the second step asks for. */
+const INTEGRATION_TARGET = 5;
+
+/** Survives a reload, so a dismissed checklist stays dismissed. */
+const DISMISSED_KEY = "gomer.onboarding.dismissed";
 
 type OnboardingTask = {
   title: string;
@@ -17,33 +22,45 @@ type OnboardingTask = {
   completed?: boolean;
 };
 
-const tasks: OnboardingTask[] = [
-  {
-    title: "Send Gomer your first task",
-    description:
-      "DM Gomer or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
-    image: gettingSayHi,
-    buttonLabel: "Message Gomer",
-    completed: true,
-  },
-  {
-    title: "Connect 5 integrations",
-    description:
-      "Give Gomer enough access to work across your stack. Connect five integrations to unlock the full setup.",
-    image: gettingConnectTools,
-    buttonLabel: "Browse Integrations",
-    href: "/dashboard/integrations",
-    badge: "0 / 5 integrations",
-  },
-  {
-    title: "Teach Gomer new skills",
-    description:
-      "Skills are prebuilt workflows — from drafting emails to pulling reports. Browse the directory and install what fits.",
-    image: gettingInstallSkills,
-    buttonLabel: "Browse Skills",
-    href: "/dashboard/skills",
-  },
-];
+/**
+ * The checklist, with each step's completion read from what the workspace has
+ * actually done. A count that could not be read leaves its step incomplete
+ * rather than guessing either way.
+ */
+function buildTasks(overview: DashboardOverview): OnboardingTask[] {
+  const integrations = overview.integrations;
+
+  return [
+    {
+      title: "Send Gomer your first task",
+      description:
+        "DM Gomer or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
+      image: gettingSayHi,
+      buttonLabel: "Message Gomer",
+      completed: overview.hasRunATask === true,
+    },
+    {
+      title: `Connect ${INTEGRATION_TARGET} integrations`,
+      description:
+        "Give Gomer enough access to work across your stack. Connect five integrations to unlock the full setup.",
+      image: gettingConnectTools,
+      buttonLabel: "Browse Integrations",
+      href: "/dashboard/integrations",
+      badge:
+        integrations === null ? undefined : `${integrations} / ${INTEGRATION_TARGET} integrations`,
+      completed: integrations !== null && integrations >= INTEGRATION_TARGET,
+    },
+    {
+      title: "Teach Gomer new skills",
+      description:
+        "Skills are prebuilt workflows — from drafting emails to pulling reports. Browse the directory and install what fits.",
+      image: gettingInstallSkills,
+      buttonLabel: "Browse Skills",
+      href: "/dashboard/skills",
+      completed: (overview.installedSkills ?? 0) > 0,
+    },
+  ];
+}
 
 function SecondaryButton({ label, href }: { label: string; href?: string }) {
   const className =
@@ -64,17 +81,23 @@ function SecondaryButton({ label, href }: { label: string; href?: string }) {
   );
 }
 
-export function OnboardingSection() {
+export function OnboardingSection({ overview }: { overview: DashboardOverview }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCompletedSteps, setShowCompletedSteps] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => localStorage.getItem(DISMISSED_KEY) === "true");
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const tasks = buildTasks(overview);
   const tasksDone = tasks.filter((task) => task.completed).length;
-  const progressPercent = (tasksDone / TOTAL_TASKS) * 100;
-  const visibleTasks = showCompletedSteps
-    ? tasks
-    : tasks.filter((task) => !task.completed);
+  // Was a hardcoded 4 against a three-step list, so a fresh workspace showed
+  // "1 / 4 tasks done" and a full one could only ever reach three quarters.
+  const progressPercent = (tasksDone / tasks.length) * 100;
+  const visibleTasks = showCompletedSteps ? tasks : tasks.filter((task) => !task.completed);
+
+  function dismiss() {
+    setDismissed(true);
+    localStorage.setItem(DISMISSED_KEY, "true");
+  }
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -104,7 +127,9 @@ export function OnboardingSection() {
       <div className="px-6 pt-5 pb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold tracking-tight text-foreground">Get Gomer up to speed</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">
+              Get Gomer up to speed
+            </h2>
             <p className="mt-1 text-sm text-muted-foreground">
               Complete the core setup steps so Gomer is fully ready for your workspace.
             </p>
@@ -112,10 +137,15 @@ export function OnboardingSection() {
           <div className="flex shrink-0 items-center gap-1">
             <button
               type="button"
+              onClick={() => void overview.refresh()}
+              disabled={overview.loading}
               className="cursor-pointer gomer-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none"
               aria-label="Refresh progress"
             >
-              <RefreshCw className="size-4" strokeWidth={1.5} />
+              <RefreshCw
+                className={`size-4 ${overview.loading ? "animate-spin" : ""}`}
+                strokeWidth={1.5}
+              />
             </button>
             <div ref={menuRef} className="relative">
               <button
@@ -150,7 +180,7 @@ export function OnboardingSection() {
                     type="button"
                     role="menuitem"
                     onClick={() => {
-                      setDismissed(true);
+                      dismiss();
                       setMenuOpen(false);
                     }}
                     className="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
@@ -183,7 +213,7 @@ export function OnboardingSection() {
           </div>
           <div className="inline-flex shrink-0 items-center gap-1.5 text-sm tabular-nums text-muted-foreground">
             <Puzzle className="size-4 text-highlight" strokeWidth={1.5} />
-            {tasksDone} / {TOTAL_TASKS} tasks done
+            {tasksDone} / {tasks.length} tasks done
           </div>
         </div>
       </div>
@@ -205,7 +235,9 @@ export function OnboardingSection() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="truncate text-sm font-medium text-foreground">{task.title}</span>
+                    <span className="truncate text-sm font-medium text-foreground">
+                      {task.title}
+                    </span>
                     {task.badge && (
                       <span className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-highlight/10 px-2 py-1 text-xs font-medium text-highlight">
                         <Puzzle className="size-3.5" strokeWidth={1.5} />
