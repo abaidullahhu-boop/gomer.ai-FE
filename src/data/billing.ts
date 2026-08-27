@@ -21,11 +21,7 @@ export const billingData = {
       },
     ] satisfies PlanFeature[],
   },
-  credits: {
-    available: "39.4k",
-    reward: "39.4k",
-    progressPercent: 100,
-  },
+  // Credit figures come from /billing/summary via `useCredits` — never from here.
   inviteLink: "https://app.gomer.com/signin?ref=eY9xAiDrEahAt3NDC5CNLH",
   referrals: {
     totalEarned: "0 credits",

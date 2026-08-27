@@ -12,7 +12,9 @@ import {
 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { billingData } from "@/data/billing";
-import { ApiError, fetchBillingSummary, startTopup, type BillingSummary } from "@/lib/api";
+import { ApiError, startTopup } from "@/lib/api";
+import { creditProgressPercent, useCredits } from "@/lib/credits";
+import { PENDING } from "@/lib/format";
 
 function PlanFeatureItem({
   label,
@@ -50,28 +52,22 @@ function PlanFeatureItem({
 
 export default function DashboardBilling() {
   const [copied, setCopied] = useState(false);
-  const [summary, setSummary] = useState<BillingSummary | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [topupError, setTopupError] = useState<string | null>(null);
   const [payingPackId, setPayingPackId] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const topupResult = searchParams.get("topup");
+  const { summary, error: loadError, refresh } = useCredits();
 
+  // Returning from Stripe means the balance the shell loaded is already stale.
   useEffect(() => {
-    fetchBillingSummary()
-      .then(setSummary)
-      .catch((err) => {
-        const status = err instanceof ApiError ? err.status : 0;
-        setError(
-          status > 0 && status < 500 && err instanceof ApiError
-            ? err.message
-            : "Failed to load billing data",
-        );
-      });
-  }, [topupResult]);
+    if (topupResult) void refresh();
+  }, [topupResult, refresh]);
+
+  const error = topupError ?? loadError;
 
   async function buyPack(packId: string) {
     setPayingPackId(packId);
-    setError(null);
+    setTopupError(null);
     try {
       const { checkoutUrl } = await startTopup(packId);
       window.location.href = checkoutUrl;
@@ -82,7 +78,7 @@ export default function DashboardBilling() {
       // (504)". Prefer our own wording for anything gateway-shaped.
       const status = err instanceof ApiError ? err.status : 0;
       const useOwnWording = status === 0 || status >= 500;
-      setError(
+      setTopupError(
         !useOwnWording && err instanceof ApiError
           ? err.message
           : "Could not start the checkout — please try again shortly.",
@@ -97,13 +93,10 @@ export default function DashboardBilling() {
   // balance on a failed fetch — the one moment the figure most needs to be true.
   const creditsLabel = balance
     ? `${balance.balance.toLocaleString()} (≈ $${(balance.balance / 100).toFixed(2)})`
-    : error
+    : loadError
       ? "Unavailable"
-      : "—";
-  const progressPercent =
-    balance && balance.granted > 0
-      ? Math.max(Math.min((balance.balance / balance.granted) * 100, 100), 0)
-      : 0;
+      : PENDING;
+  const progressPercent = creditProgressPercent(balance);
 
   async function copyInviteLink() {
     try {

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LogOut, Monitor } from "lucide-react";
-import { billingData } from "@/data/billing";
+import { creditProgressPercent, rewardCredits, useCredits } from "@/lib/credits";
+import { figureLabel } from "@/lib/format";
 import { themeLabels, useTheme } from "@/lib/theme";
 import { useSession } from "@/lib/session";
 
@@ -16,6 +17,7 @@ type MenuPosition = {
 export function ProfileMenu() {
   const { theme, cycleTheme } = useTheme();
   const { user, loading, signOut } = useSession();
+  const { summary, error: creditsError } = useCredits();
   const [open, setOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -91,12 +93,14 @@ export function ProfileMenu() {
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-foreground">Credits available</span>
-                  <span className="text-sm text-foreground">{billingData.credits.available}</span>
+                  <span className="text-sm text-foreground">
+                    {figureLabel(summary?.balance.balance, creditsError)}
+                  </span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary">
                   <div
                     className="h-2 rounded-full bg-[#FFDC61]"
-                    style={{ width: `${billingData.credits.progressPercent}%` }}
+                    style={{ width: `${creditProgressPercent(summary?.balance)}%` }}
                   />
                 </div>
               </div>
@@ -104,7 +108,7 @@ export function ProfileMenu() {
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="text-sm font-medium text-foreground">Reward credits</span>
                   <span className="shrink-0 text-sm text-foreground">
-                    {billingData.credits.reward}
+                    {figureLabel(rewardCredits(summary?.grants), creditsError)}
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground">Reward credits never expire.</span>

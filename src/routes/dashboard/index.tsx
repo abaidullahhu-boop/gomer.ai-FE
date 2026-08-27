@@ -3,9 +3,14 @@ import { MetricCard } from "@/components/dashboard/MetricCard";
 import { BillingIcon, IntegrationIcon, ScheduledTasksIcon } from "@/components/dashboard/NavIcons";
 import { OnboardingSection } from "@/components/dashboard/OnboardingSection";
 import { WhatsNewCarousel } from "@/components/dashboard/WhatsNewCarousel";
-import { billingData } from "@/data/billing";
+import { useDashboardOverview } from "@/components/dashboard/useDashboardOverview";
+import { useCredits } from "@/lib/credits";
+import { figureLabel } from "@/lib/format";
 
 export default function DashboardHome() {
+  const { summary, error } = useCredits();
+  const overview = useDashboardOverview();
+
   return (
     <>
       <PageMeta title="Dashboard — Gomer" description="Gomer dashboard" />
@@ -16,21 +21,21 @@ export default function DashboardHome() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <MetricCard
               label="Credits available"
-              value={billingData.credits.available}
+              value={figureLabel(summary?.balance.balance, error)}
               href="/dashboard/billing"
               linkLabel="Manage plan"
               icon={BillingIcon}
             />
             <MetricCard
               label="Scheduled tasks"
-              value="0"
+              value={figureLabel(overview.scheduledTasks)}
               href="/dashboard/tasks"
               linkLabel="Manage tasks"
               icon={ScheduledTasksIcon}
             />
             <MetricCard
               label="Connected integrations"
-              value="0"
+              value={figureLabel(overview.integrations)}
               href="/dashboard/integrations"
               linkLabel="Browse integrations"
               icon={IntegrationIcon}
@@ -39,7 +44,7 @@ export default function DashboardHome() {
         </div>
 
         <div className="mt-8">
-          <OnboardingSection />
+          <OnboardingSection overview={overview} />
         </div>
 
         <div className="mt-8">
