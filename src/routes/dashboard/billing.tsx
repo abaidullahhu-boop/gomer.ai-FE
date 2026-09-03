@@ -12,7 +12,13 @@ import {
 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { FREE_PLAN_FEATURES, PLAN_FEATURES, billingData } from "@/data/billing";
-import { ApiError, startSubscription, startTopup, type Subscription } from "@/lib/api";
+import {
+  ApiError,
+  openBillingPortal,
+  startSubscription,
+  startTopup,
+  type Subscription,
+} from "@/lib/api";
 import {
   creditProgressPercent,
   expiringCredits,
@@ -70,7 +76,8 @@ function SubscriptionNote({ subscription }: { subscription: Subscription }) {
   if (subscription.status === "past_due") {
     return (
       <span className="text-sm text-amber-600">
-        Payment failed — Gomer keeps working while your card is retried.
+        Payment failed — Gomer keeps working while your card is retried. Update it under Manage
+        below.
       </span>
     );
   }
@@ -88,6 +95,7 @@ export default function DashboardBilling() {
   const [topupError, setTopupError] = useState<string | null>(null);
   const [payingPackId, setPayingPackId] = useState<string | null>(null);
   const [payingPlanId, setPayingPlanId] = useState<string | null>(null);
+  const [openingPortal, setOpeningPortal] = useState(false);
   const [searchParams] = useSearchParams();
   const topupResult = searchParams.get("topup");
   const subscriptionResult = searchParams.get("subscription");
@@ -137,6 +145,24 @@ export default function DashboardBilling() {
           : "Could not start the checkout — please try again shortly.",
       );
       setPayingPlanId(null);
+    }
+  }
+
+  async function manageSubscription() {
+    setOpeningPortal(true);
+    setTopupError(null);
+    try {
+      const { portalUrl } = await openBillingPortal();
+      window.location.href = portalUrl;
+    } catch (err) {
+      const status = err instanceof ApiError ? err.status : 0;
+      const useOwnWording = status === 0 || status >= 500;
+      setTopupError(
+        !useOwnWording && err instanceof ApiError
+          ? err.message
+          : "Could not open the billing portal — please try again shortly.",
+      );
+      setOpeningPortal(false);
     }
   }
 
@@ -234,6 +260,17 @@ export default function DashboardBilling() {
                     >
                       {currentPlan ? "Change your plan" : "Choose a plan"}
                     </a>
+                    {subscription ? (
+                      <button
+                        type="button"
+                        disabled={openingPortal}
+                        onClick={() => void manageSubscription()}
+                        className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <ExternalLink className="size-3.5" strokeWidth={1.5} />
+                        {openingPortal ? "Opening…" : "Manage or cancel"}
+                      </button>
+                    ) : null}
                   </div>
                 </div>
 
