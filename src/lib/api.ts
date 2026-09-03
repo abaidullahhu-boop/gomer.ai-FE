@@ -696,6 +696,15 @@ export function startSubscription(planId: string): Promise<{ checkoutUrl: string
   });
 }
 
+/**
+ * Open Stripe's billing portal — update a failed card, cancel, resume, or fetch
+ * invoices. Caller redirects to the returned URL; Stripe sends the customer
+ * back to the billing page when they are done.
+ */
+export function openBillingPortal(): Promise<{ portalUrl: string }> {
+  return apiFetch<{ portalUrl: string }>("/billing/portal", { method: "POST" });
+}
+
 // ── Admin dashboard ──────────────────────────────────────────────────────────
 
 /** A member row on the admin roster (includes deactivated members). */
