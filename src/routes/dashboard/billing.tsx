@@ -11,10 +11,16 @@ import {
   X,
 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
-import { billingData } from "@/data/billing";
-import { ApiError, startTopup } from "@/lib/api";
-import { creditProgressPercent, useCredits } from "@/lib/credits";
-import { PENDING } from "@/lib/format";
+import { FREE_PLAN_FEATURES, PLAN_FEATURES, billingData } from "@/data/billing";
+import { ApiError, startSubscription, startTopup, type Subscription } from "@/lib/api";
+import {
+  creditProgressPercent,
+  expiringCredits,
+  nextExpiry,
+  permanentCredits,
+} from "@/lib/credit-math";
+import { useCredits } from "@/lib/credits";
+import { PENDING, creditsAsDollars, relativeDeadline } from "@/lib/format";
 
 function PlanFeatureItem({
   label,
@@ -50,18 +56,47 @@ function PlanFeatureItem({
   );
 }
 
+/**
+ * The one line under the plan name that says what happens next.
+ *
+ * A subscription's state is only interesting in terms of the next event: when
+ * it renews, when it stops, or that a payment is failing. Showing the raw
+ * status ("past_due") tells a customer nothing they can act on.
+ */
+function SubscriptionNote({ subscription }: { subscription: Subscription }) {
+  const renews = new Date(subscription.currentPeriodEnd);
+  const when = relativeDeadline(renews);
+
+  if (subscription.status === "past_due") {
+    return (
+      <span className="text-sm text-amber-600">
+        Payment failed — Gomer keeps working while your card is retried.
+      </span>
+    );
+  }
+  if (subscription.status === "canceled") {
+    return <span className="text-sm text-muted-foreground">Cancelled — no further renewals.</span>;
+  }
+  if (subscription.cancelAtPeriodEnd) {
+    return <span className="text-sm text-muted-foreground">Ends {when}, then no renewal.</span>;
+  }
+  return <span className="text-sm text-muted-foreground">Renews {when}.</span>;
+}
+
 export default function DashboardBilling() {
   const [copied, setCopied] = useState(false);
   const [topupError, setTopupError] = useState<string | null>(null);
   const [payingPackId, setPayingPackId] = useState<string | null>(null);
+  const [payingPlanId, setPayingPlanId] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const topupResult = searchParams.get("topup");
+  const subscriptionResult = searchParams.get("subscription");
   const { summary, error: loadError, refresh } = useCredits();
 
   // Returning from Stripe means the balance the shell loaded is already stale.
   useEffect(() => {
-    if (topupResult) void refresh();
-  }, [topupResult, refresh]);
+    if (topupResult || subscriptionResult) void refresh();
+  }, [topupResult, subscriptionResult, refresh]);
 
   const error = topupError ?? loadError;
 
@@ -87,16 +122,40 @@ export default function DashboardBilling() {
     }
   }
 
+  async function choosePlan(planId: string) {
+    setPayingPlanId(planId);
+    setTopupError(null);
+    try {
+      const { checkoutUrl } = await startSubscription(planId);
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      const status = err instanceof ApiError ? err.status : 0;
+      const useOwnWording = status === 0 || status >= 500;
+      setTopupError(
+        !useOwnWording && err instanceof ApiError
+          ? err.message
+          : "Could not start the checkout — please try again shortly.",
+      );
+      setPayingPlanId(null);
+    }
+  }
+
   const balance = summary?.balance ?? null;
   // Until the summary lands there is no honest number to show. The placeholder
   // this used to fall back to was a hardcoded "39.4k", which rendered as a real
   // balance on a failed fetch — the one moment the figure most needs to be true.
   const creditsLabel = balance
-    ? `${balance.balance.toLocaleString()} (≈ $${(balance.balance / 100).toFixed(2)})`
+    ? `${balance.balance.toLocaleString()} (≈ ${creditsAsDollars(balance.balance)})`
     : loadError
       ? "Unavailable"
       : PENDING;
   const progressPercent = creditProgressPercent(balance);
+
+  const subscription = summary?.subscription ?? null;
+  const currentPlan = summary?.plans.find((plan) => plan.id === subscription?.planId) ?? null;
+  const expiring = expiringCredits(balance);
+  const permanent = permanentCredits(balance);
+  const expiry = nextExpiry(balance);
 
   async function copyInviteLink() {
     try {
@@ -137,9 +196,15 @@ export default function DashboardBilling() {
                   up.
                 </div>
               ) : null}
-              {topupResult === "cancelled" ? (
+              {topupResult === "cancelled" || subscriptionResult === "cancelled" ? (
                 <div className="rounded-md border border-border bg-card px-4 py-3 text-sm text-muted-foreground">
                   Checkout cancelled — no payment was made.
+                </div>
+              ) : null}
+              {subscriptionResult === "success" ? (
+                <div className="rounded-md border border-emerald-300/50 bg-emerald-500/5 px-4 py-3 text-sm text-emerald-600">
+                  You're subscribed — your monthly credits have been added. It can take a few
+                  seconds to show up.
                 </div>
               ) : null}
               {error ? (
@@ -153,21 +218,22 @@ export default function DashboardBilling() {
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-muted-foreground">Current plan</span>
                     <h2 className="text-2xl font-bold tracking-tight text-foreground">
-                      {billingData.plan.name}
+                      {currentPlan ? currentPlan.label : summary ? "No plan" : PENDING}
                     </h2>
+                    {subscription ? <SubscriptionNote subscription={subscription} /> : null}
                     <ul className="mt-1.5 flex flex-col gap-1.5">
-                      {billingData.plan.features.map((feature) => (
+                      {(currentPlan ? PLAN_FEATURES : FREE_PLAN_FEATURES).map((feature) => (
                         <PlanFeatureItem key={feature.label} {...feature} />
                       ))}
                     </ul>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <button
-                      type="button"
+                    <a
+                      href="#plans"
                       className="gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
                     >
-                      Upgrade your plan
-                    </button>
+                      {currentPlan ? "Change your plan" : "Choose a plan"}
+                    </a>
                   </div>
                 </div>
 
@@ -190,7 +256,34 @@ export default function DashboardBilling() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3 pt-1">
-                      <div className="flex flex-col gap-0.5">
+                      {balance ? (
+                        <dl className="flex flex-col gap-1.5">
+                          <div className="flex items-baseline justify-between gap-3">
+                            <dt className="text-sm text-muted-foreground">
+                              Expiring
+                              {expiry ? (
+                                <span className="text-muted-foreground/80">
+                                  {" "}
+                                  · soonest {relativeDeadline(expiry)}
+                                </span>
+                              ) : null}
+                            </dt>
+                            <dd className="shrink-0 text-sm text-foreground">
+                              {expiring.toLocaleString()}
+                            </dd>
+                          </div>
+                          <div className="flex items-baseline justify-between gap-3">
+                            <dt className="text-sm text-muted-foreground">
+                              Never expires
+                              <span className="text-muted-foreground/80"> · top-ups & rewards</span>
+                            </dt>
+                            <dd className="shrink-0 text-sm text-foreground">
+                              {permanent.toLocaleString()}
+                            </dd>
+                          </div>
+                        </dl>
+                      ) : null}
+                      <div className="flex flex-col gap-0.5 border-t border-border pt-2.5">
                         <div className="flex items-baseline justify-between gap-3">
                           <span className="text-sm font-medium text-foreground">Credits used</span>
                           <span className="shrink-0 text-sm text-foreground">
@@ -199,7 +292,11 @@ export default function DashboardBilling() {
                         </div>
                         <span className="text-xs text-muted-foreground">
                           Of {balance ? balance.granted.toLocaleString() : "—"} granted in total.
-                          Credits never expire.
+                          {balance && balance.expired > 0
+                            ? ` ${balance.expired.toLocaleString()} expired unused.`
+                            : ""}{" "}
+                          Plan credits expire monthly and roll over once; top-ups and rewards never
+                          expire.
                         </span>
                       </div>
                     </div>
@@ -207,8 +304,67 @@ export default function DashboardBilling() {
                 </div>
               </div>
 
+              <div className="flex flex-col gap-3" id="plans">
+                <div className="flex flex-col gap-1">
+                  <h2 className="font-body text-lg font-medium text-foreground">Monthly plans</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Credits renew every month. Anything unused carries into the following month,
+                    then expires.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+                  {(summary?.plans ?? []).map((plan) => {
+                    const active = plan.id === subscription?.planId;
+                    return (
+                      <div
+                        key={plan.id}
+                        className={`flex h-full flex-col justify-between gap-3 rounded-[7px] border bg-card p-5 ${
+                          active ? "border-foreground/40" : "border-border"
+                        }`}
+                      >
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm text-muted-foreground">{plan.label}</span>
+                          <span className="text-2xl font-bold tracking-tight text-foreground">
+                            ${(plan.priceCents / 100).toFixed(0)}
+                            <span className="text-sm font-normal text-muted-foreground">/mo</span>
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {plan.monthlyCredits.toLocaleString()} credits
+                          </span>
+                          {plan.bonusCredits ? (
+                            <span className="text-xs text-emerald-600">
+                              includes {plan.bonusCredits.toLocaleString()} bonus
+                            </span>
+                          ) : null}
+                        </div>
+                        <button
+                          type="button"
+                          disabled={active || payingPlanId !== null}
+                          onClick={() => void choosePlan(plan.id)}
+                          className="gomer-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-1.5 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          {active
+                            ? "Current plan"
+                            : payingPlanId === plan.id
+                              ? "Redirecting…"
+                              : "Choose"}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {!summary && !error ? (
+                  <p className="text-sm text-muted-foreground">Loading plans…</p>
+                ) : null}
+              </div>
+
               <div className="flex flex-col gap-3">
-                <h2 className="font-body text-lg font-medium text-foreground">Top up credits</h2>
+                <div className="flex flex-col gap-1">
+                  <h2 className="font-body text-lg font-medium text-foreground">Top up credits</h2>
+                  <p className="text-sm text-muted-foreground">
+                    One-off credits that never expire. Spent only once your plan allowance runs out.
+                  </p>
+                </div>
                 <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                   {(summary?.packs ?? []).map((pack) => (
                     <div

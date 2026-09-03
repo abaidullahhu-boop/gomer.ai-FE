@@ -502,11 +502,30 @@ export async function fetchIntegrationTools(appSlug: string): Promise<{ tools: A
 
 // ── Billing & credits ────────────────────────────────────────────────────────
 
-/** The workspace's credit position. 1 credit = $0.01. */
+/**
+ * Which pot a workspace's credits sit in. The order is the order they are
+ * spent: what expires soonest goes first, and credits that never expire are
+ * only reached once the rest are gone.
+ */
+export type CreditBucket = "rollover" | "plan" | "topup" | "reward";
+
+/** What one bucket holds, and when its soonest slice runs out. */
+export type BucketBalance = {
+  bucket: CreditBucket;
+  credits: number;
+  /** ISO timestamp, or null for credits that never expire. */
+  expiresAt: string | null;
+};
+
+/** The workspace's credit position. 1 credit = $0.0025 (400 to the dollar). */
 export type CreditBalance = {
   granted: number;
   used: number;
+  /** Live credits only — anything already expired is excluded. */
   balance: number;
+  /** Granted credits that ran out before they were spent. */
+  expired: number;
+  buckets: BucketBalance[];
 };
 
 /** A purchasable credit bundle offered on the billing page. */
@@ -517,10 +536,40 @@ export type CreditPack = {
   credits: number;
 };
 
-/** One credit addition: onboarding gift, Stripe top-up, or manual grant. */
+/** A recurring plan: a monthly price and the allowance it renews. */
+export type SubscriptionPlan = {
+  id: string;
+  label: string;
+  priceCents: number;
+  monthlyCredits: number;
+  /** Credits above the flat rate, where a tier is deliberately generous. */
+  bonusCredits?: number;
+};
+
+export type SubscriptionStatus = "trialing" | "active" | "past_due" | "canceled" | "incomplete";
+
+/** The workspace's current plan, mirrored from Stripe. */
+export type Subscription = {
+  id: string;
+  planId: string;
+  status: SubscriptionStatus;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  seats: number;
+  cancelAtPeriodEnd: boolean;
+};
+
+/** One credit addition — bought, granted, renewed, or carried forward. */
 export type CreditGrant = {
   id: string;
-  reason: "onboarding" | "topup" | "manual";
+  reason:
+    | "onboarding"
+    | "topup"
+    | "manual"
+    | "subscription"
+    | "rollover"
+    | "referral"
+    | "seat_bonus";
   credits: number;
   amountCents: number | null;
   currency: string | null;
@@ -531,6 +580,8 @@ export type CreditGrant = {
 export type BillingSummary = {
   balance: CreditBalance;
   packs: CreditPack[];
+  plans: SubscriptionPlan[];
+  subscription: Subscription | null;
   grants: CreditGrant[];
 };
 
@@ -634,6 +685,14 @@ export function startTopup(packId: string): Promise<{ checkoutUrl: string }> {
   return apiFetch<{ checkoutUrl: string }>("/billing/topup", {
     method: "POST",
     body: JSON.stringify({ packId }),
+  });
+}
+
+/** Start a recurring Stripe Checkout for a plan; caller redirects to the URL. */
+export function startSubscription(planId: string): Promise<{ checkoutUrl: string }> {
+  return apiFetch<{ checkoutUrl: string }>("/billing/subscribe", {
+    method: "POST",
+    body: JSON.stringify({ planId }),
   });
 }
 
