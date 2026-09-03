@@ -15,13 +15,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  ApiError,
-  fetchBillingSummary,
-  type BillingSummary,
-  type CreditBalance,
-  type CreditGrant,
-} from "./api";
+import { ApiError, fetchBillingSummary, type BillingSummary } from "./api";
 
 type CreditsContextValue = {
   summary: BillingSummary | null;
@@ -78,22 +72,4 @@ export function useCredits(): CreditsContextValue {
     throw new Error("useCredits must be used within a CreditsProvider");
   }
   return context;
-}
-
-/** Share of granted credits still unspent, clamped to 0–100 for the meter. */
-export function creditProgressPercent(balance: CreditBalance | null | undefined): number {
-  if (!balance || balance.granted <= 0) return 0;
-  return Math.max(Math.min((balance.balance / balance.granted) * 100, 100), 0);
-}
-
-/**
- * Credits that were given rather than bought — the $100 onboarding gift and any
- * manual grant. These are what "reward credits" means to a workspace: the ones
- * that arrived without a card being charged.
- */
-export function rewardCredits(grants: CreditGrant[] | undefined): number | null {
-  if (!grants) return null;
-  return grants
-    .filter((grant) => grant.reason !== "topup")
-    .reduce((total, grant) => total + grant.credits, 0);
 }

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LogOut, Monitor } from "lucide-react";
-import { creditProgressPercent, rewardCredits, useCredits } from "@/lib/credits";
+import { creditProgressPercent, rewardCredits } from "@/lib/credit-math";
+import { useCredits } from "@/lib/credits";
 import { figureLabel } from "@/lib/format";
 import { themeLabels, useTheme } from "@/lib/theme";
 import { useSession } from "@/lib/session";
@@ -108,7 +109,7 @@ export function ProfileMenu() {
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="text-sm font-medium text-foreground">Reward credits</span>
                   <span className="shrink-0 text-sm text-foreground">
-                    {figureLabel(rewardCredits(summary?.grants), creditsError)}
+                    {figureLabel(rewardCredits(summary?.balance), creditsError)}
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground">Reward credits never expire.</span>
