@@ -4,7 +4,7 @@
 <g id="glow" filter="url(#filter0_f_0_190)">
 <ellipse cx="28" cy="-6.17969" rx="28" ry="6.50781" fill="var(--fill-0, #FDE3AA)"/>
 </g>
-<text x="28" y="31" text-anchor="middle" dominant-baseline="central" fill="white" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="34" font-weight="800">Z</text>
+<text x="28" y="31" text-anchor="middle" dominant-baseline="central" fill="white" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="34" font-weight="800">G</text>
 </g>
 <defs>
 <filter id="filter0_f_0_190" x="-12.3266" y="-25.0141" width="80.6531" height="37.6688" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
