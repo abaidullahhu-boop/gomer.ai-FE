@@ -76,7 +76,7 @@ function SubscriptionNote({ subscription }: { subscription: Subscription }) {
   if (subscription.status === "past_due") {
     return (
       <span className="text-sm text-amber-600">
-        Payment failed — Zundy keeps working while your card is retried. Update it under Manage
+        Payment failed — Gaspo keeps working while your card is retried. Update it under Manage
         below.
       </span>
     );
@@ -196,8 +196,8 @@ export default function DashboardBilling() {
   return (
     <>
       <PageMeta
-        title="Billing & Credits — Zundy"
-        description="Manage your plan and see how Zundy is working for your team."
+        title="Billing & Credits — Gaspo"
+        description="Manage your plan and see how Gaspo is working for your team."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
@@ -213,7 +213,7 @@ export default function DashboardBilling() {
 
             <div className="flex w-full flex-col gap-6">
               <p className="font-body text-base text-foreground">
-                Manage your plan and see how Zundy is working for your team.
+                Manage your plan and see how Gaspo is working for your team.
               </p>
 
               {topupResult === "success" ? (
@@ -256,7 +256,7 @@ export default function DashboardBilling() {
                   <div className="flex flex-wrap gap-2">
                     <a
                       href="#plans"
-                      className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                      className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
                     >
                       {currentPlan ? "Change your plan" : "Choose a plan"}
                     </a>
@@ -265,7 +265,7 @@ export default function DashboardBilling() {
                         type="button"
                         disabled={openingPortal}
                         onClick={() => void manageSubscription()}
-                        className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                        className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         <ExternalLink className="size-3.5" strokeWidth={1.5} />
                         {openingPortal ? "Opening…" : "Manage or cancel"}
@@ -378,7 +378,7 @@ export default function DashboardBilling() {
                           type="button"
                           disabled={active || payingPlanId !== null}
                           onClick={() => void choosePlan(plan.id)}
-                          className="zundy-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-1.5 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="gaspo-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-1.5 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {active
                             ? "Current plan"
@@ -421,7 +421,7 @@ export default function DashboardBilling() {
                         type="button"
                         disabled={payingPackId !== null}
                         onClick={() => void buyPack(pack.id)}
-                        className="zundy-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-1.5 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                        className="gaspo-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-1.5 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         <CreditCard className="size-3.5" strokeWidth={1.5} />
                         {payingPackId === pack.id ? "Redirecting…" : "Buy"}
@@ -444,7 +444,7 @@ export default function DashboardBilling() {
                           Invite friends
                         </h3>
                         <p className="text-sm leading-relaxed text-muted-foreground">
-                          Get 10k credits for every friend that adds Zundy to their own Slack
+                          Get 10k credits for every friend that adds Gaspo to their own Slack
                           workspace.
                         </p>
                       </div>
@@ -463,7 +463,7 @@ export default function DashboardBilling() {
                             type="button"
                             onClick={copyInviteLink}
                             aria-label={copied ? "Copied" : "Copy invite link"}
-                            className="zundy-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-accent"
+                            className="gaspo-focus-ring flex size-10 shrink-0 items-center justify-center rounded-md border border-border transition-colors hover:bg-accent"
                           >
                             <Copy className="size-4" />
                           </button>
@@ -479,17 +479,17 @@ export default function DashboardBilling() {
                           Share a use case
                         </h3>
                         <p className="text-sm leading-relaxed text-muted-foreground">
-                          Show others on LinkedIn or X how Zundy helps you in your work and get
+                          Show others on LinkedIn or X how Gaspo helps you in your work and get
                           extra credits for it.
                         </p>
                       </div>
                       <div>
                         <Link
                           to="/creators"
-                          className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
+                          className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
                         >
                           <span className="flex items-center gap-1.5">
-                            Join Zundy Creator Program
+                            Join Gaspo Creator Program
                             <ExternalLink className="size-3.5" strokeWidth={1.5} />
                           </span>
                         </Link>
@@ -507,7 +507,7 @@ export default function DashboardBilling() {
                   />
                   <p className="text-sm text-muted-foreground">
                     All plans share credits across your entire Slack or Teams workspace. No per-seat
-                    limits — everyone can work with Zundy.
+                    limits — everyone can work with Gaspo.
                   </p>
                 </div>
               </div>
@@ -520,7 +520,7 @@ export default function DashboardBilling() {
                   to="/privacy"
                   target="_blank"
                   rel="noreferrer"
-                  className="zundy-focus-ring relative inline-flex min-h-0 cursor-pointer select-none items-center justify-center gap-1 rounded-sm border-0 bg-transparent px-0 py-0 text-sm font-medium text-foreground transition-[background-color,border-color,transform] duration-200 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:scale-x-0 after:bg-border hover:text-accent-foreground hover:after:scale-x-100 active:scale-[0.98]"
+                  className="gaspo-focus-ring relative inline-flex min-h-0 cursor-pointer select-none items-center justify-center gap-1 rounded-sm border-0 bg-transparent px-0 py-0 text-sm font-medium text-foreground transition-[background-color,border-color,transform] duration-200 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:scale-x-0 after:bg-border hover:text-accent-foreground hover:after:scale-x-100 active:scale-[0.98]"
                 >
                   Privacy Policy
                 </Link>

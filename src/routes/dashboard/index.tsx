@@ -13,7 +13,7 @@ export default function DashboardHome() {
 
   return (
     <>
-      <PageMeta title="Dashboard — Zundy" description="Zundy dashboard" />
+      <PageMeta title="Dashboard — Gaspo" description="Gaspo dashboard" />
       <div className="mx-auto w-full max-w-5xl px-5 py-8">
         <h1 className="text-3xl font-bold leading-8 text-foreground">Dashboard</h1>
 

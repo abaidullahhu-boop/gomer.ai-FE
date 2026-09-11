@@ -10,10 +10,10 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Blog — Zundy"
-        description="News, technical solutions, and background articles from the Zundy team."
-        ogTitle="Blog — Zundy"
-        ogDescription="News, technical solutions, and background articles from the Zundy team."
+        title="Blog — Gaspo"
+        description="News, technical solutions, and background articles from the Gaspo team."
+        ogTitle="Blog — Gaspo"
+        ogDescription="News, technical solutions, and background articles from the Gaspo team."
       />
       <div className="pt-6">
         <Nav heroTone="light" />
@@ -23,7 +23,7 @@ export default function BlogPage() {
         <header className="text-left px-2 sm:px-24 mx-auto">
           <h1 className="font-display text-6xl md:text-7xl tracking-tight leading-[1]">Blog</h1>
           <p className="mt-6 text-primary font-medium text-lg">
-            Insights, guides, and comparisons from the Zundy team.
+            Insights, guides, and comparisons from the Gaspo team.
           </p>
         </header>
 

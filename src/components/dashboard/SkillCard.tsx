@@ -18,7 +18,7 @@ export function SkillCard({ skill, busy = false, onInstall, onUninstall }: Skill
             <h3 className="min-w-0 text-base font-medium leading-6">
               <Link
                 to={`/dashboard/skills/${skill.slug}`}
-                className="zundy-focus-ring rounded-sm hover:underline"
+                className="gaspo-focus-ring rounded-sm hover:underline"
               >
                 {skill.title}
               </Link>
@@ -44,7 +44,7 @@ export function SkillCard({ skill, busy = false, onInstall, onUninstall }: Skill
                   <button
                     type="button"
                     aria-label="Skill options"
-                    className="zundy-focus-ring inline-flex size-8 min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    className="gaspo-focus-ring inline-flex size-8 min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <MoreVertical className="size-4 shrink-0" strokeWidth={1.5} />
                   </button>
@@ -54,7 +54,7 @@ export function SkillCard({ skill, busy = false, onInstall, onUninstall }: Skill
                   type="button"
                   onClick={() => onInstall?.(skill)}
                   disabled={busy || !onInstall}
-                  className="zundy-focus-ring inline-flex min-h-8 min-w-[84px] cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="gaspo-focus-ring inline-flex min-h-8 min-w-[84px] cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {busy ? (
                     <Loader2 className="size-3.5 shrink-0 animate-spin" strokeWidth={1.5} />

@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const sarahAvatar =
@@ -79,9 +79,9 @@ const CAPABILITY_TABS: CapabilityTab[] = [
     tabId: "connectors-comparison-tab",
     icon: <ConnectorsIcon className="size-5 shrink-0" />,
     title: "3,200+ via Managed Connectors",
-    body: "Beyond the 27 native integrations, Zundy connects to 3,200+ tools through managed connectors. CRM, project management, finance, communication, analytics. If your team uses it, Zundy can reach it.",
+    body: "Beyond the 27 native integrations, Gaspo connects to 3,200+ tools through managed connectors. CRM, project management, finance, communication, analytics. If your team uses it, Gaspo can reach it.",
     footnote:
-      "Most connectors are one-click OAuth - pick a tool, authorize, done. Some use API keys. Either way, Zundy handles authentication and starts working. No webhooks, no Zapier zaps.",
+      "Most connectors are one-click OAuth - pick a tool, authorize, done. Some use API keys. Either way, Gaspo handles authentication and starts working. No webhooks, no Zapier zaps.",
   },
   {
     id: "integrations",
@@ -99,9 +99,9 @@ const CAPABILITY_TABS: CapabilityTab[] = [
     panelId: "builds-comparison-panel",
     tabId: "builds-comparison-tab",
     icon: <BuildsIcon className="size-5 shrink-0" />,
-    title: "Zundy Builds Its Own",
-    body: "Tool not in the catalog? Zundy can build a custom integration from API docs or use its browser directly.",
-    footnote: "Custom connectors usually ship within a day — Zundy reads the docs, handles auth, and starts working.",
+    title: "Gaspo Builds Its Own",
+    body: "Tool not in the catalog? Gaspo can build a custom integration from API docs or use its browser directly.",
+    footnote: "Custom connectors usually ship within a day — Gaspo reads the docs, handles auth, and starts working.",
   },
 ];
 
@@ -528,7 +528,7 @@ function BuildsSlackPreview() {
                   </div>
                   <div className="body-main font-normal text-slack">
                     <span className="inline-block rounded-sm bg-slack-mention px-1 py-0.5 align-baseline whitespace-nowrap text-sm leading-snug text-slack-mention">
-                      @Zundy
+                      @Gaspo
                     </span>
                     I need data from [obscure internal tool]. Here&apos;s the API docs:{" "}
                     <span className="text-slack-mention underline decoration-solid">[link]</span>
@@ -538,25 +538,25 @@ function BuildsSlackPreview() {
               </div>
 
               <div
-                data-variant="zundy"
+                data-variant="gaspo"
                 data-highlighted="true"
-                className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-zundy"
+                className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-gaspo"
               >
-                <div aria-hidden="true" className="slack-zundy-bg-mount">
-                  <div className="slack-zundy-layer-glass-stack" />
-                  <div className="slack-zundy-layer-inner-depth-soft" />
-                  <div className="slack-zundy-layer-inner-glow-overlay" />
-                  <div className="slack-zundy-layer-feather-blur" />
-                  <div className="slack-zundy-layer-white-sheet" />
+                <div aria-hidden="true" className="slack-gaspo-bg-mount">
+                  <div className="slack-gaspo-layer-glass-stack" />
+                  <div className="slack-gaspo-layer-inner-depth-soft" />
+                  <div className="slack-gaspo-layer-inner-glow-overlay" />
+                  <div className="slack-gaspo-layer-feather-blur" />
+                  <div className="slack-gaspo-layer-white-sheet" />
                 </div>
                 <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-                  <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+                  <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
                 </div>
                 <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
                   <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
                     <span className="body-small font-medium text-slack">
                       <span className="inline-flex items-center gap-1.5">
-                        <span>Zundy</span>
+                        <span>Gaspo</span>
                         <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                           APP
                         </span>
@@ -636,9 +636,9 @@ export function IntegrationsCapabilitiesSection() {
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 lg:gap-16">
           <h2 className="max-w-5xl text-center font-heading h3 text-balance text-primary">
-            If it exists, Zundy connects to it.
+            If it exists, Gaspo connects to it.
             <br />
-            If it doesn&apos;t, Zundy builds it.
+            If it doesn&apos;t, Gaspo builds it.
           </h2>
 
           <div className="flex w-full flex-col gap-10">

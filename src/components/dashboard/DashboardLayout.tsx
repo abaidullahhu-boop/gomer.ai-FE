@@ -5,7 +5,7 @@ import { SessionProvider } from "@/lib/session";
 import { GetFreeCreditsModal } from "./GetFreeCreditsModal";
 import { InviteTeamMembersModal } from "./InviteTeamMembersModal";
 import { MobileMenuButton, Sidebar } from "./Sidebar";
-import { ZundyLogo } from "./ZundyLogo";
+import { GaspoLogo } from "./GaspoLogo";
 
 export type DashboardOutletContext = {
   openInviteModal: () => void;
@@ -58,7 +58,7 @@ export function DashboardLayout() {
           )}
 
           <header className="fixed top-0 right-0 left-0 z-30 flex items-center justify-between bg-background px-5 py-4 md:hidden">
-            <ZundyLogo />
+            <GaspoLogo />
             <MobileMenuButton open={sidebarOpen} onClick={() => setSidebarOpen((open) => !open)} />
           </header>
 

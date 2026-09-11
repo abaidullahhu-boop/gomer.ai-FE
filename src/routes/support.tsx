@@ -30,10 +30,10 @@ export default function SupportPage() {
   return (
     <div className="support-page relative min-h-screen bg-cream text-stone-900 selection:bg-cobalt selection:text-cream">
       <PageMeta
-        title="Support — Zundy"
-        description="Need help with the Zundy app? Contact our support team at support@gomer.com."
-        ogTitle="Support — Zundy"
-        ogDescription="Need help with the Zundy app? We're here to assist."
+        title="Support — Gaspo"
+        description="Need help with the Gaspo app? Contact our support team at support@gomer.com."
+        ogTitle="Support — Gaspo"
+        ogDescription="Need help with the Gaspo app? We're here to assist."
       />
 
       <div
@@ -48,7 +48,7 @@ export default function SupportPage() {
             to="/"
             className="shrink-0 font-support-serif text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
           >
-            Zundy
+            Gaspo
           </Link>
           <nav className="flex shrink-0 items-center gap-2 sm:gap-6">
             <Link
@@ -72,7 +72,7 @@ export default function SupportPage() {
           <div>
             <h1 className="font-support-serif mb-8 text-5xl tracking-tight md:text-7xl">Support</h1>
             <p className="mb-16 text-xl text-stone-500">
-              Need help with the Zundy app? We&apos;re here to assist.
+              Need help with the Gaspo app? We&apos;re here to assist.
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export default function SupportPage() {
         <div className="mx-auto max-w-[1400px] px-6 md:px-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
-              <span className="font-support-serif text-xl font-bold">Zundy</span>
+              <span className="font-support-serif text-xl font-bold">Gaspo</span>
               <p className="mt-1 text-sm text-stone-500">© Zeta AI, Inc. All rights reserved.</p>
             </div>
             <div className="flex flex-wrap items-center gap-6">

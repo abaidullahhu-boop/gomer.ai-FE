@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
 import { startSlackLogin } from "@/lib/auth";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
 const authButtonClass =
@@ -11,19 +11,19 @@ export default function SignIn() {
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
       <PageMeta
-        title="Sign in to Zundy"
-        description="Sign in to Zundy with Slack or join the Microsoft Teams waitlist."
+        title="Sign in to Gaspo"
+        description="Sign in to Gaspo with Slack or join the Microsoft Teams waitlist."
       />
 
       <div className="absolute left-5 top-5 z-10">
-        <ZundyLogo />
+        <GaspoLogo />
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center px-4">
         <div className="flex w-full max-w-[360px] flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-4">
             <img
-              src={zundyAvatar}
+              src={gaspoAvatar}
               alt=""
               className="size-14 rounded-lg"
               width={56}
@@ -55,7 +55,7 @@ export default function SignIn() {
 
       <div className="p-6">
         <p className="text-center text-xs text-muted-foreground">
-          By logging in, you agree to the Zundy{" "}
+          By logging in, you agree to the Gaspo{" "}
           <a href="/privacy" target="_blank" rel="noreferrer" className="underline">
             Privacy Policy
           </a>{" "}
@@ -69,11 +69,11 @@ export default function SignIn() {
   );
 }
 
-function ZundyLogo() {
+function GaspoLogo() {
   return (
     <img
-      src="/assets/brand/logos/zundy-logo-soft-black.svg"
-      alt="Zundy"
+      src="/assets/brand/logos/gaspo-logo-soft-black.svg"
+      alt="Gaspo"
       className="block h-7 w-auto"
       width={112}
       height={28}

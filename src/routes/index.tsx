@@ -8,7 +8,7 @@ import { UseCasesSection } from "@/components/site/UseCasesSection";
 import slackLogo from "@/assets/images/slack.svg";
 import zapierLogo from "@/assets/images/zapier.svg";
 import microsoftLogo from "@/assets/images/microsoft-teams.svg";
-import zundyAvatar from "@/assets/images/zundy-slack-avatar (1).svg";
+import gaspoAvatar from "@/assets/images/gaspo-slack-avatar (1).svg";
 import {
   WorkflowAutomation, ReportsAnalytics, AppBuilder, AskAI,
 } from "@/components/site/HomeSections";
@@ -25,13 +25,13 @@ const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
 
 const testimonials = [
-  { name: "Tobias Giesen", role: "CEO, Growably", saved: "1-3 hrs/week", quote: "Zundy is like Claude, but you can interact with him like with a colleague, not an LLM. He runs projects and scheduled tasks in the cloud.", image: avatar("photo-1507003211169-0a1dd7228f2d") },
+  { name: "Tobias Giesen", role: "CEO, Growably", saved: "1-3 hrs/week", quote: "Gaspo is like Claude, but you can interact with him like with a colleague, not an LLM. He runs projects and scheduled tasks in the cloud.", image: avatar("photo-1507003211169-0a1dd7228f2d") },
   { name: "Antonín Štětina", role: "CEO, KULINA Group", saved: "10+ hrs/week", quote: "Mindblowing all-in-one AI which does everything in a single solution.", image: avatar("photo-1560250097-0b93528c311a") },
-  { name: "Sam Kopelman", role: "CEO, Givr", saved: "10+ hrs/week", quote: "Zundy is like the most capable all-round colleague you can imagine.", image: avatar("photo-1472099645785-5658abf4ff4e") },
-  { name: "Boris Wexler", role: "CEO, Space Dinosaurs", saved: "10+ hrs/week", quote: "Zundy is an incredible tool — it was almost instantly adopted by the bulk of my team.", image: avatar("photo-1500648767791-00dcc994a43e") },
-  { name: "Robert Tyrrell", role: "Owner, TalentBright", saved: "10+ hrs/week", quote: "It's blown my mind seeing what Zundy can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring.", image: avatar("photo-1519345182560-3f2917c472ef") },
-  { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Zundy is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
-  { name: "Jacob Aldridge", role: "Founder, Como Business Coaching", saved: "3-5 hrs/week", quote: "Zundy may feel expensive for a monthly subscription, but is the cheapest employee I've ever hired AND the only one who acts on my midnight instructions.", image: avatar("photo-1573496359142-b8d87734a5a2") },
+  { name: "Sam Kopelman", role: "CEO, Givr", saved: "10+ hrs/week", quote: "Gaspo is like the most capable all-round colleague you can imagine.", image: avatar("photo-1472099645785-5658abf4ff4e") },
+  { name: "Boris Wexler", role: "CEO, Space Dinosaurs", saved: "10+ hrs/week", quote: "Gaspo is an incredible tool — it was almost instantly adopted by the bulk of my team.", image: avatar("photo-1500648767791-00dcc994a43e") },
+  { name: "Robert Tyrrell", role: "Owner, TalentBright", saved: "10+ hrs/week", quote: "It's blown my mind seeing what Gaspo can actually do. I'm having real conversations with my partner about investing in an AI tool the way we used to talk about hiring.", image: avatar("photo-1519345182560-3f2917c472ef") },
+  { name: "Jordan Dikoum", role: "Co-Founder, UniTru Inc.", saved: "10+ hrs/week", quote: "Gaspo is our eyes, ears, and hands. We might really never have to hire someone again.", image: avatar("photo-1506794778202-cad84cf45f1d") },
+  { name: "Jacob Aldridge", role: "Founder, Como Business Coaching", saved: "3-5 hrs/week", quote: "Gaspo may feel expensive for a monthly subscription, but is the cheapest employee I've ever hired AND the only one who acts on my midnight instructions.", image: avatar("photo-1573496359142-b8d87734a5a2") },
   { name: "Richard Comer", role: "Owner, Flagship Financial", saved: "10+ hrs/week", quote: "Like a virtual personal assistant who you don't have to manage as their therapist. He just does the work and doesn't complain.", image: avatar("photo-1580489944761-15a19d654956") },
   { name: "Matthias Lis", role: "CEO, CodeYourBrand", saved: "1-3 hrs/week", quote: "A proactive employee that learns what's important in your company and delivers without hesitation.", image: avatar("photo-1438761681033-6461ffad8d80") },
 ];
@@ -40,9 +40,9 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Zundy — Not a tool. A hire."
-        description="Zundy is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."
-        ogTitle="Zundy — Not a tool. A hire."
+        title="Gaspo — Not a tool. A hire."
+        description="Gaspo is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."
+        ogTitle="Gaspo — Not a tool. A hire."
         ogDescription="The AI coworker that ships real work in Slack and Teams."
       />
       <section className="border-0 py-0!" id="hero">
@@ -63,7 +63,7 @@ export default function Index() {
                     <img src={slackLogo} alt="" width={16} height={16} className="size-4 shrink-0" />
                     <img src={microsoftLogo} alt="" width={16} height={16} className="size-4 shrink-0" />
                   </span>
-                  <span className="body-small font-medium min-w-0 truncate">30,000+ workspaces hired Zundy</span>
+                  <span className="body-small font-medium min-w-0 truncate">30,000+ workspaces hired Gaspo</span>
                 </div>
 
                 <h1 className="font-heading text-5xl leading-[1.1] font-bold tracking-[-2.4px] text-balance text-white max-sm:text-[2.625rem] sm:text-6xl sm:tracking-[-3.6px] lg:text-7xl xl:text-[80px] xl:tracking-[-4.8px]">
@@ -74,7 +74,7 @@ export default function Index() {
 
               <div className="flex max-w-136.75 flex-col items-center gap-8">
                 <p className="text-lg leading-[1.4] font-medium text-white">
-                  Zundy is the AI employee that connects to 3,200+ tools and does the work. Reports, dashboards, code, campaigns.
+                  Gaspo is the AI employee that connects to 3,200+ tools and does the work. Reports, dashboards, code, campaigns.
                 </p>
 
                 <div className="flex w-full flex-col items-center gap-3">
@@ -101,19 +101,19 @@ export default function Index() {
               <div className="grid w-full gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-x-5 lg:gap-y-0">
                 <FeatureCard
                   title="Real output, not just text."
-                  body="Zundy doesn't brainstorm. He ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
+                  body="Gaspo doesn't brainstorm. He ships. PDFs your board can read. Dashboards your team actually uses. Web apps you'd think a developer built."
                   visual={<ChatPreview />}
                   contentClassName="pr-4"
                 />
                 <FeatureCard
                   title="One message, all your tools."
-                  body="Stripe, Meta Ads, Notion, GitHub. Zundy queries them all in a single run. No tab-switching, no CSV exports."
+                  body="Stripe, Meta Ads, Notion, GitHub. Gaspo queries them all in a single run. No tab-switching, no CSV exports."
                   visual={<ToolIconsVisual />}
                   visualOverflow
                 />
                 <FeatureCard
                   title="Never repeat yourself."
-                  body="Every conversation makes Zundy smarter about your business. He remembers what worked, what didn't, and how you like things done."
+                  body="Every conversation makes Gaspo smarter about your business. He remembers what worked, what didn't, and how you like things done."
                   visual={<FollowUpPreview />}
                   visualAlign="end"
                 />
@@ -283,7 +283,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackZundyMessage({
+function SlackGaspoMessage({
   time,
   body,
   attachment,
@@ -294,25 +294,25 @@ function SlackZundyMessage({
 }) {
   return (
     <div
-      data-variant="zundy"
+      data-variant="gaspo"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-4 text-left slack-message-zundy"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-4 text-left slack-message-gaspo"
     >
-      <div aria-hidden="true" className="slack-zundy-bg-mount">
-        <div className="slack-zundy-layer-glass-stack" />
-        <div className="slack-zundy-layer-inner-depth-soft" />
-        <div className="slack-zundy-layer-inner-glow-overlay" />
-        <div className="slack-zundy-layer-feather-blur" />
-        <div className="slack-zundy-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gaspo-bg-mount">
+        <div className="slack-gaspo-layer-glass-stack" />
+        <div className="slack-gaspo-layer-inner-depth-soft" />
+        <div className="slack-gaspo-layer-inner-glow-overlay" />
+        <div className="slack-gaspo-layer-feather-blur" />
+        <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Zundy</span>
+              <span>Gaspo</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -438,7 +438,7 @@ function ChatPreview() {
         avatar={annaAvatar}
         body={
           <>
-            <SlackMention>@Zundy</SlackMention> we need a competitive analysis
+            <SlackMention>@Gaspo</SlackMention> we need a competitive analysis
           </>
         }
       />
@@ -448,11 +448,11 @@ function ChatPreview() {
         avatar={lisaAvatar}
         body={
           <>
-            <SlackMention>@Zundy</SlackMention> make it a PDF plssss
+            <SlackMention>@Gaspo</SlackMention> make it a PDF plssss
           </>
         }
       />
-      <SlackZundyMessage
+      <SlackGaspoMessage
         time="2:43 PM"
         body={
           <>
@@ -507,13 +507,13 @@ function FollowUpPreview() {
         avatar={stevenAvatar}
         body={
           <>
-            <SlackMention>@Zundy</SlackMention> any updates?
+            <SlackMention>@Gaspo</SlackMention> any updates?
           </>
         }
         reactions={<SlackReactions initial={[{ emoji: "👀", count: 1 }]} />}
       />
-      <SlackZundyMessage time="2:43 PM" body="No response from Acme. Smells fishy. 🐟" />
-      <SlackZundyMessage time="2:43 PM" body="I just followed up with them" />
+      <SlackGaspoMessage time="2:43 PM" body="No response from Acme. Smells fishy. 🐟" />
+      <SlackGaspoMessage time="2:43 PM" body="I just followed up with them" />
     </div>
   );
 }

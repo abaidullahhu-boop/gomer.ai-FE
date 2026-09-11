@@ -8,7 +8,7 @@ import {
 } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Megaphone, ShoppingBag, Sun } from "lucide-react";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
@@ -28,7 +28,7 @@ type StarterTab = {
   marquee: string[];
   messages: {
     user: { name: string; time: string; avatar: string; body: ReactNode; reactions?: SlackReaction[] };
-    zundy: { time: string; body: ReactNode; reactions?: SlackReaction[] };
+    gaspo: { time: string; body: ReactNode; reactions?: SlackReaction[] };
   };
 };
 
@@ -53,12 +53,12 @@ const STARTER_TABS: StarterTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
         body: (
           <>
-            <SlackMention>@Zundy</SlackMention> pause anything with CPA above $40 and export this
+            <SlackMention>@Gaspo</SlackMention> pause anything with CPA above $40 and export this
             week&apos;s performance to Sheets ASAP.
           </>
         ),
       },
-      zundy: {
+      gaspo: {
         time: "11:38 AM",
         reactions: [
           { emoji: "✅", count: 2 },
@@ -88,12 +88,12 @@ const STARTER_TABS: StarterTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
         body: (
           <>
-            <SlackMention>@Zundy</SlackMention> refund rate jumped to 8% this weekend. Pull the top
+            <SlackMention>@Gaspo</SlackMention> refund rate jumped to 8% this weekend. Pull the top
             reasons from Shopify and tell me if any SKUs are driving it.
           </>
         ),
       },
-      zundy: {
+      gaspo: {
         time: "11:38 AM",
         reactions: [
           { emoji: "✅", count: 2 },
@@ -137,13 +137,13 @@ const STARTER_TABS: StarterTab[] = [
         reactions: [{ emoji: "⏳", count: 1 }],
         body: (
           <>
-            <SlackMention>@Zundy</SlackMention> weekly recap for Kelso Athletics. Spend, ROAS, open
+            <SlackMention>@Gaspo</SlackMention> weekly recap for Kelso Athletics. Spend, ROAS, open
             deliverables. Branded PDF in{" "}
             <span className="text-slack-mention underline decoration-solid">#client-kelso</span>.
           </>
         ),
       },
-      zundy: {
+      gaspo: {
         time: "11:38 AM",
         reactions: [
           { emoji: "✅", count: 2 },
@@ -304,7 +304,7 @@ function StarterSlackUserMessage({
   );
 }
 
-function StarterSlackZundyMessage({
+function StarterSlackGaspoMessage({
   time,
   body,
   reactions,
@@ -315,25 +315,25 @@ function StarterSlackZundyMessage({
 }) {
   return (
     <div
-      data-variant="zundy"
+      data-variant="gaspo"
       data-highlighted="true"
-      className="relative flex w-full text-left isolate overflow-hidden slack-message-zundy gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
+      className="relative flex w-full text-left isolate overflow-hidden slack-message-gaspo gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
     >
-      <div aria-hidden="true" className="slack-zundy-bg-mount">
-        <div className="slack-zundy-layer-glass-stack" />
-        <div className="slack-zundy-layer-inner-depth-soft" />
-        <div className="slack-zundy-layer-inner-glow-overlay" />
-        <div className="slack-zundy-layer-feather-blur" />
-        <div className="slack-zundy-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gaspo-bg-mount">
+        <div className="slack-gaspo-layer-glass-stack" />
+        <div className="slack-gaspo-layer-inner-depth-soft" />
+        <div className="slack-gaspo-layer-inner-glow-overlay" />
+        <div className="slack-gaspo-layer-feather-blur" />
+        <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md z-[1] bg-transparent">
-        <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 mb-0.5">
           <span className="body-small text-slack font-medium">
             <span className="inline-flex items-center gap-1.5">
-              <span>Zundy</span>
+              <span>Gaspo</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -408,7 +408,7 @@ function GlassChatCard({
   panelId: string;
   tabId: string;
 }) {
-  const { user, zundy } = tab.messages;
+  const { user, gaspo } = tab.messages;
 
   return (
     <div
@@ -434,7 +434,7 @@ function GlassChatCard({
             body={user.body}
             reactions={user.reactions}
           />
-          <StarterSlackZundyMessage time={zundy.time} body={zundy.body} reactions={zundy.reactions} />
+          <StarterSlackGaspoMessage time={gaspo.time} body={gaspo.body} reactions={gaspo.reactions} />
         </div>
       </div>
     </div>

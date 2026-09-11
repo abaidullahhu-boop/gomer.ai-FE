@@ -29,19 +29,19 @@ function faqs(topic: string): BlogPostFaq[] {
   return [
     {
       q: `Do I need prior experience to get started with ${topic}?`,
-      a: "No. Zundy is designed so engineers can describe what they need in plain language and iterate from a working starting point. You can go from idea to a shareable app in a single session.",
+      a: "No. Gaspo is designed so engineers can describe what they need in plain language and iterate from a working starting point. You can go from idea to a shareable app in a single session.",
     },
     {
       q: "Can my whole team use the same workflow?",
-      a: "Yes. Apps and automations built in Zundy can be shared across your workspace with permissions, versioning, and audit trails so the whole team works from one source of truth.",
+      a: "Yes. Apps and automations built in Gaspo can be shared across your workspace with permissions, versioning, and audit trails so the whole team works from one source of truth.",
     },
     {
-      q: "How does Zundy connect to our existing tools?",
-      a: "Zundy integrates with 3,000+ apps through managed authentication. Connect your stack once and Zundy can read, write, and orchestrate work across your tools from Slack or Teams.",
+      q: "How does Gaspo connect to our existing tools?",
+      a: "Gaspo integrates with 3,000+ apps through managed authentication. Connect your stack once and Gaspo can read, write, and orchestrate work across your tools from Slack or Teams.",
     },
     {
       q: "Is this suitable for production engineering work?",
-      a: "Yes. Teams use Zundy for client deliverables, internal calculations, reports, and production deployments — with review-first defaults and SOC 2 compliant infrastructure.",
+      a: "Yes. Teams use Gaspo for client deliverables, internal calculations, reports, and production deployments — with review-first defaults and SOC 2 compliant infrastructure.",
     },
   ];
 }
@@ -51,24 +51,24 @@ function standardSections(topic: string, bullets: string[]): BlogPostSection[] {
     {
       title: "The short answer",
       paragraphs: [
-        `${topic} is one of the highest-leverage ways engineering teams are using Zundy today. Instead of rebuilding the same workflow in spreadsheets or one-off scripts, you package the logic once and let Zundy run it on demand — or on a schedule — from Slack.`,
+        `${topic} is one of the highest-leverage ways engineering teams are using Gaspo today. Instead of rebuilding the same workflow in spreadsheets or one-off scripts, you package the logic once and let Gaspo run it on demand — or on a schedule — from Slack.`,
         "The practical win is speed without sacrificing rigor: your calculations stay auditable, your outputs stay formatted for clients, and your team stops copying data between tools by hand.",
       ],
       bullets: bullets,
     },
     {
-      title: "How it works in Zundy",
+      title: "How it works in Gaspo",
       subsections: [
         {
           title: "Describe the workflow",
           paragraphs: [
-            "Start in Slack or the Zundy App Builder. Describe the inputs, the calculation or extraction logic, and the output you need — a PDF, a dashboard, a web app, or a data export.",
+            "Start in Slack or the Gaspo App Builder. Describe the inputs, the calculation or extraction logic, and the output you need — a PDF, a dashboard, a web app, or a data export.",
           ],
         },
         {
           title: "Connect your tools",
           paragraphs: [
-            "Wire up the files, APIs, and databases your workflow depends on. Zundy handles authentication and keeps credentials out of prompts.",
+            "Wire up the files, APIs, and databases your workflow depends on. Gaspo handles authentication and keeps credentials out of prompts.",
           ],
         },
         {
@@ -84,7 +84,7 @@ function standardSections(topic: string, bullets: string[]): BlogPostSection[] {
       paragraphs: [
         "Teams typically go from a manual process that takes hours to an app or automation that runs in minutes. The output is client-ready, version-controlled, and easy to hand off to colleagues who were not in the original conversation.",
       ],
-      codeBlock: `@Zundy run the ${topic.toLowerCase()} workflow on the latest project files
+      codeBlock: `@Gaspo run the ${topic.toLowerCase()} workflow on the latest project files
 and post the results to #engineering for review before sending to the client.`,
     },
     {
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     subtitle:
       "Analyze the differences between AI coworkers and AI agents to understand the implications for business operations and workforce dynamics.",
     date: "Jun 09, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "An AI agent is the technology. An AI coworker is how that technology shows up at work.",
       "The difference is not the model — it is the posture: presence, review-first action, and accountability.",
@@ -166,7 +166,7 @@ export const blogPosts: BlogPost[] = [
           "Coworker: multi-tool work that needs judgment — investor updates, pipeline triage, month-end reconciliation.",
           "Most teams need both; a coworker can orchestrate narrow agents underneath.",
         ],
-        codeBlock: `@Zundy every Friday at 4pm, pull this week's closed-won deals from HubSpot
+        codeBlock: `@Gaspo every Friday at 4pm, pull this week's closed-won deals from HubSpot
 and new signups from our database, draft a short wins recap for #team, and
 post it for me to review before it goes out.`,
       },
@@ -192,40 +192,40 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "build-engineering-apps-claude-code-gomer-sdk",
-    title: "Build engineering apps with Claude Code + Zundy SDK, and share them safely on the Zundy platform",
+    title: "Build engineering apps with Claude Code + Gaspo SDK, and share them safely on the Gaspo platform",
     excerpt:
-      "Learn how to build a real engineering app with Claude Code and the Zundy SDK, from setup and development to debugging and visualization.",
+      "Learn how to build a real engineering app with Claude Code and the Gaspo SDK, from setup and development to debugging and visualization.",
     subtitle:
-      "A practical guide to building, debugging, and sharing engineering apps with Claude Code and the Zundy SDK.",
+      "A practical guide to building, debugging, and sharing engineering apps with Claude Code and the Gaspo SDK.",
     date: "Jun 01, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
-      "Claude Code and the Zundy SDK let you go from prompt to production app without leaving your editor.",
+      "Claude Code and the Gaspo SDK let you go from prompt to production app without leaving your editor.",
       "The SDK handles auth, deployment, and workspace sharing so you focus on engineering logic.",
-      "Apps built this way inherit Zundy's permissions, versioning, and review workflows.",
+      "Apps built this way inherit Gaspo's permissions, versioning, and review workflows.",
       "Visualization and debugging tools are built in — you see outputs as you iterate.",
       "Sharing safely means governance by default, not an afterthought.",
     ],
     intro: [
-      "Engineering teams no longer need a separate web team to ship internal tools. With Claude Code and the Zundy SDK, you describe the calculation or workflow, iterate in code, and publish to your workspace in one flow.",
+      "Engineering teams no longer need a separate web team to ship internal tools. With Claude Code and the Gaspo SDK, you describe the calculation or workflow, iterate in code, and publish to your workspace in one flow.",
       "This post walks through setup, development, debugging, and how to share apps across your organization without exposing credentials or losing version control.",
     ],
-    sections: standardSections("Claude Code + Zundy SDK apps", [
+    sections: standardSections("Claude Code + Gaspo SDK apps", [
       "Use Claude Code for fast iteration on app logic and UI.",
-      "Use the Zundy SDK for deployment, integrations, and workspace APIs.",
-      "Publish to Zundy when the app is ready for teammates.",
+      "Use the Gaspo SDK for deployment, integrations, and workspace APIs.",
+      "Publish to Gaspo when the app is ready for teammates.",
     ]),
-    faqs: faqs("Claude Code + Zundy SDK"),
+    faqs: faqs("Claude Code + Gaspo SDK"),
   },
   {
     slug: "4-engineering-workflows-automate-ai-gomer",
-    title: "4 Engineering workflows you can easily automate with AI in Zundy",
+    title: "4 Engineering workflows you can easily automate with AI in Gaspo",
     excerpt:
-      "Discover 4 practical ways engineers can use AI inside Zundy apps, from extracting borehole data and reading PDFs to querying IFC models.",
+      "Discover 4 practical ways engineers can use AI inside Gaspo apps, from extracting borehole data and reading PDFs to querying IFC models.",
     subtitle:
-      "Four real engineering workflows — borehole extraction, PDF parsing, IFC queries, and report generation — automated with AI in Zundy.",
+      "Four real engineering workflows — borehole extraction, PDF parsing, IFC queries, and report generation — automated with AI in Gaspo.",
     date: "May 19, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Borehole log extraction turns scanned PDFs into structured data your footing design app can consume.",
       "PDF specification parsing eliminates manual re-keying of legacy documents.",
@@ -234,7 +234,7 @@ post it for me to review before it goes out.`,
       "Each workflow runs from Slack with review before anything goes external.",
     ],
     intro: [
-      "Engineers spend a surprising amount of time moving data between formats — PDFs to spreadsheets, borehole logs to design inputs, IFC files to quantity takeoffs. Zundy automates those bridges with AI that understands engineering context.",
+      "Engineers spend a surprising amount of time moving data between formats — PDFs to spreadsheets, borehole logs to design inputs, IFC files to quantity takeoffs. Gaspo automates those bridges with AI that understands engineering context.",
       "Here are four workflows teams ship in the first week.",
     ],
     sections: [
@@ -257,39 +257,39 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "claude-code-to-production-engineering-teams",
-    title: "From Claude Code to Production: How Engineering Teams Scale AI Automation with Zundy",
+    title: "From Claude Code to Production: How Engineering Teams Scale AI Automation with Gaspo",
     excerpt:
-      "Engineering firms are starting to combine Claude Code and Zundy to automate engineering workflows faster and at larger scale.",
+      "Engineering firms are starting to combine Claude Code and Gaspo to automate engineering workflows faster and at larger scale.",
     subtitle:
-      "How engineering firms move from prototype automations to production-grade workflows with Claude Code and Zundy.",
+      "How engineering firms move from prototype automations to production-grade workflows with Claude Code and Gaspo.",
     date: "May 14, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
-      "Prototypes in Claude Code become production apps on Zundy with one publish step.",
+      "Prototypes in Claude Code become production apps on Gaspo with one publish step.",
       "Scaling means permissions, versioning, and audit trails — not more scripts on laptops.",
-      "Teams keep engineering logic in code while Zundy handles infra and integrations.",
+      "Teams keep engineering logic in code while Gaspo handles infra and integrations.",
       "Scheduled jobs and Slack triggers replace manual 'run this script' handoffs.",
       "Production does not mean sacrificing the speed of vibe coding.",
     ],
     intro: [
-      "The gap between a working prototype and something your whole firm can rely on is where most AI automation projects stall. Zundy closes that gap by giving engineering teams a path from Claude Code experiments to managed production apps.",
+      "The gap between a working prototype and something your whole firm can rely on is where most AI automation projects stall. Gaspo closes that gap by giving engineering teams a path from Claude Code experiments to managed production apps.",
     ],
     sections: standardSections("Claude Code to production", [
       "Prototype locally with Claude Code.",
-      "Publish to Zundy for managed deployment.",
+      "Publish to Gaspo for managed deployment.",
       "Share, schedule, and govern from your workspace.",
     ]),
     faqs: faqs("production AI automation"),
   },
   {
     slug: "whats-new-gomer-may-2026",
-    title: "What's new in Zundy (May 2026)",
+    title: "What's new in Gaspo (May 2026)",
     excerpt:
-      "Zundy's May 2026 updates make it easier to build, manage, and collaborate on engineering apps. From new App Builder capabilities to smarter app management.",
+      "Gaspo's May 2026 updates make it easier to build, manage, and collaborate on engineering apps. From new App Builder capabilities to smarter app management.",
     subtitle:
       "May 2026 release notes: App Builder improvements, smarter app management, and faster collaboration for engineering teams.",
     date: "May 12, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "App Builder now supports richer parametric UIs with less boilerplate.",
       "App management includes bulk permissions and workspace-wide search.",
@@ -298,7 +298,7 @@ post it for me to review before it goes out.`,
       "New integrations for common civil and structural tooling.",
     ],
     intro: [
-      "May was a big month for teams building and sharing engineering apps on Zundy. Here is what shipped and how to use it.",
+      "May was a big month for teams building and sharing engineering apps on Gaspo. Here is what shipped and how to use it.",
     ],
     sections: [
       {
@@ -320,11 +320,11 @@ post it for me to review before it goes out.`,
       {
         title: "Collaboration",
         paragraphs: [
-          "Teammates can comment on specific app versions and compare outputs side by side — so design reviews happen in Zundy, not in email threads.",
+          "Teammates can comment on specific app versions and compare outputs side by side — so design reviews happen in Gaspo, not in email threads.",
         ],
       },
     ],
-    faqs: faqs("Zundy May 2026 updates"),
+    faqs: faqs("Gaspo May 2026 updates"),
   },
   {
     slug: "5-python-libraries-structural-engineering",
@@ -332,7 +332,7 @@ post it for me to review before it goes out.`,
     excerpt:
       "Discover 5 Python libraries that help structural engineers automate analysis, modeling, and design workflows.",
     subtitle:
-      "Five Python libraries structural engineers use inside Zundy apps — from analysis APIs to parametric modeling.",
+      "Five Python libraries structural engineers use inside Gaspo apps — from analysis APIs to parametric modeling.",
     date: "May 11, 2026",
     author: "Luis Maldonado",
     tags: ["Civil", "Structural"],
@@ -341,16 +341,16 @@ post it for me to review before it goes out.`,
       "Structural analysis APIs integrate with commercial solvers for code-check workflows.",
       "Parametric modeling libraries power flexible design exploration.",
       "Pandas bridges spreadsheet workflows into auditable Python pipelines.",
-      "Zundy wraps these libraries in shareable apps your whole team can run.",
+      "Gaspo wraps these libraries in shareable apps your whole team can run.",
     ],
     intro: [
-      "Python is the lingua franca of structural automation. These five libraries show up in nearly every Zundy app we see from structural teams — and AI makes wiring them together faster than ever.",
+      "Python is the lingua franca of structural automation. These five libraries show up in nearly every Gaspo app we see from structural teams — and AI makes wiring them together faster than ever.",
     ],
     sections: [
       {
         title: "The five libraries",
         table: {
-          headers: ["Library", "Use case", "In Zundy"],
+          headers: ["Library", "Use case", "In Gaspo"],
           rows: [
             ["NumPy / SciPy", "Matrix math and solvers", "Core calculation engines"],
             ["Pandas", "Tabular loads and results", "Import/export from Excel"],
@@ -362,7 +362,7 @@ post it for me to review before it goes out.`,
       },
       ...standardSections("structural Python automation", [
         "Pick the library that matches your solver and code standard.",
-        "Wrap logic in a Zundy app for sharing and review.",
+        "Wrap logic in a Gaspo app for sharing and review.",
         "Schedule recurring analysis runs from Slack.",
       ]),
     ],
@@ -370,37 +370,37 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "infraspace-gomer-infrastructure-planning",
-    title: "How InfraSpace and Zundy improve early-stage infrastructure planning with AI",
+    title: "How InfraSpace and Gaspo improve early-stage infrastructure planning with AI",
     excerpt:
       "Combining route optimization with engineering analysis for roads, transmission lines, and heavy transport projects.",
     subtitle:
-      "Route optimization meets engineering analysis — how InfraSpace and Zundy accelerate early-stage infrastructure planning.",
+      "Route optimization meets engineering analysis — how InfraSpace and Gaspo accelerate early-stage infrastructure planning.",
     date: "May 07, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "Early-stage planning benefits from combining GIS route data with engineering constraints.",
-      "InfraSpace handles corridor optimization; Zundy runs the engineering checks.",
+      "InfraSpace handles corridor optimization; Gaspo runs the engineering checks.",
       "Teams compare alternatives faster without rebuilding models by hand.",
       "Outputs feed directly into client presentations and permit packages.",
       "AI coordinates the handoff between optimization and analysis tools.",
     ],
     intro: [
-      "Infrastructure projects live or die in early planning. Combining InfraSpace's route optimization with Zundy's engineering analysis gives teams a single workflow from corridor selection to design validation.",
+      "Infrastructure projects live or die in early planning. Combining InfraSpace's route optimization with Gaspo's engineering analysis gives teams a single workflow from corridor selection to design validation.",
     ],
     sections: standardSections("infrastructure planning with InfraSpace", [
       "Export route alternatives from InfraSpace.",
-      "Run engineering checks in Zundy against your standards.",
+      "Run engineering checks in Gaspo against your standards.",
       "Package results for stakeholders in one report.",
     ]),
     faqs: faqs("infrastructure planning"),
   },
   {
     slug: "geotechnical-ai-agents-borehole-logs",
-    title: "How to build geotechnical AI agents in Zundy for borehole logs and footing design",
+    title: "How to build geotechnical AI agents in Gaspo for borehole logs and footing design",
     excerpt:
       "Learn how to build geotechnical AI agents to extract data from borehole logs and reports, automate footing design inputs.",
     subtitle:
-      "Build geotechnical AI agents that extract borehole data and automate footing design inputs in Zundy.",
+      "Build geotechnical AI agents that extract borehole data and automate footing design inputs in Gaspo.",
     date: "May 04, 2026",
     author: "Alejandro Duarte",
     keyTakeaways: [
@@ -411,7 +411,7 @@ post it for me to review before it goes out.`,
       "The same agent handles updates when new logs arrive mid-project.",
     ],
     intro: [
-      "Geotechnical engineers still re-type borehole data from PDFs into design spreadsheets. Zundy agents read the logs, structure the data, and hand it to your footing design app — with review at every step.",
+      "Geotechnical engineers still re-type borehole data from PDFs into design spreadsheets. Gaspo agents read the logs, structure the data, and hand it to your footing design app — with review at every step.",
     ],
     sections: standardSections("geotechnical borehole agents", [
       "Upload or connect borehole PDFs from your document store.",
@@ -426,13 +426,13 @@ post it for me to review before it goes out.`,
     excerpt:
       "Turn legacy PDF specifications into living, calculable applications without rewriting the underlying logic.",
     subtitle:
-      "Turn legacy PDF specifications into living, calculable Zundy apps — without rewriting your engineering logic.",
+      "Turn legacy PDF specifications into living, calculable Gaspo apps — without rewriting your engineering logic.",
     date: "Apr 29, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "PDF specs encode decades of engineering knowledge — but are not calculable.",
       "AI extraction maps tables and formulas into structured app inputs.",
-      "You keep the engineering logic; Zundy handles the UI and deployment.",
+      "You keep the engineering logic; Gaspo handles the UI and deployment.",
       "Updates to the spec propagate through versioned apps.",
       "Teams stop maintaining parallel spreadsheet copies.",
     ],
@@ -441,7 +441,7 @@ post it for me to review before it goes out.`,
     ],
     sections: standardSections("PDF to app", [
       "Parse the PDF into structured inputs and rules.",
-      "Build the calculation layer in Python or Zundy's App Builder.",
+      "Build the calculation layer in Python or Gaspo's App Builder.",
       "Publish and version as the spec evolves.",
     ]),
     faqs: faqs("PDF to app workflows"),
@@ -454,7 +454,7 @@ post it for me to review before it goes out.`,
     subtitle:
       "Modernize spreadsheet-bound engineering calculations into shareable web apps without losing fidelity.",
     date: "Apr 24, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Excel tools break when shared — wrong versions, broken links, no audit trail.",
       "Web apps preserve calculation logic with proper versioning and permissions.",
@@ -467,7 +467,7 @@ post it for me to review before it goes out.`,
     ],
     sections: standardSections("Excel to web migration", [
       "Audit the spreadsheet for hidden dependencies and edge cases.",
-      "Rebuild logic in Zundy with side-by-side validation.",
+      "Rebuild logic in Gaspo with side-by-side validation.",
       "Retire the spreadsheet once outputs match.",
     ]),
     faqs: faqs("Excel to web migration"),
@@ -480,7 +480,7 @@ post it for me to review before it goes out.`,
     subtitle:
       "Why engineering teams are adopting AI coworkers for analysis, documentation, and cross-tool workflows.",
     date: "Apr 18, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Engineers lose hours to documentation and data gathering — not design.",
       "AI coworkers draft reports, extract data, and chase inputs across tools.",
@@ -500,16 +500,16 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "vibe-coding-gomer-tutorial",
-    title: "Vibe coding in Zundy: a hands-on tutorial",
+    title: "Vibe coding in Gaspo: a hands-on tutorial",
     excerpt:
       "A new way to prototype engineering tools — describe what you want, iterate with AI, and ship in hours not weeks.",
     subtitle:
       "Hands-on tutorial: describe what you want, iterate with AI, and ship an engineering tool in hours.",
     date: "Apr 12, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Vibe coding means describing outcomes, not writing boilerplate first.",
-      "Zundy's App Builder turns prompts into working UIs you refine in conversation.",
+      "Gaspo's App Builder turns prompts into working UIs you refine in conversation.",
       "You ship a shareable app in one session — not a slide deck of requirements.",
       "Iteration is cheap: change the prompt, see the app update.",
       "Production hardening comes after the prototype proves value.",
@@ -517,7 +517,7 @@ post it for me to review before it goes out.`,
     intro: [
       "Vibe coding is prototyping engineering tools by describing what you want and iterating with AI until it works. This tutorial walks through building a real calculable app from a single prompt.",
     ],
-    sections: standardSections("vibe coding in Zundy", [
+    sections: standardSections("vibe coding in Gaspo", [
       "Describe the inputs, calculation, and output format.",
       "Iterate on the UI and logic in the App Builder.",
       "Publish to your workspace when teammates can use it.",
@@ -532,7 +532,7 @@ post it for me to review before it goes out.`,
     subtitle:
       "Governance, versioning, and permissions for engineering apps that scale beyond a single team.",
     date: "Apr 08, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "Permissions should mirror how your firm already governs calculations.",
       "Version every publish — clients and auditors will ask what changed.",
@@ -541,7 +541,7 @@ post it for me to review before it goes out.`,
       "A central app catalog beats scattered links in Slack threads.",
     ],
     intro: [
-      "The first Zundy app is easy. The tenth requires governance — who can edit, who can run, what version went to the client. These practices keep shared apps trustworthy as adoption spreads.",
+      "The first Gaspo app is easy. The tenth requires governance — who can edit, who can run, what version went to the client. These practices keep shared apps trustworthy as adoption spreads.",
     ],
     sections: standardSections("sharing apps across teams", [
       "Define roles: builder, reviewer, runner.",
@@ -552,23 +552,23 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "civil-engineers-automate-reports",
-    title: "How Civil Engineers Use Zundy to Automate Reports",
+    title: "How Civil Engineers Use Gaspo to Automate Reports",
     excerpt:
       "From design checks to fully formatted client deliverables in a fraction of the time.",
     subtitle:
-      "From design checks to fully formatted client deliverables — how civil engineers automate reports with Zundy.",
+      "From design checks to fully formatted client deliverables — how civil engineers automate reports with Gaspo.",
     date: "Apr 03, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     tags: ["Civil"],
     keyTakeaways: [
       "Report automation starts with templating your firm's standard sections.",
-      "Zundy pulls calculation results and inserts them into branded PDFs.",
+      "Gaspo pulls calculation results and inserts them into branded PDFs.",
       "Review in Slack before anything goes to the client.",
       "Recurring reports — monthly progress, inspection summaries — run on schedule.",
       "Engineers spend time on judgment, not copy-paste.",
     ],
     intro: [
-      "Civil engineers produce enormous documentation load. Zundy automates the assembly — pulling numbers from calculations, formatting to your template, and routing for review.",
+      "Civil engineers produce enormous documentation load. Gaspo automates the assembly — pulling numbers from calculations, formatting to your template, and routing for review.",
     ],
     sections: standardSections("civil engineering reports", [
       "Template your standard report sections once.",
@@ -579,24 +579,24 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "visualizing-3d-models-gomer-app",
-    title: "Visualizing 3D models in your Zundy app",
+    title: "Visualizing 3D models in your Gaspo app",
     excerpt:
-      "A walk-through of Zundy's 3D viewer and how to integrate it with parametric models.",
+      "A walk-through of Gaspo's 3D viewer and how to integrate it with parametric models.",
     subtitle:
-      "Walk-through of Zundy's 3D viewer and integrating it with parametric engineering models.",
+      "Walk-through of Gaspo's 3D viewer and integrating it with parametric engineering models.",
     date: "Mar 28, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
-      "Zundy's 3D viewer embeds directly in App Builder UIs.",
+      "Gaspo's 3D viewer embeds directly in App Builder UIs.",
       "Parametric inputs drive geometry updates in real time.",
       "Teams use it for structural, geotech, and infrastructure visualization.",
       "Export snapshots for reports and client presentations.",
       "No separate desktop viewer required for review.",
     ],
     intro: [
-      "3D visualization helps engineers and clients understand designs faster than tables alone. Zundy's built-in viewer connects to your parametric models inside shareable apps.",
+      "3D visualization helps engineers and clients understand designs faster than tables alone. Gaspo's built-in viewer connects to your parametric models inside shareable apps.",
     ],
-    sections: standardSections("3D visualization in Zundy", [
+    sections: standardSections("3D visualization in Gaspo", [
       "Connect your geometry source or generate parametrically.",
       "Embed the viewer component in your app UI.",
       "Export views for reports and presentations.",
@@ -605,22 +605,22 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "engineers-guide-api-integrations-gomer",
-    title: "The Engineer's Guide to API integrations in Zundy",
+    title: "The Engineer's Guide to API integrations in Gaspo",
     excerpt:
-      "Connect Zundy apps to your favorite engineering tools and external services with minimal glue code.",
+      "Connect Gaspo apps to your favorite engineering tools and external services with minimal glue code.",
     subtitle:
-      "Connect Zundy apps to engineering tools and external services with minimal glue code.",
+      "Connect Gaspo apps to engineering tools and external services with minimal glue code.",
     date: "Mar 23, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
-      "Zundy manages OAuth and API keys — credentials never enter prompts.",
+      "Gaspo manages OAuth and API keys — credentials never enter prompts.",
       "3,000+ integrations cover most engineering and business stacks.",
       "Custom APIs work through the SDK when you need something bespoke.",
       "Integrations are workspace-scoped with audit logs.",
       "Start read-only, promote to write after review.",
     ],
     intro: [
-      "API integrations are how Zundy apps become part of your real workflow — pulling live data from HubSpot, pushing results to SharePoint, triggering analysis on your solver cluster.",
+      "API integrations are how Gaspo apps become part of your real workflow — pulling live data from HubSpot, pushing results to SharePoint, triggering analysis on your solver cluster.",
     ],
     sections: standardSections("API integrations", [
       "Connect integrations at the workspace level.",
@@ -631,13 +631,13 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "deploy-first-gomer-app-production",
-    title: "How to deploy your first Zundy app to production",
+    title: "How to deploy your first Gaspo app to production",
     excerpt:
       "A step-by-step guide from local development to a fully managed deployment with versioning and rollback.",
     subtitle:
       "Step-by-step: from local development to managed production deployment with versioning and rollback.",
     date: "Mar 18, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Production deployment is one click from the App Builder.",
       "Versioning captures every publish with rollback support.",
@@ -646,7 +646,7 @@ post it for me to review before it goes out.`,
       "Staging environments let you validate before firm-wide rollout.",
     ],
     intro: [
-      "Deploying your first Zundy app to production is simpler than traditional web hosting — no servers to manage, no CI pipeline to wire up. This guide covers the path from prototype to firm-wide rollout.",
+      "Deploying your first Gaspo app to production is simpler than traditional web hosting — no servers to manage, no CI pipeline to wire up. This guide covers the path from prototype to firm-wide rollout.",
     ],
     sections: standardSections("first production deployment", [
       "Validate outputs against your reference calculations.",
@@ -663,7 +663,7 @@ post it for me to review before it goes out.`,
     subtitle:
       "A practical catalog of parametric design patterns for flexible, reusable engineering models.",
     date: "Mar 12, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Separation of inputs, logic, and presentation keeps models maintainable.",
       "Constraint-driven geometry beats hard-coded dimensions.",
@@ -672,7 +672,7 @@ post it for me to review before it goes out.`,
       "Patterns reuse across disciplines — structures, geotech, MEP.",
     ],
     intro: [
-      "Parametric models power the best Zundy apps. These patterns — drawn from production apps across civil, structural, and infrastructure teams — help you build models that scale.",
+      "Parametric models power the best Gaspo apps. These patterns — drawn from production apps across civil, structural, and infrastructure teams — help you build models that scale.",
     ],
     sections: standardSections("parametric design patterns", [
       "Separate inputs, logic, and output formatting.",
@@ -685,11 +685,11 @@ post it for me to review before it goes out.`,
     slug: "spreadsheets-to-scalable-apps-30-days",
     title: "From spreadsheets to scalable apps in 30 days",
     excerpt:
-      "A real-world case study of migrating a fleet of internal spreadsheets to managed Zundy applications.",
+      "A real-world case study of migrating a fleet of internal spreadsheets to managed Gaspo applications.",
     subtitle:
-      "Case study: migrating a fleet of internal spreadsheets to managed Zundy apps in 30 days.",
+      "Case study: migrating a fleet of internal spreadsheets to managed Gaspo apps in 30 days.",
     date: "Mar 06, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "Week 1: inventory and prioritize spreadsheets by usage and risk.",
       "Week 2: migrate the highest-value tool with side-by-side validation.",
@@ -698,7 +698,7 @@ post it for me to review before it goes out.`,
       "Executive sponsorship accelerates adoption more than perfect apps.",
     ],
     intro: [
-      "One mid-size engineering firm migrated twelve business-critical spreadsheets to Zundy apps in thirty days. Here is the playbook they used — and what they would do differently.",
+      "One mid-size engineering firm migrated twelve business-critical spreadsheets to Gaspo apps in thirty days. Here is the playbook they used — and what they would do differently.",
     ],
     sections: standardSections("spreadsheet migration case study", [
       "Inventory spreadsheets by hours saved and error risk.",
@@ -709,24 +709,24 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "working-ifc-bim-data-gomer",
-    title: "Working with IFC and BIM data in Zundy",
+    title: "Working with IFC and BIM data in Gaspo",
     excerpt:
-      "Open, parse, and manipulate BIM models with Zundy's BIM toolkit.",
+      "Open, parse, and manipulate BIM models with Gaspo's BIM toolkit.",
     subtitle:
-      "Open, parse, and manipulate IFC and BIM models with Zundy's BIM toolkit.",
+      "Open, parse, and manipulate IFC and BIM models with Gaspo's BIM toolkit.",
     date: "Mar 01, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
-      "IFC files parse into queryable element trees inside Zundy apps.",
+      "IFC files parse into queryable element trees inside Gaspo apps.",
       "Quantity takeoffs and clash checks run without desktop BIM software.",
       "AI queries let you ask natural-language questions about the model.",
       "Results export to reports and downstream calculation apps.",
       "Large models stream efficiently — you do not load everything at once.",
     ],
     intro: [
-      "BIM data is only useful when engineers can query it without opening a heavyweight desktop viewer. Zundy's BIM toolkit makes IFC models accessible inside shareable apps and Slack workflows.",
+      "BIM data is only useful when engineers can query it without opening a heavyweight desktop viewer. Gaspo's BIM toolkit makes IFC models accessible inside shareable apps and Slack workflows.",
     ],
-    sections: standardSections("IFC and BIM in Zundy", [
+    sections: standardSections("IFC and BIM in Gaspo", [
       "Upload or connect IFC from your project repository.",
       "Query elements, properties, and quantities in apps or Slack.",
       "Feed results into calculations and reports.",
@@ -735,25 +735,25 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "digital-twin-gomer-azure",
-    title: "Building a digital twin with Zundy and Azure",
+    title: "Building a digital twin with Gaspo and Azure",
     excerpt:
       "Combine sensor data with parametric models for true real-time digital twins.",
     subtitle:
-      "Combine sensor data with parametric models for real-time digital twins on Zundy and Azure.",
+      "Combine sensor data with parametric models for real-time digital twins on Gaspo and Azure.",
     date: "Feb 24, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Digital twins need live sensor feeds and engineering models in one place.",
-      "Azure IoT Hub streams data Zundy apps consume in real time.",
+      "Azure IoT Hub streams data Gaspo apps consume in real time.",
       "Parametric models update dashboards as conditions change.",
       "Alerts route to Slack when thresholds are breached.",
       "Historical data supports forensic analysis after events.",
     ],
     intro: [
-      "Digital twins bridge the gap between physical assets and engineering models. Zundy and Azure together let teams build twins that update live — without custom infrastructure teams.",
+      "Digital twins bridge the gap between physical assets and engineering models. Gaspo and Azure together let teams build twins that update live — without custom infrastructure teams.",
     ],
     sections: standardSections("digital twins with Azure", [
-      "Connect Azure IoT Hub to your Zundy workspace.",
+      "Connect Azure IoT Hub to your Gaspo workspace.",
       "Map sensor streams to parametric model inputs.",
       "Build dashboards and alerts in App Builder.",
     ]),
@@ -761,13 +761,13 @@ post it for me to review before it goes out.`,
   },
   {
     slug: "whats-new-gomer-february-2026",
-    title: "What's new in Zundy (February 2026)",
+    title: "What's new in Gaspo (February 2026)",
     excerpt:
       "New views, better collaboration, and faster apps — here's a roundup of February's releases.",
     subtitle:
       "February 2026 release notes: new views, better collaboration, and faster apps.",
     date: "Feb 18, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "New table and chart views for engineering dashboards.",
       "Faster app load times for calculation-heavy workloads.",
@@ -800,17 +800,17 @@ post it for me to review before it goes out.`,
         ],
       },
     ],
-    faqs: faqs("Zundy February 2026 updates"),
+    faqs: faqs("Gaspo February 2026 updates"),
   },
   {
     slug: "ai-assisted-code-review-engineering-apps",
     title: "AI-assisted code review for engineering apps",
     excerpt:
-      "How Zundy's AI reviewer catches calculation errors before they reach production.",
+      "How Gaspo's AI reviewer catches calculation errors before they reach production.",
     subtitle:
-      "How Zundy's AI reviewer catches calculation errors before engineering apps reach production.",
+      "How Gaspo's AI reviewer catches calculation errors before engineering apps reach production.",
     date: "Feb 12, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "AI review catches unit mismatches, edge cases, and common calculation errors.",
       "Review runs automatically on every publish request.",
@@ -819,7 +819,7 @@ post it for me to review before it goes out.`,
       "Audit trail records what the AI flagged and what changed.",
     ],
     intro: [
-      "Engineering apps carry real liability when calculations are wrong. Zundy's AI reviewer acts as a first pass — catching errors that are easy to miss in manual review.",
+      "Engineering apps carry real liability when calculations are wrong. Gaspo's AI reviewer acts as a first pass — catching errors that are easy to miss in manual review.",
     ],
     sections: standardSections("AI code review", [
       "Enable AI review on apps before production publish.",
@@ -836,16 +836,16 @@ post it for me to review before it goes out.`,
     subtitle:
       "Confidence in your numbers starts with disciplined unit test coverage for engineering logic.",
     date: "Feb 06, 2026",
-    author: "Zundy Team",
+    author: "Gaspo Team",
     keyTakeaways: [
       "Golden-file tests compare outputs against validated reference cases.",
       "Boundary tests catch edge cases at min/max inputs.",
       "Regression tests run on every publish automatically.",
       "Test data should come from real projects, anonymized.",
-      "Zundy's SDK integrates with standard Python test runners.",
+      "Gaspo's SDK integrates with standard Python test runners.",
     ],
     intro: [
-      "Unit tests are how engineering teams sleep at night. These practices — used by firms running production Zundy apps — keep calculation logic trustworthy as apps evolve.",
+      "Unit tests are how engineering teams sleep at night. These practices — used by firms running production Gaspo apps — keep calculation logic trustworthy as apps evolve.",
     ],
     sections: standardSections("unit testing engineering logic", [
       "Build a reference case library from validated projects.",
@@ -862,7 +862,7 @@ post it for me to review before it goes out.`,
     subtitle:
       "Why the best engineering automations come from engineers and AI working together — not AI alone.",
     date: "Feb 01, 2026",
-    author: "Zundy",
+    author: "Gaspo",
     keyTakeaways: [
       "AI accelerates drafting; engineers provide judgment and accountability.",
       "Collaborative automation means review-first, not fully autonomous.",

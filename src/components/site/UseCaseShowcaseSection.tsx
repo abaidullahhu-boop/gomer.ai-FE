@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const sarahAvatar =
@@ -101,7 +101,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackZundyMessage({
+function SlackGaspoMessage({
   time,
   body,
   attachment,
@@ -116,25 +116,25 @@ function SlackZundyMessage({
 }) {
   return (
     <div
-      data-variant="zundy"
+      data-variant="gaspo"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-3 text-left slack-message-zundy"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-3 text-left slack-message-gaspo"
     >
-      <div aria-hidden="true" className="slack-zundy-bg-mount">
-        <div className="slack-zundy-layer-glass-stack" />
-        <div className="slack-zundy-layer-inner-depth-soft" />
-        <div className="slack-zundy-layer-inner-glow-overlay" />
-        <div className="slack-zundy-layer-feather-blur" />
-        <div className="slack-zundy-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gaspo-bg-mount">
+        <div className="slack-gaspo-layer-glass-stack" />
+        <div className="slack-gaspo-layer-inner-depth-soft" />
+        <div className="slack-gaspo-layer-inner-glow-overlay" />
+        <div className="slack-gaspo-layer-feather-blur" />
+        <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Zundy</span>
+              <span>Gaspo</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -290,7 +290,7 @@ export function UseCaseShowcaseSection() {
               className="order-1"
               eyebrow="Finance & Ops"
               title="Cash flow forecast before your Monday meeting"
-              description="Zundy pulls actuals from Stripe, invoices from QuickBooks, and payroll from Gusto. You get a board-ready summary in Slack."
+              description="Gaspo pulls actuals from Stripe, invoices from QuickBooks, and payroll from Gusto. You get a board-ready summary in Slack."
               tools={
                 <>
                   <ToolIconTile alt="Stripe">
@@ -318,12 +318,12 @@ export function UseCaseShowcaseSection() {
                   reactions={[{ emoji: "⏳", count: 1 }]}
                   body={
                     <>
-                      <SlackMention>@Zundy</SlackMention>
+                      <SlackMention>@Gaspo</SlackMention>
                       pull last week&apos;s cash position. Net revenue, outstanding invoices, and payroll due this week. Format it for the leadership meeting.
                     </>
                   }
                 />
-                <SlackZundyMessage
+                <SlackGaspoMessage
                   time="7:49 AM"
                   reactions={[
                     { emoji: "❤️", count: 4 },
@@ -352,7 +352,7 @@ export function UseCaseShowcaseSection() {
               className="order-1 lg:order-2"
               eyebrow="Engineering"
               title="Triage overnight alerts without context-switching"
-              description="Zundy monitors Sentry and Linear, groups related issues, and posts a morning summary with suggested priorities."
+              description="Gaspo monitors Sentry and Linear, groups related issues, and posts a morning summary with suggested priorities."
               tools={
                 <>
                   <ToolIconTile alt="Linear">
@@ -373,7 +373,7 @@ export function UseCaseShowcaseSection() {
                 title="Morning triage"
                 badge={<CardStatusBadge icon={<AutoSummaryIcon />} label="Auto Summary" />}
               >
-                <SlackZundyMessage
+                <SlackGaspoMessage
                   time="8:12 AM"
                   reactions={[
                     { emoji: "❤️", count: 4 },

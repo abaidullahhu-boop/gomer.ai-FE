@@ -4,7 +4,7 @@ export const accountData = {
     avatar: "https://a.slack-edge.com/80588/img/avatars-teams/ava_0015-88.png",
   },
   email: {
-    zundyAddress: "zaid@gomer-mail.com",
+    gaspoAddress: "zaid@gomer-mail.com",
     allowedEmails: ["zaidali9585@gmail.com"],
     allowedDomains: [] as string[],
   },

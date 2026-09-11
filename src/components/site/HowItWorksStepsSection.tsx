@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import integrationsTab1 from "@/assets/images/integrations-tab1.avif";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const mayaAvatar =
@@ -150,7 +150,7 @@ function SlackUserMessage({
   );
 }
 
-function SlackZundyMessage({
+function SlackGaspoMessage({
   time,
   body,
   attachment,
@@ -163,25 +163,25 @@ function SlackZundyMessage({
 }) {
   return (
     <div
-      data-variant="zundy"
+      data-variant="gaspo"
       data-highlighted="true"
-      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-zundy"
+      className="relative isolate flex w-full gap-2 overflow-hidden px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)] text-left slack-message-gaspo"
     >
-      <div aria-hidden="true" className="slack-zundy-bg-mount">
-        <div className="slack-zundy-layer-glass-stack" />
-        <div className="slack-zundy-layer-inner-depth-soft" />
-        <div className="slack-zundy-layer-inner-glow-overlay" />
-        <div className="slack-zundy-layer-feather-blur" />
-        <div className="slack-zundy-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gaspo-bg-mount">
+        <div className="slack-gaspo-layer-glass-stack" />
+        <div className="slack-gaspo-layer-inner-depth-soft" />
+        <div className="slack-gaspo-layer-inner-glow-overlay" />
+        <div className="slack-gaspo-layer-feather-blur" />
+        <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
           <span className="body-small font-medium text-slack">
             <span className="inline-flex items-center gap-1.5">
-              <span>Zundy</span>
+              <span>Gaspo</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>
@@ -211,7 +211,7 @@ export function HowItWorksStepsSection() {
             <HowItWorksStepCard
               number="01"
               title="Connect your stack"
-              body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Zundy handles auth and starts working. No webhooks, no Zapier zaps."
+              body="27 native integrations. 3,200+ tools via managed connectors. Most are one-click OAuth, some use API keys - Gaspo handles auth and starts working. No webhooks, no Zapier zaps."
               stepBadge="overlay"
               visual={
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-hero">
@@ -229,8 +229,8 @@ export function HowItWorksStepsSection() {
             />
             <HowItWorksStepCard
               number="02"
-              title="Tell Zundy what you need"
-              body="Message Zundy in Slack like you'd message a teammate."
+              title="Tell Gaspo what you need"
+              body="Message Gaspo in Slack like you'd message a teammate."
               stepBadge="inline"
               visual={
                 <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
@@ -241,12 +241,12 @@ export function HowItWorksStepsSection() {
                     reactions={[{ emoji: "⏳", count: 1 }]}
                     body={
                       <>
-                        <SlackMention>@Zundy</SlackMention>
+                        <SlackMention>@Gaspo</SlackMention>
                         pull this week&apos;s MRR from Stripe and post it to private channel.
                       </>
                     }
                   />
-                  <SlackZundyMessage
+                  <SlackGaspoMessage
                     time="11:33 AM"
                     reactions={[
                       { emoji: "✅", count: 2 },
@@ -259,12 +259,12 @@ export function HowItWorksStepsSection() {
             />
             <HowItWorksStepCard
               number="03"
-              title="Zundy operates, you review"
-              body="Zundy executes the action, confirms what changed, and logs everything. You stop doing the work and start reviewing completed work."
+              title="Gaspo operates, you review"
+              body="Gaspo executes the action, confirms what changed, and logs everything. You stop doing the work and start reviewing completed work."
               stepBadge="inline"
               visual={
                 <div className="flex min-h-0 w-full flex-col items-end justify-end gap-2 px-3 pb-3 sm:px-4 sm:pb-4">
-                  <SlackZundyMessage
+                  <SlackGaspoMessage
                     time="9:12 AM"
                     reactions={[{ emoji: "👀", count: 2 }]}
                     body={

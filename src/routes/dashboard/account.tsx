@@ -3,9 +3,9 @@
  *
  * Every value on this page is placeholder data from src/data/account.ts — the
  * same workspace name and email render for every user, whoever is signed in.
- * The "Zundy email address" section is the worse half: it advertises being able
+ * The "Gaspo email address" section is the worse half: it advertises being able
  * to email the assistant, and no such feature exists anywhere in the backend
- * (grep for zundy-mail / allowedEmails / allowedDomains / inboundEmail returns
+ * (grep for gaspo-mail / allowedEmails / allowedDomains / inboundEmail returns
  * nothing).
  *
  * Kept rather than deleted so the layout survives for whenever there is real
@@ -49,7 +49,7 @@ function SecondaryButton({ children }: { children: React.ReactNode }) {
   return (
     <button
       type="button"
-      className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
+      className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98]"
     >
       {children}
     </button>
@@ -85,7 +85,7 @@ export default function DashboardAccount() {
 
   async function copyEmailAddress() {
     try {
-      await navigator.clipboard.writeText(accountData.email.zundyAddress);
+      await navigator.clipboard.writeText(accountData.email.gaspoAddress);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -110,7 +110,7 @@ export default function DashboardAccount() {
   return (
     <>
       <PageMeta
-        title="Account — Zundy"
+        title="Account — Gaspo"
         description="Manage your Slack connection, email settings, and account."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -135,8 +135,8 @@ export default function DashboardAccount() {
                     </div>
                   </h2>
                   <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    Zundy is connected to {accountData.slack.workspaceName}. If you disconnect,
-                    Zundy will immediately stop accessing your Slack data. You can reconnect
+                    Gaspo is connected to {accountData.slack.workspaceName}. If you disconnect,
+                    Gaspo will immediately stop accessing your Slack data. You can reconnect
                     anytime.
                   </p>
                   <div className="mt-1 flex items-center gap-2">
@@ -165,25 +165,25 @@ export default function DashboardAccount() {
                     Email Settings
                   </h2>
                   <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    Only emails from the domains and addresses listed below can reach Zundy. Emails
+                    Only emails from the domains and addresses listed below can reach Gaspo. Emails
                     from other senders will be rejected.
                   </p>
 
                   <div className="mt-4 flex flex-col gap-6">
                     <div className="flex flex-col gap-1">
-                      <h4 className="text-sm font-medium">Zundy&apos;s Email Address</h4>
+                      <h4 className="text-sm font-medium">Gaspo&apos;s Email Address</h4>
                       <p className="text-xs text-muted-foreground">
-                        Send emails to this address to have Zundy process them
+                        Send emails to this address to have Gaspo process them
                       </p>
                       <div className="mt-1 flex items-center gap-2">
                         <span className="text-sm text-foreground">
-                          {accountData.email.zundyAddress}
+                          {accountData.email.gaspoAddress}
                         </span>
                         <button
                           type="button"
                           onClick={copyEmailAddress}
                           aria-label={copied ? "Copied" : "Copy email address"}
-                          className="zundy-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                          className="gaspo-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent px-3 py-2 text-xs font-medium text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                         >
                           <Copy className="size-3.5" strokeWidth={1.5} />
                         </button>
@@ -199,7 +199,7 @@ export default function DashboardAccount() {
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="zundy-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="gaspo-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="example.com"
                               value={domainInput}
@@ -215,7 +215,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!domainInput.trim()}
                           onClick={addDomain}
-                          className="zundy-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="gaspo-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Domain
                         </button>
@@ -241,12 +241,12 @@ export default function DashboardAccount() {
                       <div className="flex flex-col gap-1">
                         <h4 className="text-sm font-medium">Allowed Email Addresses</h4>
                         <p className="text-xs text-muted-foreground">
-                          Specific email addresses that can email Zundy
+                          Specific email addresses that can email Gaspo
                         </p>
                       </div>
                       <div className="flex items-start gap-2">
                         <div className="flex w-full flex-1 flex-col gap-1.5">
-                          <div className="zundy-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
+                          <div className="gaspo-focus-ring flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors hover:border-border/80 focus-within:outline-2">
                             <input
                               placeholder="user@example.com"
                               value={emailInput}
@@ -262,7 +262,7 @@ export default function DashboardAccount() {
                           type="button"
                           disabled={!emailInput.trim()}
                           onClick={addEmail}
-                          className="zundy-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="gaspo-focus-ring inline-flex min-h-10 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-muted px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/50 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Add Email
                         </button>
@@ -308,7 +308,7 @@ export default function DashboardAccount() {
                 >
                   <button
                     type="button"
-                    className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-destructive/90 px-4 py-2 text-sm font-medium text-white transition-[background-color,border-color,transform] duration-200 hover:bg-destructive/90 active:scale-[0.98]"
+                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-destructive/90 px-4 py-2 text-sm font-medium text-white transition-[background-color,border-color,transform] duration-200 hover:bg-destructive/90 active:scale-[0.98]"
                   >
                     Cancel Subscription &amp; Delete Account
                   </button>

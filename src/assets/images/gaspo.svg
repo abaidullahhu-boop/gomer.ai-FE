@@ -10,30 +10,30 @@
         font-style: normal;
       }
     </style>
-    <radialGradient id="zundy-wm-radial" cx="50%" cy="32%" r="72%" gradientUnits="objectBoundingBox">
+    <radialGradient id="gaspo-wm-radial" cx="50%" cy="32%" r="72%" gradientUnits="objectBoundingBox">
       <stop stop-color="white" stop-opacity="0.18"/>
       <stop offset="1" stop-color="white" stop-opacity="0.42"/>
     </radialGradient>
-    <linearGradient id="zundy-wm-linear" x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="objectBoundingBox">
+    <linearGradient id="gaspo-wm-linear" x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="objectBoundingBox">
       <stop stop-color="white" stop-opacity="0.7"/>
       <stop offset="0.38" stop-color="white" stop-opacity="0"/>
       <stop offset="0.62" stop-color="white" stop-opacity="0"/>
       <stop offset="1" stop-color="white" stop-opacity="0.7"/>
     </linearGradient>
-    <filter id="zundy-wm-bezel" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+    <filter id="gaspo-wm-bezel" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
       <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
     </filter>
-    <clipPath id="zundy-wm-clip"><text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505">zundy</text></clipPath>
+    <clipPath id="gaspo-wm-clip"><text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505">gaspo</text></clipPath>
   </defs>
 
   <g>
     <!-- Bezel: a blurred stroke clipped to the glyphs, so the blur reads as an
          inner bevel rather than a halo. Clipping is what gives the mark its
          solid, frosted look. -->
-    <g clip-path="url(#zundy-wm-clip)">
-      <text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505" fill="none" stroke="white" stroke-width="10" stroke-opacity="0.45" filter="url(#zundy-wm-bezel)" style="mix-blend-mode: luminosity" opacity="0.95">zundy</text>
+    <g clip-path="url(#gaspo-wm-clip)">
+      <text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505" fill="none" stroke="white" stroke-width="10" stroke-opacity="0.45" filter="url(#gaspo-wm-bezel)" style="mix-blend-mode: luminosity" opacity="0.95">gaspo</text>
     </g>
     <!-- Glass: radial fill with a linear-gradient edge light. -->
-    <text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505" fill="url(#zundy-wm-radial)" fill-opacity="0.35" stroke="url(#zundy-wm-linear)" stroke-opacity="1" stroke-width="1" style="mix-blend-mode: luminosity" opacity="0.9">zundy</text>
+    <text x="969" y="401" text-anchor="middle" font-family="UlmGrotesk" font-weight="700" font-size="505" fill="url(#gaspo-wm-radial)" fill-opacity="0.35" stroke="url(#gaspo-wm-linear)" stroke-opacity="1" stroke-width="1" style="mix-blend-mode: luminosity" opacity="0.9">gaspo</text>
   </g>
 </svg>

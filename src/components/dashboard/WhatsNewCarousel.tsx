@@ -16,7 +16,7 @@ const items: WhatsNewItem[] = [
     date: "May 26",
     title: "Multiple Workspaces",
     description:
-      "Switch between Zundy workspaces from the sidebar — keep personal, team, and client work in separate spaces without signing out.",
+      "Switch between Gaspo workspaces from the sidebar — keep personal, team, and client work in separate spaces without signing out.",
     image: whatsNewWorkspaceSwitcher,
   },
   {
@@ -66,13 +66,13 @@ export function WhatsNewCarousel() {
         <div>
           <h2 className="text-xl font-semibold tracking-tight text-foreground">What&apos;s new</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            New features, improvements, and fixes shipped to Zundy.
+            New features, improvements, and fixes shipped to Gaspo.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1">
           <button
             type="button"
-            className="cursor-pointer zundy-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="cursor-pointer gaspo-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="Previous update"
             onClick={() => goTo(activeIndex - 1)}
           >
@@ -80,7 +80,7 @@ export function WhatsNewCarousel() {
           </button>
           <button
             type="button"
-            className="cursor-pointer zundy-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="cursor-pointer gaspo-focus-ring rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="Next update"
             onClick={() => goTo(activeIndex + 1)}
           >
