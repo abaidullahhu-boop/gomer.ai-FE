@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { CircleHelp, Gift, Repeat2, ShieldCheck, UserPlus } from "lucide-react";
+import { Bug, CircleHelp, Gift, Repeat2, ShieldCheck, Telescope, UserPlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { SVGProps } from "react";
 import {
@@ -42,6 +42,17 @@ const mainNav: NavItem[] = [
 
 /** Shown only to workspace admins, between Billing and Settings. */
 const adminNavItem: NavItem = { label: "Admin", to: "/dashboard/admin", icon: ShieldCheck };
+
+/**
+ * Shown only to the platform owner. A different icon from Admin on purpose —
+ * the two sit next to each other and mean very different things, so they should
+ * not be told apart by their label alone.
+ */
+const superAdminNavItem: NavItem = {
+  label: "Super Admin",
+  to: "/dashboard/super-admin",
+  icon: Telescope,
+};
 
 function NavItemLink({
   label,
@@ -104,6 +115,7 @@ type SidebarProps = {
   onMobileClose?: () => void;
   onGetFreeCredits?: () => void;
   onInviteTeammates?: () => void;
+  onReportBug?: () => void;
 };
 
 function MobileMenuIcon() {
@@ -149,16 +161,18 @@ export function Sidebar({
   onMobileClose,
   onGetFreeCredits,
   onInviteTeammates,
+  onReportBug,
 }: SidebarProps) {
   const { user } = useSession();
-  const nav =
-    user?.role === "admin"
-      ? [
-          ...mainNav.slice(0, mainNav.length - 2),
-          adminNavItem,
-          ...mainNav.slice(mainNav.length - 2),
-        ]
-      : mainNav;
+  // Both privileged entries slot in ahead of the last two items (Billing,
+  // Settings), so the tail of the nav stays where people expect it.
+  const privileged = [
+    ...(user?.role === "admin" ? [adminNavItem] : []),
+    ...(user?.isSuperAdmin ? [superAdminNavItem] : []),
+  ];
+  const nav = privileged.length
+    ? [...mainNav.slice(0, mainNav.length - 2), ...privileged, ...mainNav.slice(mainNav.length - 2)]
+    : mainNav;
   return (
     <aside
       className={[
@@ -206,6 +220,14 @@ export function Sidebar({
               </>
             )}
           </NavLink>
+          <SecondaryButton
+            label="Report a bug"
+            icon={Bug}
+            onClick={() => {
+              onMobileClose?.();
+              onReportBug?.();
+            }}
+          />
           <SecondaryButton
             label="Get free credits"
             icon={Gift}

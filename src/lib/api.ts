@@ -16,6 +16,13 @@ export type AuthUser = {
   email: string | null;
   avatarUrl: string | null;
   role: "admin" | "member";
+  isActive: boolean;
+  /**
+   * True for the platform owner — a cross-tenant identity that no workspace
+   * role grants. Comes from a server-side allowlist, so it is only ever a hint
+   * for what to render: `/super-admin` re-checks it on every request.
+   */
+  isSuperAdmin: boolean;
 };
 
 export type Workspace = {
@@ -762,6 +769,176 @@ export function setMemberActive(id: string, isActive: boolean): Promise<AdminMem
   return apiFetch<AdminMember>(`/admin/users/${id}/active`, {
     method: "PATCH",
     body: JSON.stringify({ isActive }),
+  });
+}
+
+// ── Bug reports ──────────────────────────────────────────────────────────────
+
+export type BugSeverity = "low" | "medium" | "high" | "critical";
+export type BugStatus = "open" | "in_progress" | "resolved" | "dismissed";
+
+/** A report as its own author sees it — triage notes are not included. */
+export type BugReport = {
+  id: string;
+  title: string;
+  description: string;
+  stepsToReproduce: string | null;
+  severity: BugSeverity;
+  status: BugStatus;
+  pageUrl: string | null;
+  createdAt: string;
+  resolvedAt: string | null;
+};
+
+/**
+ * File a bug against the caller's workspace.
+ *
+ * The workspace, the reporter and the browser are attached server-side; the
+ * form only sends what the person actually typed, plus the page they were on.
+ */
+export function createBugReport(input: {
+  title: string;
+  description: string;
+  stepsToReproduce?: string;
+  severity: BugSeverity;
+  pageUrl?: string;
+}): Promise<BugReport> {
+  return apiFetch<BugReport>("/bug-reports", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+/** The caller's own reports and where each one got to. */
+export function fetchMyBugReports(): Promise<BugReport[]> {
+  return apiFetch<BugReport[]>("/bug-reports/mine");
+}
+
+// ── Super admin (platform owner) ─────────────────────────────────────────────
+// Cross-tenant reads, gated server-side by an email allowlist. Distinct from
+// the `/admin/*` endpoints above, which are workspace administration and are
+// reachable by any customer's admin.
+
+export type PlatformOverview = {
+  days: number;
+  range: { from: string; to: string };
+  workspaces: { total: number; newInWindow: number };
+  users: { total: number; active: number; activeInWindow: number; admins: number };
+  revenue: { totalCents: number; windowCents: number };
+  credits: { granted: number; used: number; events: number };
+  margin: { chargedUsd: number; costUsd: number; marginUsd: number; events: number };
+  bugs: { open: number; inProgress: number; total: number };
+};
+
+export type PlatformGrowth = {
+  days: number;
+  series: Array<{ day: string; signups: number; credits: number; costUsd: number }>;
+};
+
+/** One customer row on the workspaces table. */
+export type PlatformWorkspace = {
+  id: string;
+  name: string;
+  slackTeamId: string;
+  createdAt: string;
+  members: { total: number; active: number };
+  credits: { granted: number; used: number; balance: number };
+  paidCents: number;
+  plan: {
+    planId: string;
+    status: SubscriptionStatus;
+    seats: number;
+    currentPeriodEnd: string;
+  } | null;
+  connectedAccounts: number;
+  lastActivityAt: string | null;
+};
+
+export type PlatformWorkspaceDetail = {
+  workspace: {
+    id: string;
+    name: string;
+    slackTeamId: string;
+    defaultModel: string | null;
+    createdAt: string;
+  };
+  members: Array<{
+    id: string;
+    name: string;
+    email: string | null;
+    avatarUrl: string | null;
+    role: "admin" | "member";
+    isActive: boolean;
+    lastActiveAt: string | null;
+    createdAt: string;
+  }>;
+  credits: CreditBalance;
+  usage: { totalCreditsUsed: number; totalTokensUsed: number; eventCount: number };
+  cost: { costUsd: number; chargedUsd: number; marginUsd: number; events: number };
+  subscription: Subscription | null;
+  grants: CreditGrant[];
+  integrations: Array<{
+    id: string;
+    provider: string;
+    appSlug: string | null;
+    accountName: string | null;
+    accessLevel: string;
+    createdAt: string;
+  }>;
+  recentActivity: UsageActivityEntry[];
+  bugReportCount: number;
+};
+
+/** A report in the owner's inbox, with reporter and workspace resolved. */
+export type PlatformBugReport = {
+  id: string;
+  title: string;
+  description: string;
+  stepsToReproduce: string | null;
+  severity: BugSeverity;
+  status: BugStatus;
+  pageUrl: string | null;
+  userAgent: string | null;
+  resolutionNote: string | null;
+  resolvedAt: string | null;
+  createdAt: string;
+  workspace: { id: string; name: string } | null;
+  /** Null when the reporter's account has since been removed. */
+  reportedBy: { id: string; name: string; email: string | null; avatarUrl: string | null } | null;
+};
+
+export function fetchPlatformOverview(days = 30): Promise<PlatformOverview> {
+  return apiFetch<PlatformOverview>(`/super-admin/overview?days=${days}`);
+}
+
+export function fetchPlatformGrowth(days = 30): Promise<PlatformGrowth> {
+  return apiFetch<PlatformGrowth>(`/super-admin/growth?days=${days}`);
+}
+
+export function fetchPlatformWorkspaces(
+  search = "",
+): Promise<{ total: number; rows: PlatformWorkspace[] }> {
+  const query = search ? `?search=${encodeURIComponent(search)}` : "";
+  return apiFetch<{ total: number; rows: PlatformWorkspace[] }>(`/super-admin/workspaces${query}`);
+}
+
+export function fetchPlatformWorkspace(id: string): Promise<PlatformWorkspaceDetail> {
+  return apiFetch<PlatformWorkspaceDetail>(`/super-admin/workspaces/${id}`);
+}
+
+export function fetchPlatformBugs(status?: BugStatus): Promise<PlatformBugReport[]> {
+  const query = status ? `?status=${status}` : "";
+  return apiFetch<PlatformBugReport[]>(`/super-admin/bugs${query}`);
+}
+
+/** Move a report through triage, or annotate it. Owner only. */
+export function updatePlatformBug(
+  id: string,
+  changes: { status?: BugStatus; resolutionNote?: string | null },
+): Promise<PlatformBugReport> {
+  return apiFetch<PlatformBugReport>(`/super-admin/bugs/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(changes),
   });
 }
 

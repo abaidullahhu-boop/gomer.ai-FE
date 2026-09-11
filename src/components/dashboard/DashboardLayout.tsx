@@ -4,6 +4,7 @@ import { CreditsProvider } from "@/lib/credits";
 import { SessionProvider } from "@/lib/session";
 import { GetFreeCreditsModal } from "./GetFreeCreditsModal";
 import { InviteTeamMembersModal } from "./InviteTeamMembersModal";
+import { ReportBugModal } from "./ReportBugModal";
 import { MobileMenuButton, Sidebar } from "./Sidebar";
 import { GaspoLogo } from "./GaspoLogo";
 
@@ -14,6 +15,7 @@ export type DashboardOutletContext = {
 export function DashboardLayout() {
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  const [bugModalOpen, setBugModalOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -67,6 +69,7 @@ export function DashboardLayout() {
             onMobileClose={() => setSidebarOpen(false)}
             onGetFreeCredits={() => setCreditsModalOpen(true)}
             onInviteTeammates={() => setInviteModalOpen(true)}
+            onReportBug={() => setBugModalOpen(true)}
           />
           <main className="min-w-0 flex-1 overflow-y-auto bg-background pt-[72px] md:pt-0">
             <Outlet context={{ openInviteModal: () => setInviteModalOpen(true) }} />
@@ -76,6 +79,7 @@ export function DashboardLayout() {
             open={inviteModalOpen}
             onClose={() => setInviteModalOpen(false)}
           />
+          <ReportBugModal open={bugModalOpen} onClose={() => setBugModalOpen(false)} />
         </div>
       </CreditsProvider>
     </SessionProvider>

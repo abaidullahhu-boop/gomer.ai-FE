@@ -25,6 +25,7 @@ import DashboardTeam from "@/routes/dashboard/team";
 import DashboardTeamEdit from "@/routes/dashboard/team-edit";
 import DashboardBilling from "@/routes/dashboard/billing";
 import DashboardAdmin from "@/routes/dashboard/admin";
+import DashboardSuperAdmin from "@/routes/dashboard/super-admin";
 import DashboardAutomations from "@/routes/dashboard/automations";
 import { SettingsLayout } from "@/components/dashboard/settings/SettingsLayout";
 import SettingsGeneral from "@/routes/dashboard/settings/general";
@@ -104,6 +105,9 @@ export default function App() {
           </Route>
           <Route path="billing" element={<DashboardBilling />} />
           <Route path="admin" element={<DashboardAdmin />} />
+          {/* Platform-owner only. The page redirects a non-owner away, and
+              every endpoint behind it re-checks the allowlist server-side. */}
+          <Route path="super-admin" element={<DashboardSuperAdmin />} />
           {/* The Account page renders placeholder data end to end — a fixed
               workspace name and a "Gaspo email address" feature that has no
               backend at all. Hidden from the sidebar and redirected here
