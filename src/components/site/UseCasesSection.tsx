@@ -54,7 +54,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     label: "Marketing & Growth",
     icon: Megaphone,
     headline:
-      "Zundy manages your ad accounts, writes your content, builds your pipeline, and reports on all of it. Every day.",
+      "Gaspo manages your ad accounts, writes your content, builds your pipeline, and reports on all of it. Every day.",
     items: [
       {
         title: "Full-funnel ad intelligence",
@@ -79,7 +79,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     label: "Engineering",
     icon: Sun,
     headline:
-      "Zundy writes code, opens PRs, triages bugs, and builds internal tools. Your engineers only work on what matters.",
+      "Gaspo writes code, opens PRs, triages bugs, and builds internal tools. Your engineers only work on what matters.",
     items: [
       {
         title: "Intelligent bug triage",
@@ -104,7 +104,7 @@ const USE_CASE_TABS: UseCaseTab[] = [
     label: "Operations & Finance",
     icon: ChartNoAxesColumnIncreasing,
     headline:
-      "Zundy eliminates the spreadsheet wrangling, vendor chasing, and report building that eats your ops team alive.",
+      "Gaspo eliminates the spreadsheet wrangling, vendor chasing, and report building that eats your ops team alive.",
     items: [
       {
         title: "Board pack assembly",
@@ -292,7 +292,7 @@ export function UseCasesSection() {
                   <p className="body-small text-[var(--primitive-purple-50)]">Use cases</p>
                 </div>
                 <h2 className="font-heading max-w-[27.125rem] text-5xl leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.625rem]">
-                  What Zundy can own for your team.
+                  What Gaspo can own for your team.
                 </h2>
               </div>
 

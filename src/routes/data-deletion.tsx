@@ -31,9 +31,9 @@ export default function DataDeletionPage() {
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Data Deletion Instructions"
-        description="How to disconnect an account or request deletion of your Zundy data — what is removed, what is retained, and how long it takes."
+        description="How to disconnect an account or request deletion of your Gaspo data — what is removed, what is retained, and how long it takes."
         ogTitle="Data Deletion Instructions"
-        ogDescription="How to disconnect an account or request deletion of your Zundy data — what is removed, what is retained, and how long it takes."
+        ogDescription="How to disconnect an account or request deletion of your Gaspo data — what is removed, what is retained, and how long it takes."
       />
       <Nav heroTone="light" />
       <main className="pt-32 pb-24 px-6 md:px-12">
@@ -52,8 +52,8 @@ export default function DataDeletionPage() {
 
           <Section number="1" title="Overview">
             <p>
-              You can remove your data from Zundy at any time. This page explains the three
-              ways to do that — disconnecting a single account, removing Zundy from your
+              You can remove your data from Gaspo at any time. This page explains the three
+              ways to do that — disconnecting a single account, removing Gaspo from your
               Slack workspace, or requesting deletion of everything — and what each one
               removes.
             </p>
@@ -69,24 +69,24 @@ export default function DataDeletionPage() {
               integration — leaves the rest of your workspace intact.
             </p>
             <ol>
-              <li>Open your Zundy dashboard and go to <strong>Integrations</strong>.</li>
+              <li>Open your Gaspo dashboard and go to <strong>Integrations</strong>.</li>
               <li>Find the connected account you want to remove.</li>
               <li>
                 Choose <strong>Disconnect</strong>.
               </li>
             </ol>
             <p>
-              The stored access and refresh tokens for that account are deleted, and Zundy
+              The stored access and refresh tokens for that account are deleted, and Gaspo
               immediately loses the ability to read or act on it. Disconnecting does not
               revoke the authorization on the provider's side, so you may also want to remove
-              Zundy from that provider's own connected-apps settings — for Meta, under
+              Gaspo from that provider's own connected-apps settings — for Meta, under
               Settings &rarr; Business integrations.
             </p>
           </Section>
 
-          <Section number="3" title="Remove Zundy from Slack">
+          <Section number="3" title="Remove Gaspo from Slack">
             <p>
-              Uninstalling the Zundy app from your Slack workspace stops all further data
+              Uninstalling the Gaspo app from your Slack workspace stops all further data
               collection from Slack.
             </p>
             <ol>
@@ -94,7 +94,7 @@ export default function DataDeletionPage() {
                 In Slack, go to <strong>Settings &amp; administration</strong> &rarr;{" "}
                 <strong>Manage apps</strong>.
               </li>
-              <li>Select <strong>Zundy</strong>.</li>
+              <li>Select <strong>Gaspo</strong>.</li>
               <li>
                 Choose <strong>Remove app</strong>.
               </li>
@@ -109,7 +109,7 @@ export default function DataDeletionPage() {
             <p>
               To have everything associated with you or your workspace erased, email{" "}
               <a href="mailto:privacy@gomer.com">privacy@gomer.com</a> from the address on
-              your Zundy account with the subject line <strong>Data deletion request</strong>,
+              your Gaspo account with the subject line <strong>Data deletion request</strong>,
               and include:
             </p>
             <ul>
@@ -132,7 +132,7 @@ export default function DataDeletionPage() {
                 All access and refresh tokens for connected accounts, including Meta Ads and
                 accounts connected through Pipedream
               </li>
-              <li>Your conversation history with Zundy, in Slack and in the dashboard</li>
+              <li>Your conversation history with Gaspo, in Slack and in the dashboard</li>
               <li>Workspace settings, saved instructions, installed skills, and scheduled tasks</li>
             </ul>
           </Section>
@@ -141,7 +141,7 @@ export default function DataDeletionPage() {
             <p>
               We keep billing and usage records — the amount charged and the date, with no
               conversation content — for as long as tax and accounting law requires. These
-              records cannot identify what you asked Zundy or what it did.
+              records cannot identify what you asked Gaspo or what it did.
             </p>
             <p>
               We may also retain data where we are legally required to, or where it is needed
@@ -170,7 +170,7 @@ export default function DataDeletionPage() {
               style={{ backgroundColor: "oklch(97% 0.001 106.424)" }}
             >
               <p className="mb-2" style={{ color: "#293045" }}>
-                <strong>Zundy</strong>
+                <strong>Gaspo</strong>
               </p>
               <p className="mb-2" style={{ color: "#293045" }}>
                 Privacy Team

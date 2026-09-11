@@ -181,26 +181,26 @@ function LogoShowcaseCard({
 const primaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
-    logoSrc: "/assets/brand/logos/zundy-logo-pure-white.svg",
-    logoAlt: "Zundy wordmark (pure white) on brand gradient",
+    logoSrc: "/assets/brand/logos/gaspo-logo-pure-white.svg",
+    logoAlt: "Gaspo wordmark (pure white) on brand gradient",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/zundy-logo-soft-black.svg",
-    logoAlt: "Zundy wordmark on light blurred background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-soft-black.svg",
+    logoAlt: "Gaspo wordmark on light blurred background",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/zundy-logo-soft-black.svg",
-    logoAlt: "Zundy wordmark (soft black) on white background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-soft-black.svg",
+    logoAlt: "Gaspo wordmark (soft black) on white background",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/zundy-logo-pure-white.svg",
-    logoAlt: "Zundy wordmark (pure white) on dark background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-pure-white.svg",
+    logoAlt: "Gaspo wordmark (pure white) on dark background",
     background: "dark",
   },
 ];
@@ -243,12 +243,12 @@ function AvatarShowcaseCard({
         <img
           alt={
             background === "white"
-              ? "Zundy avatar on white background"
-              : "Zundy avatar on dark background"
+              ? "Gaspo avatar on white background"
+              : "Gaspo avatar on dark background"
           }
           className="size-40 object-contain"
           loading="lazy"
-          src="/assets/brand/logos/zundy-avatar-color.svg"
+          src="/assets/brand/logos/gaspo-avatar-color.svg"
         />
       </div>
     </div>
@@ -348,33 +348,33 @@ const toneOfVoiceIsRules = [
   "A persistent agent that remembers context, learns over time, and acts proactively.",
   "The most capable colleague on your team: research, reports, code, workflows, dashboards.",
   "Built for teams. Connects to 3,000+ tools via browser and native APIs.",
-  "Human-in-the-loop: Zundy proposes, the human decides.",
+  "Human-in-the-loop: Gaspo proposes, the human decides.",
 ] as const;
 
 const toneOfVoiceIsNotRules = [
-  "Not a chatbot. Zundy does not just answer questions. It actually does the work.",
+  "Not a chatbot. Gaspo does not just answer questions. It actually does the work.",
   "Not a simple automation tool. It thinks, plans, and adapts with full reasoning.",
   "Not autonomous without oversight. Every significant action requires approval.",
   "Not a replacement for people. It augments your team's capabilities.",
-  'Not "AI-powered X". Zundy is the coworker, not a feature inside something else.',
+  'Not "AI-powered X". Gaspo is the coworker, not a feature inside something else.',
 ] as const;
 
 const dosRules = [
-  'Always say Zundy. Do not say "the Zundy bot" or "the Zundy AI assistant."',
-  "Emphasize that Zundy does real work, not only answers.",
-  "Position Zundy as a coworker. Use team language.",
-  "Mention Slack-first. Zundy lives where your team already works.",
-  "Highlight execution: code, browser, build, and deploy. Zundy is not chat-only.",
-  "Use concrete examples of what Zundy can do (research, reports, apps, automations).",
+  'Always say Gaspo. Do not say "the Gaspo bot" or "the Gaspo AI assistant."',
+  "Emphasize that Gaspo does real work, not only answers.",
+  "Position Gaspo as a coworker. Use team language.",
+  "Mention Slack-first. Gaspo lives where your team already works.",
+  "Highlight execution: code, browser, build, and deploy. Gaspo is not chat-only.",
+  "Use concrete examples of what Gaspo can do (research, reports, apps, automations).",
 ] as const;
 
 const dontRuleGroups = [
   {
     title: "Messaging",
     rules: [
-      "Do not call Zundy a chatbot, virtual assistant, or copilot.",
+      "Do not call Gaspo a chatbot, virtual assistant, or copilot.",
       "Do not imply full autonomy. Always show where a human approves or reviews.",
-      "Do not position Zundy as ChatGPT or Claude in Slack. Zundy is a different category: an AI employee wired into your tools and Slack.",
+      "Do not position Gaspo as ChatGPT or Claude in Slack. Gaspo is a different category: an AI employee wired into your tools and Slack.",
     ],
   },
   {
@@ -565,29 +565,29 @@ function DosDontsDontColumn({
 const secondaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
-    logoSrc: "/assets/brand/logos/zundy-logo-secondary-pure-white.svg",
-    logoAlt: "Zundy secondary lockup (pure white) on brand gradient",
+    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-pure-white.svg",
+    logoAlt: "Gaspo secondary lockup (pure white) on brand gradient",
     logoMaxWidth: "24rem",
     background: "gradient",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/zundy-logo-secondary-soft-black.svg",
-    logoAlt: "Zundy secondary lockup on soft blurred background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-soft-black.svg",
+    logoAlt: "Gaspo secondary lockup on soft blurred background",
     logoMaxWidth: "24rem",
     background: "peach",
   },
   {
     badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/zundy-logo-secondary-soft-black.svg",
-    logoAlt: "Zundy secondary lockup (soft black) on white background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-soft-black.svg",
+    logoAlt: "Gaspo secondary lockup (soft black) on white background",
     logoMaxWidth: "24rem",
     background: "white",
   },
   {
     badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/zundy-logo-secondary-pure-white.svg",
-    logoAlt: "Zundy secondary lockup (pure white) on dark background",
+    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-pure-white.svg",
+    logoAlt: "Gaspo secondary lockup (pure white) on dark background",
     logoMaxWidth: "24rem",
     background: "dark",
   },
@@ -597,8 +597,8 @@ export default function BrandPage() {
   return (
     <div className="vb">
       <PageMeta
-        title="Brand Usage Guidelines — Zundy"
-        description="Logo, colours, typography and tone of voice guidelines for the Zundy brand."
+        title="Brand Usage Guidelines — Gaspo"
+        description="Logo, colours, typography and tone of voice guidelines for the Gaspo brand."
       />
       <style>{styles}</style>
 
@@ -629,7 +629,7 @@ export default function BrandPage() {
               <div className="w-full shrink-0 lg:w-auto">
                 <a
                   className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/zundy-logo-pack.zip"
+                  href="/assets/downloads/brand/gaspo-logo-pack.zip"
                 >
                   Download all logos
                 </a>
@@ -644,7 +644,7 @@ export default function BrandPage() {
                   </p>
                   <div className="flex min-w-0 max-w-xl flex-col gap-3 md:max-w-[32.5rem] md:flex-1">
                     <p className="body-main leading-relaxed text-secondary font-medium">
-                      The Zundy wordmark is our primary logo and should be used in most applications. Its bold, distinctive form makes it the most recognizable expression of the brand.
+                      The Gaspo wordmark is our primary logo and should be used in most applications. Its bold, distinctive form makes it the most recognizable expression of the brand.
                     </p>
                   </div>
                 </div>
@@ -689,7 +689,7 @@ export default function BrandPage() {
                   Avatar
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  The Zundy avatar — not the logo. Use it where the wordmark won't fit: a messaging-app
+                  The Gaspo avatar — not the logo. Use it where the wordmark won't fit: a messaging-app
                   profile, a favicon, an app icon. Avatar and wordmark are never paired — pick one or the
                   other based on context.
                 </p>
@@ -697,7 +697,7 @@ export default function BrandPage() {
               <div className="w-full shrink-0 lg:w-auto">
                 <a
                   className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/zundy-avatar-pack.zip"
+                  href="/assets/downloads/brand/gaspo-avatar-pack.zip"
                 >
                   Download avatar (PNG)
                 </a>
@@ -726,7 +726,7 @@ export default function BrandPage() {
                   Colours
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  Zundy&apos;s palette runs from warm peach through lilac and violet into deep navy.
+                  Gaspo&apos;s palette runs from warm peach through lilac and violet into deep navy.
                   Soft-black and white anchor it; the radial gradient ties them together.
                 </p>
               </div>
@@ -811,7 +811,7 @@ export default function BrandPage() {
                   Typography
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  Font styles, weights, and how to apply Zundy&apos;s typography in design.
+                  Font styles, weights, and how to apply Gaspo&apos;s typography in design.
                 </p>
               </div>
             </div>
@@ -868,14 +868,14 @@ export default function BrandPage() {
                   Tone of voice
                 </h2>
                 <p className="body-main max-w-xl text-secondary">
-                  Write like Zundy: direct, capable, and human. Not a chatbot. A coworker.
+                  Write like Gaspo: direct, capable, and human. Not a chatbot. A coworker.
                 </p>
               </div>
             </div>
 
             <div className="mx-auto grid w-full max-w-full gap-10 lg:grid-cols-2 lg:gap-8 xl:gap-12">
-              <ToneOfVoiceColumn variant="do" label="What Zundy is" rules={toneOfVoiceIsRules} />
-              <ToneOfVoiceColumn variant="dont" label="What Zundy is not" rules={toneOfVoiceIsNotRules} />
+              <ToneOfVoiceColumn variant="do" label="What Gaspo is" rules={toneOfVoiceIsRules} />
+              <ToneOfVoiceColumn variant="dont" label="What Gaspo is not" rules={toneOfVoiceIsNotRules} />
             </div>
           </div>
         </div>

@@ -75,7 +75,7 @@ export function ConnectAccountModal({
           type="button"
           aria-label="Close dialog"
           onClick={onClose}
-          className="zundy-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+          className="gaspo-focus-ring absolute top-4 right-4 inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
         >
           <X className="size-4" strokeWidth={1.5} />
         </button>
@@ -101,7 +101,7 @@ export function ConnectAccountModal({
               placeholder={`e.g. Team's ${appName}`}
               autoComplete="off"
               maxLength={255}
-              className="zundy-focus-ring h-10 w-full rounded-[7px] border border-border bg-secondary px-3 text-sm text-foreground outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring placeholder:text-muted-foreground"
+              className="gaspo-focus-ring h-10 w-full rounded-[7px] border border-border bg-secondary px-3 text-sm text-foreground outline-0 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring placeholder:text-muted-foreground"
             />
             <span className="text-xs text-muted-foreground">
               Just a label to tell your accounts apart.
@@ -123,7 +123,7 @@ export function ConnectAccountModal({
           <button
             type="button"
             onClick={() => onConfirm({ accessLevel, nickname: nickname.trim() || undefined })}
-            className="zundy-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+            className="gaspo-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
           >
             Continue to {appName}
           </button>

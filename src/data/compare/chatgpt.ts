@@ -6,18 +6,18 @@ const chatgptWhenChooseGradient =
 
 export const chatgptCompareConfig: ComparePageConfig = {
   meta: {
-    title: "Zundy vs ChatGPT — The AI That Does the Work",
+    title: "Gaspo vs ChatGPT — The AI That Does the Work",
     description:
-      "Compare Zundy and ChatGPT side-by-side. Zundy connects to 3,000+ tools and ships real work in Slack — ChatGPT talks about it.",
-    ogTitle: "Zundy vs ChatGPT — The AI That Does the Work",
+      "Compare Gaspo and ChatGPT side-by-side. Gaspo connects to 3,000+ tools and ships real work in Slack — ChatGPT talks about it.",
+    ogTitle: "Gaspo vs ChatGPT — The AI That Does the Work",
     ogDescription:
-      "How Zundy and ChatGPT stack up on integrations, deployment, pricing, security, and reliability.",
+      "How Gaspo and ChatGPT stack up on integrations, deployment, pricing, security, and reliability.",
   },
   hero: {
-    titleLine1: "Zundy vs ChatGPT:",
+    titleLine1: "Gaspo vs ChatGPT:",
     titleLine2: "The AI That Does the Work",
     subtitle:
-      "ChatGPT answers your questions. Zundy connects to your tools, runs your reports, and delivers real outputs. One is a chatbot. The other is a coworker.",
+      "ChatGPT answers your questions. Gaspo connects to your tools, runs your reports, and delivers real outputs. One is a chatbot. The other is a coworker.",
     lastUpdated: "Last updated: March 2026",
   },
   competitor: {
@@ -34,103 +34,103 @@ export const chatgptCompareConfig: ComparePageConfig = {
   rows: [
     {
       feature: "What it is",
-      zundy:
+      gaspo:
         "AI employee that lives in your Slack workspace. Connects to your tools and does real work autonomously.",
       competitor:
         "AI chatbot accessed through a separate web app or mobile app. Generates text responses to prompts.",
     },
     {
       feature: "Where it lives",
-      zundy: "Inside your Slack (or Microsoft Teams). You @mention Zundy like a colleague.",
+      gaspo: "Inside your Slack (or Microsoft Teams). You @mention Gaspo like a colleague.",
       competitor: "Separate app at chat.openai.com. You leave your workspace to use it.",
     },
     {
       feature: "Integrations",
-      zundy:
+      gaspo:
         "3,200+ managed integrations with real read/write access. Connects to Stripe, HubSpot, Meta Ads, Google Ads, GitHub, Notion, Linear, and more via one-click OAuth.",
       competitor:
         "Limited. Some GPT-4 plugins and web browsing. No managed OAuth connections to your business tools.",
     },
     {
       feature: "Deliverables",
-      zundy:
-        "Board-ready PDFs, Excel spreadsheets, PowerPoint decks, full-stack web applications (Zundy Spaces), code commits, and more.",
+      gaspo:
+        "Board-ready PDFs, Excel spreadsheets, PowerPoint decks, full-stack web applications (Gaspo Spaces), code commits, and more.",
       competitor:
         "Text responses. Can generate code snippets and basic files, but no polished professional documents or deployed applications.",
     },
     {
       feature: "Pricing",
-      zundy: "Free starter ($100 credits) · Team $50/mo per workspace — not per seat",
+      gaspo: "Free starter ($100 credits) · Team $50/mo per workspace — not per seat",
       competitor: "Free tier (limited) · Plus $20/mo · Pro $200/mo — per user",
     },
     {
       feature: "Memory",
-      zundy:
-        "Persistent company memory. Zundy learns your tools, preferences, team structure, and processes. Gets smarter about your business every week.",
+      gaspo:
+        "Persistent company memory. Gaspo learns your tools, preferences, team structure, and processes. Gets smarter about your business every week.",
       competitor:
         "Limited conversation memory. Can reference recent chats, but no persistent company knowledge across sessions.",
     },
     {
       feature: "Scheduled tasks",
-      zundy:
+      gaspo:
         "Built-in cron system. Daily reports, weekly audits, monthly reconciliations run autonomously without prompting.",
       competitor: "Not available. You must manually start each conversation.",
     },
     {
       feature: "Team features",
-      zundy:
-        "Multi-user. Everyone in your Slack workspace can @mention Zundy. Shared context, shared automations, shared memory.",
+      gaspo:
+        "Multi-user. Everyone in your Slack workspace can @mention Gaspo. Shared context, shared automations, shared memory.",
       competitor:
         "Primarily single-user. Team plans exist, but each user has separate conversations with no shared context.",
     },
     {
       feature: "Actions",
-      zundy:
+      gaspo:
         "Real actions: creates Linear issues, updates CRM records, sends emails, manages ad campaigns, deploys web apps, submits pull requests.",
       competitor: "Generates text about what you could do. You still copy-paste and execute manually.",
     },
     {
       feature: "Security",
-      zundy:
+      gaspo:
         "SOC 2 Type 1 certified. GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
       competitor: "SOC 2 certified. Enterprise data policies available on Team/Enterprise plans.",
     },
     {
       feature: "Setup",
-      zundy: "Install from Slack App Directory. Connect integrations via OAuth. Takes under 5 minutes. Free to start.",
+      gaspo: "Install from Slack App Directory. Connect integrations via OAuth. Takes under 5 minutes. Free to start.",
       competitor: "Sign up at openai.com. No business tool connections to configure.",
     },
   ],
   featureSections: [
     {
-      title: "Zundy does the work. ChatGPT talks about it.",
+      title: "Gaspo does the work. ChatGPT talks about it.",
       paragraphs: [
-        "ChatGPT generates text responses. Zundy generates results. When you ask Zundy to audit your ad spend, it pulls live data from Meta Ads and Google Ads, cross-references with Stripe revenue, analyzes trends vs. last month, and delivers a polished PDF report with charts, tables, and an executive summary. That PDF is in your Slack thread in under 5 minutes.",
+        "ChatGPT generates text responses. Gaspo generates results. When you ask Gaspo to audit your ad spend, it pulls live data from Meta Ads and Google Ads, cross-references with Stripe revenue, analyzes trends vs. last month, and delivers a polished PDF report with charts, tables, and an executive summary. That PDF is in your Slack thread in under 5 minutes.",
         "With ChatGPT, you'd describe your data in the chat, get a text analysis back, then manually create the report yourself.",
-        "The difference isn't intelligence. Both use frontier AI models. The difference is that Zundy is connected to your tools and authorized to act. ChatGPT can think. Zundy can think and do.",
+        "The difference isn't intelligence. Both use frontier AI models. The difference is that Gaspo is connected to your tools and authorized to act. ChatGPT can think. Gaspo can think and do.",
       ],
     },
     {
       title: "A teammate in Slack, not a tab in your browser.",
       paragraphs: [
-        "Zundy lives where your team already works. You @mention it in a channel or DM it directly, just like messaging a colleague. It sees the conversation context, knows who's asking, and remembers what you discussed last week.",
+        "Gaspo lives where your team already works. You @mention it in a channel or DM it directly, just like messaging a colleague. It sees the conversation context, knows who's asking, and remembers what you discussed last week.",
         "ChatGPT lives in a separate browser tab. Every conversation starts from scratch. You provide the context manually every time, and whatever ChatGPT produces, you still have to bring it back to your team in Slack.",
-        "Zundy's integration into Slack means your entire team benefits. When Zundy automates a weekly report, everyone in the channel sees it. When Zundy learns something about your Stripe account, that knowledge is available to everyone who asks. There's no copy-pasting between apps.",
+        "Gaspo's integration into Slack means your entire team benefits. When Gaspo automates a weekly report, everyone in the channel sees it. When Gaspo learns something about your Stripe account, that knowledge is available to everyone who asks. There's no copy-pasting between apps.",
       ],
     },
     {
       title: "3,200+ integrations vs. copy-paste.",
       paragraphs: [
-        "Zundy connects to your business tools with managed OAuth. One click to connect Stripe, HubSpot, Meta Ads, Google Ads, Notion, Linear, GitHub, and thousands more. Zundy can read and write data across all of them in a single request.",
+        "Gaspo connects to your business tools with managed OAuth. One click to connect Stripe, HubSpot, Meta Ads, Google Ads, Notion, Linear, GitHub, and thousands more. Gaspo can read and write data across all of them in a single request.",
         "Pull our Stripe revenue this month, compare it to our Meta Ads spend, and create a Linear issue if ROAS dropped below 3x. That's one message. Three tools. Real actions taken.",
         "ChatGPT has limited integrations through plugins and can browse the web, but it can't connect to your Stripe account, update your CRM, or manage your ad campaigns. You describe what you want, ChatGPT suggests what to do, and you go execute it yourself across each tool.",
       ],
     },
   ],
   whenToChoose: {
-    title: "When to choose ChatGPT vs Zundy",
+    title: "When to choose ChatGPT vs Gaspo",
     competitorChooseLabel: "Choose ChatGPT if:",
-    zundyWhen: [
+    gaspoWhen: [
       "You need an AI that connects to your business tools and takes real actions",
       "You want your team to share one AI employee with shared context and memory",
       "You need professional deliverables: PDFs, Excel reports, PowerPoint decks, web applications",
@@ -150,12 +150,12 @@ export const chatgptCompareConfig: ComparePageConfig = {
       name: "Tobias Giesen",
       role: "CEO, Growably",
       quote:
-        "We replaced four different ChatGPT seats with one Zundy workspace. The team actually uses it because it lives where they already work.",
+        "We replaced four different ChatGPT seats with one Gaspo workspace. The team actually uses it because it lives where they already work.",
     },
     {
       name: "Sam Kopelman",
       role: "CEO, Givr",
-      quote: "ChatGPT was helpful. Zundy is operational. It runs the work, not just the answers.",
+      quote: "ChatGPT was helpful. Gaspo is operational. It runs the work, not just the answers.",
     },
     {
       name: "Antonín Štětina",
@@ -166,20 +166,20 @@ export const chatgptCompareConfig: ComparePageConfig = {
   ],
   faqs: [
     {
-      q: "Is Zundy a replacement for ChatGPT?",
+      q: "Is Gaspo a replacement for ChatGPT?",
       a: "For team workflows — yes. For personal Q&A in a browser tab, ChatGPT still wins. Many of our customers run both.",
     },
     {
-      q: "Do I have to move my team off ChatGPT to use Zundy?",
-      a: "No. Zundy lives in Slack and Teams next to your existing tools. Try it on one workflow first and grow from there.",
+      q: "Do I have to move my team off ChatGPT to use Gaspo?",
+      a: "No. Gaspo lives in Slack and Teams next to your existing tools. Try it on one workflow first and grow from there.",
     },
     {
       q: "How is pricing different from a ChatGPT subscription?",
-      a: "Zundy charges per task that runs, not per seat. Invite the whole company; you only pay for the work that ships.",
+      a: "Gaspo charges per task that runs, not per seat. Invite the whole company; you only pay for the work that ships.",
     },
     {
       q: "Is my data safe?",
-      a: "Yes. Zundy is SOC 2 compliant with workspace controls, audit logs, and least-privilege access to every integration you connect.",
+      a: "Yes. Gaspo is SOC 2 compliant with workspace controls, audit logs, and least-privilege access to every integration you connect.",
     },
   ],
 };

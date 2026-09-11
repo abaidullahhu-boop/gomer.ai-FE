@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export type CompareRow = {
   feature: string;
-  zundy: string;
+  gaspo: string;
   competitor: string;
 };
 
@@ -36,7 +36,7 @@ export type ComparePageConfig = {
   whenToChoose: {
     title: string;
     competitorChooseLabel: string;
-    zundyWhen: string[];
+    gaspoWhen: string[];
     competitorWhen: string[];
   };
   testimonials: { name: string; role: string; quote: string }[];

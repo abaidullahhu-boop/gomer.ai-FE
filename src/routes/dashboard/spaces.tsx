@@ -37,8 +37,8 @@ export default function DashboardSpaces() {
   return (
     <>
       <PageMeta
-        title="Spaces — Zundy"
-        description="View and manage web applications created by Zundy."
+        title="Spaces — Gaspo"
+        description="View and manage web applications created by Gaspo."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
@@ -54,7 +54,7 @@ export default function DashboardSpaces() {
 
             <div className="flex w-full flex-col gap-6">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                View and manage web applications created by Zundy. Each space has its own database,
+                View and manage web applications created by Gaspo. Each space has its own database,
                 authentication, and hosting.
               </p>
 
@@ -83,7 +83,7 @@ export default function DashboardSpaces() {
                     <div className="space-y-2">
                       <h3 className="font-medium text-foreground">No Spaces yet</h3>
                       <p className="mx-auto max-w-sm text-sm leading-relaxed text-muted-foreground">
-                        Ask Zundy to create a web app for you and it will appear here.
+                        Ask Gaspo to create a web app for you and it will appear here.
                       </p>
                     </div>
                   </div>

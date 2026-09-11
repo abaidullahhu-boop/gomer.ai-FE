@@ -34,7 +34,7 @@ export function ScheduledTasksTable() {
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
         <button
           type="button"
-          className="zundy-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98] sm:w-auto"
+          className="gaspo-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98] sm:w-auto"
         >
           <Calendar className="size-4 shrink-0" strokeWidth={1.5} />
           Show system tasks only
@@ -130,7 +130,7 @@ export function ScheduledTasksTable() {
                     aria-label={`Manage task: ${task.name}`}
                     title="Manage task"
                     onClick={(event) => event.preventDefault()}
-                    className="zundy-focus-ring flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    className="gaspo-focus-ring flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
                     <Settings className="size-4" />
                   </button>

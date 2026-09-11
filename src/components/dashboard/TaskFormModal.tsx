@@ -175,13 +175,13 @@ export function TaskFormModal({
               {task ? "Edit scheduled task" : "Create scheduled task"}
             </h2>
             <p className="mt-0.5 text-sm text-muted-foreground">
-              Zundy runs the description on the schedule you set.
+              Gaspo runs the description on the schedule you set.
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="zundy-focus-ring rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-foreground"
+            className="gaspo-focus-ring rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-foreground"
             aria-label="Close"
           >
             <X className="size-5" strokeWidth={1.5} />
@@ -211,7 +211,7 @@ export function TaskFormModal({
             <textarea
               value={description}
               onChange={(event) => setDescription(event.target.value)}
-              placeholder="What should Zundy do on each run?"
+              placeholder="What should Gaspo do on each run?"
               rows={5}
               className={`${inputClass} resize-y`}
             />

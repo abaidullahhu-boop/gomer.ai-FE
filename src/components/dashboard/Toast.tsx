@@ -24,7 +24,7 @@ export function Toast({ message, onClose, duration = 4000 }: ToastProps) {
         type="button"
         onClick={onClose}
         aria-label="Dismiss"
-        className="zundy-focus-ring ml-2 shrink-0 cursor-pointer rounded-full p-0.5 text-muted-foreground transition-colors hover:text-foreground"
+        className="gaspo-focus-ring ml-2 shrink-0 cursor-pointer rounded-full p-0.5 text-muted-foreground transition-colors hover:text-foreground"
       >
         <X className="size-4" strokeWidth={1.5} />
       </button>

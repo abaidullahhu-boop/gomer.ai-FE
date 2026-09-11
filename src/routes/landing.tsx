@@ -10,12 +10,12 @@ import {
   AboutStarIcon,
   AboutStartupIcon,
 } from "@/components/landing/AboutValueIcons";
-import zundyWordmark from "@/assets/images/zundy.svg";
+import gaspoWordmark from "@/assets/images/gaspo.svg";
 import { AboutInvestorsSection } from "@/components/landing/AboutInvestorsSection";
 import { Footer } from "@/components/site/Footer";
 
 const tokens = `
-.zundy-scope {
+.gaspo-scope {
   --vk-beige: #faf5f1;
   --vk-white: #fff;
   --vk-dark: #1a182b;
@@ -39,7 +39,7 @@ const tokens = `
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
 }
-.zundy-scope * { box-sizing: border-box; }
+.gaspo-scope * { box-sizing: border-box; }
 .vk-container { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
 .vk-hero { background: var(--vk-hero-surface); padding: 7rem 0 5rem; text-align: center; }
 .vk-eyebrow {
@@ -193,11 +193,11 @@ function VideoPlayIcon() {
 
 export default function LandingPage() {
   return (
-    <div className="zundy-scope">
+    <div className="gaspo-scope">
       <PageMeta
-        title="Zundy — The AI employee for everyone else"
+        title="Gaspo — The AI employee for everyone else"
         description="A focused AI coworker that connects to your tools and does the work — built for modern teams."
-        ogTitle="Zundy — The AI employee"
+        ogTitle="Gaspo — The AI employee"
         ogDescription="Premium AI workforce for modern teams."
       />
       <style>{tokens}</style>
@@ -230,7 +230,7 @@ export default function LandingPage() {
                 />
                 <div className="relative z-10">
                   <img
-                    alt="Zundy team"
+                    alt="Gaspo team"
                     loading="eager"
                     width={1920}
                     height={1280}
@@ -326,7 +326,7 @@ export default function LandingPage() {
                 decoding="async"
                 width={1938}
                 height={518}
-                src={zundyWordmark}
+                src={gaspoWordmark}
                 className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
               />
               <div className="relative z-10 flex w-full flex-col items-center gap-16">
@@ -336,7 +336,7 @@ export default function LandingPage() {
                       <p className="body-small text-[#f1edff] font-medium">Let's work together</p>
                     </div>
                     <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
-                      Build Zundy with us
+                      Build Gaspo with us
                     </h2>
                   </div>
                   <p className="body-main max-w-[35.625rem] text-white font-medium opacity-80">

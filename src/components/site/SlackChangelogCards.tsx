@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
+import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
 
 const lisaAvatar =
@@ -23,12 +23,12 @@ export function SlackLightCard() {
       <div className="rounded-[18px] bg-white/95 backdrop-blur-sm p-5 sm:p-6 shadow-[0_10px_30px_-15px_rgba(40,20,80,0.25)]">
         <div className="flex flex-col gap-3.5">
           <SlackRow name="Anna" time="1:23 PM" avatarClass="from-fuchsia-400 to-violet-500">
-            <Mention>@Zundy</Mention> we need a competitive analysis for Monday
+            <Mention>@Gaspo</Mention> we need a competitive analysis for Monday
           </SlackRow>
           <SlackRow name="Lisa" time="1:24 PM" avatarClass="from-pink-400 to-violet-500">
-            <Mention>@Zundy</Mention> please make it a PDF
+            <Mention>@Gaspo</Mention> please make it a PDF
           </SlackRow>
-          <SlackRow name="Zundy" time="2:43 PM" avatarClass="from-violet-400 to-fuchsia-500" app>
+          <SlackRow name="Gaspo" time="2:43 PM" avatarClass="from-violet-400 to-fuchsia-500" app>
             <>
               Done — pulled latest from Stripe, HubSpot and three review sites.
               <div className="mt-2.5">
@@ -42,7 +42,7 @@ export function SlackLightCard() {
   );
 }
 
-/* ---------- Purple Slack card with Zundy glass reply (compare page) ---------- */
+/* ---------- Purple Slack card with Gaspo glass reply (compare page) ---------- */
 export function SlackPurpleCard() {
   return (
     <CompareSlackGradientShell>
@@ -53,12 +53,12 @@ export function SlackPurpleCard() {
         reactions={[{ emoji: "⏳", count: 1 }]}
         body={
           <>
-            <SlackMention>@Zundy</SlackMention> we need a competitive analysis — us vs Notion AI, Glean, and
+            <SlackMention>@Gaspo</SlackMention> we need a competitive analysis — us vs Notion AI, Glean, and
             Moveworks. Pricing, features, positioning. Make it a PDF I can share with the board
           </>
         }
       />
-      <CompareSlackZundyMessage
+      <CompareSlackGaspoMessage
         time="9:04 AM"
         reactions={[
           { emoji: "❤️", count: 4 },
@@ -90,11 +90,11 @@ export function SlackTeammateCard() {
         reactions={[{ emoji: "⏳", count: 1 }]}
         body={
           <>
-            <SlackMention>@Zundy</SlackMention> audit our Meta Ads and Google Ads spend. Compare vs last month.
+            <SlackMention>@Gaspo</SlackMention> audit our Meta Ads and Google Ads spend. Compare vs last month.
           </>
         }
       />
-      <CompareSlackZundyMessage
+      <CompareSlackGaspoMessage
         time="9:02 AM"
         reactions={[
           { emoji: "🎯", count: 4 },
@@ -149,7 +149,7 @@ function CompareSlackUserMessage({
   );
 }
 
-function CompareSlackZundyMessage({
+function CompareSlackGaspoMessage({
   time,
   body,
   attachment,
@@ -162,25 +162,25 @@ function CompareSlackZundyMessage({
 }) {
   return (
     <div
-      data-variant="zundy"
+      data-variant="gaspo"
       data-highlighted="true"
-      className="relative flex w-full text-left isolate overflow-hidden slack-message-zundy gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
+      className="relative flex w-full text-left isolate overflow-hidden slack-message-gaspo gap-2 px-[var(--slack-message-pad-x)] py-[var(--slack-message-pad-y)]"
     >
-      <div aria-hidden="true" className="slack-zundy-bg-mount">
-        <div className="slack-zundy-layer-glass-stack" />
-        <div className="slack-zundy-layer-inner-depth-soft" />
-        <div className="slack-zundy-layer-inner-glow-overlay" />
-        <div className="slack-zundy-layer-feather-blur" />
-        <div className="slack-zundy-layer-white-sheet" />
+      <div aria-hidden="true" className="slack-gaspo-bg-mount">
+        <div className="slack-gaspo-layer-glass-stack" />
+        <div className="slack-gaspo-layer-inner-depth-soft" />
+        <div className="slack-gaspo-layer-inner-glow-overlay" />
+        <div className="slack-gaspo-layer-feather-blur" />
+        <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md z-[1] bg-transparent">
-        <img alt="Zundy" loading="lazy" width={36} height={36} className="size-full object-cover" src={zundyAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 mb-0.5">
           <span className="body-small text-slack font-medium">
             <span className="inline-flex items-center gap-1.5">
-              <span>Zundy</span>
+              <span>Gaspo</span>
               <span className="inline-flex items-center rounded-sm bg-slack-app-badge px-1 py-px text-[12px] leading-tight font-normal tracking-wide text-slack-app-badge uppercase">
                 APP
               </span>

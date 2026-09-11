@@ -18,7 +18,7 @@ const controlCards: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: <FingerprintIcon />,
     title: "OAuth, not passwords.",
-    body: "Zundy authenticates through official OAuth flows. We never see or store your passwords. Disconnect any integration with one click.",
+    body: "Gaspo authenticates through official OAuth flows. We never see or store your passwords. Disconnect any integration with one click.",
   },
   {
     icon: <ShieldSecurityIcon />,
@@ -28,12 +28,12 @@ const controlCards: { icon: ReactNode; title: string; body: string }[] = [
   {
     icon: <ReceiptCheckIcon />,
     title: "Approval before action.",
-    body: "Zundy asks before doing anything risky. Sensitive actions require your explicit approval. You're always in control.",
+    body: "Gaspo asks before doing anything risky. Sensitive actions require your explicit approval. You're always in control.",
   },
   {
     icon: <KeyholeShieldIcon />,
     title: "Per-tool permissions.",
-    body: "Connect only what you need. Each integration has granular scopes. Zundy only accesses what you authorize.",
+    body: "Connect only what you need. Each integration has granular scopes. Gaspo only accesses what you authorize.",
   },
 ];
 

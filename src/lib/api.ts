@@ -375,7 +375,7 @@ export function uninstallSkill(id: string): Promise<Skill> {
   return apiFetch<Skill>(`/skills/${id}/install`, { method: "DELETE" });
 }
 
-/** A web app Zundy built, as listed on the dashboard. */
+/** A web app Gaspo built, as listed on the dashboard. */
 export type Space = {
   id: string;
   slug: string;
@@ -484,7 +484,7 @@ export async function deleteTask(id: string): Promise<void> {
   await apiFetch<{ success: boolean }>(`/tasks/${id}`, { method: "DELETE" });
 }
 
-/** An action an app exposes — what Zundy can do with it. */
+/** An action an app exposes — what Gaspo can do with it. */
 export type AppTool = {
   key: string;
   name: string;
@@ -492,7 +492,7 @@ export type AppTool = {
 };
 
 /**
- * Every action an app exposes, for the "what can Zundy do?" panel. The API pages
+ * Every action an app exposes, for the "what can Gaspo do?" panel. The API pages
  * through Pipedream and caches server-side, so this returns the complete list in
  * one request.
  */

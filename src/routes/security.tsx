@@ -23,22 +23,22 @@ import riskTabsCredentialsVisual from "@/assets/images/security/risk-tabs-creden
 import riskTabsApprovalsVisual from "@/assets/images/security/risk-tabs-approvals-visual.webp";
 import riskTabsNoTrainingVisual from "@/assets/images/security/risk-tabs-no-training-visual.webp";
 import riskTabsIsolationVisual from "@/assets/images/security/risk-tabs-isolation-visual.webp";
-import zundySlackAvatar from "@/assets/images/zundy-slack-avatar (1).svg";
+import gaspoSlackAvatar from "@/assets/images/gaspo-slack-avatar (1).svg";
 
 export default function SecurityPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Security — Zundy"
+        title="Security — Gaspo"
         description="The security behind your AI coworker. Independently audited, continuously verified. SOC 2 Type II, GDPR, encryption everywhere, and zero training on your data."
-        ogTitle="Security — Zundy"
+        ogTitle="Security — Gaspo"
         ogDescription="Independently audited, continuously verified. Enterprise-grade security for your AI coworker."
         ogUrl="/security"
         canonical="/security"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Security — Zundy",
+          name: "Security — Gaspo",
           description: "The security behind your AI coworker.",
         }}
       />
@@ -182,7 +182,7 @@ function SecurityHero() {
                           Approved by Slack. Listed in the App Directory.
                         </h2>
                         <p className="body-main text-secondary font-medium">
-                          Zundy is published in the official Slack App Directory. That
+                          Gaspo is published in the official Slack App Directory. That
                           means our OAuth scopes, security posture, and store listing
                           have been reviewed and approved by Slack before we were allowed
                           to ship to customers through their store.
@@ -285,7 +285,7 @@ function AuditedTable() {
   );
 }
 
-/* ---------------- WHAT ZUNDY DOES / DOES NOT ---------------- */
+/* ---------------- WHAT GASPO DOES / DOES NOT ---------------- */
 
 const doesItems = [
   { t: "Encrypts everything", d: "TLS 1.2+ in transit, AES-256 at rest. Secrets in dedicated vaults." },
@@ -336,7 +336,7 @@ function CapHeader({ active, label }: { active?: boolean; label: string }) {
       <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 flex flex-col items-center">
         <div className="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center ring-4 ring-background p-1">
           <img
-            src={zundySlackAvatar}
+            src={gaspoSlackAvatar}
             alt=""
             aria-hidden
             className={`w-14 h-14 rounded-xl object-cover ${
@@ -364,7 +364,7 @@ function DoesDoesNot() {
         <div className="text-center">
           <p className="text-eyebrow-primitive-purple-700">Data handling</p>
           <h2 className="font-display text-4xl md:text-6xl mt-4 leading-tight">
-            What Zundy does.<br />What Zundy does not.
+            What Gaspo does.<br />What Gaspo does not.
           </h2>
           <p className="mt-5 text-secondary max-w-xl mx-auto font-medium">
             The audit reports are real, the controls are continuously monitored,
@@ -443,7 +443,7 @@ const riskTabs: {
     label: "Approvals",
     icon: BadgeCheck,
     description: "You approve every sensitive action",
-    lead: "Before Zundy sends an email, pushes code, modifies an ad campaign, or charges a card, it shows you exactly what it wants to do and waits for approval or rejection in Slack.",
+    lead: "Before Gaspo sends an email, pushes code, modifies an ad campaign, or charges a card, it shows you exactly what it wants to do and waits for approval or rejection in Slack.",
     subhead: "Admins choose which action types require approval. Defaults are conservative.",
     visual: riskTabsApprovalsVisual,
     visualAlt: "Slack approval flow security illustration",
@@ -453,7 +453,7 @@ const riskTabs: {
     label: "No training",
     icon: Rocket,
     description: "Your data never trains a model",
-    lead: "Conversations, files, business data, and outputs stay in your workspace. We do not use customer data to train Zundy, and our model providers do not either.",
+    lead: "Conversations, files, business data, and outputs stay in your workspace. We do not use customer data to train Gaspo, and our model providers do not either.",
     subhead: "Enterprise customers can turn persistent memory off per workspace or channel.",
     visual: riskTabsNoTrainingVisual,
     visualAlt: "No training and inference receipt security illustration",
@@ -785,8 +785,8 @@ function PillarProtectionIcon() {
 }
 
 const pillars = [
-  { icon: PillarAccessIcon, title: "Access you control", body: "Granular scopes, SSO, SAML, and SCIM. Grant exactly what Zundy needs, revoke in one click, and provision your whole team automatically." },
-  { icon: PillarVisibilityIcon, title: "Visibility you can trust", body: "A full audit log of every action, queryable and exportable. Know what Zundy did, when, and on whose behalf — always." },
+  { icon: PillarAccessIcon, title: "Access you control", body: "Granular scopes, SSO, SAML, and SCIM. Grant exactly what Gaspo needs, revoke in one click, and provision your whole team automatically." },
+  { icon: PillarVisibilityIcon, title: "Visibility you can trust", body: "A full audit log of every action, queryable and exportable. Know what Gaspo did, when, and on whose behalf — always." },
   { icon: PillarProtectionIcon, title: "Protection that's tested", body: "Continuous penetration testing, encryption everywhere, and isolated runtimes. Security that's proven, not promised." },
 ];
 
@@ -795,7 +795,7 @@ function Pillars() {
     <section className="px-2 sm:px-6 py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto flex w-full max-w-[776px] flex-col justify-center items-center gap-8 text-center">
-          <p className="text-eyebrow-primitive-purple-700">Zundy vs AI tools</p>
+          <p className="text-eyebrow-primitive-purple-700">Gaspo vs AI tools</p>
           <h2 className="font-heading text-[36px] max-sm:text-[31.5px] leading-[1.1] font-bold tracking-[-0.06em] text-primary text-balance sm:text-[40px] md:text-[48px]">
             Independently audited.<br />
             AI brings new risks, and we know how to handle them
@@ -845,7 +845,7 @@ function ZeroSecrets() {
               <div className="mt-8 space-y-5 max-w-md">
                 <div className="border-b border-white/15 pb-5">
                   <h3 className="text-white font-semibold text-2xl">OAuth first</h3>
-                  <p className="text-white/75 text-md leading-relaxed">Zundy connects through OAuth wherever possible — no passwords pasted into a message, ever.</p>
+                  <p className="text-white/75 text-md leading-relaxed">Gaspo connects through OAuth wherever possible — no passwords pasted into a message, ever.</p>
                 </div>
                 <div className="border-b border-white/15 pb-5">
                   <h3 className="text-white font-semibold text-lg">Encrypted vault</h3>
@@ -894,7 +894,7 @@ function FoundSomething() {
           </div>
         </div>
         <p className="mt-8 mx-auto max-w-2xl text-center text-sm text-muted-foreground leading-relaxed font-medium">
-          We are building a formal bug bounty program. In the meantime, we recognize meaningful security research with a thank you, public credit if you want it, and Zundy credits.
+          We are building a formal bug bounty program. In the meantime, we recognize meaningful security research with a thank you, public credit if you want it, and Gaspo credits.
         </p>
       </div>
     </section>

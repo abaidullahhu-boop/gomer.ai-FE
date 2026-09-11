@@ -7,7 +7,7 @@ import { useSession } from "@/lib/session";
 import { ApiError, fetchTeamMembers, updateMemberRole, type TeamMember } from "@/lib/api";
 
 const SLACK_INVITE_DESCRIPTION =
-  "Allow Zundy to invite Slack workspace members to join your team via DM.";
+  "Allow Gaspo to invite Slack workspace members to join your team via DM.";
 
 function MemberRoleControl({
   member,
@@ -35,7 +35,7 @@ function MemberRoleControl({
       value={member.role}
       disabled={saving}
       onChange={(event) => onChange(event.target.value as "admin" | "member")}
-      className="zundy-focus-ring min-h-9 cursor-pointer rounded-md border border-border bg-background px-3 py-1.5 text-sm capitalize text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80 disabled:cursor-not-allowed disabled:opacity-50"
+      className="gaspo-focus-ring min-h-9 cursor-pointer rounded-md border border-border bg-background px-3 py-1.5 text-sm capitalize text-foreground transition-[border-color,box-shadow] duration-150 outline-none hover:border-border/80 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <option value="member">Member</option>
       <option value="admin">Admin</option>
@@ -116,7 +116,7 @@ function TeamOptionsMenu({
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((value) => !value)}
-        className="zundy-focus-ring inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+        className="gaspo-focus-ring inline-flex size-10 min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-transparent text-muted-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
       >
         <MoreVertical className="size-4" strokeWidth={1.5} />
       </button>
@@ -231,7 +231,7 @@ export default function DashboardTeam() {
   return (
     <>
       <PageMeta
-        title="Team — Zundy"
+        title="Team — Gaspo"
         description="Manage your team members, seats, and permissions."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -265,14 +265,14 @@ export default function DashboardTeam() {
                 <div className="flex w-full flex-col gap-4 lg:w-auto lg:flex-row lg:gap-2">
                   <Link
                     to="/dashboard/billing"
-                    className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
+                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
                   >
                     <ExternalLink className="size-4" strokeWidth={1.5} />
                     Manage plan
                   </Link>
                   <button
                     type="button"
-                    className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <RefreshCw className="size-4" strokeWidth={1.5} />
                     Check Slack members
@@ -280,7 +280,7 @@ export default function DashboardTeam() {
                   <button
                     type="button"
                     onClick={openInviteModal}
-                    className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                   >
                     <UserPlus className="size-4" strokeWidth={1.5} />
                     Invite members
@@ -293,7 +293,7 @@ export default function DashboardTeam() {
                   type="button"
                   onClick={() => setActiveTab("members")}
                   className={[
-                    "zundy-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
+                    "gaspo-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
                     activeTab === "members"
                       ? "border-foreground text-foreground"
                       : "border-transparent text-muted-foreground hover:text-foreground",
@@ -308,7 +308,7 @@ export default function DashboardTeam() {
                   type="button"
                   onClick={() => setActiveTab("settings")}
                   className={[
-                    "zundy-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
+                    "gaspo-focus-ring -mb-px inline-flex cursor-pointer items-center gap-2 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors",
                     activeTab === "settings"
                       ? "border-foreground text-foreground"
                       : "border-transparent text-muted-foreground hover:text-foreground",
@@ -365,7 +365,7 @@ export default function DashboardTeam() {
                       aria-checked={slackInviteEnabled}
                       onClick={() => setSlackInviteEnabled((value) => !value)}
                       className={[
-                        "zundy-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+                        "gaspo-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
                         slackInviteEnabled ? "border-highlight bg-highlight" : "bg-input",
                       ].join(" ")}
                     >
@@ -380,11 +380,11 @@ export default function DashboardTeam() {
 
                   <SettingsCard
                     title="Permissions"
-                    description="Slack Connect, guest access, what teammates can do, and who can use Zundy are managed in the Permissions section."
+                    description="Slack Connect, guest access, what teammates can do, and who can use Gaspo are managed in the Permissions section."
                   >
                     <Link
                       to="/dashboard/settings/permissions"
-                      className="zundy-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                      className="gaspo-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
                     >
                       Open Permissions
                     </Link>

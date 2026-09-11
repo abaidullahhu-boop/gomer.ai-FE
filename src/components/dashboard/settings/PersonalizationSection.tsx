@@ -70,7 +70,7 @@ export function PersonalizationSection({
             <div className="min-w-0">
               <div className="text-sm font-medium text-foreground">Employee personality</div>
               <p className="mt-1 text-sm text-muted-foreground">
-                Choose a default tone for Zundy responses.
+                Choose a default tone for Gaspo responses.
               </p>
             </div>
 
@@ -91,10 +91,10 @@ export function PersonalizationSection({
             <div>
               <div className="text-sm font-medium text-foreground">Workspace instructions</div>
               <p className="mt-1 text-sm text-muted-foreground">
-                Give Zundy extra instructions and context for your workspace.{" "}
+                Give Gaspo extra instructions and context for your workspace.{" "}
                 <button
                   type="button"
-                  className="zundy-focus-ring inline-flex items-center gap-1 text-primary underline-offset-4 hover:underline"
+                  className="gaspo-focus-ring inline-flex items-center gap-1 text-primary underline-offset-4 hover:underline"
                 >
                   Examples
                   <Info className="size-4" strokeWidth={1.5} />
@@ -108,7 +108,7 @@ export function PersonalizationSection({
 
           <div className="flex w-full flex-col gap-1.5 font-mono">
             <div
-              className="zundy-focus-ring grid w-full overflow-hidden rounded-md border border-border bg-muted text-sm leading-5 transition-colors hover:border-border/80 focus-within:outline-2"
+              className="gaspo-focus-ring grid w-full overflow-hidden rounded-md border border-border bg-muted text-sm leading-5 transition-colors hover:border-border/80 focus-within:outline-2"
               style={{ maxHeight: 220 }}
             >
               <textarea
@@ -141,7 +141,7 @@ export function PersonalizationSection({
               type="button"
               disabled={disabled || !hasChanges}
               onClick={handleSave}
-              className="zundy-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+              className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-secondary/80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {saving ? "Saving…" : "Save changes"}
             </button>

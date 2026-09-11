@@ -66,7 +66,7 @@ export default function DashboardIntegrationAccount() {
     };
   }, [accountId]);
 
-  // The actions this app exposes — what Zundy can do with it.
+  // The actions this app exposes — what Gaspo can do with it.
   useEffect(() => {
     if (!appSlug) return;
     let cancelled = false;
@@ -198,7 +198,7 @@ export default function DashboardIntegrationAccount() {
                       type="button"
                       onClick={() => setTab(entry.id)}
                       className={[
-                        "zundy-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,transform] duration-200 active:scale-[0.98]",
+                        "gaspo-focus-ring inline-flex min-h-9 cursor-pointer select-none items-center justify-center rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,transform] duration-200 active:scale-[0.98]",
                         tab === entry.id
                           ? "bg-secondary text-secondary-foreground"
                           : "bg-transparent text-muted-foreground hover:bg-accent",
@@ -232,7 +232,7 @@ export default function DashboardIntegrationAccount() {
                         aria-hidden
                       />
                       <h2 className="text-sm font-semibold text-foreground">
-                        What Zundy can do for you
+                        What Gaspo can do for you
                       </h2>
                       {!toolsLoading && !toolsError && (
                         <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
@@ -254,7 +254,7 @@ export default function DashboardIntegrationAccount() {
                       </p>
                     ) : tools.length === 0 ? (
                       <p className="rounded-xl border border-border bg-muted px-4 py-6 text-center text-sm text-muted-foreground">
-                        This app doesn’t expose any actions Zundy can use yet.
+                        This app doesn’t expose any actions Gaspo can use yet.
                       </p>
                     ) : filteredTools.length === 0 ? (
                       <p className="px-1 py-4 text-sm text-muted-foreground">
@@ -310,7 +310,7 @@ export default function DashboardIntegrationAccount() {
                           disabled={saving || selected}
                           onClick={() => void persist({ accessLevel: option.value })}
                           className={[
-                            "zundy-focus-ring flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors disabled:cursor-default",
+                            "gaspo-focus-ring flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors disabled:cursor-default",
                             selected
                               ? "border-highlight bg-highlight/10"
                               : "border-border bg-card hover:bg-accent",
@@ -351,7 +351,7 @@ export default function DashboardIntegrationAccount() {
                         Account label
                       </label>
                       <p className="text-xs text-muted-foreground">
-                        Zundy uses the label to tell your connections apart
+                        Gaspo uses the label to tell your connections apart
                       </p>
                       <div className="flex gap-2">
                         <input
@@ -365,7 +365,7 @@ export default function DashboardIntegrationAccount() {
                           type="button"
                           disabled={saving || label === (account.nickname ?? "")}
                           onClick={() => void persist({ nickname: label })}
-                          className="zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-60"
+                          className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center rounded-[7px] bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-60"
                         >
                           Save
                         </button>
@@ -378,7 +378,7 @@ export default function DashboardIntegrationAccount() {
                           Enable integration
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          Allow Zundy to use this {appName} connection
+                          Allow Gaspo to use this {appName} connection
                         </span>
                       </div>
                       <button
@@ -388,7 +388,7 @@ export default function DashboardIntegrationAccount() {
                         disabled={saving}
                         onClick={() => void persist({ isActive: !account.isActive })}
                         className={[
-                          "zundy-focus-ring relative inline-flex w-10.5 shrink-0 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none disabled:cursor-default",
+                          "gaspo-focus-ring relative inline-flex w-10.5 shrink-0 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none disabled:cursor-default",
                           account.isActive ? "border-highlight bg-highlight" : "bg-secondary",
                         ].join(" ")}
                       >
@@ -406,14 +406,14 @@ export default function DashboardIntegrationAccount() {
                         Disconnect integration
                       </span>
                       <span className="text-xs text-muted-foreground">
-                        Remove this connection and revoke Zundy’s access. Your other {appName}{" "}
+                        Remove this connection and revoke Gaspo’s access. Your other {appName}{" "}
                         connections are not affected.
                       </span>
                       <button
                         type="button"
                         disabled={saving}
                         onClick={() => void handleDisconnect()}
-                        className="zundy-focus-ring mt-1 inline-flex min-h-9 w-fit cursor-pointer select-none items-center gap-2 rounded-[7px] border border-border px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/15 disabled:cursor-default disabled:opacity-60"
+                        className="gaspo-focus-ring mt-1 inline-flex min-h-9 w-fit cursor-pointer select-none items-center gap-2 rounded-[7px] border border-border px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/15 disabled:cursor-default disabled:opacity-60"
                       >
                         {saving ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
                         Disconnect integration

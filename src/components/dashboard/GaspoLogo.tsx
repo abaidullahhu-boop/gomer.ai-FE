@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-export function ZundyLogo() {
+export function GaspoLogo() {
   return (
     <Link to="/dashboard" className="block">
       <svg
         role="img"
-        aria-label="Zundy"
+        aria-label="Gaspo"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 240 60"
         height={28}
@@ -21,7 +21,7 @@ export function ZundyLogo() {
           letterSpacing="2px"
           fill="currentColor"
         >
-          ZUNDY
+          GASPO
         </text>
       </svg>
     </Link>

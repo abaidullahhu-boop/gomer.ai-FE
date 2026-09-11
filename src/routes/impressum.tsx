@@ -9,10 +9,10 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Impressum — Zundy"
-        description="Provider information and legal notice for Zundy."
-        ogTitle="Impressum — Zundy"
-        ogDescription="Provider information and legal notice for Zundy."
+        title="Impressum — Gaspo"
+        description="Provider information and legal notice for Gaspo."
+        ogTitle="Impressum — Gaspo"
+        ogDescription="Provider information and legal notice for Gaspo."
       />
       <Nav heroTone="light" />
       <section className="pt-12 sm:pt-[5rem] pb-14 sm:pb-[7rem]">
@@ -29,7 +29,7 @@ export default function ImpressumPage() {
                 </div>
                 <h1 className="font-heading h2 sm:h1 text-primary ">Impressum</h1>
                 <p className="body-medium text-secondary font-medium">
-                  Provider information and legal notice for Zundy.
+                  Provider information and legal notice for Gaspo.
                 </p>
               </header>
 
@@ -52,7 +52,7 @@ export default function ImpressumPage() {
                       <br />
                       United States
                       <br />
-                      Product: Zundy (
+                      Product: Gaspo (
                       <a href="https://gomer.com" className={linkClassName}>
                         gomer.com
                       </a>
