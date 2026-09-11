@@ -105,7 +105,7 @@ export default function App() {
           <Route path="billing" element={<DashboardBilling />} />
           <Route path="admin" element={<DashboardAdmin />} />
           {/* The Account page renders placeholder data end to end — a fixed
-              workspace name and a "Gomer email address" feature that has no
+              workspace name and a "Zundy email address" feature that has no
               backend at all. Hidden from the sidebar and redirected here
               rather than deleted, so the work survives for whenever it is
               wired to real data. */}

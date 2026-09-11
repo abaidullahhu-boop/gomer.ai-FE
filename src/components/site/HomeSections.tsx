@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { Workflow, BarChart3, GitBranch, Globe, Users, ShieldCheck, Check } from "lucide-react";
 import { HowItWorksScrollSection, type HowItWorksStep } from "@/components/site/ProductHowItWorksSection";
-import gomerWordmark from "@/assets/images/gomer.svg";
+import zundyWordmark from "@/assets/images/zundy.svg";
 import chatgptLogo from "@/assets/images/chatgpt.svg";
 import claudeLogo from "@/assets/images/claude.svg";
 import perplexityLogo from "@/assets/images/perplexity.svg";
@@ -45,7 +45,7 @@ export function WorkflowAutomation() {
           eyebrow="Workflow Automation"
           icon={Workflow}
           title="Automations that write themselves."
-          body="Don't build flows in a no-code maze. Tell Gomer the outcome — it figures out which tools to query, when to run, and what to do with the result."
+          body="Don't build flows in a no-code maze. Tell Zundy the outcome — it figures out which tools to query, when to run, and what to do with the result."
           bullets={[
             "Schedule recurring tasks in plain English",
             "Multi-step workflows across 3,000+ tools",
@@ -84,7 +84,7 @@ export function ReportsAnalytics() {
           eyebrow="Reports & Analytics"
           icon={BarChart3}
           title="Board-ready reports. Zero copy-paste."
-          body="Gomer pulls numbers from every source of truth, writes the narrative, designs the charts, and delivers a polished PDF or live dashboard."
+          body="Zundy pulls numbers from every source of truth, writes the narrative, designs the charts, and delivers a polished PDF or live dashboard."
           bullets={[
             "MRR, churn, CAC, ROAS — always in sync",
             "Investor updates, board decks, weekly digests",
@@ -124,19 +124,19 @@ const HOME_HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
   {
     number: "/01",
     title: "Connect",
-    body: "Install Gomer from the Slack App Directory or Microsoft Teams. Connect your tools: Stripe, Notion, Google Ads, whatever you use. Takes 2 minutes.",
+    body: "Install Zundy from the Slack App Directory or Microsoft Teams. Connect your tools: Stripe, Notion, Google Ads, whatever you use. Takes 2 minutes.",
     visual: "marketplace",
   },
   {
     number: "/02",
     title: "Ask",
-    body: 'Talk to Gomer like a colleague. "Pull our Meta Ads data and compare vs. last month." "Create a Linear issue for the pricing update." "Build me a revenue dashboard."',
+    body: 'Talk to Zundy like a colleague. "Pull our Meta Ads data and compare vs. last month." "Create a Linear issue for the pricing update." "Build me a revenue dashboard."',
     visual: "slack-connect",
   },
   {
     number: "/03",
-    title: "Gomer delivers",
-    body: "Gomer queries your tools, analyzes data, and delivers real outputs: PDFs, spreadsheets, web apps, code. He also schedules recurring tasks and proposes automations you didn't think to ask for.",
+    title: "Zundy delivers",
+    body: "Zundy queries your tools, analyzes data, and delivers real outputs: PDFs, spreadsheets, web apps, code. He also schedules recurring tasks and proposes automations you didn't think to ask for.",
     visual: "slack-work",
   },
 ];
@@ -154,7 +154,7 @@ export function Engineering() {
           eyebrow="Engineering"
           icon={GitBranch}
           title="An engineer who ships PRs while you sleep."
-          body="Gomer clones your repo, writes the fix on a feature branch, opens a PR with context, and assigns reviewers. Real commits. Real review."
+          body="Zundy clones your repo, writes the fix on a feature branch, opens a PR with context, and assigns reviewers. Real commits. Real review."
           bullets={[
             "Bug triage from Slack and Linear",
             "Pull requests with tests + release notes",
@@ -172,7 +172,7 @@ export function Engineering() {
                 <div className="text-rose-400">- // TODO: validate email</div>
               </div>
               <div className="mt-4 p-3 rounded-lg bg-white/5 text-slate-300">
-                <div className="text-[10px] text-slate-500">PR #1284 · opened by Gomer</div>
+                <div className="text-[10px] text-slate-500">PR #1284 · opened by Zundy</div>
                 <div className="mt-1">Fix checkout validation crash</div>
               </div>
             </div>
@@ -190,8 +190,8 @@ export function BrowserAutomation() {
         <CapabilityRow
           eyebrow="Browser Automation"
           icon={Globe}
-          title="Gomer uses the web like you do."
-          body="No API? No problem. Gomer logs in, clicks through, scrapes the dashboard, and pulls the data — securely, in its own sandboxed browser."
+          title="Zundy uses the web like you do."
+          body="No API? No problem. Zundy logs in, clicks through, scrapes the dashboard, and pulls the data — securely, in its own sandboxed browser."
           bullets={[
             "Works with any web app, even legacy admin panels",
             "Multi-factor login + credential vault",
@@ -228,20 +228,20 @@ export function TeamCollaboration() {
           eyebrow="Team Collaboration"
           icon={Users}
           title="One coworker. The whole team."
-          body="Everyone on your team works with the same Gomer. Shared memory, shared integrations, shared context — but private threads when you need them."
+          body="Everyone on your team works with the same Zundy. Shared memory, shared integrations, shared context — but private threads when you need them."
           bullets={[
             "Public + private DMs in Slack and Teams",
             "Role-based access for integrations",
-            "Audit log of every action Gomer takes",
+            "Audit log of every action Zundy takes",
           ]}
           visual={
             <div className="bg-background rounded-2xl p-5 w-full max-w-sm shadow-2xl text-foreground space-y-3">
               <div className="text-xs text-muted-foreground"># product-launch</div>
               {[
-                ["Anna", "Gomer draft the launch email"],
-                ["Gomer", "Sent to Lisa for review ✓", true],
+                ["Anna", "Zundy draft the launch email"],
+                ["Zundy", "Sent to Lisa for review ✓", true],
                 ["Lisa", "Approved. Push to Mailchimp."],
-                ["Gomer", "Scheduled for 9am tomorrow ✓", true],
+                ["Zundy", "Scheduled for 9am tomorrow ✓", true],
               ].map(([n, t, app], i) => (
                 <div key={i} className="flex gap-2 items-start text-sm">
                   <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-300 to-violet-500 shrink-0" />
@@ -280,7 +280,7 @@ export function SecurityCompliance() {
           </div>
           <h2 className="font-display text-5xl md:text-7xl mt-5">Enterprise-grade by default.</h2>
           <p className="mt-5 text-background/70 max-w-2xl mx-auto">
-            Gomer is built for teams who can't trade speed for security. Every plan ships with the controls auditors ask for.
+            Zundy is built for teams who can't trade speed for security. Every plan ships with the controls auditors ask for.
           </p>
         </div>
         <div className="mt-16 grid md:grid-cols-3 gap-4">
@@ -300,7 +300,7 @@ export function SecurityCompliance() {
 }
 
 const ASK_AI_QUERY =
-  "I'm evaluating Gomer, the AI employee for Slack and Microsoft Teams (Gomer.com). What does he do, what are his strengths and weaknesses, and who is he best for?";
+  "I'm evaluating Zundy, the AI employee for Slack and Microsoft Teams (Gomer.com). What does he do, what are his strengths and weaknesses, and who is he best for?";
 
 const ASK_AI_OPTIONS = [
   {
@@ -333,7 +333,7 @@ export function AskAI() {
               decoding="async"
               width={1938}
               height={518}
-              src={gomerWordmark}
+              src={zundyWordmark}
               className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
             />
             <div className="relative z-10 flex w-full flex-col items-center gap-16">
@@ -343,11 +343,11 @@ export function AskAI() {
                     <p className="body-small text-[#f1edff] font-medium">Don't take our word for it</p>
                   </div>
                   <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
-                    Ask AI about Gomer
+                    Ask AI about Zundy
                   </h2>
                 </div>
                 <p className="body-main max-w-[35.625rem] text-white opacity-80 font-medium">
-                  Pick your favorite AI and ask what it thinks about Gomer.
+                  Pick your favorite AI and ask what it thinks about Zundy.
                   <br className="hidden sm:block" />
                   <span className="sm:hidden"> </span>
                   No filter, no spin.

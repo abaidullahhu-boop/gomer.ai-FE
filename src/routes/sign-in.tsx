@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
 import { startSlackLogin } from "@/lib/auth";
-import gomerAvatar from "@/assets/images/gomer-marketplace-avatar.svg";
+import zundyAvatar from "@/assets/images/zundy-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
 const authButtonClass =
@@ -11,19 +11,19 @@ export default function SignIn() {
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
       <PageMeta
-        title="Sign in to Gomer"
-        description="Sign in to Gomer with Slack or join the Microsoft Teams waitlist."
+        title="Sign in to Zundy"
+        description="Sign in to Zundy with Slack or join the Microsoft Teams waitlist."
       />
 
       <div className="absolute left-5 top-5 z-10">
-        <GomerLogo />
+        <ZundyLogo />
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center px-4">
         <div className="flex w-full max-w-[360px] flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-4">
             <img
-              src={gomerAvatar}
+              src={zundyAvatar}
               alt=""
               className="size-14 rounded-lg"
               width={56}
@@ -55,7 +55,7 @@ export default function SignIn() {
 
       <div className="p-6">
         <p className="text-center text-xs text-muted-foreground">
-          By logging in, you agree to the Gomer{" "}
+          By logging in, you agree to the Zundy{" "}
           <a href="/privacy" target="_blank" rel="noreferrer" className="underline">
             Privacy Policy
           </a>{" "}
@@ -69,11 +69,11 @@ export default function SignIn() {
   );
 }
 
-function GomerLogo() {
+function ZundyLogo() {
   return (
     <img
-      src="/assets/brand/logos/gomer-logo-soft-black.svg"
-      alt="Gomer"
+      src="/assets/brand/logos/zundy-logo-soft-black.svg"
+      alt="Zundy"
       className="block h-7 w-auto"
       width={112}
       height={28}

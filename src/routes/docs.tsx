@@ -16,10 +16,10 @@ export default function DocsPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Documentation — Gomer"
-        description="Learn how to set up and get the most out of Gomer — your AI coworker in Slack and Microsoft Teams."
-        ogTitle="Documentation — Gomer"
-        ogDescription="Set up Gomer and connect your tools in minutes."
+        title="Documentation — Zundy"
+        description="Learn how to set up and get the most out of Zundy — your AI coworker in Slack and Microsoft Teams."
+        ogTitle="Documentation — Zundy"
+        ogDescription="Set up Zundy and connect your tools in minutes."
       />
       {/* SECTION 1 — HERO */}
       <section className="border-0 py-0! pt-0 pb-12 sm:pb-[5rem]">
@@ -32,7 +32,7 @@ export default function DocsPage() {
                 <div className="flex flex-col gap-8">
                   <h1 className="font-heading h1 text-primary">Documentation</h1>
                   <p className="max-w-[34.1875rem] body-medium text-primary font-medium">
-                    Learn how to set up and get the most out of Gomer.
+                    Learn how to set up and get the most out of Zundy.
                   </p>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function DocsPage() {
                       className="body-small transition-colors text-accent-1 font-medium"
                       aria-current="page"
                     >
-                      Getting Started with Gomer
+                      Getting Started with Zundy
                     </a>
                   </nav>
                 </div>
@@ -66,20 +66,20 @@ export default function DocsPage() {
 
               <article className="flex min-w-0 flex-col gap-12">
                 <header id="getting-started" className="flex flex-col gap-4">
-                  <h2 className="font-heading h4 text-primary">Getting Started with Gomer</h2>
+                  <h2 className="font-heading h4 text-primary">Getting Started with Zundy</h2>
                   <p className="body-main text-secondary font-medium">
-                    Add Gomer to your Slack or Microsoft Teams workspace and start automating tasks in minutes.
+                    Add Zundy to your Slack or Microsoft Teams workspace and start automating tasks in minutes.
                   </p>
                 </header>
 
                 <div className={proseClasses}>
                   <p className="body-main text-primary font-medium">
-                    Gomer is an AI coworker that lives in your Slack or Microsoft Teams workspace. It connects to 3,000+
+                    Zundy is an AI coworker that lives in your Slack or Microsoft Teams workspace. It connects to 3,000+
                     business tools and does real work — pulling reports, managing campaigns, writing code, and automating
                     workflows.
                   </p>
 
-                  <h2 className="font-heading h5 text-primary">Add Gomer to Slack or Microsoft Teams</h2>
+                  <h2 className="font-heading h5 text-primary">Add Zundy to Slack or Microsoft Teams</h2>
                   <ol className={listClasses}>
                     <li>
                       Go to{" "}
@@ -94,18 +94,18 @@ export default function DocsPage() {
                       and create your account.
                     </li>
                     <li>
-                      Click <strong>We use Slack</strong> or <strong>We use Teams</strong> and authorize Gomer for your
+                      Click <strong>We use Slack</strong> or <strong>We use Teams</strong> and authorize Zundy for your
                       workspace.
                     </li>
                     <li>
-                      Gomer will appear as a member of your workspace — you can message it directly or invite it to
+                      Zundy will appear as a member of your workspace — you can message it directly or invite it to
                       channels.
                     </li>
                   </ol>
 
                   <h2 className="font-heading h5 text-primary">Connect your tools</h2>
                   <p className="body-main text-primary font-medium">
-                    Gomer works best when it can access the tools your team uses. Head to the Gomer dashboard and connect
+                    Zundy works best when it can access the tools your team uses. Head to the Zundy dashboard and connect
                     integrations like:
                   </p>
                   <ul className={bulletListClasses}>
@@ -130,7 +130,7 @@ export default function DocsPage() {
                   </p>
 
                   <h2 className="font-heading h5 text-primary">Start working</h2>
-                  <p className="body-main text-primary font-medium">Message Gomer the way you would message a coworker:</p>
+                  <p className="body-main text-primary font-medium">Message Zundy the way you would message a coworker:</p>
                   <div className="flex flex-col gap-1">
                     {[
                       '"Pull last week\'s revenue from Stripe and compare it to the week before."',
@@ -143,21 +143,21 @@ export default function DocsPage() {
                     ))}
                   </div>
                   <p className="body-main text-primary font-medium">
-                    Gomer figures out which tools to use, pulls the data, and delivers the result right in your
+                    Zundy figures out which tools to use, pulls the data, and delivers the result right in your
                     conversation.
                   </p>
 
                   <h2 className="font-heading h5 text-primary">What&apos;s next</h2>
                   <ul className={bulletListClasses}>
                     <li>
-                      Set up <strong>scheduled tasks</strong> so Gomer runs recurring workflows automatically.
+                      Set up <strong>scheduled tasks</strong> so Zundy runs recurring workflows automatically.
                     </li>
                     <li>
-                      Explore <strong>proactive automations</strong> — Gomer observes your team&apos;s patterns and
+                      Explore <strong>proactive automations</strong> — Zundy observes your team&apos;s patterns and
                       suggests helpful routines.
                     </li>
                     <li>
-                      Invite your team — everyone in the workspace can use Gomer, no technical expertise required.
+                      Invite your team — everyone in the workspace can use Zundy, no technical expertise required.
                     </li>
                   </ul>
                 </div>

@@ -167,7 +167,7 @@ export default function DashboardAutomations() {
   return (
     <>
       <PageMeta
-        title="Automations — Gomer"
+        title="Automations — Zundy"
         description="Rules, reports, memory and verified ROAS."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
@@ -181,14 +181,14 @@ export default function DashboardAutomations() {
               <button
                 type="button"
                 onClick={() => void load()}
-                className="gomer-focus-ring flex min-h-9 cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
+                className="zundy-focus-ring flex min-h-9 cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
               >
                 <RefreshCw className={`size-3.5 ${loading ? "animate-spin" : ""}`} />
                 Refresh
               </button>
             </div>
             <p className="mb-6 max-w-[65ch] text-sm text-muted-foreground">
-              What Gomer is running unattended. Set these up by asking Gomer in Slack — this page
+              What Zundy is running unattended. Set these up by asking Zundy in Slack — this page
               reports on them.
             </p>
 
@@ -199,7 +199,7 @@ export default function DashboardAutomations() {
                   type="button"
                   onClick={() => setTab(t.id)}
                   className={[
-                    "gomer-focus-ring inline-flex min-h-9 flex-1 cursor-pointer items-center justify-center rounded-[5px] px-3 py-1.5 text-sm font-medium transition-colors",
+                    "zundy-focus-ring inline-flex min-h-9 flex-1 cursor-pointer items-center justify-center rounded-[5px] px-3 py-1.5 text-sm font-medium transition-colors",
                     tab === t.id
                       ? "bg-secondary text-secondary-foreground"
                       : "bg-transparent text-muted-foreground hover:bg-accent",
@@ -241,7 +241,7 @@ function RulesTab({ rules, actions }: { rules: AdRule[]; actions: AdRuleAction[]
       {rules.length === 0 ? (
         <Empty
           title="No rules yet"
-          hint='Ask Gomer in Slack, e.g. "every night at 2am pause any campaign whose CPA over the last 3 days is above 40".'
+          hint='Ask Zundy in Slack, e.g. "every night at 2am pause any campaign whose CPA over the last 3 days is above 40".'
         />
       ) : (
         <Table head={["Rule", "Condition", "Action", "Schedule", "Last run", "Status"]}>
@@ -339,7 +339,7 @@ function ReportsTab({ rows }: { rows: ScheduledExportRow[] }) {
     return (
       <Empty
         title="No scheduled reports"
-        hint={`Ask Gomer, e.g. "every Monday at 8am put last week's campaign performance in that sheet".`}
+        hint={`Ask Zundy, e.g. "every Monday at 8am put last week's campaign performance in that sheet".`}
       />
     );
   }
@@ -359,7 +359,7 @@ function ReportsTab({ rows }: { rows: ScheduledExportRow[] }) {
                 href={row.spreadsheetUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="gomer-focus-ring text-highlight underline underline-offset-2"
+                className="zundy-focus-ring text-highlight underline underline-offset-2"
               >
                 {row.spreadsheetTitle ?? "Open sheet"}
               </a>
@@ -403,7 +403,7 @@ function MemoryTab({ facts }: { facts: WorkspaceMemoryFact[] }) {
     return (
       <Empty
         title="Nothing remembered yet"
-        hint='Tell Gomer something durable, e.g. "our target ROAS is 3" or "remember our alerts channel is #ads-alerts".'
+        hint='Tell Zundy something durable, e.g. "our target ROAS is 3" or "remember our alerts channel is #ads-alerts".'
       />
     );
   }
@@ -423,7 +423,7 @@ function MemoryTab({ facts }: { facts: WorkspaceMemoryFact[] }) {
         ))}
       </Table>
       <p className="text-sm text-muted-foreground">
-        Gomer uses these in every conversation. To change or drop one, just tell it — e.g. “forget
+        Zundy uses these in every conversation. To change or drop one, just tell it — e.g. “forget
         our target ROAS”.
       </p>
     </>
@@ -435,7 +435,7 @@ function RoasTab({ snapshots }: { snapshots: RoasSnapshot[] }) {
     return (
       <Empty
         title="No verified checks yet"
-        hint={`Ask Gomer "what's our real ROAS for the last 7 days?" with Stripe connected, and the result is recorded here.`}
+        hint={`Ask Zundy "what's our real ROAS for the last 7 days?" with Stripe connected, and the result is recorded here.`}
       />
     );
   }

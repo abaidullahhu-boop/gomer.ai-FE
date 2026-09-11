@@ -11,10 +11,10 @@ export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Research — Gomer"
-        description="Engineering and research deep-dives from the team building Gomer."
-        ogTitle="Research — Gomer"
-        ogDescription="Engineering and research deep-dives from the team building Gomer."
+        title="Research — Zundy"
+        description="Engineering and research deep-dives from the team building Zundy."
+        ogTitle="Research — Zundy"
+        ogDescription="Engineering and research deep-dives from the team building Zundy."
       />
       <div className="pt-6">
         <Nav heroTone="light" />
@@ -24,7 +24,7 @@ export default function ResearchPage() {
         <header className="text-left px-2 sm:px-24 mx-auto">
           <h1 className="font-display text-6xl md:text-7xl tracking-tight leading-[1]">Research</h1>
           <p className="mt-6 text-primary font-medium text-lg">
-            Engineering and research deep-dives from the team building Gomer.
+            Engineering and research deep-dives from the team building Zundy.
           </p>
         </header>
 

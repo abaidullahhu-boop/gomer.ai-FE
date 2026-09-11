@@ -122,7 +122,7 @@ export function ProfileMenu() {
               type="button"
               role="menuitem"
               onClick={cycleTheme}
-              className="gomer-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-sidebar-accent"
+              className="zundy-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-sidebar-accent"
             >
               <Monitor className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} aria-hidden />
               Theme: {themeLabels[theme]}
@@ -132,7 +132,7 @@ export function ProfileMenu() {
               type="button"
               role="menuitem"
               onClick={() => void signOut()}
-              className="gomer-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-[#F4F4F5]"
+              className="zundy-focus-ring flex w-full cursor-pointer items-center gap-2.5 px-3.5 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:bg-[#F4F4F5]"
             >
               <LogOut className="size-[18px] shrink-0 opacity-50" strokeWidth={1.5} aria-hidden />
               Sign out
@@ -152,7 +152,7 @@ export function ProfileMenu() {
         aria-haspopup="menu"
         onClick={() => setOpen((prev) => !prev)}
         className={[
-          "gomer-focus-ring flex w-full cursor-pointer items-center gap-3 rounded-[7px] px-3 py-2 text-foreground transition-all duration-150",
+          "zundy-focus-ring flex w-full cursor-pointer items-center gap-3 rounded-[7px] px-3 py-2 text-foreground transition-all duration-150",
           open ? "bg-sidebar-accent" : "hover:bg-sidebar-accent",
         ].join(" ")}
       >

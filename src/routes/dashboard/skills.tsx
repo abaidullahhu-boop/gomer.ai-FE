@@ -126,8 +126,8 @@ export default function DashboardSkills() {
   return (
     <>
       <PageMeta
-        title="Skills — Gomer"
-        description="Browse and install pre-built skills that extend Gomer's functionality."
+        title="Skills — Zundy"
+        description="Browse and install pre-built skills that extend Zundy's functionality."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
@@ -165,8 +165,8 @@ export default function DashboardSkills() {
               </div>
 
               <p className="text-base leading-6 text-muted-foreground">
-                Skills are pre-built capabilities that extend Gomer&apos;s functionality. Install them
-                to give Gomer access to specialized knowledge and workflows.
+                Skills are pre-built capabilities that extend Zundy&apos;s functionality. Install them
+                to give Zundy access to specialized knowledge and workflows.
               </p>
 
               <div className="flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center">

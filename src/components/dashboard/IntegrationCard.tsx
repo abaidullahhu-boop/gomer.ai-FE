@@ -27,7 +27,7 @@ export function IntegrationCard({
       type="button"
       disabled={busy}
       onClick={onClick}
-      className="gomer-focus-ring flex h-[60px] w-full cursor-pointer items-center gap-3 rounded-sm border border-border bg-card p-3 text-left transition-[background-color,border-color,transform] duration-150 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-70"
+      className="zundy-focus-ring flex h-[60px] w-full cursor-pointer items-center gap-3 rounded-sm border border-border bg-card p-3 text-left transition-[background-color,border-color,transform] duration-150 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-70"
     >
       <div
         className={`flex size-9 shrink-0 items-center justify-center rounded-lg bg-card ${hasImageIcon ? "p-1" : ""}`}

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
-import footerWordmark from "../../assets/images/gomer.svg";
+import footerWordmark from "../../assets/images/zundy.svg";
 
 type Item = { label: string; to: string; external?: boolean; newTab?: boolean };
 
@@ -36,8 +36,8 @@ const colsRow2: { h: string; items: Item[] }[] = [
   {
     h: "About",
     items: [
-      { label: "Earn money with Gomer", to: "https://partners.dub.co/getgomer-com", external: true },
-      { label: "Become a Gomer influencer", to: "/creators" },
+      { label: "Earn money with Zundy", to: "https://partners.dub.co/getgomer-com", external: true },
+      { label: "Become a Zundy influencer", to: "/creators" },
       { label: "About", to: "/landing" },
       { label: "Brand", to: "/brand" },
       { label: "Careers", to: "https://jobs.ashbyhq.com/gomer", external: true },
@@ -142,7 +142,7 @@ function LinkCol({ h, items }: { h: string; items: Item[] }) {
 function BrandBlock() {
   return (
     <div className="flex flex-col gap-16">
-      <Link to="/" aria-label="Gomer home" className="inline-flex w-fit">
+      <Link to="/" aria-label="Zundy home" className="inline-flex w-fit">
         <span aria-hidden="true" className="block">
           <img src={logo} alt="" width={152} height={38} className="block" loading="lazy" decoding="async" />
         </span>

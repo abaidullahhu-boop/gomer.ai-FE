@@ -60,7 +60,7 @@ export default function DashboardIntegrationConfigure() {
     void load();
   }, [load]);
 
-  // The actions this app exposes — what Gomer can actually do with it.
+  // The actions this app exposes — what Zundy can actually do with it.
   useEffect(() => {
     if (!appSlug) return;
     let cancelled = false;
@@ -181,7 +181,7 @@ export default function DashboardIntegrationConfigure() {
                 type="button"
                 onClick={() => setAddOpen(true)}
                 disabled={adding || !ready}
-                className="gomer-focus-ring inline-flex min-h-9 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] bg-secondary px-3 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-70"
+                className="zundy-focus-ring inline-flex min-h-9 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] bg-secondary px-3 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-default disabled:opacity-70"
               >
                 {adding ? (
                   <Loader2 className="size-4 shrink-0 animate-spin" aria-hidden />
@@ -281,7 +281,7 @@ export default function DashboardIntegrationConfigure() {
                                 onClick={() =>
                                   navigate(integrationAccountPath(appSlug, account.id))
                                 }
-                                className="gomer-focus-ring inline-flex cursor-pointer items-center gap-1 rounded-[7px] px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                                className="zundy-focus-ring inline-flex cursor-pointer items-center gap-1 rounded-[7px] px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                               >
                                 <Pencil className="size-3.5" strokeWidth={1.5} aria-hidden />
                                 Edit
@@ -294,7 +294,7 @@ export default function DashboardIntegrationConfigure() {
                   </table>
                 </div>
 
-                {/* What Gomer can do with this app — the live MCP tool list. */}
+                {/* What Zundy can do with this app — the live MCP tool list. */}
                 <div className="mt-2 flex flex-col gap-3">
                   <div className="flex items-center gap-2">
                     <Zap
@@ -303,7 +303,7 @@ export default function DashboardIntegrationConfigure() {
                       aria-hidden
                     />
                     <h2 className="text-sm font-semibold text-foreground">
-                      What Gomer can do with {appName}
+                      What Zundy can do with {appName}
                     </h2>
                     {!toolsLoading && !toolsError && (
                       <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
@@ -322,7 +322,7 @@ export default function DashboardIntegrationConfigure() {
                     </p>
                   ) : tools.length === 0 ? (
                     <p className="rounded-xl border border-border bg-muted px-4 py-6 text-center text-sm text-muted-foreground">
-                      This app doesn’t expose any actions Gomer can use yet.
+                      This app doesn’t expose any actions Zundy can use yet.
                     </p>
                   ) : (
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">

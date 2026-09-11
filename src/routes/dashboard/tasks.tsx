@@ -44,7 +44,7 @@ function relativeTime(iso: string | null): string {
 
 function tabButtonClass(active: boolean) {
   return [
-    "gomer-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
+    "zundy-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 px-4 py-2 text-sm font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98]",
     active
       ? "bg-secondary text-secondary-foreground hover:bg-secondary"
       : "bg-transparent text-muted-foreground hover:bg-accent",
@@ -197,8 +197,8 @@ export default function DashboardTasks() {
   return (
     <>
       <PageMeta
-        title="Scheduled Tasks — Gomer"
-        description="Manage scheduled tasks for your Gomer workspace."
+        title="Scheduled Tasks — Zundy"
+        description="Manage scheduled tasks for your Zundy workspace."
       />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
@@ -220,7 +220,7 @@ export default function DashboardTasks() {
 
             <div className="flex flex-col gap-3">
               <p className="text-base leading-6 text-muted-foreground">
-                Create a task above, or by talking to Gomer in chat.
+                Create a task above, or by talking to Zundy in chat.
               </p>
 
               <div className="flex h-10 w-full items-center gap-2 rounded-[7px] border border-border bg-muted px-3 text-sm transition-colors outline-none hover:border-border/80 focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-2">
@@ -285,7 +285,7 @@ export default function DashboardTasks() {
                         <button
                           type="button"
                           onClick={() => toggleExpanded(task.id)}
-                          className="gomer-focus-ring flex min-w-0 flex-1 items-center gap-3 text-left"
+                          className="zundy-focus-ring flex min-w-0 flex-1 items-center gap-3 text-left"
                           aria-expanded={isOpen}
                         >
                           <ChevronDown
@@ -324,7 +324,7 @@ export default function DashboardTasks() {
                             type="button"
                             onClick={() => handleTogglePause(task)}
                             disabled={busy}
-                            className="gomer-focus-ring rounded-full border border-border p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground disabled:opacity-50"
+                            className="zundy-focus-ring rounded-full border border-border p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground disabled:opacity-50"
                             aria-label={task.isActive ? "Pause task" : "Resume task"}
                             title={task.isActive ? "Pause task" : "Resume task"}
                           >

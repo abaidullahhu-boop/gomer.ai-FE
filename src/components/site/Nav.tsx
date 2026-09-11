@@ -343,8 +343,8 @@ export function Nav({ heroTone = "dark" }: NavProps) {
               <div className="relative z-10 h-full min-h-0 w-full">
                 <div className="relative z-10 grid h-full w-full grid-cols-[1fr_auto_1fr] items-center">
                 <div className="min-w-0">
-                <Link to="/" aria-label="Gomer home" className="block">
-                  <img src={logo} alt="Gomer" width={112} height={28} />
+                <Link to="/" aria-label="Zundy home" className="block">
+                  <img src={logo} alt="Zundy" width={112} height={28} />
                 </Link>
                 </div>
 
@@ -408,7 +408,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
 
                 <div className="relative z-10 flex items-center justify-between">
                 <Link to="/" className="relative block" onClick={closeMobileMenu}>
-                  <img src={logo} alt="Gomer" width={112} height={28} />
+                  <img src={logo} alt="Zundy" width={112} height={28} />
                 </Link>
                 <MenuToggleButton
                   open={mobileOpen}

@@ -109,7 +109,7 @@ function MemberRow({
           disabled={saving || isSelf}
           title={isSelf ? "You cannot deactivate your own account" : undefined}
           onClick={() => onToggle(!member.isActive)}
-          className="gomer-focus-ring min-h-8 cursor-pointer rounded-md border border-border px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="zundy-focus-ring min-h-8 cursor-pointer rounded-md border border-border px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
         >
           {member.isActive ? "Deactivate" : "Reactivate"}
         </button>
@@ -174,7 +174,7 @@ export default function DashboardAdmin() {
 
   return (
     <>
-      <PageMeta title="Admin — Gomer" description="Workspace administration." />
+      <PageMeta title="Admin — Zundy" description="Workspace administration." />
       <div className="flex h-full min-h-0 flex-1 flex-col font-sans text-foreground">
         <div
           className="flex-1 overflow-y-auto px-4 py-8 sm:px-12"
@@ -186,7 +186,7 @@ export default function DashboardAdmin() {
               <button
                 type="button"
                 onClick={() => void load()}
-                className="gomer-focus-ring flex min-h-9 cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
+                className="zundy-focus-ring flex min-h-9 cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-accent"
               >
                 <RefreshCw className={`size-3.5 ${loading ? "animate-spin" : ""}`} />
                 Refresh
@@ -199,7 +199,7 @@ export default function DashboardAdmin() {
                   key={t.id}
                   type="button"
                   onClick={() => setSearchParams({ tab: t.id })}
-                  className={`gomer-focus-ring min-h-9 flex-1 cursor-pointer rounded-[5px] px-3 text-sm font-medium transition-colors ${
+                  className={`zundy-focus-ring min-h-9 flex-1 cursor-pointer rounded-[5px] px-3 text-sm font-medium transition-colors ${
                     tab === t.id
                       ? "bg-secondary text-foreground"
                       : "text-muted-foreground hover:text-foreground"

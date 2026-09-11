@@ -5,7 +5,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
-import gomerWordmark from "@/assets/images/gomer.svg";
+import zundyWordmark from "@/assets/images/zundy.svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 
 type Case = {
@@ -92,7 +92,7 @@ const cases: Case[] = [
     tags: ["Private network for founders & CEOs", "Founders & Power users"],
     title: "Editors, not creators",
     excerpt:
-      "How Hampton's 25-person team started operating like a much larger one, in 44 days with Gomer.",
+      "How Hampton's 25-person team started operating like a much larger one, in 44 days with Zundy.",
     pills: ["26 scheduled tasks", "44 days to full setup"],
     logoLabel: "H",
   },
@@ -125,10 +125,10 @@ export default function CaseStudiesPage() {
   return (
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
-        title="Case Studies — Gomer"
-        description="Real stories from teams running on Gomer. The numbers are the customers'. The tools are theirs. The workflows still run today."
-        ogTitle="Case Studies — Gomer"
-        ogDescription="Real stories from teams running on Gomer."
+        title="Case Studies — Zundy"
+        description="Real stories from teams running on Zundy. The numbers are the customers'. The tools are theirs. The workflows still run today."
+        ogTitle="Case Studies — Zundy"
+        ogDescription="Real stories from teams running on Zundy."
       />
       {/* Hero + featured case */}
       <section className="relative border-0">
@@ -223,7 +223,7 @@ export default function CaseStudiesPage() {
                 decoding="async"
                 width={1938}
                 height={518}
-                src={gomerWordmark}
+                src={zundyWordmark}
                 className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-auto w-full min-w-[50rem] max-w-none translate-y-1/2 opacity-35 select-none"
               />
               <div className="relative flex w-full flex-col items-center gap-10 sm:gap-16">
