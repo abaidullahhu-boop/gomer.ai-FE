@@ -626,14 +626,6 @@ export default function BrandPage() {
                   Use the logo with clear space and sufficient contrast. Available in dark and light variants, gradient or flat.
                 </p>
               </div>
-              <div className="w-full shrink-0 lg:w-auto">
-                <a
-                  className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/gaspo-logo-pack.zip"
-                >
-                  Download all logos
-                </a>
-              </div>
             </div>
 
             <div className="flex flex-col gap-12 lg:gap-16">
@@ -693,14 +685,6 @@ export default function BrandPage() {
                   profile, a favicon, an app icon. Avatar and wordmark are never paired — pick one or the
                   other based on context.
                 </p>
-              </div>
-              <div className="w-full shrink-0 lg:w-auto">
-                <a
-                  className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full bg-primitive-main-dark px-10 text-base font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-all hover:opacity-90 sm:w-auto"
-                  href="/assets/downloads/brand/gaspo-avatar-pack.zip"
-                >
-                  Download avatar (PNG)
-                </a>
               </div>
             </div>
 
