@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-export function GomerLogo() {
+export function ZundyLogo() {
   return (
     <Link to="/dashboard" className="block">
       <svg
         role="img"
-        aria-label="Gomer"
+        aria-label="Zundy"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 240 60"
         height={28}
@@ -21,7 +21,7 @@ export function GomerLogo() {
           letterSpacing="2px"
           fill="currentColor"
         >
-          GOMER
+          ZUNDY
         </text>
       </svg>
     </Link>

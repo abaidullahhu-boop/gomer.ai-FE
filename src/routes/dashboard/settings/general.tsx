@@ -58,7 +58,7 @@ export default function SettingsGeneral() {
           Default model
         </h2>
         <p className="mt-1 mb-4 max-w-[640px] text-sm leading-normal text-muted-foreground">
-          Used for conversations with Gomer and as a default for scheduled tasks.
+          Used for conversations with Zundy and as a default for scheduled tasks.
           {isAdmin
             ? " Changing it applies to everyone in this workspace."
             : " Only admins can change it."}

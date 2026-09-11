@@ -1,6 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
-import gomerIcon from "@/assets/images/gomer-marketplace-avatar.svg";
+import zundyIcon from "@/assets/images/zundy-marketplace-avatar.svg";
 
 const HERO_ICON_CLASS =
   "h-auto max-h-20 w-auto max-w-[5rem] object-contain sm:max-h-32 sm:max-w-[7rem]";
@@ -263,7 +263,7 @@ export function IntegrationsLogoLoop({ variant = "hero", className }: Integratio
           </div>
         </div>
         <p className="sr-only">
-          Gomer connects to popular tools including Cursor, Notion, Linear, HubSpot, GitHub, Google
+          Zundy connects to popular tools including Cursor, Notion, Linear, HubSpot, GitHub, Google
           Ads, Google Drive, Stripe, PostHog, and Meta.
         </p>
       </div>
@@ -281,11 +281,11 @@ export function IntegrationsLogoLoop({ variant = "hero", className }: Integratio
             : "relative -mt-1 size-28 sm:size-[120px]"
         }
       >
-        <span className="integrations-gomer-avatar-glow absolute inset-[-38px]" aria-hidden="true" />
+        <span className="integrations-zundy-avatar-glow absolute inset-[-38px]" aria-hidden="true" />
         <img
-          alt="Gomer"
+          alt="Zundy"
           className={`relative z-10 size-full rounded-[25px] ${variant === "hero" ? "rounded-[34px]" : ""}`}
-          src={gomerIcon}
+          src={zundyIcon}
         />
       </div>
     </div>

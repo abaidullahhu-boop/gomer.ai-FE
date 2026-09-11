@@ -32,17 +32,17 @@ function buildTasks(overview: DashboardOverview): OnboardingTask[] {
 
   return [
     {
-      title: "Send Gomer your first task",
+      title: "Send Zundy your first task",
       description:
-        "DM Gomer or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
+        "DM Zundy or @mention him in any channel — ask a question, kick off a workflow, or just say hi.",
       image: gettingSayHi,
-      buttonLabel: "Message Gomer",
+      buttonLabel: "Message Zundy",
       completed: overview.hasRunATask === true,
     },
     {
       title: `Connect ${INTEGRATION_TARGET} integrations`,
       description:
-        "Give Gomer enough access to work across your stack. Connect five integrations to unlock the full setup.",
+        "Give Zundy enough access to work across your stack. Connect five integrations to unlock the full setup.",
       image: gettingConnectTools,
       buttonLabel: "Browse Integrations",
       href: "/dashboard/integrations",
@@ -51,7 +51,7 @@ function buildTasks(overview: DashboardOverview): OnboardingTask[] {
       completed: integrations !== null && integrations >= INTEGRATION_TARGET,
     },
     {
-      title: "Teach Gomer new skills",
+      title: "Teach Zundy new skills",
       description:
         "Skills are prebuilt workflows — from drafting emails to pulling reports. Browse the directory and install what fits.",
       image: gettingInstallSkills,
@@ -128,10 +128,10 @@ export function OnboardingSection({ overview }: { overview: DashboardOverview })
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <h2 className="text-xl font-semibold tracking-tight text-foreground">
-              Get Gomer up to speed
+              Get Zundy up to speed
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Complete the core setup steps so Gomer is fully ready for your workspace.
+              Complete the core setup steps so Zundy is fully ready for your workspace.
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1">
@@ -139,7 +139,7 @@ export function OnboardingSection({ overview }: { overview: DashboardOverview })
               type="button"
               onClick={() => void overview.refresh()}
               disabled={overview.loading}
-              className="cursor-pointer gomer-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none"
+              className="cursor-pointer zundy-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none"
               aria-label="Refresh progress"
             >
               <RefreshCw
@@ -150,7 +150,7 @@ export function OnboardingSection({ overview }: { overview: DashboardOverview })
             <div ref={menuRef} className="relative">
               <button
                 type="button"
-                className="cursor-pointer gomer-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="cursor-pointer zundy-focus-ring rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="More options"
                 aria-expanded={menuOpen}
                 aria-haspopup="menu"

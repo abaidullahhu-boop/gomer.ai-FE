@@ -12,7 +12,7 @@ export type DashboardOverview = {
   /** Connected accounts visible to this member — team-wide plus their own private. */
   integrations: number | null;
   installedSkills: number | null;
-  /** Whether Gomer has ever run anything here, which is how "first task" is proven. */
+  /** Whether Zundy has ever run anything here, which is how "first task" is proven. */
   hasRunATask: boolean | null;
   loading: boolean;
   refresh: () => Promise<void>;
@@ -25,7 +25,7 @@ function count<T>(result: PromiseSettledResult<T[]>): number | null {
 
 /**
  * The figures behind the home page: credit-free counts of what the workspace has
- * set up, plus whether Gomer has run at all.
+ * set up, plus whether Zundy has run at all.
  *
  * Settled rather than awaited together, so one failing endpoint costs its own
  * tile a number instead of blanking every tile on the page. A count that could
