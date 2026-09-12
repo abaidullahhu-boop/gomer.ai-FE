@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Bug, RefreshCw, Search } from "lucide-react";
+import { ArrowLeft, Bug, ChevronRight, RefreshCw, Search } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { useSession } from "@/lib/session";
 import {
@@ -17,6 +17,7 @@ import {
   type PlatformOverview,
   type PlatformWorkspace,
   type PlatformWorkspaceDetail,
+  type WorkspaceSort,
 } from "@/lib/api";
 
 type Tab = "overview" | "customers" | "bugs";
@@ -26,6 +27,16 @@ const TABS: Array<{ id: Tab; label: string }> = [
   { id: "customers", label: "Customers" },
   { id: "bugs", label: "Bug Reports" },
 ];
+
+const SORTS: Array<{ id: WorkspaceSort; label: string }> = [
+  { id: "created", label: "Newest" },
+  { id: "members", label: "Most people" },
+  { id: "activity", label: "Last active" },
+  { id: "name", label: "Name" },
+];
+
+/** How many biggest-team rows the overview lists. */
+const TOP_TEAMS = 5;
 
 const BUG_STATUSES: Array<{ id: BugStatus; label: string }> = [
   { id: "open", label: "Open" },
@@ -145,6 +156,101 @@ function GrowthChart({ series }: { series: PlatformGrowth["series"] }) {
         </span>
       </div>
     </div>
+  );
+}
+
+/**
+ * Workspaces bucketed by headcount, as one stacked bar.
+ *
+ * The bands answer the question the averages cannot: whether the platform is
+ * carrying a few large teams or a long tail of one-person Slacks. Counts are
+ * printed next to each band because a segment two pixels wide is unreadable on
+ * its own, and a band at zero is dropped rather than rendered as a sliver.
+ */
+function TeamSizeBar({
+  distribution,
+  workspaces,
+}: {
+  distribution: PlatformOverview["teams"]["distribution"];
+  workspaces: number;
+}) {
+  const bands = [
+    { key: "solo", label: "Solo (0–1)", count: distribution.solo, fill: "bg-slate-400" },
+    { key: "small", label: "Small (2–5)", count: distribution.small, fill: "bg-sky-400" },
+    { key: "medium", label: "Team (6–20)", count: distribution.medium, fill: "bg-violet-400" },
+    { key: "large", label: "Large (21+)", count: distribution.large, fill: "bg-emerald-500" },
+  ].filter((band) => band.count > 0);
+
+  if (!workspaces || !bands.length) {
+    return <p className="text-sm text-muted-foreground">No workspaces yet.</p>;
+  }
+
+  return (
+    <div>
+      <div className="flex h-3 w-full gap-0.5 overflow-hidden rounded-full">
+        {bands.map((band) => (
+          <div
+            key={band.key}
+            className={band.fill}
+            style={{ width: `${(band.count / workspaces) * 100}%` }}
+            title={`${band.label}: ${band.count} workspace${band.count === 1 ? "" : "s"}`}
+          />
+        ))}
+      </div>
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+        {bands.map((band) => (
+          <span key={band.key} className="flex items-center gap-1.5">
+            <span className={`size-2 rounded-sm ${band.fill}`} />
+            {band.label}
+            <span className="font-medium tabular-nums text-foreground">{band.count}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** The workspaces carrying the most people, newest question first. */
+function BiggestTeams({
+  workspaces,
+  onOpen,
+}: {
+  workspaces: PlatformWorkspace[];
+  onOpen: (id: string) => void;
+}) {
+  if (!workspaces.length) {
+    return <p className="text-sm text-muted-foreground">No workspaces yet.</p>;
+  }
+  const largest = Math.max(...workspaces.map((workspace) => workspace.members.total), 1);
+  return (
+    <ul className="flex flex-col">
+      {workspaces.map((workspace) => (
+        <li key={workspace.id}>
+          <button
+            type="button"
+            onClick={() => onOpen(workspace.id)}
+            className="gaspo-focus-ring flex w-full cursor-pointer items-center gap-3 rounded-md px-1 py-2 text-left transition-colors hover:bg-accent/50"
+          >
+            <div className="flex min-w-0 flex-1 flex-col gap-1">
+              <span className="truncate text-sm font-medium text-foreground">{workspace.name}</span>
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                <div
+                  className="h-full rounded-full bg-violet-400"
+                  style={{ width: `${(workspace.members.total / largest) * 100}%` }}
+                />
+              </div>
+            </div>
+            <span className="shrink-0 text-right text-xs tabular-nums text-muted-foreground">
+              <span className="block text-sm font-medium text-foreground">
+                {workspace.members.total}
+              </span>
+              {workspace.members.total === 1 ? "person" : "people"}
+            </span>
+            <ChevronRight className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -522,8 +628,11 @@ export default function SuperAdmin() {
   const [overview, setOverview] = useState<PlatformOverview | null>(null);
   const [growth, setGrowth] = useState<PlatformGrowth | null>(null);
   const [workspaces, setWorkspaces] = useState<PlatformWorkspace[]>([]);
+  const [workspaceTotal, setWorkspaceTotal] = useState(0);
+  const [topTeams, setTopTeams] = useState<PlatformWorkspace[]>([]);
   const [bugs, setBugs] = useState<PlatformBugReport[]>([]);
   const [bugFilter, setBugFilter] = useState<BugStatus | "all">("open");
+  const [sort, setSort] = useState<WorkspaceSort>("created");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -532,22 +641,28 @@ export default function SuperAdmin() {
     setLoading(true);
     setError(null);
     try {
-      const [o, g, w, b] = await Promise.all([
+      const [o, g, w, t, b] = await Promise.all([
         fetchPlatformOverview(30),
         fetchPlatformGrowth(30),
-        fetchPlatformWorkspaces(search),
+        fetchPlatformWorkspaces({ search, sort }),
+        // Asked for separately rather than sorted out of the page above: that
+        // page is whatever the customer table is currently showing, and the
+        // biggest teams on the platform are not necessarily on it.
+        fetchPlatformWorkspaces({ sort: "members", limit: TOP_TEAMS }),
         fetchPlatformBugs(bugFilter === "all" ? undefined : bugFilter),
       ]);
       setOverview(o);
       setGrowth(g);
       setWorkspaces(w.rows);
+      setWorkspaceTotal(w.total);
+      setTopTeams(t.rows);
       setBugs(b);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Failed to load the panel");
     } finally {
       setLoading(false);
     }
-  }, [search, bugFilter]);
+  }, [search, sort, bugFilter]);
 
   useEffect(() => {
     if (user?.isSuperAdmin) void load();
@@ -625,12 +740,12 @@ export default function SuperAdmin() {
                   <StatCard
                     label="Workspaces"
                     value={overview.workspaces.total.toLocaleString()}
-                    hint={`${overview.workspaces.newInWindow} new in ${overview.days}d`}
+                    hint={`${overview.workspaces.newInWindow} new · ${overview.workspaces.activeInWindow} active in ${overview.days}d`}
                   />
                   <StatCard
-                    label="Users"
-                    value={overview.users.total.toLocaleString()}
-                    hint={`${overview.users.activeInWindow} active in ${overview.days}d`}
+                    label="People"
+                    value={overview.teams.people.toLocaleString()}
+                    hint={`${overview.teams.medianTeamSize.toLocaleString(undefined, { maximumFractionDigits: 1 })} per workspace, typically`}
                   />
                   <StatCard
                     label="Revenue"
@@ -643,6 +758,76 @@ export default function SuperAdmin() {
                     tone={overview.margin.marginUsd >= 0 ? "positive" : "negative"}
                     hint={`${usd(overview.margin.chargedUsd)} charged · ${usd(overview.margin.costUsd)} cost`}
                   />
+                </div>
+
+                {/* items-start so the shorter card keeps its own height rather
+                    than being stretched to match the taller one. */}
+                <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+                  <SectionCard
+                    title="Workspaces and people"
+                    action={
+                      <span className="text-xs text-muted-foreground">
+                        {overview.workspaces.total.toLocaleString()} workspace
+                        {overview.workspaces.total === 1 ? "" : "s"} ·{" "}
+                        {overview.teams.people.toLocaleString()}{" "}
+                        {overview.teams.people === 1 ? "person" : "people"}
+                      </span>
+                    }
+                  >
+                    <div className="flex flex-col gap-5">
+                      <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-4">
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Typical team</dt>
+                          <dd className="font-medium tabular-nums text-foreground">
+                            {overview.teams.medianTeamSize.toLocaleString(undefined, {
+                              maximumFractionDigits: 1,
+                            })}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Average</dt>
+                          <dd className="font-medium tabular-nums text-foreground">
+                            {overview.teams.meanTeamSize.toLocaleString(undefined, {
+                              maximumFractionDigits: 1,
+                            })}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Largest</dt>
+                          <dd className="font-medium tabular-nums text-foreground">
+                            {overview.teams.largestTeam.toLocaleString()}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs text-muted-foreground">Admins</dt>
+                          <dd className="font-medium tabular-nums text-foreground">
+                            {overview.users.admins.toLocaleString()}
+                          </dd>
+                        </div>
+                      </dl>
+
+                      <TeamSizeBar
+                        distribution={overview.teams.distribution}
+                        workspaces={overview.workspaces.total}
+                      />
+
+                      {overview.teams.people !== overview.teams.activePeople ? (
+                        <p className="text-xs text-muted-foreground">
+                          Includes{" "}
+                          {(overview.teams.people - overview.teams.activePeople).toLocaleString()}{" "}
+                          deactivated account
+                          {overview.teams.people - overview.teams.activePeople === 1 ? "" : "s"}.
+                        </p>
+                      ) : null}
+                    </div>
+                  </SectionCard>
+
+                  <SectionCard title="Biggest teams">
+                    <BiggestTeams
+                      workspaces={topTeams}
+                      onOpen={(id) => setSearchParams({ tab: "customers", workspace: id })}
+                    />
+                  </SectionCard>
                 </div>
 
                 <SectionCard title={`Growth and burn (last ${growth.days} days)`}>
@@ -714,8 +899,43 @@ export default function SuperAdmin() {
                     />
                   </div>
 
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="mr-1 text-xs text-muted-foreground">Sort by</span>
+                    {SORTS.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => setSort(option.id)}
+                        className={`gaspo-focus-ring min-h-8 cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors ${
+                          sort === option.id
+                            ? "border-transparent bg-secondary text-foreground"
+                            : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+
                   <SectionCard
-                    title={`${workspaces.length} workspace${workspaces.length === 1 ? "" : "s"}`}
+                    title={
+                      // The page size caps at 50, so the count shown and the
+                      // count that exists are different questions once the
+                      // platform outgrows one page.
+                      workspaces.length === workspaceTotal
+                        ? `${workspaceTotal} workspace${workspaceTotal === 1 ? "" : "s"}`
+                        : `${workspaces.length} of ${workspaceTotal} workspaces`
+                    }
+                    action={
+                      workspaces.length ? (
+                        <span className="text-xs text-muted-foreground">
+                          {workspaces
+                            .reduce((sum, workspace) => sum + workspace.members.total, 0)
+                            .toLocaleString()}{" "}
+                          people listed
+                        </span>
+                      ) : null
+                    }
                   >
                     {workspaces.length ? (
                       <div className="overflow-x-auto">
@@ -723,7 +943,7 @@ export default function SuperAdmin() {
                           <thead>
                             <tr className="text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
                               <th className="px-3 pb-2">Workspace</th>
-                              <th className="px-3 pb-2">Members</th>
+                              <th className="px-3 pb-2">People</th>
                               <th className="px-3 pb-2">Plan</th>
                               <th className="px-3 pb-2">Credits left</th>
                               <th className="px-3 pb-2">Paid</th>
@@ -750,8 +970,19 @@ export default function SuperAdmin() {
                                     </span>
                                   </div>
                                 </td>
-                                <td className="px-3 py-2.5 tabular-nums text-muted-foreground">
-                                  {workspace.members.active}/{workspace.members.total}
+                                <td className="px-3 py-2.5">
+                                  <div className="flex flex-col">
+                                    <span className="tabular-nums text-foreground">
+                                      {workspace.members.total}
+                                    </span>
+                                    <span className="text-xs whitespace-nowrap text-muted-foreground">
+                                      {workspace.members.admins} admin
+                                      {workspace.members.admins === 1 ? "" : "s"}
+                                      {workspace.members.active < workspace.members.total
+                                        ? ` · ${workspace.members.total - workspace.members.active} off`
+                                        : ""}
+                                    </span>
+                                  </div>
                                 </td>
                                 <td className="px-3 py-2.5">
                                   {workspace.plan ? (
