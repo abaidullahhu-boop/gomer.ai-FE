@@ -819,11 +819,34 @@ export function fetchMyBugReports(): Promise<BugReport[]> {
 // the `/admin/*` endpoints above, which are workspace administration and are
 // reachable by any customer's admin.
 
+/** How the customer table may be ordered. Mirrors the server's allowed set. */
+export type WorkspaceSort = "created" | "members" | "activity" | "name";
+
 export type PlatformOverview = {
   days: number;
   range: { from: string; to: string };
-  workspaces: { total: number; newInWindow: number };
+  workspaces: {
+    total: number;
+    newInWindow: number;
+    /** Ran at least one metered task in the window. */
+    activeInWindow: number;
+    idleInWindow: number;
+  };
   users: { total: number; active: number; activeInWindow: number; admins: number };
+  /**
+   * Headcount spread across tenants. The median sits next to the mean on
+   * purpose: a handful of solo Slacks and one large company average out to a
+   * team size that describes neither.
+   */
+  teams: {
+    people: number;
+    activePeople: number;
+    meanTeamSize: number;
+    medianTeamSize: number;
+    largestTeam: number;
+    /** Workspace counts by headcount band: 0–1, 2–5, 6–20, 21+. */
+    distribution: { solo: number; small: number; medium: number; large: number };
+  };
   revenue: { totalCents: number; windowCents: number };
   credits: { granted: number; used: number; events: number };
   margin: { chargedUsd: number; costUsd: number; marginUsd: number; events: number };
@@ -841,7 +864,7 @@ export type PlatformWorkspace = {
   name: string;
   slackTeamId: string;
   createdAt: string;
-  members: { total: number; active: number };
+  members: { total: number; active: number; admins: number };
   credits: { granted: number; used: number; balance: number };
   paidCents: number;
   plan: {
@@ -915,11 +938,23 @@ export function fetchPlatformGrowth(days = 30): Promise<PlatformGrowth> {
   return apiFetch<PlatformGrowth>(`/super-admin/growth?days=${days}`);
 }
 
+/**
+ * A page of the customer table.
+ *
+ * `total` is every workspace matching the search, not the number returned — the
+ * table shows a window of it, and the two disagreeing is the normal case.
+ */
 export function fetchPlatformWorkspaces(
-  search = "",
-): Promise<{ total: number; rows: PlatformWorkspace[] }> {
-  const query = search ? `?search=${encodeURIComponent(search)}` : "";
-  return apiFetch<{ total: number; rows: PlatformWorkspace[] }>(`/super-admin/workspaces${query}`);
+  options: { search?: string; sort?: WorkspaceSort; limit?: number } = {},
+): Promise<{ total: number; rows: PlatformWorkspace[]; sort: WorkspaceSort }> {
+  const params = new URLSearchParams();
+  if (options.search) params.set("search", options.search);
+  if (options.sort) params.set("sort", options.sort);
+  if (options.limit) params.set("limit", String(options.limit));
+  const query = params.size ? `?${params}` : "";
+  return apiFetch<{ total: number; rows: PlatformWorkspace[]; sort: WorkspaceSort }>(
+    `/super-admin/workspaces${query}`,
+  );
 }
 
 export function fetchPlatformWorkspace(id: string): Promise<PlatformWorkspaceDetail> {
