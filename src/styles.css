@@ -800,10 +800,6 @@
   background: var(--gradient-dark1);
 }
 
-@utility bg-about-investors-surface {
-  background: var(--gradient-dark1);
-}
-
 @utility gradient-dark-2 {
   background: var(--gradient-dark2);
 }
