@@ -11,7 +11,6 @@ import {
   AboutStartupIcon,
 } from "@/components/landing/AboutValueIcons";
 import gaspoWordmark from "@/assets/images/gaspo.svg";
-import { AboutInvestorsSection } from "@/components/landing/AboutInvestorsSection";
 import { Footer } from "@/components/site/Footer";
 
 const tokens = `
@@ -312,8 +311,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      <AboutInvestorsSection />
 
       <section className="bg-primitive-main-beige py-1 sm:py-[7rem]">
         <div className="px-4 sm:px-6 md:px-12 lg:px-20">

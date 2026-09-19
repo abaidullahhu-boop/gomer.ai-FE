@@ -16,7 +16,6 @@ import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { PricingHeroPoints, landingHeroBadges } from "@/components/site/HeroBadges";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-import { LogoWall } from "@/components/site/LogoWall";
 import { SlackReactions } from "@/components/site/SlackReactions";
 
 const toolLogos = ["Slack", "Zapier", "ClickUp", "GitHub", "HubSpot"];
@@ -96,8 +95,6 @@ export default function Index() {
             </div>
 
             <div className="flex w-full flex-col gap-10">
-              <LogoWall />
-
               <div className="grid w-full gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-x-5 lg:gap-y-0">
                 <FeatureCard
                   title="Real output, not just text."
