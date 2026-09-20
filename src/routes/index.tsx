@@ -37,7 +37,7 @@ const testimonials = [
 
 export default function Index() {
   return (
-    <div className="min-h-screen bg-primitive-main-beige">
+    <div className="mono-site min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Gaspo — Not a tool. A hire."
         description="Gaspo is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."
@@ -303,7 +303,7 @@ function SlackGaspoMessage({
         <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="mono-art size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
@@ -383,7 +383,7 @@ function ToolIconsVisual() {
         className="pointer-events-none absolute inset-x-0 top-0 z-10 mx-auto max-w-xl"
         style={{
           height: "9.24rem",
-          background: "radial-gradient(60% 100% at 50% -10%, rgba(237, 229, 251, 0.95), transparent 62%)",
+          background: "radial-gradient(60% 100% at 50% -10%, color-mix(in srgb, var(--primitive-purple-100) 55%, white), transparent 62%)",
         }}
       />
       <div
@@ -522,10 +522,10 @@ function TestimonialRow({ items, duration, reverse }: { items: typeof testimonia
       <div className="flex gap-5 w-max" style={{ animation: `marquee ${duration} linear infinite`, animationDirection: reverse ? "reverse" : "normal" }}>
         {doubled.map((t, i) => (
           <div key={i} className="w-[380px] shrink-0 rounded-3xl bg-card border border-border p-7 shadow-sm">
-            <div className="text-xs text-violet-600 font-semibold">Saved: {t.saved}</div>
+            <div className="text-xs text-primitive-purple-500 font-semibold">Saved: {t.saved}</div>
             <p className="mt-3 text-foreground leading-relaxed">"{t.quote}"</p>
             <div className="mt-5 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-300 to-violet-500" />
+              <div className="w-10 h-10 rounded-full bg-hero" />
               <div>
                 <div className="font-semibold text-sm">{t.name}</div>
                 <div className="text-xs text-muted-foreground">{t.role}</div>

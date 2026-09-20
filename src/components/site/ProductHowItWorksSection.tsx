@@ -9,7 +9,7 @@ const lisaAvatar =
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
 
 const HEADING_GRADIENT =
-  "radial-gradient(125% 115% at 58% -8%, rgb(255, 187, 152) 0%, rgb(255, 187, 152) 7%, rgb(207, 160, 204) 29%, rgb(158, 132, 255) 51%, rgb(110, 71, 255) 80%, rgb(21, 0, 121) 100%)";
+  "radial-gradient(125% 115% at 58% -8%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 7%, color-mix(in srgb, var(--primitive-orange-500) 50%, var(--primitive-purple-300)) 29%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%)";
 
 export type HowItWorksStep = {
   number: string;
@@ -108,7 +108,7 @@ function MarketplaceAppsVisual() {
         />
         <span aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-white/8 mix-blend-plus-lighter backdrop-blur-[10px]" />
         <span aria-hidden="true" className="absolute inset-4 rounded-2xl bg-white blur-2xl mix-blend-plus-lighter" />
-        <img alt="" className="relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={gaspoMarketplaceAvatar} />
+        <img alt="" className="mono-art relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={gaspoMarketplaceAvatar} />
         <div className="relative z-10 flex min-w-0 flex-1 items-start">
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <div className="flex min-w-0 flex-wrap items-center gap-1">
@@ -210,7 +210,7 @@ function SlackGaspoMessage({
         <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="mono-art size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
@@ -334,8 +334,8 @@ function getHowItWorksPanelBackground(scrollProgress: number) {
   const e = Math.min(1, Math.max(0, t));
 
   return {
-    backgroundColor: "#150079",
-    backgroundImage: `radial-gradient(ellipse ${128 + 18 * e}% ${108 + 32 * e}% at ${50 + (e - 0.5) * 7}% ${-8 + 5 * e}%, #ffbd9e 0%, #fdbca0 6%, #947fff 51%, #6748fd 80%, #150079 100%)`,
+    backgroundColor: "var(--primitive-main-dblue)",
+    backgroundImage: `radial-gradient(ellipse ${128 + 18 * e}% ${108 + 32 * e}% at ${50 + (e - 0.5) * 7}% ${-8 + 5 * e}%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 6%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%)`,
     backgroundRepeat: "no-repeat" as const,
     backgroundSize: `${103 + 12 * t}% ${218 + 95 * t}%`,
     backgroundPosition: `${50 + (t - 0.5) * 10}% ${96 - 58 * t}%`,
@@ -535,7 +535,7 @@ export function HowItWorksScrollSection({
           <div className="min-w-0 min-[1360px]:sticky min-[1360px]:top-[max(64px,calc((100vh-712px)/2))] min-[1360px]:flex min-[1360px]:min-h-[min(712px,calc(100vh-128px))] min-[1360px]:items-center min-[1360px]:self-start">
             <div className="flex max-w-[459px] flex-col items-start">
               <p className="body-small pb-4 text-eyebrow-primitive-purple-700">How it works</p>
-              <h2 className="font-heading text-[40px] max-sm:text-[35px] leading-[1.1] font-bold tracking-normal text-[#1a182b] sm:text-5xl">
+              <h2 className="font-heading text-[40px] max-sm:text-[35px] leading-[1.1] font-bold tracking-normal text-primitive-main-dark sm:text-5xl">
                 Hiring your first AI employee has never been{" "}
                 <span className="bg-clip-text text-transparent" style={{ backgroundImage: HEADING_GRADIENT }}>
                   this easy.

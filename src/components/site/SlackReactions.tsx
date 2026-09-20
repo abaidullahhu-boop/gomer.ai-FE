@@ -143,7 +143,7 @@ function SlackAddReactionButton({ onSelect }: { onSelect: (emoji: string) => voi
             role="toolbar"
             aria-label="Pick a reaction"
             style={{ position: "fixed", top: pickerStyle.top, left: pickerStyle.left, zIndex: 9999 }}
-            className="flex items-center gap-0.5 rounded-full border border-white/70 bg-white/95 p-1 shadow-[0_8px_24px_rgba(46,30,107,0.18)] backdrop-blur-sm [--slack-reaction-pill-bg:#d2c6ff]"
+            className="flex items-center gap-0.5 rounded-full border border-white/70 bg-white/95 p-1 shadow-[0_8px_24px_rgba(46,30,107,0.18)] backdrop-blur-sm [--slack-reaction-pill-bg:var(--primitive-purple-100)]"
           >
             {QUICK_REACTION_EMOJIS.map((emoji) => (
               <button

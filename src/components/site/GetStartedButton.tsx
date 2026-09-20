@@ -13,7 +13,7 @@ type GetStartedButtonProps = {
 const variantClasses: Record<NonNullable<GetStartedButtonProps["variant"]>, string> = {
   white: "bg-white text-foreground hover:bg-white/95 px-10 py-4 text-base",
   dark: "bg-foreground text-background hover:bg-foreground/90 px-10 py-4 text-base",
-  nav: "inline-flex h-10 shrink-0 items-center justify-center border-[1.25px] border-solid border-[#1a182b] bg-[#1a182b] px-6 text-sm text-white tracking-[-0.14px] transition-transform hover:translate-y-px",
+  nav: "inline-flex h-10 shrink-0 items-center justify-center border-[1.25px] border-solid border-(--primitive-main-dark) bg-primitive-main-dark px-6 text-sm text-white tracking-[-0.14px] transition-transform hover:translate-y-px",
   team: "bg-primitive-main-dark text-white hover:bg-primitive-main-dark/90",
 };
 

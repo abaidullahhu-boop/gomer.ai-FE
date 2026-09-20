@@ -14,7 +14,7 @@ function CapabilityRow({
   return (
     <div className={`grid md:grid-cols-2 gap-12 items-center ${reverse ? "md:[direction:rtl]" : ""}`}>
       <div className="[direction:ltr] pl-[108px]">
-        <div className={`inline-flex items-center gap-2 text-violet-700 text-xs ${eyebrowNoBg ? "" : "px-3 py-1.5 rounded-full bg-violet-100"}`}>
+        <div className={`inline-flex items-center gap-2 text-primitive-purple-700 text-xs ${eyebrowNoBg ? "" : "px-3 py-1.5 rounded-full bg-primitive-purple-50"}`}>
           {Icon ? <Icon className="w-3.5 h-3.5" /> : null} {eyebrow}
         </div>
         <h3 className="font-medium text-4xl md:text-5xl mt-4 leading-[1.05]">{title}</h3>
@@ -22,7 +22,7 @@ function CapabilityRow({
         <ul className="mt-6 space-y-3">
           {bullets.map((b) => (
             <li key={b} className="flex items-start gap-3 text-foreground/90">
-              <span className="mt-0.5 w-5 h-5 rounded-full bg-violet-600 text-white flex items-center justify-center shrink-0">
+              <span className="mt-0.5 w-5 h-5 rounded-full bg-(--primitive-purple-500) text-white flex items-center justify-center shrink-0">
                 <Check className="w-3 h-3" />
               </span>
               <span>{b}</span>
@@ -62,7 +62,7 @@ export function WorkflowAutomation() {
               ].map(([t, s], i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-muted text-sm">
                   <span>{t}</span>
-                  <span className="text-violet-600 font-bold">{s}</span>
+                  <span className="text-primitive-purple-500 font-bold">{s}</span>
                 </div>
               ))}
             </div>
@@ -99,7 +99,7 @@ export function ReportsAnalytics() {
                 </div>
                 <div className="mt-4 flex items-end gap-2 h-32">
                   {[40, 55, 48, 70, 62, 85, 78, 95].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-t-md bg-gradient-to-t from-violet-500 to-indigo-400" style={{ height: `${h}%` }} />
+                    <div key={i} className="flex-1 rounded-t-md bg-(--primitive-purple-500)" style={{ height: `${h}%` }} />
                   ))}
                 </div>
                 <div className="mt-4 grid grid-cols-3 gap-2 text-center">
@@ -166,10 +166,10 @@ export function Engineering() {
                 <GitBranch className="w-3.5 h-3.5" /> feature/fix-checkout-validation
               </div>
               <div className="mt-3 space-y-1">
-                <div className="text-emerald-400">+ if (!email.includes('@')) {`{`}</div>
-                <div className="text-emerald-400">+   throw new Error('Invalid email')</div>
-                <div className="text-emerald-400">+ {`}`}</div>
-                <div className="text-rose-400">- // TODO: validate email</div>
+                <div className="text-slate-100">+ if (!email.includes('@')) {`{`}</div>
+                <div className="text-slate-100">+   throw new Error('Invalid email')</div>
+                <div className="text-slate-100">+ {`}`}</div>
+                <div className="text-slate-500">- // TODO: validate email</div>
               </div>
               <div className="mt-4 p-3 rounded-lg bg-white/5 text-slate-300">
                 <div className="text-[10px] text-slate-500">PR #1284 · opened by Gaspo</div>
@@ -206,7 +206,7 @@ export function BrowserAutomation() {
               <div className="p-5 space-y-2">
                 {["Logging in…", "Navigating /reports", "Exporting CSV", "Parsing 1,284 rows", "Posting to Slack ✓"].map((s, i) => (
                   <div key={s} className="flex items-center gap-2 text-xs">
-                    <span className={`w-1.5 h-1.5 rounded-full ${i < 4 ? "bg-emerald-500" : "bg-violet-500 animate-pulse"}`} />
+                    <span className={`w-1.5 h-1.5 rounded-full ${i < 4 ? "bg-slate-300" : "bg-(--primitive-purple-500) animate-pulse"}`} />
                     {s}
                   </div>
                 ))}
@@ -244,11 +244,11 @@ export function TeamCollaboration() {
                 ["Gaspo", "Scheduled for 9am tomorrow ✓", true],
               ].map(([n, t, app], i) => (
                 <div key={i} className="flex gap-2 items-start text-sm">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-300 to-violet-500 shrink-0" />
+                  <div className="w-7 h-7 rounded-full bg-hero shrink-0" />
                   <div className="flex-1">
                     <div className="flex items-center gap-1.5">
                       <span className="font-semibold text-xs">{n}</span>
-                      {app && <span className="px-1 py-0.5 rounded text-[9px] bg-violet-100 text-violet-700 font-bold">APP</span>}
+                      {app && <span className="px-1 py-0.5 rounded text-[9px] bg-primitive-purple-50 text-primitive-purple-700 font-bold">APP</span>}
                     </div>
                     <div className="text-xs text-foreground/80">{t}</div>
                   </div>
@@ -340,7 +340,7 @@ export function AskAI() {
               <div className="flex w-full flex-col items-center gap-8">
                 <div className="flex w-full flex-col items-center">
                   <div className="pb-4">
-                    <p className="body-small text-[#f1edff] font-medium">Don't take our word for it</p>
+                    <p className="body-small text-primitive-purple-50 font-medium">Don't take our word for it</p>
                   </div>
                   <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
                     Ask AI about Gaspo
@@ -360,7 +360,7 @@ export function AskAI() {
                     href={option.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center gap-2.5 rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-[#292737] transition-all hover:bg-white/95 active:translate-y-px sm:w-auto"
+                    className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center gap-2.5 rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-primitive-main-dark transition-all hover:bg-white/95 active:translate-y-px sm:w-auto"
                   >
                     <img
                       alt=""
