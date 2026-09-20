@@ -61,6 +61,8 @@
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
   --color-peach: var(--hero-peach);
   --color-violet-soft: var(--hero-violet);
   --color-indigo-deep: var(--hero-indigo);
@@ -185,13 +187,53 @@
 
 }
 
+/*
+ * The dashboard is monochrome: white surfaces and black ink in light mode,
+ * near-black surfaces and white ink in dark mode. The marketing site keeps the
+ * purple brand palette; nothing below this line leaks past `.dashboard-shell`.
+ * Status colours (destructive red, warning amber) keep their hue on purpose.
+ */
 .dashboard-shell {
+  --mono-ink: oklch(0.15 0 0);
+  --mono-ink-soft: oklch(0.48 0 0);
+
   --background: var(--primitive-main-white);
+  --foreground: var(--mono-ink);
   --card: var(--primitive-main-white);
-  --sidebar-background: var(--primitive-main-white);
+  --card-foreground: var(--mono-ink);
+  --popover-foreground: var(--mono-ink);
+  --primary: var(--mono-ink);
+  --primary-foreground: var(--primitive-main-white);
+  --secondary-foreground: var(--mono-ink);
   --muted: #f4f4f5;
+  --muted-foreground: var(--mono-ink-soft);
   --accent: #f4f4f5;
+  --accent-foreground: var(--mono-ink);
   --secondary: #f4f4f5;
+  --border: oklch(0.9 0 0 / 60%);
+  --input: oklch(0.9 0 0);
+  --ring: var(--mono-ink);
+
+  --sidebar-background: var(--primitive-main-white);
+  --sidebar-foreground: var(--mono-ink-soft);
+  --sidebar-primary-foreground: var(--mono-ink);
+  --sidebar-border: oklch(0.92 0 0);
+  --shell: oklch(0.98 0 0);
+  --highlight: var(--mono-ink);
+  --success: oklch(0.94 0 0);
+  --success-foreground: var(--mono-ink);
+
+  /* Two-series charts: solid ink and a lighter grey the legend can still tell apart. */
+  --chart-1: var(--mono-ink);
+  --chart-2: oklch(0.72 0 0);
+
+  /* Brand button primitives resolve to plain ink here, not the navy brand dark. */
+  --btn-primary: var(--mono-ink);
+  --border-btn-primary: var(--mono-ink);
+  --text-btn-primary: var(--primitive-main-white);
+  /* The marketing `.bg-primary` utility below shadows Tailwind's; inside the shell it must mean the primary button, not beige. */
+  --bg-primary: var(--primary);
+
   --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
   --font-body: Gellix, ui-sans-serif, sans-serif;
   font-family: var(--font-sans);
@@ -228,7 +270,7 @@
   --destructive: oklch(0.65 0.2 27);
   --border: var(--dashboard-dark-border);
   --input: var(--dashboard-dark-muted);
-  --ring: oklch(0.68 0.18 295);
+  --ring: oklch(0.95 0 0);
 
   --sidebar-background: var(--dashboard-dark-bg);
   --sidebar-foreground: oklch(0.62 0 0);
@@ -236,10 +278,104 @@
   --sidebar-accent: color-mix(in srgb, var(--dashboard-dark-bg), white 12%);
   --sidebar-border: color-mix(in srgb, var(--dashboard-dark-bg), white 16%);
   --shell: var(--dashboard-dark-bg);
-  --highlight: #9e84ff;
-  --success: oklch(0.25 0.05 163);
-  --success-foreground: oklch(0.72 0.15 163);
+  --highlight: oklch(0.95 0 0);
+  --success: color-mix(in srgb, var(--dashboard-dark-bg), white 10%);
+  --success-foreground: oklch(0.95 0 0);
   --warning: oklch(0.75 0.183 55);
+
+  --chart-1: oklch(0.95 0 0);
+  --chart-2: oklch(0.45 0 0);
+
+  --btn-primary: oklch(0.95 0 0);
+  --border-btn-primary: oklch(0.95 0 0);
+  --text-btn-primary: var(--dashboard-dark-bg);
+  --bg-primary: var(--primary);
+}
+
+/*
+ * Monochrome marketing scope. Put on a page's root and every brand primitive,
+ * gradient and Slack-mock colour the page reads resolves to greys. Components
+ * are shared with pages that do not opt in, so they keep using the brand
+ * tokens; only the tokens change here.
+ */
+.mono-site {
+  --primitive-main-beige: #f4f4f4;
+  --primitive-main-dark: #111;
+  --primitive-main-dblue: #0a0a0a;
+  --primitive-main-grey: #7a7a7a;
+  --primitive-purple-700: #2a2a2a;
+  --primitive-purple-500: #444;
+  --primitive-purple-400: #6b6b6b;
+  --primitive-purple-300: #9a9a9a;
+  --primitive-purple-100: #dcdcdc;
+  --primitive-purple-50: #eee;
+  --primitive-orange-500: #cfcfcf;
+  --bg-brand-tag-initial: var(--primitive-purple-50);
+  --btn-primary: var(--primitive-main-dark);
+  --border-btn-primary: var(--primitive-main-dark);
+  --bg-primary: var(--primitive-main-beige);
+  --typo-h1-color: var(--primitive-main-dark);
+  --typo-h2-color: var(--primitive-main-dark);
+  --typo-h3-color: var(--primitive-main-dark);
+  --hero-peach: #e0e0e0;
+  --hero-violet: #6b6b6b;
+  --hero-indigo: #2a2a2a;
+  --hero-deep: #0a0a0a;
+  --highlight: var(--primitive-main-dark);
+  --ring: var(--primitive-main-dark);
+
+  --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #e6e6e6 0%, #e6e6e6 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%);
+  --gradient-dark1: radial-gradient(108.79% 100% at 50% 0%, #ffffff33 0%, #ffffff00 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9a9a9a 0%, #444 36.52%, #0a0a0a 100%);
+  --gradient-dark2: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #d9d9d9 0%, #d9d9d9 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%);
+  --gradient-dark3: radial-gradient(283.63% 201.39% at 31.42% -99.18%, #e0e0e0 0%, #d0d0d0 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%), #d9d9d9;
+  --gradient-disclosure: radial-gradient(108.79% 100% at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9a9a9a 0%, #444 36.52%, #0a0a0a 100%);
+  --surface-hero-primary: radial-gradient(70% 44% at 52% 9rem, #d9d9d9b8 0%, #cfcfcfa8 6%, #bdbdbd6b 29%, #9a9a9a2e 51%, #f4f4f400 92%), linear-gradient(90deg, var(--primitive-main-beige), var(--primitive-main-beige));
+  --integrations-hero-surface: var(--surface-hero-primary);
+  --integrations-hero-text-gradient: radial-gradient(120% 140% at 55% 0%, #bdbdbd 0%, #8a8a8a 50%, #0a0a0a 100%);
+  --conic-gradient-bg: conic-gradient(from -60deg at 62% 64%, #e6e6e699 0%, #e6e6e699 15%, #cfcfcf99 35%, #8a8a8a99 45%, #dcdcdc99 80%, #e6e6e699 100%);
+  --slack-mention-bg: #eee;
+  --slack-mention-text: #2a2a2a;
+  --slack-app-badge-bg: #eee;
+  --slack-app-badge-text: #2a2a2a;
+  --slack-attached-pill-bg: radial-gradient(ellipse 160% 120% at 52% -24%, #bdbdbd 0%, #8a8a8a 51%, #3a3a3a 80%, #0a0a0a 100%);
+  --integrations-connector-line: linear-gradient(180deg, #0a0a0a 0%, #444 58%, #9a9a9a 100%);
+  --integrations-gaspo-avatar-glow: radial-gradient(50% 50% at 50% 50%, #44444457 0%, #cfcfcf3d 36%, #f4f4f400 72%);
+  --integrations-icon-tile-bg: linear-gradient(135deg, #f4f4f4 19.749%, #fff 100.45%);
+  --integrations-icon-tile-border: #fff;
+  --integrations-rail-edge-fade: linear-gradient(90deg, #f4f4f4 0%, #f4f4f400 100%);
+}
+
+.mono-site .bg-ask-card {
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, #6b6b6b 0%, #444 45%, #2a2a2a 100%);
+}
+
+.mono-site .bg-startfree-card {
+  background: linear-gradient(120deg, #cfcfcf 0%, #9a9a9a 35%, #444 70%, #2a2a2a 100%);
+}
+
+.mono-site .gaspo-glass-card::before {
+  background:
+    radial-gradient(80% 70% at 0 0, #e0e0e0f2 0%, #e0e0e000 70%),
+    radial-gradient(75% 60% at 100% 0, #d5d5d5cc 0%, #d5d5d500 70%),
+    radial-gradient(80% 70% at 100% 100%, #8a8a8a 0%, #8a8a8a00 75%),
+    radial-gradient(85% 75% at 0 100%, #b0b0b0 0%, #b0b0b000 75%);
+}
+
+.mono-site .integrations-connector-dot-top,
+.mono-site .integrations-connector-dot-bottom {
+  box-shadow:
+    0 0 8px rgb(255 255 255 / 55%),
+    0 0 14px rgb(0 0 0 / 28%);
+}
+
+.mono-site .bg-section-cream,
+.mono-site .bg-cream {
+  background-color: #f4f4f4;
+}
+
+/* Brand artwork shipped as SVG gradients (avatars, the footer blob). */
+.mono-site .mono-art {
+  filter: grayscale(1);
 }
 
 .dashboard-shell :where(

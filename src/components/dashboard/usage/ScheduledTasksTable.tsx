@@ -112,7 +112,7 @@ export function ScheduledTasksTable() {
                   </span>
                 </div>
                 <div className="flex w-[200px] shrink-0 items-center gap-2 px-4 py-3">
-                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-highlight text-[10px] font-semibold text-white">
+                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-highlight text-[10px] font-semibold text-background">
                     {task.createdByName ? initialsFor(task.createdByName) : "\u2699"}
                   </span>
                   <span className="truncate font-medium text-secondary-foreground">

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import whatsNewWorkspaceSwitcher from "@/assets/images/whats-new-workspace-switcher.png";
-import whatsNewEditableCrons from "@/assets/images/whats-new-editable-crons.png";
-import whatsNewCreditRollover from "@/assets/images/whats-new-credit-rollover.webp";
+import whatsNewWorkspaceSwitcher from "@/assets/images/whats-new-workspace-switcher-mono.webp";
+import whatsNewEditableCrons from "@/assets/images/whats-new-editable-crons-mono.webp";
+import whatsNewCreditRollover from "@/assets/images/whats-new-credit-rollover-mono.webp";
 
 type WhatsNewItem = {
   date: string;

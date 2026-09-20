@@ -31,7 +31,7 @@ const solutionsMenu: MenuItem[] = [
 ];
 
 const dropdownLinkClass =
-  "rounded-xl px-3 py-2 text-sm text-[#1a182b] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none whitespace-nowrap";
+  "rounded-xl px-3 py-2 text-sm text-primitive-main-dark transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none whitespace-nowrap";
 
 type NavTheme = {
   link: string;
@@ -42,10 +42,10 @@ type NavTheme = {
 
 function getNavTheme(): NavTheme {
   return {
-    link: "text-foreground hover:text-purple-500",
-    linkOpen: "text-purple-500",
-    caretClosed: "text-[#9693a3]",
-    caretOpen: "text-purple-500",
+    link: "text-foreground hover:text-primitive-purple-500",
+    linkOpen: "text-primitive-purple-500",
+    caretClosed: "text-primitive-main-grey",
+    caretOpen: "text-primitive-purple-500",
   };
 }
 
@@ -257,7 +257,7 @@ function MenuToggleButton({ open, onClick }: { open: boolean; onClick: () => voi
       aria-label={open ? "Close menu" : "Open menu"}
       aria-expanded={open}
       onClick={onClick}
-      className="cursor-pointer flex h-8 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1A1829] text-white transition-opacity hover:opacity-90"
+      className="cursor-pointer flex h-8 w-12 shrink-0 items-center justify-center rounded-lg bg-primitive-main-dark text-white transition-opacity hover:opacity-90"
     >
       {open ? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -326,8 +326,8 @@ export function Nav({ heroTone = "dark" }: NavProps) {
 
   const showGlassOverlay = !scrolled && !mobileOpen;
   const theme = getNavTheme();
-  const mobileCaretClosedClass = "text-[#9693a3]";
-  const mobileCaretOpenClass = "text-purple-500";
+  const mobileCaretClosedClass = "text-primitive-main-grey";
+  const mobileCaretOpenClass = "text-primitive-purple-500";
 
   return (
     <header className="fixed top-0 z-50 w-full">
@@ -344,7 +344,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
                 <div className="relative z-10 grid h-full w-full grid-cols-[1fr_auto_1fr] items-center">
                 <div className="min-w-0">
                 <Link to="/" aria-label="Gaspo home" className="block">
-                  <img src={logo} alt="Gaspo" width={112} height={28} />
+                  <img src={logo} alt="Gaspo" width={112} height={28} className="mono-art" />
                 </Link>
                 </div>
 
@@ -408,7 +408,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
 
                 <div className="relative z-10 flex items-center justify-between">
                 <Link to="/" className="relative block" onClick={closeMobileMenu}>
-                  <img src={logo} alt="Gaspo" width={112} height={28} />
+                  <img src={logo} alt="Gaspo" width={112} height={28} className="mono-art" />
                 </Link>
                 <MenuToggleButton
                   open={mobileOpen}

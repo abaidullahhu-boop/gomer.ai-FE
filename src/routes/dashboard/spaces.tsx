@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
-import spacesEmptyState from "@/assets/images/spaces-empty-state.png";
+import spacesEmptyState from "@/assets/images/spaces-empty-state-mono.png";
 import { deleteSpace, fetchSpaces, spacePath, type Space } from "@/lib/api";
 
 export default function DashboardSpaces() {

@@ -128,7 +128,7 @@ const HERO_BADGE_INTERVAL_MS = 3000;
 function EnterpriseHeroPoint({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className="flex shrink-0 items-center gap-4">
-      <span className="inline-flex text-[#1B182A33]">{icon}</span>
+      <span className="inline-flex text-(--primitive-main-dark)/20">{icon}</span>
       <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-primitive-main-dark">
         {label}
       </p>
@@ -206,7 +206,7 @@ export function EnterpriseHeroPoints({
       <div aria-hidden="true" className="relative h-12 w-full shrink-0 overflow-hidden sm:hidden">
         <div className="h-12 overflow-hidden">
           <div key={activeIndex} className="flex h-12 min-h-12 w-full animate-logo-slide-up items-center justify-center gap-4">
-            <span className="inline-flex text-[#1B182A33]">{activeBadge.icon}</span>
+            <span className="inline-flex text-(--primitive-main-dark)/20">{activeBadge.icon}</span>
             <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-primitive-main-dark">
               {activeBadge.label}
             </p>

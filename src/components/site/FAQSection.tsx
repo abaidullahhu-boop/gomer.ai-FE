@@ -67,13 +67,13 @@ export function FAQSection({
                   >
                     <span
                       className={`font-medium text-lg transition-colors duration-300 ease-out ${
-                        isOpen ? "text-[#6e47ff]" : "text-foreground"
+                        isOpen ? "text-primitive-purple-500" : "text-foreground"
                       }`}
                     >
                       {f.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-violet-600 transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
+                      className={`w-5 h-5 shrink-0 text-primitive-purple-500 transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
                     />
                   </button>
                   <div
@@ -83,7 +83,7 @@ export function FAQSection({
                   >
                     <div className="overflow-hidden">
                       <div
-                        className={`px-7 pb-6 text-md text-[#9693a3] leading-relaxed transition-[opacity,transform] duration-300 ease-out font-medium ${
+                        className={`px-7 pb-6 text-md text-primitive-main-grey leading-relaxed transition-[opacity,transform] duration-300 ease-out font-medium ${
                           isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
                         }`}
                       >

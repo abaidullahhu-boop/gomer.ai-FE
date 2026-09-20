@@ -144,7 +144,7 @@ function BrandBlock() {
     <div className="flex flex-col gap-16">
       <Link to="/" aria-label="Gaspo home" className="inline-flex w-fit">
         <span aria-hidden="true" className="block">
-          <img src={logo} alt="" width={152} height={38} className="block" loading="lazy" decoding="async" />
+          <img src={logo} alt="" width={152} height={38} className="mono-art block" loading="lazy" decoding="async" />
         </span>
       </Link>
       <div className="flex flex-wrap items-center gap-4">
@@ -221,7 +221,7 @@ export function Footer() {
               alt=""
               width={1840}
               height={1150}
-              className="pointer-events-none absolute top-1/2 left-1/2 z-0 w-full max-w-none select-none"
+              className="mono-art pointer-events-none absolute top-1/2 left-1/2 z-0 w-full max-w-none select-none"
               style={{ opacity: 1, transform: "translate(-50%, -34%) scale(1.4)" }}
               decoding="async"
               draggable={false}
@@ -231,7 +231,7 @@ export function Footer() {
               alt=""
               width={1938}
               height={518}
-              className="relative z-[1] block h-auto w-full overflow-visible select-none"
+              className="mono-art relative z-[1] block h-auto w-full overflow-visible select-none"
               aria-hidden="true"
             />
           </div>

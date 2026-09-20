@@ -97,7 +97,7 @@ type TabIndicator = {
 };
 
 function ComparisonTabActiveBackground({ className }: { className?: string }) {
-  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={className} />;
+  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={`mono-art ${className ?? ""}`} />;
 }
 
 export function CompareSection() {
@@ -203,7 +203,7 @@ export function CompareSection() {
               className="text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1 ring-1 ring-white/50 "
               style={{
                 background:
-                  "radial-gradient(482.96% 141.42% at .12% 0, #f2598a1a 0%, #f2598a00 100%), #fffc",
+                  "radial-gradient(482.96% 141.42% at .12% 0, color-mix(in srgb, var(--primitive-purple-500) 10%, transparent) 0%, transparent 100%), #fffc",
               }}
             >
               <div className="inline-flex items-center gap-2">
@@ -224,7 +224,7 @@ export function CompareSection() {
                   className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
                   style={{
                     background:
-                      "radial-gradient(ellipse 130% 100% at 50% 0%, rgba(254,177,142,0.4) 0%, rgba(255,201,173,0.4) 24%, rgba(211,196,252,0.4) 100%)",
+                      "radial-gradient(ellipse 130% 100% at 50% 0%, color-mix(in srgb, var(--primitive-orange-500) 40%, transparent) 0%, color-mix(in srgb, var(--primitive-orange-500) 30%, transparent) 24%, color-mix(in srgb, var(--primitive-purple-100) 40%, transparent) 100%)",
                   }}
                 />
                 <div
@@ -267,7 +267,7 @@ export function CompareSection() {
                 </div>
               </div>
               <p className="text-lg font-medium">
-                <span className="text-primitive-purple-700 inline-block px-2 py-0.5 rounded-[5px] bg-[#f1edff] mr-1.5 text-lg font-medium">
+                <span className="text-primitive-purple-700 inline-block px-2 py-0.5 rounded-[5px] bg-primitive-purple-50 mr-1.5 text-lg font-medium">
                   {current.right.highlight}
                 </span>
                 {current.right.text}
@@ -332,8 +332,8 @@ function ComparisonConnector() {
               y2="45.6327"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#FFBB98" />
-              <stop offset="1" stopColor="#BCAAFF" />
+              <stop style={{ stopColor: "var(--primitive-orange-500)" }} />
+              <stop offset="1" style={{ stopColor: "var(--primitive-purple-300)" }} />
             </linearGradient>
           </defs>
         </svg>
@@ -370,8 +370,8 @@ function ComparisonConnector() {
               y2="76"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#FFEADF" />
-              <stop offset="1" stopColor="#FFBB98" />
+              <stop style={{ stopColor: "color-mix(in srgb, var(--primitive-orange-500) 40%, white)" }} />
+              <stop offset="1" style={{ stopColor: "var(--primitive-orange-500)" }} />
             </linearGradient>
             <linearGradient
               id={`${id}-purple`}
@@ -381,8 +381,8 @@ function ComparisonConnector() {
               y2="78.5"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#F1EDFF" />
-              <stop offset="1" stopColor="#634AF6" />
+              <stop style={{ stopColor: "var(--primitive-purple-50)" }} />
+              <stop offset="1" style={{ stopColor: "var(--primitive-purple-500)" }} />
             </linearGradient>
           </defs>
         </svg>

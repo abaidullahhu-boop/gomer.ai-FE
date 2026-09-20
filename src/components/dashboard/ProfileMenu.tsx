@@ -164,7 +164,7 @@ export function ProfileMenu() {
             loading="lazy"
           />
         ) : (
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#0d9488] text-sm font-bold text-white">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-bold text-background">
             {initial}
           </div>
         )}

@@ -286,7 +286,7 @@ export default function DashboardBilling() {
                       <div className="relative">
                         <div className="flex h-2 rounded-full bg-secondary">
                           <div
-                            className="h-2 rounded-full bg-[#FFDC61]"
+                            className="h-2 rounded-full bg-foreground"
                             style={{ width: `${progressPercent}%` }}
                           />
                         </div>
@@ -369,7 +369,7 @@ export default function DashboardBilling() {
                             {plan.monthlyCredits.toLocaleString()} credits
                           </span>
                           {plan.bonusCredits ? (
-                            <span className="text-xs text-emerald-600">
+                            <span className="text-xs text-muted-foreground">
                               includes {plan.bonusCredits.toLocaleString()} bonus
                             </span>
                           ) : null}

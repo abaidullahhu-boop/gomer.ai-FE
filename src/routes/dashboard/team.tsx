@@ -46,10 +46,10 @@ function MemberRoleControl({
 function TeamAvatar() {
   return (
     <div className="relative inline-flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-[7px]">
-      <div className="size-full bg-gradient-to-br from-cyan-200 via-violet-300 to-pink-300" />
+      <div className="size-full bg-gradient-to-br from-neutral-100 via-neutral-300 to-neutral-500" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.6)_0%,transparent_50%)]" />
-      <div className="absolute right-1 bottom-1 size-5 rounded-sm bg-violet-500/70" />
-      <div className="absolute top-2 left-2 size-4 rounded-full bg-cyan-400/80" />
+      <div className="absolute right-1 bottom-1 size-5 rounded-sm bg-neutral-900/70" />
+      <div className="absolute top-2 left-2 size-4 rounded-full bg-white/80" />
     </div>
   );
 }

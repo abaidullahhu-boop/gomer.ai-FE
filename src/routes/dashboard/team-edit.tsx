@@ -7,10 +7,10 @@ import { useSession } from "@/lib/session";
 function TeamAvatarLarge() {
   return (
     <div className="relative inline-flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-[7px]">
-      <div className="size-full bg-gradient-to-br from-cyan-200 via-violet-300 to-pink-300" />
+      <div className="size-full bg-gradient-to-br from-neutral-100 via-neutral-300 to-neutral-500" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.6)_0%,transparent_50%)]" />
-      <div className="absolute right-2 bottom-2 size-8 rounded-md bg-violet-500/70" />
-      <div className="absolute top-3 left-3 size-6 rounded-full bg-cyan-400/80" />
+      <div className="absolute right-2 bottom-2 size-8 rounded-md bg-neutral-900/70" />
+      <div className="absolute top-3 left-3 size-6 rounded-full bg-white/80" />
     </div>
   );
 }
@@ -85,7 +85,7 @@ export default function DashboardTeamEdit() {
                 type="button"
                 disabled={!hasChanges}
                 onClick={handleSave}
-                className="gaspo-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-[linear-gradient(to_right,#d1c2f4,#edc2e7,#ffdc61)] px-4 py-2 text-sm font-medium text-zinc-900 transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                className="gaspo-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Save changes
               </button>

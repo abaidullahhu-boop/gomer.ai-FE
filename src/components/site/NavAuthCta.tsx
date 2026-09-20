@@ -89,7 +89,7 @@ export function NavAuthCta({ fullWidth = false, className = "", onClick }: NavAu
 
   const classes = [
     "inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 rounded-full border-[1.25px]",
-    "border-solid border-[#1a182b] bg-[#1a182b] py-1 pr-5 pl-1 text-sm font-medium text-white",
+    "border-solid border-(--primitive-main-dark) bg-primitive-main-dark py-1 pr-5 pl-1 text-sm font-medium text-white",
     "tracking-[-0.14px] transition-transform hover:translate-y-px",
     fullWidth ? "flex w-full justify-center" : "max-w-[280px]",
     className,

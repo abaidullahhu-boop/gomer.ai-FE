@@ -330,7 +330,7 @@ export function TestimonialsCarousel({
                                     className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
                                     style={{
                                       background:
-                                        "linear-gradient(125deg, rgba(255, 255, 255, 0.92) 0%, rgba(254, 177, 142, 0.32) 42%, rgba(211, 196, 252, 0.32) 100%)",
+                                        "linear-gradient(125deg, rgba(255, 255, 255, 0.92) 0%, color-mix(in srgb, var(--primitive-orange-500) 32%, transparent) 42%, color-mix(in srgb, var(--primitive-purple-100) 32%, transparent) 100%)",
                                     }}
                                   />
                                 ) : (
@@ -358,7 +358,7 @@ export function TestimonialsCarousel({
                                               "rounded-full px-2 py-1 text-sm leading-[1.3] transition-colors duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] " +
                                               (isActive
                                                 ? "bg-primitive-purple-500/16 text-accent-1"
-                                                : "border border-white text-primitive-purple-50 shadow-[inset_0_0_10px_#d2c6ff]")
+                                                : "border border-white text-primitive-purple-50 shadow-[inset_0_0_10px_var(--primitive-purple-100)]")
                                             }
                                           >
                                             {t.saved}
@@ -385,7 +385,7 @@ export function TestimonialsCarousel({
                                           className="size-12 shrink-0 rounded-full object-cover"
                                         />
                                       ) : (
-                                        <div className="size-12 shrink-0 rounded-full bg-gradient-to-br from-pink-300 to-violet-500" />
+                                        <div className="size-12 shrink-0 rounded-full bg-hero" />
                                       )}
                                       <div className="min-w-0 flex-1 text-base font-medium tracking-[-0.03em] transition-colors duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]">
                                         <p

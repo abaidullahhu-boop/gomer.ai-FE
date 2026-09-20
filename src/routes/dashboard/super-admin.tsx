@@ -75,7 +75,7 @@ function StatCard({
 }) {
   const toneClass =
     tone === "positive"
-      ? "text-emerald-600 dark:text-emerald-400"
+      ? "text-foreground"
       : tone === "negative"
         ? "text-red-600 dark:text-red-400"
         : "text-foreground";
@@ -136,12 +136,12 @@ function GrowthChart({ series }: { series: PlatformGrowth["series"] }) {
           >
             {point.signups > 0 ? (
               <div
-                className="mx-auto mb-1 size-1.5 shrink-0 rounded-full bg-emerald-500"
+                className="mx-auto mb-1 size-1.5 shrink-0 rounded-full bg-chart-2"
                 style={{ opacity: 0.4 + (point.signups / maxSignups) * 0.6 }}
               />
             ) : null}
             <div
-              className="w-full rounded-t-sm bg-violet-300"
+              className="w-full rounded-t-sm bg-chart-1"
               style={{ height: `${Math.max((point.credits / maxCredits) * 100, 1)}%` }}
             />
           </div>
@@ -149,10 +149,10 @@ function GrowthChart({ series }: { series: PlatformGrowth["series"] }) {
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <span className="size-2 rounded-sm bg-violet-300" /> Credits burned
+          <span className="size-2 rounded-sm bg-chart-1" /> Credits burned
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="size-1.5 rounded-full bg-emerald-500" /> New workspaces
+          <span className="size-1.5 rounded-full bg-chart-2" /> New workspaces
         </span>
       </div>
     </div>
@@ -175,10 +175,10 @@ function TeamSizeBar({
   workspaces: number;
 }) {
   const bands = [
-    { key: "solo", label: "Solo (0–1)", count: distribution.solo, fill: "bg-slate-400" },
-    { key: "small", label: "Small (2–5)", count: distribution.small, fill: "bg-sky-400" },
-    { key: "medium", label: "Team (6–20)", count: distribution.medium, fill: "bg-violet-400" },
-    { key: "large", label: "Large (21+)", count: distribution.large, fill: "bg-emerald-500" },
+    { key: "solo", label: "Solo (0–1)", count: distribution.solo, fill: "bg-foreground/25" },
+    { key: "small", label: "Small (2–5)", count: distribution.small, fill: "bg-foreground/45" },
+    { key: "medium", label: "Team (6–20)", count: distribution.medium, fill: "bg-foreground/70" },
+    { key: "large", label: "Large (21+)", count: distribution.large, fill: "bg-foreground" },
   ].filter((band) => band.count > 0);
 
   if (!workspaces || !bands.length) {
@@ -235,7 +235,7 @@ function BiggestTeams({
               <span className="truncate text-sm font-medium text-foreground">{workspace.name}</span>
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
                 <div
-                  className="h-full rounded-full bg-violet-400"
+                  className="h-full rounded-full bg-foreground"
                   style={{ width: `${(workspace.members.total / largest) * 100}%` }}
                 />
               </div>
@@ -257,7 +257,7 @@ function BiggestTeams({
 function SeverityPill({ severity }: { severity: PlatformBugReport["severity"] }) {
   const styles: Record<PlatformBugReport["severity"], string> = {
     low: "bg-secondary text-muted-foreground",
-    medium: "bg-sky-500/10 text-sky-600 dark:text-sky-400",
+    medium: "bg-foreground/8 text-foreground",
     high: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
     critical: "bg-red-500/10 text-red-600 dark:text-red-400",
   };
@@ -533,7 +533,7 @@ function WorkspaceDetail({ id, onBack }: { id: string; onBack: () => void }) {
                     <span
                       className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
                         member.isActive
-                          ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                          ? "bg-foreground/8 text-foreground"
                           : "bg-secondary text-muted-foreground"
                       }`}
                     >
