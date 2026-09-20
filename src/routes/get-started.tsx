@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { PageMeta } from "@/components/PageMeta";
-import { startSlackLogin } from "@/lib/auth";
+import { SLACK_CREATE_ACCOUNT_URL, startSlackLogin } from "@/lib/auth";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
-import { CasaTier3Badge, CcpaBadge, GdprBadge, Soc2Badge } from "@/components/icons/compliance-badges";
+import {
+  CasaTier3Badge,
+  CcpaBadge,
+  GdprBadge,
+  Soc2Badge,
+} from "@/components/icons/compliance-badges";
 
 const testimonials = [
   {
@@ -20,7 +25,8 @@ const testimonials = [
     image: "/images/testimonials/ben-diamond.webp",
   },
   {
-    quote: "Gaspo is like the most capable all-round colleague you can imagine. He just does the work.",
+    quote:
+      "Gaspo is like the most capable all-round colleague you can imagine. He just does the work.",
     name: "Sam Kopelman",
     role: "CEO, Givr",
     image: "/images/testimonials/sam-kopelman.webp",
@@ -100,22 +106,34 @@ export default function GetStarted() {
           <div className="w-full max-w-[440px] px-4">
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-6">
-              <h1 className="text-center font-display text-[32px] font-bold leading-[1.25] tracking-[-0.64px] text-foreground">
-                Try Gaspo for free.
-                <br />
-                <span>$100 credits included.</span>
-              </h1>
+                <h1 className="text-center font-display text-[32px] font-bold leading-[1.25] tracking-[-0.64px] text-foreground">
+                  Try Gaspo for free.
+                  <br />
+                  <span>$100 credits included.</span>
+                </h1>
 
-              <div className="flex w-full flex-col gap-3">
-                <button type="button" className={authButtonClass} onClick={startSlackLogin}>
-                  <SlackIcon />
-                  Continue with Slack
-                </button>
-                <button type="button" className={authButtonClass}>
-                  <img src={microsoftTeamsIcon} alt="" className="size-5 shrink-0" aria-hidden />
-                  Continue with Microsoft Teams
-                </button>
-              </div>
+                <div className="flex w-full flex-col gap-3">
+                  <button type="button" className={authButtonClass} onClick={startSlackLogin}>
+                    <SlackIcon />
+                    Continue with Slack
+                  </button>
+                  <button type="button" className={authButtonClass}>
+                    <img src={microsoftTeamsIcon} alt="" className="size-5 shrink-0" aria-hidden />
+                    Continue with Microsoft Teams
+                  </button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Signing up needs a Slack account. New to Slack?{" "}
+                    <a
+                      href={SLACK_CREATE_ACCOUNT_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-foreground underline"
+                    >
+                      Create one
+                    </a>
+                    , then come back to this tab and continue with Slack.
+                  </p>
+                </div>
               </div>
               <div className=" flex items-center justify-center gap-1 text-sm font-medium text-foreground sm:gap-2">
                 <span>No credit card required</span>
