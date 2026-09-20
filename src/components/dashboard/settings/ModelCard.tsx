@@ -20,7 +20,7 @@ function Badge({ badge }: { badge: ModelBadge }) {
       );
     case "beta":
       return (
-        <span className="inline-flex items-center rounded-full border border-violet-500/30 bg-violet-500/10 px-1.5 py-px text-xs leading-tight font-medium tracking-tight text-violet-600 dark:text-violet-400">
+        <span className="inline-flex items-center rounded-full border border-foreground/20 bg-foreground/8 px-1.5 py-px text-xs leading-tight font-medium tracking-tight text-foreground">
           Beta
         </span>
       );

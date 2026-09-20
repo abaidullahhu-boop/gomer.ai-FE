@@ -46,8 +46,8 @@ export default function UsageTeam() {
                       </span>
                     ) : (
                       <span
-                        className={`inline-flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white ${
-                          spender.userId ? "bg-teal-500" : "bg-highlight"
+                        className={`inline-flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-background ${
+                          spender.userId ? "bg-foreground" : "bg-muted-foreground"
                         }`}
                       >
                         {initialsFor(spender)}

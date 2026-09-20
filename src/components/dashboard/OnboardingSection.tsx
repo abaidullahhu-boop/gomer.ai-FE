@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Ellipsis, Eye, Puzzle, RefreshCw, X } from "lucide-react";
-import gettingSayHi from "@/assets/images/getting.png";
-import gettingConnectTools from "@/assets/images/getting2.png";
-import gettingInstallSkills from "@/assets/images/getting-started-install-skills.png";
+import gettingSayHi from "@/assets/images/getting-mono.webp";
+import gettingConnectTools from "@/assets/images/getting2-mono.webp";
+import gettingInstallSkills from "@/assets/images/getting-started-install-skills-mono.webp";
 import type { DashboardOverview } from "./useDashboardOverview";
 
 /** How many connected accounts the second step asks for. */

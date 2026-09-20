@@ -67,11 +67,11 @@ export function CreditUsageChart({ analytics, loading }: CreditUsageChartProps) 
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground sm:justify-end">
           <div className="flex items-center gap-1.5">
-            <span className="size-2.5 rounded-sm bg-violet-300" />
+            <span className="size-2.5 rounded-sm bg-chart-2" />
             <span>Threads - {share(analytics?.byType.thread ?? 0, total)}%</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="size-2.5 rounded-sm bg-highlight" />
+            <span className="size-2.5 rounded-sm bg-chart-1" />
             <span>Scheduled tasks - {share(analytics?.byType.scheduledTask ?? 0, total)}%</span>
           </div>
         </div>
@@ -135,7 +135,7 @@ export function CreditUsageChart({ analytics, loading }: CreditUsageChartProps) 
                           y={scheduledY}
                           width={width}
                           height={scheduledHeight}
-                          fill="var(--highlight)"
+                          fill="var(--chart-1)"
                           rx="1"
                         />
                       )}
@@ -145,7 +145,7 @@ export function CreditUsageChart({ analytics, loading }: CreditUsageChartProps) 
                           y={threadsY}
                           width={width}
                           height={threadsHeight}
-                          fill="var(--primitive-purple-300)"
+                          fill="var(--chart-2)"
                           rx="1"
                         />
                       )}

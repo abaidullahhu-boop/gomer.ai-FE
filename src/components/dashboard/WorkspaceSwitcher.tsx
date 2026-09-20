@@ -4,7 +4,7 @@ import { useSession } from "@/lib/session";
 
 function WorkspaceTile({ name }: { name: string }) {
   return (
-    <span className="flex size-6 shrink-0 items-center justify-center rounded-[7px] border border-sidebar-border bg-[#1a182b] text-xs font-bold text-white">
+    <span className="flex size-6 shrink-0 items-center justify-center rounded-[7px] border border-sidebar-border bg-foreground text-xs font-bold text-background">
       {name.charAt(0).toUpperCase() || "?"}
     </span>
   );

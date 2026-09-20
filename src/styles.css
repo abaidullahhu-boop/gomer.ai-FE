@@ -61,6 +61,8 @@
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
   --color-peach: var(--hero-peach);
   --color-violet-soft: var(--hero-violet);
   --color-indigo-deep: var(--hero-indigo);
@@ -185,13 +187,53 @@
 
 }
 
+/*
+ * The dashboard is monochrome: white surfaces and black ink in light mode,
+ * near-black surfaces and white ink in dark mode. The marketing site keeps the
+ * purple brand palette; nothing below this line leaks past `.dashboard-shell`.
+ * Status colours (destructive red, warning amber) keep their hue on purpose.
+ */
 .dashboard-shell {
+  --mono-ink: oklch(0.15 0 0);
+  --mono-ink-soft: oklch(0.48 0 0);
+
   --background: var(--primitive-main-white);
+  --foreground: var(--mono-ink);
   --card: var(--primitive-main-white);
-  --sidebar-background: var(--primitive-main-white);
+  --card-foreground: var(--mono-ink);
+  --popover-foreground: var(--mono-ink);
+  --primary: var(--mono-ink);
+  --primary-foreground: var(--primitive-main-white);
+  --secondary-foreground: var(--mono-ink);
   --muted: #f4f4f5;
+  --muted-foreground: var(--mono-ink-soft);
   --accent: #f4f4f5;
+  --accent-foreground: var(--mono-ink);
   --secondary: #f4f4f5;
+  --border: oklch(0.9 0 0 / 60%);
+  --input: oklch(0.9 0 0);
+  --ring: var(--mono-ink);
+
+  --sidebar-background: var(--primitive-main-white);
+  --sidebar-foreground: var(--mono-ink-soft);
+  --sidebar-primary-foreground: var(--mono-ink);
+  --sidebar-border: oklch(0.92 0 0);
+  --shell: oklch(0.98 0 0);
+  --highlight: var(--mono-ink);
+  --success: oklch(0.94 0 0);
+  --success-foreground: var(--mono-ink);
+
+  /* Two-series charts: solid ink and a lighter grey the legend can still tell apart. */
+  --chart-1: var(--mono-ink);
+  --chart-2: oklch(0.72 0 0);
+
+  /* Brand button primitives resolve to plain ink here, not the navy brand dark. */
+  --btn-primary: var(--mono-ink);
+  --border-btn-primary: var(--mono-ink);
+  --text-btn-primary: var(--primitive-main-white);
+  /* The marketing `.bg-primary` utility below shadows Tailwind's; inside the shell it must mean the primary button, not beige. */
+  --bg-primary: var(--primary);
+
   --font-sans: UlmGrotesk, Gellix, ui-sans-serif, sans-serif;
   --font-body: Gellix, ui-sans-serif, sans-serif;
   font-family: var(--font-sans);
@@ -228,7 +270,7 @@
   --destructive: oklch(0.65 0.2 27);
   --border: var(--dashboard-dark-border);
   --input: var(--dashboard-dark-muted);
-  --ring: oklch(0.68 0.18 295);
+  --ring: oklch(0.95 0 0);
 
   --sidebar-background: var(--dashboard-dark-bg);
   --sidebar-foreground: oklch(0.62 0 0);
@@ -236,10 +278,18 @@
   --sidebar-accent: color-mix(in srgb, var(--dashboard-dark-bg), white 12%);
   --sidebar-border: color-mix(in srgb, var(--dashboard-dark-bg), white 16%);
   --shell: var(--dashboard-dark-bg);
-  --highlight: #9e84ff;
-  --success: oklch(0.25 0.05 163);
-  --success-foreground: oklch(0.72 0.15 163);
+  --highlight: oklch(0.95 0 0);
+  --success: color-mix(in srgb, var(--dashboard-dark-bg), white 10%);
+  --success-foreground: oklch(0.95 0 0);
   --warning: oklch(0.75 0.183 55);
+
+  --chart-1: oklch(0.95 0 0);
+  --chart-2: oklch(0.45 0 0);
+
+  --btn-primary: oklch(0.95 0 0);
+  --border-btn-primary: oklch(0.95 0 0);
+  --text-btn-primary: var(--dashboard-dark-bg);
+  --bg-primary: var(--primary);
 }
 
 .dashboard-shell :where(

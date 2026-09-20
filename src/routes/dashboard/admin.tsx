@@ -60,7 +60,7 @@ function UsageBarChart({ daily }: { daily: AdminAnalytics["daily"] }) {
         <div
           key={d.day}
           title={`${d.day}: ${d.credits} credits (${d.events} runs)`}
-          className="min-w-[3px] flex-1 rounded-t-sm bg-violet-300"
+          className="min-w-[3px] flex-1 rounded-t-sm bg-chart-1"
           style={{ height: `${Math.max((d.credits / max) * 100, 2)}%` }}
         />
       ))}
@@ -96,7 +96,7 @@ function MemberRow({
         <span
           className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
             member.isActive
-              ? "bg-emerald-500/10 text-emerald-600"
+              ? "bg-foreground/8 text-foreground"
               : "bg-secondary text-muted-foreground"
           }`}
         >

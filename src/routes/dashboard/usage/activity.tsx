@@ -92,8 +92,8 @@ export default function UsageActivity() {
                       </span>
                     ) : (
                       <span
-                        className={`inline-flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${
-                          entry.user ? "bg-teal-500" : "bg-highlight"
+                        className={`inline-flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-background ${
+                          entry.user ? "bg-foreground" : "bg-muted-foreground"
                         }`}
                       >
                         {initialsFor(entry)}

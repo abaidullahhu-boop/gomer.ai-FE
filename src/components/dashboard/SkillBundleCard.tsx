@@ -30,7 +30,7 @@ export function SkillBundleCard({ bundle }: SkillBundleCardProps) {
       <div className="relative aspect-[21/9] w-full overflow-hidden bg-muted">
         <img alt="" className="size-full object-cover" src={bundle.image} />
         <div className="absolute left-3 top-3">
-          <span className="inline-flex h-5 items-center justify-center gap-1 rounded bg-[linear-gradient(to_right,#d1c2f4,#edc2e7,#ffdc61)] px-1.5 py-1 text-xs font-medium text-zinc-900">
+          <span className="inline-flex h-5 items-center justify-center gap-1 rounded border border-border bg-card/90 px-1.5 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
             Bundle
           </span>
         </div>
