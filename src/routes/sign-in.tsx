@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
-import { startSlackLogin } from "@/lib/auth";
+import { SLACK_CREATE_ACCOUNT_URL, startSlackLogin } from "@/lib/auth";
 import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import microsoftTeamsIcon from "@/assets/images/microsoft-teams.svg";
 
@@ -42,6 +42,18 @@ export default function SignIn() {
               <img src={microsoftTeamsIcon} alt="" className="size-5 shrink-0" aria-hidden />
               Join Microsoft Teams waitlist
             </button>
+            <p className="text-center text-xs text-muted-foreground">
+              Signing in needs a Slack account. New to Slack?{" "}
+              <a
+                href={SLACK_CREATE_ACCOUNT_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-foreground underline"
+              >
+                Create one
+              </a>
+              , then come back to this tab and continue with Slack.
+            </p>
           </div>
 
           <p className="text-sm text-muted-foreground">

@@ -26,6 +26,13 @@ export type SessionHint = { workspaceId: string; workspaceName: string };
 /** Base URL of the gomer.ai backend. */
 export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
+/**
+ * Slack's own account-creation page. Opened in a new tab from the auth pages so
+ * a visitor without a Slack account can make one and return here, instead of
+ * being stranded in Slack's sign-up after we hand the browser to OAuth.
+ */
+export const SLACK_CREATE_ACCOUNT_URL = "https://slack.com/get-started#/createnew";
+
 /** Kick off the Slack OAuth flow by handing the browser to the backend. */
 export function startSlackLogin(): void {
   window.location.href = `${API_URL}/auth/slack/install`;
