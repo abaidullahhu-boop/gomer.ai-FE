@@ -8,8 +8,8 @@ import mockupGenerator2 from "@/assets/images/mockup-generator-2.avif";
 import mockupGenerator3 from "@/assets/images/mockup-generator-3.avif";
 
 const styles = `
-.vb { --vb-bg:#faf5f1; --vb-dark:#1a182b; --vb-grey:#6b6880; --vb-line:rgba(26,24,43,0.08);
-  --vb-violet1:#a89bff; --vb-violet2:#7c66f5; --vb-violet3:#4224bc; --vb-peach:#ffd4b5;
+.vb { --vb-bg:#fff; --vb-dark:#000; --vb-grey:#6a6a6a; --vb-line:rgba(0,0,0,0.08);
+  --vb-violet1:#000; --vb-violet2:#000; --vb-violet3:#000; --vb-peach:#fff;
   background:var(--vb-bg); color:var(--vb-dark); min-height:100vh; font-family:Gellix,ui-sans-serif,sans-serif; }
 .vb-nav { display:flex; align-items:center; justify-content:space-between; padding:1.5rem 0; }
 .vb-nav-brand { font-size:1.4rem; font-weight:700; letter-spacing:-0.04em; }
@@ -25,10 +25,10 @@ const styles = `
 .vb-card-bar { position:absolute; top:0; left:0; right:0; height:22px; background:rgba(255,255,255,0.45); display:flex; align-items:center; gap:5px; padding:0 10px; }
 .vb-card-bar i { width:8px; height:8px; border-radius:50%; background:rgba(0,0,0,0.18); }
 .vb-card .logo { font-size:clamp(2rem,5vw,3.4rem); font-weight:700; letter-spacing:-0.05em; }
-.vb-bg-violet { background:linear-gradient(135deg,#a89bff,#7c66f5 55%,#4224bc); color:#fff; }
-.vb-bg-peach { background:radial-gradient(ellipse at 30% 30%,#ffd9b8,#f8c9c0 60%,#e8c5e0); color:#1a182b; }
-.vb-bg-white { background:#fff; color:#1a182b; }
-.vb-bg-dark { background:#161427; color:#fff; }
+.vb-bg-violet { background:linear-gradient(135deg,#000,#000 55%,#000); color:#fff; }
+.vb-bg-peach { background:radial-gradient(ellipse at 30% 30%,#fff,#fff 60%,#cecece); color:#000; }
+.vb-bg-white { background:#fff; color:#000; }
+.vb-bg-dark { background:#000; color:#fff; }
 .vb-checklist { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem 2rem; margin-top:1.2rem; font-size:0.9rem; color:var(--vb-grey); }
 .vb-checklist span { display:flex; align-items:center; gap:0.55rem; }
 .vb-checklist .ok { color:#22c55e; }
@@ -41,12 +41,12 @@ const styles = `
 .vb-footer ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.55rem; font-size:0.9rem; }
 .vb-footer a { color:var(--vb-grey); text-decoration:none; }
 .vb-footer a:hover { color:var(--vb-dark); }
-.vb-wordmark { text-align:center; font-size:clamp(6rem,22vw,18rem); font-weight:800; letter-spacing:-0.06em; line-height:0.8; background:linear-gradient(180deg,#c9beff 0%,#7c66f5 60%,#3a1fa6 100%); -webkit-background-clip:text; background-clip:text; color:transparent; margin-top:3rem; user-select:none; }
+.vb-wordmark { text-align:center; font-size:clamp(6rem,22vw,18rem); font-weight:800; letter-spacing:-0.06em; line-height:0.8; background:#000; -webkit-background-clip:text; background-clip:text; color:transparent; margin-top:3rem; user-select:none; }
 `;
 
 function LogoBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex h-auto min-h-5 w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-transparent bg-[#e7e2ff] px-3 py-1.5 text-[0.6875rem] leading-normal font-medium whitespace-normal text-[#6e47ff]">
+    <span className="inline-flex h-auto min-h-5 w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-transparent bg-[#e5e5e5] px-3 py-1.5 text-[0.6875rem] leading-normal font-medium whitespace-normal text-[#000]">
       {children}
     </span>
   );
@@ -119,19 +119,12 @@ const mockupTemplates = [
   { label: "Orchid", image: mockupGenerator3 },
 ] as const;
 
-const brandSolidColors = [
-  { color: "#FFBD9E", badges: ["Solid", "Peach"], hexCodes: ["#FFBD9E"], badgeVariant: "light" as const },
-  { color: "#947FFF", badges: ["Solid", "Lilac"], hexCodes: ["#947FFF"], badgeVariant: "dark" as const },
-  { color: "#6748FD", badges: ["Solid", "Violet"], hexCodes: ["#6748FD"], badgeVariant: "dark" as const },
-  { color: "#150079", badges: ["Solid", "Navy"], hexCodes: ["#150079"], badgeVariant: "dark" as const },
-] as const;
-
 type LogoShowcaseCardProps = {
   badges: string[];
   logoSrc: string;
   logoAlt: string;
   logoMaxWidth?: string;
-  background?: "gradient" | "peach" | "white" | "dark";
+  background?: "white" | "dark";
 };
 
 function LogoShowcaseCard({
@@ -139,21 +132,10 @@ function LogoShowcaseCard({
   logoSrc,
   logoAlt,
   logoMaxWidth = "18rem",
-  background = "gradient",
+  background = "white",
 }: LogoShowcaseCardProps) {
   return (
     <div className="relative isolate min-h-[280px] overflow-hidden rounded-2xl shadow-sm sm:min-h-[360px]">
-      {background === "gradient" ? (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit] gradient-dark-2" />
-      ) : null}
-      {background === "peach" ? (
-        <img
-          alt=""
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center select-none"
-          loading="lazy"
-          src="/assets/visuals/sections/brand/card2-bg.svg"
-        />
-      ) : null}
       {background === "white" ? (
         <div aria-hidden="true" className="absolute inset-0 bg-white" />
       ) : null}
@@ -182,26 +164,14 @@ const primaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
     logoSrc: "/assets/brand/logos/gaspo-logo-pure-white.svg",
-    logoAlt: "Gaspo wordmark (pure white) on brand gradient",
-    background: "gradient",
-  },
-  {
-    badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/gaspo-logo-soft-black.svg",
-    logoAlt: "Gaspo wordmark on light blurred background",
-    background: "peach",
+    logoAlt: "Gaspo wordmark (pure white) on dark background",
+    background: "dark",
   },
   {
     badges: ["Logo", "Dark"],
     logoSrc: "/assets/brand/logos/gaspo-logo-soft-black.svg",
     logoAlt: "Gaspo wordmark (soft black) on white background",
     background: "white",
-  },
-  {
-    badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/gaspo-logo-pure-white.svg",
-    logoAlt: "Gaspo wordmark (pure white) on dark background",
-    background: "dark",
   },
 ];
 
@@ -248,7 +218,11 @@ function AvatarShowcaseCard({
           }
           className="size-40 object-contain"
           loading="lazy"
-          src="/assets/brand/logos/gaspo-avatar-color.svg"
+          src={
+            background === "white"
+              ? "/assets/brand/logos/gaspo-avatar.svg"
+              : "/assets/brand/logos/gaspo-avatar-white.svg"
+          }
         />
       </div>
     </div>
@@ -269,7 +243,7 @@ function BrandRuleDoIcon() {
 function BrandRuleDontIcon() {
   return (
     <span
-      className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-[#1a182b]/12 text-white"
+      className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-[#000]/12 text-white"
       aria-hidden="true"
     >
       <X className="size-3" strokeWidth={2.4} aria-hidden="true" />
@@ -312,14 +286,14 @@ function BrandRuleColumn({
         <span
           className={`inline-flex h-auto shrink-0 items-center justify-center rounded-full border border-transparent px-5 py-1 text-lg font-medium ${
             variant === "do"
-              ? "bg-[rgba(92,40,215,0.16)] text-accent-1"
-              : "bg-[rgba(26,24,42,0.05)] text-[#9693A3]"
+              ? "bg-[rgba(0,0,0,0.16)] text-accent-1"
+              : "bg-[rgba(0,0,0,0.05)] text-[#959595]"
           }`}
         >
           {label}
         </span>
         <div
-          className="pointer-events-none h-px min-h-px min-w-0 flex-1 bg-[linear-gradient(90deg,rgba(26,24,42,0.2)_0%,rgba(26,24,42,0)_100%)]"
+          className="pointer-events-none h-px min-h-px min-w-0 flex-1 bg-[linear-gradient(90deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0)_100%)]"
           aria-hidden="true"
         />
       </div>
@@ -337,11 +311,9 @@ function BrandRuleColumn({
 const brandToneHeaderShadow =
   "inset 2.702px 2.702px 1.351px -2.702px white, inset -2.702px -2.702px 1.351px -2.702px white, inset 0 0 8.106px rgba(255,255,255,0.5), inset 0 0 43.232px #f2f2f2";
 
-const toneGradientDo =
-  "radial-gradient(135% 145% at 52% -8%, rgb(255, 189, 158) 0%, rgb(253, 188, 160) 6.43%, rgb(201, 158, 208) 21.2%, rgb(148, 127, 255) 36%, rgb(126, 100, 254) 58%, rgb(103, 72, 253) 80%, rgb(83, 54, 220) 85%, rgb(62, 36, 187) 90%, rgb(42, 18, 154) 95%, rgb(21, 0, 121) 100%)";
+const toneGradientDo = "#000";
 
-const toneGradientDont =
-  "radial-gradient(135% 145% at 52% -8%, rgb(245, 245, 245) 0%, rgb(236, 236, 236) 6.43%, rgb(206, 206, 206) 21.2%, rgb(153, 153, 153) 36%, rgb(125, 125, 125) 58%, rgb(102, 102, 102) 80%, rgb(82, 82, 82) 85%, rgb(61, 61, 61) 90%, rgb(42, 42, 42) 95%, rgb(21, 21, 21) 100%)";
+const toneGradientDont = "#fff";
 
 const toneOfVoiceIsRules = [
   "An AI employee with its own computer. It lives in Slack, connects to your tools, and does real work.",
@@ -395,7 +367,7 @@ function ToneOfVoiceCheckIcon() {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" className="block size-full">
       <g clipPath={`url(#${clipId})`}>
-        <rect width="64" height="64" fill="#FAF5F1" />
+        <rect width="64" height="64" fill="#FFF" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -412,11 +384,11 @@ function ToneOfVoiceCheckIcon() {
           gradientTransform="matrix(5.83333 66.7852 -89.8106 24.7924 33.3167 -2.78518)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#000" />
+          <stop offset="0.0642857" stopColor="#000" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
         <clipPath id={clipId}>
           <rect width="64" height="64" fill="white" />
@@ -432,12 +404,12 @@ function ToneOfVoiceDismissIcon() {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" className="block size-full">
       <g clipPath={`url(#${clipId})`}>
-        <rect width="64" height="64" fill="#FAF5F1" />
+        <rect width="64" height="64" fill="#FFF" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
           d="M32 0C22.0822 0 13.9992 2.79671 8.39799 8.39799C2.79671 13.9992 0 22.0822 0 32C0 41.9178 2.79671 50.0009 8.39799 55.6018C13.9992 61.2032 22.0822 64 32 64C41.9178 64 50.0009 61.2032 55.6018 55.6018C61.2032 50.0009 64 41.9178 64 32C64 22.0822 61.2032 13.9992 55.6018 8.39799C50.0009 2.79671 41.9178 0 32 0ZM45.594 18.4083C46.7099 19.5241 46.7099 21.3331 45.594 22.4489L36.0428 32L45.594 41.5511C46.7099 42.6669 46.7099 44.476 45.594 45.5918C44.4782 46.7077 42.6692 46.7077 41.5534 45.5917L32.0022 36.0406L22.4511 45.5918C21.3353 46.7077 19.5263 46.7077 18.4105 45.5918C17.2947 44.476 17.2947 42.6669 18.4105 41.5511L27.9616 32L18.4105 22.4489C17.2947 21.3331 17.2947 19.5241 18.4105 18.4083C19.5263 17.2925 21.3353 17.2925 22.4511 18.4083L32.0022 27.9594L41.5534 18.4083C42.6692 17.2925 44.4782 17.2925 45.594 18.4083Z"
-          fill="#9693A3"
+          fill="#959595"
         />
       </g>
       <defs>
@@ -458,7 +430,10 @@ function ToneOfVoiceColumnHeader({ variant }: { variant: "do" | "dont" }) {
       >
         <div
           className="absolute inset-0 rounded-section"
-          style={{ background: variant === "do" ? toneGradientDo : toneGradientDont }}
+          style={{
+            background: variant === "do" ? toneGradientDo : toneGradientDont,
+            boxShadow: variant === "do" ? undefined : "inset 0 0 0 1px #e5e5e5",
+          }}
         />
         <div className="absolute inset-0 rounded-section bg-white/20" />
       </div>
@@ -483,13 +458,13 @@ function ToneOfVoiceLabel({
       <div
         className={`h-px flex-1 ${
           variant === "do"
-            ? "bg-[linear-gradient(90deg,rgba(26,24,43,0)_0%,rgba(26,24,43,0.12)_100%)]"
-            : "bg-[linear-gradient(90deg,rgba(26,24,43,0.12)_0%,rgba(26,24,43,0)_100%)]"
+            ? "bg-[linear-gradient(90deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.12)_100%)]"
+            : "bg-[linear-gradient(90deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0)_100%)]"
         }`}
       />
       <span
         className={`relative z-30 inline-flex h-8 items-center justify-center rounded-full px-4 text-base leading-[1.3] font-medium tracking-[0.01em] sm:px-5 sm:text-[1.125rem] ${
-          variant === "do" ? "bg-[#5c28d7]/16 text-[#5c28d7]" : "bg-[#1a182b]/5 text-secondary"
+          variant === "do" ? "bg-[#000]/16 text-[#000]" : "bg-[#000]/5 text-secondary"
         }`}
       >
         {children}
@@ -497,8 +472,8 @@ function ToneOfVoiceLabel({
       <div
         className={`h-px flex-1 ${
           variant === "do"
-            ? "bg-[linear-gradient(90deg,rgba(26,24,43,0.12)_0%,rgba(26,24,43,0)_100%)]"
-            : "bg-[linear-gradient(90deg,rgba(26,24,43,0)_0%,rgba(26,24,43,0.12)_100%)]"
+            ? "bg-[linear-gradient(90deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0)_100%)]"
+            : "bg-[linear-gradient(90deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.12)_100%)]"
         }`}
       />
     </div>
@@ -566,16 +541,9 @@ const secondaryLogoCards: LogoShowcaseCardProps[] = [
   {
     badges: ["Logo", "Light"],
     logoSrc: "/assets/brand/logos/gaspo-logo-secondary-pure-white.svg",
-    logoAlt: "Gaspo secondary lockup (pure white) on brand gradient",
+    logoAlt: "Gaspo secondary lockup (pure white) on dark background",
     logoMaxWidth: "24rem",
-    background: "gradient",
-  },
-  {
-    badges: ["Logo", "Dark"],
-    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-soft-black.svg",
-    logoAlt: "Gaspo secondary lockup on soft blurred background",
-    logoMaxWidth: "24rem",
-    background: "peach",
+    background: "dark",
   },
   {
     badges: ["Logo", "Dark"],
@@ -583,13 +551,6 @@ const secondaryLogoCards: LogoShowcaseCardProps[] = [
     logoAlt: "Gaspo secondary lockup (soft black) on white background",
     logoMaxWidth: "24rem",
     background: "white",
-  },
-  {
-    badges: ["Logo", "Dark", "Flat"],
-    logoSrc: "/assets/brand/logos/gaspo-logo-secondary-pure-white.svg",
-    logoAlt: "Gaspo secondary lockup (pure white) on dark background",
-    logoMaxWidth: "24rem",
-    background: "dark",
   },
 ];
 
@@ -710,68 +671,19 @@ export default function BrandPage() {
                   Colours
                 </h2>
                 <p className="body-main max-w-xl text-secondary font-medium">
-                  Gaspo&apos;s palette runs from warm peach through lilac and violet into deep navy.
-                  Soft-black and white anchor it; the radial gradient ties them together.
+                  Gaspo is black and white. Pure black and pure white carry every surface, with no
+                  gradients between them. Colour belongs to icons and third-party logos, never to
+                  Gaspo&apos;s own surfaces.
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-                {brandSolidColors.map((swatch) => (
-                  <SolidColorSwatch key={swatch.hexCodes[0]} {...swatch} />
-                ))}
-              </div>
-
-              <div className="grid gap-4 lg:grid-cols-2">
-                <div className="relative min-h-[200px] overflow-hidden rounded-2xl shadow-sm sm:min-h-[240px]">
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 gradient-dark-2 select-none"
-                  />
-                  <div className="relative flex h-full min-h-[200px] flex-col justify-between gap-6 p-4 sm:min-h-[240px]">
-                    <div className="flex flex-wrap gap-2">
-                      <ColorSwatchBadge variant="dark">Gradient</ColorSwatchBadge>
-                      <ColorSwatchBadge variant="dark">Radial</ColorSwatchBadge>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {["#FFBD9E", "#947FFF", "#6748FD", "#150079"].map((hex) => (
-                        <ColorSwatchBadge key={hex} variant="dark">
-                          {hex}
-                        </ColorSwatchBadge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative min-h-[200px] overflow-hidden rounded-2xl shadow-sm sm:min-h-[240px]">
-                  <img
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover select-none"
-                    loading="lazy"
-                    src="/assets/visuals/sections/brand/brand-colours-gradient2.svg"
-                  />
-                  <div className="relative flex h-full min-h-[200px] flex-col justify-between gap-6 p-4 sm:min-h-[240px]">
-                    <div className="flex flex-wrap gap-2">
-                      <ColorSwatchBadge variant="light">Gradient</ColorSwatchBadge>
-                      <ColorSwatchBadge variant="light">Blur + Blend mode</ColorSwatchBadge>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {["#B3A3FF", "#FFCCB5", "#FFF5AC", "#150079"].map((hex) => (
-                        <ColorSwatchBadge key={hex} variant="light">
-                          {hex}
-                        </ColorSwatchBadge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="grid gap-4 sm:grid-cols-2">
                 <SolidColorSwatch
-                  color="#1B182A"
-                  badges={["Solid", "Soft-black"]}
-                  hexCodes={["#1B182A"]}
+                  color="#000"
+                  badges={["Solid", "Black"]}
+                  hexCodes={["#000"]}
                   badgeVariant="dark"
                 />
                 <SolidColorSwatch

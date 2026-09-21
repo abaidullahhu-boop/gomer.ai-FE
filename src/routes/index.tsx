@@ -37,7 +37,7 @@ const testimonials = [
 
 export default function Index() {
   return (
-    <div className="mono-site min-h-screen bg-primitive-main-beige">
+    <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Gaspo — Not a tool. A hire."
         description="Gaspo is the AI coworker that connects to 3,000+ tools and does the work. Reports, dashboards, code, campaigns."
@@ -166,14 +166,14 @@ function FeatureGlassCardShell({ children }: { children: ReactNode }) {
           <div className="relative z-[1] h-full w-full rounded-[inherit]">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+              className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
               style={{
                 background: "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
               }}
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+              className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
               style={{
                 background:
                   "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -189,7 +189,7 @@ function FeatureGlassCardShell({ children }: { children: ReactNode }) {
               style={{ filter: "blur(5px)" }}
             >
               <div
-                className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
                 style={{
                   background:
                     "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -354,7 +354,7 @@ function integrationRelativeSlot(logoIndex: number, activeIndex: number, count: 
 function IntegrationLogoCard({ children, featured }: { children: ReactNode; featured?: boolean }) {
   return (
     <div
-      className={`integration-logo-card flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-opacity duration-[50ms] ease-out ${featured ? "opacity-100" : "opacity-90"}`}
+      className={`integration-logo-card flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fff] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#fff] transition-opacity duration-[50ms] ease-out ${featured ? "opacity-100" : "opacity-90"}`}
     >
       <div className="flex size-full items-center justify-center overflow-hidden rounded-[inherit] px-2 py-2">
         {children}

@@ -123,7 +123,7 @@ function CardGlassBorder() {
       />
       <div
         aria-hidden
-        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -140,7 +140,7 @@ function CardGlassBorder() {
         style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",

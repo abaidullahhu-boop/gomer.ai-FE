@@ -58,7 +58,7 @@ function OrganizationIcon() {
 function AutomationsIcon() {
   return (
     <span
-      className="inline-flex size-[0.875em] shrink-0 items-center justify-center rounded-md bg-[#6e47ff] text-[0.42em] font-bold text-white"
+      className="inline-flex size-[0.875em] shrink-0 items-center justify-center rounded-md bg-[#000] text-[0.42em] font-bold text-white"
       aria-hidden="true"
     >
       G

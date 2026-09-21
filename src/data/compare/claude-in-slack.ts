@@ -2,7 +2,7 @@ import type { ComparePageConfig } from "@/components/compare/types";
 import claudeIcon from "@/assets/images/claude.svg";
 
 const claudeWhenChooseGradient =
-  "radial-gradient(139.85% 104.66% at 52.06% -4.35%, rgb(255, 180, 150) 0%, rgb(217, 119, 87) 6.43%, rgb(255, 210, 190) 35.97%, rgb(250, 200, 180) 80.07%, rgb(217, 119, 87) 100%)";
+  "#fff";
 
 export const claudeInSlackCompareConfig: ComparePageConfig = {
   meta: {

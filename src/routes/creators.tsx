@@ -274,7 +274,7 @@ function PayoutRowCard({
       <div className="relative z-[1] h-full w-full rounded-[inherit]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -282,7 +282,7 @@ function PayoutRowCard({
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -298,7 +298,7 @@ function PayoutRowCard({
           style={{ filter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -572,11 +572,11 @@ function CreatorsHowIcon({
           gradientTransform={gradientTransform}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.0642857" stopColor="#FFF" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
       </defs>
     </svg>
@@ -681,7 +681,7 @@ function HowItWorksStepCard({
         <div className="flex flex-col gap-8">
           <div className="flex items-start justify-between gap-3">
             <CreatorsHowIcon {...icon} />
-            <span className="inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-[#5c28d7]/16 px-5 body-small text-accent-1">
+            <span className="inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-[#000]/16 px-5 body-small text-accent-1">
               {number}
             </span>
           </div>
@@ -895,12 +895,12 @@ function CreditsConicCardShell({ children }: { children: ReactNode }) {
       <div className="relative z-[1] h-full w-full rounded-[inherit]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{ background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)" }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -916,7 +916,7 @@ function CreditsConicCardShell({ children }: { children: ReactNode }) {
           style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
@@ -1334,7 +1334,7 @@ function AudienceGlassCard({
       <div className="relative h-full w-full rounded-[inherit]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -1342,7 +1342,7 @@ function AudienceGlassCard({
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -1357,7 +1357,7 @@ function AudienceGlassCard({
           style={{ filter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -1473,7 +1473,7 @@ function RulesReceiptCheckIcon() {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M0.43668 2.88096C0.706137 1.15026 2.21884 0 3.88249 0H13.284C14.8943 0 16.3871 1.08234 16.6785 2.77039C17.4541 7.26234 17.158 12.9894 16.5578 17.8154C16.3424 19.5487 14.3167 20.3164 13.0094 19.18L11.6268 17.978L10.7032 19.0181C9.54591 20.3216 7.53394 20.3283 6.36824 19.0323L5.41955 17.9777L4.09994 19.1366C2.78638 20.29 0.741437 19.5064 0.537366 17.7596C-0.0328942 12.8781 -0.269909 7.41931 0.43668 2.88096ZM12.1498 7.25457C12.5881 6.857 12.6211 6.17941 12.2235 5.74114C11.826 5.30286 11.1484 5.26987 10.7101 5.66744C9.74702 6.54109 9.00957 7.33893 8.38471 8.31423C8.01597 8.88977 7.69668 9.51116 7.39301 10.2231L6.48487 9.28657C6.07292 8.86176 5.39461 8.85133 4.96981 9.26326C4.54501 9.67519 4.53457 10.3535 4.94649 10.7783L7.02442 12.9212C7.28321 13.188 7.66184 13.3017 8.02481 13.2215C8.38779 13.1413 8.68325 12.8786 8.80547 12.5275C9.28144 11.1603 9.69697 10.2382 10.189 9.47021C10.6768 8.70883 11.2687 8.05391 12.1498 7.25457Z"
-        fill="#6748FD"
+        fill="#000"
       />
     </svg>
   );
@@ -1486,7 +1486,7 @@ function RulesOpenHandIcon() {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M9.23356 9.10611C8.70746 9.10611 8.28096 8.68679 8.28096 8.16953V2.60189C8.28096 1.74214 7.584 1.04519 6.72426 1.04519C5.97787 1.04519 5.33306 1.57451 5.21779 2.31194C4.71644 5.51924 4.63566 8.77029 4.8553 12.0164L2.85794 11.0947C1.84324 10.7247 0.707975 11.1654 0.223985 12.1171C-0.214735 12.9798 0.00567888 14.0257 0.756915 14.646L6.22083 19.1576C6.62924 19.4947 7.1231 19.7147 7.64924 19.7754C10.222 20.0724 12.7376 20.0749 15.3094 19.7829C15.8761 19.7184 16.4236 19.4831 16.762 19.024C19.0919 15.8629 18.6211 8.58536 18.3099 3.78757C18.2623 3.05464 17.6543 2.48487 16.9197 2.48487C16.1533 2.48487 15.5319 3.10624 15.5319 3.87273V8.09416C15.5319 8.61141 15.1054 9.03074 14.5793 9.03074C14.0531 9.03074 13.6267 8.61141 13.6267 8.09416V1.72027C13.6267 0.770192 12.8565 0 11.9064 0C10.9564 0 10.1862 0.770192 10.1862 1.72027V8.16953C10.1862 8.68679 9.75967 9.10611 9.23356 9.10611ZM4.76283 10.1248C4.78103 10.7378 4.81146 11.3657 4.85536 12.0148C6.61386 12.2139 7.78923 12.9747 8.40391 14.2924C8.62326 14.7626 9.18873 14.9689 9.66693 14.7533C10.1451 14.5376 10.355 13.9816 10.1357 13.5115C9.12153 11.3375 7.1384 10.3218 4.76283 10.1248Z"
-        fill="#CC9881"
+        fill="#000"
       />
     </svg>
   );
@@ -1499,7 +1499,7 @@ function RulesWebBrowserIcon() {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M2.49452 4.76463C2.4345 4.96173 2.39243 5.16607 2.37025 5.37573C2.06706 8.24136 2.06706 11.0423 2.37025 13.908C2.53499 15.4651 3.79726 16.73 5.3584 16.9023C8.24165 17.2203 11.0499 17.2203 13.9332 16.9023C15.4942 16.73 16.7565 15.4651 16.9214 13.908C17.2245 11.0423 17.2245 8.24136 16.9214 5.37573C16.8991 5.16607 16.8571 4.96173 16.7971 4.76463H2.49452ZM14.1681 0.251492C11.1287 -0.0838312 8.16285 -0.0838298 5.12342 0.251492C2.566 0.533636 0.510486 2.5869 0.239282 5.15027C-0.0797612 8.16579 -0.0797598 11.1179 0.239282 14.1334C0.510487 16.6967 2.566 18.75 5.12342 19.0321C8.16285 19.3676 11.1287 19.3676 14.1681 19.0321C16.7255 18.75 18.7811 16.6967 19.0522 14.1334C19.3714 11.1179 19.3714 8.16579 19.0522 5.15027C18.7811 2.5869 16.7255 0.533636 14.1681 0.251492ZM11.7868 13.0357C11.7868 12.444 11.3071 11.9643 10.7153 11.9643H5.6724C5.08068 11.9643 4.60098 12.444 4.60098 13.0357C4.60098 13.6274 5.08068 14.1071 5.6724 14.1071H10.7153C11.3071 14.1071 11.7868 13.6274 11.7868 13.0357ZM5.67243 7.85714C5.0807 7.85714 4.601 8.33684 4.601 8.92857C4.601 9.5203 5.0807 10 5.67243 10H13.6189C14.2106 10 14.6902 9.5203 14.6902 8.92857C14.6902 8.33684 14.2106 7.85714 13.6189 7.85714H5.67243Z"
-        fill="#A37F9E"
+        fill="#898989"
       />
     </svg>
   );

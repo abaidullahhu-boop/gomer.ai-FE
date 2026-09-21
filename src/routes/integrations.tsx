@@ -469,7 +469,7 @@ export default function IntegrationsPage() {
 function StepBadge({ number, className = "" }: { number: string; className?: string }) {
   return (
     <span
-      className={`inline-flex h-8 items-center justify-center rounded-full bg-[#5c28d7]/16 px-5 backdrop-blur-[5px] font-sans text-sm leading-[1.3] font-medium tracking-[0.01em] text-[#5c28d7] ${className}`}
+      className={`inline-flex h-8 items-center justify-center rounded-full bg-[#000]/16 px-5 backdrop-blur-[5px] font-sans text-sm leading-[1.3] font-medium tracking-[0.01em] text-[#000] ${className}`}
     >
       {number}
     </span>
@@ -488,12 +488,12 @@ function ConicGradientCardShell({ children }: { children: ReactNode }) {
       <div className="relative z-[1] h-full w-full rounded-[inherit]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{ background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 100%)" }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background: "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
             WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -508,7 +508,7 @@ function ConicGradientCardShell({ children }: { children: ReactNode }) {
           style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background: "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
               WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -713,12 +713,12 @@ function ConnectedAccountGlassCard({
       <div className="relative size-full rounded-2xl bg-white/20 p-[1.0625rem] backdrop-blur-sm">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{ background: "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)" }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background: "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
             WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -733,7 +733,7 @@ function ConnectedAccountGlassCard({
           style={{ filter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background: "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
               WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -750,7 +750,7 @@ function ConnectedAccountGlassCard({
             </span>
             <span className="flex items-center gap-2">
               <span
-                className="size-2 shrink-0 rounded-full bg-[#43d08b] shadow-[inset_1.8px_1.8px_3.6px_0_#f5f1ed]"
+                className="size-2 shrink-0 rounded-full bg-[#43d08b] shadow-[inset_1.8px_1.8px_3.6px_0_#fff]"
                 aria-hidden="true"
               />
               <span className="text-xs leading-[1.3] font-medium text-white">Active</span>

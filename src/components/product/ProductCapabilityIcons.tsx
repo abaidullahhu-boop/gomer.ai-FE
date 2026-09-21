@@ -8,11 +8,11 @@ function capabilityGradient(id: string) {
       gradientTransform="matrix(2.91666 33.3926 -44.9053 12.3962 16.6583 -1.39259)"
       gradientUnits="userSpaceOnUse"
     >
-      <stop stopColor="#FFBB98" />
-      <stop offset="0.0642857" stopColor="#FFBB98" />
-      <stop offset="0.507143" stopColor="#9E84FF" />
-      <stop offset="0.803571" stopColor="#6E47FF" />
-      <stop offset="1" stopColor="#150079" />
+      <stop stopColor="#FFF" />
+      <stop offset="0.0642857" stopColor="#FFF" />
+      <stop offset="0.507143" stopColor="#000" />
+      <stop offset="0.803571" stopColor="#000" />
+      <stop offset="1" stopColor="#000" />
     </radialGradient>
   );
 }

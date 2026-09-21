@@ -38,7 +38,7 @@ export function IntegrationsHero() {
               />
               <Link
                 to="#integrations-directory"
-                className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#1a182b1a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#1a182b]/[0.06] active:translate-y-px sm:w-auto"
+                className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#0000001a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#000]/[0.06] active:translate-y-px sm:w-auto"
               >
                 See All Integrations
               </Link>

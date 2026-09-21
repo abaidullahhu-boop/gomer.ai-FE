@@ -236,7 +236,7 @@ function MobileNavAccordion({
               to={item.to}
               onClick={onNavigate}
               className={({ isActive }) =>
-                `rounded-xl px-1 py-2 text-xl font-medium text-[#2d2e32] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none${
+                `rounded-xl px-1 py-2 text-xl font-medium text-[#2e2e2e] transition-colors hover:bg-black/5 focus:bg-black/5 focus:outline-none${
                   isActive ? " bg-black/[0.06]" : ""
                 }`
               }

@@ -15,23 +15,23 @@ import { Footer } from "@/components/site/Footer";
 
 const tokens = `
 .gaspo-scope {
-  --vk-beige: #faf5f1;
+  --vk-beige: #fff;
   --vk-white: #fff;
-  --vk-dark: #1a182b;
-  --vk-grey: #9693a3;
-  --vk-dblue: #150079;
-  --vk-purple-700: #4e32b5;
-  --vk-purple-500: #6e47ff;
-  --vk-purple-300: #9e84ff;
-  --vk-purple-100: #d2c6ff;
-  --vk-purple-50: #f1edff;
-  --vk-orange-500: #ffbb98;
-  --vk-orange-300: #ffd1ba;
+  --vk-dark: #000;
+  --vk-grey: #959595;
+  --vk-dblue: #000;
+  --vk-purple-700: #000;
+  --vk-purple-500: #000;
+  --vk-purple-300: #000;
+  --vk-purple-100: #fff;
+  --vk-purple-50: #fff;
+  --vk-orange-500: #fff;
+  --vk-orange-300: #fff;
   --vk-radius: 0.875rem;
   --vk-radius-lg: 1.225rem;
   --vk-radius-xl: 1.575rem;
   --vk-radius-2xl: 2.275rem;
-  --vk-hero-surface: radial-gradient(70% 44% at 52% 9rem, rgba(255,189,158,0.72) 0%, rgba(253,188,160,0.66) 6%, rgba(201,158,208,0.42) 29%, rgba(148,127,255,0.18) 51%, rgba(250,245,241,0) 92%), linear-gradient(90deg, var(--vk-beige), var(--vk-beige));
+  --vk-hero-surface: radial-gradient(70% 44% at 52% 9rem, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.66) 6%, rgba(0,0,0,0.42) 29%, rgba(0,0,0,0.18) 51%, rgba(255,255,255,0) 92%), linear-gradient(90deg, var(--vk-beige), var(--vk-beige));
   font-family: Gellix, ui-sans-serif, sans-serif;
   background: var(--vk-beige);
   color: var(--vk-dark);
@@ -46,7 +46,7 @@ const tokens = `
   font-size: 0.8rem; font-weight: 500;
   color: var(--vk-purple-700);
   background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(110,71,255,0.18);
+  border: 1px solid rgba(0,0,0,0.18);
   padding: 0.4rem 0.85rem; border-radius: 999rem;
   backdrop-filter: blur(8px);
 }
@@ -70,14 +70,14 @@ const tokens = `
   background: rgba(255,255,255,0.7); color: var(--vk-dark);
   border-radius: 999rem; padding: 0.85rem 1.4rem;
   font-weight: 500; font-size: 0.95rem;
-  border: 1px solid rgba(26,24,43,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
   backdrop-filter: blur(8px);
 }
 .vk-hero-img {
   margin: 0 auto; max-width: 60rem; border-radius: var(--vk-radius-2xl);
-  overflow: hidden; box-shadow: 0 30px 80px -20px rgba(26,24,41,0.25);
+  overflow: hidden; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.25);
   border: 1px solid rgba(255,255,255,0.6);
-  background: linear-gradient(135deg, #f9f5f1, #fffefc);
+  background: linear-gradient(135deg, #fff, #fff);
   aspect-ratio: 16/9;
   display: flex; align-items: center; justify-content: center;
   position: relative;
@@ -85,9 +85,9 @@ const tokens = `
 .vk-hero-img-inner {
   position: absolute; inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(110,71,255,0.25), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(255,187,152,0.35), transparent 50%),
-    linear-gradient(135deg, #f9f5f1 0%, #fffefc 100%);
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.25), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.35), transparent 50%),
+    linear-gradient(135deg, #fff 0%, #fff 100%);
 }
 .vk-hero-img-card {
   position: relative; z-index: 1;
@@ -95,12 +95,12 @@ const tokens = `
   backdrop-filter: blur(20px);
   border-radius: 1rem; padding: 1.25rem 1.5rem;
   border: 1px solid rgba(255,255,255,0.9);
-  box-shadow: 0 12px 32px rgba(26,24,41,0.12);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
   font-size: 0.9rem; color: var(--vk-dark);
   display: flex; align-items: center; gap: 0.75rem;
 }
 
-.vk-footer { padding: 4.5rem 0 2.5rem; border-top: 1px solid rgba(26,24,43,0.08); margin-top: 4rem; }
+.vk-footer { padding: 4.5rem 0 2.5rem; border-top: 1px solid rgba(0,0,0,0.08); margin-top: 4rem; }
 .vk-footer-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 2rem; }
 @media (max-width: 800px) { .vk-footer-grid { grid-template-columns: 1fr 1fr; } }
 .vk-footer h4 { font-size: 0.8125rem; font-weight: 600; margin-bottom: 1rem; color: var(--vk-dark); }
@@ -108,7 +108,7 @@ const tokens = `
 .vk-footer a { color: var(--vk-grey); font-size: 0.9rem; text-decoration: none; transition: color 0.15s; }
 .vk-footer a:hover { color: var(--vk-dark); }
 .vk-brand { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.04em; margin-bottom: 0.75rem; }
-.vk-footer-bottom { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(26,24,43,0.06); font-size: 0.8125rem; color: var(--vk-grey); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.vk-footer-bottom { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.06); font-size: 0.8125rem; color: var(--vk-grey); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 
 .vk-nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; }
 .vk-nav-links { display: flex; gap: 1.75rem; }
@@ -179,7 +179,7 @@ const behindTheScenesVideos = [
 
 function VideoPlayIcon() {
   return (
-    <svg viewBox="0 0 12.5714 15.4239" fill="none" aria-hidden className="size-4 text-[#1a182b]">
+    <svg viewBox="0 0 12.5714 15.4239" fill="none" aria-hidden className="size-4 text-[#000]">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -330,7 +330,7 @@ export default function LandingPage() {
                 <div className="flex w-full flex-col items-center gap-8">
                   <div className="flex w-full flex-col items-center">
                     <div className="pb-4">
-                      <p className="body-small text-[#f1edff] font-medium">Let's work together</p>
+                      <p className="body-small text-[#fff] font-medium">Let's work together</p>
                     </div>
                     <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
                       Build Gaspo with us
@@ -344,7 +344,7 @@ export default function LandingPage() {
                   href="https://jobs.ashbyhq.com/gomer"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-14 min-h-14 shrink-0 items-center justify-center rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-[#292737] transition-all hover:bg-white/95 active:translate-y-px"
+                  className="inline-flex h-14 min-h-14 shrink-0 items-center justify-center rounded-full border-transparent bg-white px-10 text-base font-medium tracking-[0.01em] text-[#292929] transition-all hover:bg-white/95 active:translate-y-px"
                 >
                   See the open roles
                 </a>

@@ -42,7 +42,7 @@ export default function SupportPage() {
         aria-hidden="true"
       />
 
-      <header className="fixed top-0 right-0 left-0 z-40 bg-[#fff6eecc] backdrop-blur-md">
+      <header className="fixed top-0 right-0 left-0 z-40 bg-[#ffffffcc] backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] min-w-0 items-center justify-between gap-3 px-4 py-4 sm:gap-6 sm:px-6 sm:py-6 md:px-12">
           <Link
             to="/"

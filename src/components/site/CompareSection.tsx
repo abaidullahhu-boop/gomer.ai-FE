@@ -98,7 +98,7 @@ type TabIndicator = {
 };
 
 function ComparisonTabActiveBackground({ className }: { className?: string }) {
-  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={`mono-art ${className ?? ""}`} />;
+  return <img aria-hidden alt="" src={comparisonTabActiveBg} className={className} />;
 }
 
 export function CompareSection() {
@@ -187,7 +187,7 @@ export function CompareSection() {
                 >
                   <Icon
                     className={`w-5 h-5 shrink-0 transition-colors duration-300 ease-out ${
-                      isActive ? "text-[#D0CFD6]" : "text-[#D0CFD6]"
+                      isActive ? "text-[#D0D0D0]" : "text-[#D0D0D0]"
                     }`}
                   />
                   {t.label}
@@ -230,7 +230,7 @@ export function CompareSection() {
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+                  className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
                   style={{
                     background:
                       "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -246,7 +246,7 @@ export function CompareSection() {
                   style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
                 >
                   <div
-                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
                     style={{
                       background:
                         "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",

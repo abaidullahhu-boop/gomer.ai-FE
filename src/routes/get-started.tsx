@@ -90,7 +90,7 @@ export default function GetStarted() {
   const testimonial = testimonials[activeIndex];
 
   return (
-    <div className="mono-site flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
+    <div className="flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
       <PageMeta
         title="Try Gaspo for free — $100 credits included"
         description="Sign up for Gaspo with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
@@ -98,7 +98,7 @@ export default function GetStarted() {
 
       {/* Sign-up panel */}
       <div className="relative flex w-full flex-1 flex-col overflow-hidden lg:shrink-0">
-        <div className="absolute left-5 top-5 z-10 text-[#1b182a] md:hidden">
+        <div className="absolute left-5 top-5 z-10 text-[#000] md:hidden">
           <GaspoLogo />
         </div>
 
@@ -167,13 +167,13 @@ export default function GetStarted() {
 
       {/* Testimonial panel */}
       <div className="gaspo-auth-gradient relative hidden flex-1 flex-col overflow-hidden md:flex md:h-auto">
-        <div className="mono-invert absolute left-5 top-5 z-10 text-[#1b182a]">
+        <div className="mono-invert absolute left-5 top-5 z-10 text-[#000]">
           <GaspoLogo />
         </div>
 
         <div className="flex h-full flex-col items-center justify-center gap-5 px-4 py-6 md:gap-6 md:px-10 md:py-0">
           <div className="relative h-[280px] w-full max-w-[448px]">
-            <div className="gaspo-glass-card flex h-[280px] flex-col gap-6 rounded-[32px] p-8 text-[#1b182a]">
+            <div className="gaspo-glass-card flex h-[280px] flex-col gap-6 rounded-[32px] p-8 text-[#000]">
               <p className="flex-1 text-[16px] leading-6">{testimonial.quote}</p>
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -184,7 +184,7 @@ export default function GetStarted() {
                   />
                   <div className="flex flex-col">
                     <p className="text-sm font-bold leading-5">{testimonial.name}</p>
-                    <p className="text-sm leading-5 text-[#1b182a]/80">{testimonial.role}</p>
+                    <p className="text-sm leading-5 text-[#000]/80">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
