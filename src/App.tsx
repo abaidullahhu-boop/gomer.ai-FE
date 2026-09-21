@@ -34,6 +34,7 @@ import DashboardIntegrations from "@/routes/dashboard/integrations";
 import DashboardIntegrationConfigure from "@/routes/dashboard/integration-configure";
 import DashboardIntegrationAccount from "@/routes/dashboard/integration-account";
 import DashboardSkills from "@/routes/dashboard/skills";
+import DashboardSkillBundle from "@/routes/dashboard/skill-bundle";
 import DashboardSpaces from "@/routes/dashboard/spaces";
 import { UsageLayout } from "@/components/dashboard/usage/UsageLayout";
 import UsageOverview from "@/routes/dashboard/usage/overview";
@@ -92,6 +93,7 @@ export default function App() {
           <Route path="skills" element={<DashboardSkills />} />
           <Route path="skills/installed" element={<DashboardSkills />} />
           <Route path="skills/installed/library" element={<DashboardSkills />} />
+          <Route path="skills/bundle/:slug" element={<DashboardSkillBundle />} />
           <Route path="spaces" element={<DashboardSpaces />} />
           <Route path="tasks" element={<DashboardTasks />} />
           <Route path="automations" element={<DashboardAutomations />} />
