@@ -90,7 +90,7 @@ export default function GetStarted() {
   const testimonial = testimonials[activeIndex];
 
   return (
-    <div className="flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
+    <div className="mono-site flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
       <PageMeta
         title="Try Gaspo for free — $100 credits included"
         description="Sign up for Gaspo with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."

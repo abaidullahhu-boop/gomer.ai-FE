@@ -9,7 +9,7 @@ const authButtonClass =
 
 export default function SignIn() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
+    <div className="mono-site relative flex min-h-screen flex-col bg-white">
       <PageMeta
         title="Sign in to Gaspo"
         description="Sign in to Gaspo with Slack or join the Microsoft Teams waitlist."
@@ -25,7 +25,7 @@ export default function SignIn() {
             <img
               src={gaspoAvatar}
               alt=""
-              className="size-14 rounded-lg"
+              className="mono-art size-14 rounded-lg"
               width={56}
               height={56}
               aria-hidden
