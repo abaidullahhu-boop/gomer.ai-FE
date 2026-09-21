@@ -6,7 +6,7 @@ type SkillBundleCardProps = {
   bundle: SkillBundle;
 };
 
-function AuthorAvatar({ name }: { name: string }) {
+export function AuthorAvatar({ name }: { name: string }) {
   const initials = name
     .split(" ")
     .map((part) => part[0])
@@ -44,7 +44,9 @@ export function SkillBundleCard({ bundle }: SkillBundleCardProps) {
               <BadgeCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden />
             ) : null}
           </div>
-          <p className="line-clamp-4 text-sm leading-5 text-secondary-foreground">{bundle.description}</p>
+          <p className="line-clamp-4 text-sm leading-5 text-secondary-foreground">
+            {bundle.description}
+          </p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -57,9 +59,10 @@ export function SkillBundleCard({ bundle }: SkillBundleCardProps) {
 
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">{bundle.skillCount} skills included</span>
+          {/* Installing happens on the bundle page, so this click rides the
+              surrounding link there rather than being swallowed. */}
           <button
             type="button"
-            onClick={(event) => event.preventDefault()}
             className="gaspo-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border-0 bg-btn-primary px-3 py-2 text-xs font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98]"
           >
             <ArrowDownToLine className="size-3.5 shrink-0" strokeWidth={1.5} />
