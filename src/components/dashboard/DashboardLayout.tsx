@@ -10,11 +10,14 @@ import { GaspoLogo } from "./GaspoLogo";
 
 export type DashboardOutletContext = {
   openInviteModal: () => void;
+  /** Bumps each time an invite goes through, so pages listing members can refetch. */
+  invitesVersion: number;
 };
 
 export function DashboardLayout() {
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  const [invitesVersion, setInvitesVersion] = useState(0);
   const [bugModalOpen, setBugModalOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -72,12 +75,13 @@ export function DashboardLayout() {
             onReportBug={() => setBugModalOpen(true)}
           />
           <main className="min-w-0 flex-1 overflow-y-auto bg-background pt-[72px] md:pt-0">
-            <Outlet context={{ openInviteModal: () => setInviteModalOpen(true) }} />
+            <Outlet context={{ openInviteModal: () => setInviteModalOpen(true), invitesVersion }} />
           </main>
           <GetFreeCreditsModal open={creditsModalOpen} onClose={() => setCreditsModalOpen(false)} />
           <InviteTeamMembersModal
             open={inviteModalOpen}
             onClose={() => setInviteModalOpen(false)}
+            onInvited={() => setInvitesVersion((version) => version + 1)}
           />
           <ReportBugModal open={bugModalOpen} onClose={() => setBugModalOpen(false)} />
         </div>

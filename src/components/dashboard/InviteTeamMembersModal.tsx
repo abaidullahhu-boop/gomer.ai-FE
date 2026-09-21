@@ -1,12 +1,32 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
-import { X } from "lucide-react";
+import { AlertTriangle, Check, UserCheck, X } from "lucide-react";
+import { ApiError, inviteTeamMembers, type InviteResult } from "@/lib/api";
 
 type InviteTeamMembersModalProps = {
   open: boolean;
   onClose: () => void;
+  /** Called once per batch in which at least one person was added. */
+  onInvited?: () => void;
 };
+
+function ResultIcon({ status }: { status: InviteResult["status"] }) {
+  if (status === "invited") {
+    return <Check className="size-4 shrink-0 text-foreground" strokeWidth={1.5} aria-hidden />;
+  }
+  if (status === "already_member") {
+    return (
+      <UserCheck className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} aria-hidden />
+    );
+  }
+  return (
+    <AlertTriangle
+      className="size-4 shrink-0 text-muted-foreground"
+      strokeWidth={1.5}
+      aria-hidden
+    />
+  );
+}
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -33,10 +53,12 @@ function EmailChip({ email, onRemove }: { email: string; onRemove: () => void })
   );
 }
 
-export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModalProps) {
+export function InviteTeamMembersModal({ open, onClose, onInvited }: InviteTeamMembersModalProps) {
   const [emails, setEmails] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [results, setResults] = useState<InviteResult[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const emailInputId = useId();
   const emailLabelId = useId();
@@ -67,6 +89,8 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
       setEmails([]);
       setInputValue("");
       setSubmitting(false);
+      setResults([]);
+      setError(null);
       window.setTimeout(() => inputRef.current?.focus(), 0);
     }
   }, [open]);
@@ -125,10 +149,25 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
     if (allEmails.length === 0) return;
 
     setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
-      onClose();
-    }, 600);
+    setError(null);
+    inviteTeamMembers(allEmails)
+      .then((batch) => {
+        // Keep the dialog open: the per-address outcome is the whole point.
+        setResults(batch);
+        setEmails([]);
+        setInputValue("");
+        if (batch.some((result) => result.status === "invited")) onInvited?.();
+      })
+      .catch((err: unknown) => {
+        if (err instanceof ApiError && err.status === 403) {
+          setError("Only workspace admins can invite members.");
+        } else if (err instanceof ApiError) {
+          setError(err.message);
+        } else {
+          setError("Could not send the invites. Check your connection and try again.");
+        }
+      })
+      .finally(() => setSubmitting(false));
   }
 
   if (!open) return null;
@@ -162,16 +201,9 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
               Invite team members
             </div>
             <div className="text-sm text-muted-foreground">
-              Add team members to collaborate on projects and share your workspace benefits. Invites
-              do not change your billing amount in Gaspo&apos;s credit-based plans.{" "}
-              <Link
-                to="/dashboard/billing"
-                target="_blank"
-                rel="noreferrer"
-                className="underline decoration-solid"
-              >
-                Learn more
-              </Link>
+              Add people from your Slack workspace by the email on their Slack account. Each one
+              joins right away and gets a Slack DM from Gaspo with where to sign in. There are no
+              per-seat fees on Gaspo&apos;s credit plans.
             </div>
           </div>
 
@@ -194,7 +226,9 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
                   <EmailChip
                     key={email}
                     email={email}
-                    onRemove={() => setEmails((current) => current.filter((item) => item !== email))}
+                    onRemove={() =>
+                      setEmails((current) => current.filter((item) => item !== email))
+                    }
                   />
                 ))}
                 <input
@@ -220,15 +254,50 @@ export function InviteTeamMembersModal({ open, onClose }: InviteTeamMembersModal
               </div>
             </div>
 
-            <button
-              type="button"
-              disabled={!canInvite || submitting}
-              onClick={handleInvite}
-              data-loading={submitting}
-              className="gaspo-focus-ring inline-flex min-h-10 w-full cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[loading=true]:cursor-wait"
-            >
-              Invite
-            </button>
+            {error ? (
+              <p className="text-sm text-destructive" role="alert">
+                {error}
+              </p>
+            ) : null}
+
+            {results.length > 0 ? (
+              <ul className="flex flex-col gap-2 rounded-[7px] border border-border bg-secondary p-3">
+                {results.map((result) => (
+                  <li key={result.email} className="flex items-start gap-2 text-sm">
+                    <span className="mt-0.5">
+                      <ResultIcon status={result.status} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-medium text-foreground">
+                        {result.email}
+                      </span>
+                      <span className="block text-muted-foreground">{result.message}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                disabled={!canInvite || submitting}
+                onClick={handleInvite}
+                data-loading={submitting}
+                className="gaspo-focus-ring inline-flex min-h-10 flex-1 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[loading=true]:cursor-wait"
+              >
+                {submitting ? "Inviting…" : results.length > 0 ? "Invite more" : "Invite"}
+              </button>
+              {results.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                >
+                  Done
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
