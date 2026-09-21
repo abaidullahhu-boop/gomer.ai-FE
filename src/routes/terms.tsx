@@ -15,7 +15,7 @@ function Section({
     <section className="mb-10">
       <h2
         className="font-serif text-2xl md:text-3xl mb-4"
-        style={{ color: "#293045", fontFamily: '"Instrument Serif", serif' }}
+        style={{ color: "#303030", fontFamily: '"Instrument Serif", serif' }}
       >
         {number}. {title}
       </h2>
@@ -41,7 +41,7 @@ export default function TermsPage() {
           <div className="mb-12">
             <h1
               className="font-serif text-5xl md:text-7xl tracking-tight mb-4"
-              style={{ color: "#293045", fontFamily: '"Instrument Serif", serif' }}
+              style={{ color: "#303030", fontFamily: '"Instrument Serif", serif' }}
             >
               Terms of Service
             </h1>
@@ -301,10 +301,10 @@ export default function TermsPage() {
               className="rounded-lg p-6 mt-4"
               style={{ backgroundColor: "oklch(97% 0.001 106.424)" }}
             >
-              <p className="mb-2" style={{ color: "#293045" }}>
+              <p className="mb-2" style={{ color: "#303030" }}>
                 <strong>Gaspo</strong>
               </p>
-              <p className="mb-2" style={{ color: "#293045" }}>
+              <p className="mb-2" style={{ color: "#303030" }}>
                 Legal Department
               </p>
               <p>

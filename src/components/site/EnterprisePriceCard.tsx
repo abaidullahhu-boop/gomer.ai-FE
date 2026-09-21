@@ -36,7 +36,7 @@ export function EnterprisePriceCard() {
       <div className="relative h-full w-full p-6 py-8 sm:p-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 100%)",
@@ -44,7 +44,7 @@ export function EnterprisePriceCard() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -61,7 +61,7 @@ export function EnterprisePriceCard() {
           style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%)",
@@ -77,7 +77,7 @@ export function EnterprisePriceCard() {
         <div className="relative z-[2] flex h-full w-full flex-col justify-between">
           <div className="flex h-full w-full flex-col gap-8">
             <div className="relative grid auto-rows-min items-start gap-4 p-0">
-              <p className="text-sm font-medium text-[#ffbb98]">Enterprise</p>
+              <p className="text-sm font-medium text-[#fff]">Enterprise</p>
               <p className="font-heading text-5xl max-sm:text-[2.625rem] leading-none font-bold tracking-[-0.06em]">
                 Custom
               </p>

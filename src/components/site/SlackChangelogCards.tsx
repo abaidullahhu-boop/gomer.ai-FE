@@ -19,16 +19,16 @@ function CompareSlackGradientShell({ children }: { children: ReactNode }) {
 /* ---------- Light Slack card (image 1) ---------- */
 export function SlackLightCard() {
   return (
-    <div className="relative w-full rounded-[28px] p-5 sm:p-7 bg-gradient-to-br from-[#c9b8ff] via-[#a78bfa] to-[#7c6cf0] shadow-[0_30px_60px_-20px_rgba(80,40,160,0.35)]">
+    <div className="relative w-full rounded-[28px] p-5 sm:p-7 bg-gradient-to-br from-[#fff] via-[#000] to-[#000] shadow-[0_30px_60px_-20px_rgba(80,40,160,0.35)]">
       <div className="rounded-[18px] bg-white/95 backdrop-blur-sm p-5 sm:p-6 shadow-[0_10px_30px_-15px_rgba(40,20,80,0.25)]">
         <div className="flex flex-col gap-3.5">
-          <SlackRow name="Anna" time="1:23 PM" avatarClass="from-fuchsia-400 to-violet-500">
+          <SlackRow name="Anna" time="1:23 PM" avatarClass="from-neutral-700 to-black">
             <Mention>@Gaspo</Mention> we need a competitive analysis for Monday
           </SlackRow>
-          <SlackRow name="Lisa" time="1:24 PM" avatarClass="from-pink-400 to-violet-500">
+          <SlackRow name="Lisa" time="1:24 PM" avatarClass="from-neutral-500 to-neutral-800">
             <Mention>@Gaspo</Mention> please make it a PDF
           </SlackRow>
-          <SlackRow name="Gaspo" time="2:43 PM" avatarClass="from-violet-400 to-fuchsia-500" app>
+          <SlackRow name="Gaspo" time="2:43 PM" avatarClass="from-black to-black" app>
             <>
               Done — pulled latest from Stripe, HubSpot and three review sites.
               <div className="mt-2.5">
@@ -237,7 +237,7 @@ function SlackRow({
         <div className="flex flex-wrap items-baseline gap-x-2">
           <span className="font-semibold text-[#1d1c1d] text-sm">{name}</span>
           {app && (
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-violet-100 text-violet-700 font-semibold">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slack-app-badge text-slack-app-badge font-semibold">
               APP
             </span>
           )}
@@ -251,7 +251,7 @@ function SlackRow({
 
 function Mention({ children }: { children: ReactNode }) {
   return (
-    <span className="px-1 rounded bg-violet-100 text-violet-700 font-medium">
+    <span className="px-1 rounded bg-slack-app-badge text-slack-app-badge font-medium">
       {children}
     </span>
   );
@@ -261,7 +261,7 @@ function FileChip({ name, tint }: { name: string; tint?: boolean }) {
   return (
     <span
       className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-[12px] font-medium ${
-        tint ? "bg-violet-100 text-violet-700" : "bg-stone-100 text-stone-700"
+        tint ? "bg-slack-app-badge text-slack-app-badge" : "bg-stone-100 text-stone-700"
       }`}
     >
       <span>📎</span>

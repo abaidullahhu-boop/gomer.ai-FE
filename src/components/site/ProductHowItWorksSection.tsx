@@ -52,7 +52,7 @@ function GlassCardShell({ children }: { children: ReactNode }) {
       />
       <div
         aria-hidden="true"
-        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -68,7 +68,7 @@ function GlassCardShell({ children }: { children: ReactNode }) {
         style={{ filter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -103,7 +103,7 @@ function MarketplaceAppsVisual() {
           className="absolute inset-0 rounded-[inherit]"
           style={{
             backgroundImage:
-              "var(--how-it-works-gaspo-row-image, radial-gradient(95% 80% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 38%, rgba(255, 255, 255, 0) 76%), conic-gradient(from 90deg, rgba(253, 227, 170, 0.6) 0%, rgba(255, 189, 158, 0.6) 33%, rgba(210, 198, 255, 0.6) 66%, rgba(103, 72, 253, 0.6) 80%, rgba(253, 227, 170, 0.6) 100%))",
+              "var(--how-it-works-gaspo-row-image, radial-gradient(95% 80% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 38%, rgba(255, 255, 255, 0) 76%), conic-gradient(from 90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.6) 33%, rgba(255, 255, 255, 0.6) 66%, rgba(0, 0, 0, 0.6) 80%, rgba(255, 255, 255, 0.6) 100%))",
           }}
         />
         <span aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-white/8 mix-blend-plus-lighter backdrop-blur-[10px]" />
@@ -112,7 +112,7 @@ function MarketplaceAppsVisual() {
         <div className="relative z-10 flex min-w-0 flex-1 items-start">
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <div className="flex min-w-0 flex-wrap items-center gap-1">
-              <p className="text-sm leading-[1.3] font-medium whitespace-nowrap text-[#262219]">Gaspo</p>
+              <p className="text-sm leading-[1.3] font-medium whitespace-nowrap text-[#222222]">Gaspo</p>
               <div className="flex items-center justify-center gap-2 rounded-full bg-[#cff2ff] px-2 py-px">
                 <svg width="17" height="12" viewBox="0 0 17 12" fill="none" aria-hidden="true" className="h-3 w-[17px] shrink-0">
                   <path
@@ -123,7 +123,7 @@ function MarketplaceAppsVisual() {
                 <span className="text-xs leading-[1.3] font-medium whitespace-nowrap text-[#00a1e0]">Salesforce Partner</span>
               </div>
             </div>
-            <p className="text-sm leading-[1.3] text-[#262219]">Your AI employee in Slack</p>
+            <p className="text-sm leading-[1.3] text-[#222222]">Your AI employee in Slack</p>
           </div>
         </div>
         <span

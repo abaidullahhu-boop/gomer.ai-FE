@@ -155,7 +155,7 @@ function EnterpriseHero() {
                 href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#1a182b1a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#1a182b]/[0.06] active:translate-y-px sm:w-auto"
+                className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#0000001a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#000]/[0.06] active:translate-y-px sm:w-auto"
               >
                 Book a Demo
               </a>
@@ -220,7 +220,7 @@ function OperationsIcon() {
 const complianceColumns: ComplianceColumnData[] = [
   {
     title: "Identity & Access",
-    pillClassName: "bg-[rgba(103,72,253,0.16)] text-[#6748fd]",
+    pillClassName: "bg-[rgba(0,0,0,0.16)] text-[#000]",
     icon: <IdentityAccessIcon />,
     rows: [
       {
@@ -239,7 +239,7 @@ const complianceColumns: ComplianceColumnData[] = [
   },
   {
     title: "Compliance",
-    pillClassName: "bg-[rgba(253,188,160,0.16)] text-[#cc9881]",
+    pillClassName: "bg-[rgba(255,255,255,0.16)] text-[#000]",
     icon: <ComplianceShieldIcon />,
     rows: [
       {
@@ -258,7 +258,7 @@ const complianceColumns: ComplianceColumnData[] = [
   },
   {
     title: "Operations",
-    pillClassName: "bg-[rgba(208,162,201,0.16)] text-[#a37f9e]",
+    pillClassName: "bg-[rgba(0,0,0,0.16)] text-[#898989]",
     icon: <OperationsIcon />,
     rows: [
       {
@@ -282,7 +282,7 @@ function ComplianceGlassCard({ title, description }: { title: string; descriptio
     <div className="relative h-full w-full rounded-2xl bg-white/20 px-8 py-6 lg:min-h-[163px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -290,7 +290,7 @@ function ComplianceGlassCard({ title, description }: { title: string; descriptio
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -306,7 +306,7 @@ function ComplianceGlassCard({ title, description }: { title: string; descriptio
         style={{ filter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -354,7 +354,7 @@ function ComplianceGrid() {
             <div className="w-full lg:w-[776px] lg:shrink-0">
               <div className="w-full pb-4">
                 <div className="inline-flex max-w-full items-center">
-                  <p className="body-small m-0 max-w-full truncate font-medium text-[#4e32b5]">
+                  <p className="body-small m-0 max-w-full truncate font-medium text-[#000]">
                     Data handling
                   </p>
                 </div>
@@ -736,7 +736,7 @@ function EnterpriseSlackGaspoMessage({
 
 function EnterpriseChatPreview({ messages }: { messages: SlackMessage[] }) {
   return (
-    <div className="w-full max-w-[502px] rounded-2xl p-0 sm:p-4 [--slack-add-reaction-icon:#2e1e6b] [--slack-mention-bg:#3d278c] [--slack-mention-text:#f1edff] [--slack-reaction-pill-bg:#d2c6ff] [--slack-reaction-pill-hover-bg:#c4b5ff]">
+    <div className="w-full max-w-[502px] rounded-2xl p-0 sm:p-4 [--slack-add-reaction-icon:#000] [--slack-mention-bg:#000] [--slack-mention-text:#fff] [--slack-reaction-pill-bg:#fff] [--slack-reaction-pill-hover-bg:#fff]">
       <div className="flex flex-col gap-2">
         {messages.map((message, index) =>
           message.kind === "user" ? (
@@ -854,7 +854,7 @@ function DeliverablesTabs() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
             <div className="w-full pb-4 flex justify-center">
               <div className="inline-flex max-w-full items-center">
-                <p className="body-small m-0 max-w-full truncate font-medium text-[#4e32b5]">The Enterprise plan</p>
+                <p className="body-small m-0 max-w-full truncate font-medium text-[#000]">The Enterprise plan</p>
               </div>
             </div>
             <h2 className="font-heading h3 text-balance">One coworker. Every team. Real deliverables.</h2>
@@ -1010,11 +1010,11 @@ function enterpriseIconGradient(id: string) {
       gradientTransform="matrix(2.91667 33.3926 -44.9053 12.3962 16.6583 -1.39259)"
       gradientUnits="userSpaceOnUse"
     >
-      <stop stopColor="#FFBB98" />
-      <stop offset="0.0642857" stopColor="#FFBB98" />
-      <stop offset="0.507143" stopColor="#9E84FF" />
-      <stop offset="0.803571" stopColor="#6E47FF" />
-      <stop offset="1" stopColor="#150079" />
+      <stop stopColor="#FFF" />
+      <stop offset="0.0642857" stopColor="#FFF" />
+      <stop offset="0.507143" stopColor="#000" />
+      <stop offset="0.803571" stopColor="#000" />
+      <stop offset="1" stopColor="#000" />
     </radialGradient>
   );
 }
@@ -1104,7 +1104,7 @@ function SecurityControlCard({
     <div className="relative h-full w-full rounded-[inherit] rounded-section bg-white/20 px-8 py-8 text-left lg:min-h-[15.75rem] lg:pr-16">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -1112,7 +1112,7 @@ function SecurityControlCard({
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -1128,7 +1128,7 @@ function SecurityControlCard({
         style={{ filter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -1160,7 +1160,7 @@ function SecurityAlly() {
           <div className="flex max-w-[34.125rem] flex-col items-center">
             <div className="w-full pb-4 flex justify-center">
               <div className="inline-flex max-w-full items-center">
-                <p className="body-small m-0 max-w-full truncate text-[#4e32b5] font-medium px-3 py-1">
+                <p className="body-small m-0 max-w-full truncate text-[#000] font-medium px-3 py-1">
                   Security & Compliance
                 </p>
               </div>
@@ -1291,7 +1291,7 @@ function OnboardingGlassCard({
         <div className="relative z-[1] h-full w-full rounded-[inherit]">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
             style={{
               background:
                 "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -1299,7 +1299,7 @@ function OnboardingGlassCard({
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+            className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -1315,7 +1315,7 @@ function OnboardingGlassCard({
             style={{ filter: "blur(5px)" }}
           >
             <div
-              className="pointer-events-none absolute inset-0 rounded-[inherit]"
+              className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
               style={{
                 background:
                   "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -1329,7 +1329,7 @@ function OnboardingGlassCard({
           <div className="relative z-[2] flex h-full w-full flex-col justify-between">
             <div className="relative z-10 h-[21.25rem] shrink-0 overflow-hidden">
               {visual}
-              <span className="absolute top-8 left-8 z-20 flex h-8 items-center justify-center rounded-full bg-[#5c28d7]/16 px-5 font-sans text-sm leading-[1.3] font-medium tracking-[0.01em] text-[#5c28d7]">
+              <span className="absolute top-8 left-8 z-20 flex h-8 items-center justify-center rounded-full bg-[#000]/16 px-5 font-sans text-sm leading-[1.3] font-medium tracking-[0.01em] text-[#000]">
                 {step}
               </span>
             </div>
@@ -1355,7 +1355,7 @@ function AddInTwoMinutes() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
             <div className="flex w-full justify-center pb-4">
               <div className="inline-flex max-w-full items-center">
-                <p className="body-small m-0 max-w-full truncate font-medium text-[#4e32b5] px-3 py-1">
+                <p className="body-small m-0 max-w-full truncate font-medium text-[#000] px-3 py-1">
                   Onboarding
                 </p>
               </div>

@@ -13,7 +13,7 @@ export function ConicPriceCardShell({
     <div
       className={`group/card relative flex w-full flex-col overflow-visible rounded-section border-0 bg-transparent p-0 ring-0 ${className}`}
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[18px]">
+      <div className="conic-price-card pointer-events-none absolute inset-0 overflow-hidden rounded-[18px]">
         <div className="bg-conic-gradient-bg absolute inset-0 opacity-75" />
         <div
           className="absolute inset-[8px] rounded-[inherit]"
@@ -30,7 +30,7 @@ export function ConicPriceCardShell({
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
-              "radial-gradient(ellipse 110% 105% at 50% 38%, transparent 52%, rgba(150,120,210,0.18) 78%, rgba(90,60,170,0.32) 100%)",
+              "radial-gradient(ellipse 110% 105% at 50% 38%, transparent 52%, rgba(0,0,0,0.18) 78%, rgba(0,0,0,0.32) 100%)",
           }}
         />
         <div

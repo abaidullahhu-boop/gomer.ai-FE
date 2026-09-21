@@ -56,7 +56,7 @@ export function IntegrationsControlSection() {
     <section className="relative overflow-visible bg-primitive-main-beige py-14 sm:py-[7rem]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-11.625rem] left-1/2 h-[23.25rem] w-[min(73.8vw,66.5rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgb(110_71_255/0.34)_0%,rgb(158_132_255/0.24)_42%,rgb(250_245_241/0)_100%)] blur-[80px]"
+        className="mono-hide pointer-events-none absolute bottom-[-11.625rem] left-1/2 h-[23.25rem] w-[min(73.8vw,66.5rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgb(110_71_255/0.34)_0%,rgb(158_132_255/0.24)_42%,rgb(250_245_241/0)_100%)] blur-[80px]"
       />
       <div className="px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-16">
@@ -116,11 +116,11 @@ function FingerprintIcon() {
           gradientTransform="matrix(2.91667 33.3926 -44.9053 12.3962 16.6583 -1.39259)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.0642857" stopColor="#FFF" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
         <clipPath id="integrations-control-fingerprint-clip">
           <rect width="32" height="32" fill="white" />
@@ -150,11 +150,11 @@ function ShieldSecurityIcon() {
           gradientTransform="matrix(2.9166 33.0292 -44.9043 12.2613 16.6584 -1.20312)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.0642857" stopColor="#FFF" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
         <clipPath id="integrations-control-shield-security-clip">
           <rect width="32" height="32" fill="white" />
@@ -184,11 +184,11 @@ function ReceiptCheckIcon() {
           gradientTransform="matrix(2.5004 33.3926 -38.4964 12.3962 16.5645 -1.39259)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.0642857" stopColor="#FFF" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
         <clipPath id="integrations-control-receipt-check-clip">
           <rect width="32" height="32" fill="white" />
@@ -218,11 +218,11 @@ function KeyholeShieldIcon() {
           gradientTransform="matrix(2.8125 32.1999 -43.3016 11.9535 16.6347 -0.771564)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.0642857" stopColor="#FFBB98" />
-          <stop offset="0.507143" stopColor="#9E84FF" />
-          <stop offset="0.803571" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.0642857" stopColor="#FFF" />
+          <stop offset="0.507143" stopColor="#000" />
+          <stop offset="0.803571" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
         <clipPath id="integrations-control-keyhole-shield-clip">
           <rect width="32" height="32" fill="white" />

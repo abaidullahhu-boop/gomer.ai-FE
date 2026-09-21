@@ -210,6 +210,8 @@
   --accent: #f4f4f5;
   --accent-foreground: var(--mono-ink);
   --secondary: #f4f4f5;
+  /* The marketing .text-secondary utility reads this; in the shell it is the muted ink, in both modes. */
+  --primitive-main-grey: var(--muted-foreground);
   --border: oklch(0.9 0 0 / 60%);
   --input: oklch(0.9 0 0);
   --ring: var(--mono-ink);
@@ -293,16 +295,16 @@
 }
 
 /*
- * Black-and-white marketing scope. Put on a page's root and every brand
- * primitive, gradient and Slack-mock colour the page reads resolves to pure
- * black or pure white: surfaces are one or the other, never a grey sweep
- * between them. Components are shared with pages that do not opt in, so they
- * keep using the brand tokens; only the tokens change here.
+ * Black-and-white scope, switched on for the whole site by class="mono-site" on
+ * <html> in index.html. Every brand primitive, gradient and Slack-mock colour
+ * resolves to pure black or pure white: surfaces are one or the other, never a
+ * grey sweep between them. The :root values above are the old purple palette;
+ * removing the class from <html> brings the token-driven parts of it back.
  *
- * Icons keep their colour. The Gaspo app icon and every third-party logo
- * render as shipped; only brand artwork that is not an icon (the compare tab
- * pill, the GASPO logotype) is tagged mono-art and flattened to black. The
- * glass "gaspo" wordmark swaps for a solid black twin via mono-show/mono-hide.
+ * Third-party logos keep their colour. The Gaspo G icon is itself black and
+ * white; brand artwork that is not an icon (the GASPO logotype) is tagged
+ * mono-art and flattened to black, and the glass "gaspo" wordmark swaps for a
+ * solid black twin via mono-show/mono-hide.
  *
  * Light brand tints (purple-50/100, orange-500) become white so the tinted
  * glass on cards washes out to plain white. The two dark sweeps that read
@@ -380,6 +382,29 @@
   --how-it-works-gaspo-row-image: linear-gradient(#fff, #fff);
   /* The compare section's ChatGPT-side card drops its corner tint. */
   --compare-card-tint: transparent;
+  --case-study-hero-surface: #fff;
+  --integrations-icon-tile-shadow: 0 8px 16px 0 rgb(0 0 0 / 6%), inset 1.8px 1.8px 3.6px 0 #f2f2f2;
+  /* The support page's accent blue and cream become ink and white. */
+  --color-cobalt: #000;
+  --color-cream: #fff;
+}
+
+.mono-site .creators-rules-pill-requirements,
+.mono-site .creators-rules-pill-limits,
+.mono-site .creators-rules-pill-content {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #000;
+  color: #000;
+}
+
+.mono-site .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::before,
+.mono-site .integrations-logo-loop--edge-mask .integrations-logo-loop-viewport::after {
+  background: linear-gradient(90deg, #000 0%, #0000 100%);
+}
+
+.mono-site .glass-pill,
+.mono-site .chat-card {
+  box-shadow: 0 8px 32px rgb(0 0 0 / 12%);
 }
 
 /* Hero feature cards, the use-cases panel: solid white instead of frosted glass. */
@@ -411,6 +436,29 @@
 }
 
 .mono-site .use-case-tab-glass > * {
+  display: none;
+}
+
+/*
+ * The glass pattern copied through the marketing pages: a 1px edge highlight (glass-edge)
+ * over a soft white tint and a blurred highlight (both mono-hide). Here the edge is a crisp
+ * white line and the soft layers go, so glass on black reads as a black card outlined in white.
+ */
+.mono-site .glass-edge {
+  background: #fff !important;
+}
+
+/* The compare pages' Gaspo hero card: solid white, not white glass fading into the black hero. */
+.mono-site .compare-hero-gaspo-card {
+  background: #fff;
+}
+
+/* The pricing Team card: a white face instead of the tinted conic glass and its edge vignette. */
+.mono-site .conic-price-card {
+  background: #fff;
+}
+
+.mono-site .conic-price-card > * {
   display: none;
 }
 

@@ -219,14 +219,14 @@ function TabGlassIndicator({
       <div className="relative h-full w-full rounded-section bg-white/[0.08] backdrop-blur-[22px] backdrop-saturate-150">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 100%)",
           }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -242,7 +242,7 @@ function TabGlassIndicator({
           style={{ filter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgb(255,255,255) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgb(255,255,255) 100%)",
@@ -262,13 +262,13 @@ function TabGlassIndicator({
 function TabBadge({ label, variant }: { label: string; variant: "live" | "soon" }) {
   if (variant === "live") {
     return (
-      <span className="inline-flex h-7 shrink-0 items-center rounded-full bg-[#6e47ff] px-4 body-small font-medium text-white">
+      <span className="inline-flex h-7 shrink-0 items-center rounded-full bg-[#000] px-4 body-small font-medium text-white">
         {label}
       </span>
     );
   }
   return (
-    <span className="inline-flex h-7 shrink-0 items-center rounded-full border border-white/25 px-4 body-small font-medium text-[#f1edff]">
+    <span className="inline-flex h-7 shrink-0 items-center rounded-full border border-white/25 px-4 body-small font-medium text-[#fff]">
       {label}
     </span>
   );
@@ -460,14 +460,14 @@ function GlassCardShell({ children }: { children: ReactNode }) {
       <div className="relative z-[1] h-full w-full rounded-[inherit]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background: "radial-gradient(100% 100% at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 100%)",
           }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -483,7 +483,7 @@ function GlassCardShell({ children }: { children: ReactNode }) {
           style={{ filter: "blur(5px)" }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
               background:
                 "linear-gradient(-56deg, rgb(255,255,255) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgb(255,255,255) 100%)",

@@ -2,7 +2,7 @@ import type { ComparePageConfig } from "@/components/compare/types";
 import openclawIcon from "@/assets/images/openclaw-app-icon-color.avif";
 
 const openclawWhenChooseGradient =
-  "radial-gradient(139.85% 104.66% at 52.06% -4.35%, rgb(255, 140, 90) 0%, rgb(255, 107, 53) 6.43%, rgb(255, 180, 140) 35.97%, rgb(255, 160, 120) 80.07%, rgb(255, 107, 53) 100%)";
+  "#fff";
 
 export const openclawCompareConfig: ComparePageConfig = {
   meta: {

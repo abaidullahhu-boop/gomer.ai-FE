@@ -32,19 +32,13 @@ import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
 
 /* ============================================================
-   Design tokens used inline (mapped from prompt):
-   --beige:  #faf5f1
-   --orange: #ff9b6b  (primitive-orange-500)
-   --purple-300: #b9a7ff
-   --purple-500: #8267ff
-   --dblue: #1a1342  (primitive-main-dblue)
+   Inline colours are black and white only: #000 surfaces and
+   ink, #fff cards. Colour belongs to third-party logos.
 ============================================================ */
 
-const CTA_GRADIENT =
-  "radial-gradient(60% 80% at 20% 20%, #ffb08a55 0%, transparent 60%), radial-gradient(80% 90% at 80% 50%, #8267ff 0%, #4b2dbe 45%, #1a1342 100%)";
+const CTA_GRADIENT = "#000";
 
-const SECURITY_GRADIENT =
-  "radial-gradient(108.79% 100% at 50% 0%, rgba(255,187,152,0.2) 0%, rgba(255,187,152,0) 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9e84ff 0%, #8666ff 18.26%, #6e47ff 36.52%, #5835de 52.39%, #4224bc 68.26%, #2b129b 84.13%, #20098a 92.07%, #150079 100%)";
+const SECURITY_GRADIENT = "#000";
 
 const securityBadges = [
   { src: soc2Badge, alt: "SOC 2", label: "SOC 2 compliant." },
@@ -124,7 +118,7 @@ function Hero() {
               href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#1a182b1a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#1a182b]/[0.06] active:translate-y-px sm:w-auto"
+              className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#0000001a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#000]/[0.06] active:translate-y-px sm:w-auto"
             >
               Book a Demo
             </a>
@@ -335,7 +329,7 @@ function SectionWhatCanDo() {
                   <div className="flex flex-col gap-8">
                     <div className="flex items-start justify-between gap-3">
                       {c.icon}
-                      <span className="inline-flex font-medium h-8 shrink-0 items-center justify-center rounded-full bg-[#5c28d7]/16 px-5 body-small text-accent-1">
+                      <span className="inline-flex font-medium h-8 shrink-0 items-center justify-center rounded-full bg-[#000]/16 px-5 body-small text-accent-1">
                         {c.tag}
                       </span>
                     </div>

@@ -61,10 +61,10 @@ function PricingCheckIcon({ className = "size-5 shrink-0" }: { className?: strin
           gradientTransform="matrix(12.1144 19.8937 -24.9614 15.2009 5.83333 0.625)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFBB98" />
-          <stop offset="0.43" stopColor="#9E84FF" />
-          <stop offset="0.74" stopColor="#6E47FF" />
-          <stop offset="1" stopColor="#150079" />
+          <stop stopColor="#FFF" />
+          <stop offset="0.43" stopColor="#000" />
+          <stop offset="0.74" stopColor="#000" />
+          <stop offset="1" stopColor="#000" />
         </radialGradient>
       </defs>
     </svg>
@@ -126,7 +126,7 @@ function CreditsDropdown({
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((prev) => !prev)}
-        className="cursor-pointer flex w-full items-center justify-between rounded-full border border-[#d8d0ff] bg-white px-5 py-3.5 text-left text-sm font-medium text-primitive-main-dark transition-[border-color,box-shadow] duration-200 hover:border-[#c4b8ff] focus:outline-none focus:ring-2 focus:ring-primitive-purple-500/20"
+        className="cursor-pointer flex w-full items-center justify-between rounded-full border border-[#fff] bg-white px-5 py-3.5 text-left text-sm font-medium text-primitive-main-dark transition-[border-color,box-shadow] duration-200 hover:border-[#fff] focus:outline-none focus:ring-2 focus:ring-primitive-purple-500/20"
       >
         <span>{selected.label}</span>
         <ChevronDown
@@ -168,8 +168,8 @@ function CreditsDropdown({
                 }}
                 className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
                   isSelected
-                    ? "bg-[#f3f0ff] text-primitive-purple-500"
-                    : "text-primitive-main-dark hover:bg-[#faf9ff]"
+                    ? "bg-[#fff] text-primitive-purple-500"
+                    : "text-primitive-main-dark hover:bg-[#fff]"
                 }`}
               >
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center">

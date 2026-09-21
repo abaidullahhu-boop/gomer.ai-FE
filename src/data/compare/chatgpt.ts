@@ -2,7 +2,7 @@ import type { ComparePageConfig } from "@/components/compare/types";
 import chatgptIcon from "@/assets/images/chatgpt.svg";
 
 const chatgptWhenChooseGradient =
-  "radial-gradient(139.85% 104.66% at 52.06% -4.35%, rgb(141, 206, 250) 0%, rgb(134, 203, 250) 6.43%, rgb(215, 236, 255) 35.97%, rgb(211, 234, 253) 80.07%, rgb(132, 203, 250) 100%)";
+  "#fff";
 
 export const chatgptCompareConfig: ComparePageConfig = {
   meta: {

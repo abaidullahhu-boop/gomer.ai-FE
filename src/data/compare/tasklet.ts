@@ -2,7 +2,7 @@ import type { ComparePageConfig } from "@/components/compare/types";
 import taskletIcon from "@/assets/images/tasklet.svg";
 
 const taskletWhenChooseGradient =
-  "radial-gradient(139.85% 104.66% at 52.06% -4.35%, rgb(165, 180, 252) 0%, rgb(99, 102, 241) 6.43%, rgb(199, 210, 254) 35.97%, rgb(180, 190, 250) 80.07%, rgb(99, 102, 241) 100%)";
+  "#fff";
 
 export const taskletCompareConfig: ComparePageConfig = {
   meta: {

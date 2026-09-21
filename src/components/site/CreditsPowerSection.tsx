@@ -16,7 +16,7 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Sarah", time: "1:15 AM", initial: "S" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Gaspo</span> summarize yesterday's #sales thread and flag anything I need to follow up on
+            <span className="rounded-sm bg-slack-mention px-1 text-slack-mention">@Gaspo</span> summarize yesterday's #sales thread and flag anything I need to follow up on
           </>
         ),
         gaspoTime: "1:16 AM",
@@ -30,7 +30,7 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Mike", time: "11:30 AM", initial: "M" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Gaspo</span> the pricing page still says $50/mo. Can the slider fix it, should be $79/mo. Can you update it?
+            <span className="rounded-sm bg-slack-mention px-1 text-slack-mention">@Gaspo</span> the pricing page still says $50/mo. Can the slider fix it, should be $79/mo. Can you update it?
           </>
         ),
         gaspoTime: "11:46 AM",
@@ -51,7 +51,7 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Sarah", time: "9:14 AM", initial: "S" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Gaspo</span> summarize yesterday's #sales thread and flag anything I need to follow up on
+            <span className="rounded-sm bg-slack-mention px-1 text-slack-mention">@Gaspo</span> summarize yesterday's #sales thread and flag anything I need to follow up on
           </>
         ),
         gaspoTime: "9:15 AM",
@@ -65,14 +65,14 @@ const variants: Record<Variant, { icon: ReactNode; label: string; cards: CardDat
         user: { name: "Mike", time: "11:32 AM", initial: "M" },
         userMsg: (
           <>
-            <span className="text-violet-600">@Gaspo</span> the pricing page still says "$99/mo" on the starter tier. It should be "$79/mo". Can you update it?
+            <span className="rounded-sm bg-slack-mention px-1 text-slack-mention">@Gaspo</span> the pricing page still says "$99/mo" on the starter tier. It should be "$79/mo". Can you update it?
           </>
         ),
         gaspoTime: "11:38 AM",
         gaspoMsg: (
           <>
             Done ✅ Updated the pricing page — Starter tier now shows $79/mo. Preview is ready for your review:{" "}
-            <a className="text-violet-600 underline">acme.com/pricing-preview</a>
+            <a className="text-foreground underline">acme.com/pricing-preview</a>
           </>
         ),
       },
@@ -93,7 +93,7 @@ type CardData = {
 export function CreditsPowerSection({ variant = "organization" }: { variant?: Variant }) {
   const v = variants[variant];
   return (
-    <section className="px-6 py-24" style={{ background: "#fbf6ef" }}>
+    <section className="px-6 py-24" style={{ background: "#fff" }}>
       <div className="mx-auto max-w-6xl">
         <h2 className="font-display text-center text-5xl md:text-6xl text-foreground leading-[1.05]">
           Credits power everything
@@ -126,12 +126,12 @@ function CreditCard({ data }: { data: CardData }) {
       <div className="rounded-[inherit] relative z-[1] h-full w-full">
         {/* 5 - radial overlay */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{ background: "radial-gradient(100% 100%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)" }}
         />
         {/* 6 - thin border highlight */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+          className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -144,7 +144,7 @@ function CreditCard({ data }: { data: CardData }) {
         <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]" style={{ filter: "blur(5px)" }} />
         {/* 8 - thick border highlight */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255,255,255) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgb(255,255,255) 100%)",
@@ -160,7 +160,7 @@ function CreditCard({ data }: { data: CardData }) {
           <div className="relative z-10 px-6 pt-6 sm:px-8 sm:pt-8">
             {/* 11 */}
             <div className="flex max-w-md flex-col gap-2">
-              <p className="text-violet-600 text-sm font-semibold">{data.tag}</p>
+              <p className="text-foreground text-sm font-semibold">{data.tag}</p>
               <h3 className="font-display text-3xl text-foreground tracking-tight">{data.credits}</h3>
               <p className="text-muted-foreground text-sm">{data.subtitle}</p>
             </div>
@@ -203,7 +203,7 @@ function SlackMessage({
 }) {
   return (
     <div className="relative flex w-full text-left isolate gap-2 rounded-lg px-[var(--slack-message-pad-x)] py-1 border border-solid border-transparent bg-transparent">
-      <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-500">
+      <div className="relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black">
         <span className="sr-only">{initial}</span>
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
@@ -282,14 +282,14 @@ function GaspoMessage({ time, body }: { time: string; body: ReactNode }) {
           />
 
           {/* avatar */}
-          <div className="relative z-[20] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-500">
+          <div className="relative z-[20] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black">
             <span className="sr-only">V</span>
           </div>
           {/* body */}
           <div className="relative z-[20] flex min-w-0 flex-1 flex-col gap-0">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
               <span className="font-semibold text-foreground text-sm">Gaspo</span>
-              <span className="px-1.5 py-0.5 rounded text-[10px] bg-violet-100 text-violet-700 font-semibold">
+              <span className="px-1.5 py-0.5 rounded text-[10px] bg-slack-app-badge text-slack-app-badge font-semibold">
                 APP
               </span>
               <span className="text-xs text-muted-foreground">{time}</span>

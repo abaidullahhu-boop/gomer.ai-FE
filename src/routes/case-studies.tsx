@@ -402,7 +402,7 @@ function GlassOverlays() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -410,7 +410,7 @@ function GlassOverlays() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -426,7 +426,7 @@ function GlassOverlays() {
         style={{ filter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",

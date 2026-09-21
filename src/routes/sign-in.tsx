@@ -9,7 +9,7 @@ const authButtonClass =
 
 export default function SignIn() {
   return (
-    <div className="mono-site relative flex min-h-screen flex-col bg-white">
+    <div className="relative flex min-h-screen flex-col bg-white">
       <PageMeta
         title="Sign in to Gaspo"
         description="Sign in to Gaspo with Slack or join the Microsoft Teams waitlist."

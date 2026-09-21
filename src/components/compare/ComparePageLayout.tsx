@@ -17,7 +17,7 @@ const glassBorderLayers = (
   <>
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+      className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
       style={{
         background:
           "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -25,7 +25,7 @@ const glassBorderLayers = (
     />
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+      className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
       style={{
         background:
           "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -41,7 +41,7 @@ const glassBorderLayers = (
       style={{ filter: "blur(5px)" }}
     >
       <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",
@@ -70,7 +70,7 @@ const whenChooseTrustBadges = [
 function GaspoCheckBadge() {
   return (
     <span
-      className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(145.58%_104.75%_at_52.06%_-4.35%,#ffbb98_0%,#ffbb98_6.43%,#9e84ff_50.71%,#6e47ff_80.36%,#150079_100%)] shadow-[inset_0_0_8px_rgba(255,255,255,0.35)]"
+      className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-black shadow-[inset_0_0_8px_rgba(255,255,255,0.35)]"
       aria-hidden="true"
     >
       <Check className="size-3.5 text-white" strokeWidth={2.8} aria-hidden="true" />
@@ -81,7 +81,7 @@ function GaspoCheckBadge() {
 function CompetitorXBadge() {
   return (
     <span
-      className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#1a182b]/12 text-white"
+      className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#000]/12 text-white"
       aria-hidden="true"
     >
       <X className="size-3.5" strokeWidth={2.4} aria-hidden="true" />
@@ -117,15 +117,15 @@ function WhenChooseItemCard({ children }: { children: string }) {
 function WhenChooseLabel({ children, variant }: { children: string; variant: "gaspo" | "competitor" }) {
   return (
     <div className="flex items-center justify-center gap-3 px-1 sm:gap-5">
-      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(26,24,43,0.12)_0%,rgba(26,24,43,0)_100%)]" />
+      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0)_100%)]" />
       <span
         className={`relative z-30 inline-flex h-8 items-center justify-center rounded-full px-4 text-base leading-[1.3] font-medium tracking-[0.01em] sm:px-5 sm:text-[1.125rem] ${
-          variant === "gaspo" ? "bg-[#5c28d7]/16 text-[#5c28d7]" : "bg-[#1a182b]/5 text-secondary"
+          variant === "gaspo" ? "bg-[#000]/16 text-[#000]" : "bg-[#000]/5 text-secondary"
         }`}
       >
         {children}
       </span>
-      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(26,24,43,0)_0%,rgba(26,24,43,0.12)_100%)]" />
+      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.12)_100%)]" />
     </div>
   );
 }
@@ -176,7 +176,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
           <div className="relative z-[1] h-full w-full rounded-[16px]">
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+              className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
               style={{
                 background:
                   "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -253,7 +253,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
           {glassBorderLayers}
           <div className="relative z-[2] flex h-full w-full flex-col justify-between">
             <div className="flex h-full flex-col gap-8 p-8 text-left sm:p-16">
-              <div className="relative flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-[16px] border border-[#fffefc] bg-gradient-to-br from-[#f9f5f1] to-[#fffefc] shadow-[0_10px_20px_rgba(26,24,41,0.06)]">
+              <div className="relative flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-[16px] border border-[#fff] bg-gradient-to-br from-[#fff] to-[#fff] shadow-[0_10px_20px_rgba(26,24,41,0.06)]">
                 <img
                   src={competitor.icon}
                   alt={competitor.iconAlt}
@@ -439,8 +439,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
           <div
             className="absolute inset-0 rounded-section"
             style={{
-              background:
-                "radial-gradient(135% 145% at 52% -8%, rgb(255, 189, 158) 0%, rgb(253, 188, 160) 6.43%, rgb(201, 158, 208) 21.2%, rgb(148, 127, 255) 36%, rgb(126, 100, 254) 58%, rgb(103, 72, 253) 80%, rgb(83, 54, 220) 85%, rgb(62, 36, 187) 90%, rgb(42, 18, 154) 95%, rgb(21, 0, 121) 100%)",
+              background: "#000",
             }}
           />
         </div>
@@ -470,7 +469,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
         </div>
         <div className="absolute bottom-0 left-1/2 z-10 flex -translate-x-1/2 items-end justify-center">
           <span className="block size-10 shrink-0 rounded-[17px] shadow-[0_0_0_24px_var(--primitive-main-beige)] sm:size-11 lg:size-[3.25rem]">
-            <div className="flex size-full items-center justify-center overflow-hidden rounded-[17px] border border-[#fffefc] bg-gradient-to-br from-[#f9f5f1] to-[#fffefc]">
+            <div className="flex size-full items-center justify-center overflow-hidden rounded-[17px] border border-[#fff] bg-gradient-to-br from-[#fff] to-[#fff]">
               <img
                 src={competitor.icon}
                 alt={competitor.iconAlt}
@@ -545,7 +544,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
               <div className="flex flex-row flex-wrap items-center justify-center gap-8">
                 {whenChooseTrustBadges.map((badge) => (
                   <div key={badge.label} className="flex shrink-0 items-center gap-4">
-                    <span className="inline-flex text-[#1B182A33]">{badge.icon}</span>
+                    <span className="inline-flex text-[#00000033]">{badge.icon}</span>
                     <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-primary">
                       {badge.label}
                     </p>

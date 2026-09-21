@@ -186,7 +186,7 @@ const CONNECTOR_LOGOS: { name: string; icon: ReactNode }[] = [
     icon: (
       <svg viewBox="0 0 24 24" className={LOGO_CLASS} aria-hidden>
         <circle cx="8" cy="8" r="3" fill="#5B8DEF" />
-        <circle cx="16" cy="8" r="3" fill="#7B61FF" />
+        <circle cx="16" cy="8" r="3" fill="#000" />
         <circle cx="8" cy="16" r="3" fill="#FF6B6B" />
         <circle cx="16" cy="16" r="3" fill="#34D399" />
       </svg>
@@ -406,14 +406,14 @@ function GlassBorderLayers() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background: "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="glass-edge pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -429,7 +429,7 @@ function GlassBorderLayers() {
         style={{ filter: "blur(5px)" }}
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          className="mono-hide pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
             background:
               "linear-gradient(-56deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgb(255, 255, 255) 100%)",

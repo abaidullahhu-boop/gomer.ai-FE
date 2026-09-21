@@ -183,7 +183,7 @@ export function BlogPostLayout({
               </div>
             )}
             {section.codeBlock && (
-              <div className="mt-6 rounded-2xl bg-[#1a182b] p-5 md:p-6 overflow-x-auto">
+              <div className="mt-6 rounded-2xl bg-[#000] p-5 md:p-6 overflow-x-auto">
                 <pre className="text-sm text-white/90 leading-relaxed whitespace-pre-wrap font-mono">
                   {section.codeBlock}
                 </pre>
