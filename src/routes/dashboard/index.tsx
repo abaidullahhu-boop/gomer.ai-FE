@@ -2,7 +2,6 @@ import { PageMeta } from "@/components/PageMeta";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { BillingIcon, IntegrationIcon, ScheduledTasksIcon } from "@/components/dashboard/NavIcons";
 import { OnboardingSection } from "@/components/dashboard/OnboardingSection";
-import { WhatsNewCarousel } from "@/components/dashboard/WhatsNewCarousel";
 import { useDashboardOverview } from "@/components/dashboard/useDashboardOverview";
 import { useCredits } from "@/lib/credits";
 import { figureLabel } from "@/lib/format";
@@ -45,10 +44,6 @@ export default function DashboardHome() {
 
         <div className="mt-8">
           <OnboardingSection overview={overview} />
-        </div>
-
-        <div className="mt-8">
-          <WhatsNewCarousel />
         </div>
       </div>
     </>
