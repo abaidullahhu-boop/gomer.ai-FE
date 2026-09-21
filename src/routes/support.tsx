@@ -31,7 +31,7 @@ export default function SupportPage() {
     <div className="support-page relative min-h-screen bg-cream text-stone-900 selection:bg-cobalt selection:text-cream">
       <PageMeta
         title="Support — Gaspo"
-        description="Need help with the Gaspo app? Contact our support team at support@gomer.com."
+        description="Need help with the Gaspo app? Contact our support team at hello@gaspo.co or gaspo.co/support."
         ogTitle="Support — Gaspo"
         ogDescription="Need help with the Gaspo app? We're here to assist."
       />
@@ -79,13 +79,22 @@ export default function SupportPage() {
           <div className="space-y-12">
             <section className="rounded-2xl border-2 border-stone-200 bg-white p-8">
               <h2 className="font-support-serif mb-6 text-3xl">Contact Support</h2>
-              <p className="mb-6 text-lg text-stone-700">
+              <p className="mb-3 text-lg text-stone-700">
                 Email us at:{" "}
                 <a
-                  href="mailto:support@getgomer.com"
+                  href="mailto:hello@gaspo.co"
                   className="font-semibold text-cobalt hover:underline"
                 >
-                  support@getgomer.com
+                  hello@gaspo.co
+                </a>
+              </p>
+              <p className="mb-6 text-lg text-stone-700">
+                Support page:{" "}
+                <a
+                  href="https://gaspo.co/support"
+                  className="font-semibold text-cobalt hover:underline"
+                >
+                  gaspo.co/support
                 </a>
               </p>
               <p className="mb-4 text-stone-600">Please include:</p>
