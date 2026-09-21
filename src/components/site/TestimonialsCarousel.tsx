@@ -115,7 +115,7 @@ function CardGlassBorder() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.04))",
@@ -123,7 +123,7 @@ function CardGlassBorder() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,0.6) 100%)",
@@ -136,7 +136,7 @@ function CardGlassBorder() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
         style={{ filter: "blur(5px)", WebkitFilter: "blur(5px)" }}
       >
         <div
@@ -321,7 +321,7 @@ export function TestimonialsCarousel({
                                   "relative h-full min-h-52 w-full overflow-hidden rounded-[inherit] p-6 transition-[background-color,box-shadow,color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:p-8 " +
                                   (isActive
                                     ? "bg-white text-primitive-main-dark"
-                                    : "bg-white/4 text-white backdrop-blur-sm")
+                                    : "testimonial-card-idle bg-white/4 text-white backdrop-blur-sm")
                                 }
                               >
                                 {isActive ? (
@@ -357,7 +357,7 @@ export function TestimonialsCarousel({
                                             className={
                                               "rounded-full px-2 py-1 text-sm leading-[1.3] transition-colors duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] " +
                                               (isActive
-                                                ? "bg-primitive-purple-500/16 text-accent-1"
+                                                ? "testimonial-saved-pill bg-primitive-purple-500/16 text-accent-1"
                                                 : "border border-white text-primitive-purple-50 shadow-[inset_0_0_10px_var(--primitive-purple-100)]")
                                             }
                                           >

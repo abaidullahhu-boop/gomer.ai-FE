@@ -11,8 +11,13 @@ const DEFAULT_POINTS = [
 
 function CheckIcon() {
   return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="size-6 shrink-0 opacity-50">
-      <g opacity="0.3">
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+      className="start-free-check size-6 shrink-0 opacity-50"
+    >
+      <g className="mono-hide" opacity="0.3">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

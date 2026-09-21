@@ -340,7 +340,7 @@ export function AskAI() {
               <div className="flex w-full flex-col items-center gap-8">
                 <div className="flex w-full flex-col items-center">
                   <div className="pb-4">
-                    <p className="body-small text-primitive-purple-50 font-medium">Don't take our word for it</p>
+                    <p className="body-small text-[var(--primitive-purple-50)] font-medium">Don't take our word for it</p>
                   </div>
                   <h2 className="font-heading max-w-full text-balance text-[2.5rem] leading-[1.1] font-bold tracking-[-0.06em] text-white max-sm:text-[2.1875rem] sm:text-[3rem]">
                     Ask AI about Gaspo

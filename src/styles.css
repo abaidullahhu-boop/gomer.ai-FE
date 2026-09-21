@@ -293,95 +293,217 @@
 }
 
 /*
- * Monochrome marketing scope. Put on a page's root and every brand primitive,
- * gradient and Slack-mock colour the page reads resolves to greys. Components
- * are shared with pages that do not opt in, so they keep using the brand
- * tokens; only the tokens change here.
+ * Black-and-white marketing scope. Put on a page's root and every brand
+ * primitive, gradient and Slack-mock colour the page reads resolves to pure
+ * black or pure white: surfaces are one or the other, never a grey sweep
+ * between them. Components are shared with pages that do not opt in, so they
+ * keep using the brand tokens; only the tokens change here.
+ *
+ * Icons keep their colour. The Gaspo app icon and every third-party logo
+ * render as shipped; only brand artwork that is not an icon (the compare tab
+ * pill, the GASPO logotype) is tagged mono-art and flattened to black. The
+ * glass "gaspo" wordmark swaps for a solid black twin via mono-show/mono-hide.
+ *
+ * Light brand tints (purple-50/100, orange-500) become white so the tinted
+ * glass on cards washes out to plain white. The two dark sweeps that read
+ * those same tints as their highlight get their own hooks below.
  */
 .mono-site {
-  --primitive-main-beige: #f4f4f4;
-  --primitive-main-dark: #111;
-  --primitive-main-dblue: #0a0a0a;
-  --primitive-main-grey: #7a7a7a;
-  --primitive-purple-700: #2a2a2a;
-  --primitive-purple-500: #444;
-  --primitive-purple-400: #6b6b6b;
-  --primitive-purple-300: #9a9a9a;
-  --primitive-purple-100: #dcdcdc;
-  --primitive-purple-50: #eee;
-  --primitive-orange-500: #cfcfcf;
-  --bg-brand-tag-initial: var(--primitive-purple-50);
-  --btn-primary: var(--primitive-main-dark);
-  --border-btn-primary: var(--primitive-main-dark);
-  --bg-primary: var(--primitive-main-beige);
-  --typo-h1-color: var(--primitive-main-dark);
-  --typo-h2-color: var(--primitive-main-dark);
-  --typo-h3-color: var(--primitive-main-dark);
-  --hero-peach: #e0e0e0;
-  --hero-violet: #6b6b6b;
-  --hero-indigo: #2a2a2a;
-  --hero-deep: #0a0a0a;
-  --highlight: var(--primitive-main-dark);
-  --ring: var(--primitive-main-dark);
+  --primitive-main-beige: #fff;
+  --primitive-main-dark: #000;
+  --primitive-main-dblue: #000;
+  --primitive-main-grey: #555;
+  --primitive-purple-700: #000;
+  --primitive-purple-500: #000;
+  --primitive-purple-400: #000;
+  --primitive-purple-300: #000;
+  --primitive-purple-100: #fff;
+  --primitive-purple-50: #fff;
+  --primitive-orange-500: #fff;
+  --bg-brand-tag-initial: #fff;
+  --btn-primary: #000;
+  --border-btn-primary: #000;
+  --text-btn-primary: #fff;
+  --bg-primary: #fff;
+  --typo-h1-color: #000;
+  --typo-h2-color: #000;
+  --typo-h3-color: #000;
+  --hero-peach: #fff;
+  --hero-violet: #000;
+  --hero-indigo: #000;
+  --hero-deep: #000;
+  --highlight: #000;
+  --ring: #000;
 
-  --gradient-hero: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #e6e6e6 0%, #e6e6e6 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%);
-  --gradient-dark1: radial-gradient(108.79% 100% at 50% 0%, #ffffff33 0%, #ffffff00 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9a9a9a 0%, #444 36.52%, #0a0a0a 100%);
-  --gradient-dark2: radial-gradient(145.58% 104.75% at 52.06% -4.35%, #d9d9d9 0%, #d9d9d9 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%);
-  --gradient-dark3: radial-gradient(283.63% 201.39% at 31.42% -99.18%, #e0e0e0 0%, #d0d0d0 6.43%, #8a8a8a 50.71%, #3a3a3a 80.36%, #0a0a0a 100%), #d9d9d9;
-  --gradient-disclosure: radial-gradient(108.79% 100% at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(210.1% 116.78% at 39.65% 0%, #9a9a9a 0%, #444 36.52%, #0a0a0a 100%);
-  --surface-hero-primary: radial-gradient(70% 44% at 52% 9rem, #d9d9d9b8 0%, #cfcfcfa8 6%, #bdbdbd6b 29%, #9a9a9a2e 51%, #f4f4f400 92%), linear-gradient(90deg, var(--primitive-main-beige), var(--primitive-main-beige));
-  --integrations-hero-surface: var(--surface-hero-primary);
-  --integrations-hero-text-gradient: radial-gradient(120% 140% at 55% 0%, #bdbdbd 0%, #8a8a8a 50%, #0a0a0a 100%);
-  --conic-gradient-bg: conic-gradient(from -60deg at 62% 64%, #e6e6e699 0%, #e6e6e699 15%, #cfcfcf99 35%, #8a8a8a99 45%, #dcdcdc99 80%, #e6e6e699 100%);
-  --slack-mention-bg: #eee;
-  --slack-mention-text: #2a2a2a;
-  --slack-app-badge-bg: #eee;
-  --slack-app-badge-text: #2a2a2a;
-  --slack-attached-pill-bg: radial-gradient(ellipse 160% 120% at 52% -24%, #bdbdbd 0%, #8a8a8a 51%, #3a3a3a 80%, #0a0a0a 100%);
-  --integrations-connector-line: linear-gradient(180deg, #0a0a0a 0%, #444 58%, #9a9a9a 100%);
-  --integrations-gaspo-avatar-glow: radial-gradient(50% 50% at 50% 50%, #44444457 0%, #cfcfcf3d 36%, #f4f4f400 72%);
-  --integrations-icon-tile-bg: linear-gradient(135deg, #f4f4f4 19.749%, #fff 100.45%);
-  --integrations-icon-tile-border: #fff;
-  --integrations-rail-edge-fade: linear-gradient(90deg, #f4f4f4 0%, #f4f4f400 100%);
+  /* The shared theme ink is a navy near-black; here it is black. Hover fills stay a whisper of grey. */
+  --background: #fff;
+  --foreground: #000;
+  --card: #fff;
+  --card-foreground: #000;
+  --popover: #fff;
+  --popover-foreground: #000;
+  --primary: #000;
+  --primary-foreground: #fff;
+  --secondary: #fff;
+  --secondary-foreground: #000;
+  --muted: #fff;
+  --muted-foreground: #555;
+  --accent: #f5f5f5;
+  --accent-foreground: #000;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  /* body resolved its ink from :root before this scope applied; restate it here. */
+  color: var(--foreground);
+
+  --gradient-hero: #000;
+  --gradient-dark1: #000;
+  --gradient-dark2: #000;
+  --gradient-dark3: #000;
+  --gradient-disclosure: #000;
+  --surface-hero-primary: #fff;
+  --integrations-hero-surface: #fff;
+  --integrations-hero-text-gradient: #000;
+  --conic-gradient-bg: linear-gradient(#fff, #fff);
+  --slack-mention-bg: #000;
+  --slack-mention-text: #fff;
+  --slack-app-badge-bg: #000;
+  --slack-app-badge-text: #fff;
+  --slack-attached-pill-bg: #000;
+  --integrations-connector-line: #000;
+  --integrations-gaspo-avatar-glow: transparent;
+  --integrations-icon-tile-bg: #fff;
+  --integrations-rail-edge-fade: linear-gradient(90deg, #fff 0%, #fff0 100%);
+
+  /* The how-it-works sweeps: solid black panel, heading accent in plain ink. */
+  --how-it-works-panel-image: none;
+  --how-it-works-heading-fill: linear-gradient(#000, #000);
+  --how-it-works-gaspo-row-image: linear-gradient(#fff, #fff);
+  /* The compare section's ChatGPT-side card drops its corner tint. */
+  --compare-card-tint: transparent;
 }
 
-.mono-site .bg-ask-card {
-  background: radial-gradient(ellipse 120% 100% at 50% 0%, #6b6b6b 0%, #444 45%, #2a2a2a 100%);
+/* Hero feature cards, the use-cases panel: solid white instead of frosted glass. */
+.mono-site .feature-glass-card,
+.mono-site .use-case-panel-card {
+  background: #fff;
+  box-shadow: none;
 }
 
-.mono-site .bg-startfree-card {
-  background: linear-gradient(120deg, #cfcfcf 0%, #9a9a9a 35%, #444 70%, #2a2a2a 100%);
+/* The frosted layer blurs the black hero into the card's top edge. */
+.mono-site .feature-glass-card > div {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
-.mono-site .gaspo-glass-card::before {
-  background:
-    radial-gradient(80% 70% at 0 0, #e0e0e0f2 0%, #e0e0e000 70%),
-    radial-gradient(75% 60% at 100% 0, #d5d5d5cc 0%, #d5d5d500 70%),
-    radial-gradient(80% 70% at 100% 100%, #8a8a8a 0%, #8a8a8a00 75%),
-    radial-gradient(85% 75% at 0 100%, #b0b0b0 0%, #b0b0b000 75%);
+.mono-site .integration-logo-card {
+  background: #fff;
+  border-color: #e5e5e5;
 }
 
-.mono-site .integrations-connector-dot-top,
-.mono-site .integrations-connector-dot-bottom {
-  box-shadow:
-    0 0 8px rgb(255 255 255 / 55%),
-    0 0 14px rgb(0 0 0 / 28%);
+/* Glass that sits on black (how-it-works cards, idle testimonials, the active use-case tab): black, outlined in white. */
+.mono-site .how-it-works-glass,
+.mono-site .testimonial-card-idle,
+.mono-site .use-case-tab-glass {
+  background: #000;
+  box-shadow: inset 0 0 0 1px #fff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.mono-site .use-case-tab-glass > * {
+  display: none;
+}
+
+.mono-site .testimonial-saved-pill {
+  background: #000;
+  color: #fff;
+}
+
+/* The ChatGPT-side card is white on white: a hairline keeps its edge. */
+.mono-site .compare-left-card {
+  --tw-ring-color: #e5e5e5;
+}
+
+.mono-site .compare-gaspo-card {
+  box-shadow: none;
+}
+
+/* The Gaspo pill on the compare section's black card: solid white behind the black wordmark. */
+.mono-site .compare-gaspo-pill {
+  background-color: #fff;
+}
+
+.mono-site .compare-connector-stroke {
+  stroke: #000;
+}
+
+.mono-site .start-free-check,
+.mono-site .start-free-check g {
+  opacity: 1;
+}
+
+/* Dark artwork that lands on a black panel (the sign-up page's logo). */
+.mono-site .mono-invert {
+  filter: invert(1);
+}
+
+.mono-site .bg-ask-card,
+.mono-site .bg-startfree-card,
+.mono-site .gaspo-auth-gradient {
+  background: #000;
 }
 
 .mono-site .bg-section-cream,
 .mono-site .bg-cream {
-  background-color: #f4f4f4;
+  background-color: #fff;
 }
 
-/* Brand artwork shipped as SVG gradients (avatars, the footer blob). */
+/* Glass cards: plain white, without the grey inner vignette. */
+.mono-site .gaspo-glass-card {
+  box-shadow: none;
+}
+
+.mono-site .gaspo-glass-card::before,
+.mono-site .gaspo-glass-card::after {
+  background: #fff;
+}
+
+/* Gaspo's Slack message: a white card, not a tinted glass stack. */
+.mono-site .slack-gaspo-layer-glass-stack {
+  background: #fff;
+}
+
+.mono-site .slack-gaspo-layer-inner-depth-soft,
+.mono-site .slack-gaspo-layer-inner-glow-overlay {
+  box-shadow: none;
+}
+
+.mono-site .integrations-connector-dot-top,
+.mono-site .integrations-connector-dot-bottom {
+  box-shadow: none;
+}
+
+/* The hero is black, so the see-through nav would put dark links on black: keep the bar white. */
+.mono-site .site-nav-bar {
+  background-color: #fff;
+}
+
+/* Brand artwork that is not an icon (tab pill, logotype): flattened to black. */
 .mono-site .mono-art {
-  filter: grayscale(1);
+  filter: brightness(0);
 }
 
-/* The auth pages' testimonial panel: same peach-to-indigo sweep, in greys. */
-.mono-site .gaspo-auth-gradient {
-  background-color: #0a0a0a;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 900' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(18.7 83.7 -139.11 31.08 298 0)'><stop stop-color='%23e6e6e6' offset='0.064'/><stop stop-color='%23bdbdbd' offset='0.286'/><stop stop-color='%238a8a8a' offset='0.507'/><stop stop-color='%236b6b6b' offset='0.655'/><stop stop-color='%23444444' offset='0.804'/><stop stop-color='%232a2a2a' offset='0.853'/><stop stop-color='%231c1c1c' offset='0.902'/><stop stop-color='%23111111' offset='0.951'/><stop stop-color='%230d0d0d' offset='0.975'/><stop stop-color='%230a0a0a' offset='1'/></radialGradient></defs></svg>");
+/* Swap artwork per scope: .mono-show only renders inside .mono-site, .mono-hide only outside it. */
+.mono-show {
+  display: none;
+}
+
+.mono-site .mono-show {
+  display: block;
+}
+
+.mono-site .mono-hide {
+  display: none;
 }
 
 .dashboard-shell :where(

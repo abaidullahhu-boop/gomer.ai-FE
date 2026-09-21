@@ -70,7 +70,7 @@ function NavItemLink({
         [
           "gaspo-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
           isActive
-            ? "bg-sidebar-accent text-sidebar-primary-foreground"
+            ? "bg-sidebar-primary-foreground text-sidebar-background"
             : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-primary-foreground",
         ].join(" ")
       }
@@ -205,7 +205,7 @@ export function Sidebar({
               [
                 "gaspo-focus-ring flex items-center gap-3 rounded-[7px] px-3 py-2.5 text-sm font-medium transition-all duration-150",
                 isActive
-                  ? "bg-sidebar-accent text-sidebar-primary-foreground"
+                  ? "bg-sidebar-primary-foreground text-sidebar-background"
                   : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-primary-foreground",
               ].join(" ")
             }

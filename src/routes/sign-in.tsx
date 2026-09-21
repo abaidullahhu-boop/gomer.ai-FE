@@ -25,7 +25,7 @@ export default function SignIn() {
             <img
               src={gaspoAvatar}
               alt=""
-              className="mono-art size-14 rounded-lg"
+              className="size-14 rounded-lg"
               width={56}
               height={56}
               aria-hidden

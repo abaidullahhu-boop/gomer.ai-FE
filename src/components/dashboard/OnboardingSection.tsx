@@ -62,9 +62,9 @@ function buildTasks(overview: DashboardOverview): OnboardingTask[] {
   ];
 }
 
-function SecondaryButton({ label, href }: { label: string; href?: string }) {
+function StepButton({ label, href }: { label: string; href?: string }) {
   const className =
-    "inline-flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 select-none hover:bg-secondary/80 active:scale-[0.98] md:w-auto";
+    "inline-flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-[7px] border-0 bg-btn-primary px-4 py-2 text-sm font-medium text-btn-primary transition-[opacity,transform] duration-200 select-none hover:opacity-90 active:scale-[0.98] md:w-auto";
 
   if (href) {
     return (
@@ -249,7 +249,7 @@ export function OnboardingSection({ overview }: { overview: DashboardOverview })
                 </div>
               </div>
               <div className="shrink-0 md:ml-auto md:self-center">
-                <SecondaryButton label={task.buttonLabel} href={task.href} />
+                <StepButton label={task.buttonLabel} href={task.href} />
               </div>
             </div>
           </div>
