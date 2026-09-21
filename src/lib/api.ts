@@ -128,8 +128,19 @@ export type TeamMember = {
   role: "admin" | "member";
   isCurrentUser: boolean;
   lastActiveAt: string | null;
+  /** Set when an admin added them by email; with a null lastActiveAt they are still "Invited". */
+  invitedAt: string | null;
   createdAt: string;
 };
+
+/**
+ * Added by an admin and not yet seen in Slack or the dashboard. Truthiness on
+ * invitedAt (not a null check) so a backend that predates the field never
+ * marks the whole roster as invited.
+ */
+export function isPendingInvite(member: Pick<TeamMember, "invitedAt" | "lastActiveAt">): boolean {
+  return Boolean(member.invitedAt) && member.lastActiveAt === null;
+}
 
 /** List the members of the current workspace, oldest first. */
 export function fetchTeamMembers(): Promise<TeamMember[]> {
@@ -141,6 +152,27 @@ export function updateMemberRole(id: string, role: "admin" | "member"): Promise<
   return apiFetch<TeamMember>(`/users/${id}/role`, {
     method: "PATCH",
     body: JSON.stringify({ role }),
+  });
+}
+
+/** What happened to one address in an invite batch, in words the admin can act on. */
+export type InviteResult = {
+  email: string;
+  status: "invited" | "already_member" | "not_in_slack" | "failed";
+  name: string | null;
+  notified: boolean;
+  message: string;
+};
+
+/**
+ * Add Slack teammates by email. Admins only. Each address is resolved to a
+ * member of the workspace's Slack team, added straight away, and DMed where to
+ * sign in; the result says per address what happened.
+ */
+export function inviteTeamMembers(emails: string[]): Promise<InviteResult[]> {
+  return apiFetch<InviteResult[]>("/users/invites", {
+    method: "POST",
+    body: JSON.stringify({ emails }),
   });
 }
 

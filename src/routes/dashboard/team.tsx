@@ -4,10 +4,13 @@ import { ExternalLink, MoreVertical, Pencil, RefreshCw, UserPlus } from "lucide-
 import type { DashboardOutletContext } from "@/components/dashboard/DashboardLayout";
 import { PageMeta } from "@/components/PageMeta";
 import { useSession } from "@/lib/session";
-import { ApiError, fetchTeamMembers, updateMemberRole, type TeamMember } from "@/lib/api";
-
-const SLACK_INVITE_DESCRIPTION =
-  "Allow Gaspo to invite Slack workspace members to join your team via DM.";
+import {
+  ApiError,
+  fetchTeamMembers,
+  isPendingInvite,
+  updateMemberRole,
+  type TeamMember,
+} from "@/lib/api";
 
 function MemberRoleControl({
   member,
@@ -138,7 +141,6 @@ function TeamOptionsMenu({
             <Pencil className="size-4 shrink-0" strokeWidth={1.5} />
             Edit team info
           </button>
-          
         </div>
       ) : null}
     </div>
@@ -169,18 +171,20 @@ function SettingsCard({
 
 export default function DashboardTeam() {
   const navigate = useNavigate();
-  const { openInviteModal } = useOutletContext<DashboardOutletContext>();
+  const { openInviteModal, invitesVersion } = useOutletContext<DashboardOutletContext>();
   const { user, currentWorkspace } = useSession();
   const [activeTab, setActiveTab] = useState<"members" | "settings">("members");
-  const [slackInviteEnabled, setSlackInviteEnabled] = useState<boolean>(true);
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
+  const [reloadCount, setReloadCount] = useState(0);
 
   const isAdmin = user?.role === "admin";
   const teamName = currentWorkspace?.name ?? "Your Team";
 
+  // Refetches on mount, on the Refresh button, and after the invite dialog
+  // adds someone (the layout bumps invitesVersion).
   useEffect(() => {
     let active = true;
     setLoading(true);
@@ -202,7 +206,7 @@ export default function DashboardTeam() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [invitesVersion, reloadCount]);
 
   const handleRoleChange = useCallback(
     async (memberId: string, role: "admin" | "member") => {
@@ -272,19 +276,26 @@ export default function DashboardTeam() {
                   </Link>
                   <button
                     type="button"
-                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    onClick={() => setReloadCount((count) => count + 1)}
+                    disabled={loading}
+                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
                   >
-                    <RefreshCw className="size-4" strokeWidth={1.5} />
-                    Check Slack members
+                    <RefreshCw
+                      className={["size-4", loading ? "animate-spin" : ""].join(" ")}
+                      strokeWidth={1.5}
+                    />
+                    Refresh
                   </button>
-                  <button
-                    type="button"
-                    onClick={openInviteModal}
-                    className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
-                  >
-                    <UserPlus className="size-4" strokeWidth={1.5} />
-                    Invite members
-                  </button>
+                  {isAdmin ? (
+                    <button
+                      type="button"
+                      onClick={openInviteModal}
+                      className="gaspo-focus-ring inline-flex min-h-10 cursor-pointer select-none items-center justify-center gap-2 rounded-[7px] border border-border bg-transparent px-4 py-2 text-sm font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                    >
+                      <UserPlus className="size-4" strokeWidth={1.5} />
+                      Invite members
+                    </button>
+                  ) : null}
                 </div>
               </div>
 
@@ -337,12 +348,20 @@ export default function DashboardTeam() {
                         >
                           <MemberAvatar name={member.name} avatar={member.avatarUrl ?? ""} />
                           <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-0.5">
-                            <p className="w-full truncate text-[15px] font-medium leading-[1.3] text-foreground">
-                              {member.name}
-                              {member.isCurrentUser ? <span> (You)</span> : null}
+                            <p className="flex w-full min-w-0 items-center gap-2 text-[15px] font-medium leading-[1.3] text-foreground">
+                              <span className="truncate">
+                                {member.name}
+                                {member.isCurrentUser ? <span> (You)</span> : null}
+                              </span>
+                              {isPendingInvite(member) ? (
+                                <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[11px] font-medium leading-none text-muted-foreground">
+                                  Invited
+                                </span>
+                              ) : null}
                             </p>
                             <p className="w-full truncate text-xs leading-normal text-sidebar-foreground">
                               {member.email}
+                              {isPendingInvite(member) ? " · hasn't signed in yet" : ""}
                             </p>
                           </div>
                           <MemberRoleControl
@@ -358,24 +377,24 @@ export default function DashboardTeam() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <SettingsCard title="Bot settings" description={SLACK_INVITE_DESCRIPTION}>
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={slackInviteEnabled}
-                      onClick={() => setSlackInviteEnabled((value) => !value)}
-                      className={[
-                        "gaspo-focus-ring relative inline-flex w-10.5 cursor-pointer rounded-full border border-border p-1 transition-colors duration-150 outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
-                        slackInviteEnabled ? "border-highlight bg-highlight" : "bg-input",
-                      ].join(" ")}
-                    >
-                      <span
-                        className={[
-                          "size-4 rounded-full bg-muted-foreground transition-all duration-150",
-                          slackInviteEnabled ? "translate-x-4 bg-primary-foreground" : "",
-                        ].join(" ")}
-                      />
-                    </button>
+                  <SettingsCard
+                    title="Invites"
+                    description="Admins add teammates by the email on their Slack account. Gaspo DMs each new member in Slack with where to sign in; nobody outside your Slack workspace can be added."
+                  >
+                    {isAdmin ? (
+                      <button
+                        type="button"
+                        onClick={openInviteModal}
+                        className="gaspo-focus-ring inline-flex min-h-8 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98]"
+                      >
+                        <UserPlus className="size-3.5" strokeWidth={1.5} />
+                        Invite members
+                      </button>
+                    ) : (
+                      <p className="text-xs text-muted-foreground">
+                        Ask a workspace admin to invite people.
+                      </p>
+                    )}
                   </SettingsCard>
 
                   <SettingsCard
