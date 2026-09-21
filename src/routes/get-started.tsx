@@ -167,7 +167,7 @@ export default function GetStarted() {
 
       {/* Testimonial panel */}
       <div className="gaspo-auth-gradient relative hidden flex-1 flex-col overflow-hidden md:flex md:h-auto">
-        <div className="absolute left-5 top-5 z-10 text-[#1b182a]">
+        <div className="mono-invert absolute left-5 top-5 z-10 text-[#1b182a]">
           <GaspoLogo />
         </div>
 

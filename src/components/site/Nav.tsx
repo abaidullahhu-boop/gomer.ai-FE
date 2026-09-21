@@ -336,7 +336,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
           {/* Desktop navbar */}
           <div className="relative isolate hidden w-full overflow-visible rounded-full xl:block">
             <div
-              className={`relative h-full min-h-0 w-full rounded-full py-4 pr-4 pl-8 ${navBarClass}`}
+              className={`site-nav-bar relative h-full min-h-0 w-full rounded-full py-4 pr-4 pl-8 ${navBarClass}`}
             >
               {showGlassOverlay && <NavGlassLayers />}
 
@@ -402,7 +402,7 @@ export function Nav({ heroTone = "dark" }: NavProps) {
           <div className="xl:hidden">
             <div className="relative isolate w-full overflow-visible rounded-full">
               <div
-                className={`relative h-full min-h-0 w-full rounded-full px-6 py-3 ${navBarClass}`}
+                className={`site-nav-bar relative h-full min-h-0 w-full rounded-full px-6 py-3 ${navBarClass}`}
               >
                 {showGlassOverlay && <NavGlassLayers />}
 

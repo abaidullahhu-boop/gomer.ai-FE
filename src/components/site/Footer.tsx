@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import footerBlob from "../../assets/images/footer-blob.svg";
 import footerWordmark from "../../assets/images/gaspo.svg";
+import footerWordmarkMono from "../../assets/images/gaspo-mono.svg";
 
 type Item = { label: string; to: string; external?: boolean; newTab?: boolean };
 
@@ -221,7 +222,7 @@ export function Footer() {
               alt=""
               width={1840}
               height={1150}
-              className="mono-art pointer-events-none absolute top-1/2 left-1/2 z-0 w-full max-w-none select-none"
+              className="mono-hide pointer-events-none absolute top-1/2 left-1/2 z-0 w-full max-w-none select-none"
               style={{ opacity: 1, transform: "translate(-50%, -34%) scale(1.4)" }}
               decoding="async"
               draggable={false}
@@ -231,8 +232,17 @@ export function Footer() {
               alt=""
               width={1938}
               height={518}
-              className="mono-art relative z-[1] block h-auto w-full overflow-visible select-none"
+              className="mono-hide relative z-[1] block h-auto w-full overflow-visible select-none"
               aria-hidden="true"
+            />
+            <img
+              src={footerWordmarkMono}
+              alt=""
+              width={1938}
+              height={518}
+              className="mono-show relative z-[1] h-auto w-full overflow-visible select-none"
+              aria-hidden="true"
+              loading="lazy"
             />
           </div>
         </div>

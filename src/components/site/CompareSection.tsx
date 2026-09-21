@@ -4,6 +4,7 @@ import chatgptIcon from "@/assets/images/chatgpt.svg";
 import claudeIcon from "@/assets/images/claude.svg";
 import copilotIcon from "@/assets/images/copilot.svg";
 import gaspoWordmark from "@/assets/images/gaspo.svg";
+import gaspoWordmarkMono from "@/assets/images/gaspo-mono.svg";
 import zapierIcon from "@/assets/images/zapier.svg";
 
 type TabIconProps = { className?: string };
@@ -200,10 +201,10 @@ export function CompareSection() {
         <div className="mt-14 w-full sm:px-8 lg:px-0">
           <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-0">
             <div
-              className="text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1 ring-1 ring-white/50 "
+              className="compare-left-card text-left p-7 rounded-3xl min-h-[135px] flex flex-col justify-between md:flex-1 ring-1 ring-white/50 "
               style={{
                 background:
-                  "radial-gradient(482.96% 141.42% at .12% 0, color-mix(in srgb, var(--primitive-purple-500) 10%, transparent) 0%, transparent 100%), #fffc",
+                  "radial-gradient(482.96% 141.42% at .12% 0, color-mix(in srgb, var(--compare-card-tint, var(--primitive-purple-500)) 10%, transparent) 0%, transparent 100%), #fffc",
               }}
             >
               <div className="inline-flex items-center gap-2">
@@ -217,8 +218,8 @@ export function CompareSection() {
 
             <ComparisonConnector />
 
-            <div className="relative bg-hero text-left px-5 pb-8 pt-4 rounded-xl text-white min-h-[135px] flex flex-col justify-between gap-4 md:justify-end md:gap-0 md:pt-0 md:pl-5 md:pr-0 shadow-[0_20px_60px_-20px_rgba(60,40,180,0.5)] md:flex-1">
-              <div className="relative z-10 inline-flex h-auto w-fit shrink-0 rounded-[40px] px-4 py-3 shadow-lg backdrop-blur-[5px] backdrop-saturate-150 md:absolute md:-left-4 md:-top-5 md:px-10 md:py-8">
+            <div className="compare-gaspo-card relative bg-hero text-left px-5 pb-8 pt-4 rounded-xl text-white min-h-[135px] flex flex-col justify-between gap-4 md:justify-end md:gap-0 md:pt-0 md:pl-5 md:pr-0 shadow-[0_20px_60px_-20px_rgba(60,40,180,0.5)] md:flex-1">
+              <div className="compare-gaspo-pill relative z-10 inline-flex h-auto w-fit shrink-0 rounded-[40px] px-4 py-3 shadow-lg backdrop-blur-[5px] backdrop-saturate-150 md:absolute md:-left-4 md:-top-5 md:px-10 md:py-8">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
@@ -262,7 +263,15 @@ export function CompareSection() {
                     alt="Gaspo"
                     width={1938}
                     height={518}
-                    className="h-7 w-auto opacity-90 md:h-9"
+                    className="mono-hide h-7 w-auto opacity-90 md:h-9"
+                  />
+                  <img
+                    src={gaspoWordmarkMono}
+                    alt="Gaspo"
+                    width={1938}
+                    height={518}
+                    className="mono-show h-7 w-auto md:h-9"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -316,6 +325,7 @@ function ComparisonConnector() {
           style={{ width: "calc(165.937%)" }}
         >
           <ellipse
+            className="mono-hide"
             opacity="0.4"
             cx="295.35"
             cy="78"
@@ -349,6 +359,7 @@ function ComparisonConnector() {
         >
           <path
             d="M1.84955 84.904C69.03020329528515 33.02164703432037 160.10494529038746 171.1672764730036 239.85 84.904"
+            className="compare-connector-stroke"
             stroke={`url(#${id}-orange)`}
             strokeWidth="6"
             strokeLinecap="round"
@@ -356,6 +367,7 @@ function ComparisonConnector() {
           />
           <path
             d="M1.84955 56.9097C77.88292972935434 142.286718710162 182.95103717355641 -6.8595259858710165 239.85 56.9097"
+            className="compare-connector-stroke"
             stroke={`url(#${id}-purple)`}
             strokeWidth="6"
             strokeLinecap="round"
@@ -389,7 +401,7 @@ function ComparisonConnector() {
 
         <div
           aria-hidden="true"
-          className={`${svgClass} z-2`}
+          className={`mono-hide ${svgClass} z-2`}
           style={{
             pointerEvents: "none",
             transformOrigin: "right",

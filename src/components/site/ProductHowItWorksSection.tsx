@@ -9,7 +9,7 @@ const lisaAvatar =
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=facearea&facepad=2&w=96&h=96&q=80";
 
 const HEADING_GRADIENT =
-  "radial-gradient(125% 115% at 58% -8%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 7%, color-mix(in srgb, var(--primitive-orange-500) 50%, var(--primitive-purple-300)) 29%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%)";
+  "var(--how-it-works-heading-fill, radial-gradient(125% 115% at 58% -8%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 7%, color-mix(in srgb, var(--primitive-orange-500) 50%, var(--primitive-purple-300)) 29%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%))";
 
 export type HowItWorksStep = {
   number: string;
@@ -41,10 +41,10 @@ const PRODUCT_STEPS: HowItWorksStep[] = [
 
 function GlassCardShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative h-full w-full min-h-0 rounded-[inherit]">
+    <div className="how-it-works-glass relative h-full w-full min-h-0 rounded-[inherit]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "radial-gradient(100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)",
@@ -52,7 +52,7 @@ function GlassCardShell({ children }: { children: ReactNode }) {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
         style={{
           background:
             "linear-gradient(-56deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.6) 100%)",
@@ -64,7 +64,7 @@ function GlassCardShell({ children }: { children: ReactNode }) {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
+        className="mono-hide pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
         style={{ filter: "blur(5px)" }}
       >
         <div
@@ -103,12 +103,12 @@ function MarketplaceAppsVisual() {
           className="absolute inset-0 rounded-[inherit]"
           style={{
             backgroundImage:
-              "radial-gradient(95% 80% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 38%, rgba(255, 255, 255, 0) 76%), conic-gradient(from 90deg, rgba(253, 227, 170, 0.6) 0%, rgba(255, 189, 158, 0.6) 33%, rgba(210, 198, 255, 0.6) 66%, rgba(103, 72, 253, 0.6) 80%, rgba(253, 227, 170, 0.6) 100%)",
+              "var(--how-it-works-gaspo-row-image, radial-gradient(95% 80% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 38%, rgba(255, 255, 255, 0) 76%), conic-gradient(from 90deg, rgba(253, 227, 170, 0.6) 0%, rgba(255, 189, 158, 0.6) 33%, rgba(210, 198, 255, 0.6) 66%, rgba(103, 72, 253, 0.6) 80%, rgba(253, 227, 170, 0.6) 100%))",
           }}
         />
         <span aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-white/8 mix-blend-plus-lighter backdrop-blur-[10px]" />
         <span aria-hidden="true" className="absolute inset-4 rounded-2xl bg-white blur-2xl mix-blend-plus-lighter" />
-        <img alt="" className="mono-art relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={gaspoMarketplaceAvatar} />
+        <img alt="" className="relative z-10 size-14 shrink-0 overflow-hidden rounded-2xl" loading="lazy" src={gaspoMarketplaceAvatar} />
         <div className="relative z-10 flex min-w-0 flex-1 items-start">
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <div className="flex min-w-0 flex-wrap items-center gap-1">
@@ -210,7 +210,7 @@ function SlackGaspoMessage({
         <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Gaspo" loading="lazy" width={36} height={36} className="mono-art size-full object-cover" src={gaspoAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
@@ -335,7 +335,7 @@ function getHowItWorksPanelBackground(scrollProgress: number) {
 
   return {
     backgroundColor: "var(--primitive-main-dblue)",
-    backgroundImage: `radial-gradient(ellipse ${128 + 18 * e}% ${108 + 32 * e}% at ${50 + (e - 0.5) * 7}% ${-8 + 5 * e}%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 6%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%)`,
+    backgroundImage: `var(--how-it-works-panel-image, radial-gradient(ellipse ${128 + 18 * e}% ${108 + 32 * e}% at ${50 + (e - 0.5) * 7}% ${-8 + 5 * e}%, var(--primitive-orange-500) 0%, var(--primitive-orange-500) 6%, var(--primitive-purple-300) 51%, var(--primitive-purple-500) 80%, var(--primitive-main-dblue) 100%))`,
     backgroundRepeat: "no-repeat" as const,
     backgroundSize: `${103 + 12 * t}% ${218 + 95 * t}%`,
     backgroundPosition: `${50 + (t - 0.5) * 10}% ${96 - 58 * t}%`,

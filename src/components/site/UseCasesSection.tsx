@@ -167,7 +167,7 @@ function TabGlassIndicator({ translateY, cycleKey }: { translateY: number; cycle
       className="pointer-events-none absolute top-0 left-0 z-0 h-[3.8125rem] w-full overflow-hidden rounded-full transition-transform duration-500 ease-out"
       style={{ transform: `translateY(${translateY}rem)` }}
     >
-      <div className="relative h-full w-full rounded-full bg-white/10 backdrop-blur-[22px] backdrop-saturate-150">
+      <div className="use-case-tab-glass relative h-full w-full rounded-full bg-white/10 backdrop-blur-[22px] backdrop-saturate-150">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 rounded-[inherit]"
@@ -346,7 +346,7 @@ export function UseCasesSection() {
             </div>
 
             <div className="relative mt-10 w-full min-w-0 xl:mt-0 xl:ml-auto xl:max-w-[40.625rem]">
-              <div className="relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-section border border-white bg-white/[0.01] p-6 text-primary shadow-[inset_0_0_32px_16px_rgb(255_255_255/0.64)] sm:p-8">
+              <div className="use-case-panel-card relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-section border border-white bg-white/[0.01] p-6 text-primary shadow-[inset_0_0_32px_16px_rgb(255_255_255/0.64)] sm:p-8">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-[2.63%_2.93%_2.72%] rounded-section bg-white opacity-70 blur-[15px] [mix-blend-mode:plus-lighter]"

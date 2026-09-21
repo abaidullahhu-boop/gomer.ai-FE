@@ -155,7 +155,7 @@ const stevenAvatar =
 
 function FeatureGlassCardShell({ children }: { children: ReactNode }) {
   return (
-    <article className="relative h-full min-h-96 overflow-hidden rounded-section">
+    <article className="feature-glass-card relative h-full min-h-96 overflow-hidden rounded-section">
       <div className="h-full min-h-96 w-full overflow-hidden rounded-[35px] backdrop-blur-[20px]">
         <div className="relative h-full w-full overflow-hidden rounded-[inherit]">
           <div
@@ -303,7 +303,7 @@ function SlackGaspoMessage({
         <div className="slack-gaspo-layer-white-sheet" />
       </div>
       <div className="relative z-[1] flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-transparent">
-        <img alt="Gaspo" loading="lazy" width={36} height={36} className="mono-art size-full object-cover" src={gaspoAvatar} />
+        <img alt="Gaspo" loading="lazy" width={36} height={36} className="size-full object-cover" src={gaspoAvatar} />
       </div>
       <div className="relative z-[1] flex min-w-0 flex-1 flex-col gap-0">
         <div className="mb-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0">
@@ -354,7 +354,7 @@ function integrationRelativeSlot(logoIndex: number, activeIndex: number, count: 
 function IntegrationLogoCard({ children, featured }: { children: ReactNode; featured?: boolean }) {
   return (
     <div
-      className={`flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-opacity duration-[50ms] ease-out ${featured ? "opacity-100" : "opacity-90"}`}
+      className={`integration-logo-card flex size-full items-center justify-center overflow-visible rounded-lg border border-[#fffefc] bg-[linear-gradient(135deg,rgb(249_245_241)_19.749%,rgb(255_254_252)_100.45%)] shadow-[0_8px_16px_0_rgb(26_24_41/6%),inset_1.8px_1.8px_3.6px_0_#f5f1ed] transition-opacity duration-[50ms] ease-out ${featured ? "opacity-100" : "opacity-90"}`}
     >
       <div className="flex size-full items-center justify-center overflow-hidden rounded-[inherit] px-2 py-2">
         {children}
