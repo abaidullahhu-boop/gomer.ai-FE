@@ -46,7 +46,7 @@ export default function PrivacyPage() {
               Privacy Policy
             </h1>
             <p style={{ color: "oklch(55.3% 0.013 58.071)" }}>
-              Last updated: June 6, 2026
+              Last updated: September 22, 2026
             </p>
           </div>
 
@@ -262,7 +262,56 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section number="13" title="Changes to This Policy">
+          <Section number="13" title="Data from Meta (Facebook and Instagram)">
+            <p>
+              If you connect a Meta ad account, you do so through Facebook Login for Business.
+              Gaspo receives an access token limited to the business assets you choose and the
+              permissions you approve in Meta&rsquo;s dialog. With it, Gaspo can access:
+            </p>
+            <ul>
+              <li>
+                The ad accounts you shared with Gaspo: account ID, name, currency and status.
+              </li>
+              <li>
+                Campaigns, ad sets and ads in those accounts: names, status, objective, budgets
+                and targeting settings.
+              </li>
+              <li>
+                Performance insights for those accounts, such as spend, impressions, clicks,
+                reach, click-through rate, cost per click and cost per thousand impressions.
+              </li>
+              <li>
+                Where Meta grants it, the Facebook Pages you can advertise as (Page ID and
+                name), used when you ask Gaspo to create an ad.
+              </li>
+            </ul>
+            <p>
+              We use this data only to do what you ask: answer your questions about your ads,
+              and create or change campaigns, ad sets and ads after you explicitly confirm the
+              action. Gaspo never changes an ad account without your confirmation, and new or
+              duplicated campaigns, ad sets and ads are created paused.
+            </p>
+            <p>
+              To answer a request, the data it needs is processed by the AI model providers we
+              use as service providers. The answer appears in your conversation with Gaspo and
+              is kept with your conversation history. When you ask Gaspo to check return on ad
+              spend, it also saves a summary for that ad account and date range (total spend,
+              revenue, return on ad spend and purchases) to your workspace.
+            </p>
+            <p>
+              We do not sell Meta data, use it for advertising or profiling, share it with data
+              brokers, or use it to train AI models.
+            </p>
+            <p>
+              You can remove access at any time. Disconnecting Meta in your Gaspo dashboard under{" "}
+              <strong>Integrations</strong> deletes the stored token immediately, and you can
+              also remove Gaspo in Meta under Settings &rarr; Business integrations. To have
+              saved summaries and conversation history erased, follow our{" "}
+              <a href="/data-deletion">Data Deletion Instructions</a>.
+            </p>
+          </Section>
+
+          <Section number="14" title="Changes to This Policy">
             <p>
               We may update this Privacy Policy from time to time. Material changes will be
               communicated through the Service or by email. Your continued use of the Service
@@ -270,7 +319,7 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section number="14" title="Contact Us">
+          <Section number="15" title="Contact Us">
             <p>
               If you have questions about this Privacy Policy or wish to exercise your rights,
               please contact us:
@@ -286,7 +335,7 @@ export default function PrivacyPage() {
                 Privacy Team
               </p>
               <p>
-                <a href="mailto:privacy@gomer.com">privacy@gomer.com</a>
+                <a href="mailto:privacy@gaspo.co">privacy@gaspo.co</a>
               </p>
             </div>
           </Section>

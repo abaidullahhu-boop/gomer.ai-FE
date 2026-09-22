@@ -46,7 +46,7 @@ export default function DataDeletionPage() {
               Data Deletion Instructions
             </h1>
             <p style={{ color: "oklch(55.3% 0.013 58.071)" }}>
-              Last updated: August 7, 2026
+              Last updated: September 22, 2026
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export default function DataDeletionPage() {
           <Section number="4" title="Request deletion of all your data">
             <p>
               To have everything associated with you or your workspace erased, email{" "}
-              <a href="mailto:privacy@gomer.com">privacy@gomer.com</a> from the address on
+              <a href="mailto:privacy@gaspo.co">privacy@gaspo.co</a> from the address on
               your Gaspo account with the subject line <strong>Data deletion request</strong>,
               and include:
             </p>
@@ -133,6 +133,10 @@ export default function DataDeletionPage() {
                 accounts connected through Pipedream
               </li>
               <li>Your conversation history with Gaspo, in Slack and in the dashboard</li>
+              <li>
+                Saved ad performance summaries, such as return-on-ad-spend checks for a Meta
+                ad account
+              </li>
               <li>Workspace settings, saved instructions, installed skills, and scheduled tasks</li>
             </ul>
           </Section>
@@ -176,7 +180,7 @@ export default function DataDeletionPage() {
                 Privacy Team
               </p>
               <p>
-                <a href="mailto:privacy@gomer.com">privacy@gomer.com</a>
+                <a href="mailto:privacy@gaspo.co">privacy@gaspo.co</a>
               </p>
             </div>
           </Section>

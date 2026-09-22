@@ -185,7 +185,7 @@ function BrandBlock() {
 function Copyright() {
   return (
     <div className="mt-10 space-y-1 text-xs text-secondary lg:mt-auto">
-      <p>2026 gomer.com. All rights reserved.</p>
+      <p>© 2026 Gaspo. All rights reserved.</p>
 
     </div>
   );
