@@ -370,7 +370,7 @@ export function AskAI() {
                       height={20}
                       decoding="async"
                       src={option.logo}
-                      className="size-5 brightness-0"
+                      className="size-5"
                     />
                     {option.name}
                   </a>
