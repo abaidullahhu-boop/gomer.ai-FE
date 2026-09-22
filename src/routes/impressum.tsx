@@ -44,46 +44,20 @@ export default function ImpressumPage() {
                   </h2>
                   <div className="mt-4">
                     <address className="not-italic body-main text-secondary font-medium">
-                      Zeta AI, Inc.
+                      Gaspo
                       <br />
-                      2810 N Church Street, PMB 20589
-                      <br />
-                      Wilmington, DE 19802
-                      <br />
-                      United States
-                      <br />
-                      Product: Gaspo (
-                      <a href="https://gomer.com" className={linkClassName}>
-                        gomer.com
+                      Website:{" "}
+                      <a href="https://gaspo.co" className={linkClassName}>
+                        gaspo.co
                       </a>
-                      )
                     </address>
-                  </div>
-                </section>
-
-                <section
-                  id="authorized-representatives"
-                  aria-labelledby="authorized-representatives-title"
-                  className="border-t border-primitive-main-dark/10 py-8 md:py-10"
-                >
-                  <h2
-                    id="authorized-representatives-title"
-                    className="font-heading h5 text-primary"
-                  >
-                    Authorized representatives
-                  </h2>
-                  <div className="mt-4">
-                    <ul className="space-y-1 body-main text-secondary font-medium">
-                      <li>Peter Albert, Co-CEO</li>
-                      <li>Fryderyk Wiatrowski, Co-CEO</li>
-                    </ul>
                   </div>
                 </section>
 
                 <section
                   id="contact"
                   aria-labelledby="contact-title"
-                  className="border-t border-primitive-main-dark/10 py-8 md:py-10"
+                  className="border-t border-primitive-main-dark/10 pt-8 md:pt-10"
                 >
                   <h2 id="contact-title" className="font-heading h5 text-primary">
                     Contact
@@ -92,28 +66,11 @@ export default function ImpressumPage() {
                     <ul className="space-y-1 body-main text-secondary font-medium">
                       <li>
                         Email:{" "}
-                        <a href="mailto:legal@gomer.com" className={linkClassName}>
-                          legal@gomer.com
+                        <a href="mailto:legal@gaspo.co" className={linkClassName}>
+                          legal@gaspo.co
                         </a>
                       </li>
-                      <li>Phone: +1 929 243 9664</li>
                     </ul>
-                  </div>
-                </section>
-
-                <section
-                  id="registration"
-                  aria-labelledby="registration-title"
-                  className="border-t border-primitive-main-dark/10 pt-8 md:pt-10"
-                >
-                  <h2 id="registration-title" className="font-heading h5 text-primary">
-                    Registration
-                  </h2>
-                  <div className="mt-4">
-                    <p className="body-main text-secondary font-medium">
-                      Zeta AI, Inc. is a company incorporated and registered under the laws of
-                      the State of Delaware, USA, under File Number 7643252.
-                    </p>
                   </div>
                 </section>
               </div>

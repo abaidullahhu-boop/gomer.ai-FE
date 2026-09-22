@@ -136,7 +136,7 @@ export default function SupportPage() {
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
               <span className="font-support-serif text-xl font-bold">Gaspo</span>
-              <p className="mt-1 text-sm text-stone-500">© Zeta AI, Inc. All rights reserved.</p>
+              <p className="mt-1 text-sm text-stone-500">© 2026 Gaspo. All rights reserved.</p>
             </div>
             <div className="flex flex-wrap items-center gap-6">
               <Link
