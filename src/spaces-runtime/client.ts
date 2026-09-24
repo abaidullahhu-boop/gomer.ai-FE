@@ -4,8 +4,11 @@
  * This is intentionally separate from `lib/api.ts`: the runtime authenticates a
  * Space end-user with a space-scoped session token (one per slug), never the
  * workspace/dashboard session. Tokens are namespaced in localStorage by slug.
+ * The one exception is {@link openWithWorkspaceSession}, which spends the
+ * dashboard session once to obtain a space token for a member of the team.
  */
 
+import { apiFetch } from "@/lib/api";
 import { API_URL } from "@/lib/auth";
 import type { PublicSpace, SpaceRecord, SpaceSession } from "./types";
 
@@ -70,6 +73,16 @@ export function requestMagicLink(
   return publicFetch(`/spaces/${encodeURIComponent(slug)}/auth/request-link`, {
     method: "POST",
     body: JSON.stringify({ email }),
+  });
+}
+
+/**
+ * Exchange the Gaspo dashboard session for a session in this app, so the team
+ * that owns it walks straight in. Fails (404) for an app from another workspace.
+ */
+export function openWithWorkspaceSession(slug: string): Promise<SpaceSession> {
+  return apiFetch<SpaceSession>(`/spaces/${encodeURIComponent(slug)}/auth/workspace-session`, {
+    method: "POST",
   });
 }
 
