@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
+import { ApiError, spacePath } from "@/lib/api";
+import { hasSession, startSlackLoginReturningTo } from "@/lib/auth";
 import {
   clearSpaceToken,
   createRecord,
@@ -8,6 +10,7 @@ import {
   fetchPublicSpace,
   getSpaceToken,
   listRecords,
+  openWithWorkspaceSession,
   requestMagicLink,
   storeSpaceToken,
   verifyMagicLink,
@@ -24,11 +27,32 @@ export default function SpaceApp() {
   const [authError, setAuthError] = useState<string | null>(null);
   const [authed, setAuthed] = useState(() => Boolean(getSpaceToken(slug)));
   const [verifying, setVerifying] = useState(false);
+  // Someone signed in to Gaspo skips the form: their dashboard session is
+  // exchanged for one in this app, which works when the app is their team's.
+  const [exchanging, setExchanging] = useState(
+    () => !getSpaceToken(slug) && !searchParams.get("token") && hasSession(),
+  );
 
   useEffect(() => {
     fetchPublicSpace(slug)
       .then(setSpace)
       .catch((err: Error) => setLoadError(err.message));
+  }, [slug]);
+
+  useEffect(() => {
+    if (!exchanging) return;
+    openWithWorkspaceSession(slug)
+      .then((session) => {
+        storeSpaceToken(slug, session.token);
+        setAuthed(true);
+      })
+      // Another team's app or a lapsed session just falls back to the form;
+      // a member with no email on file is told what to do there instead.
+      .catch((err: unknown) => {
+        if (err instanceof ApiError && err.status === 403) setAuthError(err.message);
+      })
+      .finally(() => setExchanging(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   // Redeem a magic-link token if the URL carries one, then strip it.
@@ -68,7 +92,7 @@ export default function SpaceApp() {
       </Centered>
     );
   }
-  if (!space || verifying) {
+  if (!space || verifying || exchanging) {
     return <Centered>Loading…</Centered>;
   }
   if (!authed) {
@@ -156,14 +180,22 @@ function SpaceLogin({
   return (
     <>
       <PageMeta title={space.name} />
-      <div className="flex min-h-screen items-center justify-center bg-background p-6 font-sans">
+      <div className="space-runtime flex min-h-screen items-center justify-center bg-background p-6 font-sans">
         <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-8">
           <h1 className="text-xl font-bold text-foreground">{space.name}</h1>
           <p className="mt-1 text-sm text-muted-foreground">Sign in to continue.</p>
 
           {status === "sent" ? (
             <div className="mt-6 space-y-3 text-sm">
-              <p className="text-foreground">Check your email for a sign-in link.</p>
+              {/* The API answers the same for every address, so this cannot say
+                  whether the DM went out, only when it would have. */}
+              <p className="text-foreground">
+                If {email.trim()} is on the team’s Slack, Gaspo has sent a sign-in link there. Check
+                your Slack DMs from Gaspo.
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Nothing arrived? For now, only people on the team’s Slack can sign in.
+              </p>
               {devLink && (
                 <div className="rounded-lg border border-border bg-muted/40 p-3">
                   <p className="mb-1 text-xs text-muted-foreground">Dev mode link:</p>
@@ -182,11 +214,15 @@ function SpaceLogin({
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="mt-6 space-y-3">
+              <p className="text-xs text-muted-foreground">
+                Enter the email on your Slack profile and Gaspo will send you a sign-in link in
+                Slack.
+              </p>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => updateEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder="you@company.com"
                 autoComplete="email"
                 aria-label="Email address"
                 aria-invalid={shownError ? true : undefined}
@@ -207,7 +243,19 @@ function SpaceLogin({
                 disabled={status === "sending"}
                 className="w-full rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
               >
-                {status === "sending" ? "Sending…" : "Email me a sign-in link"}
+                {status === "sending" ? "Sending…" : "Send me a sign-in link"}
+              </button>
+              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                <span className="h-px flex-1 bg-border" />
+                or
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <button
+                type="button"
+                onClick={() => startSlackLoginReturningTo(spacePath(space.slug))}
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground"
+              >
+                Sign in to Gaspo with Slack
               </button>
             </form>
           )}
@@ -228,7 +276,7 @@ function SpaceShell({ space, onSignOut }: { space: PublicSpace; onSignOut: () =>
   return (
     <>
       <PageMeta title={space.name} />
-      <div className="flex min-h-screen bg-background font-sans text-foreground">
+      <div className="space-runtime flex min-h-screen bg-background font-sans text-foreground">
         <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card p-4">
           <div className="mb-4 truncate text-base font-bold">{space.name}</div>
           <nav className="flex flex-col gap-1">

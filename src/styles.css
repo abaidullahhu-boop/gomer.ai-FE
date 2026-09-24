@@ -241,6 +241,15 @@
   font-family: var(--font-sans);
 }
 
+/*
+ * The apps Gaspo builds (/s/:slug) sit outside the dashboard shell, where the
+ * marketing `.bg-primary` utility is white under mono-site. Their primary
+ * buttons (sign in, save) were white on white; here it means the primary again.
+ */
+.space-runtime {
+  --bg-primary: var(--primary);
+}
+
 .dark .dashboard-shell {
   color-scheme: dark;
 

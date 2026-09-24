@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
-import { storeTokens } from "@/lib/auth";
+import { storeTokens, takeReturnTo } from "@/lib/auth";
 
 /**
  * Landing route for the Slack OAuth redirect. The backend sends the browser
@@ -33,8 +33,9 @@ export default function AuthCallback() {
     }
 
     storeTokens(accessToken, refreshToken);
-    // Replace so the tokens don't linger in history; land in the dashboard.
-    navigate("/dashboard", { replace: true });
+    // Replace so the tokens don't linger in history; land in the dashboard,
+    // or back on the app that sent the user to sign in.
+    navigate(takeReturnTo() ?? "/dashboard", { replace: true });
   }, [navigate, searchParams]);
 
   return (

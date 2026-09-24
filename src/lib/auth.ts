@@ -33,9 +33,45 @@ export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
  */
 export const SLACK_CREATE_ACCOUNT_URL = "https://slack.com/get-started#/createnew";
 
+/**
+ * Where to land after the Slack round trip, when it should not be the
+ * dashboard. sessionStorage survives the OAuth redirects because they happen
+ * in the same tab.
+ */
+const RETURN_TO_KEY = "gaspo_return_to";
+
+function goToSlack(returnTo: string | null): void {
+  try {
+    if (returnTo) sessionStorage.setItem(RETURN_TO_KEY, returnTo);
+    else sessionStorage.removeItem(RETURN_TO_KEY);
+  } catch {
+    // Storage blocked: the user just lands on the dashboard instead.
+  }
+  window.location.href = `${API_URL}/auth/slack/install`;
+}
+
 /** Kick off the Slack OAuth flow by handing the browser to the backend. */
 export function startSlackLogin(): void {
-  window.location.href = `${API_URL}/auth/slack/install`;
+  goToSlack(null);
+}
+
+/** Sign in with Slack, then come back to `path` (e.g. an app) instead of the dashboard. */
+export function startSlackLoginReturningTo(path: string): void {
+  goToSlack(path);
+}
+
+/**
+ * The path saved by {@link startSlackLoginReturningTo}, read once. Only a
+ * same-site path is honoured, so a planted value cannot redirect off-site.
+ */
+export function takeReturnTo(): string | null {
+  try {
+    const path = sessionStorage.getItem(RETURN_TO_KEY);
+    sessionStorage.removeItem(RETURN_TO_KEY);
+    return path && path.startsWith("/") && !path.startsWith("//") ? path : null;
+  } catch {
+    return null;
+  }
 }
 
 export function storeTokens(accessToken: string, refreshToken: string): void {
