@@ -62,10 +62,20 @@ export interface AppSpec {
   auth: { mode: "magic-link"; allowSignup: boolean };
 }
 
+/** An app rendered from its spec, or a page Gaspo wrote as a whole HTML document. */
+export type SpaceKind = "app" | "page";
+
 export interface PublicSpace {
   slug: string;
   name: string;
+  kind: SpaceKind;
   spec: AppSpec;
+}
+
+/** A page's HTML and what it has saved, served once the viewer is signed in. */
+export interface PageDocument {
+  html: string;
+  state: Record<string, unknown>;
 }
 
 export interface SpaceRecord {

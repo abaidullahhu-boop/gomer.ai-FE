@@ -110,8 +110,14 @@ export default function DashboardSpaces() {
                           </p>
                         )}
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {space.entityCount} {space.entityCount === 1 ? "entity" : "entities"} ·{" "}
-                          {space.viewCount} {space.viewCount === 1 ? "view" : "views"}
+                          {space.kind === "page" ? (
+                            "Page"
+                          ) : (
+                            <>
+                              {space.entityCount} {space.entityCount === 1 ? "entity" : "entities"}{" "}
+                              · {space.viewCount} {space.viewCount === 1 ? "view" : "views"}
+                            </>
+                          )}
                         </p>
                       </div>
                       <div className="flex shrink-0 items-center gap-2">

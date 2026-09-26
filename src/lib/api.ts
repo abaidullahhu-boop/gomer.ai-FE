@@ -421,6 +421,8 @@ export type Space = {
   name: string;
   description: string | null;
   status: "draft" | "published";
+  /** An app rendered from its spec, or a page Gaspo wrote as HTML. */
+  kind: "app" | "page";
   url: string;
   entityCount: number;
   viewCount: number;

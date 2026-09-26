@@ -10,7 +10,7 @@
 
 import { apiFetch } from "@/lib/api";
 import { API_URL } from "@/lib/auth";
-import type { PublicSpace, SpaceRecord, SpaceSession } from "./types";
+import type { PageDocument, PublicSpace, SpaceRecord, SpaceSession } from "./types";
 
 const tokenKey = (slug: string) => `gomer_space_session:${slug}`;
 
@@ -124,5 +124,26 @@ export function updateRecord(
 export function deleteRecord(slug: string, entity: string, recordId: string): Promise<void> {
   return spaceFetch(slug, `/spaces/${slug}/data/${encodeURIComponent(entity)}/${recordId}`, {
     method: "DELETE",
+  });
+}
+
+export function fetchPage(slug: string): Promise<PageDocument> {
+  return spaceFetch<PageDocument>(slug, `/spaces/${slug}/page`);
+}
+
+/**
+ * Save one key of what a page remembers; `null` removes it. `keepalive` lets
+ * the last save still go out while the tab is closing.
+ */
+export function savePageState(
+  slug: string,
+  key: string,
+  value: unknown,
+  keepalive = false,
+): Promise<{ success: boolean }> {
+  return spaceFetch(slug, `/spaces/${slug}/page/state`, {
+    method: "PUT",
+    body: JSON.stringify({ key, value }),
+    keepalive,
   });
 }
