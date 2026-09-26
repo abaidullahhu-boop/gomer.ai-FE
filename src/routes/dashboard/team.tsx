@@ -6,11 +6,17 @@ import { PageMeta } from "@/components/PageMeta";
 import { useSession } from "@/lib/session";
 import {
   ApiError,
+  fetchSlackRoster,
   fetchTeamMembers,
+  inviteTeamMembers,
   isPendingInvite,
   updateMemberRole,
+  type SlackRosterEntry,
   type TeamMember,
 } from "@/lib/api";
+
+const SMALL_OUTLINE_BUTTON =
+  "gaspo-focus-ring inline-flex min-h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-xs font-medium text-secondary-foreground transition-[background-color,border-color,transform] duration-200 hover:bg-accent active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50";
 
 function MemberRoleControl({
   member,
@@ -76,6 +82,108 @@ function MemberAvatar({ name, avatar }: { name: string; avatar: string }) {
   return (
     <div className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground">
       {initials}
+    </div>
+  );
+}
+
+/** Past this many people the list gets a search box. */
+const ROSTER_SEARCH_THRESHOLD = 8;
+
+/**
+ * People in the workspace's Slack who are not on Gaspo, each with an Invite
+ * button. Inviting adds them straight away and DMs them in Slack, so they
+ * move up into the member list as "Invited".
+ */
+function NotOnGaspoList({
+  people,
+  loading,
+  error,
+  invitingId,
+  onInvite,
+}: {
+  people: SlackRosterEntry[];
+  loading: boolean;
+  error: string | null;
+  invitingId: string | null;
+  onInvite: (person: SlackRosterEntry) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const needle = query.trim().toLowerCase();
+  const shown = needle
+    ? people.filter(
+        (person) =>
+          person.name.toLowerCase().includes(needle) ||
+          (person.email ?? "").toLowerCase().includes(needle),
+      )
+    : people;
+
+  let body: React.ReactNode;
+  if (loading) {
+    body = <p className="py-6 text-sm text-muted-foreground">Loading your Slack workspace…</p>;
+  } else if (error) {
+    body = null;
+  } else if (people.length === 0) {
+    body = (
+      <p className="py-6 text-sm text-muted-foreground">
+        Everyone in your Slack workspace is on Gaspo.
+      </p>
+    );
+  } else if (shown.length === 0) {
+    body = <p className="py-6 text-sm text-muted-foreground">No one matches “{query.trim()}”.</p>;
+  } else {
+    body = shown.map((person) => (
+      <div key={person.slackUserId} className="flex h-16 w-full items-center justify-start gap-3">
+        <MemberAvatar name={person.name} avatar={person.avatarUrl ?? ""} />
+        <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-0.5">
+          <p className="w-full truncate text-[15px] font-medium leading-[1.3] text-foreground">
+            {person.name}
+          </p>
+          <p className="w-full truncate text-xs leading-normal text-sidebar-foreground">
+            {person.email ?? "Slack doesn't share this person's email"}
+          </p>
+        </div>
+        <button
+          type="button"
+          aria-label={`Invite ${person.name}`}
+          disabled={!person.email || invitingId !== null}
+          onClick={() => onInvite(person)}
+          data-loading={invitingId === person.slackUserId}
+          className={`${SMALL_OUTLINE_BUTTON} data-[loading=true]:cursor-wait`}
+        >
+          <UserPlus className="size-3.5" strokeWidth={1.5} />
+          {invitingId === person.slackUserId ? "Inviting…" : "Invite"}
+        </button>
+      </div>
+    ));
+  }
+
+  return (
+    <div className="mt-8 flex flex-col">
+      <p className="text-xs leading-tight text-muted-foreground/80">
+        In your Slack, not on Gaspo yet
+        {!loading && people.length > 0 ? ` · ${people.length}` : ""}
+      </p>
+      <p className="mt-1 text-xs leading-normal text-muted-foreground">
+        Invite adds them to the team and Gaspo sends them a Slack DM with where to sign in.
+      </p>
+      {error ? (
+        <p className="mt-2 text-sm text-destructive" role="alert">
+          {error}
+        </p>
+      ) : null}
+      {!loading && people.length > ROSTER_SEARCH_THRESHOLD ? (
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search by name or email"
+          aria-label="Search people not on Gaspo"
+          autoComplete="off"
+          spellCheck={false}
+          className="gaspo-focus-ring mt-3 min-h-9 w-full max-w-sm rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        />
+      ) : null}
+      <div>{body}</div>
     </div>
   );
 }
@@ -179,9 +287,16 @@ export default function DashboardTeam() {
   const [error, setError] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [reloadCount, setReloadCount] = useState(0);
+  const [roster, setRoster] = useState<SlackRosterEntry[]>([]);
+  const [rosterLoading, setRosterLoading] = useState(false);
+  const [rosterError, setRosterError] = useState<string | null>(null);
+  /** The Slack id (roster row) or member id (Resend) being invited right now. */
+  const [invitingId, setInvitingId] = useState<string | null>(null);
+  const [inviteNotice, setInviteNotice] = useState<string | null>(null);
 
   const isAdmin = user?.role === "admin";
   const teamName = currentWorkspace?.name ?? "Your Team";
+  const notOnGaspo = roster.filter((person) => person.status === "not_on_gaspo");
 
   // Refetches on mount, on the Refresh button, and after the invite dialog
   // adds someone (the layout bumps invitesVersion).
@@ -207,6 +322,57 @@ export default function DashboardTeam() {
       active = false;
     };
   }, [invitesVersion, reloadCount]);
+
+  // The Slack roster is admin-only (it lists every teammate's email), so
+  // members never ask for it. Reloads alongside the member list.
+  useEffect(() => {
+    if (!isAdmin) return;
+    let active = true;
+    setRosterLoading(true);
+    fetchSlackRoster()
+      .then((data) => {
+        if (active) {
+          setRoster(data);
+          setRosterError(null);
+        }
+      })
+      .catch((err) => {
+        if (active) {
+          // A 5xx message may have been rewritten at the edge; say what to do instead.
+          setRosterError(
+            err instanceof ApiError && err.status < 500
+              ? err.message
+              : "Couldn't load your Slack workspace. Try Refresh in a minute.",
+          );
+        }
+      })
+      .finally(() => {
+        if (active) setRosterLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [isAdmin, invitesVersion, reloadCount]);
+
+  /** Invite one person (or re-send a pending invite) through the regular invite endpoint. */
+  const handleInvite = useCallback(async (key: string, email: string) => {
+    setInvitingId(key);
+    setInviteNotice(null);
+    try {
+      const [result] = await inviteTeamMembers([email]);
+      setInviteNotice(result?.message ?? null);
+      // Refetch both lists so the person moves up into the members as "Invited".
+      if (result?.status === "invited") setReloadCount((count) => count + 1);
+    } catch (err) {
+      setInviteNotice(
+        err instanceof ApiError
+          ? err.message
+          : "Could not send the invite. Check your connection and try again.",
+      );
+    } finally {
+      setInvitingId(null);
+    }
+  }, []);
 
   const handleRoleChange = useCallback(
     async (memberId: string, role: "admin" | "member") => {
@@ -337,6 +503,11 @@ export default function DashboardTeam() {
                       {error}
                     </p>
                   ) : null}
+                  {inviteNotice ? (
+                    <p className="mt-2 text-sm text-foreground" role="status">
+                      {inviteNotice}
+                    </p>
+                  ) : null}
                   <div>
                     {loading ? (
                       <p className="py-6 text-sm text-muted-foreground">Loading team members…</p>
@@ -364,6 +535,17 @@ export default function DashboardTeam() {
                               {isPendingInvite(member) ? " · hasn't signed in yet" : ""}
                             </p>
                           </div>
+                          {isAdmin && isPendingInvite(member) && member.email ? (
+                            <button
+                              type="button"
+                              aria-label={`Resend invite to ${member.name}`}
+                              disabled={invitingId !== null}
+                              onClick={() => member.email && handleInvite(member.id, member.email)}
+                              className={SMALL_OUTLINE_BUTTON}
+                            >
+                              {invitingId === member.id ? "Sending…" : "Resend"}
+                            </button>
+                          ) : null}
                           <MemberRoleControl
                             member={member}
                             canManage={isAdmin}
@@ -374,6 +556,17 @@ export default function DashboardTeam() {
                       ))
                     )}
                   </div>
+                  {isAdmin ? (
+                    <NotOnGaspoList
+                      people={notOnGaspo}
+                      loading={rosterLoading && roster.length === 0}
+                      error={rosterError}
+                      invitingId={invitingId}
+                      onInvite={(person) =>
+                        person.email && handleInvite(person.slackUserId, person.email)
+                      }
+                    />
+                  ) : null}
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
