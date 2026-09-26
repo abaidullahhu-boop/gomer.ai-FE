@@ -176,6 +176,21 @@ export function inviteTeamMembers(emails: string[]): Promise<InviteResult[]> {
   });
 }
 
+/** One person on the workspace's Slack team, and where they stand with Gaspo. */
+export type SlackRosterEntry = {
+  slackUserId: string;
+  name: string;
+  /** Null when Slack withholds it; such a person cannot be invited by email. */
+  email: string | null;
+  avatarUrl: string | null;
+  status: "on_gaspo" | "invited" | "not_on_gaspo";
+};
+
+/** Everyone on the workspace's Slack team, sorted by name. Admins only. */
+export function fetchSlackRoster(): Promise<SlackRosterEntry[]> {
+  return apiFetch<SlackRosterEntry[]>("/users/invites/slack-members");
+}
+
 export function fetchCurrentWorkspace(): Promise<Workspace> {
   return apiFetch<Workspace>("/workspaces/me");
 }
