@@ -107,6 +107,20 @@ export function createRecord(
   });
 }
 
+/** Replace a record's data; the backend re-validates the whole row. */
+export function updateRecord(
+  slug: string,
+  entity: string,
+  recordId: string,
+  data: Record<string, unknown>,
+): Promise<SpaceRecord> {
+  return spaceFetch<SpaceRecord>(
+    slug,
+    `/spaces/${slug}/data/${encodeURIComponent(entity)}/${recordId}`,
+    { method: "PUT", body: JSON.stringify({ data }) },
+  );
+}
+
 export function deleteRecord(slug: string, entity: string, recordId: string): Promise<void> {
   return spaceFetch(slug, `/spaces/${slug}/data/${encodeURIComponent(entity)}/${recordId}`, {
     method: "DELETE",

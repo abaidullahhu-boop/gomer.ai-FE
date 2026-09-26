@@ -13,6 +13,7 @@ import {
   openWithWorkspaceSession,
   requestMagicLink,
   storeSpaceToken,
+  updateRecord,
   verifyMagicLink,
 } from "./client";
 import type { EntitySpec, FieldSpec, PublicSpace, SpaceRecord, ViewSpec } from "./types";
@@ -46,8 +47,8 @@ export default function SpaceApp() {
         storeSpaceToken(slug, session.token);
         setAuthed(true);
       })
-      // Another team's app or a lapsed session just falls back to the form;
-      // a member with no email on file is told what to do there instead.
+      // A lapsed session just falls back to the form. Someone signed in to a
+      // different workspace, or with no email on file, is told why there.
       .catch((err: unknown) => {
         if (err instanceof ApiError && err.status === 403) setAuthError(err.message);
       })
@@ -355,6 +356,47 @@ function useRecords(slug: string, entity: string | undefined, version: number) {
   return { records, error };
 }
 
+/**
+ * Names for the rows a table's reference columns point at, keyed by id, so a
+ * cell shows "Week 1: Foundation" rather than the row's id.
+ */
+function useReferenceLabels(
+  slug: string,
+  spec: PublicSpace["spec"],
+  fields: FieldSpec[],
+  version: number,
+): Record<string, string> {
+  const targets = useMemo(
+    () => [
+      ...new Set(
+        fields.flatMap((f) => (f.type === "reference" && f.refEntity ? [f.refEntity] : [])),
+      ),
+    ],
+    [fields],
+  );
+  const [labels, setLabels] = useState<Record<string, string>>({});
+  useEffect(() => {
+    if (targets.length === 0) return;
+    let current = true;
+    Promise.all(
+      targets.map((name) =>
+        listRecords(slug, name).then((rows) =>
+          rows.map((r) => [r.id, displayLabel(entityOf(spec, name), r)] as const),
+        ),
+      ),
+    )
+      .then((pairs) => {
+        if (current) setLabels(Object.fromEntries(pairs.flat()));
+      })
+      // Without the names the cells fall back to showing ids, which still works.
+      .catch(() => undefined);
+    return () => {
+      current = false;
+    };
+  }, [slug, spec, targets, version]);
+  return labels;
+}
+
 function displayLabel(entity: EntitySpec | undefined, record: SpaceRecord): string {
   const labelField = entity?.fields.find((f) => f.type === "string" || f.type === "text");
   const value = labelField ? record.data[labelField.name] : undefined;
@@ -446,6 +488,10 @@ function TableView({
           .filter(Boolean) as FieldSpec[])
       : entity.fields;
   }, [entity, view.columns]);
+  const referenceLabels = useReferenceLabels(slug, spec, columns, dataVersion);
+  // Values changed in the table, shown at once while the save and refetch run.
+  const [edits, setEdits] = useState<Record<string, Record<string, unknown>>>({});
+  const [editError, setEditError] = useState<string | null>(null);
 
   if (!entity) return <p className="text-sm text-destructive">Unknown entity “{view.entity}”.</p>;
 
@@ -454,10 +500,27 @@ function TableView({
     onChanged();
   }
 
+  // Select and yes/no cells are edited in place, which is how a plan's steps
+  // get ticked off: the whole row is sent back and re-validated.
+  async function change(record: SpaceRecord, field: FieldSpec, value: unknown) {
+    const previous = edits[record.id];
+    const data = { ...record.data, ...previous, [field.name]: value };
+    setEdits((current) => ({ ...current, [record.id]: { ...previous, [field.name]: value } }));
+    setEditError(null);
+    try {
+      await updateRecord(slug, view.entity, record.id, data);
+      onChanged();
+    } catch (err) {
+      setEdits((current) => ({ ...current, [record.id]: previous ?? {} }));
+      setEditError((err as Error).message);
+    }
+  }
+
   return (
     <div>
       <h2 className="mb-6 text-2xl font-bold">{view.title}</h2>
       {error && <p className="mb-3 text-sm text-destructive">{error}</p>}
+      {editError && <p className="mb-3 text-sm text-destructive">{editError}</p>}
       <div className="overflow-x-auto rounded-xl border border-border bg-card">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border text-muted-foreground">
@@ -483,11 +546,40 @@ function TableView({
             )}
             {records.map((record) => (
               <tr key={record.id} className="border-b border-border/60 last:border-0">
-                {columns.map((c) => (
-                  <td key={c.name} className="px-4 py-2 text-foreground">
-                    {formatCell(c, record.data[c.name])}
-                  </td>
-                ))}
+                {columns.map((c) => {
+                  const value = edits[record.id]?.[c.name] ?? record.data[c.name];
+                  return (
+                    <td key={c.name} className="px-4 py-2 text-foreground">
+                      {c.type === "select" ? (
+                        <select
+                          value={(value as string) ?? ""}
+                          onChange={(e) => change(record, c, e.target.value)}
+                          aria-label={c.label}
+                          className="rounded-md border border-border bg-background px-2 py-1 text-sm text-foreground outline-none focus:border-primary"
+                        >
+                          {(!c.required || value == null || value === "") && (
+                            <option value="">—</option>
+                          )}
+                          {c.options?.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      ) : c.type === "boolean" ? (
+                        <input
+                          type="checkbox"
+                          checked={Boolean(value)}
+                          onChange={(e) => change(record, c, e.target.checked)}
+                          aria-label={c.label}
+                          className="h-4 w-4"
+                        />
+                      ) : (
+                        formatCell(c, value, referenceLabels)
+                      )}
+                    </td>
+                  );
+                })}
                 <td className="px-4 py-2 text-right">
                   <button
                     type="button"
@@ -669,8 +761,13 @@ function inputType(type: FieldSpec["type"]): string {
   }
 }
 
-function formatCell(field: FieldSpec, value: unknown): string {
+function formatCell(
+  field: FieldSpec,
+  value: unknown,
+  referenceLabels: Record<string, string>,
+): string {
   if (value == null || value === "") return "—";
   if (field.type === "boolean") return value ? "Yes" : "No";
+  if (field.type === "reference") return referenceLabels[String(value)] ?? String(value);
   return String(value);
 }
