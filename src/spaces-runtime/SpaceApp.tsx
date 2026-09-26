@@ -16,6 +16,7 @@ import {
   updateRecord,
   verifyMagicLink,
 } from "./client";
+import { SpacePage } from "./SpacePage";
 import type { EntitySpec, FieldSpec, PublicSpace, SpaceRecord, ViewSpec } from "./types";
 
 export default function SpaceApp() {
@@ -105,6 +106,7 @@ export default function SpaceApp() {
       />
     );
   }
+  if (space.kind === "page") return <SpacePage space={space} onSignOut={signOut} />;
   return <SpaceShell space={space} onSignOut={signOut} />;
 }
 
