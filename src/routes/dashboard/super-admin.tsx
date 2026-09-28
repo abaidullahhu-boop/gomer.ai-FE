@@ -18,6 +18,7 @@ import {
   type PlatformWorkspace,
   type PlatformWorkspaceDetail,
   type WorkspaceSort,
+  type WorkspaceStage,
 } from "@/lib/api";
 
 type Tab = "overview" | "customers" | "bugs";
@@ -34,6 +35,49 @@ const SORTS: Array<{ id: WorkspaceSort; label: string }> = [
   { id: "activity", label: "Last active" },
   { id: "name", label: "Name" },
 ];
+
+/**
+ * The sales stages, in funnel order: paying, then trials from warmest to
+ * coldest, then lost. `fill` shades the three groups apart; the label carries
+ * the identity, so the shade is never the only way to tell them apart.
+ */
+const STAGES: Array<{ id: WorkspaceStage; label: string; hint: string; fill: string }> = [
+  { id: "subscribed", label: "On a plan", hint: "Billed monthly", fill: "bg-foreground" },
+  {
+    id: "topup_only",
+    label: "Top-ups only",
+    hint: "Bought credits, no plan",
+    fill: "bg-foreground",
+  },
+  {
+    id: "trial_active",
+    label: "Active trial",
+    hint: "Used Gaspo in the last 30 days",
+    fill: "bg-foreground/50",
+  },
+  {
+    id: "trial_idle",
+    label: "Idle trial",
+    hint: "Credits left, quiet for 30+ days",
+    fill: "bg-foreground/50",
+  },
+  {
+    id: "trial_spent",
+    label: "Trial used up",
+    hint: "Out of free credits, never paid",
+    fill: "bg-foreground/50",
+  },
+  {
+    id: "canceled",
+    label: "Cancelled",
+    hint: "Had a plan, cancelled it",
+    fill: "bg-foreground/25",
+  },
+];
+
+function stageLabel(stage: WorkspaceStage): string {
+  return STAGES.find((option) => option.id === stage)?.label ?? stage;
+}
 
 /** How many biggest-team rows the overview lists. */
 const TOP_TEAMS = 5;
@@ -251,6 +295,116 @@ function BiggestTeams({
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * Every workspace by sales stage, one row each, largest bar scaled to full width.
+ *
+ * Rows rather than one stacked bar: six segments in shades of one ink are not
+ * tellable apart, and the question here is "how many in each", which a labelled
+ * count answers directly. Each row opens the customer table filtered to it.
+ */
+function StageBreakdown({
+  stages,
+  onOpen,
+}: {
+  stages: PlatformOverview["sales"]["stages"];
+  onOpen: (stage: WorkspaceStage) => void;
+}) {
+  const largest = Math.max(...STAGES.map((stage) => stages[stage.id]), 1);
+  if (STAGES.every((stage) => stages[stage.id] === 0)) {
+    return <p className="text-sm text-muted-foreground">No workspaces yet.</p>;
+  }
+  return (
+    <ul className="flex flex-col">
+      {STAGES.map((stage) => {
+        const count = stages[stage.id];
+        return (
+          <li key={stage.id}>
+            <button
+              type="button"
+              onClick={() => onOpen(stage.id)}
+              title={`Show the ${count} workspace${count === 1 ? "" : "s"} in "${stage.label}"`}
+              className="gaspo-focus-ring flex w-full cursor-pointer items-center gap-3 rounded-md px-1 py-2 text-left transition-colors hover:bg-accent/50"
+            >
+              <div className="flex min-w-0 flex-1 flex-col gap-1">
+                <span className="flex min-w-0 items-baseline gap-2">
+                  <span className="shrink-0 text-sm font-medium text-foreground">
+                    {stage.label}
+                  </span>
+                  <span className="truncate text-xs text-muted-foreground">{stage.hint}</span>
+                </span>
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                  {count > 0 ? (
+                    <div
+                      className={`h-full rounded-full ${stage.fill}`}
+                      style={{ width: `${(count / largest) * 100}%` }}
+                    />
+                  ) : null}
+                </div>
+              </div>
+              <span className="w-8 shrink-0 text-right text-sm font-medium tabular-nums text-foreground">
+                {count}
+              </span>
+              <ChevronRight className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/** Subscribers per plan, with what each plan brings in a month. */
+function PlanBreakdown({ sales }: { sales: PlatformOverview["sales"] }) {
+  if (!sales.plans.length) {
+    return <p className="text-sm text-muted-foreground">No one is on a plan yet.</p>;
+  }
+  return (
+    <div className="flex flex-col gap-4">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <th className="pb-2">Plan</th>
+            <th className="pb-2 text-right">Customers</th>
+            <th className="pb-2 text-right">Per month</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sales.plans.map((plan) => (
+            <tr key={plan.planId} className="border-t border-border text-sm">
+              <td className="py-2.5 font-medium text-foreground">{plan.label}</td>
+              <td className="py-2.5 text-right tabular-nums text-foreground">{plan.customers}</td>
+              <td className="py-2.5 text-right tabular-nums text-foreground">
+                {dollars(plan.mrrCents)}
+              </td>
+            </tr>
+          ))}
+          <tr className="border-t border-border text-sm">
+            <td className="py-2.5 text-muted-foreground">Total</td>
+            <td className="py-2.5 text-right font-medium tabular-nums text-foreground">
+              {sales.stages.subscribed}
+            </td>
+            <td className="py-2.5 text-right font-medium tabular-nums text-foreground">
+              {dollars(sales.mrrCents)}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {sales.pastDue > 0 || sales.cancelling > 0 ? (
+        <p className="text-xs text-muted-foreground">
+          Includes{" "}
+          {[
+            sales.pastDue > 0 ? `${sales.pastDue} past due (card failed, Stripe retrying)` : null,
+            sales.cancelling > 0 ? `${sales.cancelling} cancelling at the end of the period` : null,
+          ]
+            .filter(Boolean)
+            .join(" and ")}
+          .
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -624,6 +778,9 @@ export default function SuperAdmin() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = (searchParams.get("tab") as Tab) || "overview";
   const selectedWorkspace = searchParams.get("workspace");
+  // In the URL rather than state, so the overview's stage rows can link
+  // straight into a filtered table and the filter survives a drill-in and back.
+  const stageFilter = STAGES.find((option) => option.id === searchParams.get("stage"))?.id ?? null;
 
   const [overview, setOverview] = useState<PlatformOverview | null>(null);
   const [growth, setGrowth] = useState<PlatformGrowth | null>(null);
@@ -644,7 +801,7 @@ export default function SuperAdmin() {
       const [o, g, w, t, b] = await Promise.all([
         fetchPlatformOverview(30),
         fetchPlatformGrowth(30),
-        fetchPlatformWorkspaces({ search, sort }),
+        fetchPlatformWorkspaces({ search, sort, stage: stageFilter ?? undefined }),
         // Asked for separately rather than sorted out of the page above: that
         // page is whatever the customer table is currently showing, and the
         // biggest teams on the platform are not necessarily on it.
@@ -662,7 +819,7 @@ export default function SuperAdmin() {
     } finally {
       setLoading(false);
     }
-  }, [search, sort, bugFilter]);
+  }, [search, sort, stageFilter, bugFilter]);
 
   useEffect(() => {
     if (user?.isSuperAdmin) void load();
@@ -674,6 +831,15 @@ export default function SuperAdmin() {
 
   function setTab(next: Tab) {
     setSearchParams({ tab: next });
+  }
+
+  /** The customer table, optionally narrowed to one stage and/or one workspace. */
+  function openCustomers(options: { stage?: WorkspaceStage | null; workspace?: string } = {}) {
+    setSearchParams({
+      tab: "customers",
+      ...(options.stage ? { stage: options.stage } : {}),
+      ...(options.workspace ? { workspace: options.workspace } : {}),
+    });
   }
 
   return (
@@ -736,6 +902,30 @@ export default function SuperAdmin() {
 
             {tab === "overview" && overview && growth ? (
               <div className="flex flex-col gap-6">
+                {/* Sales first: it is the question the owner opens this page with. */}
+                <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                  <StatCard
+                    label="Paying customers"
+                    value={overview.sales.payingCustomers.toLocaleString()}
+                    hint={`${overview.sales.stages.subscribed} on a plan · ${overview.sales.stages.topup_only} top-ups only`}
+                  />
+                  <StatCard
+                    label="Active trials"
+                    value={overview.sales.stages.trial_active.toLocaleString()}
+                    hint={`Used in ${overview.sales.activeTrialDays}d · ${overview.sales.stages.trial_idle} idle · ${overview.sales.stages.trial_spent} used up`}
+                  />
+                  <StatCard
+                    label="Monthly recurring"
+                    value={dollars(overview.sales.mrrCents)}
+                    hint={`${dollars(overview.sales.mrrCents * 12)} a year at this rate`}
+                  />
+                  <StatCard
+                    label="Revenue collected"
+                    value={dollars(overview.revenue.totalCents)}
+                    hint={`${dollars(overview.revenue.windowCents)} in ${overview.days}d`}
+                  />
+                </div>
+
                 <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                   <StatCard
                     label="Workspaces"
@@ -748,9 +938,9 @@ export default function SuperAdmin() {
                     hint={`${overview.teams.medianTeamSize.toLocaleString(undefined, { maximumFractionDigits: 1 })} per workspace, typically`}
                   />
                   <StatCard
-                    label="Revenue"
-                    value={dollars(overview.revenue.totalCents)}
-                    hint={`${dollars(overview.revenue.windowCents)} in ${overview.days}d`}
+                    label="Converted"
+                    value={`${Math.round(overview.sales.conversionRate * 100)}%`}
+                    hint="of workspaces have ever paid"
                   />
                   <StatCard
                     label={`Margin (${overview.days}d)`}
@@ -758,6 +948,26 @@ export default function SuperAdmin() {
                     tone={overview.margin.marginUsd >= 0 ? "positive" : "negative"}
                     hint={`${usd(overview.margin.chargedUsd)} charged · ${usd(overview.margin.costUsd)} cost`}
                   />
+                </div>
+
+                <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+                  <SectionCard
+                    title="Customers by stage"
+                    action={
+                      <span className="text-xs text-muted-foreground">
+                        Click a stage to list them
+                      </span>
+                    }
+                  >
+                    <StageBreakdown
+                      stages={overview.sales.stages}
+                      onOpen={(stage) => openCustomers({ stage })}
+                    />
+                  </SectionCard>
+
+                  <SectionCard title="Plans">
+                    <PlanBreakdown sales={overview.sales} />
+                  </SectionCard>
                 </div>
 
                 {/* items-start so the shorter card keeps its own height rather
@@ -825,7 +1035,7 @@ export default function SuperAdmin() {
                   <SectionCard title="Biggest teams">
                     <BiggestTeams
                       workspaces={topTeams}
-                      onOpen={(id) => setSearchParams({ tab: "customers", workspace: id })}
+                      onOpen={(id) => openCustomers({ workspace: id })}
                     />
                   </SectionCard>
                 </div>
@@ -884,7 +1094,7 @@ export default function SuperAdmin() {
               selectedWorkspace ? (
                 <WorkspaceDetail
                   id={selectedWorkspace}
-                  onBack={() => setSearchParams({ tab: "customers" })}
+                  onBack={() => openCustomers({ stage: stageFilter })}
                 />
               ) : (
                 <div className="flex flex-col gap-4">
@@ -917,6 +1127,32 @@ export default function SuperAdmin() {
                     ))}
                   </div>
 
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="mr-1 text-xs text-muted-foreground">Show</span>
+                    {[{ id: null, label: "Everyone" }, ...STAGES].map((option) => (
+                      <button
+                        key={option.id ?? "all"}
+                        type="button"
+                        aria-pressed={stageFilter === option.id}
+                        onClick={() => openCustomers({ stage: option.id })}
+                        className={`gaspo-focus-ring min-h-8 cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors ${
+                          stageFilter === option.id
+                            ? "border-transparent bg-secondary text-foreground"
+                            : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
+                        }`}
+                      >
+                        {option.label}
+                        {overview ? (
+                          <span className="ml-1.5 tabular-nums opacity-60">
+                            {option.id
+                              ? overview.sales.stages[option.id]
+                              : overview.workspaces.total}
+                          </span>
+                        ) : null}
+                      </button>
+                    ))}
+                  </div>
+
                   <SectionCard
                     title={
                       // The page size caps at 50, so the count shown and the
@@ -944,7 +1180,7 @@ export default function SuperAdmin() {
                             <tr className="text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
                               <th className="px-3 pb-2">Workspace</th>
                               <th className="px-3 pb-2">People</th>
-                              <th className="px-3 pb-2">Plan</th>
+                              <th className="px-3 pb-2">Stage</th>
                               <th className="px-3 pb-2">Credits left</th>
                               <th className="px-3 pb-2">Paid</th>
                               <th className="px-3 pb-2">Last active</th>
@@ -955,7 +1191,7 @@ export default function SuperAdmin() {
                               <tr
                                 key={workspace.id}
                                 onClick={() =>
-                                  setSearchParams({ tab: "customers", workspace: workspace.id })
+                                  openCustomers({ stage: stageFilter, workspace: workspace.id })
                                 }
                                 className="cursor-pointer border-t border-border text-sm transition-colors hover:bg-accent/50"
                               >
@@ -985,16 +1221,17 @@ export default function SuperAdmin() {
                                   </div>
                                 </td>
                                 <td className="px-3 py-2.5">
-                                  {workspace.plan ? (
-                                    <span className="capitalize text-foreground">
-                                      {workspace.plan.planId}
-                                      <span className="ml-1 text-xs text-muted-foreground">
+                                  <div className="flex flex-col">
+                                    <span className="whitespace-nowrap text-foreground">
+                                      {stageLabel(workspace.stage)}
+                                    </span>
+                                    {workspace.plan ? (
+                                      <span className="text-xs whitespace-nowrap text-muted-foreground capitalize">
+                                        {workspace.plan.planId} ·{" "}
                                         {workspace.plan.status.replace("_", " ")}
                                       </span>
-                                    </span>
-                                  ) : (
-                                    <span className="text-xs text-muted-foreground">Trial</span>
-                                  )}
+                                    ) : null}
+                                  </div>
                                 </td>
                                 <td className="px-3 py-2.5 tabular-nums text-foreground">
                                   {workspace.credits.balance.toLocaleString()}
@@ -1012,7 +1249,11 @@ export default function SuperAdmin() {
                       </div>
                     ) : (
                       <p className="text-sm text-muted-foreground">
-                        {search ? "No workspace matches that search." : "No workspaces yet."}
+                        {search
+                          ? "No workspace matches that search."
+                          : stageFilter
+                            ? `No workspaces in "${stageLabel(stageFilter)}" right now.`
+                            : "No workspaces yet."}
                       </p>
                     )}
                   </SectionCard>
