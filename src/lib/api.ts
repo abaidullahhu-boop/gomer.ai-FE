@@ -871,6 +871,19 @@ export function fetchMyBugReports(): Promise<BugReport[]> {
 /** How the customer table may be ordered. Mirrors the server's allowed set. */
 export type WorkspaceSort = "created" | "members" | "activity" | "name";
 
+/**
+ * Where a workspace sits in the sales funnel; every workspace is in exactly
+ * one. The three trial stages exist because trial credits never expire, so "no
+ * plan" alone would count every signup that never came back as a live trial.
+ */
+export type WorkspaceStage =
+  | "subscribed"
+  | "topup_only"
+  | "canceled"
+  | "trial_active"
+  | "trial_idle"
+  | "trial_spent";
+
 export type PlatformOverview = {
   days: number;
   range: { from: string; to: string };
@@ -897,6 +910,22 @@ export type PlatformOverview = {
     distribution: { solo: number; small: number; medium: number; large: number };
   };
   revenue: { totalCents: number; windowCents: number };
+  sales: {
+    /** Workspace counts per stage, every stage present. */
+    stages: Record<WorkspaceStage, number>;
+    /** On a plan, plus top-up buyers who never had one. */
+    payingCustomers: number;
+    pastDue: number;
+    /** Cancelled, but still inside the period they paid for. */
+    cancelling: number;
+    /** List price of every plan still billing, in cents. */
+    mrrCents: number;
+    plans: Array<{ planId: string; label: string; customers: number; mrrCents: number }>;
+    /** Share of all workspaces that have ever paid, 0–1. */
+    conversionRate: number;
+    /** How recently a trial must have run something to count as active. */
+    activeTrialDays: number;
+  };
   credits: { granted: number; used: number; events: number };
   margin: { chargedUsd: number; costUsd: number; marginUsd: number; events: number };
   bugs: { open: number; inProgress: number; total: number };
@@ -922,6 +951,7 @@ export type PlatformWorkspace = {
     seats: number;
     currentPeriodEnd: string;
   } | null;
+  stage: WorkspaceStage;
   connectedAccounts: number;
   lastActivityAt: string | null;
 };
@@ -994,16 +1024,25 @@ export function fetchPlatformGrowth(days = 30): Promise<PlatformGrowth> {
  * table shows a window of it, and the two disagreeing is the normal case.
  */
 export function fetchPlatformWorkspaces(
-  options: { search?: string; sort?: WorkspaceSort; limit?: number } = {},
-): Promise<{ total: number; rows: PlatformWorkspace[]; sort: WorkspaceSort }> {
+  options: { search?: string; sort?: WorkspaceSort; stage?: WorkspaceStage; limit?: number } = {},
+): Promise<{
+  total: number;
+  rows: PlatformWorkspace[];
+  sort: WorkspaceSort;
+  stage: WorkspaceStage | null;
+}> {
   const params = new URLSearchParams();
   if (options.search) params.set("search", options.search);
   if (options.sort) params.set("sort", options.sort);
+  if (options.stage) params.set("stage", options.stage);
   if (options.limit) params.set("limit", String(options.limit));
   const query = params.size ? `?${params}` : "";
-  return apiFetch<{ total: number; rows: PlatformWorkspace[]; sort: WorkspaceSort }>(
-    `/super-admin/workspaces${query}`,
-  );
+  return apiFetch<{
+    total: number;
+    rows: PlatformWorkspace[];
+    sort: WorkspaceSort;
+    stage: WorkspaceStage | null;
+  }>(`/super-admin/workspaces${query}`);
 }
 
 export function fetchPlatformWorkspace(id: string): Promise<PlatformWorkspaceDetail> {
