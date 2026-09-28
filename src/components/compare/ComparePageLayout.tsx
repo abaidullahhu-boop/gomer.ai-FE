@@ -12,6 +12,7 @@ import { SlackPurpleCard, SlackTeammateCard } from "@/components/site/SlackChang
 import compareVisual3 from "@/assets/images/compare-visual-3.avif";
 import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
 import type { ComparePageConfig } from "@/components/compare/types";
+import { DEMO_CALL_URL } from "@/lib/links";
 
 const glassBorderLayers = (
   <>
@@ -301,12 +302,12 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <GetStartedButton className="inline-flex h-14 min-h-14 items-center justify-center border border-white bg-white px-10 text-base tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-white/90 active:translate-y-px" />
                 <a
-                  href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                  href={DEMO_CALL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-14 min-h-14 shrink-0 items-center justify-center rounded-full border border-white/15 bg-transparent px-10 text-base font-medium tracking-[-0.01em] text-white transition-all hover:bg-white/10 active:translate-y-px"
                 >
-                  Watch Gaspo Work
+                  Book a demo call
                 </a>
               </div>
             </div>

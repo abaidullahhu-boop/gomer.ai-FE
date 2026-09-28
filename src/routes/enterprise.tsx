@@ -22,6 +22,7 @@ import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { FAQSection } from "@/components/site/FAQSection";
 import { SlackReactions, type SlackReaction } from "@/components/site/SlackReactions";
+import { DEMO_CALL_URL } from "@/lib/links";
 
 const avatar = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`;
@@ -152,12 +153,12 @@ function EnterpriseHero() {
                 className="inline-flex h-14 min-h-14 w-full items-center justify-center px-10 text-base tracking-[-0.01em] sm:w-auto"
               />
               <a
-                href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                href={DEMO_CALL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#0000001a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#000]/[0.06] active:translate-y-px sm:w-auto"
               >
-                Book a Demo
+                Book a demo call
               </a>
             </div>
           </div>

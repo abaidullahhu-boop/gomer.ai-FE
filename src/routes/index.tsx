@@ -17,6 +17,7 @@ import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { PricingHeroPoints, landingHeroBadges } from "@/components/site/HeroBadges";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { SlackReactions } from "@/components/site/SlackReactions";
+import { DEMO_CALL_URL } from "@/lib/links";
 
 const toolLogos = ["Slack", "Zapier", "ClickUp", "GitHub", "HubSpot"];
 
@@ -79,12 +80,12 @@ export default function Index() {
                 <div className="flex w-full flex-col items-center gap-3">
                   <GetStartedButton className="inline-flex h-14 min-h-14 w-full items-center justify-center border border-white bg-white px-10 text-base tracking-[-0.01em] text-primitive-main-dark transition-all hover:opacity-90 active:translate-y-px sm:w-auto" />
                   <a
-                    href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                    href={DEMO_CALL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white/70 underline underline-offset-4 hover:text-white"
                   >
-                    or talk to sales →
+                    or book a demo call →
                   </a>
                 </div>
               </div>

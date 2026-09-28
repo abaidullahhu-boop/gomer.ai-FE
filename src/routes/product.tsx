@@ -30,6 +30,7 @@ import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
+import { DEMO_CALL_URL } from "@/lib/links";
 
 /* ============================================================
    Inline colours are black and white only: #000 surfaces and
@@ -115,12 +116,12 @@ function Hero() {
               className="inline-flex h-14 min-h-14 w-full items-center justify-center px-10 text-base tracking-[-0.01em] sm:w-auto"
             />
             <a
-              href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+              href={DEMO_CALL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-[#0000001a] px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-[#000]/[0.06] active:translate-y-px sm:w-auto"
             >
-              Book a Demo
+              Book a demo call
             </a>
           </div>
         </div>

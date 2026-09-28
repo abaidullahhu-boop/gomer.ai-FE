@@ -7,6 +7,7 @@ import { GetStartedButton } from "@/components/site/GetStartedButton";
 import { CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
 import gaspoWordmark from "@/assets/images/gaspo.svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
+import { DEMO_CALL_URL } from "@/lib/links";
 
 type Case = {
   category: string;
@@ -239,12 +240,12 @@ export default function CaseStudiesPage() {
                 <div className="flex w-full flex-col items-stretch justify-center gap-4 sm:w-auto sm:flex-row">
                   <GetStartedButton className="inline-flex h-14 min-h-14 w-full items-center justify-center px-10 text-base tracking-[-0.01em] sm:w-auto" />
                   <a
-                    href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                    href={DEMO_CALL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-white/20 bg-transparent px-10 text-base font-medium tracking-[-0.01em] text-white transition-all hover:bg-white/10 active:translate-y-px sm:w-auto"
                   >
-                    Book a demo
+                    Book a demo call
                   </a>
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center gap-6 sm:gap-8">
