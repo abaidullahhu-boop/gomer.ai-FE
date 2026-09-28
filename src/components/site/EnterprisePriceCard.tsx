@@ -1,3 +1,5 @@
+import { DEMO_CALL_URL } from "@/lib/links";
+
 const enterpriseFeatures = [
   "Invoicing + custom billing terms",
   "Security review support + DPA",
@@ -87,14 +89,12 @@ export function EnterprisePriceCard() {
               <div className="flex flex-col gap-3">
                 <p className="text-sm font-medium text-white/75">Flexible pricing</p>
                 <a
-                  href="https://cal.com/forms/24cb15e9-8a3d-4d94-9209-cc3d5f198286"
+                  href={DEMO_CALL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-vk-track="speak_to_sales_click"
-                  data-vk-label="Contact Sales"
                   className="inline-flex h-14 min-h-14 w-full shrink-0 items-center justify-center rounded-full border border-white bg-white px-10 text-base font-medium tracking-[-0.01em] text-primitive-main-dark transition-all hover:bg-white/90 active:translate-y-px"
                 >
-                  Contact sales
+                  Book a demo call
                 </a>
               </div>
 
