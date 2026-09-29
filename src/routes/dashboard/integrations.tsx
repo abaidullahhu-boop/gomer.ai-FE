@@ -471,6 +471,7 @@ export default function DashboardIntegrations() {
         <ConnectAccountModal
           open
           appName={pendingApp.name}
+          appSlug={pendingApp.nameSlug}
           onClose={() => setPendingApp(null)}
           onConfirm={(options) => {
             const app = pendingApp;
