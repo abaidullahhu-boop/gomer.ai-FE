@@ -358,6 +358,7 @@ export default function DashboardIntegrationConfigure() {
       <ConnectAccountModal
         open={addOpen}
         appName={appName}
+        appSlug={appSlug}
         onClose={() => setAddOpen(false)}
         onConfirm={(options) => {
           setAddOpen(false);

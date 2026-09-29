@@ -2,12 +2,15 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Lock, Users, X } from "lucide-react";
 import type { IntegrationAccessLevel } from "@/lib/api";
+import { connectNoteFor } from "@/lib/connect-notes";
 import type { ConnectOptions } from "@/lib/pipedream";
 import { Dropdown, type DropdownOption } from "./Dropdown";
 
 type ConnectAccountModalProps = {
   open: boolean;
   appName: string;
+  /** The app's slug, to show any setup it needs before connecting. */
+  appSlug?: string | null;
   onClose: () => void;
   onConfirm: (options: ConnectOptions) => void;
 };
@@ -25,6 +28,7 @@ const ACCESS_OPTIONS: readonly DropdownOption[] = [
 export function ConnectAccountModal({
   open,
   appName,
+  appSlug,
   onClose,
   onConfirm,
 }: ConnectAccountModalProps) {
@@ -57,6 +61,8 @@ export function ConnectAccountModal({
 
   if (!open) return null;
 
+  const note = connectNoteFor(appSlug);
+
   return createPortal(
     <div className="dashboard-shell fixed inset-0 z-50 grid place-items-center p-4">
       <button
@@ -84,6 +90,23 @@ export function ConnectAccountModal({
           <div className="font-body text-lg font-medium leading-lg tracking-lg text-foreground">
             Connect another {appName} account
           </div>
+
+          {note && (
+            <div className="flex w-full flex-col gap-1.5 rounded-[7px] border border-border bg-secondary p-3">
+              <span className="text-xs font-medium leading-xs text-foreground">{note.title}</span>
+              <p className="text-xs text-muted-foreground">{note.body}</p>
+              {note.link && (
+                <a
+                  href={note.link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="gaspo-focus-ring w-fit text-xs text-foreground underline underline-offset-2"
+                >
+                  {note.link.label}
+                </a>
+              )}
+            </div>
+          )}
 
           <div className="flex w-full flex-col gap-1.5">
             <label
