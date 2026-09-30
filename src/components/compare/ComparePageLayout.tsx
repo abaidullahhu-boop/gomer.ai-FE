@@ -3,7 +3,7 @@ import { PageMeta } from "@/components/PageMeta";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-import { CoinIcon, CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
+import { CoinIcon, CreditCardIcon } from "@/components/site/HeroBadges";
 import { TestimonialsCarousel } from "@/components/site/TestimonialsCarousel";
 import { Check, X } from "lucide-react";
 import { FAQSection } from "@/components/site/FAQSection";
@@ -65,7 +65,6 @@ const whenChooseHeaderShadow =
 const whenChooseTrustBadges = [
   { label: "$100 in free credits", icon: <CoinIcon /> },
   { label: "No credit card required", icon: <CreditCardIcon /> },
-  { label: "SOC 2 compliant", icon: <Soc2Icon /> },
 ] as const;
 
 function GaspoCheckBadge() {
@@ -230,7 +229,7 @@ export function ComparePageLayout({ config }: { config: ComparePageConfig }) {
                   </div>
                 </div>
                 <div className="mt-auto flex flex-wrap gap-2">
-                  {["3,200+ integrations", "SOC 2 compliant", "Used by teams at +2000 companies."].map((badge) => (
+                  {["3,200+ integrations", "Used by teams at +2000 companies."].map((badge) => (
                     <span
                       key={badge}
                       className="rounded-full bg-accent-1 px-4 py-1 body-small text-white"

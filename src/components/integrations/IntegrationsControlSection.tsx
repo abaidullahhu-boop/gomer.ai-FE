@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
@@ -8,7 +7,6 @@ const controlCardShadow =
   "shadow-[inset_2.702px_2.702px_1.351px_-2.702px_white,inset_-2.702px_-2.702px_1.351px_-2.702px_white,inset_0_0_8.106px_0_rgb(255_255_255/50%),inset_0_0_43.232px_0_#f2f2f2]";
 
 const securityBadges = [
-  { src: soc2Badge, alt: "AICPA SOC" },
   { src: gdprBadge, alt: "GDPR" },
   { src: ccpaBadge, alt: "CCPA" },
   { src: casaTier3Badge, alt: "CASA Tier 3 certified" },
@@ -22,8 +20,8 @@ const controlCards: { icon: ReactNode; title: string; body: string }[] = [
   },
   {
     icon: <ShieldSecurityIcon />,
-    title: "SOC 2 compliant.",
-    body: "SOC 2 Type 1 certified. Your data never trains AI models. Enterprise-grade security from day one.",
+    title: "Your data stays yours.",
+    body: "Encrypted in transit and at rest. Your data never trains AI models.",
   },
   {
     icon: <ReceiptCheckIcon />,

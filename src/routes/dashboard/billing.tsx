@@ -514,7 +514,7 @@ export default function DashboardBilling() {
 
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm text-muted-foreground">
-                  SOC 2 Type I compliant. · No training on your data.
+                  No training on your data.
                 </p>
                 <Link
                   to="/privacy"

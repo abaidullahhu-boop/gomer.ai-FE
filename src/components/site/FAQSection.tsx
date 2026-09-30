@@ -9,7 +9,7 @@ export const DEFAULT_FAQS: FAQItem[] = [
   { q: "What can Gaspo actually do?", a: "Pull reports, build dashboards, write code, run ad audits, draft outreach, triage bugs, build internal tools, automate recurring work, and more — anything you'd ask a smart generalist hire." },
   { q: "What tools does Gaspo connect to?", a: "3,000+ integrations including Slack, Teams, Notion, Linear, GitHub, Stripe, HubSpot, Salesforce, Meta Ads, Google Ads, Apollo, Airtable, and almost any tool with an API." },
   { q: "How does pricing work?", a: "Flat monthly subscription per workspace. No per-seat fees, no per-task billing. Start free with $100 in credits." },
-  { q: "Is my data secure?", a: "Yes. Gaspo is SOC 2 Type II compliant. Your data is encrypted in transit and at rest, and never used to train shared models." },
+  { q: "Is my data secure?", a: "Yes. Your data is encrypted in transit and at rest, and never used to train shared models." },
   { q: "Where does Gaspo run?", a: "Gaspo runs in an isolated cloud sandbox per workspace. It has its own computer, file system, and browser environment." },
   { q: "Can Gaspo write and deploy code?", a: "Yes. Gaspo can write code in any major language, open pull requests, review code, and deploy to your existing CI/CD pipeline." },
   { q: "Does Gaspo work in Microsoft Teams?", a: "Yes. Gaspo works natively in both Slack and Microsoft Teams with full feature parity." },

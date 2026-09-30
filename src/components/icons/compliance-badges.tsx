@@ -2,7 +2,6 @@ import type { SVGProps } from "react";
 import casaTier3Svg from "./casa-tier-3-badge.svg?raw";
 import ccpaSvg from "./ccpa-badge.svg?raw";
 import gdprSvg from "./gdpr-badge.svg?raw";
-import soc2Svg from "./soc2-badge.svg?raw";
 
 function svgInner(raw: string) {
   return raw.replace(/^<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
@@ -32,4 +31,3 @@ function createComplianceBadge(innerHtml: string) {
 export const CasaTier3Badge = createComplianceBadge(svgInner(casaTier3Svg));
 export const GdprBadge = createComplianceBadge(svgInner(gdprSvg));
 export const CcpaBadge = createComplianceBadge(svgInner(ccpaSvg));
-export const Soc2Badge = createComplianceBadge(svgInner(soc2Svg));

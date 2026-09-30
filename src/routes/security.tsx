@@ -10,12 +10,10 @@ import { Footer } from "@/components/site/Footer";
 import { FAQSection } from "@/components/site/FAQSection";
 import { StartFreeSection } from "@/components/site/StartFreeSection";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
 import slackLogo from "@/assets/images/slack.svg";
-import iso27001Badge from "@/assets/images/iso27001.svg";
 import intgTilesImage from "@/assets/images/integrations.avif";
 
 import riskTabsBg from "@/assets/images/security-risk-tabs-bg.png";
@@ -30,9 +28,9 @@ export default function SecurityPage() {
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Security — Gaspo"
-        description="The security behind your AI coworker. Independently audited, continuously verified. SOC 2 Type II, GDPR, encryption everywhere, and zero training on your data."
+        description="The security behind your AI coworker. Encryption everywhere, approval before sensitive actions, and zero training on your data."
         ogTitle="Security — Gaspo"
-        ogDescription="Independently audited, continuously verified. Enterprise-grade security for your AI coworker."
+        ogDescription="Encryption everywhere and zero training on your data. Security for your AI coworker."
         ogUrl="/security"
         canonical="/security"
         jsonLd={{
@@ -104,7 +102,6 @@ function SecurityHero() {
             </div>
 
             <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 lg:flex-nowrap lg:gap-8">
-              <HeroBadge icon={soc2Badge} text="SOC 2 compliant." />
               <HeroBadge icon={gdprBadge} text="GDPR aligned" />
               <HeroBadge icon={ccpaBadge} text="CCPA compliant" />
               <HeroBadge icon={casaTier3Badge} text="CASA Tier 3 certified" />
@@ -210,12 +207,10 @@ function SecurityHero() {
 /* ---------------- AUDITED TABLE ---------------- */
 
 const auditRows = [
-  { logo: soc2Badge, name: "SOC 2 Type 1", badge: "Certified", what: "Independent attestation that our security controls operate as designed. Type II in progress.", who: "Report available under NDA." },
   { logo: gdprBadge, name: "GDPR", badge: "Aligned", what: "EU data protection requirements met.", who: "DPA available on request." },
   { logo: ccpaBadge, name: "CCPA", badge: "Compliant", what: "California Consumer Privacy Act requirements met.", who: "Privacy documentation available." },
   { logo: casaTier3Badge, name: "CASA Tier 3", badge: "Certified", what: "Cloud Application Security Assessment, the highest tier required for Google API access.", who: "Attestation included in compliance pack." },
   { logo: slackLogo, name: "Slack App Directory", badge: "Listed", what: "OAuth scopes and security posture vetted before shipment through the Slack store.", who: "Public App Directory listing." },
-  { logo: iso27001Badge, name: "ISO 27001", badge: "In progress", what: "ISMS controls implementation and evidence collection in progress.", who: "Controls overview available today; audit evidence shared after certification." },
 ];
 
 function AuditedTable() {
@@ -225,11 +220,11 @@ function AuditedTable() {
         <p className="text-eyebrow-primitive-purple-700 font-medium">Compliance</p>
         <div className="mt-4 grid md:grid-cols-[1fr_300px] gap-8 items-end">
           <h2 className="font-display text-4xl md:text-5xl leading-[1.05]">
-            Independently audited.<br />Continuously verified.
+            Where we stand<br />on compliance.
           </h2>
           <p className="text-secondary text-md leading-relaxed font-medium">
-            The audit reports are real, the controls are continuously monitored,
-            and the next audit is always on the calendar.
+            The standards we build to today. Ask us for the documentation
+            behind any of them.
           </p>
         </div>
 
@@ -365,8 +360,8 @@ function DoesDoesNot() {
             What Gaspo does.<br />What Gaspo does not.
           </h2>
           <p className="mt-5 text-secondary max-w-xl mx-auto font-medium">
-            The audit reports are real, the controls are continuously monitored,
-            and the next audit is always on the calendar.
+            Plain answers about what Gaspo touches, what it keeps, and what it
+            never does with your data.
           </p>
         </div>
 
@@ -795,7 +790,6 @@ function Pillars() {
         <div className="mx-auto flex w-full max-w-[776px] flex-col justify-center items-center gap-8 text-center">
           <p className="text-eyebrow-primitive-purple-700">Gaspo vs AI tools</p>
           <h2 className="font-heading text-[36px] max-sm:text-[31.5px] leading-[1.1] font-bold tracking-[-0.06em] text-primary text-balance sm:text-[40px] md:text-[48px]">
-            Independently audited.<br />
             AI brings new risks, and we know how to handle them
           </h2>
           <p className="mt-5 text-muted-foreground max-w-2xl mx-auto font-medium">

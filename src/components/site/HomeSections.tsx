@@ -264,7 +264,6 @@ export function TeamCollaboration() {
 
 export function SecurityCompliance() {
   const items = [
-    { t: "SOC 2 Type II", d: "Audited annually by an independent firm." },
     { t: "GDPR & CCPA", d: "Full data residency and deletion controls." },
     { t: "Encryption at rest", d: "AES-256 for every byte we store." },
     { t: "Encryption in transit", d: "TLS 1.3 for every connection." },
