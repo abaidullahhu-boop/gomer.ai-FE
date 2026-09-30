@@ -41,7 +41,7 @@ function faqs(topic: string): BlogPostFaq[] {
     },
     {
       q: "Is this suitable for production engineering work?",
-      a: "Yes. Teams use Gaspo for client deliverables, internal calculations, reports, and production deployments — with review-first defaults and SOC 2 compliant infrastructure.",
+      a: "Yes. Teams use Gaspo for client deliverables, internal calculations, reports, and production deployments — with review-first defaults.",
     },
   ];
 }

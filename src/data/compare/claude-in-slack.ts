@@ -96,7 +96,7 @@ export const claudeInSlackCompareConfig: ComparePageConfig = {
     {
       feature: "Security",
       gaspo:
-        "SOC 2 Type 1 certified. GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
+        "GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
       competitor:
         "Anthropic enterprise security policies. Slack conversation data retained per Anthropic's privacy policy. Admin controls for app approval.",
     },
@@ -186,7 +186,7 @@ export const claudeInSlackCompareConfig: ComparePageConfig = {
     },
     {
       q: "Is my data safe?",
-      a: "Yes. Gaspo is SOC 2 compliant with workspace controls, audit logs, and least-privilege access to every integration you connect.",
+      a: "Yes. Gaspo has workspace controls, audit logs, and least-privilege access to every integration you connect.",
     },
   ],
 };

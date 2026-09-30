@@ -6,7 +6,6 @@ const DEFAULT_POINTS = [
   "Slack and Teams",
   "Reports, dashboards, apps",
   "Code and PR reviews",
-  "SOC 2 compliant",
 ];
 
 function CheckIcon() {

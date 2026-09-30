@@ -6,7 +6,6 @@ import {
   CasaTier3Badge,
   CcpaBadge,
   GdprBadge,
-  Soc2Badge,
 } from "@/components/icons/compliance-badges";
 
 const testimonials = [
@@ -70,7 +69,6 @@ const complianceBadges = [
   { Icon: CasaTier3Badge, alt: "CASA Tier 3 Certified" },
   { Icon: GdprBadge, alt: "GDPR Aligned" },
   { Icon: CcpaBadge, alt: "CCPA Compliant" },
-  { Icon: Soc2Badge, alt: "SOC 2 Type 1 Audited" },
 ];
 
 const authButtonClass =
@@ -93,7 +91,7 @@ export default function GetStarted() {
     <div className="flex max-md:min-h-screen flex-col bg-white md:h-screen md:flex-row-reverse">
       <PageMeta
         title="Try Gaspo for free — $100 credits included"
-        description="Sign up for Gaspo with Slack or Microsoft Teams. No credit card required. SOC2 Type I compliant."
+        description="Sign up for Gaspo with Slack or Microsoft Teams. No credit card required."
       />
 
       {/* Sign-up panel */}
@@ -137,8 +135,6 @@ export default function GetStarted() {
               </div>
               <div className=" flex items-center justify-center gap-1 text-sm font-medium text-foreground sm:gap-2">
                 <span>No credit card required</span>
-                <span aria-hidden>•</span>
-                <span>SOC2 Type I compliant</span>
               </div>
             </div>
           </div>

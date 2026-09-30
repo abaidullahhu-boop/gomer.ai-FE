@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import gaspoAvatar from "@/assets/images/gaspo-marketplace-avatar.svg";
-import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
@@ -38,9 +37,9 @@ export default function EnterprisePage() {
     <div className="min-h-screen bg-primitive-main-beige">
       <PageMeta
         title="Enterprise — Gaspo"
-        description="One AI employee. Enterprise-ready. SSO, RBAC, audit logs, SOC 2, GDPR — everything your security, IT, and procurement teams ask for."
+        description="One AI employee. Enterprise-ready. SSO, RBAC, audit logs, GDPR — everything your security, IT, and procurement teams ask for."
         ogTitle="Enterprise — Gaspo"
-        ogDescription="Enterprise-ready AI coworker with SSO, SCIM, audit logs, and SOC 2."
+        ogDescription="Enterprise-ready AI coworker with SSO, SCIM and audit logs."
         ogUrl="/enterprise"
         canonical="/enterprise"
       />
@@ -74,7 +73,6 @@ export default function EnterprisePage() {
           "Users and Teams",
           "Approvals, customizable scopes",
           "Costs and PII reviews",
-          "SOC 2 compliance",
         ]}
       />
       <Footer />
@@ -365,8 +363,8 @@ function ComplianceGrid() {
               </h2>
             </div>
             <p className="font-medium body-main max-w-[472px] text-secondary lg:flex-1 lg:pb-1">
-              The audit reports are real, the controls are continuously monitored, and the next
-              audit is always on the calendar.
+              Approvals, scoped access and a record of what Gaspo did, set up before your
+              team asks for them.
             </p>
           </div>
 
@@ -1084,7 +1082,6 @@ const allyCards = [
 ];
 
 const securityBadges = [
-  { src: soc2Badge, label: "SOC 2 compliant." },
   { src: gdprBadge, label: "GDPR aligned" },
   { src: ccpaBadge, label: "CCPA compliant" },
   { src: casaTier3Badge, label: "CASA Tier 3 certified" },

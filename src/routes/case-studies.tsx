@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { GetStartedButton } from "@/components/site/GetStartedButton";
-import { CreditCardIcon, Soc2Icon } from "@/components/site/HeroBadges";
+import { CreditCardIcon } from "@/components/site/HeroBadges";
 import gaspoWordmark from "@/assets/images/gaspo.svg";
 import comparisonTabActiveBg from "@/assets/images/download (1).svg";
 import { DEMO_CALL_URL } from "@/lib/links";
@@ -249,14 +249,6 @@ export default function CaseStudiesPage() {
                   </a>
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center gap-6 sm:gap-8">
-                  <div className="flex shrink-0 items-center gap-4">
-                    <span className="inline-flex text-white">
-                      <Soc2Icon />
-                    </span>
-                    <p className="whitespace-nowrap text-center text-sm font-medium leading-[1.4] text-white">
-                      SOC 2 compliant.
-                    </p>
-                  </div>
                   <div className="flex shrink-0 items-center gap-4">
                     <span className="inline-flex text-white">
                       <CreditCardIcon />

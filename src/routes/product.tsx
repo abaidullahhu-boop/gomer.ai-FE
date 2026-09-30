@@ -26,7 +26,6 @@ import { GetStartedButton } from "@/components/site/GetStartedButton";
 import builtForTeamsImg from "@/assets/images/built-for-teams.avif";
 import slackLogo from "@/assets/images/slack.svg";
 import microsoftLogo from "@/assets/images/microsoft-teams.svg";
-import soc2Badge from "@/assets/images/soc2.svg";
 import gdprBadge from "@/assets/images/gdpr.svg";
 import ccpaBadge from "@/assets/images/ccpa.svg";
 import casaTier3Badge from "@/assets/images/casa-tier-3.svg";
@@ -42,7 +41,6 @@ const CTA_GRADIENT = "#000";
 const SECURITY_GRADIENT = "#000";
 
 const securityBadges = [
-  { src: soc2Badge, alt: "SOC 2", label: "SOC 2 compliant." },
   { src: gdprBadge, alt: "GDPR", label: "GDPR aligned" },
   { src: ccpaBadge, alt: "CCPA", label: "CCPA compliant" },
   { src: casaTier3Badge, alt: "CASA", label: "CASA Tier 3 certified" },
@@ -601,7 +599,6 @@ const startFeatures = [
   "Users and teams",
   "Approvals, customizable scopes",
   "Costs and PII reviews",
-  "SOC 2 compliance",
 ];
 
 <StartFreeSection />

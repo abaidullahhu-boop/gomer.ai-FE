@@ -92,7 +92,7 @@ export const chatgptCompareConfig: ComparePageConfig = {
     {
       feature: "Security",
       gaspo:
-        "SOC 2 Type 1 certified. GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
+        "GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
       competitor: "SOC 2 certified. Enterprise data policies available on Team/Enterprise plans.",
     },
     {
@@ -179,7 +179,7 @@ export const chatgptCompareConfig: ComparePageConfig = {
     },
     {
       q: "Is my data safe?",
-      a: "Yes. Gaspo is SOC 2 compliant with workspace controls, audit logs, and least-privilege access to every integration you connect.",
+      a: "Yes. Gaspo has workspace controls, audit logs, and least-privilege access to every integration you connect.",
     },
   ],
 };

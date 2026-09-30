@@ -96,7 +96,7 @@ export const taskletCompareConfig: ComparePageConfig = {
     {
       feature: "Security",
       gaspo:
-        "SOC 2 Type 1 certified. GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
+        "GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
       competitor: "Cloud-native agent runtime with credential management. Check Tasklet's security documentation for compliance details.",
     },
     {
@@ -141,7 +141,7 @@ export const taskletCompareConfig: ComparePageConfig = {
       "You want professional deliverables: PDFs, Excel reports, PowerPoint decks, web applications",
       "You prefer @mentioning an AI coworker over managing agents in a web dashboard",
       "You need ad campaign management, cross-tool analytics, or codebase contributions from Slack",
-      "You want SOC 2 certified security with managed OAuth for 3,200+ integrations",
+      "You want managed OAuth for 3,200+ integrations",
     ],
     competitorWhen: [
       "You want to describe automations in plain English and let AI configure them",
@@ -186,7 +186,7 @@ export const taskletCompareConfig: ComparePageConfig = {
     },
     {
       q: "Is my data safe?",
-      a: "Yes. Gaspo is SOC 2 compliant with workspace controls, audit logs, and least-privilege access to every integration you connect.",
+      a: "Yes. Gaspo has workspace controls, audit logs, and least-privilege access to every integration you connect.",
     },
   ],
 };

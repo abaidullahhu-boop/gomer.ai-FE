@@ -73,7 +73,6 @@ export function SlackAppDirectoryIcon() {
 export const landingHeroBadges = [
   { label: "$100 in free credits", icon: <CoinIcon /> },
   { label: "No credit card required", icon: <CreditCardIcon /> },
-  { label: "SOC 2 compliant", icon: <Soc2Icon /> },
 ] as const;
 
 export const enterpriseHeroBadges = [
@@ -81,7 +80,6 @@ export const enterpriseHeroBadges = [
   { label: "$100 in free credits", icon: <CoinIcon /> },
   { label: "No credit card required", icon: <CreditCardIcon /> },
   { label: "Free pilot credits", icon: <CoinIcon /> },
-  { label: "SOC 2 compliant", icon: <Soc2Icon /> },
 ] as const;
 
 export const pricingHeroBadges = [

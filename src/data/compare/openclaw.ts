@@ -97,7 +97,7 @@ export const openclawCompareConfig: ComparePageConfig = {
     {
       feature: "Security",
       gaspo:
-        "SOC 2 Type 1 certified. GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
+        "GDPR aligned. CCPA compliant. CASA Tier 3 certified. Credentials stored server-side only.",
       competitor:
         "Self-hosted: security is your responsibility. Managed services vary — check each provider's compliance certifications.",
     },
@@ -141,7 +141,6 @@ export const openclawCompareConfig: ComparePageConfig = {
       "You want a production-ready AI employee with zero DevOps overhead",
       "You need 3,200+ managed integrations with one-click OAuth",
       "You want professional deliverables: PDFs, Excel reports, PowerPoint decks, web applications",
-      "You need SOC 2 certified security out of the box",
       "Your team needs shared context and memory across the whole workspace",
       "You want scheduled automations running without manual configuration",
     ],
@@ -187,7 +186,7 @@ export const openclawCompareConfig: ComparePageConfig = {
     },
     {
       q: "Is my data safe with Gaspo vs self-hosted OpenClaw?",
-      a: "Gaspo is SOC 2 Type 1 certified with workspace controls and audit logs. Self-hosted OpenClaw security depends entirely on your team's infrastructure practices.",
+      a: "Gaspo keeps credentials server-side and gives you workspace controls and audit logs. Self-hosted OpenClaw security depends entirely on your team's infrastructure practices.",
     },
   ],
 };
